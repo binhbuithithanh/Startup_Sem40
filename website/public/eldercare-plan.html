@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ElderCare VN — Kế hoạch kinh doanh (Tài chính · Marketing · Pháp lý)</title>
+  <meta name="description" content="Kế hoạch kinh doanh chuyên sâu ElderCare VN: mô hình doanh thu 5 trụ cột, unit economics, P&L 5 năm, 4 vòng gọi vốn, cap table, định giá DCF (CAPM/WACC) & sensitivity. Áp dụng CFA L1-3. Dự án ETR601 SEM40HN." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --primary: #1a1a2e;
+      --accent: #e94560;
+      --gold: #f5a623;
+      --care: #0d9488;
+      --care-light: #2dd4bf;
+      --care-bright: #5eead4;
+      --coral: #fb7185;
+      --light: #f6fbfa;
+      --muted: #6b7280;
+      --card-bg: #ffffff;
+      --border: #e5e7eb;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--light); color: var(--primary); line-height: 1.6;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; width: 100%; z-index: 100;
+      background: rgba(26,26,46,0.97); backdrop-filter: blur(12px);
+      padding: 0 2rem; display: flex; align-items: center; justify-content: space-between;
+      height: 64px; border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .nav-logo { font-size: 1.2rem; font-weight: 800; color: #fff; text-decoration: none; letter-spacing: -0.5px; white-space: nowrap; }
+    .nav-logo span { color: var(--care-light); }
+    .nav-tabs { display: flex; gap: 0.25rem; }
+    .nav-tab {
+      color: rgba(255,255,255,0.65); text-decoration: none;
+      font-size: 0.82rem; font-weight: 500; padding: 6px 13px; border-radius: 8px;
+      transition: all .2s; white-space: nowrap;
+    }
+    .nav-tab:hover { background: rgba(255,255,255,0.08); color: #fff; }
+    .nav-tab.active { background: var(--care); color: #fff; }
+    .nav-badge { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.7); font-size: 0.72rem; font-weight: 700; padding: 3px 10px; border-radius: 99px; white-space: nowrap; }
+
+    /* HERO */
+    .hero {
+      min-height: 78vh;
+      background: linear-gradient(135deg, #0d1b2a 0%, #1a1a2e 45%, #0d2b29 100%);
+      display: flex; align-items: center; justify-content: center; text-align: center;
+      padding: 7rem 2rem 4rem; position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 60% 40%, rgba(13,148,136,0.22) 0%, transparent 60%),
+                  radial-gradient(ellipse at 20% 80%, rgba(251,113,133,0.12) 0%, transparent 50%),
+                  radial-gradient(ellipse at 85% 15%, rgba(245,166,35,0.08) 0%, transparent 40%);
+    }
+    .hero-grid { position: absolute; inset: 0; opacity: 0.04;
+      background-image: linear-gradient(rgba(255,255,255,.3) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.3) 1px, transparent 1px);
+      background-size: 40px 40px; }
+    .hero-content { position: relative; max-width: 900px; }
+    .hero-tag {
+      display: inline-block; background: rgba(13,148,136,0.15); border: 1px solid rgba(13,148,136,0.4);
+      color: var(--care-bright); font-size: 0.78rem; font-weight: 600;
+      padding: 6px 16px; border-radius: 99px; margin-bottom: 1.5rem; letter-spacing: 1px; text-transform: uppercase;
+    }
+    .hero h1 { font-size: clamp(2.4rem, 5.5vw, 4.4rem); font-weight: 900; color: #fff; line-height: 1.05; letter-spacing: -2px; margin-bottom: 0.5rem; }
+    .hero h1 .accent-care { color: var(--care-light); }
+    .hero-sub { font-size: clamp(1rem, 2vw, 1.2rem); color: rgba(255,255,255,0.6); margin: 1rem 0 2rem; font-weight: 400; }
+    .hero-badges { display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: center; margin-bottom: 1.5rem; }
+    .hero-badge { background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.14); color: rgba(255,255,255,0.82); padding: 6px 16px; border-radius: 99px; font-size: 0.82rem; font-weight: 500; }
+    .hero-cta { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--care); color: #fff; padding: 13px 30px; border-radius: 10px; font-weight: 700; font-size: 0.95rem; text-decoration: none; transition: transform .2s, box-shadow .2s; box-shadow: 0 8px 30px rgba(13,148,136,0.4); }
+    .hero-cta:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(13,148,136,0.5); }
+
+    /* STICKY SUB-NAV (mục lục 6 phần) */
+    .subnav {
+      position: sticky; top: 64px; z-index: 90;
+      background: rgba(255,255,255,0.97); backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      display: flex; gap: 0.4rem; padding: 0.7rem 1.5rem; overflow-x: auto;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.03);
+    }
+    .subnav a {
+      flex-shrink: 0; text-decoration: none; font-size: 0.8rem; font-weight: 600;
+      color: var(--muted); padding: 6px 14px; border-radius: 99px; white-space: nowrap;
+      border: 1px solid transparent; transition: all .2s;
+    }
+    .subnav a:hover { background: #f0fdfa; color: var(--care); }
+    .subnav a.active { background: var(--care); color: #fff; }
+    .subnav a.soon { opacity: 0.5; cursor: default; }
+    .subnav a.soon::after { content: ' · sắp'; font-size: 0.68rem; }
+
+    /* SECTIONS */
+    section { padding: 4.5rem 2rem; }
+    .container { max-width: 1100px; margin: 0 auto; }
+    .section-tag { font-size: 0.75rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--care); margin-bottom: 0.75rem; }
+    h2 { font-size: clamp(1.8rem, 3.5vw, 2.8rem); font-weight: 800; letter-spacing: -1px; margin-bottom: 1rem; line-height: 1.2; }
+    h3.fin-sub { font-size: 1.35rem; font-weight: 800; letter-spacing: -0.5px; margin: 3rem 0 0.5rem; display: flex; align-items: center; gap: 0.6rem; }
+    h3.fin-sub .badge-n { background: var(--care); color: #fff; font-size: 0.8rem; font-weight: 800; width: 28px; height: 28px; border-radius: 8px; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .section-desc { font-size: 1.05rem; color: var(--muted); max-width: 720px; margin-bottom: 1.5rem; }
+    .sub-desc { font-size: 0.92rem; color: var(--muted); max-width: 760px; margin-bottom: 1.25rem; }
+    .fin-section { background: #fff; }
+
+    /* TABLES (P&L, cap table, etc.) */
+    .table-scroll { overflow-x: auto; margin: 1rem 0 0.5rem; border-radius: 12px; border: 1px solid var(--border); }
+    .fin-table { width: 100%; border-collapse: collapse; font-size: 0.84rem; min-width: 640px; }
+    .fin-table th { background: var(--primary); color: #fff; padding: 0.7rem 0.85rem; text-align: right; font-size: 0.76rem; font-weight: 700; white-space: nowrap; }
+    .fin-table th:first-child { text-align: left; border-radius: 0; }
+    .fin-table td { padding: 0.6rem 0.85rem; text-align: right; border-bottom: 1px solid var(--border); color: #374151; white-space: nowrap; }
+    .fin-table td:first-child { text-align: left; font-weight: 600; color: var(--primary); }
+    .fin-table tr:nth-child(even) td { background: #f9fafb; }
+    .fin-table tr.row-total td { background: #f0fdfa; font-weight: 800; color: #115e59; border-top: 2px solid #99f6e4; }
+    .fin-table tr.row-sub td { color: var(--muted); font-size: 0.8rem; }
+    .fin-table .pos { color: var(--care); font-weight: 700; }
+    .fin-table .neg { color: #dc2626; font-weight: 700; }
+    .fin-table .hl { color: var(--gold); font-weight: 700; }
+    .tnote { font-size: 0.74rem; color: var(--muted); font-style: italic; margin-top: 0.5rem; }
+
+    /* PILLAR revenue cards */
+    .pillar-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px,1fr)); gap: 1rem; margin: 1.25rem 0; }
+    .pillar-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 14px; padding: 1.4rem; position: relative; overflow: hidden; }
+    .pillar-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; }
+    .pillar-card.p1::before { background: linear-gradient(90deg, var(--care), var(--care-light)); }
+    .pillar-card.p2::before { background: linear-gradient(90deg, #0891b2, #22d3ee); }
+    .pillar-card.p3::before { background: linear-gradient(90deg, #f5a623, #fbbf24); }
+    .pillar-card.p4::before { background: linear-gradient(90deg, #8b5cf6, #a78bfa); }
+    .pillar-card.p5::before { background: linear-gradient(90deg, var(--coral), #fda4af); }
+    .pillar-card .pi { font-size: 1.5rem; margin-bottom: 0.5rem; }
+    .pillar-card h4 { font-size: 0.98rem; font-weight: 800; margin-bottom: 0.15rem; }
+    .pillar-card .pmodel { font-size: 0.74rem; font-weight: 700; color: var(--care); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.6rem; }
+    .pillar-card p { font-size: 0.82rem; color: #4b5563; line-height: 1.55; margin-bottom: 0.5rem; }
+    .pillar-meta { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.6rem; }
+    .pillar-meta span { background: #f0fdfa; color: #115e59; font-size: 0.72rem; font-weight: 700; padding: 3px 9px; border-radius: 99px; }
+
+    /* KPI / unit economics stat strip */
+    .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px,1fr)); gap: 0.85rem; margin: 1.25rem 0; }
+    .kpi { background: #f0fdfa; border: 1px solid #99f6e4; border-radius: 14px; padding: 1.1rem; text-align: center; }
+    .kpi .k-num { font-size: 1.7rem; font-weight: 900; color: var(--care); line-height: 1; }
+    .kpi .k-num.gold { color: var(--gold); }
+    .kpi .k-num.coral { color: var(--coral); }
+    .kpi .k-label { font-size: 0.74rem; color: var(--muted); margin-top: 6px; line-height: 1.35; }
+
+    /* Funding round cards */
+    .round-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px,1fr)); gap: 1rem; margin: 1.25rem 0; }
+    .round-card { border-radius: 16px; padding: 1.4rem; border: 1px solid var(--border); background: var(--card-bg); position: relative; }
+    .round-card .r-stage { font-size: 0.72rem; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); }
+    .round-card .r-amount { font-size: 1.9rem; font-weight: 900; letter-spacing: -1px; line-height: 1.1; margin: 0.2rem 0; }
+    .round-card.s1 { border-top: 4px solid var(--care-light); } .round-card.s1 .r-amount { color: var(--care); }
+    .round-card.s2 { border-top: 4px solid #22d3ee; } .round-card.s2 .r-amount { color: #0891b2; }
+    .round-card.s3 { border-top: 4px solid var(--gold); } .round-card.s3 .r-amount { color: #d97706; }
+    .round-card.s4 { border-top: 4px solid var(--coral); } .round-card.s4 .r-amount { color: var(--coral); }
+    .round-card .r-usd { font-size: 0.8rem; color: var(--muted); font-weight: 600; }
+    .round-card ul { list-style: none; margin-top: 0.75rem; }
+    .round-card ul li { font-size: 0.78rem; color: #4b5563; padding: 4px 0 4px 1.1rem; position: relative; line-height: 1.45; }
+    .round-card ul li::before { content: '▸'; position: absolute; left: 0; color: var(--care); }
+    .round-card ul li strong { color: var(--primary); }
+
+    /* Scenario base/bull/bear */
+    .scenario-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin: 1.25rem 0; }
+    .scen-card { border-radius: 16px; padding: 1.5rem; text-align: center; border: 1px solid var(--border); }
+    .scen-card.bear { background: #fff1f2; border-color: #fecdd3; }
+    .scen-card.base { background: #f0fdfa; border-color: #5eead4; box-shadow: 0 0 0 3px rgba(13,148,136,0.08); }
+    .scen-card.bull { background: #fffbeb; border-color: #fde68a; }
+    .scen-card .sc-name { font-size: 0.78rem; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 0.4rem; }
+    .scen-card.bear .sc-name { color: #e11d48; }
+    .scen-card.base .sc-name { color: var(--care); }
+    .scen-card.bull .sc-name { color: #d97706; }
+    .scen-card .sc-val { font-size: 1.8rem; font-weight: 900; letter-spacing: -1px; line-height: 1.1; }
+    .scen-card .sc-usd { font-size: 0.82rem; color: var(--muted); font-weight: 600; margin-bottom: 0.6rem; }
+    .scen-card .sc-assume { font-size: 0.74rem; color: #4b5563; line-height: 1.5; text-align: left; border-top: 1px dashed var(--border); padding-top: 0.6rem; margin-top: 0.4rem; }
+
+    /* RISK + AI mandatory boxes */
+    .endbox { border-radius: 16px; padding: 1.75rem 2rem; margin-top: 1.5rem; }
+    .endbox h4 { font-size: 1.1rem; font-weight: 800; margin-bottom: 0.4rem; display: flex; align-items: center; gap: 0.5rem; }
+    .endbox.risk { background: #fff5f6; border: 1px solid #fecdd3; }
+    .endbox.risk h4 { color: #e11d48; }
+    .endbox.ai { background: #f0fdfa; border: 1px solid #5eead4; }
+    .endbox.ai h4 { color: var(--care); }
+    .endbox .eb-desc { font-size: 0.86rem; color: #4b5563; margin-bottom: 1rem; }
+    .risk-row { display: grid; grid-template-columns: 1fr; gap: 0.75rem; }
+    .risk-item { background: #fff; border: 1px solid #fecdd3; border-radius: 12px; padding: 1rem 1.15rem; }
+    .risk-item .ri-head { font-size: 0.88rem; font-weight: 800; color: #be123c; margin-bottom: 0.3rem; }
+    .risk-item .ri-fix { font-size: 0.82rem; color: #374151; line-height: 1.55; }
+    .risk-item .ri-fix strong { color: var(--care); }
+    .risk-item .ri-backup { font-size: 0.78rem; color: var(--muted); margin-top: 0.35rem; font-style: italic; }
+    .ai-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px,1fr)); gap: 0.85rem; }
+    .ai-item { background: #fff; border: 1px solid #99f6e4; border-radius: 12px; padding: 1rem 1.15rem; }
+    .ai-item .ai-head { font-size: 0.88rem; font-weight: 800; color: #115e59; margin-bottom: 0.3rem; display: flex; align-items: center; gap: 0.4rem; }
+    .ai-item p { font-size: 0.8rem; color: #374151; line-height: 1.55; }
+    .ai-item .ai-model { display: inline-block; margin-top: 0.5rem; background: var(--care); color: #fff; font-size: 0.68rem; font-weight: 700; padding: 2px 9px; border-radius: 99px; }
+
+    /* ===== DEEP-DIVE EXPANDABLE SYSTEM (copy từ eldercare.html) ===== */
+    .deep-toggle {
+      display: inline-flex; align-items: center; gap: 0.5rem; margin-top: 1.25rem;
+      background: #fff; color: var(--care); border: 2px solid var(--care);
+      padding: 10px 22px; border-radius: 99px; font-family: 'Inter', sans-serif;
+      font-size: 0.85rem; font-weight: 700; cursor: pointer; transition: all .2s;
+    }
+    .deep-toggle:hover { background: var(--care); color: #fff; }
+    .deep-toggle .chev { transition: transform .3s; font-size: 0.7rem; }
+    .deep-toggle.active { background: var(--care); color: #fff; }
+    .deep-toggle.active .chev { transform: rotate(180deg); }
+    .deep-panel { max-height: 0; overflow: hidden; opacity: 0; transition: max-height .5s ease, opacity .4s ease, margin .4s ease; margin-top: 0; }
+    .deep-panel.open { max-height: 8000px; opacity: 1; margin-top: 1.5rem; }
+    .deep-inner { background: #fff; border: 1px solid var(--border); border-left: 4px solid var(--care); border-radius: 14px; padding: 1.75rem 2rem; }
+    .deep-inner h5 { font-size: 0.95rem; font-weight: 800; margin: 1.5rem 0 0.75rem; display: flex; align-items: center; gap: 0.5rem; }
+    .deep-inner h5:first-child { margin-top: 0; }
+    .deep-inner p { font-size: 0.86rem; color: #374151; margin-bottom: 0.6rem; line-height: 1.65; }
+    .deep-inner ul { list-style: none; margin: 0.5rem 0 0.75rem; }
+    .deep-inner ul li { font-size: 0.85rem; color: #374151; line-height: 1.6; padding: 5px 0 5px 1.4rem; position: relative; }
+    .deep-inner ul li::before { content: '▸'; position: absolute; left: 0; color: var(--care); }
+    .deep-inner strong { color: #111827; }
+    .deep-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px,1fr)); gap: 0.85rem; margin: 1rem 0 1.25rem; }
+    .deep-stat { background: #f0fdfa; border: 1px solid #99f6e4; border-radius: 12px; padding: 1rem; text-align: center; }
+    .deep-stat .ds-num { font-size: 1.5rem; font-weight: 900; color: var(--care); line-height: 1; }
+    .deep-stat .ds-label { font-size: 0.72rem; color: var(--muted); margin-top: 5px; line-height: 1.35; }
+    .deep-table { width: 100%; border-collapse: collapse; margin: 0.75rem 0; font-size: 0.82rem; }
+    .deep-table th { text-align: left; padding: 0.5rem 0.75rem; background: #f0fdfa; color: #115e59; font-weight: 700; border-bottom: 2px solid #99f6e4; }
+    .deep-table td { padding: 0.5rem 0.75rem; border-bottom: 1px solid var(--border); color: #374151; vertical-align: top; }
+    .src { display: inline-block; font-size: 0.68rem; font-weight: 600; color: var(--muted); background: #f3f4f6; padding: 1px 8px; border-radius: 99px; margin-left: 4px; vertical-align: middle; }
+    .src-note { font-size: 0.72rem; color: var(--muted); font-style: italic; margin-top: 0.75rem; }
+    .deep-callout { background: linear-gradient(135deg, #ecfdfa, #f0fdfa); border: 1px solid #5eead4; border-radius: 12px; padding: 1rem 1.25rem; margin: 1rem 0; font-size: 0.86rem; color: #115e59; line-height: 1.6; }
+
+    .click-hint { display: inline-flex; align-items: center; gap: 0.4rem; background: rgba(13,148,136,0.08); color: var(--care); font-size: 0.75rem; font-weight: 600; padding: 4px 12px; border-radius: 99px; margin-bottom: 1.25rem; }
+
+    /* FOOTER */
+    footer { background: #0d0d1a; padding: 3rem 2rem; text-align: center; color: rgba(255,255,255,0.4); font-size: 0.82rem; }
+    footer .footer-logo { font-size: 1.5rem; font-weight: 900; color: #fff; margin-bottom: 0.5rem; }
+    footer .footer-logo span { color: var(--care-light); }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      nav { padding: 0 1rem; }
+      .nav-tabs { gap: 0; }
+      .nav-tab { font-size: 0.75rem; padding: 6px 8px; }
+      .nav-tab span { display: none; }
+      .nav-badge { display: none; }
+      section { padding: 3.5rem 1.25rem; }
+      .scenario-grid { grid-template-columns: 1fr; }
+      .deep-inner { padding: 1.25rem 1.25rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="/" class="nav-logo">Elder<span>Care</span> VN</a>
+  <div class="nav-tabs">
+    <a href="/" class="nav-tab">🏨 <span>OmniStay AI</span></a>
+    <a href="/taxflow" class="nav-tab">🧾 <span>TaxFlow AI</span></a>
+    <a href="/eldercare" class="nav-tab active">👵 <span>ElderCare VN</span></a>
+    <a href="/ideas" class="nav-tab">💡 <span>Ý tưởng</span></a>
+  </div>
+  <span class="nav-badge">ETR601 · SEM40</span>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-tag">📊 Business Plan · Áp dụng CFA L1–L3 · ETR601 SEM40HN</div>
+    <h1>Kế hoạch <span class="accent-care">kinh doanh</span><br/>ElderCare VN</h1>
+    <p class="hero-sub">
+      Mô hình tài chính chuyên sâu cho super-app tỉ đô chăm sóc người cao tuổi —<br/>
+      <em style="color:rgba(255,255,255,0.4);font-style:normal;">doanh thu 5 trụ cột · unit economics · P&amp;L 5 năm · 4 vòng gọi vốn · định giá DCF</em>
+    </p>
+    <div class="hero-badges">
+      <span class="hero-badge">💰 5 dòng doanh thu</span>
+      <span class="hero-badge">📈 P&amp;L &amp; unit economics</span>
+      <span class="hero-badge">🏦 Seed → Series C</span>
+      <span class="hero-badge">🧮 DCF · CAPM/WACC</span>
+      <span class="hero-badge">🎯 Sensitivity base/bull/bear</span>
+    </div>
+    <a href="#fin" class="hero-cta">Xem phần Tài chính ↓</a>
+  </div>
+</section>
+
+<!-- STICKY SUB-NAV — MỤC LỤC 6 PHẦN -->
+<div class="subnav">
+  <a href="#fin" class="active">💰 Tài chính</a>
+  <a href="#marketing" class="soon">📣 Marketing &amp; GTM</a>
+  <a href="#segment" class="soon">👥 Phân khúc &amp; chuyên gia</a>
+  <a href="#disease" class="soon">🏥 Bệnh lý &amp; đào tạo</a>
+  <a href="#legal" class="soon">⚖️ Đạo đức &amp; pháp lý</a>
+  <a href="#summary" class="soon">🧭 Tổng hợp</a>
+</div>
+
+<!-- ============================ PHIÊN 1 — TÀI CHÍNH ============================ -->
+<section class="fin-section" id="fin">
+  <div class="container">
+    <div class="section-tag">Phần 1 · Tài chính</div>
+    <h2>Mô hình tài chính: từ 5 dòng doanh thu<br/>đến định giá &amp; lộ trình gọi vốn</h2>
+    <p class="section-desc">
+      Phần này dựng mô hình tài chính đầy đủ cho ElderCare VN theo chuẩn phân tích đầu tư (CFA L1–L3): cấu trúc doanh thu super-app, unit economics, dự phóng P&amp;L 5 năm, kế hoạch nhân sự, 4 vòng gọi vốn kèm cap table, burn/runway/break-even và định giá DCF + so sánh bội số. Mọi con số đều gắn nguồn hoặc nhãn <em>"ước tính nội bộ"</em>.
+    </p>
+    <span class="click-hint">👆 Mỗi tiểu mục có nút "Phân tích sâu" — bấm để xem giả định, công thức &amp; dẫn nguồn</span>
+
+    <!-- 1.1 MÔ HÌNH DOANH THU 5 TRỤ CỘT -->
+    <h3 class="fin-sub"><span class="badge-n">1</span> Mô hình doanh thu — 5 trụ cột xếp chồng</h3>
+    <p class="sub-desc">
+      ElderCare không sống bằng một dòng tiền. Năm trụ cột xếp chồng trên cùng một khách hàng (gia đình có người cao tuổi) → ARPU cao, doanh thu lặp lại (recurring) và phòng vệ khi một mảng yếu. Mỗi trụ cột có cơ chế thu (take-rate / phí / lãi / markup) riêng.
+    </p>
+
+    <div class="pillar-grid">
+      <div class="pillar-card p1">
+        <div class="pi">🩺</div>
+        <h4>CareConnect</h4>
+        <div class="pmodel">Hoa hồng marketplace</div>
+        <p>Điều dưỡng/người chăm sóc tại nhà đã xác minh. Thu <strong>hoa hồng 20%</strong> trên GMV mỗi ca trực (giá 80–150k/giờ).</p>
+        <div class="pillar-meta"><span>Take-rate 20%</span><span>GM ~85%</span></div>
+      </div>
+      <div class="pillar-card p2">
+        <div class="pi">📱</div>
+        <h4>Khám &amp; Telehealth</h4>
+        <div class="pmodel">Subscription + phí khám</div>
+        <p>Gói gia đình 299–599k/tháng + phí khám video chuyên khoa (chia sẻ với bác sĩ). Phần ElderCare giữ ~40% phí khám.</p>
+        <div class="pillar-meta"><span>Sub 299–599k/th</span><span>GM ~60%</span></div>
+      </div>
+      <div class="pillar-card p3">
+        <div class="pi">💳</div>
+        <h4>MedFin</h4>
+        <div class="pmodel">Chênh lãi + phí bảo hiểm</div>
+        <p>Trả góp ca mổ/điều trị (vd khớp háng 45tr, 12 tháng) — thu <strong>chênh lệch lãi suất ~6–9%/năm</strong> + hoa hồng bán bảo hiểm bổ sung.</p>
+        <div class="pillar-meta"><span>NIM 6–9%</span><span>GM ~55%</span></div>
+      </div>
+      <div class="pillar-card p4">
+        <div class="pi">📹</div>
+        <h4>CareSense</h4>
+        <div class="pmodel">Thuê thiết bị + SaaS</div>
+        <p>Camera AI, wearable, cảm biến té ngã cho thuê theo tháng + phí phần mềm giám sát (SaaS) tích hợp cảnh báo.</p>
+        <div class="pillar-meta"><span>Thuê 99–199k/th</span><span>GM ~45%</span></div>
+      </div>
+      <div class="pillar-card p5">
+        <div class="pi">💊</div>
+        <h4>Dược &amp; thiết bị</h4>
+        <div class="pmodel">Markup thương mại</div>
+        <p>Giao thuốc kê đơn (hợp chuẩn GPP) &amp; thiết bị y tế tại nhà. Biên thương mại <strong>~12–18%</strong> trên giá vốn.</p>
+        <div class="pillar-meta"><span>Markup 12–18%</span><span>GM ~25%</span></div>
+      </div>
+    </div>
+
+    <div class="table-scroll">
+      <table class="fin-table">
+        <thead>
+          <tr>
+            <th>Trụ cột</th><th>Cơ chế thu</th><th>Pricing / take-rate</th>
+            <th>% doanh thu net (Y5)</th><th>Gross margin</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>CareConnect (điều dưỡng)</td><td>Hoa hồng GMV</td><td>20% trên 80–150k/giờ</td><td>36%</td><td class="pos">~85%</td></tr>
+          <tr><td>Khám &amp; Telehealth</td><td>Subscription + phí khám</td><td>299–599k/th; giữ 40% phí khám</td><td>25%</td><td class="pos">~60%</td></tr>
+          <tr><td>MedFin (tài chính y tế)</td><td>Chênh lãi + phí BH</td><td>NIM 6–9%/năm; hoa hồng BH 10–25%</td><td>20%</td><td class="pos">~55%</td></tr>
+          <tr><td>CareSense (thiết bị)</td><td>Thuê + SaaS</td><td>99–199k/th/thiết bị</td><td>12%</td><td class="pos">~45%</td></tr>
+          <tr><td>Dược &amp; thiết bị</td><td>Markup</td><td>+12–18% trên giá vốn</td><td>7%</td><td class="pos">~25%</td></tr>
+          <tr class="row-total"><td>Blended (bình quân gia quyền)</td><td>—</td><td>Net ARPU ~150k/gia đình/tháng</td><td>100%</td><td>~62–64%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="tnote">Cơ cấu %/GM là ước tính nội bộ; pricing dịch vụ (điều dưỡng 80–150k/giờ, gói 299–599k/th, mổ khớp háng 28–67tr) khớp số liệu pitch &amp; app demo ElderCare VN.</p>
+
+    <button class="deep-toggle" data-closed-label="Phân tích sâu: vì sao super-app cho ARPU cao &amp; recurring" data-open-label="Thu gọn" onclick="toggleDeep(this)">
+      <span>🔍</span><span class="dt-label">Phân tích sâu: vì sao super-app cho ARPU cao &amp; recurring</span><span class="chev">▼</span>
+    </button>
+    <div class="deep-panel"><div class="deep-inner">
+      <h5>🧱 Doanh thu xếp chồng (revenue stacking) trên cùng một khách hàng</h5>
+      <p>Một gia đình mua gói telehealth (recurring) rồi dần dùng thêm điều dưỡng (CareConnect), thuê camera (CareSense), trả góp ca mổ (MedFin), mua thuốc — mỗi lớp đẩy ARPU lên mà <strong>chi phí thu hút khách (CAC) đã trả một lần</strong>. Đây là cơ chế tăng LTV mà marketplace đơn lẻ không có.</p>
+      <div class="deep-stats">
+        <div class="deep-stat"><div class="ds-num">~150k</div><div class="ds-label">Net ARPU/gia đình/tháng (Y5, ước tính)</div></div>
+        <div class="deep-stat"><div class="ds-num">5</div><div class="ds-label">Dòng doanh thu trên 1 khách hàng</div></div>
+        <div class="deep-stat"><div class="ds-num">~62%</div><div class="ds-label">Gross margin blended</div></div>
+        <div class="deep-stat"><div class="ds-num">2 lớp</div><div class="ds-label">Recurring (sub + thuê thiết bị) chống mùa vụ</div></div>
+      </div>
+      <h5>⚖️ Chất lượng doanh thu (revenue quality)</h5>
+      <p>Doanh thu chia 3 nhóm theo độ ổn định: (1) <strong>recurring</strong> — subscription gói + thuê thiết bị (dự báo tốt, định giá cao); (2) <strong>transactional lặp lại</strong> — hoa hồng điều dưỡng, dược (gắn nhu cầu bệnh mạn tính nên đều đặn); (3) <strong>theo sự kiện</strong> — MedFin trả góp ca mổ (giá trị lớn, tần suất thấp). Tỷ trọng recurring + lặp lại chiếm ~80% giúp doanh thu dễ dự phóng — yếu tố nhà đầu tư trả bội số cao.</p>
+      <div class="deep-callout">💡 <strong>Hệ quả định giá:</strong> phần lớn doanh thu mang tính recurring/lặp lại + biên gộp ~62% đưa ElderCare vào nhóm được định giá theo bội số doanh thu của digital-health subscription (cao hơn marketplace giao dịch thuần).</div>
+      <p class="src-note">Pricing &amp; cơ cấu trụ cột: tổng hợp pitch ElderCare VN (memory) — ước tính nội bộ. Khái niệm revenue quality/stacking theo khung phân tích CFA (Equity & Financial Reporting).</p>
+    </div></div>
+
+    <!-- 1.2 UNIT ECONOMICS -->
+    <h3 class="fin-sub"><span class="badge-n">2</span> Unit economics — ARPU · CAC · LTV · payback</h3>
+    <p class="sub-desc">
+      Đơn vị kinh tế tính trên một <strong>gia đình trả phí</strong> (cohort steady-state Y3–Y5). LTV dựa trên lợi nhuận gộp (không dùng doanh thu gộp — chuẩn thận trọng).
+    </p>
+    <div class="kpi-grid">
+      <div class="kpi"><div class="k-num">150k</div><div class="k-label">Net ARPU / gia đình / tháng</div></div>
+      <div class="kpi"><div class="k-num">~62%</div><div class="k-label">Gross margin blended</div></div>
+      <div class="kpi"><div class="k-num coral">480k</div><div class="k-label">CAC blended / gia đình (≈$19)</div></div>
+      <div class="kpi"><div class="k-num gold">~5,2 th</div><div class="k-label">Payback CAC</div></div>
+      <div class="kpi"><div class="k-num">2,8tr</div><div class="k-label">LTV (theo lợi nhuận gộp)</div></div>
+      <div class="kpi"><div class="k-num">5,8×</div><div class="k-label">LTV / CAC</div></div>
+    </div>
+    <p class="tnote">Toàn bộ chỉ số unit economics là ước tính nội bộ; CAC quy đổi ~$19 theo tỷ giá ~25.500 VND/USD. Mục tiêu ngành: LTV/CAC ≥ 3× &amp; payback &lt; 12 tháng (HubiFi SaaS benchmarks 2024) — ElderCare vượt cả hai.</p>
+
+    <button class="deep-toggle" data-closed-label="Phân tích sâu: công thức LTV/CAC, churn &amp; benchmark" data-open-label="Thu gọn" onclick="toggleDeep(this)">
+      <span>🔍</span><span class="dt-label">Phân tích sâu: công thức LTV/CAC, churn &amp; benchmark</span><span class="chev">▼</span>
+    </button>
+    <div class="deep-panel"><div class="deep-inner">
+      <h5>🧮 Công thức &amp; số liệu</h5>
+      <ul>
+        <li><strong>Lợi nhuận gộp/tháng</strong> = ARPU × GM = 150k × 62% ≈ <strong>93k/gia đình/tháng</strong>.</li>
+        <li><strong>Payback</strong> = CAC ÷ LN gộp tháng = 480k ÷ 93k ≈ <strong>5,2 tháng</strong>.</li>
+        <li><strong>Churn</strong> giả định 3,3%/tháng → tuổi thọ khách bình quân = 1 ÷ 0,033 ≈ <strong>30 tháng</strong> (~2,5 năm).</li>
+        <li><strong>LTV</strong> = LN gộp tháng × tuổi thọ = 93k × 30 ≈ <strong>2,8 triệu</strong>.</li>
+        <li><strong>LTV/CAC</strong> = 2,8tr ÷ 480k ≈ <strong>5,8×</strong>.</li>
+      </ul>
+      <h5>📉 Vì sao churn người cao tuổi có thể thấp hơn app sức khỏe thông thường</h5>
+      <p>App sức khỏe nói chung rụng khách rất mạnh tháng đầu (chỉ ~3,4% còn hoạt động sau 30 ngày <span class="src">ColumnContent 2025</span>). Nhưng ElderCare gắn với <strong>bệnh mạn tính theo dõi suốt đời</strong> + điều dưỡng/thiết bị vật lý tại nhà → rào cản rời bỏ cao (gia đình đã quen người chăm, đã lắp thiết bị). Mô hình có "care team" gắn kết giữ retention dài hạn tới ~85% <span class="src">DrugPatentWatch 2024 (Hims)</span>.</p>
+      <table class="deep-table">
+        <thead><tr><th>Chỉ số</th><th>ElderCare (ước tính)</th><th>Benchmark</th><th>Nguồn benchmark</th></tr></thead>
+        <tbody>
+          <tr><td>LTV/CAC</td><td>5,8×</td><td>≥3× (khỏe)</td><td>HubiFi SaaS 2024</td></tr>
+          <tr><td>Payback</td><td>~5,2 tháng</td><td>&lt;12 tháng</td><td>Chuẩn SaaS</td></tr>
+          <tr><td>CAC</td><td>~$19</td><td>Telehealth Mỹ ~$180; VN thấp hơn nhiều</td><td>SovDoc 2024</td></tr>
+          <tr><td>LTV</td><td>~$110</td><td>Telehealth sub Mỹ ~$1.200</td><td>SovDoc 2024</td></tr>
+        </tbody>
+      </table>
+      <div class="deep-callout">⚠️ <strong>Lưu ý:</strong> CAC/LTV/churn nội địa VN là <em>ước tính</em> — chưa có bộ dữ liệu công khai về unit economics telehealth VN. Số benchmark Mỹ/toàn cầu dùng để định khung; ta scale xuống theo CPM &amp; thu nhập VN.</div>
+      <p class="src-note">Nguồn benchmark: SovDoc / Charles Kirkland 2024 (CAC/LTV telehealth); HubiFi 2024 (LTV/CAC); ColumnContent 2025 (churn app sức khỏe); DrugPatentWatch 2024 (retention Hims). Chỉ số ElderCare: ước tính nội bộ.</p>
+    </div></div>
+
+    <!-- 1.3 P&L 5 NĂM -->
+    <h3 class="fin-sub"><span class="badge-n">3</span> Dự phóng P&amp;L 5 năm</h3>
+    <p class="sub-desc">
+      Doanh thu dựng theo cohort: <em>số gia đình trả phí bình quân năm × net ARPU × 12</em>. Doanh thu Y5 ~948 tỷ khớp mục tiêu SOM ~900 tỷ trong pitch. EBITDA chuyển dương vào <strong>Năm 5</strong> nhờ đòn bẩy vận hành (biên gộp cải thiện + chi phí cố định được phân bổ trên quy mô lớn). Đơn vị: <strong>tỷ VND</strong>.
+    </p>
+    <div class="table-scroll">
+      <table class="fin-table">
+        <thead>
+          <tr><th>Chỉ tiêu (tỷ VND)</th><th>Năm 1</th><th>Năm 2</th><th>Năm 3</th><th>Năm 4</th><th>Năm 5</th></tr>
+        </thead>
+        <tbody>
+          <tr class="row-sub"><td>Gia đình trả phí (bình quân, nghìn)</td><td>6</td><td>30</td><td>110</td><td>280</td><td>520</td></tr>
+          <tr class="row-sub"><td>Net ARPU (nghìn/tháng)</td><td>110</td><td>125</td><td>140</td><td>150</td><td>152</td></tr>
+          <tr><td>Doanh thu thuần (net)</td><td>7,9</td><td>45,0</td><td>185,0</td><td>504,0</td><td class="hl">948,0</td></tr>
+          <tr class="row-sub"><td>Gross margin (%)</td><td>52%</td><td>56%</td><td>60%</td><td>62%</td><td>64%</td></tr>
+          <tr><td>Giá vốn (COGS)</td><td>3,8</td><td>19,8</td><td>74,0</td><td>191,5</td><td>341,3</td></tr>
+          <tr class="row-total"><td>Lợi nhuận gộp</td><td>4,1</td><td>25,2</td><td>111,0</td><td>312,5</td><td>606,7</td></tr>
+          <tr class="row-sub"><td>— Nhân sự (lương)</td><td>12,8</td><td>37,4</td><td>98,0</td><td>201,6</td><td>351,5</td></tr>
+          <tr class="row-sub"><td>— Marketing (S&amp;M)</td><td>11,0</td><td>30,0</td><td>64,0</td><td>110,0</td><td>130,0</td></tr>
+          <tr class="row-sub"><td>— Công nghệ (cloud/AI/license)</td><td>4,0</td><td>8,0</td><td>18,0</td><td>32,0</td><td>45,0</td></tr>
+          <tr class="row-sub"><td>— Vận hành &amp; G&amp;A</td><td>5,0</td><td>12,0</td><td>28,0</td><td>45,0</td><td>50,0</td></tr>
+          <tr><td>Tổng OpEx</td><td>32,8</td><td>87,4</td><td>208,0</td><td>388,6</td><td>576,5</td></tr>
+          <tr class="row-total"><td>EBITDA</td><td class="neg">−28,7</td><td class="neg">−62,2</td><td class="neg">−97,0</td><td class="neg">−76,1</td><td class="pos">+30,2</td></tr>
+          <tr class="row-sub"><td>Khấu hao (D&amp;A)</td><td>1,0</td><td>3,0</td><td>7,0</td><td>14,0</td><td>22,0</td></tr>
+          <tr><td>EBIT</td><td class="neg">−29,7</td><td class="neg">−65,2</td><td class="neg">−104,0</td><td class="neg">−90,1</td><td class="pos">+8,2</td></tr>
+          <tr class="row-sub"><td>Thuế TNDN (NOL bù lỗ chuyển tiếp)</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+          <tr class="row-total"><td>Lợi nhuận sau thuế</td><td class="neg">−29,7</td><td class="neg">−65,2</td><td class="neg">−104,0</td><td class="neg">−90,1</td><td class="pos">+8,2</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="tnote">Toàn bộ dự phóng là ước tính nội bộ. Thuế TNDN VN 20% nhưng Năm 5 lãi nhỏ được lỗ lũy kế các năm trước (chuyển lỗ tối đa 5 năm theo Luật Thuế TNDN VN) che chắn → thuế thực ≈ 0. Lỗ lũy kế qua Năm 4 ≈ −289 tỷ — định cỡ nhu cầu vốn.</p>
+
+    <button class="deep-toggle" data-closed-label="Phân tích sâu: giả định doanh thu, đòn bẩy vận hành &amp; đường tới hòa vốn" data-open-label="Thu gọn" onclick="toggleDeep(this)">
+      <span>🔍</span><span class="dt-label">Phân tích sâu: giả định doanh thu, đòn bẩy vận hành &amp; đường tới hòa vốn</span><span class="chev">▼</span>
+    </button>
+    <div class="deep-panel"><div class="deep-inner">
+      <h5>📈 Cây doanh thu (revenue bridge)</h5>
+      <p>Tăng trưởng đến từ hai động lực: (1) <strong>số gia đình</strong> 6k → 520k (CAGR ~205%/năm, từ nền rất nhỏ — đặc trưng startup giai đoạn đầu); (2) <strong>ARPU</strong> 110k → 152k nhờ upsell các trụ cột (telehealth → điều dưỡng → MedFin). Doanh thu Y5 ~948 tỷ ≈ SOM ~900 tỷ trong pitch — tức chỉ chiếm ~5% SAM (~18.000 tỷ) → còn rất nhiều dư địa.</p>
+      <h5>⚙️ Đòn bẩy vận hành (operating leverage)</h5>
+      <p>Biên gộp tăng 52% → 64% (mua sỉ thiết bị/dược tốt hơn, telehealth &amp; SaaS biên cao chiếm tỷ trọng lớn dần). Marketing giảm từ <strong>139% doanh thu</strong> (Y1, giai đoạn "đốt" để mở thị trường) xuống <strong>~14%</strong> (Y5, khi referral &amp; thương hiệu hoạt động). Nhân sự giảm từ 162% xuống 37% doanh thu. Đó là lý do EBITDA đảo chiều ở Năm 5.</p>
+      <div class="deep-stats">
+        <div class="deep-stat"><div class="ds-num">Năm 5</div><div class="ds-label">EBITDA hòa vốn (+30 tỷ)</div></div>
+        <div class="deep-stat"><div class="ds-num">~289 tỷ</div><div class="ds-label">Lỗ lũy kế đỉnh (cần vốn tài trợ)</div></div>
+        <div class="deep-stat"><div class="ds-num">14% → 64%</div><div class="ds-label">Marketing %DT giảm; GM tăng</div></div>
+        <div class="deep-stat"><div class="ds-num">~5%</div><div class="ds-label">Thị phần SAM ở Năm 5 → còn dư địa</div></div>
+      </div>
+      <div class="deep-callout">🎯 <strong>Kịch bản "đốt có kỷ luật":</strong> chấp nhận lỗ 4 năm để chiếm thị trường (land-grab) khi cửa sổ già hóa mở, nhưng mỗi vòng vốn gắn milestone unit-economics dương để chứng minh khả năng sinh lời trước khi mở rộng tiếp.</div>
+      <p class="src-note">Mục tiêu SOM/SAM (900 / 18.000 tỷ) khớp pitch ElderCare VN; mọi dòng P&amp;L là ước tính nội bộ. Quy định chuyển lỗ 5 năm theo Luật Thuế TNDN Việt Nam.</p>
+    </div></div>
+
+    <!-- 1.4 HEADCOUNT -->
+    <h3 class="fin-sub"><span class="badge-n">4</span> Kế hoạch nhân sự (headcount) 5 năm</h3>
+    <p class="sub-desc">
+      Nhân sự là khoản chi lớn nhất. Bảng dưới phân bổ theo phòng ban, gắn mức lương ngành VN thực tế (đã gồm BHXH &amp; phụ cấp ~1,2× lương gross → chi phí "fully-loaded").
+    </p>
+    <div class="table-scroll">
+      <table class="fin-table">
+        <thead><tr><th>Phòng ban (số người)</th><th>Năm 1</th><th>Năm 2</th><th>Năm 3</th><th>Năm 4</th><th>Năm 5</th><th>Lương gross/tháng (VND)</th></tr></thead>
+        <tbody>
+          <tr><td>Công nghệ (eng/data/PM)</td><td>12</td><td>28</td><td>55</td><td>95</td><td>140</td><td>15–55 tr</td></tr>
+          <tr><td>Vận hành chăm sóc &amp; chất lượng</td><td>8</td><td>30</td><td>90</td><td>200</td><td>360</td><td>9–18 tr</td></tr>
+          <tr><td>Y tế (điều dưỡng/BS điều phối)</td><td>6</td><td>18</td><td>50</td><td>110</td><td>200</td><td>ĐD 8–16tr · BS 20–40tr</td></tr>
+          <tr><td>Marketing &amp; tăng trưởng</td><td>5</td><td>12</td><td>30</td><td>55</td><td>85</td><td>12–35 tr</td></tr>
+          <tr><td>Tài chính/MedFin &amp; rủi ro</td><td>3</td><td>8</td><td>20</td><td>40</td><td>65</td><td>15–45 tr</td></tr>
+          <tr><td>CSKH &amp; tổng đài</td><td>4</td><td>10</td><td>25</td><td>45</td><td>80</td><td>8–15 tr</td></tr>
+          <tr><td>G&amp;A (pháp chế/HR/admin)</td><td>2</td><td>4</td><td>10</td><td>15</td><td>20</td><td>12–40 tr</td></tr>
+          <tr class="row-total"><td>TỔNG nhân sự</td><td>40</td><td>110</td><td>280</td><td>560</td><td>950</td><td>—</td></tr>
+          <tr class="row-sub"><td>Chi phí nhân sự loaded (tỷ VND)</td><td>12,8</td><td>37,4</td><td>98,0</td><td>201,6</td><td>351,5</td><td>~320–380tr/người/năm</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="tnote">Lương: ITviec Vietnam IT Salary Report 2024–25 (eng 7–55tr); Vietnam.vn/ERI 2024 (điều dưỡng ~7,5–16tr); Glassdoor/NIC 2024 (bác sĩ 20–40tr). Số lượng nhân sự &amp; chi phí loaded là ước tính nội bộ. Một phần lớn nguồn cung điều dưỡng chăm tại nhà là <em>đối tác/cộng tác viên</em> trên CareConnect (không tính headcount nội bộ).</p>
+
+    <!-- 1.5 GỌI VỐN 4 VÒNG -->
+    <h3 class="fin-sub"><span class="badge-n">5</span> Lộ trình gọi vốn — Seed → Series C</h3>
+    <p class="sub-desc">
+      Bốn vòng, mỗi vòng mở khóa bằng milestone của vòng trước. Quy mô vòng &amp; định giá tham chiếu các thương vụ healthtech VN/SEA thật (Med247 Series A $4,5M; Jio Health Series B $20M; Docosan seed $1M+).
+    </p>
+    <div class="round-grid">
+      <div class="round-card s1">
+        <div class="r-stage">Vòng 1 · Seed</div>
+        <div class="r-amount">38 tỷ</div>
+        <div class="r-usd">~$1,5M · pre $6M / post $7,5M · pha loãng 20%</div>
+        <ul>
+          <li><strong>Dùng tiền:</strong> MVP 5 trụ cột, pilot TP.HCM, 6k gia đình đầu</li>
+          <li><strong>Milestone mở khóa A:</strong> PMF, retention &gt;65%, unit-economics khả thi</li>
+        </ul>
+      </div>
+      <div class="round-card s2">
+        <div class="r-stage">Vòng 2 · Series A</div>
+        <div class="r-amount">150 tỷ</div>
+        <div class="r-usd">~$6M · pre $18M / post $24M · pha loãng 25%</div>
+        <ul>
+          <li><strong>Dùng tiền:</strong> mở Hà Nội + Đà Nẵng, scale nguồn cung điều dưỡng, giấy phép MedFin</li>
+          <li><strong>Milestone mở khóa B:</strong> 30k gia đình, 3 thành phố, LTV/CAC &gt;3×</li>
+        </ul>
+      </div>
+      <div class="round-card s3">
+        <div class="r-stage">Vòng 3 · Series B</div>
+        <div class="r-amount">510 tỷ</div>
+        <div class="r-usd">~$20M · pre $70M / post $90M · pha loãng 22%</div>
+        <ul>
+          <li><strong>Dùng tiền:</strong> phủ toàn quốc, sản xuất CareSense, hợp tác bảo hiểm, đầu tư AI</li>
+          <li><strong>Milestone mở khóa C:</strong> 110k gia đình, GM &gt;60%, recurring vững</li>
+        </ul>
+      </div>
+      <div class="round-card s4">
+        <div class="r-stage">Vòng 4 · Series C</div>
+        <div class="r-amount">1.275 tỷ</div>
+        <div class="r-usd">~$50M · pre $250M / post $300M · pha loãng 16,7%</div>
+        <ul>
+          <li><strong>Dùng tiền:</strong> thống lĩnh thị trường, chuẩn bị mở rộng khu vực, M&amp;A, tiến tới hòa vốn/IPO</li>
+          <li><strong>Cột mốc:</strong> 280k+ gia đình, EBITDA đảo chiều, hướng tới "tỉ đô"</li>
+        </ul>
+      </div>
+    </div>
+    <p class="tnote">Quy mô vòng tham chiếu: MAGNiTT/Cento-SVCA 2024 (round size SEA), Carta 2024 (pha loãng seed median ~19,5%), thương vụ VN thật (MobiHealthNews/Monk's Hill 2022). Định giá pre/post là ước tính nội bộ.</p>
+
+    <!-- CAP TABLE -->
+    <p class="sub-desc" style="margin-top:1.75rem;"><strong>Cap table &amp; pha loãng qua các vòng</strong> — % sở hữu sau mỗi vòng (đã gồm pool ESOP):</p>
+    <div class="table-scroll">
+      <table class="fin-table">
+        <thead><tr><th>Cổ đông</th><th>Khởi đầu</th><th>Sau Seed</th><th>Sau Series A</th><th>Sau Series B</th><th>Sau Series C</th></tr></thead>
+        <tbody>
+          <tr><td>Nhà sáng lập (6 founders)</td><td>88%</td><td>70,4%</td><td>52,8%</td><td>41,2%</td><td class="hl">34,3%</td></tr>
+          <tr><td>ESOP (pool nhân sự)</td><td>12%</td><td>9,6%</td><td>7,2%</td><td>5,6%</td><td>4,7%</td></tr>
+          <tr><td>Seed investors</td><td>—</td><td>20%</td><td>15%</td><td>11,7%</td><td>9,8%</td></tr>
+          <tr><td>Series A investors</td><td>—</td><td>—</td><td>25%</td><td>19,5%</td><td>16,2%</td></tr>
+          <tr><td>Series B investors</td><td>—</td><td>—</td><td>—</td><td>22%</td><td>18,3%</td></tr>
+          <tr><td>Series C investors</td><td>—</td><td>—</td><td>—</td><td>—</td><td>16,7%</td></tr>
+          <tr class="row-total"><td>Tổng</td><td>100%</td><td>100%</td><td>100%</td><td>100%</td><td>100%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="tnote">Mô hình pha loãng pro-rata đơn giản hóa (chưa tính ESOP refresh ở mỗi vòng &amp; anti-dilution). Nhà sáng lập giữ ~34% sau Series C — vẫn đủ chi phối cùng cơ chế hội đồng quản trị &amp; cổ phần ưu đãi biểu quyết. Ước tính nội bộ.</p>
+
+    <button class="deep-toggle" data-closed-label="Phân tích sâu: use of funds &amp; logic định giá từng vòng" data-open-label="Thu gọn" onclick="toggleDeep(this)">
+      <span>🔍</span><span class="dt-label">Phân tích sâu: use of funds &amp; logic định giá từng vòng</span><span class="chev">▼</span>
+    </button>
+    <div class="deep-panel"><div class="deep-inner">
+      <h5>💸 Phân bổ vốn (use of funds) điển hình mỗi vòng</h5>
+      <table class="deep-table">
+        <thead><tr><th>Hạng mục</th><th>Seed</th><th>Series A</th><th>Series B</th><th>Series C</th></tr></thead>
+        <tbody>
+          <tr><td>Sản phẩm &amp; công nghệ</td><td>40%</td><td>30%</td><td>25%</td><td>20%</td></tr>
+          <tr><td>Tăng trưởng &amp; marketing</td><td>25%</td><td>35%</td><td>35%</td><td>30%</td></tr>
+          <tr><td>Vận hành &amp; nguồn cung chăm sóc</td><td>20%</td><td>20%</td><td>22%</td><td>22%</td></tr>
+          <tr><td>Vốn cho MedFin (book trả góp)</td><td>5%</td><td>8%</td><td>10%</td><td>18%</td></tr>
+          <tr><td>Dự phòng &amp; G&amp;A/pháp lý</td><td>10%</td><td>7%</td><td>8%</td><td>10%</td></tr>
+        </tbody>
+      </table>
+      <h5>🏷️ Logic định giá tăng dần</h5>
+      <p>Định giá pre-money mỗi vòng phản ánh rủi ro đã được gỡ bỏ (de-risking): Seed định giá theo đội ngũ + thị trường; Series A theo PMF; B theo đơn vị kinh tế đã chứng minh; C theo quy mô &amp; đường tới lợi nhuận. Kiểm tra chéo bằng bội số doanh thu kỳ vọng (forward):</p>
+      <ul>
+        <li><strong>Series B</strong> pre $70M ÷ doanh thu forward Y3 ~$7,3M ≈ <strong>9,6× forward</strong> — phù hợp digital-health high-growth.</li>
+        <li><strong>Series C</strong> pre $250M ÷ doanh thu forward Y4 ~$20M ≈ <strong>12,5× forward</strong> — cao nhưng trong vùng telehealth recurring (7–12×).</li>
+      </ul>
+      <div class="deep-callout">📌 Bội số forward giảm dần khi công ty lớn lên là chuẩn — nhà đầu tư trả premium cho tăng trưởng sớm, rồi định giá hội tụ về bội số ngành khi quy mô tăng.</div>
+      <p class="src-note">Bội số tham chiếu: Healthcare.digital 2024 (digital health EV/Revenue ~4,8×); SovDoc/Multiples.vc 2024 (telehealth subscription 7–9×). Use of funds &amp; định giá: ước tính nội bộ.</p>
+    </div></div>
+
+    <!-- 1.6 BURN / RUNWAY / BREAK-EVEN -->
+    <h3 class="fin-sub"><span class="badge-n">6</span> Burn rate · runway · điểm hòa vốn</h3>
+    <div class="kpi-grid">
+      <div class="kpi"><div class="k-num coral">~2,7 tỷ</div><div class="k-label">Burn/tháng năm đầu (Seed)</div></div>
+      <div class="kpi"><div class="k-num">~289 tỷ</div><div class="k-label">Tổng vốn "đốt" tới đáy lỗ lũy kế</div></div>
+      <div class="kpi"><div class="k-num gold">Năm 5</div><div class="k-label">EBITDA &amp; dòng tiền hòa vốn</div></div>
+      <div class="kpi"><div class="k-num">14–30 th</div><div class="k-label">Runway mỗi vòng (đệm an toàn)</div></div>
+    </div>
+    <div class="table-scroll">
+      <table class="fin-table">
+        <thead><tr><th>Vòng</th><th>Vốn ròng (tỷ)</th><th>Burn TB/tháng</th><th>Runway</th><th>Trạng thái khi hết vòng</th></tr></thead>
+        <tbody>
+          <tr><td>Seed (38 tỷ)</td><td>38</td><td>~2,7 tỷ</td><td>~14 tháng</td><td>PMF, 6k gia đình</td></tr>
+          <tr><td>Series A (150 tỷ)</td><td>150</td><td>~5,5 tỷ</td><td>~24 tháng</td><td>30k gia đình, unit-economics dương</td></tr>
+          <tr><td>Series B (510 tỷ)</td><td>510</td><td>~9 tỷ</td><td>~30 tháng</td><td>110k gia đình, GM &gt;60%</td></tr>
+          <tr><td>Series C (1.275 tỷ)</td><td>1.275</td><td>giảm dần → 0</td><td>tới hòa vốn + đệm</td><td>EBITDA dương Năm 5</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="tnote">Runway = vốn ròng ÷ burn bình quân, có chừa đệm ~6 tháng trước khi mở vòng kế. Hòa vốn EBITDA Năm 5; hòa vốn dòng tiền (cash-flow break-even) cùng thời điểm do mô hình nhẹ tài sản. Ước tính nội bộ.</p>
+
+    <!-- 1.7 ĐỊNH GIÁ -->
+    <h3 class="fin-sub"><span class="badge-n">7</span> Định giá — DCF (CAPM/WACC) + bội số &amp; sensitivity</h3>
+    <p class="sub-desc">
+      Định giá bằng <strong>chiết khấu dòng tiền (DCF)</strong> với suất chiết khấu xây từ CAPM, kiểm tra chéo bằng bội số doanh thu của các healthtech khu vực, rồi chạy kịch bản base/bull/bear.
+    </p>
+
+    <h5 style="font-size:1rem;font-weight:800;margin:0.5rem 0 0.75rem;">a) Suất chiết khấu — WACC từ CAPM (build-up)</h5>
+    <div class="table-scroll">
+      <table class="fin-table">
+        <thead><tr><th>Cấu phần</th><th>Giá trị</th><th>Nguồn / giải thích</th></tr></thead>
+        <tbody>
+          <tr><td>Lãi suất phi rủi ro (Rf)</td><td>4,5%</td><td>Lợi suất TPCP VN 10 năm <span class="src">Trading Economics 2024–25</span></td></tr>
+          <tr><td>Phần bù rủi ro vốn cổ phần VN (ERP)</td><td>8,13%</td><td>Damodaran tổng ERP Việt Nam <span class="src">Damodaran 1/2026</span></td></tr>
+          <tr><td>Beta (Healthcare Info &amp; Tech, levered)</td><td>1,11</td><td>Beta ngành <span class="src">Damodaran 1/2026</span></td></tr>
+          <tr><td>Chi phí vốn cổ phần Ke = Rf + β×ERP</td><td>~13,5%</td><td>4,5% + 1,11 × 8,13%</td></tr>
+          <tr><td>+ Phần bù quy mô/giai đoạn (size &amp; stage premium)</td><td>+6,5%</td><td>Startup early-stage, thanh khoản thấp — build-up</td></tr>
+          <tr class="row-total"><td>Suất chiết khấu DCF (base)</td><td>~20%</td><td>Doanh nghiệp gần như toàn vốn cổ phần → WACC ≈ Ke điều chỉnh</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="tnote">Vì cấu trúc vốn gần như 100% equity (chưa có nợ đáng kể), WACC ≈ chi phí vốn cổ phần. Phần bù quy mô/giai đoạn theo phương pháp build-up (CFA) cho công ty tư nhân non trẻ. Ke lý thuyết ~13,5%; dùng 20% cho DCF để phản ánh rủi ro startup.</p>
+
+    <h5 style="font-size:1rem;font-weight:800;margin:1.5rem 0 0.75rem;">b) DCF — exit-multiple terminal value (base case)</h5>
+    <div class="table-scroll">
+      <table class="fin-table">
+        <thead><tr><th>tỷ VND</th><th>Năm 1</th><th>Năm 2</th><th>Năm 3</th><th>Năm 4</th><th>Năm 5</th></tr></thead>
+        <tbody>
+          <tr><td>FCF (≈ EBITDA − capex − ΔNWC)</td><td class="neg">−31</td><td class="neg">−66</td><td class="neg">−102</td><td class="neg">−82</td><td class="pos">+18</td></tr>
+          <tr><td>Hệ số chiết khấu (20%)</td><td>0,833</td><td>0,694</td><td>0,579</td><td>0,482</td><td>0,402</td></tr>
+          <tr><td>PV của FCF</td><td class="neg">−25,8</td><td class="neg">−45,8</td><td class="neg">−59,0</td><td class="neg">−39,5</td><td class="pos">+7,2</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="kpi-grid" style="margin-top:1rem;">
+      <div class="kpi"><div class="k-num coral">−163</div><div class="k-label">PV tổng FCF rõ ràng Y1–5 (tỷ)</div></div>
+      <div class="kpi"><div class="k-num">4.740</div><div class="k-label">Terminal value Y5 = DT×5,0 (tỷ)</div></div>
+      <div class="kpi"><div class="k-num">1.905</div><div class="k-label">PV của terminal value (tỷ)</div></div>
+      <div class="kpi"><div class="k-num gold">~1.740</div><div class="k-label">Giá trị doanh nghiệp (EV) hôm nay (tỷ) ≈ $68M</div></div>
+    </div>
+    <p class="tnote">Terminal value dùng <strong>exit multiple</strong> 5,0× doanh thu Y5 (948 tỷ) — phù hợp khi phần lớn giá trị nằm ở giai đoạn tăng trưởng sau cửa sổ dự phóng (FCF rõ ràng còn âm). EV ≈ −163 + 1.905 ≈ 1.740 tỷ (~$68M). Đây là giá trị nội tại theo mô hình 5 năm; tham vọng "tỉ đô" thuộc tầm nhìn Năm 8–10 ngoài khung dự phóng. Ước tính nội bộ.</p>
+
+    <h5 style="font-size:1rem;font-weight:800;margin:1.5rem 0 0.75rem;">c) Kiểm tra chéo bằng bội số doanh thu (benchmark)</h5>
+    <div class="table-scroll">
+      <table class="fin-table">
+        <thead><tr><th>Tham chiếu</th><th>EV/Revenue</th><th>Ghi chú</th></tr></thead>
+        <tbody>
+          <tr><td>Ping An Health (TQ)</td><td>~1,5×</td><td>Đã trưởng thành, healthtech TQ bị derate <span class="src">CB Insights 2024</span></td></tr>
+          <tr><td>Digital health toàn cầu (TB)</td><td>~4,8×</td><td>Giữa 2024, giảm từ ~6,5× (2023) <span class="src">Healthcare.digital 2024</span></td></tr>
+          <tr><td>Telehealth subscription/chronic-care</td><td>7–9×</td><td>Doanh thu recurring được trả premium <span class="src">SovDoc 2024</span></td></tr>
+          <tr class="row-total"><td>ElderCare VN (base case áp dụng)</td><td>5,0×</td><td>Mid-range: super-app recurring nhưng quy mô SEA → chiết khấu</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h5 style="font-size:1rem;font-weight:800;margin:1.5rem 0 0.75rem;">d) Sensitivity — base / bull / bear</h5>
+    <div class="scenario-grid">
+      <div class="scen-card bear">
+        <div class="sc-name">🐻 Bear</div>
+        <div class="sc-val">~460 tỷ</div>
+        <div class="sc-usd">≈ $18M</div>
+        <div class="sc-assume">DT Y5 ~600 tỷ · churn cao 5%/th · exit 3,0× · chiết khấu 24%. Tăng trưởng chậm, CAC tăng, một trụ cột (vd MedFin) chưa được cấp phép.</div>
+      </div>
+      <div class="scen-card base">
+        <div class="sc-name">🎯 Base</div>
+        <div class="sc-val">~1.740 tỷ</div>
+        <div class="sc-usd">≈ $68M</div>
+        <div class="sc-assume">DT Y5 948 tỷ · churn 3,3%/th · exit 5,0× · chiết khấu 20%. Kịch bản trung tâm như mô hình P&amp;L ở trên.</div>
+      </div>
+      <div class="scen-card bull">
+        <div class="sc-name">🚀 Bull</div>
+        <div class="sc-val">~4.160 tỷ</div>
+        <div class="sc-usd">≈ $163M</div>
+        <div class="sc-assume">DT Y5 ~1.400 tỷ · churn thấp 2%/th · exit 7,0× · chiết khấu 18%. Network effect &amp; data moat kích hoạt, upsell mạnh, hòa vốn sớm hơn.</div>
+      </div>
+    </div>
+    <p class="tnote">Hai biến nhạy nhất: <strong>tốc độ tăng trưởng (DT Y5)</strong> và <strong>bội số exit</strong>. Khoảng định giá rộng ($18M–$163M) phản ánh độ bất định cố hữu của startup giai đoạn đầu. Tất cả là ước tính nội bộ dựa trên benchmark đã dẫn.</p>
+
+    <button class="deep-toggle" data-closed-label="Phân tích sâu: vì sao CAPM cho VN, Gordon growth cross-check &amp; hạn chế DCF" data-open-label="Thu gọn" onclick="toggleDeep(this)">
+      <span>🔍</span><span class="dt-label">Phân tích sâu: vì sao CAPM cho VN, Gordon growth cross-check &amp; hạn chế DCF</span><span class="chev">▼</span>
+    </button>
+    <div class="deep-panel"><div class="deep-inner">
+      <h5>🧠 CAPM cho thị trường mới nổi Việt Nam</h5>
+      <p>Công thức CAPM: <strong>Ke = Rf + β × ERP</strong>. Với VN, hai cấu phần đặc thù: (1) <strong>Rf</strong> dùng lợi suất TPCP VN 10 năm (~4,5%) thay vì trái phiếu Mỹ — đã phản ánh một phần rủi ro quốc gia; (2) <strong>ERP</strong> dùng tổng phần bù vốn cổ phần Việt Nam của Damodaran (8,13%, gồm phần bù rủi ro quốc gia 3,90% cộng phần bù thị trường trưởng thành). ERP VN <em>giảm mạnh</em> từ ~11% (2023) xuống 8,13% (2026) sau khi Moody's nâng hạng VN lên <strong>Ba2</strong> — tín hiệu rủi ro quốc gia cải thiện.</p>
+      <div class="deep-stats">
+        <div class="deep-stat"><div class="ds-num">4,5%</div><div class="ds-label">Rf — TPCP VN 10 năm</div></div>
+        <div class="deep-stat"><div class="ds-num">8,13%</div><div class="ds-label">ERP tổng Việt Nam (Damodaran)</div></div>
+        <div class="deep-stat"><div class="ds-num">1,11</div><div class="ds-label">Beta Healthcare Info & Tech</div></div>
+        <div class="deep-stat"><div class="ds-num">~13,5%</div><div class="ds-label">Ke lý thuyết (trước stage premium)</div></div>
+      </div>
+      <h5>🔁 Cross-check bằng Gordon Growth (perpetuity)</h5>
+      <p>Phương pháp tăng trưởng vĩnh viễn: TV = FCF<sub>Y5</sub> × (1+g) ÷ (WACC − g). Nhưng FCF Y5 (~18 tỷ) đang ở điểm đảo chiều nên quá nhỏ để đại diện trạng thái ổn định → TV Gordon bị méo thấp. Vì vậy dùng <strong>exit-multiple</strong> làm phương pháp chính cho công ty tiền-lợi-nhuận, và Gordon chỉ dùng kiểm tra trên FCF <em>chuẩn hóa</em> (giả định biên EBITDA trưởng thành ~20% × DT Y5 → FCF chuẩn hóa ~150 tỷ; g=4%; WACC=20% → TV ≈ 975 tỷ, PV ≈ 392 tỷ + giá trị tăng trưởng tiếp theo) — củng cố khoảng base $50–70M.</p>
+      <h5>⚠️ Hạn chế của DCF cho startup</h5>
+      <ul>
+        <li>Phần lớn giá trị nằm ở terminal value → rất nhạy với bội số &amp; suất chiết khấu (xem bảng sensitivity).</li>
+        <li>FCF âm kéo dài → mô hình phụ thuộc giả định tăng trưởng dài hạn, độ tin cậy thấp hơn công ty trưởng thành.</li>
+        <li>Vì vậy <strong>tam giác hóa</strong>: DCF + bội số doanh thu + định giá vòng gọi vốn (post-money) phải hội tụ một khoảng hợp lý.</li>
+      </ul>
+      <div class="deep-callout">🧭 <strong>Kết luận định giá:</strong> ba phương pháp (DCF base ~$68M, bội số 5× ~$185M trên DT Y5, post-money Series C $300M) cho một dải định giá nội tại hợp lý theo từng mốc thời gian; con số tăng dần phản ánh giá trị được tạo ra khi rủi ro được gỡ bỏ.</div>
+      <p class="src-note">Nguồn: Damodaran/NYU Stern (country risk premium &amp; sector beta, 1/2026); Trading Economics / WorldGovernmentBonds (lợi suất TPCP VN, 2024–25); Moody's (xếp hạng Ba2). Khung CAPM/Gordon/build-up theo chương trình CFA. Mọi áp dụng số cho ElderCare: ước tính nội bộ.</p>
+    </div></div>
+
+    <!-- ⚠️ RỦI RO TÀI CHÍNH & BACKUP -->
+    <div class="endbox risk">
+      <h4>⚠️ Rủi ro tài chính &amp; phương án backup</h4>
+      <p class="eb-desc">Mỗi rủi ro gắn giải pháp chủ động và phương án dự phòng (contingency) nếu giải pháp chính thất bại.</p>
+      <div class="risk-row">
+        <div class="risk-item">
+          <div class="ri-head">🔥 Burn quá nhanh / cạn tiền giữa vòng</div>
+          <div class="ri-fix"><strong>Giải pháp:</strong> theo dõi runway hàng tháng, gắn milestone cho mỗi đợt chi; giữ đệm ~6 tháng trước khi mở vòng.</div>
+          <div class="ri-backup">Backup: cắt 30–40% burn (giảm marketing, đóng băng tuyển dụng), thu hẹp về trụ cột lõi (CareConnect + telehealth), gọi bridge round / venture debt.</div>
+        </div>
+        <div class="risk-item">
+          <div class="ri-head">🚪 Không gọi được vòng tiếp theo</div>
+          <div class="ri-fix"><strong>Giải pháp:</strong> đạt milestone unit-economics dương trước mỗi vòng để chứng minh khả năng tự nuôi; đa dạng hóa nhà đầu tư (VC + corporate/bảo hiểm chiến lược).</div>
+          <div class="ri-backup">Backup: chuyển sang chế độ "default alive" — cắt về mức hòa vốn ở quy mô nhỏ hơn, ưu tiên dòng tiền thay vì tăng trưởng.</div>
+        </div>
+        <div class="risk-item">
+          <div class="ri-head">📉 Churn cao / đơn vị kinh tế âm</div>
+          <div class="ri-fix"><strong>Giải pháp:</strong> tăng gắn kết bằng care-team &amp; thiết bị vật lý tại nhà (rào cản rời bỏ); upsell để nâng ARPU &amp; LTV; tối ưu CAC theo kênh.</div>
+          <div class="ri-backup">Backup: nếu LTV/CAC &lt; 2×, tạm dừng mở rộng địa lý, dồn lực giữ chân &amp; cải thiện retention trước.</div>
+        </div>
+        <div class="risk-item">
+          <div class="ri-head">🏦 MedFin: nợ xấu &amp; rủi ro lãi suất</div>
+          <div class="ri-fix"><strong>Giải pháp:</strong> scoring tín dụng AI, hạn mức theo hồ sơ, hợp tác công ty tài chính được cấp phép (không tự gánh toàn bộ rủi ro tín dụng); trích lập dự phòng.</div>
+          <div class="ri-backup">Backup: chuyển MedFin sang mô hình "originate-to-distribute" (giới thiệu, ăn phí, không giữ dư nợ trên bảng cân đối) nếu nợ xấu vượt ngưỡng.</div>
+        </div>
+        <div class="risk-item">
+          <div class="ri-head">💱 Rủi ro FX &amp; lãi suất vĩ mô</div>
+          <div class="ri-fix"><strong>Giải pháp:</strong> doanh thu &amp; chi phí chủ yếu bằng VND (natural hedge); vốn gọi USD đổi VND theo nhu cầu; thiết bị nhập khẩu phòng hộ bằng hợp đồng kỳ hạn khi quy mô lớn.</div>
+          <div class="ri-backup">Backup: nội địa hóa nguồn cung CareSense, đàm phán giá VND với nhà cung cấp để giảm phụ thuộc nhập khẩu.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 🤖 AI ỨNG DỤNG -->
+    <div class="endbox ai">
+      <h4>🤖 AI ứng dụng ở đâu (trong tài chính)</h4>
+      <p class="eb-desc">AI không chỉ ở sản phẩm chăm sóc — nó tối ưu trực tiếp các đòn bẩy tài chính: doanh thu, CAC, rủi ro tín dụng và dự phóng.</p>
+      <div class="ai-row">
+        <div class="ai-item">
+          <div class="ai-head">📊 Dự báo cohort &amp; churn</div>
+          <p>Mô hình chuỗi thời gian + survival analysis dự báo retention từng cohort, cảnh báo sớm gia đình có nguy cơ rời để can thiệp giữ chân.</p>
+          <span class="ai-model">Survival / gradient boosting</span>
+        </div>
+        <div class="ai-item">
+          <div class="ai-head">💳 Scoring tín dụng MedFin</div>
+          <p>Chấm điểm rủi ro trả góp từ dữ liệu hồ sơ &amp; hành vi (alternative data) → duyệt nhanh, kiểm soát nợ xấu, định giá lãi suất theo rủi ro.</p>
+          <span class="ai-model">Credit scoring ML</span>
+        </div>
+        <div class="ai-item">
+          <div class="ai-head">🎯 Tối ưu CAC theo kênh</div>
+          <p>Phân bổ ngân sách marketing đa kênh bằng mô hình attribution + bandit, dồn tiền vào kênh có LTV/CAC tốt nhất theo thời gian thực.</p>
+          <span class="ai-model">Multi-armed bandit</span>
+        </div>
+        <div class="ai-item">
+          <div class="ai-head">💲 Định giá động (pricing)</div>
+          <p>Tối ưu giá gói &amp; upsell theo độ co giãn cầu của từng phân khúc (con cái thu nhập cao vs trung bình) để cực đại hóa ARPU mà không tăng churn.</p>
+          <span class="ai-model">Price elasticity / uplift</span>
+        </div>
+        <div class="ai-item">
+          <div class="ai-head">🔮 Dự phóng tài chính &amp; kịch bản</div>
+          <p>Mô phỏng Monte Carlo các biến (tăng trưởng, churn, CAC) để cập nhật runway &amp; xác suất đạt milestone gọi vốn theo thời gian thực.</p>
+          <span class="ai-model">Monte Carlo simulation</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ====================================================================== -->
+<!-- PHIÊN 2 SẼ CHÈN: #marketing (Marketing & GTM)                           -->
+<!-- PHIÊN 3 SẼ CHÈN: #segment (Phân khúc + ma trận chuyên gia)              -->
+<!-- PHIÊN 4 SẼ CHÈN: #disease (Bệnh lý + giáo trình training)               -->
+<!-- PHIÊN 5 SẼ CHÈN: #legal (Đạo đức & pháp lý)                             -->
+<!-- PHIÊN 6 SẼ CHÈN: #summary (Risk register tổng + bản đồ AI tổng)         -->
+<!-- ====================================================================== -->
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Elder<span>Care</span> VN</div>
+  <p style="margin-bottom:0.5rem;">Kế hoạch kinh doanh · Super-app chăm sóc sức khỏe người cao tuổi · ETR601.22 · SEM40HN · FSB — FPT School of Business</p>
+  <p>Môn học: Khởi nghiệp và Đổi mới Sáng tạo trong Kỷ nguyên AI · Giảng viên: Dr. Phạm Quang Ngọc</p>
+  <div style="display:flex;gap:1.5rem;justify-content:center;margin-top:1.5rem;flex-wrap:wrap;">
+    <a href="/" style="color:rgba(255,255,255,0.5);text-decoration:none;font-size:0.82rem;">🏨 OmniStay AI</a>
+    <a href="/taxflow" style="color:rgba(255,255,255,0.5);text-decoration:none;font-size:0.82rem;">🧾 TaxFlow AI</a>
+    <a href="/eldercare" style="color:var(--care-light);text-decoration:none;font-size:0.82rem;font-weight:600;">👵 ElderCare VN</a>
+    <a href="/eldercare-app" style="color:rgba(255,255,255,0.5);text-decoration:none;font-size:0.82rem;">▶️ App demo</a>
+    <a href="/ideas" style="color:rgba(255,255,255,0.5);text-decoration:none;font-size:0.82rem;">💡 Ý tưởng</a>
+  </div>
+  <p style="margin-top:1rem;font-size:0.72rem;opacity:0.5;">© 2026 ElderCare VN · startup.sem40hn.asia/eldercare-plan</p>
+</footer>
+
+<script>
+  function toggleDeep(btn) {
+    const panel = btn.nextElementSibling;
+    const open = panel.classList.toggle('open');
+    btn.classList.toggle('active', open);
+    const label = btn.querySelector('.dt-label');
+    if (label) label.textContent = open ? (btn.dataset.openLabel || 'Thu gọn') : (btn.dataset.closedLabel || 'Xem chi tiết');
+  }
+</script>
+</body>
+</html>
