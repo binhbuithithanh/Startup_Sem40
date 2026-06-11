@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>13 Ý Tưởng Khởi Nghiệp — ETR601 SEM40</title>
+  <meta name="description" content="Bình chọn ý tưởng khởi nghiệp tốt nhất cho nhóm ETR601 SEM40HN" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --primary: #1a1a2e;
+      --accent: #e94560;
+      --gold: #f5a623;
+      --teal: #0f9b8e;
+      --light: #f8f9ff;
+      --muted: #6b7280;
+      --border: #e5e7eb;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--light); color: var(--primary); }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; width: 100%; z-index: 100;
+      background: rgba(26,26,46,0.97); backdrop-filter: blur(12px);
+      padding: 0 2rem; display: flex; align-items: center;
+      justify-content: space-between; height: 64px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .nav-logo { font-size: 1.3rem; font-weight: 800; color: #fff; text-decoration: none; letter-spacing: -0.5px; }
+    .nav-logo span { color: var(--accent); }
+    .nav-tabs { display: flex; gap: 0.25rem; }
+    .nav-tab {
+      color: rgba(255,255,255,0.65); text-decoration: none;
+      font-size: 0.85rem; font-weight: 500;
+      padding: 6px 14px; border-radius: 8px;
+      transition: all .2s;
+    }
+    .nav-tab:hover { background: rgba(255,255,255,0.08); color: #fff; }
+    .nav-tab.active { background: var(--accent); color: #fff; }
+    .nav-badge {
+      background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.7);
+      font-size: 0.72rem; font-weight: 700;
+      padding: 3px 10px; border-radius: 99px;
+    }
+
+    /* HERO */
+    .hero {
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 60%, #0f3460 100%);
+      padding: 6rem 2rem 3rem; text-align: center;
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 70% 50%, rgba(245,166,35,0.12) 0%, transparent 60%),
+                  radial-gradient(ellipse at 20% 70%, rgba(15,155,142,0.1) 0%, transparent 50%);
+    }
+    .hero-content { position: relative; max-width: 700px; margin: 0 auto; }
+    .hero-tag {
+      display: inline-block;
+      background: rgba(245,166,35,0.15); border: 1px solid rgba(245,166,35,0.4);
+      color: #fbbf24; font-size: 0.78rem; font-weight: 600;
+      padding: 6px 16px; border-radius: 99px;
+      margin-bottom: 1.25rem; letter-spacing: 1px; text-transform: uppercase;
+    }
+    .hero h1 { font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 900; color: #fff; letter-spacing: -1.5px; line-height: 1.1; }
+    .hero h1 span { color: var(--gold); }
+    .hero-sub { font-size: 1rem; color: rgba(255,255,255,0.6); margin: 1rem 0 0; }
+
+    /* VOTE SUMMARY BAR */
+    .summary-bar {
+      background: #fff; border-bottom: 1px solid var(--border);
+      padding: 1rem 2rem;
+      display: flex; flex-wrap: wrap; align-items: center;
+      justify-content: center; gap: 1.5rem;
+    }
+    .summary-stat { text-align: center; }
+    .summary-num { font-size: 1.4rem; font-weight: 900; color: var(--accent); line-height: 1; }
+    .summary-label { font-size: 0.72rem; color: var(--muted); }
+
+    /* VOTED NOTICE */
+    #voted-notice {
+      display: none;
+      background: #d1fae5; border: 1px solid #6ee7b7;
+      color: #065f46; text-align: center;
+      padding: 0.75rem; font-size: 0.85rem; font-weight: 600;
+    }
+
+    /* MAIN GRID */
+    .main { max-width: 1100px; margin: 0 auto; padding: 2.5rem 1.5rem 4rem; }
+    .section-header { margin-bottom: 1.5rem; }
+    .section-header h2 { font-size: 1.4rem; font-weight: 800; }
+    .section-header p { font-size: 0.85rem; color: var(--muted); margin-top: 0.25rem; }
+
+    /* IDEA CARDS */
+    .ideas-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1.25rem;
+    }
+    .idea-card {
+      background: #fff; border: 2px solid var(--border);
+      border-radius: 18px; padding: 1.5rem;
+      transition: transform .2s, box-shadow .2s, border-color .2s;
+      position: relative; overflow: hidden;
+    }
+    .idea-card:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(0,0,0,0.08); }
+    .idea-card.leading {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(245,166,35,0.15);
+    }
+    .idea-card.voted-this {
+      border-color: var(--teal);
+      box-shadow: 0 0 0 3px rgba(15,155,142,0.15);
+    }
+
+    /* rank badge */
+    .rank-badge {
+      position: absolute; top: 1.25rem; right: 1.25rem;
+      width: 28px; height: 28px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.7rem; font-weight: 800;
+      background: #f3f4f6; color: var(--muted);
+    }
+    .rank-badge.r1 { background: #fef3c7; color: #92400e; }
+    .rank-badge.r2 { background: #f1f5f9; color: #334155; }
+    .rank-badge.r3 { background: #fef9ec; color: #b45309; }
+
+    .idea-num {
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 1px;
+      text-transform: uppercase; color: var(--muted); margin-bottom: 0.5rem;
+    }
+    .idea-title { font-size: 1.05rem; font-weight: 800; margin-bottom: 0.3rem; line-height: 1.3; }
+    .idea-tagline { font-size: 0.78rem; color: var(--accent); font-weight: 600; margin-bottom: 0.75rem; }
+    .idea-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.6; margin-bottom: 1rem; }
+
+    /* EXPERTISE TAGS */
+    .expertise-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1rem; }
+    .exp-tag {
+      font-size: 0.68rem; font-weight: 600; padding: 3px 9px;
+      border-radius: 99px; border: 1px solid;
+    }
+    .tag-lien   { background: #fef3c7; color: #92400e; border-color: #fde68a; }
+    .tag-binh   { background: #fce7f3; color: #9d174d; border-color: #fbcfe8; }
+    .tag-tan    { background: #ecfdf5; color: #065f46; border-color: #a7f3d0; }
+    .tag-hieu   { background: #eff6ff; color: #1e40af; border-color: #bfdbfe; }
+    .tag-nhi    { background: #f5f3ff; color: #5b21b6; border-color: #ddd6fe; }
+    .tag-duy    { background: #fff1f2; color: #9f1239; border-color: #fecdd3; }
+
+    /* VOTE BAR */
+    .vote-bar-wrap { margin-bottom: 1rem; }
+    .vote-bar-label {
+      display: flex; justify-content: space-between;
+      font-size: 0.75rem; color: var(--muted); margin-bottom: 4px;
+    }
+    .vote-bar-label .vote-count { font-weight: 700; color: var(--primary); }
+    .vote-bar-track {
+      height: 6px; background: #f3f4f6; border-radius: 99px; overflow: hidden;
+    }
+    .vote-bar-fill {
+      height: 100%; border-radius: 99px;
+      background: linear-gradient(90deg, var(--teal), #34d399);
+      transition: width .5s ease;
+      width: 0%;
+    }
+    .idea-card.leading .vote-bar-fill {
+      background: linear-gradient(90deg, var(--gold), #fbbf24);
+    }
+
+    /* VOTE BUTTON */
+    .btn-vote {
+      width: 100%; padding: 10px;
+      border-radius: 10px; border: 2px solid var(--border);
+      background: #fff; color: var(--primary);
+      font-size: 0.85rem; font-weight: 700; cursor: pointer;
+      transition: all .2s; display: flex; align-items: center;
+      justify-content: center; gap: 0.4rem;
+    }
+    .btn-vote:hover:not(:disabled) {
+      background: var(--teal); border-color: var(--teal); color: #fff;
+    }
+    .btn-vote.voted {
+      background: var(--teal); border-color: var(--teal); color: #fff;
+    }
+    .btn-vote:disabled { opacity: 0.5; cursor: not-allowed; }
+    .btn-vote .vote-icon { font-size: 1rem; }
+
+    /* SECTOR BADGE */
+    .sector-badge {
+      display: inline-block; margin-bottom: 0.75rem;
+      padding: 3px 10px; border-radius: 99px;
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.5px;
+    }
+
+    /* WINNER CROWN */
+    .crown { display: none; position: absolute; top: -2px; left: 50%; transform: translateX(-50%); font-size: 1.2rem; }
+    .idea-card.leading .crown { display: block; }
+
+    /* LEGEND */
+    .legend {
+      background: #fff; border: 1px solid var(--border); border-radius: 14px;
+      padding: 1.25rem 1.5rem; margin-bottom: 2rem;
+      display: flex; flex-wrap: wrap; gap: 0.75rem; align-items: center;
+    }
+    .legend-title { font-size: 0.78rem; font-weight: 700; color: var(--muted); margin-right: 0.5rem; }
+
+    /* FOOTER */
+    footer {
+      background: var(--primary); padding: 2rem; text-align: center;
+      color: rgba(255,255,255,0.4); font-size: 0.8rem;
+    }
+    .footer-logo { font-size: 1.3rem; font-weight: 900; color: #fff; margin-bottom: 0.4rem; }
+    .footer-logo span { color: var(--accent); }
+
+    /* Loading skeleton */
+    .skeleton { animation: pulse 1.5s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
+
+    @media (max-width: 600px) {
+      .ideas-grid { grid-template-columns: 1fr; }
+      .nav-tab span { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="/" class="nav-logo">Omni<span>Stay</span> AI</a>
+  <div class="nav-tabs">
+    <a href="/" class="nav-tab">🏨 <span>OmniStay AI</span></a>
+    <a href="/taxflow" class="nav-tab">🧾 <span>TaxFlow AI</span></a>
+    <a href="/eldercare" class="nav-tab">👵 <span>ElderCare VN</span></a>
+    <a href="/ideas" class="nav-tab active">💡 <span>Ý tưởng</span></a>
+  </div>
+  <span class="nav-badge">ETR601 · SEM40</span>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-content">
+    <div class="hero-tag">💡 Bình chọn nhóm · ETR601 SEM40HN</div>
+    <h1>13 Ý Tưởng<br/><span>Khởi Nghiệp</span></h1>
+    <p class="hero-sub">Gồm <strong style="color:#a855f7">3 ý tưởng "kỳ lân tiềm năng" 💎</strong> mới bổ sung · Mỗi thành viên bình chọn 1 · Cập nhật realtime</p>
+  </div>
+</div>
+
+<!-- SUMMARY BAR -->
+<div class="summary-bar">
+  <div class="summary-stat">
+    <div class="summary-num" id="total-votes">—</div>
+    <div class="summary-label">Tổng lượt vote</div>
+  </div>
+  <div class="summary-stat">
+    <div class="summary-num" id="leading-idea">—</div>
+    <div class="summary-label">Ý tưởng dẫn đầu</div>
+  </div>
+  <div class="summary-stat">
+    <div class="summary-num" id="leading-votes">—</div>
+    <div class="summary-label">Votes cao nhất</div>
+  </div>
+  <div class="summary-stat">
+    <div class="summary-num">6</div>
+    <div class="summary-label">Thành viên nhóm</div>
+  </div>
+</div>
+
+<!-- VOTED NOTICE -->
+<div id="voted-notice">
+  ✅ Bạn đã bình chọn rồi! Hãy mời các thành viên khác vào <strong>startup.sem40hn.asia/ideas</strong> để vote.
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- LEGEND -->
+  <div class="legend">
+    <span class="legend-title">Chuyên môn:</span>
+    <span class="exp-tag tag-lien">💼 Chị Liên</span>
+    <span class="exp-tag tag-binh">📈 Thanh Bình</span>
+    <span class="exp-tag tag-tan">🏨 Minh Tân</span>
+    <span class="exp-tag tag-hieu">☁️ Anh Hiếu</span>
+    <span class="exp-tag tag-nhi">📷 Chị Nhi</span>
+    <span class="exp-tag tag-duy">🔐 Thành Duy</span>
+  </div>
+
+  <div class="section-header">
+    <h2>Chọn ý tưởng bạn thấy tiềm năng nhất 👇</h2>
+    <p>Mỗi thiết bị chỉ vote được 1 lần · Kết quả đồng bộ realtime cho cả nhóm</p>
+  </div>
+
+  <div class="ideas-grid" id="ideas-grid">
+    <!-- Cards injected by JS -->
+  </div>
+</div>
+
+<footer>
+  <div class="footer-logo">Omni<span>Stay</span> AI</div>
+  <p>ETR601.22 · SEM40HN · FSB — FPT School of Business · Dr. Phạm Quang Ngọc</p>
+  <p style="margin-top:0.5rem;"><a href="/" style="color:rgba(255,255,255,0.5);text-decoration:none;">← Quay lại trang chính</a></p>
+</footer>
+
+<script>
+const IDEAS = [
+  {
+    id: "1",
+    title: "TaxFlow AI",
+    tagline: "Kê khai thuế tự động cho freelancer & hộ kinh doanh",
+    desc: "Nền tảng AI giúp hơn 5 triệu hộ kinh doanh cá thể tại VN tự động kê khai thuế, xuất hóa đơn điện tử và nhắc hạn nộp — không cần kế toán thuê ngoài.",
+    sector: "FinTech · LegalTech",
+    sectorColor: "#fef3c7",
+    sectorText: "#92400e",
+    emoji: "🧾",
+    expertise: [
+      { cls: "tag-lien", label: "💼 Chị Liên" },
+      { cls: "tag-hieu", label: "☁️ Anh Hiếu" },
+    ],
+    ai: "AI tự động phân loại giao dịch, điền tờ khai, cảnh báo sai lệch",
+  },
+  {
+    id: "2",
+    title: "AffiliateIQ",
+    tagline: "SaaS quản lý affiliate marketing đa kênh cho brand Việt",
+    desc: "Dashboard tập trung quản lý toàn bộ affiliate links, theo dõi conversion, tính hoa hồng tự động và phân tích ROI từng kênh (TikTok, Facebook, SEO) — cho nhãn hàng fashion, beauty VN.",
+    sector: "MarTech · SaaS",
+    sectorColor: "#fce7f3",
+    sectorText: "#9d174d",
+    emoji: "📊",
+    expertise: [
+      { cls: "tag-binh", label: "📈 Thanh Bình" },
+      { cls: "tag-hieu", label: "☁️ Anh Hiếu" },
+    ],
+    ai: "AI dự báo conversion rate, tối ưu hoa hồng theo từng KOL/kênh",
+  },
+  {
+    id: "3",
+    title: "VietStay Connect",
+    tagline: "Nền tảng kết nối boutique hotel nhỏ với du khách nội địa",
+    desc: "Marketplace + PMS đơn giản cho 15.000+ cơ sở lưu trú nhỏ (dưới 20 phòng) chưa lên OTA. AI gợi ý giá, hỗ trợ đặt phòng trực tiếp qua Zalo/Facebook — zero commission.",
+    sector: "TravelTech · Marketplace",
+    sectorColor: "#ecfdf5",
+    sectorText: "#065f46",
+    emoji: "🌿",
+    expertise: [
+      { cls: "tag-tan", label: "🏨 Minh Tân" },
+      { cls: "tag-binh", label: "📈 Thanh Bình" },
+    ],
+    ai: "AI dynamic pricing, gợi ý package phù hợp khách nội địa theo mùa",
+  },
+  {
+    id: "4",
+    title: "CloudShield VN",
+    tagline: "Managed cloud security cho SME trên Viettel Cloud",
+    desc: "Dịch vụ bảo mật cloud toàn diện dành cho 800.000+ SME VN: firewall, phát hiện xâm nhập, sao lưu dữ liệu và tuân thủ Nghị định 13/2023. Triển khai trong 1 giờ, không cần IT chuyên trách.",
+    sector: "CyberSecurity · CloudTech",
+    sectorColor: "#eff6ff",
+    sectorText: "#1e40af",
+    emoji: "🛡️",
+    expertise: [
+      { cls: "tag-hieu", label: "☁️ Anh Hiếu" },
+      { cls: "tag-duy", label: "🔐 Thành Duy" },
+    ],
+    ai: "AI threat detection realtime, tự động vá lỗ hổng bảo mật phổ biến",
+  },
+  {
+    id: "5",
+    title: "SmartRetail Cam",
+    tagline: "Camera AI phân tích hành vi mua hàng cho cửa hàng bán lẻ",
+    desc: "Hệ thống camera AI cho cửa hàng bán lẻ: đếm khách, phân tích vùng hot-spot, nhận diện tuổi/giới tính, cảnh báo trộm cắp — giúp chủ shop tối ưu trưng bày và tăng conversion.",
+    sector: "RetailTech · Computer Vision",
+    sectorColor: "#f5f3ff",
+    sectorText: "#5b21b6",
+    emoji: "👁️",
+    expertise: [
+      { cls: "tag-nhi", label: "📷 Chị Nhi" },
+      { cls: "tag-duy", label: "🔐 Thành Duy" },
+      { cls: "tag-hieu", label: "☁️ Anh Hiếu" },
+    ],
+    ai: "Computer vision realtime: heatmap, dwell time, conversion zone analysis",
+  },
+  {
+    id: "6",
+    title: "NGO Compass",
+    tagline: "Nền tảng quản lý dự án & tài chính cho tổ chức phi lợi nhuận",
+    desc: "All-in-one platform cho 2.000+ NGO/NPO tại VN: quản lý dự án, ngân sách donor, báo cáo tài chính chuẩn quốc tế (GAAP/IFRS), phân quyền theo vai trò và audit trail đầy đủ.",
+    sector: "SocialTech · GovTech",
+    sectorColor: "#fff1f2",
+    sectorText: "#9f1239",
+    emoji: "🤝",
+    expertise: [
+      { cls: "tag-duy", label: "🔐 Thành Duy" },
+      { cls: "tag-lien", label: "💼 Chị Liên" },
+    ],
+    ai: "AI phát hiện bất thường tài chính, tự động tổng hợp báo cáo donor",
+  },
+  {
+    id: "7",
+    title: "BeautyLink AI",
+    tagline: "Marketplace kết nối nhãn hàng beauty VN với KOL & affiliate",
+    desc: "Nền tảng B2B kết nối 5.000+ brand beauty/skincare nội địa với 50.000+ KOL micro/nano. AI matching thương hiệu-KOL theo profile, tự động thanh toán hoa hồng và phân tích campaign.",
+    sector: "BeautyTech · Influencer",
+    sectorColor: "#fce7f3",
+    sectorText: "#9d174d",
+    emoji: "💄",
+    expertise: [
+      { cls: "tag-binh", label: "📈 Thanh Bình" },
+      { cls: "tag-nhi", label: "📷 Chị Nhi" },
+    ],
+    ai: "AI brand-KOL matching, dự báo engagement rate, phát hiện fake followers",
+  },
+  {
+    id: "8",
+    title: "GreenAccounting",
+    tagline: "Kế toán tích hợp ESG reporting cho doanh nghiệp Việt Nam",
+    desc: "Phần mềm kế toán mở rộng với module ESG: tự động tính toán carbon footprint từ dữ liệu tài chính, tạo báo cáo GRI/TCFD chuẩn quốc tế. Chuẩn bị cho luật ESG bắt buộc 2026–2027.",
+    sector: "GreenTech · FinTech",
+    sectorColor: "#ecfdf5",
+    sectorText: "#065f46",
+    emoji: "🌱",
+    expertise: [
+      { cls: "tag-lien", label: "💼 Chị Liên" },
+      { cls: "tag-hieu", label: "☁️ Anh Hiếu" },
+    ],
+    ai: "AI tự động phân loại chi phí carbon, đề xuất cải thiện chỉ số ESG",
+  },
+  {
+    id: "9",
+    title: "SecureID VN",
+    tagline: "eKYC & định danh kỹ thuật số cho fintech và ngân hàng nhỏ",
+    desc: "SDK định danh khách hàng bằng AI: đọc CCCD chip NFC, nhận diện khuôn mặt liveness, xác minh chữ ký số — dành cho quỹ tín dụng, fintech, công ty bảo hiểm chưa đủ ngân sách eKYC lớn.",
+    sector: "FinTech · RegTech",
+    sectorColor: "#fff1f2",
+    sectorText: "#9f1239",
+    emoji: "🪪",
+    expertise: [
+      { cls: "tag-duy", label: "🔐 Thành Duy" },
+      { cls: "tag-nhi", label: "📷 Chị Nhi" },
+      { cls: "tag-hieu", label: "☁️ Anh Hiếu" },
+    ],
+    ai: "AI liveness detection, face matching với dữ liệu CCCD, anomaly scoring",
+  },
+  {
+    id: "10",
+    title: "SkillBridge VN",
+    tagline: "Đào tạo kỹ năng tài chính–kế toán online cho nhân viên SME",
+    desc: "Nền tảng microlearning cho 1+ triệu nhân viên kế toán, kho quỹ SME chưa được đào tạo bài bản: khóa học ngắn 5–10 phút, bài thi thực hành, cấp chứng chỉ blockchain và kết nối việc làm.",
+    sector: "EdTech · HRTech",
+    sectorColor: "#fef3c7",
+    sectorText: "#92400e",
+    emoji: "🎓",
+    expertise: [
+      { cls: "tag-lien", label: "💼 Chị Liên" },
+      { cls: "tag-binh", label: "📈 Thanh Bình" },
+    ],
+    ai: "AI gợi ý lộ trình học cá nhân hóa, chatbot trả lời câu hỏi kế toán",
+  },
+  {
+    id: "11",
+    title: "DriveHome — Lái xe hộ",
+    tagline: "Tài xế lái CHÍNH chiếc xe của bạn về nhà — khi bạn không thể tự lái",
+    desc: "Phân khúc Grab/Xanh SM bỏ lỡ: người CÓ ô tô nhưng nhậu xong (Nghị định 100 phạt cồn cực nặng) hoặc đi xa rồi bay. Marketplace asset-light — tài xế tự mang sức, nền tảng ăn hoa hồng. Mô hình tỷ đô đã chứng minh ở TQ (Didi Daijia).",
+    sector: "Mobility · Marketplace",
+    sectorColor: "#eff6ff",
+    sectorText: "#1e40af",
+    emoji: "🚗",
+    badge: "💎 Kỳ lân tiềm năng",
+    expertise: [
+      { cls: "tag-binh", label: "📈 Thanh Bình" },
+      { cls: "tag-hieu", label: "☁️ Anh Hiếu" },
+      { cls: "tag-duy", label: "🔐 Thành Duy" },
+    ],
+    ai: "AI ghép tài xế gần nhất, định giá động theo giờ cao điểm, chấm điểm & xác minh độ an toàn tài xế",
+  },
+  {
+    id: "12",
+    title: "ElderCare VN — Chăm sóc người già tại nhà",
+    tagline: "Kết nối điều dưỡng & người chăm sóc đã xác minh với gia đình",
+    desc: "VN già hóa nhanh, con cái bận, bệnh viện quá tải. Marketplace kết nối caregiver đã xác minh với gia đình có người cao tuổi: chăm sóc tận nhà, nhắc thuốc, theo dõi sức khỏe và báo cáo cho con cái ở xa. WTP cực cao — không ai mặc cả với sức khỏe bố mẹ.",
+    sector: "HealthTech · CareTech",
+    sectorColor: "#ecfdf5",
+    sectorText: "#065f46",
+    emoji: "🧓",
+    badge: "💎 Kỳ lân tiềm năng",
+    expertise: [
+      { cls: "tag-tan", label: "🏨 Minh Tân" },
+      { cls: "tag-duy", label: "🔐 Thành Duy" },
+      { cls: "tag-nhi", label: "📷 Chị Nhi" },
+    ],
+    ai: "AI theo dõi dấu hiệu sinh tồn qua thiết bị đeo, cảnh báo bất thường realtime, ghép caregiver phù hợp nhu cầu",
+  },
+  {
+    id: "13",
+    title: "MedFin — Tài chính y tế",
+    tagline: "Trả góp chi phí khám–mổ cho bố mẹ già, không lo thiếu tiền lúc cấp bách",
+    desc: "Nhiều gia đình kẹt tiền khi cần mổ/điều trị gấp. MedFin hợp tác bệnh viện cấp tín dụng y tế trả góp 0–6 tháng, eKYC nhanh, duyệt trong vài phút ngay tại quầy viện phí. WTP cực cao + chi tiêu y tế VN tăng mạnh theo già hóa & trung lưu.",
+    sector: "FinTech · HealthTech",
+    sectorColor: "#fff1f2",
+    sectorText: "#9f1239",
+    emoji: "🏥",
+    badge: "💎 Kỳ lân tiềm năng",
+    expertise: [
+      { cls: "tag-lien", label: "💼 Chị Liên" },
+      { cls: "tag-hieu", label: "☁️ Anh Hiếu" },
+      { cls: "tag-duy", label: "🔐 Thành Duy" },
+    ],
+    ai: "AI chấm điểm tín dụng tức thì, phát hiện gian lận hồ sơ y tế, dự báo rủi ro & khả năng trả nợ",
+  },
+];
+
+const API = "/api/votes";
+const STORAGE_KEY = "sem40_voted_idea";
+
+let currentVotes = {};
+let hasVoted = localStorage.getItem(STORAGE_KEY);
+
+// Render cards
+function render(votes) {
+  const grid = document.getElementById("ideas-grid");
+  const maxVote = Math.max(...Object.values(votes), 1);
+  const totalVotes = Object.values(votes).reduce((a, b) => a + b, 0);
+
+  // Sort by votes descending for rank
+  const sorted = [...IDEAS].sort((a, b) => (votes[b.id] || 0) - (votes[a.id] || 0));
+  const rankMap = {};
+  sorted.forEach((idea, i) => { rankMap[idea.id] = i + 1; });
+
+  // Leading idea
+  const leadingIdea = sorted[0];
+  document.getElementById("total-votes").textContent = totalVotes;
+  document.getElementById("leading-idea").textContent = leadingIdea ? `#${leadingIdea.id} ${leadingIdea.title}` : "—";
+  document.getElementById("leading-votes").textContent = votes[leadingIdea?.id] || 0;
+
+  grid.innerHTML = IDEAS.map(idea => {
+    const v = votes[idea.id] || 0;
+    const pct = maxVote > 0 ? Math.round((v / maxVote) * 100) : 0;
+    const rank = rankMap[idea.id];
+    const isLeading = rank === 1 && v > 0;
+    const isVotedThis = hasVoted === idea.id;
+    const alreadyVoted = !!hasVoted;
+
+    const rankLabel = rank === 1 ? "🥇" : rank === 2 ? "🥈" : rank === 3 ? "🥉" : `#${rank}`;
+    const rankClass = rank === 1 ? "r1" : rank === 2 ? "r2" : rank === 3 ? "r3" : "";
+
+    return `
+    <div class="idea-card ${isLeading ? "leading" : ""} ${isVotedThis ? "voted-this" : ""}" id="card-${idea.id}">
+      <div class="crown">👑</div>
+      <div class="rank-badge ${rankClass}">${rankLabel}</div>
+
+      ${idea.badge ? `<div style="display:inline-block;margin-bottom:0.5rem;background:linear-gradient(90deg,#7c3aed,#a855f7);color:#fff;border-radius:99px;padding:3px 12px;font-size:0.66rem;font-weight:800;letter-spacing:0.5px;">${idea.badge}</div><br/>` : ""}
+      <div class="idea-num">Ý tưởng ${idea.id} · ${idea.sector}</div>
+      <div style="display:inline-block;background:${idea.sectorColor};color:${idea.sectorText};border-radius:99px;padding:3px 10px;font-size:0.7rem;font-weight:700;margin-bottom:0.5rem;">${idea.emoji} ${idea.sector}</div>
+      <div class="idea-title">${idea.title}</div>
+      <div class="idea-tagline">${idea.tagline}</div>
+      <div class="idea-desc">${idea.desc}</div>
+
+      <div class="expertise-tags">
+        ${idea.expertise.map(e => `<span class="exp-tag ${e.cls}">${e.label}</span>`).join("")}
+      </div>
+
+      <div style="background:#f8f9ff;border-radius:8px;padding:8px 10px;margin-bottom:1rem;">
+        <span style="font-size:0.68rem;font-weight:700;color:var(--muted);">AI ứng dụng: </span>
+        <span style="font-size:0.75rem;color:#374151;">${idea.ai}</span>
+      </div>
+
+      <div class="vote-bar-wrap">
+        <div class="vote-bar-label">
+          <span>Bình chọn</span>
+          <span class="vote-count">${v} vote${v !== 1 ? "s" : ""}</span>
+        </div>
+        <div class="vote-bar-track">
+          <div class="vote-bar-fill" id="bar-${idea.id}" style="width:${pct}%"></div>
+        </div>
+      </div>
+
+      <button
+        class="btn-vote ${isVotedThis ? "voted" : ""}"
+        id="btn-${idea.id}"
+        onclick="castVote('${idea.id}')"
+        ${alreadyVoted ? "disabled" : ""}
+      >
+        <span class="vote-icon">${isVotedThis ? "✅" : "👍"}</span>
+        ${isVotedThis ? "Bạn đã chọn ý tưởng này!" : alreadyVoted ? "Đã vote rồi" : "Bình chọn ý tưởng này"}
+      </button>
+    </div>`;
+  }).join("");
+}
+
+async function fetchVotes() {
+  try {
+    const res = await fetch(API);
+    return await res.json();
+  } catch { return {}; }
+}
+
+async function castVote(id) {
+  if (hasVoted) return;
+
+  // Optimistic UI
+  document.getElementById(`btn-${id}`).disabled = true;
+  document.getElementById(`btn-${id}`).textContent = "⏳ Đang gửi...";
+
+  try {
+    const res = await fetch(API, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id }),
+    });
+    const data = await res.json();
+    if (data.success) {
+      hasVoted = id;
+      localStorage.setItem(STORAGE_KEY, id);
+      currentVotes = data.votes;
+      render(currentVotes);
+      document.getElementById("voted-notice").style.display = "block";
+      // Scroll to voted card
+      setTimeout(() => {
+        document.getElementById(`card-${id}`)?.scrollIntoView({ behavior: "smooth", block: "center" });
+      }, 200);
+    }
+  } catch(e) {
+    document.getElementById(`btn-${id}`).disabled = false;
+    document.getElementById(`btn-${id}`).textContent = "❌ Lỗi, thử lại";
+  }
+}
+
+// Show voted notice if already voted
+if (hasVoted) {
+  document.getElementById("voted-notice").style.display = "block";
+}
+
+// Auto-refresh every 10 seconds
+async function refresh() {
+  currentVotes = await fetchVotes();
+  render(currentVotes);
+}
+
+refresh();
+setInterval(refresh, 10000);
+</script>
+</body>
+</html>

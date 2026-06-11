@@ -1,0 +1,8 @@
+# OS
+.DS_Store
+
+# Cloudflare / Wrangler
+.wrangler/
+
+# Local Claude settings (keep launch.json shared)
+.claude/settings.local.json

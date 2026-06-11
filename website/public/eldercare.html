@@ -1,0 +1,1363 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ElderCare VN — Super-app chăm sóc sức khỏe người cao tuổi Việt Nam</title>
+  <meta name="description" content="ElderCare VN: Healthcare super-app chăm sóc sức khỏe người cao tuổi cho 14+ triệu người già Việt Nam — điều dưỡng tại nhà, telehealth, tài chính y tế, giám sát AI. Dự án ETR601 SEM40HN." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --primary: #1a1a2e;
+      --accent: #e94560;
+      --gold: #f5a623;
+      --care: #0d9488;        /* teal y tế — accent chính */
+      --care-light: #2dd4bf;  /* teal sáng cho text trên nền tối */
+      --care-bright: #5eead4; /* teal nhạt nhất */
+      --coral: #fb7185;       /* accent phụ ấm áp */
+      --light: #f6fbfa;
+      --muted: #6b7280;
+      --card-bg: #ffffff;
+      --border: #e5e7eb;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--light);
+      color: var(--primary);
+      line-height: 1.6;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; width: 100%; z-index: 100;
+      background: rgba(26,26,46,0.97);
+      backdrop-filter: blur(12px);
+      padding: 0 2rem;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 64px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .nav-logo {
+      font-size: 1.2rem; font-weight: 800; color: #fff;
+      text-decoration: none; letter-spacing: -0.5px; white-space: nowrap;
+    }
+    .nav-logo span { color: var(--care-light); }
+    .nav-tabs { display: flex; gap: 0.25rem; }
+    .nav-tab {
+      color: rgba(255,255,255,0.65); text-decoration: none;
+      font-size: 0.82rem; font-weight: 500;
+      padding: 6px 13px; border-radius: 8px;
+      transition: all .2s; white-space: nowrap;
+    }
+    .nav-tab:hover { background: rgba(255,255,255,0.08); color: #fff; }
+    .nav-tab.active { background: var(--care); color: #fff; }
+    .nav-badge {
+      background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.7);
+      font-size: 0.72rem; font-weight: 700;
+      padding: 3px 10px; border-radius: 99px; white-space: nowrap;
+    }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #0d1b2a 0%, #1a1a2e 45%, #0d2b29 100%);
+      display: flex; align-items: center; justify-content: center;
+      text-align: center;
+      padding: 6rem 2rem 4rem;
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 60% 40%, rgba(13,148,136,0.22) 0%, transparent 60%),
+                  radial-gradient(ellipse at 20% 80%, rgba(251,113,133,0.12) 0%, transparent 50%),
+                  radial-gradient(ellipse at 85% 15%, rgba(245,166,35,0.08) 0%, transparent 40%);
+    }
+    .hero-grid {
+      position: absolute; inset: 0; opacity: 0.04;
+      background-image: linear-gradient(rgba(255,255,255,.3) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(255,255,255,.3) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+    .hero-content { position: relative; max-width: 900px; }
+    .hero-tag {
+      display: inline-block;
+      background: rgba(13,148,136,0.15);
+      border: 1px solid rgba(13,148,136,0.4);
+      color: var(--care-bright); font-size: 0.78rem; font-weight: 600;
+      padding: 6px 16px; border-radius: 99px;
+      margin-bottom: 1.5rem; letter-spacing: 1px; text-transform: uppercase;
+    }
+    .hero h1 {
+      font-size: clamp(2.8rem, 6vw, 5.2rem);
+      font-weight: 900; color: #fff;
+      line-height: 1.05; letter-spacing: -2.5px;
+      margin-bottom: 0.5rem;
+    }
+    .hero h1 .accent-care { color: var(--care-light); }
+    .hero-sub {
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      color: rgba(255,255,255,0.6);
+      margin: 1rem 0 2.5rem; font-weight: 400;
+    }
+    .hero-badges {
+      display: flex; flex-wrap: wrap; gap: 0.75rem;
+      justify-content: center; margin-bottom: 2.5rem;
+    }
+    .hero-badge {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.14);
+      color: rgba(255,255,255,0.82);
+      padding: 6px 16px; border-radius: 99px;
+      font-size: 0.82rem; font-weight: 500;
+    }
+    .hero-cta {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: var(--care); color: #fff;
+      padding: 14px 34px; border-radius: 10px;
+      font-weight: 700; font-size: 1rem; text-decoration: none;
+      transition: transform .2s, box-shadow .2s;
+      box-shadow: 0 8px 30px rgba(13,148,136,0.4);
+    }
+    .hero-cta:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(13,148,136,0.5); }
+
+    /* STATS BAR */
+    .stats-bar {
+      background: var(--primary);
+      padding: 2rem 4rem;
+      display: flex; flex-wrap: wrap;
+      justify-content: center; gap: 3rem;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .stat { text-align: center; }
+    .stat-num { font-size: 2rem; font-weight: 800; color: var(--care-light); line-height: 1; }
+    .stat-label { font-size: 0.78rem; color: rgba(255,255,255,0.5); margin-top: 4px; max-width: 180px; }
+
+    /* SECTIONS */
+    section { padding: 5rem 2rem; }
+    .container { max-width: 1100px; margin: 0 auto; }
+
+    .section-tag {
+      font-size: 0.75rem; font-weight: 700; letter-spacing: 2px;
+      text-transform: uppercase; color: var(--care);
+      margin-bottom: 0.75rem;
+    }
+    h2 {
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-weight: 800; letter-spacing: -1px;
+      margin-bottom: 1rem; line-height: 1.2;
+    }
+    .section-desc {
+      font-size: 1.05rem; color: var(--muted);
+      max-width: 680px; margin-bottom: 3rem;
+    }
+
+    /* PROBLEM */
+    .problem-section { background: #fff; }
+    .problem-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem; margin-bottom: 2.5rem;
+    }
+    .problem-card {
+      border: 1px solid #fecdd3; background: #fff5f6;
+      border-radius: 12px; padding: 1.25rem;
+    }
+    .problem-card .icon { font-size: 1.4rem; margin-bottom: 0.5rem; }
+    .problem-card h4 { font-size: 0.88rem; font-weight: 700; margin-bottom: 0.3rem; color: #e11d48; }
+    .problem-card p { font-size: 0.8rem; color: #6b7280; line-height: 1.5; }
+
+    /* MARKET / OPPORTUNITY */
+    .market-section { background: var(--light); }
+    .market-tam {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem; margin: 2rem 0 2.5rem;
+    }
+    .tam-card {
+      border-radius: 18px; padding: 1.75rem 1.5rem; text-align: center;
+      border: 1px solid var(--border); background: var(--card-bg);
+      position: relative; overflow: hidden;
+    }
+    .tam-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+    }
+    .tam-card.tam::before { background: linear-gradient(90deg, var(--care), var(--care-light)); }
+    .tam-card.sam::before { background: linear-gradient(90deg, #0891b2, #22d3ee); }
+    .tam-card.som::before { background: linear-gradient(90deg, var(--coral), #fda4af); }
+    .tam-tier { font-size: 0.72rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); margin-bottom: 0.5rem; }
+    .tam-num { font-size: 2.4rem; font-weight: 900; line-height: 1; letter-spacing: -1px; }
+    .tam-card.tam .tam-num { color: var(--care); }
+    .tam-card.sam .tam-num { color: #0891b2; }
+    .tam-card.som .tam-num { color: var(--coral); }
+    .tam-unit { font-size: 0.8rem; font-weight: 700; color: var(--primary); margin-top: 0.2rem; }
+    .tam-desc { font-size: 0.78rem; color: var(--muted); margin-top: 0.6rem; line-height: 1.5; }
+
+    /* COMPETITION (placeholder Phiên 2) */
+    .comp-section { background: #fff; }
+    .comp-table { width: 100%; border-collapse: collapse; }
+    .comp-table th {
+      background: var(--primary); color: #fff;
+      padding: 0.85rem 1rem; text-align: left;
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+    .comp-table th:first-child { border-radius: 10px 0 0 0; }
+    .comp-table th:last-child { border-radius: 0 10px 0 0; }
+    .comp-table td {
+      padding: 1rem; font-size: 0.82rem;
+      border-bottom: 1px solid var(--border);
+      vertical-align: middle;
+    }
+    .comp-table tr:nth-child(even) td { background: #f9fafb; }
+    .comp-table tr.us-row td { background: #f0fdfa; }
+    .comp-table tr.us-row td:first-child { font-weight: 800; color: var(--care); }
+    .check { color: var(--care); font-weight: 700; }
+    .cross { color: #dc2626; }
+    .partial { color: #d97706; }
+
+    /* SOLUTION (placeholder Phiên 2) */
+    .solution-section { background: var(--light); }
+    .modules-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.25rem;
+    }
+    .module-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 16px; padding: 1.75rem;
+      transition: transform .2s, box-shadow .2s;
+      position: relative; overflow: hidden;
+    }
+    .module-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      border-radius: 16px 16px 0 0;
+    }
+    .module-card:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(0,0,0,0.08); }
+    .module-card .mod-icon { font-size: 1.8rem; margin-bottom: 1rem; }
+    .module-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .module-card p { font-size: 0.85rem; color: var(--muted); }
+    .mod-owner {
+      display: inline-block; margin-top: 0.75rem;
+      background: #f3f4f6; color: #374151;
+      font-size: 0.72rem; font-weight: 600;
+      padding: 3px 10px; border-radius: 99px;
+    }
+    .mod-1::before { background: linear-gradient(90deg, var(--care), var(--care-light)); }
+    .mod-2::before { background: linear-gradient(90deg, #0891b2, #22d3ee); }
+    .mod-3::before { background: linear-gradient(90deg, #3b82f6, #60a5fa); }
+    .mod-4::before { background: linear-gradient(90deg, #f5a623, #fbbf24); }
+    .mod-5::before { background: linear-gradient(90deg, #8b5cf6, #a78bfa); }
+    .mod-6::before { background: linear-gradient(90deg, var(--coral), #fda4af); }
+
+    /* FOOTER */
+    footer {
+      background: #0d0d1a;
+      padding: 3rem 2rem; text-align: center;
+      color: rgba(255,255,255,0.4); font-size: 0.82rem;
+    }
+    footer .footer-logo { font-size: 1.5rem; font-weight: 900; color: #fff; margin-bottom: 0.5rem; }
+    footer .footer-logo span { color: var(--care-light); }
+
+    /* VPC — Value Proposition Canvas */
+    .vpc-section { background: #fff; }
+    .vpc-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+    .vpc-side {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 16px; padding: 1.75rem;
+    }
+    .vpc-side.customer { border-top: 4px solid var(--coral); }
+    .vpc-side.product { border-top: 4px solid var(--care); }
+    .vpc-title {
+      font-size: 0.75rem; font-weight: 700; letter-spacing: 1.5px;
+      text-transform: uppercase; margin-bottom: 1.25rem;
+    }
+    .vpc-title.c { color: var(--coral); }
+    .vpc-title.p { color: var(--care); }
+    .vpc-block { margin-bottom: 1.25rem; }
+    .vpc-block:last-child { margin-bottom: 0; }
+    .vpc-block-title {
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 1px;
+      text-transform: uppercase; color: var(--muted);
+      margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.4rem;
+    }
+    .vpc-block ul { list-style: none; }
+    .vpc-block ul li {
+      font-size: 0.82rem; color: #374151;
+      padding: 4px 0 4px 1.1rem; position: relative; line-height: 1.45;
+    }
+    .vpc-block ul li::before {
+      content: '▸'; position: absolute; left: 0; color: var(--coral); font-size: 0.75rem;
+    }
+    .vpc-side.product .vpc-block ul li::before { color: var(--care); }
+
+    /* INNOVATION — 10 Types */
+    .innov-section { background: var(--light); }
+    .innov-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;
+    }
+    .innov-card {
+      border-radius: 12px; padding: 1.1rem 1.25rem;
+      border: 1px solid var(--border); background: var(--card-bg);
+    }
+    .innov-card.active {
+      border-color: var(--care);
+      background: #f0fdfa;
+      box-shadow: 0 0 0 3px rgba(13,148,136,0.1);
+    }
+    .innov-num { font-size: 0.68rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); margin-bottom: 0.25rem; }
+    .innov-name { font-size: 0.88rem; font-weight: 700; margin-bottom: 0.25rem; }
+    .innov-card.active .innov-name { color: var(--care); }
+    .innov-desc { font-size: 0.75rem; color: var(--muted); line-height: 1.45; }
+    .innov-badge {
+      display: inline-block; margin-top: 0.5rem;
+      background: var(--care); color: #fff;
+      font-size: 0.65rem; font-weight: 700; padding: 2px 8px; border-radius: 99px;
+    }
+
+    /* FORCES — Push & Pull (dark section) */
+    .force-section { background: var(--primary); color: #fff; }
+    .force-section h2 { color: #fff; }
+    .force-section .section-desc { color: rgba(255,255,255,0.6); }
+    .force-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;
+    }
+    .force-card {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 16px; padding: 1.75rem;
+    }
+    .force-card.push { border-color: rgba(45,212,191,0.3); background: rgba(45,212,191,0.06); }
+    .force-card.pull { border-color: rgba(245,166,35,0.3); background: rgba(245,166,35,0.06); }
+    .force-head {
+      font-size: 0.75rem; font-weight: 800; letter-spacing: 1.5px;
+      text-transform: uppercase; margin-bottom: 1.25rem;
+    }
+    .force-card.push .force-head { color: var(--care-light); }
+    .force-card.pull .force-head { color: var(--gold); }
+    .force-item {
+      display: flex; gap: 0.75rem; padding: 0.75rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .force-item:last-child { border-bottom: none; }
+    .force-item-icon { font-size: 1.2rem; flex-shrink: 0; }
+    .force-item-text { font-size: 0.82rem; color: rgba(255,255,255,0.8); line-height: 1.5; }
+    .force-item-text strong { display: block; color: #fff; font-size: 0.88rem; margin-bottom: 2px; }
+
+    /* INFO BOX */
+    .info-box {
+      border-radius: 12px; padding: 1.25rem 1.5rem; margin-top: 1rem;
+    }
+    .info-care { background: #f0fdfa; border: 1px solid #99f6e4; }
+    .info-blue { background: #eff6ff; border: 1px solid #bfdbfe; }
+    .info-coral { background: #fff1f2; border: 1px solid #fecdd3; }
+
+    /* ===== DEEP-DIVE EXPANDABLE SYSTEM ===== */
+    .deep-toggle {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      margin-top: 1.5rem;
+      background: #fff; color: var(--care);
+      border: 2px solid var(--care);
+      padding: 10px 22px; border-radius: 99px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem; font-weight: 700; cursor: pointer;
+      transition: all .2s;
+    }
+    .deep-toggle:hover { background: var(--care); color: #fff; }
+    .deep-toggle .chev { transition: transform .3s; font-size: 0.7rem; }
+    .deep-toggle.active { background: var(--care); color: #fff; }
+    .deep-toggle.active .chev { transform: rotate(180deg); }
+    .deep-toggle.on-dark {
+      background: rgba(255,255,255,0.05); color: var(--care-light);
+      border-color: rgba(45,212,191,0.5);
+    }
+    .deep-toggle.on-dark:hover, .deep-toggle.on-dark.active { background: var(--care); color: #fff; border-color: var(--care); }
+
+    .deep-panel {
+      max-height: 0; overflow: hidden;
+      opacity: 0;
+      transition: max-height .5s ease, opacity .4s ease, margin .4s ease;
+      margin-top: 0;
+    }
+    .deep-panel.open {
+      max-height: 6000px; opacity: 1;
+      margin-top: 1.75rem;
+    }
+    .deep-inner {
+      background: #fff; border: 1px solid var(--border);
+      border-left: 4px solid var(--care);
+      border-radius: 14px; padding: 1.75rem 2rem;
+    }
+    .on-dark-panel .deep-inner {
+      background: rgba(255,255,255,0.04);
+      border-color: rgba(255,255,255,0.12);
+      border-left-color: var(--care-light);
+    }
+    .deep-inner h5 {
+      font-size: 0.95rem; font-weight: 800; margin: 1.5rem 0 0.75rem;
+      display: flex; align-items: center; gap: 0.5rem;
+    }
+    .deep-inner h5:first-child { margin-top: 0; }
+    .on-dark-panel .deep-inner h5 { color: #fff; }
+    .deep-inner p { font-size: 0.86rem; color: #374151; margin-bottom: 0.6rem; line-height: 1.65; }
+    .on-dark-panel .deep-inner p { color: rgba(255,255,255,0.78); }
+    .deep-inner ul { list-style: none; margin: 0.5rem 0 0.75rem; }
+    .deep-inner ul li {
+      font-size: 0.85rem; color: #374151; line-height: 1.6;
+      padding: 5px 0 5px 1.4rem; position: relative;
+    }
+    .deep-inner ul li::before { content: '▸'; position: absolute; left: 0; color: var(--care); }
+    .on-dark-panel .deep-inner ul li { color: rgba(255,255,255,0.78); }
+    .deep-inner strong { color: #111827; }
+    .on-dark-panel .deep-inner strong { color: #fff; }
+
+    /* data stat strip inside deep panels */
+    .deep-stats {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(140px,1fr));
+      gap: 0.85rem; margin: 1rem 0 1.25rem;
+    }
+    .deep-stat {
+      background: #f0fdfa; border: 1px solid #99f6e4;
+      border-radius: 12px; padding: 1rem; text-align: center;
+    }
+    .on-dark-panel .deep-stat { background: rgba(45,212,191,0.08); border-color: rgba(45,212,191,0.25); }
+    .deep-stat .ds-num { font-size: 1.5rem; font-weight: 900; color: var(--care); line-height: 1; }
+    .deep-stat .ds-label { font-size: 0.72rem; color: var(--muted); margin-top: 5px; line-height: 1.35; }
+    .on-dark-panel .deep-stat .ds-label { color: rgba(255,255,255,0.55); }
+
+    /* mini data table */
+    .deep-table { width: 100%; border-collapse: collapse; margin: 0.75rem 0; font-size: 0.82rem; }
+    .deep-table th { text-align: left; padding: 0.5rem 0.75rem; background: #f0fdfa; color: #115e59; font-weight: 700; border-bottom: 2px solid #99f6e4; }
+    .deep-table td { padding: 0.5rem 0.75rem; border-bottom: 1px solid var(--border); color: #374151; vertical-align: top; }
+    .on-dark-panel .deep-table th { background: rgba(45,212,191,0.1); color: var(--care-light); border-color: rgba(45,212,191,0.3); }
+    .on-dark-panel .deep-table td { color: rgba(255,255,255,0.78); border-color: rgba(255,255,255,0.1); }
+
+    /* source citation chip */
+    .src {
+      display: inline-block; font-size: 0.68rem; font-weight: 600;
+      color: var(--muted); background: #f3f4f6;
+      padding: 1px 8px; border-radius: 99px; margin-left: 4px;
+      vertical-align: middle;
+    }
+    .on-dark-panel .src { background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.5); }
+    .src-note { font-size: 0.72rem; color: var(--muted); font-style: italic; margin-top: 0.75rem; }
+    .on-dark-panel .src-note { color: rgba(255,255,255,0.45); }
+
+    .deep-callout {
+      background: linear-gradient(135deg, #ecfdfa, #f0fdfa);
+      border: 1px solid #5eead4; border-radius: 12px;
+      padding: 1rem 1.25rem; margin: 1rem 0;
+      font-size: 0.86rem; color: #115e59; line-height: 1.6;
+    }
+    .on-dark-panel .deep-callout { background: rgba(45,212,191,0.1); border-color: rgba(45,212,191,0.35); color: var(--care-bright); }
+
+    /* ===== EXPANDABLE CARDS ===== */
+    .expandable { cursor: pointer; position: relative; }
+    .expandable::after {
+      content: '＋'; position: absolute; bottom: 0.9rem; right: 1.1rem;
+      width: 22px; height: 22px; border-radius: 50%;
+      background: #f3f4f6; color: var(--muted);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.9rem; font-weight: 700; transition: all .2s;
+    }
+    .expandable.expanded::after { content: '−'; background: var(--care); color: #fff; }
+    .problem-card.expandable::after { background: #ffe4e6; color: #e11d48; }
+    .problem-card.expandable.expanded::after { background: #e11d48; color: #fff; }
+    .module-card.expandable { padding-bottom: 2.75rem; }
+    .problem-card.expandable { padding-bottom: 2.75rem; }
+    .card-detail {
+      max-height: 0; overflow: hidden; opacity: 0;
+      transition: max-height .4s ease, opacity .3s ease, margin .3s ease;
+    }
+    .card-detail.open { max-height: 900px; opacity: 1; margin-top: 0.9rem; }
+    .card-detail-inner { border-top: 1px dashed var(--border); padding-top: 0.85rem; }
+    .card-detail-inner p { font-size: 0.8rem; color: #4b5563; line-height: 1.6; margin-bottom: 0.5rem; }
+    .card-detail-inner .mini-num { font-weight: 800; color: var(--care); }
+    .problem-card .card-detail-inner .mini-num { color: #e11d48; }
+    .card-detail-inner ul { list-style: none; margin-top: 0.4rem; }
+    .card-detail-inner ul li { font-size: 0.78rem; color: #4b5563; padding: 2px 0 2px 1rem; position: relative; line-height: 1.5; }
+    .card-detail-inner ul li::before { content: '·'; position: absolute; left: 0.3rem; color: var(--care); font-weight: 900; }
+
+    /* hint banner */
+    .click-hint {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      background: rgba(13,148,136,0.08); color: var(--care);
+      font-size: 0.75rem; font-weight: 600;
+      padding: 4px 12px; border-radius: 99px; margin-bottom: 1.25rem;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .nav { padding: 0 1rem; }
+      .nav-tabs { gap: 0; }
+      .nav-tab { font-size: 0.75rem; padding: 6px 8px; }
+      .nav-tab span { display: none; }
+      .nav-badge { display: none; }
+      .stats-bar { gap: 1.5rem; padding: 1.5rem 2rem; }
+      .market-tam { grid-template-columns: 1fr; }
+      .vpc-grid, .force-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="/" class="nav-logo">Elder<span>Care</span> VN</a>
+  <div class="nav-tabs">
+    <a href="/" class="nav-tab">🏨 <span>OmniStay AI</span></a>
+    <a href="/taxflow" class="nav-tab">🧾 <span>TaxFlow AI</span></a>
+    <a href="/eldercare" class="nav-tab active">👵 <span>ElderCare VN</span></a>
+    <a href="/ideas" class="nav-tab">💡 <span>Ý tưởng</span></a>
+  </div>
+  <span class="nav-badge">ETR601 · SEM40</span>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-tag">👵 Healthcare Super-app · Tham vọng tỉ đô · ETR601 SEM40HN</div>
+    <h1>Elder<span class="accent-care">Care</span> VN</h1>
+    <p style="font-size:1rem;color:rgba(255,255,255,0.45);margin-bottom:0.2rem;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;">Chăm sóc tại nhà · Telehealth chuyên khoa · Tài chính y tế · Giám sát AI</p>
+    <p class="hero-sub">
+      Super-app chăm sóc sức khỏe cho <strong style="color:var(--care-light)">14+ triệu</strong> người cao tuổi Việt Nam<br/>
+      <em style="color:rgba(255,255,255,0.4);font-style:normal;">Một ứng dụng để cả gia đình an tâm chăm bố mẹ già — mọi lúc, mọi nơi</em>
+    </p>
+    <div class="hero-badges">
+      <span class="hero-badge">🩺 Điều dưỡng tại nhà 5★</span>
+      <span class="hero-badge">📱 Telehealth lão khoa</span>
+      <span class="hero-badge">💳 Trả góp y tế</span>
+      <span class="hero-badge">📹 Camera AI · cảnh báo té ngã</span>
+      <span class="hero-badge">⌚ Wearable đo sinh hiệu</span>
+      <span class="hero-badge">🔐 Bảo mật dữ liệu sức khỏe</span>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;gap:0.75rem;justify-content:center;">
+      <a href="#problem" class="hero-cta">Khám phá cơ hội tỉ đô ↓</a>
+      <a href="/eldercare-app" class="hero-cta" style="background:rgba(255,255,255,0.08);border:1px solid rgba(45,212,191,0.5);box-shadow:none;color:var(--care-light);">▶️ Xem app demo</a>
+    </div>
+  </div>
+</section>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stat">
+    <div class="stat-num">14,2 triệu</div>
+    <div class="stat-label">Người ≥60 tuổi tại VN (2024)</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">&gt;25%</div>
+    <div class="stat-label">Dân số VN sẽ ≥60 tuổi vào 2050</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">~20 năm</div>
+    <div class="stat-label">VN già hóa — Pháp mất 115 năm</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">33,8 tỷ$</div>
+    <div class="stat-label">Chi tiêu y tế VN dự báo 2030</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">≥3 bệnh</div>
+    <div class="stat-label">Mạn tính/người cao tuổi VN</div>
+  </div>
+</div>
+
+<!-- PROBLEM -->
+<section class="problem-section" id="problem">
+  <div class="container">
+    <div class="section-tag">Vấn đề</div>
+    <h2>14 triệu người già, hàng triệu gia đình<br/>không biết xoay xở chăm sóc thế nào</h2>
+    <p class="section-desc">
+      Việt Nam đang già hóa nhanh nhất thế giới trong khi hệ thống chăm sóc người cao tuổi gần như chưa có. Con cái bận rộn, sống xa bố mẹ; bệnh viện quá tải; điều dưỡng thiếu trầm trọng; viện dưỡng lão đếm trên đầu ngón tay. Một cú té ngã hay ca mổ đột ngột có thể đẩy cả gia đình vào khủng hoảng.
+    </p>
+    <span class="click-hint">👆 Bấm vào từng thẻ để xem số liệu &amp; dẫn chứng chi tiết</span>
+    <div class="problem-grid">
+
+      <div class="problem-card expandable" onclick="toggleCard(this)">
+        <div class="icon">🏃</div>
+        <h4>Con bận, sống xa bố mẹ</h4>
+        <p>"Sandwich generation" — vừa nuôi con vừa lo bố mẹ già, đi làm xa, không thể túc trực 24/7 nhưng luôn nơm nớp lo lắng</p>
+        <div class="card-detail"><div class="card-detail-inner">
+          <p>Tỷ lệ người cao tuổi sống cùng con cái <strong>đang giảm nhanh</strong> do đô thị hóa và di cư lao động. Mô hình "tứ đại đồng đường" tan rã, nhưng dịch vụ chăm sóc thay thế gần như chưa có.</p>
+          <ul>
+            <li>Con cái sẵn sàng <strong>trả tiền cho sự an tâm</strong> — đây là người trả tiền (payer), bố mẹ là người dùng (user)</li>
+            <li>Nhu cầu lớn nhất: biết bố mẹ ở nhà có an toàn không, có uống thuốc đúng giờ không</li>
+          </ul>
+          <p class="src-note">Nguồn: GSO–UNFPA, Population Ageing in Viet Nam 2021–2024</p>
+        </div></div>
+      </div>
+
+      <div class="problem-card expandable" onclick="toggleCard(this)">
+        <div class="icon">🏥</div>
+        <h4>Bệnh viện quá tải, đi khám cực nhọc</h4>
+        <p>Người già phải xếp hàng từ 4–5h sáng, chờ cả ngày để khám 10 phút; di chuyển khó khăn, nhiều bệnh mạn tính phải tái khám liên tục</p>
+        <div class="card-detail"><div class="card-detail-inner">
+          <p>Trung bình mỗi người cao tuổi VN mắc <span class="mini-num">≥3 bệnh mạn tính</span> phải theo dõi suốt đời — tăng huyết áp <strong>59,5%</strong>, tiểu đường <strong>25,4%</strong>, suy tim 23,1%.</p>
+          <ul>
+            <li>Mỗi lần tái khám là một lần cả nhà phải xin nghỉ làm đưa đón</li>
+            <li>Telehealth lão khoa có thể xử lý phần lớn lần tái khám định kỳ tại nhà</li>
+          </ul>
+          <p class="src-note">Nguồn: Bộ Y tế 2023; tổng hợp y văn người cao tuổi VN 2023–2024</p>
+        </div></div>
+      </div>
+
+      <div class="problem-card expandable" onclick="toggleCard(this)">
+        <div class="icon">🧑‍⚕️</div>
+        <h4>Thiếu điều dưỡng trầm trọng</h4>
+        <p>VN chỉ có ~11,4 điều dưỡng/10.000 dân — chưa bằng nửa trung bình thế giới; tìm người chăm sóc tại nhà đáng tin gần như "may rủi"</p>
+        <div class="card-detail"><div class="card-detail-inner">
+          <p>Mục tiêu quốc gia là <span class="mini-num">25 điều dưỡng/10.000 dân</span> nhưng thực tế mới đạt <strong>~11,4</strong>; dự báo đến 2030 thiếu <strong>40.000–50.000 điều dưỡng</strong>.</p>
+          <ul>
+            <li>Thị trường người chăm sóc tại nhà phần lớn <strong>không chính thức, không xác minh</strong></li>
+            <li>Gia đình không có cách kiểm tra chứng chỉ, lý lịch, kỹ năng của caregiver</li>
+          </ul>
+          <p class="src-note">Nguồn: Hội Điều dưỡng VN / Vietnam News 2024</p>
+        </div></div>
+      </div>
+
+      <div class="problem-card expandable" onclick="toggleCard(this)">
+        <div class="icon">🛏️</div>
+        <h4>Viện dưỡng lão đếm trên đầu ngón tay</h4>
+        <p>Cả nước chỉ hơn 40 viện dưỡng lão chuyên nghiệp cho hàng chục triệu người già; chỗ tốt kín chỗ, giá cao, xa nhà</p>
+        <div class="card-detail"><div class="card-detail-inner">
+          <p>Hơn <span class="mini-num">40 cơ sở</span> dưỡng lão cho ~14 triệu người ≥60 tuổi — tỷ lệ phủ gần như bằng 0. Văn hóa VN cũng ưu tiên chăm bố mẹ <strong>tại nhà</strong>.</p>
+          <ul>
+            <li>Giá viện dưỡng lão phổ biến <strong>7–20 triệu/tháng</strong> — ngoài tầm với số đông</li>
+            <li>Giải pháp khả thi hơn: đưa dịch vụ chăm sóc chuyên nghiệp <strong>về tận nhà</strong></li>
+          </ul>
+          <p class="src-note">Nguồn: báo ngành 2024; VnExpress, Dưỡng lão Bình Mỹ 2024–2025</p>
+        </div></div>
+      </div>
+
+      <div class="problem-card expandable" onclick="toggleCard(this)">
+        <div class="icon">⚠️</div>
+        <h4>Nỗi sợ té ngã &amp; cấp cứu</h4>
+        <p>Té ngã, đột quỵ, tụt huyết áp ban đêm khi không ai bên cạnh — "phút vàng" cấp cứu trôi qua vì không ai phát hiện kịp</p>
+        <div class="card-detail"><div class="card-detail-inner">
+          <p>Với người già sống một mình hoặc ban ngày ở nhà một mình, một cú té ngã không được phát hiện có thể dẫn đến hậu quả nghiêm trọng.</p>
+          <ul>
+            <li>Camera AI + wearable đo sinh hiệu có thể <strong>tự động cảnh báo</strong> con cái và tổng đài</li>
+            <li>Phát hiện sớm = giữ được "phút vàng" cấp cứu đột quỵ, tim mạch</li>
+          </ul>
+          <p class="src-note">Nguồn: khuyến cáo y khoa lão khoa; tỷ lệ bệnh tim mạch người già VN 2023</p>
+        </div></div>
+      </div>
+
+      <div class="problem-card expandable" onclick="toggleCard(this)">
+        <div class="icon">💸</div>
+        <h4>Chi phí mổ/điều trị đột ngột</h4>
+        <p>Một ca mổ hay đợt điều trị bất ngờ có thể tốn hàng chục triệu; người dân VN tự trả tiền túi tới 40–45% chi phí y tế</p>
+        <div class="card-detail"><div class="card-detail-inner">
+          <p>Dù BHYT phủ <strong>93,35%</strong> dân số, người dân vẫn phải <span class="mini-num">tự chi 40–45%</span> tổng chi y tế — gấp đôi mức WHO khuyến nghị (15–20%).</p>
+          <ul>
+            <li>Ví dụ: thay khớp háng ~<strong>28–67 triệu</strong>; nhiều gia đình phải vay nóng</li>
+            <li>Nhu cầu thật cho <strong>trả góp y tế &amp; bảo hiểm bổ sung</strong> (mảng MedFin)</li>
+          </ul>
+          <p class="src-note">Nguồn: BHXH VN 2023; World Bank Out-of-Pocket Health Spending VN 2024</p>
+        </div></div>
+      </div>
+
+    </div>
+
+    <button class="deep-toggle" data-closed-label="Cơn sóng thần già hóa — vì sao là thời điểm vàng?" data-open-label="Thu gọn" onclick="toggleDeep(this)">
+      <span>🌊</span><span class="dt-label">Cơn sóng thần già hóa — vì sao là thời điểm vàng?</span><span class="chev">▼</span>
+    </button>
+    <div class="deep-panel">
+      <div class="deep-inner">
+        <h5>🌊 Việt Nam đang già hóa nhanh nhất thế giới — và "già trước khi giàu"</h5>
+        <p>Năm 2019 VN có <strong>11,41 triệu</strong> người ≥60 tuổi (11,86% dân số); đến 2024 đã khoảng <strong>14,2 triệu</strong>. Nhưng điều đáng nói là <strong>tốc độ</strong>: VN chỉ mất khoảng <strong>20–25 năm</strong> để chuyển từ giai đoạn "đang già hóa" sang "dân số già", trong khi Pháp mất 115 năm, Thụy Điển 85 năm.</p>
+        <div class="deep-stats">
+          <div class="deep-stat"><div class="ds-num">14,2 tr</div><div class="ds-label">Người ≥60 tuổi (2024)</div></div>
+          <div class="deep-stat"><div class="ds-num">20,9 tr</div><div class="ds-label">Dự báo người ≥60 (2034)</div></div>
+          <div class="deep-stat"><div class="ds-num">27,5 tr</div><div class="ds-label">Dự báo người ≥60 (2044)</div></div>
+          <div class="deep-stat"><div class="ds-num">~2036</div><div class="ds-label">VN chính thức "dân số già" (≥14% người ≥65)</div></div>
+        </div>
+        <h5>⏳ "Get old before getting rich" — già hóa ở mức thu nhập còn thấp</h5>
+        <p>VN bước vào giai đoạn già hóa từ <strong>2011</strong> và dự kiến thành "dân số già" quanh <strong>2036</strong> — sớm hơn nhiều so với khi đạt mức thu nhập cao. Hệ thống an sinh và chăm sóc dài hạn chưa kịp xây → khoảng trống dịch vụ khổng lồ mà <strong>khu vực tư nhân &amp; công nghệ phải lấp</strong>.</p>
+        <table class="deep-table">
+          <thead><tr><th>Cột mốc</th><th>Số liệu</th><th>Ý nghĩa cho ElderCare VN</th></tr></thead>
+          <tbody>
+            <tr><td>Người ≥60 (2050)</td><td><strong>&gt;25%</strong> dân số</td><td>Một phần tư đất nước là khách hàng tiềm năng trong 25 năm tới</td></tr>
+            <tr><td>Bệnh mạn tính</td><td>≥3 bệnh/người già</td><td>Nhu cầu theo dõi &amp; telehealth định kỳ suốt đời — doanh thu recurring</td></tr>
+            <tr><td>Điều dưỡng</td><td>11,4/10.000 dân</td><td>Khan hiếm nguồn cung → nền tảng tổng hợp &amp; xác minh caregiver có giá trị lớn</td></tr>
+            <tr><td>Chi tiền túi</td><td>40–45% chi y tế</td><td>Dư địa cho tài chính y tế, gói trả trước, bảo hiểm bổ sung (MedFin)</td></tr>
+          </tbody>
+        </table>
+        <div class="deep-callout">
+          🌊 <strong>Thời điểm vàng:</strong> Sóng già hóa + chi tiêu y tế tăng 2 chữ số + AI/wearable/telehealth rẻ đi + thế hệ con cái rành công nghệ &amp; sẵn sàng chi trả — bốn lực hội tụ cùng lúc. Ai xây được nền tảng chăm sóc người già <strong>đầu tiên &amp; toàn diện</strong> sẽ chiếm lĩnh một thị trường tỉ đô đang hình thành.
+        </div>
+        <p class="src-note">Nguồn: GSO–UNFPA Dự báo Dân số VN 2024–2074; World Bank "Vietnam: Adapting to an Aging Society" 2021; UNFPA Vietnam 2023; Bộ Y tế 2023.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARKET / OPPORTUNITY -->
+<section class="market-section" id="market">
+  <div class="container">
+    <div class="section-tag">Cơ hội thị trường</div>
+    <h2>Thị trường nghìn tỉ đang hình thành —<br/>tham vọng healthcare super-app tỉ đô</h2>
+    <p class="section-desc">
+      ElderCare VN không phải một dịch vụ đơn lẻ mà là <strong>super-app 5 trụ cột</strong> xếp chồng trên cùng một tệp khách hàng — chăm sóc tại nhà, telehealth, tài chính y tế, giám sát AI và thương mại dược/thiết bị. Mỗi trụ cột là một dòng doanh thu; cộng lại tạo ARPU lớn, network effect và data moat — công thức của các super-app y tế tỉ đô trong khu vực.
+    </p>
+
+    <div class="market-tam">
+      <div class="tam-card tam">
+        <div class="tam-tier">TAM</div>
+        <div class="tam-num">~115.000</div>
+        <div class="tam-unit">tỷ VNĐ / năm</div>
+        <div class="tam-desc">Thị trường chăm sóc người cao tuổi VN ~4,79 tỷ USD (2031) — toàn bộ chi tiêu chăm sóc &amp; y tế cho người già</div>
+      </div>
+      <div class="tam-card sam">
+        <div class="tam-tier">SAM</div>
+        <div class="tam-num">~18.000</div>
+        <div class="tam-unit">tỷ VNĐ / năm</div>
+        <div class="tam-desc">Hộ gia đình thành thị có bố mẹ già, rành smartphone, sẵn sàng chi cho dịch vụ chăm sóc số hóa</div>
+      </div>
+      <div class="tam-card som">
+        <div class="tam-tier">SOM — Năm 5</div>
+        <div class="tam-num">~900</div>
+        <div class="tam-unit">tỷ VNĐ / năm</div>
+        <div class="tam-desc">~5% SAM — mục tiêu giành được khi phủ các đô thị lớn với đủ 5 trụ cột super-app</div>
+      </div>
+    </div>
+
+    <div class="info-box info-care">
+      <strong style="color:#115e59;">💎 Vì sao là cơ hội tỉ đô (không phải marketplace đơn lẻ):</strong>
+      <span style="color:#374151;font-size:0.9rem;"> 14 triệu người già và đang tăng → 20,9 triệu (2034); mỗi gia đình chi cho <strong>nhiều dịch vụ cùng lúc</strong> (chăm sóc + khám + thuốc + tài chính + thiết bị) suốt nhiều năm. ARPU cao × tệp khổng lồ × recurring × data sức khỏe làm bàn đạp bảo hiểm/fintech = quy mô unicorn.</span>
+    </div>
+
+    <button class="deep-toggle" data-closed-label="Demographics & benchmark super-app khu vực" data-open-label="Thu gọn" onclick="toggleDeep(this)">
+      <span>🎯</span><span class="dt-label">Demographics &amp; benchmark super-app khu vực</span><span class="chev">▼</span>
+    </button>
+    <div class="deep-panel">
+      <div class="deep-inner">
+        <h5>📈 Quy mô &amp; tốc độ tăng trưởng thị trường</h5>
+        <div class="deep-stats">
+          <div class="deep-stat"><div class="ds-num">2,21 → 4,79 tỷ$</div><div class="ds-label">Thị trường chăm sóc người già VN 2023→2031 (CAGR 7,7%)</div></div>
+          <div class="deep-stat"><div class="ds-num">18,5 tỷ$</div><div class="ds-label">Tổng chi y tế VN 2022 (~4,6% GDP) → 33,8 tỷ$ (2030)</div></div>
+          <div class="deep-stat"><div class="ds-num">2,84 → 9,5 tỷ$</div><div class="ds-label">Digital health VN 2025→2034 (CAGR ~14,4%)</div></div>
+        </div>
+
+        <h5>🌏 Benchmark super-app y tế khu vực — bằng chứng quy mô tỉ đô</h5>
+        <p>Mô hình healthcare super-app đã chứng minh quy mô tỉ đô ở các thị trường châu Á có cơ cấu dân số tương tự VN. ElderCare VN đi theo công thức đó nhưng <strong>tập trung phân khúc người cao tuổi</strong> — nơi nhu cầu sâu nhất và đang bị bỏ ngỏ.</p>
+        <table class="deep-table">
+          <thead><tr><th>Nền tảng</th><th>Thị trường</th><th>Quy mô</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Ping An Good Doctor</strong></td><td>Trung Quốc</td><td>~450 triệu người dùng đăng ký (2022); IPO Hồng Kông 2018 huy động ~1,05 tỷ USD</td></tr>
+            <tr><td><strong>Halodoc</strong></td><td>Indonesia</td><td>Gọi vốn ~258 triệu USD; kết nối ~19.000 bác sĩ, 1.000 nhà thuốc đối tác</td></tr>
+            <tr><td><strong>Jio Health</strong></td><td>Việt Nam</td><td>Series B ~20 triệu USD (2022) — healthtech VN đã thu hút vốn lớn</td></tr>
+            <tr><td><strong>Med247 · Docosan</strong></td><td>Việt Nam</td><td>Med247 Series A 4,5 tr USD; Docosan seed &gt;1 tr USD — thị trường đang nóng</td></tr>
+          </tbody>
+        </table>
+
+        <h5>👥 Khách hàng kép: con cái trả tiền — bố mẹ dùng</h5>
+        <p>Khác với healthtech thông thường nhắm người trẻ, ElderCare VN khai thác <strong>"sandwich generation"</strong>: con cái 30–50 tuổi, có thu nhập, rành công nghệ, sống xa bố mẹ và <strong>sẵn sàng trả tiền cho sự an tâm</strong>. Đây là nhóm payer lý tưởng — quyết định nhanh, sẵn lòng chi, ràng buộc cảm xúc cao.</p>
+        <div class="deep-callout">
+          🚀 <strong>Tham vọng:</strong> Trở thành "Ping An Good Doctor của người cao tuổi Việt Nam" — một super-app mà mọi gia đình có bố mẹ già đều cài đặt. Với 14→27 triệu người già trong 20 năm tới và chi tiêu y tế tăng 2 chữ số, đây là một trong số ít thị trường VN đủ lớn để nuôi một <strong>unicorn nội địa</strong>.
+        </div>
+        <p class="src-note">Nguồn: Data Bridge Market Research 2024; IMARC Group 2025; World Bank / trade.gov 2022–2023; BMI/The Investor 2023; DealStreetAsia, MobiHealthNews, TechCrunch 2021–2022; CB Insights, SCMP 2018–2023; Tracxn 2024–2026. Số TAM/SAM/SOM (VNĐ) là ước tính nội bộ quy đổi từ quy mô thị trường có nguồn — không phải số chính thức.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOLUTION — 5 TRỤ CỘT SUPER-APP -->
+<section class="solution-section" id="solution">
+  <div class="container">
+    <div class="section-tag">Giải pháp</div>
+    <h2>Một super-app, 5 trụ cột —<br/>chăm trọn vòng đời sức khỏe người già</h2>
+    <p class="section-desc">
+      ElderCare VN không bán một dịch vụ rời rạc. Năm trụ cột xếp chồng trên cùng một hồ sơ sức khỏe gia đình — chăm sóc tại nhà, đặt khám thông minh, tài chính y tế, telehealth chuyên khoa và giám sát AI + thương mại. Mỗi trụ cột là một dòng doanh thu; cộng lại tạo ARPU cao, network effect và <strong>data moat</strong> — công thức của các super-app y tế tỉ đô. Mỗi trụ cột do một thành viên dẫn dắt.
+    </p>
+    <span class="click-hint">👆 Bấm vào từng trụ cột để xem công nghệ AI vận hành bên trong</span>
+    <div class="modules-grid">
+
+      <div class="module-card mod-1 expandable" onclick="toggleCard(this)">
+        <div class="mod-icon">🩺</div>
+        <h3>1 · CareConnect — Điều dưỡng tại nhà</h3>
+        <p>Marketplace điều dưỡng &amp; người chăm sóc tại nhà đã xác minh, đặt theo giờ/ngày/gói tháng. Trụ cột lõi, doanh thu recurring.</p>
+        <span class="mod-owner">👤 Minh Tân — Care Ops &amp; Quality 5★</span>
+        <div class="card-detail"><div class="card-detail-inner">
+          <p><strong>Cách công nghệ vận hành:</strong> Hồ sơ caregiver xác minh chứng chỉ + lý lịch tư pháp; thuật toán <span class="mini-num">matching</span> theo địa lý, kỹ năng (chăm bệnh nền, vật lý trị liệu, chăm sau mổ), lịch trống và đánh giá sao.</p>
+          <ul>
+            <li>App giám sát ca trực realtime: check-in/out định vị, nhật ký chăm sóc, ảnh báo cáo gửi con cái</li>
+            <li>Chuẩn hóa quy trình &amp; đào tạo để mọi ca đạt trải nghiệm 5★ — biến dịch vụ "may rủi" thành thương hiệu tin cậy</li>
+            <li>Giải trực tiếp nỗi đau thiếu hụt ~40.000–50.000 điều dưỡng &amp; thị trường caregiver phi chính thức</li>
+          </ul>
+        </div></div>
+      </div>
+
+      <div class="module-card mod-2 expandable" onclick="toggleCard(this)">
+        <div class="mod-icon">📅</div>
+        <h3>2 · SmartBooking — Đặt khám &amp; điều phối AI</h3>
+        <p>AI triage hỏi triệu chứng, gợi ý đúng chuyên khoa/cơ sở, đặt lịch, đặt xe đưa đón — bỏ cảnh xếp hàng từ 4–5h sáng.</p>
+        <span class="mod-owner">👤 Anh Hiếu — Cloud &amp; Điều phối (CTO)</span>
+        <div class="card-detail"><div class="card-detail-inner">
+          <p><strong>Cách công nghệ vận hành:</strong> Chatbot AI triage phân loại mức độ khẩn, định tuyến tới bệnh viện/phòng khám đối tác qua API lịch khám; tích hợp <span class="mini-num">đưa đón</span> &amp; người nhà ảo đi kèm người già.</p>
+          <ul>
+            <li>Đồng bộ lịch tái khám định kỳ cho ≥3 bệnh mạn tính/người già, nhắc tự động</li>
+            <li>Kênh affiliate bệnh viện/phòng khám — vừa phục vụ user vừa tạo doanh thu B2B2C</li>
+            <li>Giảm tải lần khám trực tiếp không cần thiết, chuyển sang TeleSpecialist khi phù hợp</li>
+          </ul>
+        </div></div>
+      </div>
+
+      <div class="module-card mod-4 expandable" onclick="toggleCard(this)">
+        <div class="mod-icon">💳</div>
+        <h3>3 · MedFin — Tài chính y tế</h3>
+        <p>Trả góp ca mổ/điều trị, gói chăm sóc trả trước, bảo hiểm bổ sung — để chi phí đột ngột không đẩy gia đình vào khủng hoảng.</p>
+        <span class="mod-owner">👤 Chị Liên — MedFin &amp; Billing (CFO)</span>
+        <div class="card-detail"><div class="card-detail-inner">
+          <p><strong>Cách công nghệ vận hành:</strong> Chấm điểm tín dụng dựa trên lịch sử chi tiêu y tế &amp; hồ sơ sức khỏe trên app; hợp tác ngân hàng/công ty tài chính để cấp <span class="mini-num">trả góp 0% hoặc lãi thấp</span> cho ca mổ điển hình (thay khớp háng ~28–67 triệu).</p>
+          <ul>
+            <li>Gói chăm sóc trả trước (prepaid) tạo dòng tiền &amp; khóa khách hàng</li>
+            <li>Bảo hiểm bổ sung lấp khoảng trống tự chi 40–45% chi phí y tế của BHYT</li>
+            <li>Data hồ sơ sức khỏe = bàn đạp mở rộng sang insurtech/fintech — moat dài hạn</li>
+          </ul>
+        </div></div>
+      </div>
+
+      <div class="module-card mod-3 expandable" onclick="toggleCard(this)">
+        <div class="mod-icon">📱</div>
+        <h3>4 · TeleSpecialist — Telehealth lão khoa</h3>
+        <p>Khám video chuyên khoa cho bệnh mạn tính người già: lão khoa, tim mạch, tiểu đường, nội tiết — tái khám tại nhà, không phải đi viện.</p>
+        <span class="mod-owner">👤 Anh Hiếu &amp; Chị Liên — Telehealth Infra</span>
+        <div class="card-detail"><div class="card-detail-inner">
+          <p><strong>Cách công nghệ vận hành:</strong> Video call mã hóa + hồ sơ bệnh án điện tử + đơn thuốc số; AI tóm tắt triệu chứng &amp; số liệu sinh hiệu (từ wearable CareSense) gửi bác sĩ trước buổi khám để tiết kiệm thời gian.</p>
+          <ul>
+            <li>Phần lớn lần tái khám định kỳ xử lý được từ xa — biến chi phí đi lại thành recurring revenue</li>
+            <li>Theo dõi liên tục huyết áp 59,5% / tiểu đường 25,4% người già — phát hiện sớm biến chứng</li>
+            <li>Kết nối mạng lưới bác sĩ chuyên khoa, mở rộng độ phủ địa lý không giới hạn vật lý</li>
+          </ul>
+        </div></div>
+      </div>
+
+      <div class="module-card mod-5 expandable" onclick="toggleCard(this)">
+        <div class="mod-icon">📹</div>
+        <h3>5 · CareSense + Commerce — Giám sát AI &amp; dược/thiết bị</h3>
+        <p>Camera AI phát hiện té ngã, wearable đo sinh hiệu, cảnh báo bất thường tức thì + bán dược phẩm &amp; thiết bị y tế giao tận nhà.</p>
+        <span class="mod-owner">👤 Chị Nhi — Hardware/IoT &amp; Commerce</span>
+        <div class="card-detail"><div class="card-detail-inner">
+          <p><strong>Cách công nghệ vận hành:</strong> Camera AI computer-vision nhận diện <span class="mini-num">té ngã</span> &amp; bất động bất thường; wearable đo nhịp tim, SpO₂, huyết áp; thuật toán phát hiện bất thường tự động gọi con cái + tổng đài, giữ "phút vàng" cấp cứu đột quỵ.</p>
+          <ul>
+            <li>Bán &amp; giao thuốc định kỳ, thiết bị y tế tại nhà (máy đo đường huyết, máy trợ thở...) — dòng commerce biên cao</li>
+            <li>Dữ liệu sinh hiệu liên tục nuôi TeleSpecialist &amp; MedFin — vòng tròn dữ liệu khép kín</li>
+            <li>Phần cứng tạo rào cản chuyển đổi &amp; điểm chạm hàng ngày trong nhà</li>
+          </ul>
+        </div></div>
+      </div>
+
+      <div class="module-card mod-6 expandable" onclick="toggleCard(this)">
+        <div class="mod-icon">🔐</div>
+        <h3>Xuyên suốt · Health Data &amp; Security</h3>
+        <p>Bảo mật dữ liệu sức khỏe nhạy cảm, xác minh caregiver, tuân thủ Nghị định 13/2023 về bảo vệ dữ liệu cá nhân — nền tảng niềm tin của cả super-app.</p>
+        <span class="mod-owner">👤 Thành Duy — Security &amp; Compliance (CSO)</span>
+        <div class="card-detail"><div class="card-detail-inner">
+          <p><strong>Cách công nghệ vận hành:</strong> Mã hóa đầu-cuối hồ sơ sức khỏe, phân quyền truy cập (con cái — người già — bác sĩ — caregiver), nhật ký kiểm toán; xác minh danh tính &amp; lý lịch caregiver; tuân thủ <span class="mini-num">NĐ 13/2023</span>.</p>
+          <ul>
+            <li>Dữ liệu sức khỏe là tài sản nhạy cảm nhất — bảo mật vững là điều kiện tồn tại của super-app</li>
+            <li>Tăng trưởng 2 phía (gia đình + nguồn cung caregiver) do Thanh Bình — CMO dẫn dắt</li>
+          </ul>
+        </div></div>
+      </div>
+
+    </div>
+
+    <button class="deep-toggle" data-closed-label="Vì sao super-app thắng dịch vụ đơn lẻ?" data-open-label="Thu gọn" onclick="toggleDeep(this)">
+      <span>🧩</span><span class="dt-label">Vì sao super-app thắng dịch vụ đơn lẻ?</span><span class="chev">▼</span>
+    </button>
+    <div class="deep-panel">
+      <div class="deep-inner">
+        <h5>🧩 Công nghệ lõi: một hồ sơ sức khỏe — năm dòng tiền</h5>
+        <p>Khác biệt cốt lõi của ElderCare VN không nằm ở từng tính năng mà ở <strong>lớp dữ liệu chung</strong>: mọi trụ cột đọc/ghi vào cùng một hồ sơ sức khỏe gia đình. Caregiver ghi nhật ký → wearable bổ sung sinh hiệu → bác sĩ TeleSpecialist đọc được toàn cảnh → MedFin chấm điểm tín dụng y tế → Commerce gợi ý đúng thuốc. Càng dùng nhiều trụ cột, dữ liệu càng giàu, dịch vụ càng đúng — <strong>network effect nội tại</strong>.</p>
+        <div class="deep-stats">
+          <div class="deep-stat"><div class="ds-num">5 dòng</div><div class="ds-label">doanh thu xếp chồng trên 1 tệp khách</div></div>
+          <div class="deep-stat"><div class="ds-num">×ARPU</div><div class="ds-label">mỗi trụ cột thêm vào doanh thu/khách</div></div>
+          <div class="deep-stat"><div class="ds-num">Recurring</div><div class="ds-label">chăm sóc &amp; theo dõi bệnh mạn tính suốt đời</div></div>
+          <div class="deep-stat"><div class="ds-num">Data moat</div><div class="ds-label">hồ sơ sức khỏe = bàn đạp insurtech/fintech</div></div>
+        </div>
+        <table class="deep-table">
+          <thead><tr><th>Trụ cột</th><th>Mô hình doanh thu</th><th>Tự nó nuôi trụ cột nào</th></tr></thead>
+          <tbody>
+            <tr><td><strong>CareConnect</strong></td><td>Hoa hồng ca chăm + gói tháng</td><td>Sinh dữ liệu chăm sóc → TeleSpecialist, MedFin</td></tr>
+            <tr><td><strong>SmartBooking</strong></td><td>Phí điều phối + affiliate cơ sở y tế</td><td>Đẩy lưu lượng sang TeleSpecialist</td></tr>
+            <tr><td><strong>MedFin</strong></td><td>Lãi/phí trả góp, prepaid, bảo hiểm</td><td>Giữ chân khách, tài trợ chi cho 4 trụ kia</td></tr>
+            <tr><td><strong>TeleSpecialist</strong></td><td>Phí khám/gói theo dõi mạn tính</td><td>Kê đơn → Commerce; chỉ định → CareConnect</td></tr>
+            <tr><td><strong>CareSense + Commerce</strong></td><td>Bán/thuê thiết bị + biên dược phẩm</td><td>Sinh sinh hiệu → TeleSpecialist, cảnh báo → CareConnect</td></tr>
+          </tbody>
+        </table>
+        <div class="deep-callout">
+          🚀 <strong>Vì sao tỉ đô:</strong> Một dịch vụ đơn lẻ (chỉ điều dưỡng, chỉ telehealth) bị giới hạn ARPU &amp; dễ bị sao chép. Super-app khóa khách bằng dữ liệu &amp; thói quen hàng ngày, mỗi trụ cột hạ chi phí thu hút khách cho trụ cột kế — đúng công thức Ping An Good Doctor / Halodoc đã chứng minh ở quy mô trăm triệu người dùng.
+        </div>
+        <p class="src-note">Cấu trúc trụ cột &amp; mô hình doanh thu là thiết kế sản phẩm của nhóm; benchmark super-app theo Ping An Good Doctor, Halodoc (đã dẫn nguồn ở phần Thị trường).</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VPC — VALUE PROPOSITION CANVAS -->
+<section class="vpc-section" id="vpc">
+  <div class="container">
+    <div class="section-tag">Module 2.2 — Value Proposition Canvas</div>
+    <h2>Khách hàng kép: con cái trả tiền — bố mẹ dùng</h2>
+    <p class="section-desc">
+      ElderCare VN có mô hình khách hàng kép đặc thù: <strong>người trả tiền (payer) là con cái</strong> 30–50 tuổi rành công nghệ, còn <strong>người dùng (user) là bố mẹ già</strong>. Áp dụng Value Proposition Canvas (Osterwalder) để map Jobs / Pains / Gains của cả hai với giá trị ElderCare cung cấp.
+    </p>
+    <div class="vpc-grid">
+      <div class="vpc-side customer">
+        <div class="vpc-title c">👨‍👩‍👧 Customer Profile — Con cái (payer) &amp; Bố mẹ già (user)</div>
+        <div class="vpc-block">
+          <div class="vpc-block-title">💼 Customer Jobs (việc cần làm)</div>
+          <ul>
+            <li>Đảm bảo bố mẹ già được chăm sóc, an toàn dù mình ở xa/bận</li>
+            <li>Biết bố mẹ có uống thuốc đúng giờ, ăn uống, vận động không</li>
+            <li>Đưa bố mẹ đi khám &amp; theo dõi ≥3 bệnh mạn tính định kỳ</li>
+            <li>Xử lý nhanh khi có cấp cứu: té ngã, đột quỵ, tụt huyết áp</li>
+            <li>Lo được chi phí mổ/điều trị đột ngột mà không vỡ tài chính</li>
+            <li>Tìm điều dưỡng/người chăm tại nhà đáng tin, có kỹ năng</li>
+          </ul>
+        </div>
+        <div class="vpc-block">
+          <div class="vpc-block-title">😣 Pains (nỗi đau)</div>
+          <ul>
+            <li>Nơm nớp lo lắng, cảm giác có lỗi vì không ở bên bố mẹ</li>
+            <li>Không tìm được caregiver tin cậy — thuê "may rủi", không xác minh</li>
+            <li>Bệnh viện quá tải, mỗi lần đưa đi khám tốn cả ngày nghỉ làm</li>
+            <li>Sợ một cú té ngã/đột quỵ ban đêm không ai phát hiện kịp</li>
+            <li>Chi phí mổ hàng chục triệu ập đến bất ngờ, phải vay nóng</li>
+            <li>Dịch vụ rời rạc: mỗi nhu cầu một app/đầu mối khác nhau</li>
+          </ul>
+        </div>
+        <div class="vpc-block">
+          <div class="vpc-block-title">🌟 Gains (kết quả mong muốn)</div>
+          <ul>
+            <li>An tâm tuyệt đối: theo dõi sức khỏe bố mẹ từ điện thoại mọi lúc</li>
+            <li>Một app lo trọn gói — chăm sóc, khám, thuốc, tài chính y tế</li>
+            <li>Bố mẹ sống vui, khỏe, độc lập &amp; được tôn trọng tại nhà</li>
+            <li>Phản ứng tức thì khi có sự cố — giữ được "phút vàng"</li>
+            <li>Chi phí y tế lớn được chia nhỏ, có kế hoạch, không sốc</li>
+          </ul>
+        </div>
+      </div>
+      <div class="vpc-side product">
+        <div class="vpc-title p">👵 Value Map — ElderCare VN super-app</div>
+        <div class="vpc-block">
+          <div class="vpc-block-title">🎁 Products &amp; Services</div>
+          <ul>
+            <li>CareConnect: điều dưỡng/người chăm tại nhà đã xác minh</li>
+            <li>SmartBooking: AI triage, đặt khám &amp; đưa đón</li>
+            <li>TeleSpecialist: khám video chuyên khoa lão khoa từ xa</li>
+            <li>CareSense: camera AI té ngã + wearable đo sinh hiệu</li>
+            <li>MedFin: trả góp ca mổ, gói trả trước, bảo hiểm bổ sung</li>
+            <li>Commerce: dược phẩm &amp; thiết bị y tế giao tận nhà</li>
+          </ul>
+        </div>
+        <div class="vpc-block">
+          <div class="vpc-block-title">💊 Pain Relievers (giải đau)</div>
+          <ul>
+            <li>Nhật ký chăm sóc &amp; cảnh báo realtime → xóa nỗi lo "ở xa"</li>
+            <li>Caregiver xác minh chứng chỉ + lý lịch → hết "may rủi"</li>
+            <li>Tái khám &amp; theo dõi mạn tính tại nhà → bớt đi viện</li>
+            <li>Camera AI + wearable tự cảnh báo → giữ "phút vàng" cấp cứu</li>
+            <li>MedFin chia nhỏ chi phí mổ → không phải vay nóng</li>
+            <li>Một app cho mọi nhu cầu → hết cảnh dịch vụ rời rạc</li>
+          </ul>
+        </div>
+        <div class="vpc-block">
+          <div class="vpc-block-title">✨ Gain Creators (tạo giá trị)</div>
+          <ul>
+            <li>Bảng theo dõi sức khỏe bố mẹ realtime ngay trên điện thoại con</li>
+            <li>Hồ sơ sức khỏe thống nhất xuyên 5 trụ cột — chăm sóc chủ động</li>
+            <li>Người già sống độc lập, an toàn, có phẩm giá tại nhà</li>
+            <li>Gói gia đình trả trước — chủ động kế hoạch tài chính y tế</li>
+            <li>An tâm = giá trị cảm xúc con cái sẵn sàng trả tiền cao</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <button class="deep-toggle" data-closed-label="Fit Score: mỗi nỗi đau gắn một giải pháp" data-open-label="Thu gọn" onclick="toggleDeep(this)">
+      <span>📐</span><span class="dt-label">Fit Score: mỗi nỗi đau gắn một giải pháp</span><span class="chev">▼</span>
+    </button>
+    <div class="deep-panel">
+      <div class="deep-inner">
+        <h5>📐 Product-Market Fit: mỗi Pain được giải bằng trụ cột cụ thể</h5>
+        <table class="deep-table">
+          <thead><tr><th>Pain (mức độ)</th><th>Hiện trạng / chi phí</th><th>ElderCare giải quyết</th><th>Trụ cột</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Lo lắng vì ở xa</strong> 🔴 Cao</td><td>Không có cách theo dõi từ xa</td><td>Nhật ký chăm sóc + cảnh báo realtime</td><td>CareConnect + CareSense</td></tr>
+            <tr><td><strong>Sợ té ngã/cấp cứu</strong> 🔴 Cao</td><td>"Phút vàng" trôi qua, hậu quả nặng</td><td>Camera AI + wearable tự cảnh báo</td><td>CareSense</td></tr>
+            <tr><td><strong>Chi phí mổ đột ngột</strong> 🔴 Cao</td><td>Tự chi 40–45%; mổ ~28–67 triệu</td><td>Trả góp + prepaid + bảo hiểm bổ sung</td><td>MedFin</td></tr>
+            <tr><td><strong>Đi khám cực nhọc</strong> 🟠 TB</td><td>Xếp hàng 4–5h, mất ngày nghỉ làm</td><td>AI triage + telehealth tái khám tại nhà</td><td>SmartBooking + TeleSpecialist</td></tr>
+            <tr><td><strong>Caregiver "may rủi"</strong> 🟠 TB</td><td>Thị trường phi chính thức, thiếu hụt</td><td>Marketplace xác minh chứng chỉ + lý lịch</td><td>CareConnect</td></tr>
+          </tbody>
+        </table>
+        <div class="deep-callout">
+          💡 <strong>Fit cảm xúc:</strong> Giá trị bán đắt nhất của ElderCare không phải tính năng mà là <strong>sự an tâm</strong> — thứ con cái "sandwich generation" sẵn sàng trả tiền cao &amp; đều đặn. Đây là nhóm payer lý tưởng: có thu nhập, ràng buộc cảm xúc mạnh, quyết định nhanh.
+        </div>
+        <p class="src-note">Số chi phí mổ &amp; tỷ lệ tự chi dẫn nguồn ở phần Vấn đề (BHXH VN 2023, World Bank 2024). Mức độ Pain cần kiểm chứng bằng khảo sát sơ cấp ở giai đoạn pilot.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPETITION -->
+<section class="comp-section" id="competition">
+  <div class="container">
+    <div class="section-tag">Đánh giá cạnh tranh</div>
+    <h2>ElderCare VN vs đối thủ</h2>
+    <p class="section-desc">Healthtech VN hiện phục vụ chủ yếu người trẻ &amp; khám tổng quát. Chưa có nền tảng nào tập trung trọn vẹn vào <strong>người cao tuổi</strong> với đủ 5 trụ cột — đây là khoảng trống Blue Ocean rõ ràng.</p>
+    <div style="overflow-x:auto;">
+      <table class="comp-table">
+        <thead>
+          <tr>
+            <th>Nền tảng</th>
+            <th>Tập trung người già</th>
+            <th>Điều dưỡng tại nhà</th>
+            <th>Telehealth lão khoa</th>
+            <th>Giám sát AI/wearable</th>
+            <th>Tài chính y tế</th>
+            <th>Mô hình</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="us-row">
+            <td>👵 ElderCare VN <strong>(chúng ta)</strong></td>
+            <td class="check">✓ Lõi</td>
+            <td class="check">✓ Xác minh</td>
+            <td class="check">✓ Chuyên khoa</td>
+            <td class="check">✓ Camera+wearable</td>
+            <td class="check">✓ MedFin</td>
+            <td>Super-app 5 trụ</td>
+          </tr>
+          <tr>
+            <td>Jio Health</td>
+            <td class="cross">✗ Tổng quát</td>
+            <td class="partial">~ Điều dưỡng dạo</td>
+            <td class="check">✓</td>
+            <td class="cross">✗</td>
+            <td class="cross">✗</td>
+            <td>Phòng khám + app</td>
+          </tr>
+          <tr>
+            <td>Med247</td>
+            <td class="cross">✗ Tổng quát</td>
+            <td class="cross">✗</td>
+            <td class="check">✓</td>
+            <td class="cross">✗</td>
+            <td class="cross">✗</td>
+            <td>Clinic + telehealth</td>
+          </tr>
+          <tr>
+            <td>Docosan</td>
+            <td class="cross">✗ Tổng quát</td>
+            <td class="cross">✗</td>
+            <td class="partial">~ Đặt khám</td>
+            <td class="cross">✗</td>
+            <td class="cross">✗</td>
+            <td>Marketplace đặt khám</td>
+          </tr>
+          <tr>
+            <td>Viện dưỡng lão truyền thống</td>
+            <td class="check">✓ Người già</td>
+            <td class="partial">~ Tại cơ sở</td>
+            <td class="cross">✗</td>
+            <td class="cross">✗</td>
+            <td class="cross">✗</td>
+            <td>Cơ sở tập trung, 7–20tr/th</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="info-box info-care" style="margin-top:1.5rem;">
+      <strong style="color:#115e59;">🏆 Lợi thế Blue Ocean:</strong>
+      <span style="color:#374151;font-size:0.9rem;"> ElderCare VN là nền tảng <strong>đầu tiên</strong> tại VN tập trung trọn vẹn vào người cao tuổi, kết hợp đủ 5 trụ cột chăm sóc — tại nhà, telehealth chuyên khoa, giám sát AI, tài chính y tế &amp; thương mại — thay vì một dịch vụ đơn lẻ. Đối thủ phục vụ người trẻ &amp; khám tổng quát; viện dưỡng lão thì đắt, ít chỗ &amp; trái văn hóa chăm bố mẹ tại nhà.</span>
+    </div>
+
+    <button class="deep-toggle" data-closed-label="Moat & vì sao đối thủ khó đuổi kịp" data-open-label="Thu gọn" onclick="toggleDeep(this)">
+      <span>🛡️</span><span class="dt-label">Moat &amp; vì sao đối thủ khó đuổi kịp</span><span class="chev">▼</span>
+    </button>
+    <div class="deep-panel">
+      <div class="deep-inner">
+        <h5>🛡️ Vì sao đối thủ hiện tại khó pivot sang người già</h5>
+        <table class="deep-table">
+          <thead><tr><th>Đối thủ</th><th>Định vị</th><th>Vì sao khó cạnh tranh trực tiếp</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Jio Health</strong></td><td>Phòng khám số + app, người trẻ đô thị</td><td>Mô hình clinic-led nặng vốn; chưa có điều dưỡng tại nhà xác minh, giám sát IoT hay tài chính y tế cho người già</td></tr>
+            <tr><td><strong>Med247 · Docosan</strong></td><td>Telehealth &amp; marketplace đặt khám tổng quát</td><td>Tệp người dùng &amp; UX thiết kế cho người trẻ; thiếu trải nghiệm phù hợp người cao tuổi &amp; con cái chăm từ xa</td></tr>
+            <tr><td><strong>Viện dưỡng lão</strong></td><td>Cơ sở tập trung, 7–20tr/tháng</td><td>Không scale (chỉ &gt;40 cơ sở/14tr người già); trái văn hóa chăm tại nhà; không có lớp công nghệ &amp; dữ liệu</td></tr>
+            <tr><td><strong>Caregiver tự do</strong></td><td>Người chăm phi chính thức</td><td>Không xác minh, không bảo hành chất lượng — chính là nguồn cung ElderCare chuẩn hóa &amp; tổng hợp lại</td></tr>
+          </tbody>
+        </table>
+        <div class="deep-callout">
+          🛡️ <strong>Rào cản phòng thủ (moat):</strong> (1) <strong>Data moat</strong> — hồ sơ sức khỏe người già đa năm, càng dùng càng giàu; (2) <strong>Network effect 2 phía</strong> — càng nhiều caregiver xác minh ↔ càng nhiều gia đình; (3) <strong>Chi phí chuyển đổi cao</strong> — thiết bị CareSense lắp tại nhà + thói quen hàng ngày; (4) <strong>Niềm tin &amp; thương hiệu 5★</strong> trong lĩnh vực nhạy cảm là tài sản xây chậm, khó sao chép.
+        </div>
+        <p class="src-note">Định vị đối thủ tổng hợp từ thông tin công khai (vốn gọi được dẫn ở phần Thị trường); ma trận tính năng là đánh giá của nhóm tại thời điểm xây dự án 2026.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INNOVATION — MODULE 1 -->
+<section class="innov-section" id="innovation">
+  <div class="container">
+    <div class="section-tag">Module 1 — 10 Loại hình ĐMST</div>
+    <h2>ElderCare VN đổi mới theo loại hình nào?</h2>
+    <p class="section-desc">Theo khung 10 Types of Innovation (Doblin), ElderCare VN không chỉ đổi mới ở sản phẩm mà ở <strong>cấu hình &amp; trải nghiệm</strong> — sáu loại hình đổi mới tạo rào cản cao nhất.</p>
+    <div class="innov-grid">
+      <div class="innov-card">
+        <div class="innov-num">Loại 1</div>
+        <div class="innov-name">Profit Model</div>
+        <div class="innov-desc">Mô hình kiếm tiền truyền thống: dịch vụ chăm sóc tính theo ca</div>
+      </div>
+      <div class="innov-card active">
+        <div class="innov-num">Loại 2</div>
+        <div class="innov-name">Network</div>
+        <div class="innov-desc">Kết nối gia đình ↔ caregiver ↔ bệnh viện ↔ bác sĩ ↔ ngân hàng/bảo hiểm trong 1 nền tảng</div>
+        <span class="innov-badge">✓ Áp dụng</span>
+      </div>
+      <div class="innov-card">
+        <div class="innov-num">Loại 3</div>
+        <div class="innov-name">Structure</div>
+        <div class="innov-desc">Cơ cấu tổ chức nội bộ</div>
+      </div>
+      <div class="innov-card">
+        <div class="innov-num">Loại 4</div>
+        <div class="innov-name">Process</div>
+        <div class="innov-desc">Quy trình vận hành nội bộ</div>
+      </div>
+      <div class="innov-card">
+        <div class="innov-num">Loại 5</div>
+        <div class="innov-name">Product Performance</div>
+        <div class="innov-desc">Hiệu năng tính năng đơn lẻ</div>
+      </div>
+      <div class="innov-card active">
+        <div class="innov-num">Loại 6</div>
+        <div class="innov-name">Product System</div>
+        <div class="innov-desc">5 trụ cột tích hợp trên 1 hồ sơ sức khỏe — hệ sinh thái super-app, không phải app rời</div>
+        <span class="innov-badge">✓ Cốt lõi</span>
+      </div>
+      <div class="innov-card active">
+        <div class="innov-num">Loại 7</div>
+        <div class="innov-name">Service</div>
+        <div class="innov-desc">Dịch vụ chăm sóc chuẩn 5★, nhật ký realtime, tổng đài cấp cứu — trải nghiệm an tâm</div>
+        <span class="innov-badge">✓ Áp dụng</span>
+      </div>
+      <div class="innov-card active">
+        <div class="innov-num">Loại 8</div>
+        <div class="innov-name">Channel</div>
+        <div class="innov-desc">App mobile-first cho con cái + affiliate bệnh viện/phòng khám đưa người già vào nền tảng</div>
+        <span class="innov-badge">✓ Áp dụng</span>
+      </div>
+      <div class="innov-card active">
+        <div class="innov-num">Loại 9</div>
+        <div class="innov-name">Brand</div>
+        <div class="innov-desc">Định vị "một app để cả gia đình an tâm chăm bố mẹ già" — thương hiệu tin cậy y tế</div>
+        <span class="innov-badge">✓ Áp dụng</span>
+      </div>
+      <div class="innov-card active">
+        <div class="innov-num">Loại 10</div>
+        <div class="innov-name">Customer Engagement</div>
+        <div class="innov-desc">Bảng theo dõi sức khỏe bố mẹ realtime, nhắc thuốc, gắn kết cảm xúc con cái mỗi ngày</div>
+        <span class="innov-badge">✓ Áp dụng</span>
+      </div>
+    </div>
+    <div class="info-box info-care" style="margin-top:1.5rem;">
+      <strong style="color:#115e59;">📌 Kết luận Module 1:</strong>
+      <span style="color:#374151;font-size:0.9rem;"> ElderCare VN đổi mới mạnh nhất ở <strong>Product System (Loại 6 — super-app 5 trụ)</strong> và <strong>Network (Loại 2)</strong>, bổ trợ bằng Service, Channel, Brand &amp; Customer Engagement — áp dụng <strong>6/10 loại hình</strong>, đặt nền cho moat bền vững theo nghiên cứu Doblin.</span>
+    </div>
+
+    <button class="deep-toggle" data-closed-label="Vì sao 6 loại hình này tạo rào cản cao nhất" data-open-label="Thu gọn" onclick="toggleDeep(this)">
+      <span>💡</span><span class="dt-label">Vì sao 6 loại hình này tạo rào cản cao nhất</span><span class="chev">▼</span>
+    </button>
+    <div class="deep-panel">
+      <div class="deep-inner">
+        <h5>💡 Đổi mới ở cấu hình &amp; trải nghiệm — khó sao chép nhất</h5>
+        <p>Nghiên cứu Doblin (Deloitte): đổi mới càng dịch về phía <strong>Configuration</strong> (Network, Product System) và <strong>Experience</strong> (Service, Channel, Brand, Engagement) thì càng khó sao chép. Một dịch vụ chỉ mạnh ở "Product Performance" đơn lẻ dễ bị copy; ElderCare kết hợp 6 loại hình tạo moat bền vững.</p>
+        <table class="deep-table">
+          <thead><tr><th>Loại hình</th><th>ElderCare áp dụng</th><th>Tại sao khó sao chép</th></tr></thead>
+          <tbody>
+            <tr><td><strong>6. Product System</strong></td><td>5 trụ cột tích hợp trên 1 hồ sơ sức khỏe</td><td>Phải xây &amp; vận hành đồng thời nhiều trụ; data chung tạo lợi thế cộng hưởng</td></tr>
+            <tr><td><strong>2. Network</strong></td><td>Gia đình ↔ caregiver ↔ bệnh viện ↔ bác sĩ ↔ ngân hàng/bảo hiểm</td><td>Mỗi tích hợp đàm phán riêng; càng nhiều node càng giá trị (network effect)</td></tr>
+            <tr><td><strong>7. Service</strong></td><td>Chuẩn 5★, nhật ký realtime, tổng đài cấp cứu</td><td>Vận hành dịch vụ chất lượng trong lĩnh vực nhạy cảm rất khó chuẩn hóa</td></tr>
+            <tr><td><strong>9. Brand + 10. Engagement</strong></td><td>"An tâm chăm bố mẹ" + theo dõi mỗi ngày</td><td>Niềm tin y tế xây chậm; thói quen hàng ngày tạo chi phí chuyển đổi cảm xúc cao</td></tr>
+          </tbody>
+        </table>
+        <div class="deep-callout">
+          🏆 <strong>Theo Doblin:</strong> doanh nghiệp đổi mới ở <strong>≥3 loại hình</strong> cùng lúc có lợi nhuận vượt trội bền vững hơn hẳn. ElderCare áp dụng 6/10 — định vị một super-app y tế, không chỉ "một app đặt điều dưỡng".
+        </div>
+        <p class="src-note">Khung tham chiếu: Doblin/Deloitte "Ten Types of Innovation" (Keeley et al., 2013). Việc gán loại hình là phân tích của nhóm cho dự án ElderCare VN.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FORCES — MODULE 3.1 -->
+<section class="force-section" id="forces">
+  <div class="container">
+    <div class="section-tag" style="color:var(--care-light)">Module 3.1 — Lực đẩy &amp; Lực kéo</div>
+    <h2>Tại sao ElderCare VN đúng thời điểm?</h2>
+    <p class="section-desc">Bốn lực hội tụ cùng lúc: công nghệ chăm sóc rẻ đi (Push) gặp sóng già hóa &amp; sandwich generation (Pull) — tạo cửa sổ cơ hội tỉ đô.</p>
+    <div class="force-grid">
+      <div class="force-card push">
+        <div class="force-head">🚀 Lực đẩy công nghệ (Technology Push)</div>
+        <div class="force-item">
+          <div class="force-item-icon">🤖</div>
+          <div class="force-item-text">
+            <strong>AI &amp; computer vision rẻ đi</strong>
+            Camera AI phát hiện té ngã, LLM triage, tóm tắt bệnh án giờ đủ rẻ để triển khai đại trà tại gia đình
+          </div>
+        </div>
+        <div class="force-item">
+          <div class="force-item-icon">⌚</div>
+          <div class="force-item-text">
+            <strong>Wearable &amp; IoT y tế phổ cập</strong>
+            Thiết bị đo nhịp tim, SpO₂, huyết áp, cảm biến té ngã giá ngày càng thấp — giám sát sinh hiệu liên tục tại nhà khả thi
+          </div>
+        </div>
+        <div class="force-item">
+          <div class="force-item-icon">📱</div>
+          <div class="force-item-text">
+            <strong>Telehealth &amp; smartphone phổ cập</strong>
+            ~79,8 triệu người dùng internet (78,8% dân số), &gt;84% là smartphone — nền tảng tiếp cận con cái mọi nhà
+          </div>
+        </div>
+        <div class="force-item">
+          <div class="force-item-icon">🏛️</div>
+          <div class="force-item-text">
+            <strong>Chính sách số hóa y tế</strong>
+            Bệnh án điện tử, đơn thuốc số, khám chữa bệnh từ xa được Bộ Y tế thúc đẩy — hành lang pháp lý đang mở
+          </div>
+        </div>
+        <div class="force-item">
+          <div class="force-item-icon">☁️</div>
+          <div class="force-item-text">
+            <strong>Cloud &amp; bảo mật dữ liệu trong nước</strong>
+            Hạ tầng cloud VN + Nghị định 13/2023 về bảo vệ dữ liệu cá nhân — lưu trữ hồ sơ sức khỏe đúng chuẩn, chi phí hợp lý
+          </div>
+        </div>
+      </div>
+      <div class="force-card pull">
+        <div class="force-head">🧲 Lực kéo nhu cầu (Market Pull)</div>
+        <div class="force-item">
+          <div class="force-item-icon">🌊</div>
+          <div class="force-item-text">
+            <strong>Sóng già hóa nhanh nhất thế giới</strong>
+            14,2 triệu người ≥60 (2024) → 20,9 triệu (2034); VN "già trước khi giàu" — khoảng trống dịch vụ chăm sóc khổng lồ
+          </div>
+        </div>
+        <div class="force-item">
+          <div class="force-item-icon">👨‍👩‍👧</div>
+          <div class="force-item-text">
+            <strong>Sandwich generation sẵn sàng chi trả</strong>
+            Con cái 30–50 tuổi, có thu nhập, sống xa bố mẹ, rành công nghệ — trả tiền cho "sự an tâm", nhóm payer lý tưởng
+          </div>
+        </div>
+        <div class="force-item">
+          <div class="force-item-icon">💰</div>
+          <div class="force-item-text">
+            <strong>Chi tiêu y tế tăng 2 chữ số</strong>
+            Tổng chi y tế VN 18,5 tỷ$ (2022) → 33,8 tỷ$ (2030); người dân tự chi 40–45% — cầu lớn cho dịch vụ &amp; tài chính y tế
+          </div>
+        </div>
+        <div class="force-item">
+          <div class="force-item-icon">🧑‍⚕️</div>
+          <div class="force-item-text">
+            <strong>Thiếu điều dưỡng &amp; viện dưỡng lão</strong>
+            ~11,4 điều dưỡng/10.000 dân, &gt;40 viện dưỡng lão cho 14tr người già — cung gần như bằng 0 so với cầu
+          </div>
+        </div>
+        <div class="force-item">
+          <div class="force-item-icon">🏠</div>
+          <div class="force-item-text">
+            <strong>Văn hóa chăm bố mẹ tại nhà</strong>
+            Người VN ưu tiên chăm sóc bố mẹ tại nhà thay vì gửi viện — đúng định vị "đưa dịch vụ chuyên nghiệp về tận nhà"
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button class="deep-toggle on-dark" data-closed-label="Số liệu chứng minh cửa sổ cơ hội" data-open-label="Thu gọn" onclick="toggleDeep(this)">
+      <span>📊</span><span class="dt-label">Số liệu chứng minh cửa sổ cơ hội</span><span class="chev">▼</span>
+    </button>
+    <div class="deep-panel on-dark-panel">
+      <div class="deep-inner">
+        <h5>📊 Hạ tầng số &amp; cầu thị trường đã sẵn sàng</h5>
+        <div class="deep-stats">
+          <div class="deep-stat"><div class="ds-num">79,8 triệu</div><div class="ds-label">người dùng internet = 78,8% dân số (1/2025)</div></div>
+          <div class="deep-stat"><div class="ds-num">&gt;84%</div><div class="ds-label">thiết bị là smartphone</div></div>
+          <div class="deep-stat"><div class="ds-num">14,2 → 20,9 tr</div><div class="ds-label">người ≥60 tuổi 2024 → 2034</div></div>
+          <div class="deep-stat"><div class="ds-num">18,5 → 33,8 tỷ$</div><div class="ds-label">tổng chi y tế VN 2022 → 2030</div></div>
+        </div>
+        <h5>🌊 Sự hội tụ Push × Pull — "perfect storm" già hóa</h5>
+        <table class="deep-table">
+          <thead><tr><th>Lực</th><th>Yếu tố</th><th>Tác động lên ElderCare</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Push công nghệ</strong></td><td>AI/wearable/telehealth rẻ + chính sách số hóa y tế</td><td>Chi phí triển khai giám sát &amp; khám từ xa giảm mạnh → mô hình khả thi kinh tế</td></tr>
+            <tr><td><strong>Pull nhân khẩu</strong></td><td>Sóng già hóa + sandwich generation</td><td>Tệp khách hàng khổng lồ, đang tăng, có người trả tiền sẵn lòng</td></tr>
+            <tr><td><strong>Pull tài chính</strong></td><td>Chi y tế tăng 2 chữ số, tự chi 40–45%</td><td>Dư địa lớn cho MedFin &amp; dịch vụ trả phí định kỳ</td></tr>
+            <tr><td><strong>Pull cung thiếu</strong></td><td>Khan hiếm điều dưỡng &amp; viện dưỡng lão</td><td>Nền tảng tổng hợp &amp; xác minh nguồn cung có giá trị lớn</td></tr>
+          </tbody>
+        </table>
+        <div class="deep-callout">
+          🌊 <strong>Cửa sổ vàng:</strong> Bốn lực hiếm khi hội tụ cùng lúc. Ai xây được super-app chăm sóc người già <strong>đầu tiên &amp; toàn diện</strong> trong cửa sổ này sẽ chiếm lĩnh một thị trường tỉ đô đang hình thành — đúng thời điểm như Ping An Good Doctor đã làm ở Trung Quốc một thập kỷ trước.
+        </div>
+        <p class="src-note">Nguồn: DataReportal Digital Vietnam 2025; GSO–UNFPA Dự báo Dân số 2024; World Bank / trade.gov 2022–2023; Bộ Y tế 2023 (đã dẫn chi tiết ở các phần Vấn đề &amp; Thị trường).</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====================================================================== -->
+<!-- PHIÊN 3 SẼ CHÈN: KSF · BMC · Revenue · Roadmap · Risk · Journey ·       -->
+<!-- Theory · Team                                                          -->
+<!-- ====================================================================== -->
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Elder<span>Care</span> VN</div>
+  <p style="margin-bottom:0.5rem;">Super-app chăm sóc sức khỏe người cao tuổi · ETR601.22 · SEM40HN · FSB — FPT School of Business</p>
+  <p>Môn học: Khởi nghiệp và Đổi mới Sáng tạo trong Kỷ nguyên AI · Giảng viên: Dr. Phạm Quang Ngọc</p>
+  <div style="display:flex;gap:1.5rem;justify-content:center;margin-top:1.5rem;flex-wrap:wrap;">
+    <a href="/" style="color:rgba(255,255,255,0.5);text-decoration:none;font-size:0.82rem;">🏨 OmniStay AI</a>
+    <a href="/taxflow" style="color:rgba(255,255,255,0.5);text-decoration:none;font-size:0.82rem;">🧾 TaxFlow AI</a>
+    <a href="/eldercare" style="color:var(--care-light);text-decoration:none;font-size:0.82rem;font-weight:600;">👵 ElderCare VN</a>
+    <a href="/ideas" style="color:rgba(255,255,255,0.5);text-decoration:none;font-size:0.82rem;">💡 Ý tưởng</a>
+  </div>
+  <p style="margin-top:1rem;font-size:0.72rem;opacity:0.5;">© 2026 ElderCare VN · startup.sem40hn.asia/eldercare</p>
+</footer>
+
+<script>
+  // Section-level deep dive
+  function toggleDeep(btn) {
+    const panel = btn.nextElementSibling;
+    const open = panel.classList.toggle('open');
+    btn.classList.toggle('active', open);
+    const label = btn.querySelector('.dt-label');
+    if (label) label.textContent = open ? btn.dataset.openLabel || 'Thu gọn' : btn.dataset.closedLabel || 'Xem chi tiết';
+  }
+  // Card-level expand (problem & module cards)
+  function toggleCard(card) {
+    const detail = card.querySelector('.card-detail');
+    if (!detail) return;
+    const open = detail.classList.toggle('open');
+    card.classList.toggle('expanded', open);
+  }
+</script>
+</body>
+</html>

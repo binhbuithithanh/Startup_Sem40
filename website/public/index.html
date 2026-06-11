@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OmniStay AI — Nền tảng Quản lý Khách sạn Thông minh</title>
+  <meta name="description" content="OmniStay AI: Nền tảng quản lý khách sạn toàn diện ứng dụng AI — Made in Vietnam. Dự án khởi nghiệp ETR601 SEM40." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --primary: #1a1a2e;
+      --accent: #e94560;
+      --gold: #f5a623;
+      --teal: #0f9b8e;
+      --light: #f8f9ff;
+      --muted: #6b7280;
+      --card-bg: #ffffff;
+      --border: #e5e7eb;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--light);
+      color: var(--primary);
+      line-height: 1.6;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; width: 100%; z-index: 100;
+      background: rgba(26,26,46,0.96);
+      backdrop-filter: blur(12px);
+      padding: 0 2rem;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 64px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .nav-logo {
+      font-size: 1.3rem; font-weight: 800; color: #fff;
+      letter-spacing: -0.5px;
+    }
+    .nav-logo span { color: var(--accent); }
+    .nav-links { display: flex; gap: 1.5rem; list-style: none; }
+    .nav-links a {
+      color: rgba(255,255,255,0.75); text-decoration: none;
+      font-size: 0.85rem; font-weight: 500;
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: #fff; }
+    .nav-badge {
+      background: var(--accent); color: #fff;
+      font-size: 0.72rem; font-weight: 700;
+      padding: 3px 10px; border-radius: 99px;
+      letter-spacing: 0.5px;
+    }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+      display: flex; align-items: center; justify-content: center;
+      text-align: center;
+      padding: 6rem 2rem 4rem;
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 60% 40%, rgba(233,69,96,0.15) 0%, transparent 60%),
+                  radial-gradient(ellipse at 20% 80%, rgba(15,155,142,0.1) 0%, transparent 50%);
+    }
+    .hero-grid {
+      position: absolute; inset: 0; opacity: 0.04;
+      background-image: linear-gradient(rgba(255,255,255,.3) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(255,255,255,.3) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+    .hero-content { position: relative; max-width: 860px; }
+    .hero-tag {
+      display: inline-block;
+      background: rgba(233,69,96,0.15);
+      border: 1px solid rgba(233,69,96,0.4);
+      color: #ff7c95; font-size: 0.78rem; font-weight: 600;
+      padding: 6px 16px; border-radius: 99px;
+      margin-bottom: 1.5rem; letter-spacing: 1px; text-transform: uppercase;
+    }
+    .hero h1 {
+      font-size: clamp(2.8rem, 6vw, 5rem);
+      font-weight: 900; color: #fff;
+      line-height: 1.1; letter-spacing: -2px;
+      margin-bottom: 0.5rem;
+    }
+    .hero h1 .accent { color: var(--accent); }
+    .hero-sub {
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      color: rgba(255,255,255,0.65);
+      margin: 1rem 0 2.5rem; font-weight: 400;
+    }
+    .hero-badges {
+      display: flex; flex-wrap: wrap; gap: 0.75rem;
+      justify-content: center; margin-bottom: 2.5rem;
+    }
+    .hero-badge {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      color: rgba(255,255,255,0.85);
+      padding: 6px 16px; border-radius: 99px;
+      font-size: 0.82rem; font-weight: 500;
+    }
+    .hero-cta {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: var(--accent); color: #fff;
+      padding: 14px 32px; border-radius: 10px;
+      font-weight: 700; font-size: 1rem; text-decoration: none;
+      transition: transform .2s, box-shadow .2s;
+      box-shadow: 0 8px 30px rgba(233,69,96,0.4);
+    }
+    .hero-cta:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(233,69,96,0.5); }
+
+    /* STATS BAR */
+    .stats-bar {
+      background: var(--primary);
+      padding: 2rem 4rem;
+      display: flex; flex-wrap: wrap;
+      justify-content: center; gap: 3rem;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .stat { text-align: center; }
+    .stat-num {
+      font-size: 2rem; font-weight: 800; color: var(--accent);
+      line-height: 1;
+    }
+    .stat-label { font-size: 0.78rem; color: rgba(255,255,255,0.5); margin-top: 4px; }
+
+    /* SECTIONS */
+    section { padding: 5rem 2rem; }
+    .container { max-width: 1100px; margin: 0 auto; }
+
+    .section-tag {
+      font-size: 0.75rem; font-weight: 700; letter-spacing: 2px;
+      text-transform: uppercase; color: var(--accent);
+      margin-bottom: 0.75rem;
+    }
+    h2 {
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-weight: 800; letter-spacing: -1px;
+      margin-bottom: 1rem; line-height: 1.2;
+    }
+    .section-desc {
+      font-size: 1.05rem; color: var(--muted);
+      max-width: 620px; margin-bottom: 3rem;
+    }
+
+    /* TEAM GRID */
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 1rem;
+    }
+    .team-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 16px; padding: 1.5rem 1rem;
+      text-align: center;
+      transition: transform .2s, box-shadow .2s;
+    }
+    .team-card:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(0,0,0,0.08); }
+    .team-icon {
+      width: 52px; height: 52px; border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem; margin: 0 auto 0.75rem;
+    }
+    .team-name { font-size: 0.9rem; font-weight: 700; margin-bottom: 0.3rem; }
+    .team-role { font-size: 0.75rem; color: var(--muted); line-height: 1.4; }
+    .team-contrib {
+      margin-top: 0.75rem; padding-top: 0.75rem;
+      border-top: 1px solid var(--border);
+      font-size: 0.72rem; color: var(--teal); font-weight: 600;
+    }
+
+    /* PROBLEM */
+    .problem-section { background: #fff; }
+    .problem-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem; margin-bottom: 2.5rem;
+    }
+    .problem-card {
+      border: 1px solid #fecaca;
+      background: #fff5f5;
+      border-radius: 12px; padding: 1.25rem;
+    }
+    .problem-card .icon { font-size: 1.4rem; margin-bottom: 0.5rem; }
+    .problem-card h4 { font-size: 0.85rem; font-weight: 700; margin-bottom: 0.3rem; color: #dc2626; }
+    .problem-card p { font-size: 0.8rem; color: #6b7280; }
+
+    /* SOLUTION MODULES */
+    .modules-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.25rem;
+    }
+    .module-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 16px; padding: 1.75rem;
+      transition: transform .2s, box-shadow .2s;
+      position: relative; overflow: hidden;
+    }
+    .module-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      border-radius: 16px 16px 0 0;
+    }
+    .module-card:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(0,0,0,0.08); }
+    .module-card .mod-icon { font-size: 1.8rem; margin-bottom: 1rem; }
+    .module-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .module-card p { font-size: 0.85rem; color: var(--muted); }
+    .mod-owner {
+      display: inline-block; margin-top: 0.75rem;
+      background: #f3f4f6; color: #374151;
+      font-size: 0.72rem; font-weight: 600;
+      padding: 3px 10px; border-radius: 99px;
+    }
+    .mod-1::before { background: linear-gradient(90deg, #e94560, #ff7c95); }
+    .mod-2::before { background: linear-gradient(90deg, #0f9b8e, #34d399); }
+    .mod-3::before { background: linear-gradient(90deg, #3b82f6, #60a5fa); }
+    .mod-4::before { background: linear-gradient(90deg, #8b5cf6, #a78bfa); }
+    .mod-5::before { background: linear-gradient(90deg, #f5a623, #fbbf24); }
+    .mod-6::before { background: linear-gradient(90deg, #ef4444, #f87171); }
+
+    /* BMC */
+    .bmc-section { background: var(--primary); color: #fff; }
+    .bmc-section h2 { color: #fff; }
+    .bmc-section .section-desc { color: rgba(255,255,255,0.6); }
+    .bmc-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      grid-template-rows: auto auto auto;
+      gap: 0.75rem;
+    }
+    .bmc-cell {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 12px; padding: 1.25rem;
+    }
+    .bmc-cell h4 {
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 1px;
+      text-transform: uppercase; color: var(--accent);
+      margin-bottom: 0.75rem;
+    }
+    .bmc-cell ul { list-style: none; }
+    .bmc-cell ul li {
+      font-size: 0.8rem; color: rgba(255,255,255,0.8);
+      padding: 3px 0; padding-left: 1rem; position: relative;
+    }
+    .bmc-cell ul li::before {
+      content: '▸'; position: absolute; left: 0; color: var(--teal);
+    }
+    .bmc-partners { grid-column: 1; grid-row: 1 / 3; }
+    .bmc-activities { grid-column: 2; grid-row: 1; }
+    .bmc-resources { grid-column: 2; grid-row: 2; }
+    .bmc-vp { grid-column: 3; grid-row: 1 / 3; }
+    .bmc-relationships { grid-column: 4; grid-row: 1; }
+    .bmc-channels { grid-column: 4; grid-row: 2; }
+    .bmc-segments { grid-column: 5; grid-row: 1 / 3; }
+    .bmc-costs { grid-column: 1 / 4; grid-row: 3; }
+    .bmc-revenue { grid-column: 4 / 6; grid-row: 3; }
+    .bmc-vp { background: rgba(233,69,96,0.12); border-color: rgba(233,69,96,0.3); }
+
+    /* REVENUE */
+    .revenue-section { background: #fff; }
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.25rem; margin-bottom: 3rem;
+    }
+    .pricing-card {
+      border: 2px solid var(--border);
+      border-radius: 16px; padding: 2rem;
+      text-align: center; position: relative;
+      transition: transform .2s, box-shadow .2s;
+    }
+    .pricing-card.featured {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 4px rgba(233,69,96,0.1);
+    }
+    .pricing-card:hover { transform: translateY(-4px); }
+    .pricing-badge {
+      position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+      background: var(--accent); color: #fff;
+      font-size: 0.72rem; font-weight: 700; padding: 4px 14px; border-radius: 99px;
+    }
+    .pricing-tier { font-size: 0.82rem; font-weight: 600; color: var(--muted); margin-bottom: 0.5rem; }
+    .pricing-price { font-size: 2rem; font-weight: 900; margin-bottom: 0.25rem; }
+    .pricing-unit { font-size: 0.78rem; color: var(--muted); margin-bottom: 1.5rem; }
+    .pricing-features { list-style: none; text-align: left; }
+    .pricing-features li {
+      font-size: 0.82rem; padding: 5px 0;
+      display: flex; align-items: center; gap: 0.5rem;
+    }
+    .pricing-features li::before { content: '✓'; color: var(--teal); font-weight: 700; }
+
+    /* RISK TABLE */
+    .risk-section { background: var(--light); }
+    .risk-table { width: 100%; border-collapse: collapse; }
+    .risk-table th {
+      background: var(--primary); color: #fff;
+      padding: 0.85rem 1rem; text-align: left;
+      font-size: 0.8rem; font-weight: 700;
+      letter-spacing: 0.5px; text-transform: uppercase;
+    }
+    .risk-table th:first-child { border-radius: 10px 0 0 0; }
+    .risk-table th:last-child { border-radius: 0 10px 0 0; }
+    .risk-table td {
+      padding: 1rem; font-size: 0.82rem;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+    .risk-table tr:nth-child(even) td { background: #f9fafb; }
+    .risk-level {
+      display: inline-block; padding: 3px 10px; border-radius: 99px;
+      font-size: 0.72rem; font-weight: 700;
+    }
+    .risk-high { background: #fee2e2; color: #dc2626; }
+    .risk-med { background: #fef3c7; color: #d97706; }
+    .risk-low { background: #d1fae5; color: #065f46; }
+
+    /* THEORY */
+    .theory-section { background: var(--primary); color: #fff; }
+    .theory-section h2 { color: #fff; }
+    .theory-section .section-desc { color: rgba(255,255,255,0.6); }
+    .theory-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+    .theory-card {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 12px; padding: 1.25rem;
+    }
+    .theory-card .t-module {
+      font-size: 0.68rem; font-weight: 700; letter-spacing: 1px;
+      text-transform: uppercase; color: var(--gold);
+      margin-bottom: 0.5rem;
+    }
+    .theory-card h4 { font-size: 0.9rem; font-weight: 700; color: #fff; margin-bottom: 0.4rem; }
+    .theory-card p { font-size: 0.78rem; color: rgba(255,255,255,0.6); }
+
+    /* FOOTER */
+    footer {
+      background: #0d0d1a;
+      padding: 3rem 2rem;
+      text-align: center;
+      color: rgba(255,255,255,0.4);
+      font-size: 0.82rem;
+    }
+    footer .footer-logo {
+      font-size: 1.5rem; font-weight: 900; color: #fff; margin-bottom: 0.5rem;
+    }
+    footer .footer-logo span { color: var(--accent); }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .stats-bar { gap: 1.5rem; padding: 1.5rem 2rem; }
+      .bmc-grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+      }
+      .bmc-partners, .bmc-vp, .bmc-segments,
+      .bmc-costs, .bmc-revenue { grid-column: 1; grid-row: auto; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Omni<span>Stay</span> AI</div>
+  <ul class="nav-links">
+    <li><a href="#problem">Vấn đề</a></li>
+    <li><a href="#solution">Giải pháp</a></li>
+    <li><a href="#bmc">Mô hình KD</a></li>
+    <li><a href="#revenue">Doanh thu</a></li>
+    <li><a href="#risk">Rủi ro</a></li>
+    <li><a href="#team">Đội ngũ</a></li>
+    <li><a href="/taxflow" style="background:rgba(5,150,105,0.15);border:1px solid rgba(5,150,105,0.4);color:#34d399;padding:5px 12px;border-radius:8px;font-weight:700;">🧾 TaxFlow AI</a></li>
+    <li><a href="/eldercare" style="background:rgba(13,148,136,0.15);border:1px solid rgba(13,148,136,0.4);color:#2dd4bf;padding:5px 12px;border-radius:8px;font-weight:700;">👵 ElderCare VN</a></li>
+    <li><a href="/ideas" style="background:rgba(245,166,35,0.15);border:1px solid rgba(245,166,35,0.4);color:#fbbf24;padding:5px 12px;border-radius:8px;font-weight:700;">💡 Ý tưởng</a></li>
+  </ul>
+  <span class="nav-badge">ETR601 · SEM40</span>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-tag">🏨 Dự án khởi nghiệp · ETR601 SEM40HN</div>
+    <h1>Omni<span class="accent">Stay</span> AI</h1>
+    <p style="font-size:1.1rem;color:rgba(255,255,255,0.5);margin-bottom:0.25rem;font-weight:500;letter-spacing:1px;">NỀN TẢNG QUẢN LÝ KHÁCH SẠN THÔNG MINH TOÀN DIỆN</p>
+    <p class="hero-sub">
+      All-in-one AI platform: Camera thông minh · Bảo mật · Cloud · Kế toán VN · Marketing<br/>
+      <em style="color:rgba(255,255,255,0.4);font-style:normal">Made in Vietnam — for Vietnam's 40,000+ hotels</em>
+    </p>
+    <div class="hero-badges">
+      <span class="hero-badge">🤖 AI-Powered</span>
+      <span class="hero-badge">☁️ Viettel Cloud</span>
+      <span class="hero-badge">📊 Kế toán chuẩn VN</span>
+      <span class="hero-badge">📷 Computer Vision</span>
+      <span class="hero-badge">🔐 Zero-Trust Security</span>
+      <span class="hero-badge">📈 Revenue Management</span>
+    </div>
+    <a href="#problem" class="hero-cta">Khám phá ý tưởng ↓</a>
+  </div>
+</section>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stat">
+    <div class="stat-num">40.000+</div>
+    <div class="stat-label">Cơ sở lưu trú tại VN</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">5–8</div>
+    <div class="stat-label">Phần mềm rời rạc mỗi khách sạn</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">15–20%</div>
+    <div class="stat-label">Commission OTA hiện tại</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">65%</div>
+    <div class="stat-label">Gross Margin mục tiêu</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">27 tỷ</div>
+    <div class="stat-label">ARR mục tiêu năm 3</div>
+  </div>
+</div>
+
+<!-- PROBLEM -->
+<section class="problem-section" id="problem">
+  <div class="container">
+    <div class="section-tag">Vấn đề</div>
+    <h2>Khách sạn VN đang dùng<br/>5–8 phần mềm không liên thông</h2>
+    <p class="section-desc">
+      Hơn 40.000 cơ sở lưu trú tại Việt Nam không có giải pháp tích hợp toàn diện chuẩn thị trường nội địa. Mỗi bộ phận dùng một phần mềm khác nhau — dữ liệu phân mảnh, thao tác thủ công, chi phí cao.
+    </p>
+    <div class="problem-grid">
+      <div class="problem-card">
+        <div class="icon">💸</div>
+        <h4>Commission OTA 15–20%</h4>
+        <p>Booking.com, Agoda lấy hoa hồng cao, không có công cụ tối ưu direct booking</p>
+      </div>
+      <div class="problem-card">
+        <div class="icon">📋</div>
+        <h4>Kế toán thủ công</h4>
+        <p>PMS không kết nối kế toán, nhập tay mất 2–3 ngày/tháng, dễ sai sót thuế</p>
+      </div>
+      <div class="problem-card">
+        <div class="icon">🔒</div>
+        <h4>An ninh rời rạc</h4>
+        <p>Camera tách rời DVR, khoá phòng không tích hợp, không có AI phát hiện bất thường</p>
+      </div>
+      <div class="problem-card">
+        <div class="icon">⏱️</div>
+        <h4>Check-in thủ công chậm</h4>
+        <p>Lễ tân mất 10–15 phút/khách, nhập liệu CCCD thủ công, hàng chờ giờ cao điểm</p>
+      </div>
+      <div class="problem-card">
+        <div class="icon">🌐</div>
+        <h4>Phần mềm nước ngoài</h4>
+        <p>Opera, Cloudbeds không hỗ trợ thuế VN, server offshore, latency cao, giá đắt</p>
+      </div>
+      <div class="problem-card">
+        <div class="icon">📊</div>
+        <h4>Không có dữ liệu tổng hợp</h4>
+        <p>GM không có dashboard real-time, phải tổng hợp Excel từ nhiều nguồn mỗi tuần</p>
+      </div>
+    </div>
+    <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:12px;padding:1.25rem 1.5rem;margin-top:1rem;">
+      <strong style="color:#065f46;">💡 Khoảng trống thị trường (White Space):</strong>
+      <span style="color:#374151;font-size:0.9rem;"> Chưa có nền tảng "All-in-One, Made for Vietnam" tích hợp Camera AI + Cloud VN + Kế toán chuẩn VN + Marketing automation.</span>
+    </div>
+  </div>
+</section>
+
+<!-- SOLUTION -->
+<section id="solution" style="background:var(--light);">
+  <div class="container">
+    <div class="section-tag">Giải pháp</div>
+    <h2>6 module tích hợp — mỗi thành viên<br/>phụ trách 1 module chuyên môn</h2>
+    <p class="section-desc">
+      OmniStay AI kết hợp chuyên môn thực tế của cả 6 thành viên thành một nền tảng duy nhất,
+      ứng dụng AI tại mỗi điểm chạm trong vận hành khách sạn.
+    </p>
+    <div class="modules-grid">
+      <div class="module-card mod-1">
+        <div class="mod-icon">📷</div>
+        <h3>Smart Vision — AI Check-in & Analytics</h3>
+        <p>Nhận diện khuôn mặt từ CCCD/Passport, tự động mở khoá phòng. Camera AI phân tích hành vi khách, đếm lượng người, phát hiện bất thường realtime.</p>
+        <span class="mod-owner">👩 Chị Nhi — Camera & Extension Tech</span>
+      </div>
+      <div class="module-card mod-2">
+        <div class="mod-icon">☁️</div>
+        <h3>Cloud Infrastructure — Viettel Cloud Native</h3>
+        <p>Toàn bộ nền tảng chạy trên Viettel Cloud: data sovereignty VN, latency thấp, chi phí giảm 40% so với AWS. Scalable từ 1 đến 1.000 khách sạn.</p>
+        <span class="mod-owner">👨 Anh Hiếu — Viettel Cloud</span>
+      </div>
+      <div class="module-card mod-3">
+        <div class="mod-icon">🔐</div>
+        <h3>SecureAccess — Zero-Trust & Smart Lock</h3>
+        <p>Kiến trúc zero-trust, phân quyền theo vai trò (lễ tân / housekeeping / manager). Tích hợp smart lock API, quản lý khoá phòng tập trung, audit log đầy đủ.</p>
+        <span class="mod-owner">👨 Thành Duy — IT Security & Access Control</span>
+      </div>
+      <div class="module-card mod-4">
+        <div class="mod-icon">📊</div>
+        <h3>AutoAccounting — Kế toán & Thuế tự động</h3>
+        <p>Tự động phân loại giao dịch, xuất hóa đơn VAT điện tử (VNPT/MISA), báo cáo theo Thông tư 200, cảnh báo sai lệch. Giảm 70% thời gian kế toán.</p>
+        <span class="mod-owner">👩 Chị Liên — Kế toán & Thuế</span>
+      </div>
+      <div class="module-card mod-5">
+        <div class="mod-icon">📈</div>
+        <h3>RevenueAI — Dynamic Pricing & Marketing</h3>
+        <p>AI phân tích giá OTA realtime, tự động điều chỉnh theo occupancy. Affiliate channel management, email automation, retargeting — tăng direct booking, giảm phụ thuộc OTA.</p>
+        <span class="mod-owner">👩 Thanh Bình — Affiliate Marketing & Paid Traffic</span>
+      </div>
+      <div class="module-card mod-6">
+        <div class="mod-icon">🏨</div>
+        <h3>GuestExperience — AI Concierge & CRM</h3>
+        <p>AI concierge chatbot (tiếng Việt + Anh), phân tích lịch sử khách, đề xuất upsell (spa, F&B). Domain expertise luxury hotel đảm bảo UX chuẩn 5 sao.</p>
+        <span class="mod-owner">👨 Minh Tân — Luxury Hotel Operations</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BMC -->
+<section class="bmc-section" id="bmc">
+  <div class="container">
+    <div class="section-tag" style="color:var(--gold)">Mô hình kinh doanh</div>
+    <h2>Business Model Canvas</h2>
+    <p class="section-desc">9 ô BMC — mỗi ô là một giả định cần kiểm chứng (Lean Startup)</p>
+    <div class="bmc-grid">
+      <div class="bmc-cell bmc-partners">
+        <h4>🤝 Đối tác</h4>
+        <ul>
+          <li>Viettel Cloud (hạ tầng)</li>
+          <li>VNPT e-invoice</li>
+          <li>Smart lock: MIWA, Allegion</li>
+          <li>Booking.com / Agoda API</li>
+          <li>Hiệp hội Khách sạn VN</li>
+        </ul>
+      </div>
+      <div class="bmc-cell bmc-activities">
+        <h4>⚙️ Hoạt động chính</h4>
+        <ul>
+          <li>Phát triển AI platform</li>
+          <li>Onboarding khách sạn</li>
+          <li>Training AI pricing model</li>
+          <li>B2B sales & partnership</li>
+        </ul>
+      </div>
+      <div class="bmc-cell bmc-vp">
+        <h4>💎 Giá trị cốt lõi</h4>
+        <ul>
+          <li>All-in-one, Made for Vietnam</li>
+          <li>AI check-in tự động</li>
+          <li>Kế toán chuẩn VN tích hợp</li>
+          <li>Giảm 60% thao tác thủ công</li>
+          <li>Tăng 10–15% RevPAR</li>
+          <li>Data sovereignty VN</li>
+          <li>Dashboard real-time</li>
+        </ul>
+      </div>
+      <div class="bmc-cell bmc-relationships">
+        <h4>💬 Quan hệ KH</h4>
+        <ul>
+          <li>Dedicated onboarding</li>
+          <li>AI support 24/7</li>
+          <li>Quarterly review</li>
+        </ul>
+      </div>
+      <div class="bmc-cell bmc-segments">
+        <h4>🎯 Khách hàng</h4>
+        <ul>
+          <li>Khách sạn 3–5 sao VN</li>
+          <li>50–300 phòng</li>
+          <li>Boutique hotel chains</li>
+          <li>Resort & serviced apt</li>
+        </ul>
+      </div>
+      <div class="bmc-cell bmc-resources">
+        <h4>🔧 Nguồn lực</h4>
+        <ul>
+          <li>AI/ML engineering team</li>
+          <li>Camera SDK (Nhi)</li>
+          <li>Viettel Cloud infra</li>
+          <li>Hotel domain (Minh Tân)</li>
+        </ul>
+      </div>
+      <div class="bmc-cell bmc-channels">
+        <h4>📣 Kênh</h4>
+        <ul>
+          <li>Direct sales (hotel network)</li>
+          <li>Viettel B2B channel</li>
+          <li>Hotel association</li>
+          <li>Referral program</li>
+        </ul>
+      </div>
+      <div class="bmc-cell bmc-costs">
+        <h4>💰 Cơ cấu chi phí</h4>
+        <ul>
+          <li>Cloud hosting (Viettel) — ~20% revenue</li>
+          <li>Engineering team (4 người) — ~40% revenue</li>
+          <li>Sales & onboarding — ~15% revenue</li>
+          <li>Marketing & partnerships — ~10% revenue</li>
+        </ul>
+      </div>
+      <div class="bmc-cell bmc-revenue">
+        <h4>💵 Dòng doanh thu</h4>
+        <ul>
+          <li>SaaS subscription (chính)</li>
+          <li>% revenue share — direct booking tăng thêm</li>
+          <li>Hardware margin (smart lock)</li>
+          <li>Onboarding & training fee</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REVENUE -->
+<section class="revenue-section" id="revenue">
+  <div class="container">
+    <div class="section-tag">Khả năng sinh lời</div>
+    <h2>Mô hình định giá & Dự báo tài chính</h2>
+    <p class="section-desc">SaaS subscription — break-even tại 10 khách sạn, ARR 27 tỷ ở năm 3</p>
+    <div class="pricing-grid">
+      <div class="pricing-card">
+        <div class="pricing-tier">STANDARD · 3 sao</div>
+        <div class="pricing-price">15 triệu</div>
+        <div class="pricing-unit">VNĐ / khách sạn / tháng</div>
+        <ul class="pricing-features">
+          <li>PMS cơ bản</li>
+          <li>Check-in QR code</li>
+          <li>Kế toán & hóa đơn điện tử</li>
+          <li>Camera monitoring</li>
+          <li>Dashboard cơ bản</li>
+        </ul>
+      </div>
+      <div class="pricing-card featured">
+        <div class="pricing-badge">PHỔ BIẾN NHẤT</div>
+        <div class="pricing-tier">PREMIUM · 4–5 sao</div>
+        <div class="pricing-price">30 triệu</div>
+        <div class="pricing-unit">VNĐ / khách sạn / tháng</div>
+        <ul class="pricing-features">
+          <li>Tất cả tính năng Standard</li>
+          <li>AI facial recognition check-in</li>
+          <li>AI revenue management</li>
+          <li>Marketing automation</li>
+          <li>Smart lock integration</li>
+          <li>Guest analytics & CRM</li>
+        </ul>
+      </div>
+      <div class="pricing-card">
+        <div class="pricing-tier">ENTERPRISE · Chuỗi</div>
+        <div class="pricing-price">Liên hệ</div>
+        <div class="pricing-unit">theo số phòng & khách sạn</div>
+        <ul class="pricing-features">
+          <li>Multi-property dashboard</li>
+          <li>Custom AI model</li>
+          <li>Tích hợp bảo hiểm nhân viên</li>
+          <li>Dedicated cloud instance</li>
+          <li>SLA 99.95% uptime</li>
+        </ul>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;">
+      <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:12px;padding:1.5rem;text-align:center;">
+        <div style="font-size:1.8rem;font-weight:900;color:#065f46;">10 KS</div>
+        <div style="font-size:0.82rem;color:#374151;margin-top:4px;">Break-even point</div>
+      </div>
+      <div style="background:#eff6ff;border:1px solid #bfdbfe;border-radius:12px;padding:1.5rem;text-align:center;">
+        <div style="font-size:1.8rem;font-weight:900;color:#1d4ed8;">5,4 tỷ</div>
+        <div style="font-size:0.82rem;color:#374151;margin-top:4px;">ARR mục tiêu Năm 1</div>
+      </div>
+      <div style="background:#fdf4ff;border:1px solid #e9d5ff;border-radius:12px;padding:1.5rem;text-align:center;">
+        <div style="font-size:1.8rem;font-weight:900;color:#7c3aed;">27 tỷ</div>
+        <div style="font-size:0.82rem;color:#374151;margin-top:4px;">ARR mục tiêu Năm 3</div>
+      </div>
+      <div style="background:#fff7ed;border:1px solid #fed7aa;border-radius:12px;padding:1.5rem;text-align:center;">
+        <div style="font-size:1.8rem;font-weight:900;color:#c2410c;">65%</div>
+        <div style="font-size:0.82rem;color:#374151;margin-top:4px;">Gross Margin (SaaS)</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RISK -->
+<section class="risk-section" id="risk">
+  <div class="container">
+    <div class="section-tag">Quản trị rủi ro</div>
+    <h2>Giả định & Kế hoạch kiểm soát rủi ro</h2>
+    <p class="section-desc">Áp dụng ma trận rủi ro (Module 4.1) và nguyên tắc Lean Startup: kiểm chứng giả định sớm nhất có thể</p>
+    <div style="overflow-x:auto;">
+      <table class="risk-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Giả định</th>
+            <th>Rủi ro</th>
+            <th>Mức độ</th>
+            <th>Kế hoạch kiểm soát</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>SME hotel sẵn sàng trả 15–30 triệu/tháng</td>
+            <td>Giá quá cao với khách sạn tư nhân nhỏ</td>
+            <td><span class="risk-level risk-high">Cao</span></td>
+            <td>Pilot miễn phí 3 tháng với 3 KS của Minh Tân → chứng minh ROI trước khi charge; freemium tier</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>Camera AI facial recognition được phép pháp lý</td>
+            <td>Bộ CA chưa có quy định rõ sinh trắc học thương mại</td>
+            <td><span class="risk-level risk-high">Cao</span></td>
+            <td>Bắt đầu với QR check-in (không sinh trắc); tư vấn pháp lý từ tháng 1; nâng cấp dần khi luật rõ</td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>Staff khách sạn chấp nhận chuyển đổi hệ thống</td>
+            <td>Resistance to change, mất năng suất giai đoạn đầu</td>
+            <td><span class="risk-level risk-med">Trung bình</span></td>
+            <td>Migration support team on-site; UX thiết kế bởi Minh Tân (biết workflow thực tế); training 2 ngày</td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td>Viettel Cloud đủ ổn định cho hotel ops 24/7</td>
+            <td>Downtime ảnh hưởng check-in giờ cao điểm</td>
+            <td><span class="risk-level risk-med">Trung bình</span></td>
+            <td>Multi-cloud fallback (Viettel primary + GCP backup); offline mode cho check-in; SLA 99.9%</td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td>AI pricing tạo doanh thu tăng thực sự</td>
+            <td>KH không thấy ROI rõ ràng → churn</td>
+            <td><span class="risk-level risk-med">Trung bình</span></td>
+            <td>ROI dashboard realtime: "OmniStay tạo thêm X triệu tháng này"; monthly success report</td>
+          </tr>
+          <tr>
+            <td>6</td>
+            <td>6 founder duy trì cam kết dài hạn</td>
+            <td>Xung đột, burn-out, rời nhóm</td>
+            <td><span class="risk-level risk-low">Thấp</span></td>
+            <td>Vai trò RACI từ đầu; equity vesting 4 năm (1 năm cliff); monthly check-in & OKR rõ ràng</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- THEORY MAPPING -->
+<section class="theory-section">
+  <div class="container">
+    <div class="section-tag" style="color:var(--gold)">Nền tảng lý thuyết</div>
+    <h2>Liên kết với bài giảng ETR601</h2>
+    <p class="section-desc">OmniStay AI áp dụng trực tiếp tất cả framework được giảng dạy trong khóa học</p>
+    <div class="theory-grid">
+      <div class="theory-card">
+        <div class="t-module">Module 1</div>
+        <h4>Đổi mới Mô hình KD</h4>
+        <p>Từ buy-once fragmented software → AI SaaS subscription tích hợp — đổi mới triệt để theo khung 10 loại hình ĐMST</p>
+      </div>
+      <div class="theory-card">
+        <div class="t-module">Module 2.2</div>
+        <h4>Value Proposition Canvas</h4>
+        <p>Customer Jobs / Pains / Gains của GM khách sạn → map trực tiếp vào 6 module giải pháp</p>
+      </div>
+      <div class="theory-card">
+        <div class="t-module">Module 3.1</div>
+        <h4>Lực đẩy + Lực kéo</h4>
+        <p>Lực đẩy: AI/cloud tech mới (Viettel, computer vision). Lực kéo: nhu cầu số hóa ngành hotel post-COVID</p>
+      </div>
+      <div class="theory-card">
+        <div class="t-module">Module 4.1</div>
+        <h4>KSF & Risk Matrix</h4>
+        <p>6 KSF map 1-1 với 6 thành viên nhóm. Ma trận rủi ro 6 giả định với kế hoạch kiểm soát cụ thể</p>
+      </div>
+      <div class="theory-card">
+        <div class="t-module">Module 4.2</div>
+        <h4>Business Model Canvas</h4>
+        <p>9 ô BMC đầy đủ, revenue model SaaS + % revenue share, phân tích break-even rõ ràng</p>
+      </div>
+      <div class="theory-card">
+        <div class="t-module">Module 5</div>
+        <h4>Lean Startup + AISM</h4>
+        <p>Pilot 3 KS → validate → scale. AI-powered Design Thinking + AI-powered Lean Startup + GenAI Knowledge Platform</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section id="team" style="background:#fff;">
+  <div class="container">
+    <div class="section-tag">Đội ngũ sáng lập</div>
+    <h2>6 chuyên gia — 6 module<br/>1 nền tảng duy nhất</h2>
+    <p class="section-desc">Mỗi thành viên đóng góp chuyên môn thực chiến, tạo nên lợi thế cạnh tranh không thể sao chép</p>
+    <div class="team-grid">
+      <div class="team-card">
+        <div class="team-icon" style="background:#fef3c7;">💼</div>
+        <div class="team-name">Chị Liên</div>
+        <div class="team-role">Kế toán, Thuế, Đào tạo kế toán căn bản</div>
+        <div class="team-contrib">AutoAccounting Module</div>
+      </div>
+      <div class="team-card">
+        <div class="team-icon" style="background:#fce7f3;">📈</div>
+        <div class="team-name">Thanh Bình</div>
+        <div class="team-role">Global Affiliate Marketing · Fashion · Beauty · Gears</div>
+        <div class="team-contrib">RevenueAI Module</div>
+      </div>
+      <div class="team-card">
+        <div class="team-icon" style="background:#ecfdf5;">🏨</div>
+        <div class="team-name">Minh Tân</div>
+        <div class="team-role">Khách sạn phân khúc cao · Hotel Operations</div>
+        <div class="team-contrib">Domain Expert + First Customer</div>
+      </div>
+      <div class="team-card">
+        <div class="team-icon" style="background:#eff6ff;">☁️</div>
+        <div class="team-name">Anh Hiếu</div>
+        <div class="team-role">Viettel · Cloud Infrastructure</div>
+        <div class="team-contrib">Cloud Infrastructure Module</div>
+      </div>
+      <div class="team-card">
+        <div class="team-icon" style="background:#f5f3ff;">📷</div>
+        <div class="team-name">Chị Nhi</div>
+        <div class="team-role">Công ty Nhật · Extension · Camera Tech</div>
+        <div class="team-contrib">Smart Vision Module</div>
+      </div>
+      <div class="team-card">
+        <div class="team-icon" style="background:#fff1f2;">🔐</div>
+        <div class="team-name">Thành Duy</div>
+        <div class="team-role">IT Security · Access Control · NGO Systems</div>
+        <div class="team-contrib">SecureAccess Module</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Omni<span>Stay</span> AI</div>
+  <p style="margin-bottom:0.5rem;">Dự án khởi nghiệp · ETR601.22 · SEM40HN · FSB — FPT School of Business</p>
+  <p>Môn học: Khởi nghiệp và Đổi mới Sáng tạo trong Kỷ nguyên AI · Giảng viên: Dr. Phạm Quang Ngọc</p>
+  <p style="margin-top:1rem;font-size:0.72rem;opacity:0.5;">© 2026 OmniStay AI · startup.sem40hn.asia</p>
+</footer>
+
+</body>
+</html>

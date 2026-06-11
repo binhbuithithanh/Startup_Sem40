@@ -1,0 +1,2350 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TaxFlow AI — Kê khai thuế tự động cho hộ kinh doanh & freelancer VN</title>
+  <meta name="description" content="TaxFlow AI: Nền tảng AI tự động hóa kê khai thuế cho 5+ triệu hộ kinh doanh cá thể và freelancer Việt Nam. Dự án ETR601 SEM40HN." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --primary: #1a1a2e;
+      --accent: #e94560;
+      --gold: #f5a623;
+      --teal: #0f9b8e;
+      --green: #059669;
+      --light: #f8f9ff;
+      --muted: #6b7280;
+      --card-bg: #ffffff;
+      --border: #e5e7eb;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--light);
+      color: var(--primary);
+      line-height: 1.6;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; width: 100%; z-index: 100;
+      background: rgba(26,26,46,0.97);
+      backdrop-filter: blur(12px);
+      padding: 0 2rem;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 64px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .nav-logo {
+      font-size: 1.2rem; font-weight: 800; color: #fff;
+      text-decoration: none; letter-spacing: -0.5px; white-space: nowrap;
+    }
+    .nav-logo span { color: var(--accent); }
+    .nav-tabs { display: flex; gap: 0.25rem; }
+    .nav-tab {
+      color: rgba(255,255,255,0.65); text-decoration: none;
+      font-size: 0.82rem; font-weight: 500;
+      padding: 6px 13px; border-radius: 8px;
+      transition: all .2s; white-space: nowrap;
+    }
+    .nav-tab:hover { background: rgba(255,255,255,0.08); color: #fff; }
+    .nav-tab.active { background: var(--teal); color: #fff; }
+    .nav-badge {
+      background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.7);
+      font-size: 0.72rem; font-weight: 700;
+      padding: 3px 10px; border-radius: 99px; white-space: nowrap;
+    }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #0d1b2a 0%, #1a1a2e 45%, #0d2b1e 100%);
+      display: flex; align-items: center; justify-content: center;
+      text-align: center;
+      padding: 6rem 2rem 4rem;
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 60% 40%, rgba(5,150,105,0.2) 0%, transparent 60%),
+                  radial-gradient(ellipse at 20% 80%, rgba(15,155,142,0.12) 0%, transparent 50%),
+                  radial-gradient(ellipse at 85% 15%, rgba(245,166,35,0.08) 0%, transparent 40%);
+    }
+    .hero-grid {
+      position: absolute; inset: 0; opacity: 0.04;
+      background-image: linear-gradient(rgba(255,255,255,.3) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(255,255,255,.3) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+    .hero-content { position: relative; max-width: 900px; }
+    .hero-tag {
+      display: inline-block;
+      background: rgba(5,150,105,0.15);
+      border: 1px solid rgba(5,150,105,0.4);
+      color: #6ee7b7; font-size: 0.78rem; font-weight: 600;
+      padding: 6px 16px; border-radius: 99px;
+      margin-bottom: 1.5rem; letter-spacing: 1px; text-transform: uppercase;
+    }
+    .hero h1 {
+      font-size: clamp(2.8rem, 6vw, 5.2rem);
+      font-weight: 900; color: #fff;
+      line-height: 1.05; letter-spacing: -2.5px;
+      margin-bottom: 0.5rem;
+    }
+    .hero h1 .accent-green { color: #34d399; }
+    .hero-sub {
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      color: rgba(255,255,255,0.6);
+      margin: 1rem 0 2.5rem; font-weight: 400;
+    }
+    .hero-badges {
+      display: flex; flex-wrap: wrap; gap: 0.75rem;
+      justify-content: center; margin-bottom: 2.5rem;
+    }
+    .hero-badge {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.14);
+      color: rgba(255,255,255,0.82);
+      padding: 6px 16px; border-radius: 99px;
+      font-size: 0.82rem; font-weight: 500;
+    }
+    .hero-cta {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: var(--green); color: #fff;
+      padding: 14px 34px; border-radius: 10px;
+      font-weight: 700; font-size: 1rem; text-decoration: none;
+      transition: transform .2s, box-shadow .2s;
+      box-shadow: 0 8px 30px rgba(5,150,105,0.4);
+    }
+    .hero-cta:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(5,150,105,0.5); }
+
+    /* STATS BAR */
+    .stats-bar {
+      background: var(--primary);
+      padding: 2rem 4rem;
+      display: flex; flex-wrap: wrap;
+      justify-content: center; gap: 3rem;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .stat { text-align: center; }
+    .stat-num { font-size: 2rem; font-weight: 800; color: #34d399; line-height: 1; }
+    .stat-label { font-size: 0.78rem; color: rgba(255,255,255,0.5); margin-top: 4px; }
+
+    /* SECTIONS */
+    section { padding: 5rem 2rem; }
+    .container { max-width: 1100px; margin: 0 auto; }
+
+    .section-tag {
+      font-size: 0.75rem; font-weight: 700; letter-spacing: 2px;
+      text-transform: uppercase; color: var(--green);
+      margin-bottom: 0.75rem;
+    }
+    h2 {
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-weight: 800; letter-spacing: -1px;
+      margin-bottom: 1rem; line-height: 1.2;
+    }
+    .section-desc {
+      font-size: 1.05rem; color: var(--muted);
+      max-width: 640px; margin-bottom: 3rem;
+    }
+
+    /* PROBLEM */
+    .problem-section { background: #fff; }
+    .problem-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem; margin-bottom: 2.5rem;
+    }
+    .problem-card {
+      border: 1px solid #fecaca; background: #fff5f5;
+      border-radius: 12px; padding: 1.25rem;
+    }
+    .problem-card .icon { font-size: 1.4rem; margin-bottom: 0.5rem; }
+    .problem-card h4 { font-size: 0.88rem; font-weight: 700; margin-bottom: 0.3rem; color: #dc2626; }
+    .problem-card p { font-size: 0.8rem; color: #6b7280; line-height: 1.5; }
+
+    /* VPC CANVAS */
+    .vpc-section { background: var(--light); }
+    .vpc-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+    .vpc-side {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 16px; padding: 1.75rem;
+    }
+    .vpc-side.customer { border-top: 4px solid var(--teal); }
+    .vpc-side.product { border-top: 4px solid var(--green); }
+    .vpc-title {
+      font-size: 0.75rem; font-weight: 700; letter-spacing: 1.5px;
+      text-transform: uppercase; margin-bottom: 1.25rem;
+    }
+    .vpc-title.c { color: var(--teal); }
+    .vpc-title.p { color: var(--green); }
+    .vpc-block { margin-bottom: 1.25rem; }
+    .vpc-block:last-child { margin-bottom: 0; }
+    .vpc-block-title {
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 1px;
+      text-transform: uppercase; color: var(--muted);
+      margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.4rem;
+    }
+    .vpc-block ul { list-style: none; }
+    .vpc-block ul li {
+      font-size: 0.82rem; color: #374151;
+      padding: 4px 0 4px 1.1rem; position: relative; line-height: 1.45;
+    }
+    .vpc-block ul li::before {
+      content: '▸'; position: absolute; left: 0; color: var(--teal); font-size: 0.75rem;
+    }
+    .vpc-side.product .vpc-block ul li::before { color: var(--green); }
+
+    /* COMPETITION */
+    .comp-section { background: #fff; }
+    .comp-table { width: 100%; border-collapse: collapse; }
+    .comp-table th {
+      background: var(--primary); color: #fff;
+      padding: 0.85rem 1rem; text-align: left;
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+    .comp-table th:first-child { border-radius: 10px 0 0 0; }
+    .comp-table th:last-child { border-radius: 0 10px 0 0; }
+    .comp-table td {
+      padding: 1rem; font-size: 0.82rem;
+      border-bottom: 1px solid var(--border);
+      vertical-align: middle;
+    }
+    .comp-table tr:nth-child(even) td { background: #f9fafb; }
+    .comp-table tr.taxflow-row td { background: #f0fdf4; }
+    .comp-table tr.taxflow-row td:first-child { font-weight: 800; color: var(--green); }
+    .check { color: var(--green); font-weight: 700; }
+    .cross { color: #dc2626; }
+    .partial { color: #d97706; }
+
+    /* SOLUTION */
+    .solution-section { background: var(--light); }
+    .modules-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.25rem;
+    }
+    .module-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 16px; padding: 1.75rem;
+      transition: transform .2s, box-shadow .2s;
+      position: relative; overflow: hidden;
+    }
+    .module-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      border-radius: 16px 16px 0 0;
+    }
+    .module-card:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(0,0,0,0.08); }
+    .module-card .mod-icon { font-size: 1.8rem; margin-bottom: 1rem; }
+    .module-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .module-card p { font-size: 0.85rem; color: var(--muted); }
+    .mod-owner {
+      display: inline-block; margin-top: 0.75rem;
+      background: #f3f4f6; color: #374151;
+      font-size: 0.72rem; font-weight: 600;
+      padding: 3px 10px; border-radius: 99px;
+    }
+    .mod-1::before { background: linear-gradient(90deg, #059669, #34d399); }
+    .mod-2::before { background: linear-gradient(90deg, #0f9b8e, #2dd4bf); }
+    .mod-3::before { background: linear-gradient(90deg, #3b82f6, #60a5fa); }
+    .mod-4::before { background: linear-gradient(90deg, #f5a623, #fbbf24); }
+    .mod-5::before { background: linear-gradient(90deg, #8b5cf6, #a78bfa); }
+    .mod-6::before { background: linear-gradient(90deg, #e94560, #ff7c95); }
+
+    /* KSF */
+    .ksf-section { background: #fff; }
+    .ksf-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+    .ksf-side {
+      border-radius: 16px; padding: 1.75rem;
+    }
+    .ksf-have { background: #f0fdf4; border: 1px solid #bbf7d0; }
+    .ksf-need { background: #fff7ed; border: 1px solid #fed7aa; }
+    .ksf-head {
+      font-size: 0.75rem; font-weight: 800; letter-spacing: 1.5px;
+      text-transform: uppercase; margin-bottom: 1.25rem;
+      display: flex; align-items: center; gap: 0.5rem;
+    }
+    .ksf-have .ksf-head { color: #065f46; }
+    .ksf-need .ksf-head { color: #c2410c; }
+    .ksf-item {
+      display: flex; gap: 0.75rem; align-items: flex-start;
+      padding: 0.7rem 0; border-bottom: 1px solid rgba(0,0,0,0.06);
+    }
+    .ksf-item:last-child { border-bottom: none; }
+    .ksf-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 1px; }
+    .ksf-item-text { font-size: 0.82rem; color: #374151; }
+    .ksf-item-text strong { display: block; font-weight: 700; color: #111827; font-size: 0.85rem; margin-bottom: 1px; }
+
+    /* FORCE SECTION */
+    .force-section { background: var(--primary); color: #fff; }
+    .force-section h2 { color: #fff; }
+    .force-section .section-desc { color: rgba(255,255,255,0.6); }
+    .force-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;
+    }
+    .force-card {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 16px; padding: 1.75rem;
+    }
+    .force-card.push { border-color: rgba(52,211,153,0.3); background: rgba(52,211,153,0.06); }
+    .force-card.pull { border-color: rgba(245,166,35,0.3); background: rgba(245,166,35,0.06); }
+    .force-head {
+      font-size: 0.75rem; font-weight: 800; letter-spacing: 1.5px;
+      text-transform: uppercase; margin-bottom: 1.25rem;
+    }
+    .force-card.push .force-head { color: #34d399; }
+    .force-card.pull .force-head { color: var(--gold); }
+    .force-item {
+      display: flex; gap: 0.75rem; padding: 0.75rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .force-item:last-child { border-bottom: none; }
+    .force-item-icon { font-size: 1.2rem; flex-shrink: 0; }
+    .force-item-text { font-size: 0.82rem; color: rgba(255,255,255,0.8); line-height: 1.5; }
+    .force-item-text strong { display: block; color: #fff; font-size: 0.88rem; margin-bottom: 2px; }
+
+    /* BMC */
+    .bmc-section { background: var(--light); }
+    .bmc-dark {
+      background: var(--primary); border-radius: 20px; padding: 2.5rem;
+    }
+    .bmc-dark h2 { color: #fff; }
+    .bmc-dark .section-tag { color: var(--gold); }
+    .bmc-dark .section-desc { color: rgba(255,255,255,0.6); }
+    .bmc-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      grid-template-rows: auto auto auto;
+      gap: 0.75rem;
+    }
+    .bmc-cell {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 12px; padding: 1.25rem;
+    }
+    .bmc-cell h4 {
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 1px;
+      text-transform: uppercase; color: var(--gold);
+      margin-bottom: 0.75rem;
+    }
+    .bmc-cell ul { list-style: none; }
+    .bmc-cell ul li {
+      font-size: 0.79rem; color: rgba(255,255,255,0.8);
+      padding: 3px 0 3px 1rem; position: relative; line-height: 1.45;
+    }
+    .bmc-cell ul li::before {
+      content: '▸'; position: absolute; left: 0; color: #34d399; font-size: 0.7rem;
+    }
+    .bmc-partners { grid-column: 1; grid-row: 1 / 3; }
+    .bmc-activities { grid-column: 2; grid-row: 1; }
+    .bmc-resources { grid-column: 2; grid-row: 2; }
+    .bmc-vp { grid-column: 3; grid-row: 1 / 3; background: rgba(5,150,105,0.12) !important; border-color: rgba(5,150,105,0.35) !important; }
+    .bmc-relationships { grid-column: 4; grid-row: 1; }
+    .bmc-channels { grid-column: 4; grid-row: 2; }
+    .bmc-segments { grid-column: 5; grid-row: 1 / 3; }
+    .bmc-costs { grid-column: 1 / 4; grid-row: 3; }
+    .bmc-revenue { grid-column: 4 / 6; grid-row: 3; }
+
+    /* REVENUE */
+    .revenue-section { background: #fff; }
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.25rem; margin-bottom: 3rem;
+    }
+    .pricing-card {
+      border: 2px solid var(--border);
+      border-radius: 16px; padding: 2rem;
+      text-align: center; position: relative;
+      transition: transform .2s, box-shadow .2s;
+    }
+    .pricing-card.featured {
+      border-color: var(--green);
+      box-shadow: 0 0 0 4px rgba(5,150,105,0.1);
+    }
+    .pricing-card:hover { transform: translateY(-4px); }
+    .pricing-badge {
+      position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+      background: var(--green); color: #fff;
+      font-size: 0.72rem; font-weight: 700; padding: 4px 14px; border-radius: 99px;
+    }
+    .pricing-tier { font-size: 0.82rem; font-weight: 600; color: var(--muted); margin-bottom: 0.5rem; }
+    .pricing-price { font-size: 2rem; font-weight: 900; margin-bottom: 0.25rem; }
+    .pricing-unit { font-size: 0.78rem; color: var(--muted); margin-bottom: 1.5rem; }
+    .pricing-features { list-style: none; text-align: left; }
+    .pricing-features li {
+      font-size: 0.82rem; padding: 5px 0;
+      display: flex; align-items: center; gap: 0.5rem;
+    }
+    .pricing-features li::before { content: '✓'; color: var(--green); font-weight: 700; }
+
+    /* RISK TABLE */
+    .risk-section { background: var(--light); }
+    .risk-table { width: 100%; border-collapse: collapse; }
+    .risk-table th {
+      background: var(--primary); color: #fff;
+      padding: 0.85rem 1rem; text-align: left;
+      font-size: 0.8rem; font-weight: 700;
+      letter-spacing: 0.5px; text-transform: uppercase;
+    }
+    .risk-table th:first-child { border-radius: 10px 0 0 0; }
+    .risk-table th:last-child { border-radius: 0 10px 0 0; }
+    .risk-table td {
+      padding: 1rem; font-size: 0.82rem;
+      border-bottom: 1px solid var(--border); vertical-align: top;
+    }
+    .risk-table tr:nth-child(even) td { background: #f9fafb; }
+    .risk-level {
+      display: inline-block; padding: 3px 10px; border-radius: 99px;
+      font-size: 0.72rem; font-weight: 700;
+    }
+    .risk-high { background: #fee2e2; color: #dc2626; }
+    .risk-med { background: #fef3c7; color: #d97706; }
+    .risk-low { background: #d1fae5; color: #065f46; }
+
+    /* THEORY */
+    .theory-section { background: var(--primary); color: #fff; }
+    .theory-section h2 { color: #fff; }
+    .theory-section .section-desc { color: rgba(255,255,255,0.6); }
+    .theory-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+    .theory-card {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 12px; padding: 1.25rem;
+    }
+    .theory-card .t-module {
+      font-size: 0.68rem; font-weight: 700; letter-spacing: 1px;
+      text-transform: uppercase; color: var(--gold); margin-bottom: 0.5rem;
+    }
+    .theory-card h4 { font-size: 0.9rem; font-weight: 700; color: #fff; margin-bottom: 0.4rem; }
+    .theory-card p { font-size: 0.78rem; color: rgba(255,255,255,0.6); line-height: 1.5; }
+
+    /* TEAM GRID */
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 1rem;
+    }
+    .team-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 16px; padding: 1.5rem 1rem;
+      text-align: center;
+      transition: transform .2s, box-shadow .2s;
+    }
+    .team-card:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(0,0,0,0.08); }
+    .team-icon {
+      width: 52px; height: 52px; border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem; margin: 0 auto 0.75rem;
+    }
+    .team-name { font-size: 0.9rem; font-weight: 700; margin-bottom: 0.3rem; }
+    .team-role { font-size: 0.75rem; color: var(--muted); line-height: 1.4; }
+    .team-contrib {
+      margin-top: 0.75rem; padding-top: 0.75rem;
+      border-top: 1px solid var(--border);
+      font-size: 0.72rem; color: var(--green); font-weight: 600;
+    }
+
+    /* INNOVATION TYPE */
+    .innov-section { background: #fff; }
+    .innov-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;
+    }
+    .innov-card {
+      border-radius: 12px; padding: 1.1rem 1.25rem;
+      border: 1px solid var(--border);
+    }
+    .innov-card.active {
+      border-color: var(--green);
+      background: #f0fdf4;
+      box-shadow: 0 0 0 3px rgba(5,150,105,0.1);
+    }
+    .innov-num { font-size: 0.68rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); margin-bottom: 0.25rem; }
+    .innov-name { font-size: 0.88rem; font-weight: 700; margin-bottom: 0.25rem; }
+    .innov-card.active .innov-name { color: var(--green); }
+    .innov-desc { font-size: 0.75rem; color: var(--muted); line-height: 1.45; }
+    .innov-badge {
+      display: inline-block; margin-top: 0.5rem;
+      background: var(--green); color: #fff;
+      font-size: 0.65rem; font-weight: 700; padding: 2px 8px; border-radius: 99px;
+    }
+
+    /* FOOTER */
+    footer {
+      background: #0d0d1a;
+      padding: 3rem 2rem; text-align: center;
+      color: rgba(255,255,255,0.4); font-size: 0.82rem;
+    }
+    footer .footer-logo { font-size: 1.5rem; font-weight: 900; color: #fff; margin-bottom: 0.5rem; }
+    footer .footer-logo span { color: #34d399; }
+
+    /* INFO BOX */
+    .info-box {
+      border-radius: 12px; padding: 1.25rem 1.5rem; margin-top: 1rem;
+    }
+    .info-green { background: #f0fdf4; border: 1px solid #bbf7d0; }
+    .info-blue { background: #eff6ff; border: 1px solid #bfdbfe; }
+
+    /* ===== DEEP-DIVE EXPANDABLE SYSTEM ===== */
+    /* Section-level deep dive toggle */
+    .deep-toggle {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      margin-top: 1.5rem;
+      background: #fff; color: var(--green);
+      border: 2px solid var(--green);
+      padding: 10px 22px; border-radius: 99px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem; font-weight: 700; cursor: pointer;
+      transition: all .2s;
+    }
+    .deep-toggle:hover { background: var(--green); color: #fff; }
+    .deep-toggle .chev { transition: transform .3s; font-size: 0.7rem; }
+    .deep-toggle.active { background: var(--green); color: #fff; }
+    .deep-toggle.active .chev { transform: rotate(180deg); }
+    /* dark-section variant */
+    .deep-toggle.on-dark {
+      background: rgba(255,255,255,0.05); color: #34d399;
+      border-color: rgba(52,211,153,0.5);
+    }
+    .deep-toggle.on-dark:hover, .deep-toggle.on-dark.active { background: var(--green); color: #fff; border-color: var(--green); }
+
+    .deep-panel {
+      max-height: 0; overflow: hidden;
+      opacity: 0;
+      transition: max-height .5s ease, opacity .4s ease, margin .4s ease;
+      margin-top: 0;
+    }
+    .deep-panel.open {
+      max-height: 6000px; opacity: 1;
+      margin-top: 1.75rem;
+    }
+    .deep-inner {
+      background: #fff; border: 1px solid var(--border);
+      border-left: 4px solid var(--green);
+      border-radius: 14px; padding: 1.75rem 2rem;
+    }
+    .on-dark-panel .deep-inner {
+      background: rgba(255,255,255,0.04);
+      border-color: rgba(255,255,255,0.12);
+      border-left-color: #34d399;
+    }
+    .deep-inner h5 {
+      font-size: 0.95rem; font-weight: 800; margin: 1.5rem 0 0.75rem;
+      display: flex; align-items: center; gap: 0.5rem;
+    }
+    .deep-inner h5:first-child { margin-top: 0; }
+    .on-dark-panel .deep-inner h5 { color: #fff; }
+    .deep-inner p { font-size: 0.86rem; color: #374151; margin-bottom: 0.6rem; line-height: 1.65; }
+    .on-dark-panel .deep-inner p { color: rgba(255,255,255,0.78); }
+    .deep-inner ul { list-style: none; margin: 0.5rem 0 0.75rem; }
+    .deep-inner ul li {
+      font-size: 0.85rem; color: #374151; line-height: 1.6;
+      padding: 5px 0 5px 1.4rem; position: relative;
+    }
+    .deep-inner ul li::before { content: '▸'; position: absolute; left: 0; color: var(--green); }
+    .on-dark-panel .deep-inner ul li { color: rgba(255,255,255,0.78); }
+    .deep-inner strong { color: #111827; }
+    .on-dark-panel .deep-inner strong { color: #fff; }
+
+    /* data stat strip inside deep panels */
+    .deep-stats {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(140px,1fr));
+      gap: 0.85rem; margin: 1rem 0 1.25rem;
+    }
+    .deep-stat {
+      background: #f0fdf4; border: 1px solid #bbf7d0;
+      border-radius: 12px; padding: 1rem; text-align: center;
+    }
+    .on-dark-panel .deep-stat { background: rgba(52,211,153,0.08); border-color: rgba(52,211,153,0.25); }
+    .deep-stat .ds-num { font-size: 1.5rem; font-weight: 900; color: var(--green); line-height: 1; }
+    .deep-stat .ds-label { font-size: 0.72rem; color: var(--muted); margin-top: 5px; line-height: 1.35; }
+    .on-dark-panel .deep-stat .ds-label { color: rgba(255,255,255,0.55); }
+
+    /* mini data table */
+    .deep-table { width: 100%; border-collapse: collapse; margin: 0.75rem 0; font-size: 0.82rem; }
+    .deep-table th { text-align: left; padding: 0.5rem 0.75rem; background: #f0fdf4; color: #065f46; font-weight: 700; border-bottom: 2px solid #bbf7d0; }
+    .deep-table td { padding: 0.5rem 0.75rem; border-bottom: 1px solid var(--border); color: #374151; vertical-align: top; }
+    .on-dark-panel .deep-table th { background: rgba(52,211,153,0.1); color: #34d399; border-color: rgba(52,211,153,0.3); }
+    .on-dark-panel .deep-table td { color: rgba(255,255,255,0.78); border-color: rgba(255,255,255,0.1); }
+
+    /* source citation chip */
+    .src {
+      display: inline-block; font-size: 0.68rem; font-weight: 600;
+      color: var(--muted); background: #f3f4f6;
+      padding: 1px 8px; border-radius: 99px; margin-left: 4px;
+      vertical-align: middle;
+    }
+    .on-dark-panel .src { background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.5); }
+    .src-note { font-size: 0.72rem; color: var(--muted); font-style: italic; margin-top: 0.75rem; }
+    .on-dark-panel .src-note { color: rgba(255,255,255,0.45); }
+
+    .deep-callout {
+      background: linear-gradient(135deg, #ecfdf5, #f0fdf4);
+      border: 1px solid #6ee7b7; border-radius: 12px;
+      padding: 1rem 1.25rem; margin: 1rem 0;
+      font-size: 0.86rem; color: #065f46; line-height: 1.6;
+    }
+    .on-dark-panel .deep-callout { background: rgba(52,211,153,0.1); border-color: rgba(52,211,153,0.35); color: #6ee7b7; }
+
+    /* ===== EXPANDABLE CARDS (problem + module) ===== */
+    .expandable { cursor: pointer; position: relative; }
+    .expandable::after {
+      content: '＋'; position: absolute; bottom: 0.9rem; right: 1.1rem;
+      width: 22px; height: 22px; border-radius: 50%;
+      background: #f3f4f6; color: var(--muted);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.9rem; font-weight: 700; transition: all .2s;
+    }
+    .expandable.expanded::after { content: '−'; background: var(--green); color: #fff; }
+    .problem-card.expandable::after { background: #fee2e2; color: #dc2626; }
+    .problem-card.expandable.expanded::after { background: #dc2626; color: #fff; }
+    .module-card.expandable { padding-bottom: 2.75rem; }
+    .problem-card.expandable { padding-bottom: 2.75rem; }
+    .card-detail {
+      max-height: 0; overflow: hidden; opacity: 0;
+      transition: max-height .4s ease, opacity .3s ease, margin .3s ease;
+    }
+    .card-detail.open { max-height: 900px; opacity: 1; margin-top: 0.9rem; }
+    .card-detail-inner { border-top: 1px dashed var(--border); padding-top: 0.85rem; }
+    .card-detail-inner p { font-size: 0.8rem; color: #4b5563; line-height: 1.6; margin-bottom: 0.5rem; }
+    .card-detail-inner .mini-num { font-weight: 800; color: var(--green); }
+    .problem-card .card-detail-inner .mini-num { color: #dc2626; }
+    .card-detail-inner ul { list-style: none; margin-top: 0.4rem; }
+    .card-detail-inner ul li { font-size: 0.78rem; color: #4b5563; padding: 2px 0 2px 1rem; position: relative; line-height: 1.5; }
+    .card-detail-inner ul li::before { content: '·'; position: absolute; left: 0.3rem; color: var(--green); font-weight: 900; }
+
+    /* hint banner */
+    .click-hint {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      background: rgba(5,150,105,0.08); color: var(--green);
+      font-size: 0.75rem; font-weight: 600;
+      padding: 4px 12px; border-radius: 99px; margin-bottom: 1.25rem;
+    }
+
+    /* ===== USER JOURNEY ===== */
+    .journey-section { background: #fff; }
+    .journey-legend { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 1.75rem; }
+    .journey-phase {
+      background: var(--card-bg); border: 1px solid var(--border);
+      border-left: 4px solid var(--green);
+      border-radius: 16px; padding: 1.5rem 1.75rem; margin-bottom: 1.25rem;
+    }
+    .journey-phase-head { display: flex; align-items: center; gap: 0.85rem; margin-bottom: 1rem; }
+    .journey-phase-num {
+      width: 40px; height: 40px; border-radius: 11px; flex-shrink: 0;
+      background: #f0fdf4; color: var(--green);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem; font-weight: 800;
+    }
+    .journey-phase-title { font-size: 1.1rem; font-weight: 800; line-height: 1.2; }
+    .journey-phase-sub { font-size: 0.78rem; color: var(--muted); margin-top: 1px; }
+    .journey-step {
+      display: flex; gap: 0.85rem; align-items: flex-start;
+      padding: 0.75rem 0; border-bottom: 1px dashed var(--border);
+    }
+    .journey-step:last-child { border-bottom: none; padding-bottom: 0; }
+    .journey-step-icon { font-size: 1.15rem; flex-shrink: 0; margin-top: 2px; }
+    .journey-step-body { flex: 1; }
+    .journey-step-body strong { display: block; font-size: 0.88rem; margin-bottom: 2px; }
+    .journey-step-body p { font-size: 0.82rem; color: var(--muted); line-height: 1.5; }
+    .jtag {
+      font-size: 0.64rem; font-weight: 700; padding: 3px 9px;
+      border-radius: 99px; white-space: nowrap; flex-shrink: 0; align-self: flex-start; margin-top: 2px;
+    }
+    .jtag-auto { background: #d1fae5; color: #065f46; }
+    .jtag-manual { background: #fef3c7; color: #92400e; }
+    .jtag-collab { background: #dbeafe; color: #1e40af; }
+
+    /* ===== LONG-TERM ROADMAP ===== */
+    .roadmap-section { background: var(--primary); color: #fff; }
+    .roadmap-section h2 { color: #fff; }
+    .roadmap-section .section-tag { color: var(--gold); }
+    .roadmap-section .section-desc { color: rgba(255,255,255,0.6); }
+    .roadmap { position: relative; margin-top: 1rem; }
+    .roadmap::before {
+      content: ''; position: absolute; left: 17px; top: 10px; bottom: 10px;
+      width: 2px; background: rgba(52,211,153,0.3);
+    }
+    .rm-phase { position: relative; padding-left: 3rem; padding-bottom: 1.5rem; }
+    .rm-phase:last-child { padding-bottom: 0; }
+    .rm-dot {
+      position: absolute; left: 7px; top: 4px;
+      width: 22px; height: 22px; border-radius: 50%;
+      background: var(--green); border: 3px solid var(--primary);
+      box-shadow: 0 0 0 2px var(--green);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.7rem;
+    }
+    .rm-card {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 14px; padding: 1.25rem 1.5rem;
+    }
+    .rm-period { font-size: 0.7rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: #34d399; margin-bottom: 0.25rem; }
+    .rm-title { font-size: 1.05rem; font-weight: 800; color: #fff; margin-bottom: 0.6rem; line-height: 1.25; }
+    .rm-funding {
+      display: inline-block; background: rgba(245,166,35,0.15);
+      border: 1px solid rgba(245,166,35,0.4); color: #fbbf24;
+      font-size: 0.72rem; font-weight: 700; padding: 3px 11px; border-radius: 99px; margin-bottom: 0.75rem;
+    }
+    .rm-list { list-style: none; margin-bottom: 0.5rem; }
+    .rm-list li { font-size: 0.83rem; color: rgba(255,255,255,0.8); padding: 3px 0 3px 1.1rem; position: relative; line-height: 1.5; }
+    .rm-list li::before { content: '▸'; position: absolute; left: 0; color: #34d399; }
+    .rm-gate {
+      background: rgba(52,211,153,0.1); border: 1px solid rgba(52,211,153,0.3);
+      border-radius: 10px; padding: 0.7rem 0.95rem; margin-top: 0.6rem;
+      font-size: 0.8rem; color: #6ee7b7; line-height: 1.55;
+    }
+    .rm-gate strong { color: #fff; }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .nav-tabs { gap: 0; }
+      .nav-tab { font-size: 0.75rem; padding: 6px 8px; }
+      .nav-badge { display: none; }
+      .stats-bar { gap: 1.5rem; padding: 1.5rem 2rem; }
+      .bmc-grid { grid-template-columns: 1fr; grid-template-rows: auto; }
+      .bmc-partners, .bmc-vp, .bmc-segments, .bmc-costs, .bmc-revenue { grid-column: 1; grid-row: auto; }
+      .vpc-grid, .ksf-grid, .force-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="/" class="nav-logo">Tax<span>Flow</span> AI</a>
+  <div class="nav-tabs">
+    <a href="/" class="nav-tab">🏨 <span>OmniStay AI</span></a>
+    <a href="/taxflow" class="nav-tab active">🧾 <span>TaxFlow AI</span></a>
+    <a href="/eldercare" class="nav-tab">👵 <span>ElderCare VN</span></a>
+    <a href="/ideas" class="nav-tab">💡 <span>Ý tưởng</span></a>
+  </div>
+  <span class="nav-badge">ETR601 · SEM40</span>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-tag">🧾 Dự án khởi nghiệp được chọn · ETR601 SEM40HN</div>
+    <h1>Tax<span class="accent-green">Flow</span> AI</h1>
+    <p style="font-size:1rem;color:rgba(255,255,255,0.45);margin-bottom:0.2rem;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;">Tự động hóa kê khai thuế · Hóa đơn VAT · Nhắc hạn nộp</p>
+    <p class="hero-sub">
+      Nền tảng AI cho <strong style="color:#34d399">5+ triệu</strong> hộ kinh doanh cá thể & freelancer Việt Nam<br/>
+      <em style="color:rgba(255,255,255,0.4);font-style:normal;">Không cần kế toán thuê ngoài — Đúng luật — Không bao giờ trễ hạn</em>
+    </p>
+    <div class="hero-badges">
+      <span class="hero-badge">🤖 AI Tax Engine</span>
+      <span class="hero-badge">🧾 Hóa đơn điện tử VAT</span>
+      <span class="hero-badge">📅 Nhắc hạn tự động</span>
+      <span class="hero-badge">☁️ Cloud-native VN</span>
+      <span class="hero-badge">📊 Báo cáo tức thì</span>
+      <span class="hero-badge">🔐 Bảo mật dữ liệu</span>
+    </div>
+    <a href="#problem" class="hero-cta">Khám phá ý tưởng ↓</a>
+  </div>
+</section>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stat">
+    <div class="stat-num">5,1 triệu</div>
+    <div class="stat-label">Hộ kinh doanh cá thể tại VN</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">2+ triệu</div>
+    <div class="stat-label">Freelancer & lao động tự do</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">85%</div>
+    <div class="stat-label">Kê khai thuế thủ công, dễ sai</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">25%</div>
+    <div class="stat-label">Bị phạt chậm nộp ít nhất 1 lần</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">70%</div>
+    <div class="stat-label">Gross Margin mục tiêu (SaaS)</div>
+  </div>
+</div>
+
+<!-- PROBLEM -->
+<section class="problem-section" id="problem">
+  <div class="container">
+    <div class="section-tag">Vấn đề</div>
+    <h2>Kê khai thuế thủ công — rủi ro lớn<br/>cho hàng triệu hộ kinh doanh VN</h2>
+    <p class="section-desc">
+      Hơn 5 triệu hộ kinh doanh cá thể và freelancer Việt Nam phải tự kê khai thuế mà không có công cụ hỗ trợ. Kết quả: sai sót thường xuyên, phạt chậm nộp, tốn thời gian, chi phí kế toán thuê ngoài cao.
+    </p>
+    <span class="click-hint">👆 Bấm vào từng thẻ để xem số liệu & dẫn chứng chi tiết</span>
+    <div class="problem-grid">
+      <div class="problem-card expandable" onclick="toggleCard(this)">
+        <div class="icon">📋</div>
+        <h4>Kê khai thủ công, dễ sai</h4>
+        <p>Tờ khai thuế TNCN/GTGT phức tạp, mã số thuế rối, nhiều người kê sai dẫn đến nộp thiếu hoặc bị truy thu</p>
+        <div class="card-detail"><div class="card-detail-inner">
+          <p>Từ <span class="mini-num">1/1/2026</span>, theo Nghị quyết 68-NQ/TW, <strong>5,2 triệu hộ kinh doanh</strong> buộc phải bỏ thuế khoán và chuyển sang <strong>tự kê khai theo doanh thu thực tế</strong> — lần đầu tiên phải lập sổ sách, tờ khai định kỳ.</p>
+          <ul>
+            <li>Hộ khoán trước đây <strong>không cần ghi chép</strong> → nay phải kê khai GTGT + TNCN hàng tháng/quý</li>
+            <li>Phải xác định đúng nhóm ngành & tỷ lệ thuế (bán hàng 1%+0,5%, dịch vụ 5%+2%...)</li>
+            <li>Kê sai → bị ấn định thuế + truy thu + lãi chậm nộp</li>
+          </ul>
+          <p class="src-note">Nguồn: NQ 68-NQ/TW (4/5/2025); Tổng cục Thuế 2025-2026</p>
+        </div></div>
+      </div>
+      <div class="problem-card expandable" onclick="toggleCard(this)">
+        <div class="icon">⏰</div>
+        <h4>Trễ hạn nộp — bị phạt</h4>
+        <p>Hạn nộp thuế quý / năm dễ quên. Phạt chậm nộp 0,03%/ngày cộng phạt hành chính có thể lên tới hàng triệu/lần</p>
+        <div class="card-detail"><div class="card-detail-inner">
+          <p><strong>Khung phạt chậm nộp tờ khai với cá nhân</strong> (bằng ½ mức tổ chức, theo NĐ 125/2020):</p>
+          <ul>
+            <li>1–30 ngày: <span class="mini-num">1 – 2,5 triệu</span></li>
+            <li>31–60 ngày: 2,5 – 4 triệu · 61–90 ngày: 4 – 7,5 triệu</li>
+            <li>Trên 90 ngày: <span class="mini-num">7,5 – 12,5 triệu</span></li>
+            <li>Cộng thêm <strong>lãi chậm nộp 0,03%/ngày</strong> trên số thuế</li>
+          </ul>
+          <p class="src-note">Nguồn: Nghị định 125/2020/NĐ-CP (sửa đổi bởi NĐ 310/2025); Luật Quản lý thuế</p>
+        </div></div>
+      </div>
+      <div class="problem-card expandable" onclick="toggleCard(this)">
+        <div class="icon">🧾</div>
+        <h4>Hóa đơn điện tử bắt buộc</h4>
+        <p>Hộ doanh thu ≥1 tỷ/năm bắt buộc dùng hóa đơn điện tử từ máy tính tiền — thao tác lạ, dễ lỗi, nhiều hộ chưa kịp thích nghi</p>
+        <div class="card-detail"><div class="card-detail-inner">
+          <p><strong>Nghị định 70/2025/NĐ-CP</strong> (hiệu lực <span class="mini-num">1/6/2025</span>): hộ/cá nhân kinh doanh doanh thu ≥ 1 tỷ đồng/năm <strong>bắt buộc</strong> xuất hóa đơn điện tử khởi tạo từ máy tính tiền, kết nối dữ liệu trực tiếp với cơ quan thuế.</p>
+          <ul>
+            <li>~<span class="mini-num">270.000 hộ</span> thuộc diện áp dụng đợt đầu</li>
+            <li>Phải đăng ký nhà cung cấp, cấu hình thiết bị, đào tạo nhân viên</li>
+            <li>Không xuất hóa đơn đúng quy định → phạt + rủi ro thanh tra</li>
+          </ul>
+          <p class="src-note">Nguồn: NĐ 70/2025/NĐ-CP; Cổng TTĐT Chính phủ 2025</p>
+        </div></div>
+      </div>
+      <div class="problem-card expandable" onclick="toggleCard(this)">
+        <div class="icon">💸</div>
+        <h4>Chi phí kế toán thuê ngoài cao</h4>
+        <p>Thuê kế toán cá nhân 1–3 triệu/tháng, dịch vụ khai thuế trọn gói 5–10 triệu/năm — quá tốn cho hộ nhỏ</p>
+        <div class="card-detail"><div class="card-detail-inner">
+          <p>Với hộ doanh thu vài trăm triệu/năm, chi phí kế toán <span class="mini-num">12–36 triệu/năm</span> ăn mòn trực tiếp vào lợi nhuận mỏng.</p>
+          <ul>
+            <li>Phần mềm DN (MISA) ~4,5–7,5 triệu/năm, quá phức tạp & đắt cho hộ cá thể</li>
+            <li>TaxFlow Pro chỉ <strong>299k/tháng (~3,6 triệu/năm)</strong> — rẻ hơn kế toán thuê 3–10 lần</li>
+          </ul>
+          <p class="src-note">Nguồn: bảng giá MISA AMIS 2026; khảo sát chi phí kế toán thị trường</p>
+        </div></div>
+      </div>
+      <div class="problem-card expandable" onclick="toggleCard(this)">
+        <div class="icon">😰</div>
+        <h4>Không hiểu luật thuế</h4>
+        <p>Mức thuế khoán, biểu thuế lũy tiến, quyết toán thuế — freelancer và hộ cá thể thường không biết phải kê khai gì</p>
+        <div class="card-detail"><div class="card-detail-inner">
+          <p>Luật thuế VN thay đổi liên tục: riêng 2025 đã có NQ 68, NĐ 70/2025, ngưỡng doanh thu 1 tỷ áp dụng từ 2026.</p>
+          <ul>
+            <li>Creator (KOL/streamer): GTGT 5% + TNCN 2% = <span class="mini-num">7% doanh thu</span></li>
+            <li>Cục Thuế TP.HCM đã lập tổ rà soát KOL/KOC/người livestream</li>
+            <li>Người dân không theo kịp → cần AI Advisor giải thích bằng ngôn ngữ đơn giản</li>
+          </ul>
+          <p class="src-note">Nguồn: Thanh Niên, MVA Group 2025; Cục Thuế TP.HCM</p>
+        </div></div>
+      </div>
+      <div class="problem-card expandable" onclick="toggleCard(this)">
+        <div class="icon">📂</div>
+        <h4>Lưu trữ chứng từ rải rác</h4>
+        <p>Hoá đơn mua vào, phiếu chi lưu Excel/giấy, cuối năm không tổng hợp được để quyết toán, thiếu chứng từ hợp lệ</p>
+        <div class="card-detail"><div class="card-detail-inner">
+          <p>Khi chuyển sang kê khai thực tế, hộ kinh doanh phải chứng minh chi phí được trừ bằng <strong>hóa đơn, chứng từ hợp lệ</strong> — điều mà hộ khoán chưa từng phải làm.</p>
+          <ul>
+            <li>Chứng từ giấy thất lạc → mất quyền khấu trừ, nộp thuế cao hơn thực tế</li>
+            <li>Document Vault của TaxFlow số hóa & lưu trữ hợp lệ tối đa 5 năm</li>
+          </ul>
+          <p class="src-note">Nguồn: Luật Quản lý thuế; quy định lưu trữ chứng từ thuế</p>
+        </div></div>
+      </div>
+    </div>
+
+    <button class="deep-toggle" data-closed-label="Vì sao 2026 là thời điểm vàng?" data-open-label="Thu gọn" onclick="toggleDeep(this)">
+      <span>🔥</span><span class="dt-label">Vì sao 2026 là thời điểm vàng?</span><span class="chev">▼</span>
+    </button>
+    <div class="deep-panel">
+      <div class="deep-inner">
+        <h5>🔥 Cú hích chính sách lớn nhất 20 năm: Bỏ thuế khoán từ 1/1/2026</h5>
+        <p><strong>Nghị quyết 68-NQ/TW</strong> (Bộ Chính trị, ban hành 4/5/2025) chỉ đạo <strong>xóa bỏ hoàn toàn hình thức thuế khoán</strong> với hộ kinh doanh chậm nhất trong năm 2026. Từ 1/1/2026, hộ kinh doanh chuyển từ "khoán" (đóng một mức cố định, không cần sổ sách) sang <strong>tự kê khai theo doanh thu thực tế</strong>.</p>
+        <div class="deep-stats">
+          <div class="deep-stat"><div class="ds-num">5,2 triệu</div><div class="ds-label">hộ kinh doanh buộc chuyển sang kê khai</div></div>
+          <div class="deep-stat"><div class="ds-num">2,56 triệu</div><div class="ds-label">hộ có doanh thu &lt; 1 tỷ/năm — phân khúc lõi của TaxFlow</div></div>
+          <div class="deep-stat"><div class="ds-num">1/1/2026</div><div class="ds-label">mốc bắt buộc — đang diễn ra ngay lúc này</div></div>
+          <div class="deep-stat"><div class="ds-num">~26.000 tỷ</div><div class="ds-label">thu NSNN từ hộ KD 2024 (+20% YoY)</div></div>
+        </div>
+        <h5>📜 Nhà nước chủ động kêu gọi phần mềm hỗ trợ</h5>
+        <p>NQ 68 còn yêu cầu <strong>cung cấp miễn phí nền tảng số, phần mềm kế toán dùng chung</strong> cho hộ và doanh nghiệp siêu nhỏ — tín hiệu chính sách thuận lợi trực tiếp cho mô hình TaxFlow AI. Đây là "regulatory tailwind" hiếm có: nhu cầu không chỉ tự nhiên mà còn được <em>luật bắt buộc tạo ra</em>.</p>
+        <div class="deep-callout">
+          ⚡ <strong>Timing là tất cả:</strong> Hôm nay (6/2026), 5,2 triệu hộ đang ở giữa giai đoạn chuyển đổi hỗn loạn — chưa quen kê khai, sợ phạt, không đủ tiền thuê kế toán. TaxFlow AI ra mắt đúng đỉnh đường cong nhu cầu, không sớm không muộn.
+        </div>
+        <h5>🎯 Khoảng trống thị trường (White Space)</h5>
+        <p>Chưa có sản phẩm SaaS nào tại VN tập trung 100% vào kê khai thuế tự động cho hộ kinh doanh cá thể & freelancer. MISA (&gt;250.000 doanh nghiệp) và Fast Accounting đều nhắm <strong>doanh nghiệp</strong>, giá 4,5–7,5 triệu/năm, giao diện phức tạp — bỏ ngỏ hoàn toàn phân khúc hộ cá thể cần công cụ <strong>rẻ, đơn giản, mobile-first</strong>.</p>
+        <p class="src-note">Nguồn: NQ 68-NQ/TW (4/5/2025) qua thuvienphapluat.vn & Báo Nhân Dân; Báo Chính phủ 2026 (số hộ &lt;1 tỷ); MISA công bố 2024-2026; ngành thuế 2024.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VPC — VALUE PROPOSITION CANVAS -->
+<section class="vpc-section" id="vpc">
+  <div class="container">
+    <div class="section-tag">Module 2.2 — Value Proposition Canvas</div>
+    <h2>Hồ sơ khách hàng & Giá trị cung cấp</h2>
+    <p class="section-desc">
+      Áp dụng Value Proposition Canvas (Osterwalder) để map chính xác Jobs / Pains / Gains của khách hàng với sản phẩm TaxFlow AI
+    </p>
+    <div class="vpc-grid">
+      <div class="vpc-side customer">
+        <div class="vpc-title c">👤 Customer Profile — Hộ kinh doanh & Freelancer</div>
+        <div class="vpc-block">
+          <div class="vpc-block-title">💼 Customer Jobs (việc cần làm)</div>
+          <ul>
+            <li>Kê khai thuế TNCN / GTGT đúng hạn mỗi quý & năm</li>
+            <li>Xuất hóa đơn VAT cho khách hàng doanh nghiệp</li>
+            <li>Lưu trữ chứng từ hợp lệ cho thanh tra thuế</li>
+            <li>Tính đúng số thuế phải nộp theo biểu lũy tiến</li>
+            <li>Quyết toán thuế năm, xin hoàn thuế nếu có</li>
+            <li>Tuân thủ Nghị định 123/2020 về hóa đơn điện tử</li>
+          </ul>
+        </div>
+        <div class="vpc-block">
+          <div class="vpc-block-title">😣 Pains (nỗi đau)</div>
+          <ul>
+            <li>Không biết mức thuế khoán áp dụng cho ngành nghề mình</li>
+            <li>Sợ bị phạt vì kê sai, nộp thiếu, trễ hạn</li>
+            <li>Tốn thời gian học luật thuế liên tục thay đổi</li>
+            <li>Chi phí kế toán thuê ngoài ăn vào lợi nhuận</li>
+            <li>Xuất hóa đơn điện tử còn lạ, dễ lỗi kỹ thuật</li>
+            <li>Không có dashboard để theo dõi dòng tiền & nghĩa vụ thuế</li>
+          </ul>
+        </div>
+        <div class="vpc-block">
+          <div class="vpc-block-title">🌟 Gains (kết quả mong muốn)</div>
+          <ul>
+            <li>Kê khai đúng, nộp đúng hạn — không lo phạt</li>
+            <li>Tiết kiệm 2–5 triệu/năm chi phí kế toán</li>
+            <li>Xuất hóa đơn VAT trong 1 phút</li>
+            <li>Dashboard tổng quan nghĩa vụ thuế, dòng tiền</li>
+            <li>Cập nhật tự động khi luật thuế thay đổi</li>
+            <li>Tự tin trong giao dịch B2B vì có hóa đơn hợp lệ</li>
+          </ul>
+        </div>
+      </div>
+      <div class="vpc-side product">
+        <div class="vpc-title p">🧾 Value Map — TaxFlow AI</div>
+        <div class="vpc-block">
+          <div class="vpc-block-title">🎁 Products & Services</div>
+          <ul>
+            <li>AI Tax Engine: tự động điền tờ khai TNCN/GTGT</li>
+            <li>E-Invoice module: xuất hóa đơn VAT điện tử tích hợp</li>
+            <li>Smart Reminder: nhắc hạn nộp thuế, khai báo</li>
+            <li>Document Vault: lưu trữ chứng từ số hợp lệ</li>
+            <li>Tax Dashboard: tổng hợp nghĩa vụ thuế realtime</li>
+            <li>AI Tax Advisor: chatbot tư vấn luật thuế 24/7</li>
+          </ul>
+        </div>
+        <div class="vpc-block">
+          <div class="vpc-block-title">💊 Pain Relievers (giải đau)</div>
+          <ul>
+            <li>AI tự động xác định ngưỡng thuế khoán theo mã VSIC</li>
+            <li>Cảnh báo sai lệch trước khi nộp tờ khai</li>
+            <li>Cập nhật tự động theo Thông tư mới của BTC</li>
+            <li>Giảm chi phí kế toán 80% — chỉ còn 99k–499k/tháng</li>
+            <li>Wizard xuất hóa đơn: 3 bước, 1 phút</li>
+            <li>Dashboard nghĩa vụ thuế tổng quan theo tháng/quý/năm</li>
+          </ul>
+        </div>
+        <div class="vpc-block">
+          <div class="vpc-block-title">✨ Gain Creators (tạo giá trị)</div>
+          <ul>
+            <li>Cam kết 0 phạt trễ nộp khi dùng TaxFlow (SLA)</li>
+            <li>ROI rõ ràng: tiết kiệm 2–5 triệu/năm so với kế toán thuê</li>
+            <li>Hóa đơn VAT chuẩn — mở rộng khách hàng B2B</li>
+            <li>Tự tin kinh doanh, focus vào doanh thu thay vì thuế</li>
+            <li>Báo cáo tài chính đơn giản để ra quyết định kinh doanh</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <button class="deep-toggle" data-closed-label="Định lượng Pain & Gain (Fit Score)" data-open-label="Thu gọn" onclick="toggleDeep(this)">
+      <span>📐</span><span class="dt-label">Định lượng Pain & Gain (Fit Score)</span><span class="chev">▼</span>
+    </button>
+    <div class="deep-panel">
+      <div class="deep-inner">
+        <h5>📐 Product-Market Fit Score: mỗi Pain được giải bằng tính năng cụ thể</h5>
+        <table class="deep-table">
+          <thead><tr><th>Pain (mức độ)</th><th>Chi phí/rủi ro hiện tại</th><th>TaxFlow giải quyết</th><th>Giá trị</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Sợ phạt trễ/sai</strong> 🔴 Cao</td><td>1–12,5 triệu/lần + lãi 0,03%/ngày</td><td>Smart Reminder + AI kiểm tra chéo</td><td>Cam kết 0 phạt (SLA)</td></tr>
+            <tr><td><strong>Chi phí kế toán</strong> 🔴 Cao</td><td>12–36 triệu/năm</td><td>Tự động hóa 90% nghiệp vụ</td><td>Tiết kiệm ~90% → 3,6 triệu/năm</td></tr>
+            <tr><td><strong>Không hiểu luật</strong> 🟠 TB</td><td>Học liên tục, tư vấn 500k–1tr/lần</td><td>AI Tax Advisor 24/7</td><td>Tư vấn tức thì, miễn phí trong gói</td></tr>
+            <tr><td><strong>Hóa đơn VAT lạ</strong> 🟠 TB</td><td>Lỗi kỹ thuật, rủi ro pháp lý</td><td>E-Invoice wizard 3 bước</td><td>Xuất hóa đơn &lt; 1 phút</td></tr>
+          </tbody>
+        </table>
+        <div class="deep-callout">
+          💡 <strong>Gain rõ ràng nhất:</strong> Một hộ kinh doanh điển hình hiện chi <strong>~24 triệu/năm</strong> (kế toán thuê + rủi ro phạt). TaxFlow Pro tốn <strong>3,6 triệu/năm</strong> → tiết kiệm ròng <strong>~20 triệu/năm</strong> và loại bỏ rủi ro phạt. ROI &gt; 500%.
+        </div>
+        <p class="src-note">Pain/cost dựa trên: NĐ 125/2020 (khung phạt); bảng giá kế toán & phần mềm thị trường 2026; khảo sát sơ cấp cần thực hiện ở giai đoạn pilot.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPETITION -->
+<section class="comp-section" id="competition">
+  <div class="container">
+    <div class="section-tag">Đánh giá cạnh tranh</div>
+    <h2>TaxFlow AI vs Đối thủ cạnh tranh</h2>
+    <p class="section-desc">Không có đối thủ trực tiếp phục vụ phân khúc hộ cá thể — đây là lợi thế Blue Ocean rõ ràng</p>
+    <div style="overflow-x:auto;">
+      <table class="comp-table">
+        <thead>
+          <tr>
+            <th>Sản phẩm</th>
+            <th>Kê khai tự động</th>
+            <th>Hộ cá thể</th>
+            <th>Hóa đơn VAT</th>
+            <th>AI tư vấn</th>
+            <th>Nhắc hạn</th>
+            <th>Giá/tháng</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="taxflow-row">
+            <td>🧾 TaxFlow AI <strong>(chúng ta)</strong></td>
+            <td class="check">✓ AI</td>
+            <td class="check">✓ Tập trung</td>
+            <td class="check">✓ Tích hợp</td>
+            <td class="check">✓ Chatbot</td>
+            <td class="check">✓ Smart</td>
+            <td>99k–499k</td>
+          </tr>
+          <tr>
+            <td>MISA SME.NET</td>
+            <td class="partial">~ Bán tự động</td>
+            <td class="cross">✗ Chỉ DN</td>
+            <td class="check">✓</td>
+            <td class="cross">✗</td>
+            <td class="partial">~ Cơ bản</td>
+            <td>300k–2tr</td>
+          </tr>
+          <tr>
+            <td>Fast Accounting</td>
+            <td class="partial">~ Bán tự động</td>
+            <td class="cross">✗ Chỉ DN</td>
+            <td class="check">✓</td>
+            <td class="cross">✗</td>
+            <td class="cross">✗</td>
+            <td>200k–1,5tr</td>
+          </tr>
+          <tr>
+            <td>Kế toán thuê ngoài</td>
+            <td class="cross">✗ Thủ công</td>
+            <td class="check">✓ Có làm</td>
+            <td class="partial">~ Thêm phí</td>
+            <td class="cross">✗</td>
+            <td class="partial">~ Không ổn định</td>
+            <td>500k–3tr</td>
+          </tr>
+          <tr>
+            <td>eTax (Tổng cục Thuế)</td>
+            <td class="cross">✗ Thủ công</td>
+            <td class="check">✓ Nộp online</td>
+            <td class="cross">✗</td>
+            <td class="cross">✗</td>
+            <td class="cross">✗</td>
+            <td>Miễn phí</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="info-box info-green" style="margin-top:1.5rem;">
+      <strong style="color:#065f46;">🏆 Lợi thế Blue Ocean:</strong>
+      <span style="color:#374151;font-size:0.9rem;"> TaxFlow AI là <strong>sản phẩm đầu tiên</strong> tại VN kết hợp: (1) AI kê khai tự động, (2) tập trung hộ cá thể/freelancer, (3) tích hợp hóa đơn VAT, (4) AI advisor, ở mức giá thấp hơn kế toán thuê 5–30 lần.</span>
+    </div>
+
+    <button class="deep-toggle" data-closed-label="Phân tích quy mô thị trường & rào cản đối thủ" data-open-label="Thu gọn" onclick="toggleDeep(this)">
+      <span>🎯</span><span class="dt-label">Phân tích quy mô thị trường & rào cản đối thủ</span><span class="chev">▼</span>
+    </button>
+    <div class="deep-panel">
+      <div class="deep-inner">
+        <h5>🎯 Định cỡ thị trường — TAM / SAM / SOM</h5>
+        <div class="deep-stats">
+          <div class="deep-stat"><div class="ds-num">~6.000 tỷ</div><div class="ds-label">TAM — 5,2tr hộ × ~100k/tháng giá trị phần mềm thuế tiềm năng</div></div>
+          <div class="deep-stat"><div class="ds-num">~1.100 tỷ</div><div class="ds-label">SAM — 2,56tr hộ &lt;1 tỷ × 299k/tháng × 12% sẵn sàng số hóa</div></div>
+          <div class="deep-stat"><div class="ds-num">~108 tỷ</div><div class="ds-label">SOM năm 3 — 30.000 subscribers (0,6% SAM)</div></div>
+        </div>
+        <h5>⚔️ Vì sao đối thủ lớn khó đánh vào phân khúc này</h5>
+        <table class="deep-table">
+          <thead><tr><th>Đối thủ</th><th>Định vị</th><th>Vì sao không cạnh tranh trực tiếp</th></tr></thead>
+          <tbody>
+            <tr><td><strong>MISA</strong> (&gt;250k DN)</td><td>ERP/kế toán cho DN, giá 4,5–7,5tr/năm</td><td>Innovator's dilemma: hạ giá xuống 299k sẽ ăn thịt doanh thu DN; UX phức tạp khó đơn giản hóa</td></tr>
+            <tr><td><strong>Fast Accounting</strong></td><td>DN sản xuất/xây dựng 30–200 NV</td><td>Desktop legacy, không mobile-first, không AI; tệp khách hoàn toàn khác</td></tr>
+            <tr><td><strong>eTax</strong> (Tổng cục Thuế)</td><td>Cổng nộp tờ khai miễn phí</td><td>Chỉ là form nộp, không tự động tính/tư vấn; UX công vụ, không tối ưu trải nghiệm</td></tr>
+            <tr><td><strong>Kế toán thuê</strong></td><td>Dịch vụ thủ công 12–36tr/năm</td><td>Không scale được, đắt; chính là nhóm TaxFlow biến thành kênh affiliate (B2B2C)</td></tr>
+          </tbody>
+        </table>
+        <div class="deep-callout">
+          🛡️ <strong>Rào cản phòng thủ (moat):</strong> (1) Dữ liệu training thuế độc quyền từ domain expert; (2) Network effect qua cộng đồng + kế toán viên affiliate; (3) Chi phí chuyển đổi cao khi dữ liệu thuế 5 năm đã nằm trong hệ thống; (4) Tốc độ cập nhật luật — lợi thế của người chuyên trách.
+        </div>
+        <p class="src-note">Nguồn: số hộ KD (VnExpress 2025, Báo Chính phủ 2026); MISA công bố; benchmark conversion freemium 5–12% (userpilot 2025). TAM/SAM/SOM là ước tính nội bộ dựa trên số hộ thực tế.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INNOVATION TYPE — MODULE 1 -->
+<section class="innov-section" id="innovation">
+  <div class="container">
+    <div class="section-tag">Module 1 — 10 Loại hình ĐMST</div>
+    <h2>TaxFlow AI đổi mới theo loại hình nào?</h2>
+    <p class="section-desc">Theo khung 10 Types of Innovation (Doblin), TaxFlow AI tập trung vào 3 loại hình đổi mới có impact cao nhất</p>
+    <div class="innov-grid">
+      <div class="innov-card">
+        <div class="innov-num">Loại 1</div>
+        <div class="innov-name">Profit Model</div>
+        <div class="innov-desc">Mô hình kiếm tiền truyền thống: kế toán theo giờ/tháng</div>
+      </div>
+      <div class="innov-card active">
+        <div class="innov-num">Loại 2</div>
+        <div class="innov-name">Network</div>
+        <div class="innov-desc">Kết nối người dùng ↔ cơ quan thuế ↔ ngân hàng ↔ VNPT e-invoice trong 1 nền tảng</div>
+        <span class="innov-badge">✓ Áp dụng</span>
+      </div>
+      <div class="innov-card">
+        <div class="innov-num">Loại 3</div>
+        <div class="innov-name">Structure</div>
+        <div class="innov-desc">Cơ cấu tổ chức nội bộ</div>
+      </div>
+      <div class="innov-card">
+        <div class="innov-num">Loại 4</div>
+        <div class="innov-name">Process</div>
+        <div class="innov-desc">Quy trình vận hành</div>
+      </div>
+      <div class="innov-card active">
+        <div class="innov-num">Loại 5</div>
+        <div class="innov-name">Product Performance</div>
+        <div class="innov-desc">AI Tax Engine tự động 90% tờ khai — hiệu năng sản phẩm vượt trội so với thủ công</div>
+        <span class="innov-badge">✓ Cốt lõi</span>
+      </div>
+      <div class="innov-card">
+        <div class="innov-num">Loại 6</div>
+        <div class="innov-name">Product System</div>
+        <div class="innov-desc">Hệ sinh thái sản phẩm</div>
+      </div>
+      <div class="innov-card">
+        <div class="innov-num">Loại 7</div>
+        <div class="innov-name">Service</div>
+        <div class="innov-desc">Dịch vụ hỗ trợ khách hàng</div>
+      </div>
+      <div class="innov-card">
+        <div class="innov-num">Loại 8</div>
+        <div class="innov-name">Channel</div>
+        <div class="innov-desc">Kênh phân phối</div>
+      </div>
+      <div class="innov-card active">
+        <div class="innov-num">Loại 9</div>
+        <div class="innov-name">Brand</div>
+        <div class="innov-desc">Định vị "không kế toán = an toàn" — thay đổi nhận thức thị trường về kê khai thuế</div>
+        <span class="innov-badge">✓ Áp dụng</span>
+      </div>
+      <div class="innov-card active">
+        <div class="innov-num">Loại 10</div>
+        <div class="innov-name">Customer Engagement</div>
+        <div class="innov-desc">Gamify tax compliance: streak không trễ hạn, điểm tín nhiệm thuế, cộng đồng hộ kinh doanh</div>
+        <span class="innov-badge">✓ Áp dụng</span>
+      </div>
+    </div>
+    <div class="info-box info-blue" style="margin-top:1.5rem;">
+      <strong style="color:#1e40af;">📌 Kết luận Module 1:</strong>
+      <span style="color:#374151;font-size:0.9rem;"> TaxFlow AI đổi mới chủ yếu ở <strong>Business Model (Loại 2 — Network)</strong> và <strong>Product Performance (Loại 5)</strong> — đây là đổi mới <em>triệt để nhất</em> trong khung 10 Types, tạo rào cản cạnh tranh cao nhất theo nghiên cứu của Doblin.</span>
+    </div>
+
+    <button class="deep-toggle" data-closed-label="Giải thích 4 loại hình đổi mới bằng ví dụ cụ thể" data-open-label="Thu gọn" onclick="toggleDeep(this)">
+      <span>💡</span><span class="dt-label">Giải thích 4 loại hình đổi mới bằng ví dụ cụ thể</span><span class="chev">▼</span>
+    </button>
+    <div class="deep-panel">
+      <div class="deep-inner">
+        <h5>💡 Vì sao 4 loại hình này tạo rào cản cao nhất</h5>
+        <p>Nghiên cứu Doblin (Deloitte) chỉ ra: đổi mới càng dịch về phía <strong>cấu hình (Configuration)</strong> và <strong>trải nghiệm (Experience)</strong> thì càng khó sao chép. Sản phẩm chỉ đổi mới ở "Product Performance" đơn lẻ dễ bị copy; kết hợp nhiều loại hình tạo moat bền vững.</p>
+        <table class="deep-table">
+          <thead><tr><th>Loại hình</th><th>TaxFlow áp dụng</th><th>Tại sao khó sao chép</th></tr></thead>
+          <tbody>
+            <tr><td><strong>2. Network</strong></td><td>Kết nối hộ KD ↔ cơ quan thuế ↔ ngân hàng ↔ VNPT e-invoice ↔ kế toán viên</td><td>Mỗi tích hợp cần đàm phán riêng; càng nhiều node càng giá trị (network effect)</td></tr>
+            <tr><td><strong>5. Product Performance</strong></td><td>AI tự động 90% tờ khai vs thủ công</td><td>Cần dữ liệu training thuế độc quyền + domain expert</td></tr>
+            <tr><td><strong>9. Brand</strong></td><td>Định vị "không kế toán = vẫn an toàn"</td><td>Niềm tin về thuế xây dựng chậm, một khi có thì khó lung lay</td></tr>
+            <tr><td><strong>10. Customer Engagement</strong></td><td>Gamify compliance: streak, điểm tín nhiệm thuế, cộng đồng</td><td>Tạo thói quen & cộng đồng — chi phí chuyển đổi tâm lý cao</td></tr>
+          </tbody>
+        </table>
+        <div class="deep-callout">
+          🏆 <strong>Theo Doblin:</strong> các công ty đổi mới ở <strong>≥3 loại hình</strong> cùng lúc có lợi nhuận vượt trội bền vững hơn hẳn. TaxFlow áp dụng 4/10 loại — đặt nền cho lợi thế cạnh tranh dài hạn, không chỉ là "một app khai thuế".
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOLUTION / FEATURES -->
+<section class="solution-section" id="solution">
+  <div class="container">
+    <div class="section-tag">Giải pháp & Tính năng</div>
+    <h2>6 tính năng cốt lõi — mỗi thành viên<br/>đóng góp 1 chuyên môn thực chiến</h2>
+    <p class="section-desc">
+      TaxFlow AI kết hợp chuyên môn kế toán sâu của Chị Liên với công nghệ cloud, bảo mật và marketing của cả nhóm.
+    </p>
+    <span class="click-hint">👆 Bấm vào từng module để xem cách AI hoạt động & lộ trình phát triển</span>
+    <div class="modules-grid">
+      <div class="module-card mod-1 expandable" onclick="toggleCard(this)">
+        <div class="mod-icon">🤖</div>
+        <h3>AI Tax Engine — Kê khai tự động</h3>
+        <p>AI phân loại giao dịch, tính toán nghĩa vụ thuế TNCN/GTGT theo biểu thuế hiện hành, tự động điền tờ khai, kiểm tra chéo và cảnh báo sai lệch trước khi nộp.</p>
+        <span class="mod-owner">👩 Chị Liên — Domain Expert Thuế</span>
+        <div class="card-detail"><div class="card-detail-inner">
+          <p><strong>Cách AI hoạt động:</strong></p>
+          <ul>
+            <li>NLP đọc & phân loại giao dịch theo mã ngành VSIC, gán tỷ lệ thuế đúng</li>
+            <li>Engine tính GTGT + TNCN theo phương pháp kê khai mới (áp dụng từ 1/1/2026)</li>
+            <li>Tự điền mẫu tờ khai 01/CNKD, kiểm tra chéo logic trước khi nộp</li>
+            <li>Cảnh báo bất thường: doanh thu lệch, thiếu chứng từ, vượt ngưỡng 1 tỷ</li>
+          </ul>
+          <p><strong>Mục tiêu chính xác:</strong> <span class="mini-num">≥95%</span> tờ khai đúng, Chị Liên review 100% output trong 3 tháng đầu (human-in-the-loop).</p>
+        </div></div>
+      </div>
+      <div class="module-card mod-2 expandable" onclick="toggleCard(this)">
+        <div class="mod-icon">🧾</div>
+        <h3>E-Invoice — Hóa đơn VAT tích hợp</h3>
+        <p>Xuất hóa đơn điện tử chuẩn Nghị định 123/2020 tích hợp VNPT/MISA e-invoice. Wizard 3 bước, dưới 1 phút. Lưu trữ, tra cứu, gửi email tự động cho người mua.</p>
+        <span class="mod-owner">👩 Chị Liên — Kế toán & Hóa đơn điện tử</span>
+        <div class="card-detail"><div class="card-detail-inner">
+          <p>Tuân thủ <strong>NĐ 70/2025</strong> (hiệu lực 1/6/2025) về hóa đơn từ máy tính tiền cho hộ ≥1 tỷ/năm — phục vụ đúng <span class="mini-num">~270.000 hộ</span> diện bắt buộc đợt đầu.</p>
+          <ul>
+            <li>Tích hợp API VNPT & MISA e-invoice qua reseller agreement</li>
+            <li>Hóa đơn máy tính tiền không cần chữ ký số → phát hành tức thì</li>
+            <li>Đồng bộ ngược vào AI Tax Engine để tự tính nghĩa vụ thuế</li>
+          </ul>
+        </div></div>
+      </div>
+      <div class="module-card mod-3 expandable" onclick="toggleCard(this)">
+        <div class="mod-icon">☁️</div>
+        <h3>Cloud Infrastructure — Hạ tầng VN</h3>
+        <p>Toàn bộ dữ liệu tài chính lưu trên cloud VN (tuân thủ Nghị định 13/2023 về bảo vệ dữ liệu cá nhân). Uptime 99.9%, backup hàng ngày, encrypted at rest & in transit.</p>
+        <span class="mod-owner">👨 Anh Hiếu — Cloud Infrastructure</span>
+        <div class="card-detail"><div class="card-detail-inner">
+          <p><strong>Kiến trúc:</strong> multi-tenant trên Viettel Cloud/VNG Cloud — data sovereignty VN, chi phí thấp hơn AWS/Azure ~40%.</p>
+          <ul>
+            <li>Chi phí AI/cloud chỉ ~$50–200/tháng cho 10.000 users đầu (LLM API rẻ)</li>
+            <li>Auto-scale theo mùa cao điểm thuế (cuối quý, cuối năm)</li>
+            <li>Lợi thế: Anh Hiếu làm tại Viettel → tiếp cận hạ tầng & giá tốt</li>
+          </ul>
+        </div></div>
+      </div>
+      <div class="module-card mod-4 expandable" onclick="toggleCard(this)">
+        <div class="mod-icon">📅</div>
+        <h3>Smart Reminder — Nhắc hạn thông minh</h3>
+        <p>AI lịch thuế cá nhân hóa: nhắc hạn khai thuế quý, năm, hóa đơn VAT, quyết toán. Push notification Zalo/Email/SMS. Cam kết 0 phạt trễ nộp khi dùng đúng cách.</p>
+        <span class="mod-owner">👨 Thành Duy — Hệ thống thông báo & bảo mật</span>
+        <div class="card-detail"><div class="card-detail-inner">
+          <p>Loại bỏ trực tiếp rủi ro phạt <span class="mini-num">1–12,5 triệu/lần</span> + lãi 0,03%/ngày — pain lớn nhất của hộ mới chuyển sang kê khai.</p>
+          <ul>
+            <li>Lịch thuế cá nhân hóa theo nhóm ngành & chu kỳ kê khai của từng hộ</li>
+            <li>Đa kênh: Zalo OA (phổ biến nhất VN), Email, SMS, push app</li>
+            <li>Gamify: streak "không trễ hạn", điểm tín nhiệm thuế</li>
+          </ul>
+        </div></div>
+      </div>
+      <div class="module-card mod-5 expandable" onclick="toggleCard(this)">
+        <div class="mod-icon">📈</div>
+        <h3>Growth Engine — Acquisition & Retention</h3>
+        <p>Funnel acquisition: SEO/content "cách kê khai thuế", affiliate với kế toán viên cá nhân, referral 2 chiều. Chỉ số retention: DAU/MAU, streak, NPS — vòng lặp viral hữu cơ.</p>
+        <span class="mod-owner">👩 Thanh Bình — Affiliate & Growth Marketing</span>
+        <div class="card-detail"><div class="card-detail-inner">
+          <p>Tận dụng <span class="mini-num">~2 triệu lượt search/tháng</span> các từ khóa "cách kê khai thuế TNCN", "thuế freelancer", "mức thuế khoán" — demand organic khổng lồ chưa được phục vụ.</p>
+          <ul>
+            <li>SEO content thuế → top Google → CAC thấp ~200k/user</li>
+            <li>Affiliate kế toán viên: biến đối thủ thành kênh phân phối (20% hoa hồng)</li>
+            <li>Referral 2 chiều trong cộng đồng hộ kinh doanh</li>
+          </ul>
+        </div></div>
+      </div>
+      <div class="module-card mod-6 expandable" onclick="toggleCard(this)">
+        <div class="mod-icon">🏪</div>
+        <h3>SME Insights — Dashboard dòng tiền</h3>
+        <p>Dashboard tổng hợp: doanh thu, chi phí, lợi nhuận ước tính, nghĩa vụ thuế theo tháng/quý. Tích hợp với ngân hàng và ví điện tử VN để import giao dịch tự động.</p>
+        <span class="mod-owner">👨 Minh Tân — SME Business Insights</span>
+        <div class="card-detail"><div class="card-detail-inner">
+          <p>Biến dữ liệu thuế thành <strong>giá trị kinh doanh</strong>: hộ không chỉ nộp thuế mà còn hiểu được sức khỏe tài chính của mình.</p>
+          <ul>
+            <li>Import tự động giao dịch từ ngân hàng & ví (MoMo, ViettelPay) — module của Chị Nhi</li>
+            <li>Hồ sơ thuế sạch → hỗ trợ vay vốn SME (ngân hàng yêu cầu minh bạch tài chính)</li>
+            <li>Minh Tân: kinh nghiệm vận hành khách sạn → hiểu rõ pain dòng tiền SME</li>
+          </ul>
+        </div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- USER JOURNEY -->
+<section class="journey-section" id="journey">
+  <div class="container">
+    <div class="section-tag">Trải nghiệm sản phẩm</div>
+    <h2>Hành trình người dùng<br/>Tự làm thuế, không cần kế toán</h2>
+    <p class="section-desc">
+      "Tôi là hộ kinh doanh / freelancer, muốn tự làm hết thuế." Đây là từng bước bạn đi qua trong app —
+      rõ ràng bước nào <strong>hệ thống tự động</strong>, bước nào <strong>bạn cần làm tay</strong>.
+    </p>
+    <div class="journey-legend">
+      <span class="jtag jtag-auto">🤖 Hệ thống tự động</span>
+      <span class="jtag jtag-collab">🤝 AI gợi ý — bạn xác nhận</span>
+      <span class="jtag jtag-manual">👤 Bạn làm tay</span>
+    </div>
+
+    <!-- Phase 1 -->
+    <div class="journey-phase">
+      <div class="journey-phase-head">
+        <div class="journey-phase-num">1</div>
+        <div>
+          <div class="journey-phase-title">Lần đầu — Thiết lập (chỉ một lần, ~10 phút)</div>
+          <div class="journey-phase-sub">Onboarding & kết nối dữ liệu</div>
+        </div>
+      </div>
+      <div class="journey-step">
+        <div class="journey-step-icon">🪪</div>
+        <div class="journey-step-body"><strong>Đăng ký & xác thực danh tính (eKYC)</strong><p>Chụp CCCD + selfie, hệ thống tự đọc thông tin và xác minh.</p></div>
+        <span class="jtag jtag-auto">🤖 Tự động</span>
+      </div>
+      <div class="journey-step">
+        <div class="journey-step-icon">🏷️</div>
+        <div class="journey-step-body"><strong>Khai báo loại hình & ngành nghề</strong><p>AI gợi ý mã ngành (VSIC), phương pháp tính thuế & tỷ lệ phù hợp; bạn chỉ xác nhận.</p></div>
+        <span class="jtag jtag-collab">🤝 AI gợi ý</span>
+      </div>
+      <div class="journey-step">
+        <div class="journey-step-icon">🔗</div>
+        <div class="journey-step-body"><strong>Kết nối nguồn dữ liệu</strong><p>Liên kết tài khoản ngân hàng, ví (MoMo/ViettelPay), mã số thuế trên eTax. Bạn cấp quyền → hệ thống tự đồng bộ.</p></div>
+        <span class="jtag jtag-collab">🤝 Bạn cấp quyền</span>
+      </div>
+    </div>
+
+    <!-- Phase 2 -->
+    <div class="journey-phase">
+      <div class="journey-phase-head">
+        <div class="journey-phase-num">2</div>
+        <div>
+          <div class="journey-phase-title">Trong năm — Vận hành hàng ngày/tháng/quý</div>
+          <div class="journey-phase-sub">Phần lớn chạy nền, bạn gần như không phải nghĩ về thuế</div>
+        </div>
+      </div>
+      <div class="journey-step">
+        <div class="journey-step-icon">💰</div>
+        <div class="journey-step-body"><strong>Ghi nhận doanh thu (mỗi ngày)</strong><p>Giao dịch chuyển khoản/POS tự import. Chỉ bán tiền mặt thì bạn nhập nhanh 1 dòng (hoặc chụp).</p></div>
+        <span class="jtag jtag-collab">🤝 Đa số tự động</span>
+      </div>
+      <div class="journey-step">
+        <div class="journey-step-icon">🧾</div>
+        <div class="journey-step-body"><strong>Xuất hóa đơn điện tử cho khách</strong><p>Wizard 3 bước &lt;1 phút, tự gửi email/Zalo cho người mua, tự lưu trữ.</p></div>
+        <span class="jtag jtag-auto">🤖 Tự động</span>
+      </div>
+      <div class="journey-step">
+        <div class="journey-step-icon">📸</div>
+        <div class="journey-step-body"><strong>Lưu chứng từ chi phí mua vào</strong><p>Bạn chụp hóa đơn → AI OCR đọc, phân loại & lưu vào Document Vault.</p></div>
+        <span class="jtag jtag-collab">🤝 Bạn chụp, AI đọc</span>
+      </div>
+      <div class="journey-step">
+        <div class="journey-step-icon">📊</div>
+        <div class="journey-step-body"><strong>Lập tờ khai GTGT/TNCN (tháng/quý)</strong><p>Đến kỳ, hệ thống tự tổng hợp số liệu và điền sẵn toàn bộ tờ khai.</p></div>
+        <span class="jtag jtag-auto">🤖 Tự động</span>
+      </div>
+      <div class="journey-step">
+        <div class="journey-step-icon">✅</div>
+        <div class="journey-step-body"><strong>Duyệt & nộp tờ khai</strong><p>AI kiểm tra chéo, cảnh báo sai lệch. Bạn xem lại và bấm "Nộp" → hệ thống gửi qua eTax API.</p></div>
+        <span class="jtag jtag-collab">🤝 Bạn bấm nộp</span>
+      </div>
+      <div class="journey-step">
+        <div class="journey-step-icon">💳</div>
+        <div class="journey-step-body"><strong>Nộp tiền thuế</strong><p>App điền sẵn mã số thuế, số tiền, mã chương–tiểu mục → bạn thanh toán 1 chạm qua ngân hàng/ví (xem phân tích bên dưới).</p></div>
+        <span class="jtag jtag-collab">🤝 1 chạm</span>
+      </div>
+      <div class="journey-step">
+        <div class="journey-step-icon">🔔</div>
+        <div class="journey-step-body"><strong>Nhắc hạn thông minh</strong><p>Smart Reminder báo trước mọi hạn khai/nộp qua Zalo/Email/SMS — không bao giờ quên.</p></div>
+        <span class="jtag jtag-auto">🤖 Tự động</span>
+      </div>
+    </div>
+
+    <!-- Phase 3 -->
+    <div class="journey-phase">
+      <div class="journey-phase-head">
+        <div class="journey-phase-num">3</div>
+        <div>
+          <div class="journey-phase-title">Cuối năm — Quyết toán (1 lần/năm, ~15 phút)</div>
+          <div class="journey-phase-sub">Việc khó nhất với hộ kinh doanh — TaxFlow lo gần hết</div>
+        </div>
+      </div>
+      <div class="journey-step">
+        <div class="journey-step-icon">📚</div>
+        <div class="journey-step-body"><strong>Tổng hợp doanh thu & chi phí cả năm</strong><p>Hệ thống gom toàn bộ dữ liệu 12 tháng đã ghi nhận, không cần làm lại.</p></div>
+        <span class="jtag jtag-auto">🤖 Tự động</span>
+      </div>
+      <div class="journey-step">
+        <div class="journey-step-icon">🧮</div>
+        <div class="journey-step-body"><strong>Lập hồ sơ quyết toán thuế TNCN</strong><p>AI tính toán, điền tờ khai quyết toán, áp dụng giảm trừ gia cảnh/người phụ thuộc.</p></div>
+        <span class="jtag jtag-auto">🤖 Tự động</span>
+      </div>
+      <div class="journey-step">
+        <div class="journey-step-icon">↩️</div>
+        <div class="journey-step-body"><strong>Phát hiện hoàn thuế nếu nộp thừa</strong><p>AI tự rà soát, báo bạn nếu đủ điều kiện hoàn thuế; bạn quyết định có làm hồ sơ hoàn.</p></div>
+        <span class="jtag jtag-collab">🤝 Bạn quyết định</span>
+      </div>
+      <div class="journey-step">
+        <div class="journey-step-icon">📤</div>
+        <div class="journey-step-body"><strong>Nộp quyết toán</strong><p>Xem lại lần cuối → bấm nộp → hệ thống gửi qua eTax. Xong nghĩa vụ thuế cả năm.</p></div>
+        <span class="jtag jtag-collab">🤝 Bạn bấm nộp</span>
+      </div>
+      <div class="journey-step">
+        <div class="journey-step-icon">📈</div>
+        <div class="journey-step-body"><strong>Xuất báo cáo tài chính năm</strong><p>Dashboard tổng kết doanh thu, lợi nhuận, thuế đã nộp — dùng để vay vốn, ra quyết định kinh doanh.</p></div>
+        <span class="jtag jtag-auto">🤖 Tự động</span>
+      </div>
+    </div>
+
+    <div class="info-box info-green" style="margin-top:1.5rem;">
+      <strong style="color:#065f46;">⏱️ Tổng thời gian bạn bỏ ra:</strong>
+      <span style="color:#374151;font-size:0.9rem;"> ~10 phút thiết lập ban đầu + ~2–4 phút/ngày + ~15 phút cuối năm. So với <strong>nhiều ngày/tháng</strong> nếu tự làm thủ công, hoặc 12–36 triệu/năm thuê kế toán. Hệ thống tự động <strong>~80% công việc</strong>; bạn chỉ giữ quyền xác nhận & bấm nộp.</span>
+    </div>
+
+    <!-- PAYMENT GATEWAY DEEP DIVE -->
+    <button class="deep-toggle" data-closed-label="💳 Có nên tích hợp cổng thanh toán nộp thuế?" data-open-label="Thu gọn" onclick="toggleDeep(this)">
+      <span>💳</span><span class="dt-label">💳 Có nên tích hợp cổng thanh toán nộp thuế?</span><span class="chev">▼</span>
+    </button>
+    <div class="deep-panel">
+      <div class="deep-inner">
+        <h5>💳 Khuyến nghị: NÊN — nhưng theo lộ trình 3 bước, đừng làm hết ngày đầu</h5>
+        <p><strong>Vì sao có giá trị:</strong> "đóng vòng lặp" kê khai → nộp luôn trong 1 app. Hiện người dân khai một nơi, nộp một nơi (chuyển khoản Kho bạc thủ công, dễ điền sai mã chương–tiểu mục). Tích hợp thanh toán giúp <em>giữ chân</em>, tăng giá trị, và có thể tạo <em>dòng doanh thu phí giao dịch</em>.</p>
+        <p><strong>⚠️ Vì sao phải thận trọng:</strong> tiền thuế chảy vào <strong>Kho bạc Nhà nước</strong> — chỉ được đi qua kênh hợp pháp (ngân hàng liên kết eTax, NAPAS, hoặc trung gian thanh toán có giấy phép NHNN). <strong>Tuyệt đối không tự "cầm" tiền thuế của khách</strong> — rủi ro pháp lý & mất niềm tin.</p>
+        <table class="deep-table">
+          <thead><tr><th>Bước</th><th>Cách làm</th><th>Yêu cầu pháp lý</th><th>Giải quyết</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Bước 1 (MVP)</strong></td><td>Deep-link/redirect sang app ngân hàng & eTax, <em>điền sẵn</em> mã số thuế + số tiền + mã chương–mục</td><td>Không cầm tiền → không cần giấy phép</td><td>~80% pain ngay lập tức</td></tr>
+            <tr><td><strong>Bước 2</strong></td><td>Tích hợp NAPAS/VNPay/MoMo/ViettelPay qua API bill payment — nộp 1 chạm trong app</td><td>Hợp đồng với cổng thanh toán</td><td>Trải nghiệm "1 chạm" mượt</td></tr>
+            <tr><td><strong>Bước 3</strong></td><td>Hợp tác/xin giấy phép trung gian thanh toán → mở rộng sang BHXH, phí, lệ phí</td><td>Giấy phép trung gian thanh toán (NHNN)</td><td>Dòng doanh thu mới + dữ liệu dòng tiền cho lending</td></tr>
+          </tbody>
+        </table>
+        <div class="deep-callout">
+          ✅ <strong>Kết luận:</strong> Bắt đầu ngay từ <strong>Bước 1</strong> trong MVP (rẻ, không rào cản pháp lý, giải quyết phần lớn pain). Bước 2–3 mở dần khi đã có quy mô — và đây chính là <strong>bàn đạp sang fintech</strong> (tín dụng dựa trên hồ sơ thuế & dòng tiền), nâng tầm TaxFlow từ "app khai thuế" thành "nền tảng tài chính cho hộ kinh doanh".
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FORCE PUSH/PULL — MODULE 3.1 -->
+<section class="force-section" id="forces">
+  <div class="container">
+    <div class="section-tag" style="color:#34d399">Module 3.1 — Lực đẩy & Lực kéo</div>
+    <h2>Tại sao TaxFlow AI đúng thời điểm?</h2>
+    <p class="section-desc">Sự hội tụ của Lực đẩy tri thức-công nghệ và Lực kéo nhu cầu thị trường tạo cửa sổ cơ hội lý tưởng</p>
+    <div class="force-grid">
+      <div class="force-card push">
+        <div class="force-head">🚀 Lực đẩy tri thức (Technology Push)</div>
+        <div class="force-item">
+          <div class="force-item-icon">🤖</div>
+          <div class="force-item-text">
+            <strong>LLM & AI chi phí thấp</strong>
+            GPT-4o / Gemini API giờ đủ rẻ để xây AI Tax Engine ~$50–200/tháng cho 10.000 users
+          </div>
+        </div>
+        <div class="force-item">
+          <div class="force-item-icon">🧾</div>
+          <div class="force-item-text">
+            <strong>Hóa đơn điện tử bắt buộc từ 2022</strong>
+            Nghị định 123/2020 bắt buộc toàn bộ hộ kinh doanh dùng e-invoice — tạo nhu cầu công cụ hỗ trợ
+          </div>
+        </div>
+        <div class="force-item">
+          <div class="force-item-icon">📱</div>
+          <div class="force-item-text">
+            <strong>Smartphone & Internet phổ cập</strong>
+            77% dân số VN dùng smartphone, 73% internet — nền tảng mobile-first sẵn sàng tiếp cận mọi hộ kinh doanh
+          </div>
+        </div>
+        <div class="force-item">
+          <div class="force-item-icon">🔗</div>
+          <div class="force-item-text">
+            <strong>API thuế điện tử (eTax)</strong>
+            Tổng cục Thuế mở API nộp tờ khai trực tuyến — TaxFlow tích hợp trực tiếp, không cần qua trung gian
+          </div>
+        </div>
+        <div class="force-item">
+          <div class="force-item-icon">☁️</div>
+          <div class="force-item-text">
+            <strong>Cloud VN chi phí giảm 40%</strong>
+            Viettel Cloud / VNG Cloud cạnh tranh mạnh AWS/Azure — lưu trữ dữ liệu tài chính VN, chi phí hợp lý
+          </div>
+        </div>
+      </div>
+      <div class="force-card pull">
+        <div class="force-head">🧲 Lực kéo nhu cầu (Market Pull)</div>
+        <div class="force-item">
+          <div class="force-item-icon">📊</div>
+          <div class="force-item-text">
+            <strong>5,1 triệu hộ kinh doanh cá thể</strong>
+            Số hộ kinh doanh tăng 8%/năm, 85% chưa có phần mềm hỗ trợ thuế — TAM 3.000+ tỷ VNĐ/năm
+          </div>
+        </div>
+        <div class="force-item">
+          <div class="force-item-icon">🔍</div>
+          <div class="force-item-text">
+            <strong>2 triệu lượt search/tháng</strong>
+            "Cách kê khai thuế TNCN", "thuế freelancer", "mức thuế khoán" — demand organic khổng lồ chưa được phục vụ
+          </div>
+        </div>
+        <div class="force-item">
+          <div class="force-item-icon">😱</div>
+          <div class="force-item-text">
+            <strong>Chính sách thuế siết chặt 2024–2026</strong>
+            Tổng cục Thuế siết freelancer, KOL, thu nhập Grab/TikTok — nỗi sợ bị phạt tăng cao, cầu tư vấn bùng nổ
+          </div>
+        </div>
+        <div class="force-item">
+          <div class="force-item-icon">💼</div>
+          <div class="force-item-text">
+            <strong>Freelancer economy tăng mạnh</strong>
+            Post-COVID, 2+ triệu lao động tự do VN — nhóm hoàn toàn không có kế toán hỗ trợ, chi phí cao nhất
+          </div>
+        </div>
+        <div class="force-item">
+          <div class="force-item-icon">🏦</div>
+          <div class="force-item-text">
+            <strong>Ngân hàng yêu cầu minh bạch tài chính</strong>
+            Vay vốn SME đòi hỏi hồ sơ thuế sạch — TaxFlow giúp xây dựng lịch sử tín dụng qua compliance thuế
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button class="deep-toggle on-dark" data-closed-label="Số liệu chứng minh cửa sổ cơ hội" data-open-label="Thu gọn" onclick="toggleDeep(this)">
+      <span>📊</span><span class="dt-label">Số liệu chứng minh cửa sổ cơ hội</span><span class="chev">▼</span>
+    </button>
+    <div class="deep-panel on-dark-panel">
+      <div class="deep-inner">
+        <h5>📊 Hạ tầng số đã sẵn sàng cho mô hình mobile-first</h5>
+        <div class="deep-stats">
+          <div class="deep-stat"><div class="ds-num">79,8 triệu</div><div class="ds-label">người dùng internet = 78,8% dân số (1/2025)</div></div>
+          <div class="deep-stat"><div class="ds-num">&gt;84%</div><div class="ds-label">thiết bị là smartphone</div></div>
+          <div class="deep-stat"><div class="ds-num">126%</div><div class="ds-label">tỷ lệ kết nối di động/dân số</div></div>
+          <div class="deep-stat"><div class="ds-num">~53%</div><div class="ds-label">lực lượng lao động tri thức tham gia gig economy</div></div>
+        </div>
+        <h5>🌊 Sự hội tụ 3 lớp lực — "perfect storm"</h5>
+        <table class="deep-table">
+          <thead><tr><th>Lớp</th><th>Yếu tố</th><th>Tác động lên TaxFlow</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Chính sách</strong></td><td>Bỏ thuế khoán 2026 + NĐ 70/2025 hóa đơn + siết thuế creator (7%)</td><td>Tạo nhu cầu bắt buộc cho 5,2tr hộ — không thể né tránh</td></tr>
+            <tr><td><strong>Công nghệ</strong></td><td>LLM giá rẻ ($50–200/tháng/10k users) + cloud VN rẻ 40% + eTax API</td><td>Chi phí xây sản phẩm thấp chưa từng có → bootstrap khả thi</td></tr>
+            <tr><td><strong>Nhu cầu</strong></td><td>2tr search/tháng + freelancer economy bùng nổ + ngân hàng đòi hồ sơ sạch</td><td>Kênh acquisition organic rẻ, demand sẵn có</td></tr>
+          </tbody>
+        </table>
+        <div class="deep-callout">
+          ⏳ <strong>Cửa sổ cơ hội hẹp:</strong> 18–24 tháng tới là giai đoạn 5,2 triệu hộ thích nghi với kê khai thực tế. Ai chiếm được lòng tin & thói quen của họ trong giai đoạn này sẽ giữ được nhờ chi phí chuyển đổi cao. First-mover advantage là quyết định.
+        </div>
+        <p class="src-note">Nguồn: DataReportal / We Are Social 2025 (internet, smartphone); GSMA Intelligence 2025; Anphabe 2024 (gig economy); NQ 68-NQ/TW; NĐ 70/2025; Thanh Niên 2025 (thuế creator).</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- KSF -->
+<section class="ksf-section" id="ksf">
+  <div class="container">
+    <div class="section-tag">Yếu tố thành công cơ bản (KSF)</div>
+    <h2>Có sẵn & Cần xây dựng</h2>
+    <p class="section-desc">Đánh giá thực tế nguồn lực của nhóm theo ma trận KSF — xuất phát điểm mạnh, kế hoạch bổ sung rõ ràng</p>
+    <div class="ksf-grid">
+      <div class="ksf-side ksf-have">
+        <div class="ksf-head">✅ Đã có sẵn trong nhóm</div>
+        <div class="ksf-item">
+          <div class="ksf-icon">💼</div>
+          <div class="ksf-item-text">
+            <strong>Domain expertise thuế sâu (Chị Liên)</strong>
+            Kế toán viên thực hành 10+ năm, hiểu biểu thuế, thông tư, quy trình kê khai từng loại hộ kinh doanh
+          </div>
+        </div>
+        <div class="ksf-item">
+          <div class="ksf-icon">☁️</div>
+          <div class="ksf-item-text">
+            <strong>Cloud infrastructure & DevOps (Anh Hiếu)</strong>
+            Kinh nghiệm Viettel Cloud, có thể thiết kế hạ tầng multi-tenant secure cho dữ liệu tài chính
+          </div>
+        </div>
+        <div class="ksf-item">
+          <div class="ksf-icon">🔐</div>
+          <div class="ksf-item-text">
+            <strong>Security & access control (Thành Duy)</strong>
+            IT security chuyên sâu: mã hóa dữ liệu nhạy cảm, phân quyền, audit log đáp ứng Nghị định 13/2023
+          </div>
+        </div>
+        <div class="ksf-item">
+          <div class="ksf-icon">📈</div>
+          <div class="ksf-item-text">
+            <strong>Growth marketing & affiliate (Thanh Bình)</strong>
+            SEO, paid traffic, affiliate network — kênh acquisition hiệu quả cho SaaS B2C ở VN
+          </div>
+        </div>
+        <div class="ksf-item">
+          <div class="ksf-icon">🏪</div>
+          <div class="ksf-item-text">
+            <strong>Hiểu pain point SME thực tế (Minh Tân)</strong>
+            Quản lý khách sạn — biết rõ nỗi đau kế toán, thuế VAT phòng, hóa đơn của hộ kinh doanh
+          </div>
+        </div>
+        <div class="ksf-item">
+          <div class="ksf-icon">📷</div>
+          <div class="ksf-item-text">
+            <strong>Extension & integration tech (Chị Nhi)</strong>
+            Kinh nghiệm xây dựng browser extension, tích hợp API — phù hợp module import giao dịch từ ngân hàng
+          </div>
+        </div>
+      </div>
+      <div class="ksf-side ksf-need">
+        <div class="ksf-head">🔧 Cần xây dựng thêm</div>
+        <div class="ksf-item">
+          <div class="ksf-icon">🤖</div>
+          <div class="ksf-item-text">
+            <strong>AI/ML engineer chuyên thuế</strong>
+            Cần 1 senior AI engineer training model phân loại giao dịch, NLP cho tờ khai → tuyển hoặc outsource tháng 1–3
+          </div>
+        </div>
+        <div class="ksf-item">
+          <div class="ksf-icon">⚖️</div>
+          <div class="ksf-item-text">
+            <strong>Tư vấn pháp lý thuế chuyên sâu</strong>
+            Hợp tác với luật sư thuế để review edge cases, đảm bảo compliance — partner với công ty luật tháng 1
+          </div>
+        </div>
+        <div class="ksf-item">
+          <div class="ksf-icon">🤝</div>
+          <div class="ksf-item-text">
+            <strong>Partnership với VNPT/MISA e-invoice</strong>
+            Cần API access chính thức để xuất hóa đơn VAT hợp lệ → đàm phán reseller agreement tháng 2
+          </div>
+        </div>
+        <div class="ksf-item">
+          <div class="ksf-icon">💰</div>
+          <div class="ksf-item-text">
+            <strong>Seed funding ~500 triệu VNĐ</strong>
+            Cho 12 tháng đầu: AI infra, legal compliance, marketing. Nguồn: angel investor / startup grant / F&F round
+          </div>
+        </div>
+        <div class="ksf-item">
+          <div class="ksf-icon">📣</div>
+          <div class="ksf-item-text">
+            <strong>Community & trust building</strong>
+            Hộ kinh doanh tin tưởng phần mềm thuế chậm → cần testimonials, case study từ 50 early adopters tháng 3–6
+          </div>
+        </div>
+        <div class="ksf-item">
+          <div class="ksf-icon">🏛️</div>
+          <div class="ksf-item-text">
+            <strong>Quan hệ với Tổng cục Thuế</strong>
+            API eTax không có tài liệu công khai → cần kết nối qua Viettel (Anh Hiếu) hoặc đơn vị trung gian có phép
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button class="deep-toggle" data-closed-label="Lộ trình 12 tháng lấp khoảng trống KSF" data-open-label="Thu gọn" onclick="toggleDeep(this)">
+      <span>🗓️</span><span class="dt-label">Lộ trình 12 tháng lấp khoảng trống KSF</span><span class="chev">▼</span>
+    </button>
+    <div class="deep-panel">
+      <div class="deep-inner">
+        <h5>🗓️ Roadmap biến KSF "cần xây dựng" thành "đã có"</h5>
+        <table class="deep-table">
+          <thead><tr><th>Giai đoạn</th><th>Mục tiêu</th><th>KSF được lấp</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Tháng 1–2</strong></td><td>Tuyển AI engineer; ký tư vấn pháp lý thuế; gọi seed ~500tr</td><td>AI talent, Legal, Funding</td></tr>
+            <tr><td><strong>Tháng 2–3</strong></td><td>Reseller agreement VNPT/MISA e-invoice; tiếp cận eTax qua Viettel</td><td>API hóa đơn, API thuế</td></tr>
+            <tr><td><strong>Tháng 3–4</strong></td><td>Hoàn thiện MVP: AI kê khai 1 loại thuế + e-invoice basic</td><td>Sản phẩm lõi</td></tr>
+            <tr><td><strong>Tháng 4–6</strong></td><td>Pilot 100 hộ trong mạng lưới Chị Liên; thu 50 testimonials</td><td>Community & trust</td></tr>
+            <tr><td><strong>Tháng 6–12</strong></td><td>Launch public; scale qua SEO + affiliate kế toán viên</td><td>Growth engine vận hành</td></tr>
+          </tbody>
+        </table>
+        <div class="deep-callout">
+          💪 <strong>Điểm mạnh xuất phát:</strong> 6/6 KSF "đã có" được phủ bởi chính chuyên môn các thành viên — nhóm có thể xây MVP <strong>không cần thuê ngoài</strong> trong 4 tháng. Chỉ cần bổ sung 1 AI engineer + đối tác pháp lý/API. Đây là tỷ lệ "have vs need" rất khỏe cho một nhóm sáng lập.
+        </div>
+        <div class="deep-stats">
+          <div class="deep-stat"><div class="ds-num">~500 tr</div><div class="ds-label">seed funding cho 12 tháng đầu</div></div>
+          <div class="deep-stat"><div class="ds-num">4 tháng</div><div class="ds-label">đến MVP</div></div>
+          <div class="deep-stat"><div class="ds-num">100 hộ</div><div class="ds-label">pilot validate trước khi scale</div></div>
+          <div class="deep-stat"><div class="ds-num">6/6</div><div class="ds-label">KSF lõi đã có sẵn trong nhóm</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BMC -->
+<section class="bmc-section" id="bmc">
+  <div class="container">
+    <div class="bmc-dark">
+      <div class="section-tag">Module 4.2 — Business Model Canvas</div>
+      <h2 style="color:#fff;">Business Model Canvas</h2>
+      <p class="section-desc">9 ô BMC đầy đủ — mỗi ô là một giả định cần kiểm chứng theo Lean Startup</p>
+      <div class="bmc-grid">
+        <div class="bmc-cell bmc-partners">
+          <h4>🤝 Đối tác chính</h4>
+          <ul>
+            <li>VNPT e-invoice API</li>
+            <li>MISA e-invoice API</li>
+            <li>Viettel Cloud (hạ tầng)</li>
+            <li>Tổng cục Thuế (eTax API)</li>
+            <li>ViettelPay / MoMo (thanh toán)</li>
+            <li>Hội kế toán viên VN (VICA)</li>
+            <li>Kế toán viên freelance (reseller)</li>
+          </ul>
+        </div>
+        <div class="bmc-cell bmc-activities">
+          <h4>⚙️ Hoạt động chính</h4>
+          <ul>
+            <li>Phát triển AI Tax Engine</li>
+            <li>Duy trì compliance với luật thuế mới</li>
+            <li>Onboarding & customer success</li>
+            <li>Content marketing / SEO thuế</li>
+            <li>B2B2C qua kế toán viên</li>
+          </ul>
+        </div>
+        <div class="bmc-cell bmc-vp">
+          <h4>💎 Giá trị cốt lõi</h4>
+          <ul>
+            <li>Kê khai thuế đúng — 0 phạt</li>
+            <li>Tự động 90% thao tác</li>
+            <li>Hóa đơn VAT trong 1 phút</li>
+            <li>Tiết kiệm 2–5tr/năm vs kế toán thuê</li>
+            <li>Nhắc hạn thông minh — không quên</li>
+            <li>AI tư vấn thuế 24/7</li>
+            <li>Dữ liệu bảo mật, lưu trên cloud VN</li>
+          </ul>
+        </div>
+        <div class="bmc-cell bmc-relationships">
+          <h4>💬 Quan hệ KH</h4>
+          <ul>
+            <li>Self-serve onboarding</li>
+            <li>AI chatbot 24/7</li>
+            <li>Community forum</li>
+            <li>Webinar thuế hàng tháng</li>
+          </ul>
+        </div>
+        <div class="bmc-cell bmc-segments">
+          <h4>🎯 Phân khúc KH</h4>
+          <ul>
+            <li>Hộ kinh doanh cá thể VN</li>
+            <li>Freelancer / lao động tự do</li>
+            <li>Người bán hàng online</li>
+            <li>Streamer / KOL / creator</li>
+            <li>Nhân viên có thu nhập phụ</li>
+          </ul>
+        </div>
+        <div class="bmc-cell bmc-resources">
+          <h4>🔧 Nguồn lực</h4>
+          <ul>
+            <li>AI Tax Engine (IP core)</li>
+            <li>Domain expertise (Chị Liên)</li>
+            <li>Cloud infra (Anh Hiếu)</li>
+            <li>Security system (Thành Duy)</li>
+            <li>Dữ liệu thuế training set</li>
+          </ul>
+        </div>
+        <div class="bmc-cell bmc-channels">
+          <h4>📣 Kênh phân phối</h4>
+          <ul>
+            <li>SEO/Content (organic)</li>
+            <li>Affiliate kế toán viên</li>
+            <li>Zalo OA community</li>
+            <li>Facebook group hộ KD</li>
+            <li>App Store / Google Play</li>
+          </ul>
+        </div>
+        <div class="bmc-cell bmc-costs">
+          <h4>💰 Cơ cấu chi phí</h4>
+          <ul>
+            <li>AI/Cloud infra — ~25% revenue</li>
+            <li>Engineering team (3 người) — ~35% revenue</li>
+            <li>Legal & compliance — ~10% revenue</li>
+            <li>Marketing & acquisition — ~15% revenue</li>
+            <li>Customer support & ops — ~5% revenue</li>
+          </ul>
+        </div>
+        <div class="bmc-cell bmc-revenue">
+          <h4>💵 Dòng doanh thu</h4>
+          <ul>
+            <li>SaaS subscription (chính) — 99k–499k/tháng</li>
+            <li>Pay-per-filing — 15k/tờ khai cho free tier</li>
+            <li>E-invoice addon — 5k/hóa đơn vượt quota</li>
+            <li>B2B (kế toán viên resell) — 20% commission</li>
+            <li>AI Advisor premium — 199k/tháng</li>
+          </ul>
+        </div>
+      </div>
+
+      <button class="deep-toggle on-dark" data-closed-label="Phân tích 5 dòng doanh thu & cấu trúc chi phí" data-open-label="Thu gọn" onclick="toggleDeep(this)">
+        <span>💵</span><span class="dt-label">Phân tích 5 dòng doanh thu & cấu trúc chi phí</span><span class="chev">▼</span>
+      </button>
+      <div class="deep-panel on-dark-panel">
+        <div class="deep-inner">
+          <h5>💵 Mô hình đa dòng doanh thu — giảm phụ thuộc 1 nguồn</h5>
+          <table class="deep-table">
+            <thead><tr><th>Dòng doanh thu</th><th>Cơ chế</th><th>% doanh thu năm 3 (dự kiến)</th></tr></thead>
+            <tbody>
+              <tr><td><strong>SaaS subscription</strong></td><td>99k–499k/tháng theo gói</td><td>~70%</td></tr>
+              <tr><td><strong>Pay-per-filing</strong></td><td>15k/tờ khai cho user free tier</td><td>~8%</td></tr>
+              <tr><td><strong>E-invoice addon</strong></td><td>5k/hóa đơn vượt quota</td><td>~7%</td></tr>
+              <tr><td><strong>B2B2C kế toán viên</strong></td><td>Kế toán resell, 20% hoa hồng</td><td>~10%</td></tr>
+              <tr><td><strong>AI Advisor premium</strong></td><td>199k/tháng nâng cao</td><td>~5%</td></tr>
+            </tbody>
+          </table>
+          <h5>📉 Vì sao cấu trúc chi phí cho Gross Margin 70%</h5>
+          <ul>
+            <li><strong>Chi phí biến đổi cực thấp:</strong> AI/cloud chỉ ~25% doanh thu nhờ LLM rẻ + cloud VN</li>
+            <li><strong>Không chi phí hàng hóa:</strong> phần mềm thuần — scale 1.000 → 100.000 user gần như không tăng chi phí biên</li>
+            <li><strong>Acquisition rẻ:</strong> SEO organic + affiliate thay vì paid ads đắt đỏ</li>
+            <li>Chi phí lớn nhất là engineering (~35%) — cố định, giảm tỷ trọng khi scale</li>
+          </ul>
+          <div class="deep-callout">
+            🔁 <strong>Network effect trong BMC:</strong> Kế toán viên (đối thủ tiềm năng) trở thành <em>kênh phân phối</em> qua B2B2C — mỗi kế toán mang theo 20–50 khách hàng hộ kinh doanh. Càng nhiều hộ dùng → cộng đồng càng mạnh → SEO & referral càng rẻ → flywheel tăng trưởng.
+          </div>
+          <p class="src-note">Benchmark: Gross Margin SaaS điển hình 70–80%; LTV:CAC chuẩn ngành ≥3:1 (Vena, eaglerockcfo 2025). Tỷ trọng doanh thu là mô hình dự phóng nội bộ.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REVENUE -->
+<section class="revenue-section" id="revenue">
+  <div class="container">
+    <div class="section-tag">Khả năng sinh lời</div>
+    <h2>Mô hình định giá & Dự báo tài chính</h2>
+    <p class="section-desc">SaaS freemium — break-even tại 1.500 trả phí, ARR 18 tỷ ở năm 3 với 30.000 subscribers</p>
+    <div class="pricing-grid">
+      <div class="pricing-card">
+        <div class="pricing-tier">FREE — Cơ bản</div>
+        <div class="pricing-price">0đ</div>
+        <div class="pricing-unit">mãi mãi · 5 hóa đơn/tháng</div>
+        <ul class="pricing-features">
+          <li>Kê khai 1 loại thuế/quý</li>
+          <li>5 hóa đơn điện tử/tháng</li>
+          <li>Smart reminder cơ bản</li>
+          <li>Dashboard đơn giản</li>
+          <li>AI chatbot giới hạn 10 câu/ngày</li>
+        </ul>
+      </div>
+      <div class="pricing-card featured">
+        <div class="pricing-badge">PHỔ BIẾN NHẤT</div>
+        <div class="pricing-tier">PRO — Hộ kinh doanh</div>
+        <div class="pricing-price">299k</div>
+        <div class="pricing-unit">VNĐ / tháng · 50 hóa đơn</div>
+        <ul class="pricing-features">
+          <li>Tất cả tính năng Free</li>
+          <li>AI kê khai không giới hạn</li>
+          <li>50 hóa đơn điện tử/tháng</li>
+          <li>Smart reminder nâng cao</li>
+          <li>Import giao dịch ngân hàng</li>
+          <li>AI Advisor không giới hạn</li>
+          <li>Lưu trữ chứng từ 5 năm</li>
+        </ul>
+      </div>
+      <div class="pricing-card">
+        <div class="pricing-tier">BUSINESS — Hộ lớn & KOL</div>
+        <div class="pricing-price">499k</div>
+        <div class="pricing-unit">VNĐ / tháng · không giới hạn</div>
+        <ul class="pricing-features">
+          <li>Tất cả tính năng Pro</li>
+          <li>Hóa đơn không giới hạn</li>
+          <li>Multi-source income (3+ luồng)</li>
+          <li>Báo cáo tài chính nâng cao</li>
+          <li>Priority support 24/7</li>
+          <li>API access cho devs</li>
+        </ul>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;">
+      <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:12px;padding:1.5rem;text-align:center;">
+        <div style="font-size:1.8rem;font-weight:900;color:#065f46;">1.500</div>
+        <div style="font-size:0.82rem;color:#374151;margin-top:4px;">Subscribers break-even</div>
+      </div>
+      <div style="background:#eff6ff;border:1px solid #bfdbfe;border-radius:12px;padding:1.5rem;text-align:center;">
+        <div style="font-size:1.8rem;font-weight:900;color:#1d4ed8;">1,5 tỷ</div>
+        <div style="font-size:0.82rem;color:#374151;margin-top:4px;">ARR mục tiêu Năm 1</div>
+      </div>
+      <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:12px;padding:1.5rem;text-align:center;">
+        <div style="font-size:1.8rem;font-weight:900;color:#065f46;">18 tỷ</div>
+        <div style="font-size:0.82rem;color:#374151;margin-top:4px;">ARR mục tiêu Năm 3</div>
+      </div>
+      <div style="background:#fff7ed;border:1px solid #fed7aa;border-radius:12px;padding:1.5rem;text-align:center;">
+        <div style="font-size:1.8rem;font-weight:900;color:#c2410c;">70%</div>
+        <div style="font-size:0.82rem;color:#374151;margin-top:4px;">Gross Margin (SaaS)</div>
+      </div>
+    </div>
+    <div class="info-box info-green" style="margin-top:1.5rem;">
+      <strong style="color:#065f46;">📐 Unit Economics:</strong>
+      <span style="color:#374151;font-size:0.9rem;"> CAC ước tính ~200k/user (SEO + affiliate); LTV trung bình ~2,4 triệu (8 tháng retention × 299k). <strong>LTV:CAC = 12:1</strong> — mô hình cực kỳ hiệu quả vốn, phù hợp bootstrap giai đoạn đầu.</span>
+    </div>
+
+    <button class="deep-toggle" data-closed-label="Dự phóng tài chính 3 năm & kiểm chứng giả định" data-open-label="Thu gọn" onclick="toggleDeep(this)">
+      <span>📈</span><span class="dt-label">Dự phóng tài chính 3 năm & kiểm chứng giả định</span><span class="chev">▼</span>
+    </button>
+    <div class="deep-panel">
+      <div class="deep-inner">
+        <h5>📈 Mô hình tăng trưởng subscribers & doanh thu</h5>
+        <table class="deep-table">
+          <thead><tr><th>Chỉ số</th><th>Năm 1</th><th>Năm 2</th><th>Năm 3</th></tr></thead>
+          <tbody>
+            <tr><td>Người dùng free (cumulative)</td><td>20.000</td><td>120.000</td><td>400.000</td></tr>
+            <tr><td>Subscribers trả phí</td><td>2.500</td><td>11.000</td><td>30.000</td></tr>
+            <tr><td>Tỷ lệ free→paid</td><td>~7%</td><td>~9%</td><td>~7,5%</td></tr>
+            <tr><td>ARPU/tháng (blended)</td><td>~250k</td><td>~270k</td><td>~290k</td></tr>
+            <tr><td><strong>ARR</strong></td><td><strong>~1,5 tỷ</strong></td><td><strong>~7 tỷ</strong></td><td><strong>~18 tỷ</strong></td></tr>
+            <tr><td>Gross Margin</td><td>55%</td><td>65%</td><td>70%</td></tr>
+          </tbody>
+        </table>
+        <h5>🔬 Kiểm chứng giả định nhạy cảm nhất</h5>
+        <ul>
+          <li><strong>Conversion free→paid 7%:</strong> nằm trong khoảng chuẩn ngành (freemium ~5%, ngách high-intent 5–15%). Hộ kinh doanh là high-intent vì pain bắt buộc.</li>
+          <li><strong>LTV:CAC 12:1:</strong> phụ thuộc CAC organic thấp. Kịch bản thận trọng (CAC 400k qua paid) vẫn cho <strong>6:1</strong> — gấp đôi ngưỡng an toàn 3:1.</li>
+          <li><strong>Churn:</strong> mục tiêu &lt;4%/tháng. Tax compliance có tính "sticky" cao — dữ liệu 5 năm khóa người dùng lại.</li>
+        </ul>
+        <div class="deep-callout">
+          🎯 <strong>Break-even sớm:</strong> Chỉ cần <strong>1.500 subscribers</strong> (0,03% thị trường 5,2tr hộ) là hòa vốn vận hành. Đây là rào cản cực thấp so với quy mô thị trường — rủi ro tài chính được kiểm soát tốt.
+        </div>
+
+        <h5>👥 CAC — Chi phí mời 1 người dùng là bao nhiêu?</h5>
+        <p>Mô hình <strong>organic-led</strong> giữ CAC thấp — không "đốt tiền" quảng cáo:</p>
+        <table class="deep-table">
+          <thead><tr><th>Kênh</th><th>Tỷ trọng</th><th>CAC hiệu dụng / khách trả phí</th></tr></thead>
+          <tbody>
+            <tr><td>SEO / Content organic</td><td>~50%</td><td>~80–120k (chi phí nội dung phân bổ trên nhiều user)</td></tr>
+            <tr><td>Affiliate kế toán viên</td><td>~30%</td><td>20% hoa hồng — trả <strong>từ doanh thu</strong>, không cần vốn trước</td></tr>
+            <tr><td>Referral / cộng đồng</td><td>~20%</td><td>~gần 0đ</td></tr>
+            <tr><td><strong>Blended</strong></td><td>100%</td><td><strong>~150–250k / khách trả phí</strong> (≈15–20k / free user)</td></tr>
+          </tbody>
+        </table>
+        <p>Với LTV ~2,4 triệu → <strong>LTV:CAC ~12:1</strong>; kịch bản thận trọng (CAC 400k qua paid ads) vẫn đạt <strong>6:1</strong>, gấp đôi ngưỡng an toàn 3:1.</p>
+
+        <h5>💰 Năm 1: 1,5 tỷ có đủ bù chi phí không?</h5>
+        <p>Đủ bù <strong>chi phí vận hành</strong> — nhưng năm 1 mục tiêu là <em>hòa vốn + validate</em>, không phải lãi to. Lợi thế lớn: <strong>6 founder bootstrap</strong> (có công việc chính, góp sweat equity) nên năm 1 gần như không tốn lương thị trường.</p>
+        <table class="deep-table">
+          <thead><tr><th>Năm 1 (dòng tiền)</th><th>Giá trị</th></tr></thead>
+          <tbody>
+            <tr><td>Doanh thu</td><td>~1,5 tỷ</td></tr>
+            <tr><td>Cloud / AI (quy mô ~2.500 subs)</td><td>~300–400tr</td></tr>
+            <tr><td>1 AI engineer thuê ngoài</td><td>~360–480tr</td></tr>
+            <tr><td>Legal & compliance</td><td>~100–150tr</td></tr>
+            <tr><td>Marketing (chủ yếu content)</td><td>~200tr</td></tr>
+            <tr><td>Ops & support</td><td>~80tr</td></tr>
+            <tr><td><strong>Tổng chi tiền mặt</strong></td><td><strong>~1,1–1,3 tỷ</strong></td></tr>
+            <tr><td><strong>Kết quả</strong></td><td><strong>Hòa vốn vận hành → hơi dương; seed 500tr đệm giai đoạn ramp đầu năm</strong></td></tr>
+          </tbody>
+        </table>
+        <p>Lãi thực sự đến từ <strong>Năm 2–3</strong> khi scale (Gross Margin tăng 55% → 70%). Năm 1 không lãi to là <em>bình thường và đúng kế hoạch</em> với SaaS.</p>
+
+        <h5>🖥️ Phản biện: "44k user tốn 20 tỷ hạ tầng — giá phần cứng 2026 tăng 3–5x"?</h5>
+        <p>Đây là nhầm lẫn giữa <strong>CAPEX (mua máy chủ) và OPEX (thuê cloud)</strong>. TaxFlow là SaaS cloud-native — <strong>thuê tài nguyên theo mức dùng, KHÔNG mua phần cứng</strong>. Không hề có 20 tỷ capex; hạ tầng là chi phí biến đổi tăng dần theo số user và được trả từ chính doanh thu.</p>
+        <p><strong>Chi phí hạ tầng thật cho ~44k người dùng hoạt động:</strong></p>
+        <table class="deep-table">
+          <thead><tr><th>Hạng mục</th><th>Ước tính / tháng</th><th>Ghi chú</th></tr></thead>
+          <tbody>
+            <tr><td>Lưu trữ (DB + chứng từ ~22TB)</td><td>~$400–800</td><td>object storage, $0,02/GB</td></tr>
+            <tr><td>App servers + managed DB</td><td>~$2.000–4.000</td><td>auto-scale, Viettel/VNG Cloud (rẻ hơn AWS ~40%)</td></tr>
+            <tr><td>LLM API (AI Advisor)</td><td>~$500–2.000</td><td>model nhỏ + cache/RAG; đơn giá đang giảm nhanh</td></tr>
+            <tr><td>CDN, monitoring, backup</td><td>~$300–600</td><td></td></tr>
+            <tr><td><strong>Tổng</strong></td><td><strong>~$3.200–7.400/tháng</strong></td><td><strong>≈ 1–2,2 tỷ/năm — KHÔNG phải 20 tỷ</strong></td></tr>
+          </tbody>
+        </table>
+        <p>So với doanh thu: phần mềm thuế <strong>không nặng compute</strong> (session ~2–4 phút/ngày, tính toán bursty quanh hạn thuế). Chi phí hạ tầng chỉ chiếm <strong>1–2% doanh thu</strong> nếu 44k là khách trả phí (~150 tỷ/năm), hoặc ~10–15% nếu phần lớn là free user — vẫn giữ Gross Margin ~70%.</p>
+        <div class="deep-callout">
+          🛡️ <strong>Vì sao lạm phát phần cứng 2026 không đánh gục mô hình:</strong><br/>
+          • Giá RAM/phần cứng tăng chỉ hại bên <strong>MUA</strong> hardware — bên thuê cloud được provider hấp thụ rủi ro mua sắm ở quy mô lớn.<br/>
+          • Chi phí biên/user nhỏ xíu → dù cloud tăng 3–5x, một base ~$5k/tháng vẫn quản được & có thể chuyển vào giá bán.<br/>
+          • <strong>LLM API đang rẻ đi ~10x/năm</strong> nhờ tối ưu inference → bù thừa cho lạm phát phần cứng ở phần AI.<br/>
+          • Chi phí <strong>tăng cùng user (và doanh thu)</strong> — không bao giờ là khoản cam kết trả trước. Scale tới đâu trả tới đó.
+        </div>
+        <p class="src-note">Benchmark conversion & churn: userpilot, Vena 2025. Đơn giá cloud/LLM: bảng giá cloud object storage & LLM API 2025–2026; cloud VN rẻ hơn quốc tế ~40%. Dự phóng là mô hình nội bộ, sẽ hiệu chỉnh sau pilot 100 hộ (Build-Measure-Learn).</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LONG-TERM ROADMAP -->
+<section class="roadmap-section" id="roadmap">
+  <div class="container">
+    <div class="section-tag">Tầm nhìn dài hạn</div>
+    <h2>Lộ trình 5 năm & Chiến lược vốn</h2>
+    <p class="section-desc">
+      Từ MVP bootstrap đến nền tảng tài chính cho hộ kinh doanh. Mỗi giai đoạn có <strong style="color:#34d399">"metric cửa" (graduation metric)</strong> —
+      chỉ khi đạt mới gọi vốn & bước sang giai đoạn tiếp theo.
+    </p>
+    <div class="roadmap">
+
+      <div class="rm-phase">
+        <div class="rm-dot">🌱</div>
+        <div class="rm-card">
+          <div class="rm-period">Năm 0–1 · Giai đoạn 0</div>
+          <div class="rm-title">Bootstrap & MVP — Pilot validate</div>
+          <span class="rm-funding">💰 Vốn: tự góp + Seed ~500 triệu (F&F/angel)</span>
+          <ul class="rm-list">
+            <li>6 founder bootstrap, xây MVP trong 4 tháng (sweat equity)</li>
+            <li>Pilot 100 hộ → public launch; SEO/affiliate khởi động</li>
+            <li>Chuyển đổi pháp nhân sang <strong>Công ty Cổ phần</strong>, lập cap table & thỏa thuận vesting founder (4 năm, cliff 1 năm)</li>
+          </ul>
+          <div class="rm-gate">🚦 <strong>Cửa sang GĐ1:</strong> Pilot đạt Go (chính xác ≥95%, sẵn sàng trả ≥30%) · ≥2.500 subscribers · ARR ≥1,5 tỷ · churn &lt;5%/tháng</div>
+        </div>
+      </div>
+
+      <div class="rm-phase">
+        <div class="rm-dot">📈</div>
+        <div class="rm-card">
+          <div class="rm-period">Năm 1–2 · Giai đoạn 1</div>
+          <div class="rm-title">Tăng trưởng & Gọi vốn Seed/Angel</div>
+          <span class="rm-funding">💰 Gọi vốn Seed ~5–10 tỷ</span>
+          <ul class="rm-list">
+            <li>Tuyển team chính thức (AI, sales, CS); rời mô hình bootstrap</li>
+            <li>Scale marketing & mạng lưới kế toán viên affiliate toàn quốc</li>
+            <li>Thêm tính năng: import ngân hàng đa nguồn, AI Advisor nâng cao, gói Business</li>
+            <li>Lập <strong>ESOP</strong> giữ chân nhân tài</li>
+          </ul>
+          <div class="rm-gate">🚦 <strong>Cửa sang GĐ2:</strong> ARR ≥7 tỷ · ≥11.000 subscribers · Retention M3 ≥60% · LTV:CAC ≥4:1 · đơn vị kinh tế dương</div>
+        </div>
+      </div>
+
+      <div class="rm-phase">
+        <div class="rm-dot">🚀</div>
+        <div class="rm-card">
+          <div class="rm-period">Năm 2–3 · Giai đoạn 2</div>
+          <div class="rm-title">Scale toàn quốc & Series A</div>
+          <span class="rm-funding">💰 Gọi vốn Series A ~50–100 tỷ</span>
+          <ul class="rm-list">
+            <li>Phủ toàn quốc, dẫn đầu phân khúc hộ kinh doanh & freelancer</li>
+            <li>Mở tính năng liền kề: tích hợp cổng thanh toán (Bước 2–3), kế toán ESG, eKYC</li>
+            <li>Bắt đầu chấm điểm tín dụng dựa hồ sơ thuế — bàn đạp fintech</li>
+          </ul>
+          <div class="rm-gate">🚦 <strong>Cửa sang GĐ3:</strong> ARR ≥18 tỷ · ≥30.000 subscribers · hiện diện 63 tỉnh · Gross Margin ≥70% · NRR ≥110%</div>
+        </div>
+      </div>
+
+      <div class="rm-phase">
+        <div class="rm-dot">🌐</div>
+        <div class="rm-card">
+          <div class="rm-period">Năm 3–5 · Giai đoạn 3</div>
+          <div class="rm-title">Hệ sinh thái tài chính & Series B</div>
+          <span class="rm-funding">💰 Gọi vốn Series B ~200–500 tỷ</span>
+          <ul class="rm-list">
+            <li>Từ "app khai thuế" → <strong>nền tảng tài chính cho hộ kinh doanh</strong>: tín dụng, bảo hiểm, thanh toán</li>
+            <li>Sản phẩm liền kề: tài chính y tế/giáo dục cho chủ hộ, kế toán ESG cho SME</li>
+            <li>Cân nhắc mở rộng khu vực (Lào, Campuchia — mô hình thuế tương đồng)</li>
+          </ul>
+          <div class="rm-gate">🚦 <strong>Cửa sang GĐ4:</strong> ARR ≥100 tỷ · ≥150.000 khách trả phí · ≥2 dòng doanh thu fintech vận hành · dòng tiền dương bền vững</div>
+        </div>
+      </div>
+
+      <div class="rm-phase">
+        <div class="rm-dot">🏆</div>
+        <div class="rm-card">
+          <div class="rm-period">Năm 5+ · Giai đoạn 4</div>
+          <div class="rm-title">Exit — M&amp;A hoặc IPO</div>
+          <span class="rm-funding">💰 Thoái vốn / Niêm yết</span>
+          <ul class="rm-list">
+            <li><strong>Phương án A — M&amp;A:</strong> bán chiến lược cho MISA, ngân hàng, Viettel, hoặc tập đoàn fintech khu vực</li>
+            <li><strong>Phương án B — IPO:</strong> niêm yết UPCoM → HOSE khi đủ điều kiện lợi nhuận & quản trị</li>
+            <li>Nhà đầu tư & ESOP thực hiện quyền; founder hiện thực hóa giá trị</li>
+          </ul>
+          <div class="rm-gate">🎯 <strong>Tín hiệu sẵn sàng exit:</strong> vị thế dẫn đầu thị trường · tăng trưởng &amp; lợi nhuận ổn định 2–3 năm · quản trị minh bạch đạt chuẩn niêm yết</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- RISK -->
+<section class="risk-section" id="risk">
+  <div class="container">
+    <div class="section-tag">Giả định & Quản trị rủi ro</div>
+    <h2>Kế hoạch kiểm soát rủi ro</h2>
+    <p class="section-desc">Áp dụng Lean Startup: kiểm chứng giả định rủi ro cao nhất trước — Build-Measure-Learn nhanh nhất có thể</p>
+    <div style="overflow-x:auto;">
+      <table class="risk-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Giả định cần kiểm chứng</th>
+            <th>Rủi ro nếu sai</th>
+            <th>Mức độ</th>
+            <th>Kế hoạch kiểm soát</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>Hộ kinh doanh sẵn sàng trả 299k/tháng cho phần mềm thuế</td>
+            <td>Thị trường nhạy cảm giá hơn dự kiến → doanh thu thấp</td>
+            <td><span class="risk-level risk-high">Cao</span></td>
+            <td>Freemium mạnh để tạo habit trước khi upsell. Pilot 100 hộ trong mạng lưới của Chị Liên → đo conversion trước khi scale</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>AI Tax Engine tính toán đúng thuế ≥95% trường hợp</td>
+            <td>Sai thuế → KH bị phạt → mất tin tưởng, kiện tụng</td>
+            <td><span class="risk-level risk-high">Cao</span></td>
+            <td>Chị Liên review 100% output AI trong 3 tháng đầu. Disclaimer rõ ràng. Bảo hiểm trách nhiệm nghề nghiệp từ tháng 1</td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>Có thể tích hợp API Tổng cục Thuế / eTax hợp lệ</td>
+            <td>Không có API → chỉ export PDF, UX kém, giảm giá trị sản phẩm</td>
+            <td><span class="risk-level risk-high">Cao</span></td>
+            <td>Tiếp cận qua mối quan hệ Viettel của Anh Hiếu. Phương án B: tích hợp qua đơn vị trung gian được Tổng cục Thuế cấp phép</td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td>Kênh SEO/content tạo đủ organic traffic</td>
+            <td>CAC tăng cao nếu phải dùng paid ads → đơn vị kinh tế xấu</td>
+            <td><span class="risk-level risk-med">Trung bình</span></td>
+            <td>Thanh Bình bắt đầu content 6 tháng trước launch. Kênh affiliate kế toán viên làm primary channel. Zalo group community free</td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td>Luật thuế thay đổi không làm sản phẩm lỗi thời</td>
+            <td>Cập nhật chậm → sản phẩm sai luật, KH rời bỏ</td>
+            <td><span class="risk-level risk-med">Trung bình</span></td>
+            <td>Chị Liên là legal monitor thường trực. Alert system tự động theo dõi Cổng TTĐT Chính phủ / Tổng cục Thuế. SLA update trong 48h</td>
+          </tr>
+          <tr>
+            <td>6</td>
+            <td>Bảo mật dữ liệu tài chính đạt chuẩn Nghị định 13/2023</td>
+            <td>Lộ dữ liệu → mất tin tưởng hoàn toàn, xử phạt nặng</td>
+            <td><span class="risk-level risk-med">Trung bình</span></td>
+            <td>Thành Duy thiết kế security từ đầu. Audit bảo mật độc lập trước launch. Mã hóa AES-256, zero-knowledge architecture cho dữ liệu nhạy cảm</td>
+          </tr>
+          <tr>
+            <td>7</td>
+            <td>6 founder duy trì cam kết song song công việc chính</td>
+            <td>Tiến độ chậm, chất lượng không đồng đều, mâu thuẫn</td>
+            <td><span class="risk-level risk-low">Thấp</span></td>
+            <td>RACI rõ ràng ngay tuần 1. Sprint 2 tuần, weekly sync 30 phút. Ưu tiên MVP trong 4 tháng đầu — giới hạn scope nghiêm ngặt</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <button class="deep-toggle" data-closed-label="Thí nghiệm Lean Startup kiểm chứng từng giả định" data-open-label="Thu gọn" onclick="toggleDeep(this)">
+      <span>🧪</span><span class="dt-label">Thí nghiệm Lean Startup kiểm chứng từng giả định</span><span class="chev">▼</span>
+    </button>
+    <div class="deep-panel">
+      <div class="deep-inner">
+        <h5>🧪 Build–Measure–Learn: biến giả định rủi ro cao thành thí nghiệm rẻ</h5>
+        <p>Thay vì xây hết rồi mới biết đúng/sai, mỗi giả định rủi ro cao được kiểm chứng bằng một thí nghiệm chi phí thấp <em>trước khi</em> đầu tư lớn.</p>
+        <table class="deep-table">
+          <thead><tr><th>Giả định cần test</th><th>Thí nghiệm rẻ nhất</th><th>Chỉ số thành công (validated)</th></tr></thead>
+          <tbody>
+            <tr><td>Sẵn sàng trả 299k/tháng</td><td>Landing page + pre-order với 200 hộ trong mạng Chị Liên</td><td>≥10% để lại tiền cọc/đăng ký</td></tr>
+            <tr><td>AI tính thuế đúng ≥95%</td><td>Chị Liên đối chiếu thủ công 500 tờ khai AI sinh ra</td><td>Sai số &lt;5%, không có lỗi nghiêm trọng</td></tr>
+            <tr><td>Tích hợp được eTax API</td><td>Spike kỹ thuật 2 tuần qua quan hệ Viettel</td><td>Nộp thử thành công 1 tờ khai qua API</td></tr>
+            <tr><td>SEO tạo organic traffic</td><td>Đăng 20 bài "cách kê khai thuế" trước launch 6 tháng</td><td>≥10.000 visit/tháng tự nhiên</td></tr>
+          </tbody>
+        </table>
+
+        <h5>🎯 Pilot 100 hộ — Bộ chỉ số quyết định Go / No-Go (90 ngày)</h5>
+        <p>Pilot chạy <strong>90 ngày</strong> với 100 hộ trong mạng lưới Chị Liên (đa dạng: quán ăn, bán lẻ, dịch vụ, freelancer). Mỗi chỉ số có ngưỡng rõ ràng — quyết định dựa trên <strong>dữ liệu, không cảm tính</strong>.</p>
+        <table class="deep-table">
+          <thead><tr><th>Nhóm chỉ số</th><th>Định nghĩa đo lường</th><th>✅ Ngưỡng GO</th><th>⛔ Ngưỡng KILL</th></tr></thead>
+          <tbody>
+            <tr><td><strong>1. Độ chính xác (lõi)</strong></td><td>% tờ khai AI tính đúng (Chị Liên đối chiếu thủ công)</td><td>≥ 95%</td><td>&lt; 90%</td></tr>
+            <tr><td><strong>2. Activation</strong></td><td>% hộ hoàn thành onboarding & nộp ≥1 tờ khai qua app</td><td>≥ 70%</td><td>&lt; 40%</td></tr>
+            <tr><td><strong>3. Retention M3</strong></td><td>% hộ còn hoạt động sau 3 tháng</td><td>≥ 60%</td><td>&lt; 35%</td></tr>
+            <tr><td><strong>4. Sẵn sàng trả phí</strong></td><td>% hộ chuyển free→paid (hoặc cam kết trả 299k)</td><td>≥ 30%</td><td>&lt; 15%</td></tr>
+            <tr><td><strong>5. Tiết kiệm thời gian</strong></td><td>% thời gian kê khai giảm so với làm thủ công</td><td>≥ 70%</td><td>&lt; 40%</td></tr>
+            <tr><td><strong>6. Hài lòng (NPS)</strong></td><td>Net Promoter Score — mức độ sẵn sàng giới thiệu</td><td>≥ 40</td><td>&lt; 10</td></tr>
+            <tr><td><strong>7. Compliance</strong></td><td>Số hộ bị phạt trễ/sai do lỗi sản phẩm</td><td>0</td><td>≥ 1 lỗi nghiêm trọng</td></tr>
+            <tr><td><strong>8. Chi phí phục vụ</strong></td><td>Số giờ support / hộ / tháng (đo khả năng scale)</td><td>&lt; 0,5h</td><td>&gt; 2h</td></tr>
+          </tbody>
+        </table>
+        <p><strong>⭐ North Star Metric:</strong> "% hộ nộp tờ khai <em>đúng hạn & đúng số</em> mà không cần kế toán" — đo trực tiếp lời hứa cốt lõi của sản phẩm.</p>
+        <div class="deep-callout">
+          <strong>🚦 Quy tắc quyết định sau 90 ngày:</strong><br/>
+          🟢 <strong>GO (scale):</strong> 3 chỉ số lõi — Độ chính xác + Sẵn sàng trả + Retention M3 — đều đạt ngưỡng GO → gọi vốn seed & launch public.<br/>
+          🟡 <strong>PIVOT:</strong> Engagement/Activation cao nhưng Sẵn sàng trả thấp → điều chỉnh giá & cơ cấu gói (freemium sâu hơn, pay-per-filing) rồi test lại 1 chu kỳ.<br/>
+          🔴 <strong>KILL / rebuild:</strong> Độ chính xác &lt; 90% → DỪNG, sửa AI Tax Engine trước khi đi tiếp. Tuyệt đối không scale một sản phẩm tính sai thuế.
+        </div>
+        <p>Phân biệt <strong>leading indicators</strong> (Activation, thời gian dùng, NPS — báo sớm) vs <strong>lagging indicators</strong> (Retention M3, % trả phí, compliance — xác nhận muộn nhưng quyết định) để vừa phản ứng nhanh vừa kết luận chắc chắn.</p>
+
+        <h5>🛡️ Bảo mật là rủi ro sống còn — xử lý từ đầu</h5>
+        <ul>
+          <li>Tuân thủ <strong>Nghị định 13/2023</strong> về bảo vệ dữ liệu cá nhân (Thành Duy phụ trách)</li>
+          <li>Mã hóa AES-256, zero-knowledge cho dữ liệu nhạy cảm, audit bảo mật độc lập trước launch</li>
+          <li>Bảo hiểm trách nhiệm nghề nghiệp cho rủi ro AI tính sai thuế</li>
+        </ul>
+        <div class="deep-callout">
+          ⚖️ <strong>Triết lý quản trị rủi ro:</strong> 3 giả định "Cao" (giá, độ chính xác AI, API thuế) được test <em>trong 4 tháng MVP</em> với chi phí tối thiểu. Nếu một giả định fail → pivot sớm thay vì cháy vốn. Đây chính là tinh thần Lean Startup: <strong>thất bại rẻ, học nhanh</strong>.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- THEORY MAPPING -->
+<section class="theory-section" id="theory">
+  <div class="container">
+    <div class="section-tag" style="color:var(--gold)">Nền tảng lý thuyết ETR601</div>
+    <h2>Liên kết với bài giảng</h2>
+    <p class="section-desc">TaxFlow AI áp dụng trực tiếp toàn bộ framework được giảng dạy trong khóa học</p>
+    <div class="theory-grid">
+      <div class="theory-card">
+        <div class="t-module">Module 1</div>
+        <h4>10 Loại hình ĐMST</h4>
+        <p>TaxFlow đổi mới theo Loại 2 (Network), 5 (Product Performance), 9 (Brand), 10 (Customer Engagement) — 4/10 loại hình, tập trung vào impact cao nhất theo nghiên cứu Doblin</p>
+      </div>
+      <div class="theory-card">
+        <div class="t-module">Module 2.2</div>
+        <h4>Value Proposition Canvas</h4>
+        <p>Customer Jobs (kê khai thuế đúng hạn) / Pains (phạt, tốn kém, phức tạp) / Gains (tự động, tiết kiệm, tự tin) → map 1-1 với 6 tính năng TaxFlow AI</p>
+      </div>
+      <div class="theory-card">
+        <div class="t-module">Module 3.1</div>
+        <h4>Lực đẩy + Lực kéo</h4>
+        <p>Push: LLM giá rẻ + e-invoice bắt buộc + eTax API. Pull: 5,1tr hộ kinh doanh + chính sách thuế siết chặt 2024–2026 + freelancer economy tăng mạnh</p>
+      </div>
+      <div class="theory-card">
+        <div class="t-module">Module 4.1</div>
+        <h4>KSF & Risk Matrix</h4>
+        <p>6 KSF có sẵn (domain, cloud, security, marketing, SME insight, integration) + 6 KSF cần xây dựng (AI engineer, legal, VNPT API, funding, community, eTax API). Ma trận rủi ro 7 giả định</p>
+      </div>
+      <div class="theory-card">
+        <div class="t-module">Module 4.2</div>
+        <h4>Business Model Canvas</h4>
+        <p>9 ô BMC đầy đủ. Revenue model: SaaS freemium + pay-per-filing + e-invoice addon + B2B2C qua kế toán viên. Break-even 1.500 subscribers, Gross Margin 70%</p>
+      </div>
+      <div class="theory-card">
+        <div class="t-module">Module 5</div>
+        <h4>Lean Startup + AISM</h4>
+        <p>MVP: AI kê khai 1 loại thuế + e-invoice basic → pilot 100 hộ (mạng lưới Chị Liên) → đo retention → scale. AISM: AI-powered Design Thinking cho tax UX + GenAI tax knowledge platform</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section id="team" style="background:#fff;">
+  <div class="container">
+    <div class="section-tag">Đội ngũ sáng lập</div>
+    <h2>6 chuyên gia — 6 góc nhìn<br/>1 sản phẩm giải quyết nỗi đau thật</h2>
+    <p class="section-desc">Chị Liên là domain expert dẫn dắt — mỗi thành viên khác đóng góp một chuyên môn không thể thiếu</p>
+    <div class="team-grid">
+      <div class="team-card">
+        <div class="team-icon" style="background:#f0fdf4;">💼</div>
+        <div class="team-name">Chị Liên</div>
+        <div class="team-role">Kế toán · Thuế · Đào tạo kế toán căn bản</div>
+        <div class="team-contrib">CEO + Domain Expert chính</div>
+      </div>
+      <div class="team-card">
+        <div class="team-icon" style="background:#fce7f3;">📈</div>
+        <div class="team-name">Thanh Bình</div>
+        <div class="team-role">Global Affiliate Marketing · Fashion · Beauty</div>
+        <div class="team-contrib">CMO — Growth & Acquisition</div>
+      </div>
+      <div class="team-card">
+        <div class="team-icon" style="background:#ecfdf5;">🏪</div>
+        <div class="team-name">Minh Tân</div>
+        <div class="team-role">Khách sạn cao cấp · SME Operations</div>
+        <div class="team-contrib">CPO — SME User Insights</div>
+      </div>
+      <div class="team-card">
+        <div class="team-icon" style="background:#eff6ff;">☁️</div>
+        <div class="team-name">Anh Hiếu</div>
+        <div class="team-role">Viettel · Cloud Infrastructure</div>
+        <div class="team-contrib">CTO — Cloud & Infrastructure</div>
+      </div>
+      <div class="team-card">
+        <div class="team-icon" style="background:#f5f3ff;">📷</div>
+        <div class="team-name">Chị Nhi</div>
+        <div class="team-role">Công ty Nhật · Extension · Integration</div>
+        <div class="team-contrib">Tech Lead — API & Integrations</div>
+      </div>
+      <div class="team-card">
+        <div class="team-icon" style="background:#fff1f2;">🔐</div>
+        <div class="team-name">Thành Duy</div>
+        <div class="team-role">IT Security · Access Control · NGO</div>
+        <div class="team-contrib">CSO — Security & Compliance</div>
+      </div>
+    </div>
+    <div class="info-box info-green" style="margin-top:2rem;">
+      <strong style="color:#065f46;">🎯 Lợi thế đội ngũ:</strong>
+      <span style="color:#374151;font-size:0.9rem;"> TaxFlow AI có <strong>domain expert kế toán thuế thực hành</strong> (Chị Liên) đứng sau mọi quyết định sản phẩm — đây là lợi thế không thể sao chép. Kết hợp với cloud tech (Anh Hiếu), security (Thành Duy) và growth marketing (Thanh Bình), nhóm có đủ năng lực xây MVP trong 4 tháng không cần thuê ngoài.</span>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Tax<span>Flow</span> AI</div>
+  <p style="margin-bottom:0.5rem;">Dự án khởi nghiệp được chọn · ETR601.22 · SEM40HN · FSB — FPT School of Business</p>
+  <p>Môn học: Khởi nghiệp và Đổi mới Sáng tạo trong Kỷ nguyên AI · Giảng viên: Dr. Phạm Quang Ngọc</p>
+  <div style="display:flex;gap:1.5rem;justify-content:center;margin-top:1.5rem;">
+    <a href="/" style="color:rgba(255,255,255,0.5);text-decoration:none;font-size:0.82rem;">🏨 OmniStay AI</a>
+    <a href="/taxflow" style="color:#34d399;text-decoration:none;font-size:0.82rem;font-weight:600;">🧾 TaxFlow AI</a>
+    <a href="/eldercare" style="color:rgba(255,255,255,0.5);text-decoration:none;font-size:0.82rem;">👵 ElderCare VN</a>
+    <a href="/ideas" style="color:rgba(255,255,255,0.5);text-decoration:none;font-size:0.82rem;">💡 Ý tưởng</a>
+  </div>
+  <p style="margin-top:1rem;font-size:0.72rem;opacity:0.5;">© 2026 TaxFlow AI · startup.sem40hn.asia/taxflow</p>
+</footer>
+
+<script>
+  // Section-level deep dive
+  function toggleDeep(btn) {
+    const panel = btn.nextElementSibling;
+    const open = panel.classList.toggle('open');
+    btn.classList.toggle('active', open);
+    const label = btn.querySelector('.dt-label');
+    if (label) label.textContent = open ? btn.dataset.openLabel || 'Thu gọn' : btn.dataset.closedLabel || 'Xem chi tiết';
+  }
+  // Card-level expand (problem & module cards)
+  function toggleCard(card) {
+    const detail = card.querySelector('.card-detail');
+    if (!detail) return;
+    const open = detail.classList.toggle('open');
+    card.classList.toggle('expanded', open);
+  }
+</script>
+</body>
+</html>

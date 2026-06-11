@@ -1,0 +1,1035 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ElderCare VN — App Demo (clickable prototype)</title>
+  <meta name="description" content="App demo tương tác ElderCare VN — clickable prototype 5 trụ cột: Tổng quan, Chăm sóc, Khám, Tài chính, Hồ sơ bố mẹ + mô phỏng cảnh báo té ngã. Dự án ETR601 SEM40HN." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --primary: #1a1a2e;
+      --care: #0d9488;
+      --care-light: #2dd4bf;
+      --care-bright: #5eead4;
+      --coral: #fb7185;
+      --gold: #f5a623;
+      --light: #f6fbfa;
+      --muted: #6b7280;
+      --border: #e5e7eb;
+      --ok: #10b981;
+      --warn: #f59e0b;
+      --danger: #ef4444;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #0d1b2a 0%, #1a1a2e 45%, #0d2b29 100%);
+      background-attachment: fixed;
+      color: #fff;
+      min-height: 100vh;
+      line-height: 1.5;
+    }
+
+    /* TOP BAR (web wrapper nav) */
+    .topbar {
+      position: sticky; top: 0; z-index: 50;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0.85rem 1.5rem;
+      background: rgba(13,27,42,0.6);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .back-link {
+      color: rgba(255,255,255,0.85); text-decoration: none;
+      font-size: 0.85rem; font-weight: 600;
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      padding: 6px 12px; border-radius: 8px;
+      border: 1px solid rgba(255,255,255,0.14);
+      transition: all .2s;
+    }
+    .back-link:hover { background: rgba(255,255,255,0.08); }
+    .topbar-badge {
+      background: rgba(13,148,136,0.18); color: var(--care-bright);
+      border: 1px solid rgba(45,212,191,0.35);
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.5px;
+      padding: 4px 12px; border-radius: 99px;
+    }
+
+    /* STAGE LAYOUT */
+    .stage {
+      display: flex; align-items: center; justify-content: center;
+      gap: 3rem; flex-wrap: wrap;
+      padding: 2.5rem 1.5rem 3rem;
+      max-width: 1200px; margin: 0 auto;
+    }
+    .marketing {
+      flex: 1 1 280px; max-width: 360px;
+    }
+    .marketing .mk-tag {
+      display: inline-block;
+      background: rgba(13,148,136,0.15);
+      border: 1px solid rgba(13,148,136,0.4);
+      color: var(--care-bright); font-size: 0.72rem; font-weight: 700;
+      padding: 5px 14px; border-radius: 99px;
+      letter-spacing: 1px; text-transform: uppercase; margin-bottom: 1.25rem;
+    }
+    .marketing h1 {
+      font-size: 2rem; font-weight: 900; letter-spacing: -1px;
+      line-height: 1.1; margin-bottom: 0.75rem;
+    }
+    .marketing h1 span { color: var(--care-light); }
+    .marketing .mk-sub { color: rgba(255,255,255,0.6); font-size: 0.95rem; margin-bottom: 1.5rem; }
+    .mk-caption {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-left: 3px solid var(--care);
+      border-radius: 10px; padding: 0.9rem 1.1rem; margin-bottom: 1rem;
+      transition: all .3s;
+    }
+    .mk-caption .mc-title { font-size: 0.9rem; font-weight: 700; color: #fff; margin-bottom: 0.2rem; }
+    .mk-caption .mc-desc { font-size: 0.8rem; color: rgba(255,255,255,0.6); line-height: 1.5; }
+    .mk-hint {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.78rem; color: rgba(255,255,255,0.55); margin-top: 0.5rem;
+    }
+    .mk-mock-badge {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      background: rgba(245,166,35,0.12); border: 1px solid rgba(245,166,35,0.35);
+      color: var(--gold); font-size: 0.72rem; font-weight: 600;
+      padding: 4px 12px; border-radius: 99px; margin-top: 1rem;
+    }
+
+    /* PHONE FRAME */
+    .phone {
+      flex: 0 0 auto;
+      width: 390px; height: 800px;
+      background: #0a0a14;
+      border-radius: 48px;
+      padding: 12px;
+      box-shadow: 0 40px 80px rgba(0,0,0,0.55), 0 0 0 2px rgba(255,255,255,0.06);
+      position: relative;
+    }
+    .phone-screen {
+      position: relative;
+      width: 100%; height: 100%;
+      background: var(--light);
+      border-radius: 38px;
+      overflow: hidden;
+      display: flex; flex-direction: column;
+      color: var(--primary);
+    }
+    /* dynamic island */
+    .island {
+      position: absolute; top: 10px; left: 50%; transform: translateX(-50%);
+      width: 110px; height: 30px; background: #0a0a14; border-radius: 99px; z-index: 30;
+    }
+    /* status bar */
+    .statusbar {
+      height: 44px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 1.4rem; font-size: 0.78rem; font-weight: 700; color: var(--primary);
+    }
+
+    /* APP HEADER */
+    .app-header {
+      flex-shrink: 0;
+      background: linear-gradient(135deg, var(--care) 0%, #0f766e 100%);
+      color: #fff; padding: 0.6rem 1.1rem 1rem;
+      display: flex; align-items: center; gap: 0.7rem;
+    }
+    .app-avatar {
+      width: 42px; height: 42px; border-radius: 50%;
+      background: rgba(255,255,255,0.22); flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center; font-size: 1.3rem;
+    }
+    .app-header .hi { font-size: 0.95rem; font-weight: 800; line-height: 1.2; }
+    .app-header .sub { font-size: 0.72rem; color: rgba(255,255,255,0.85); }
+    .bell {
+      margin-left: auto; position: relative; font-size: 1.25rem; cursor: pointer;
+      width: 38px; height: 38px; border-radius: 50%;
+      background: rgba(255,255,255,0.15);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .bell-badge {
+      position: absolute; top: -2px; right: -2px;
+      background: var(--coral); color: #fff;
+      font-size: 0.6rem; font-weight: 800;
+      min-width: 16px; height: 16px; border-radius: 99px;
+      display: flex; align-items: center; justify-content: center; padding: 0 4px;
+      border: 2px solid #0f766e;
+    }
+
+    /* VIEWPORT (scrollable screens) */
+    .viewport {
+      flex: 1; overflow-y: auto; overflow-x: hidden;
+      -webkit-overflow-scrolling: touch;
+      position: relative;
+    }
+    .viewport::-webkit-scrollbar { width: 0; }
+    .screen { display: none; padding: 1rem 1rem 1.5rem; }
+    .screen.active { display: block; animation: fade .25s ease; }
+    @keyframes fade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+
+    /* CARDS / COMPONENTS */
+    .card {
+      background: #fff; border: 1px solid var(--border);
+      border-radius: 16px; padding: 1rem; margin-bottom: 0.85rem;
+    }
+    .card-title {
+      font-size: 0.7rem; font-weight: 800; letter-spacing: 1px;
+      text-transform: uppercase; color: var(--muted); margin-bottom: 0.7rem;
+      display: flex; align-items: center; gap: 0.4rem;
+    }
+    .status-hero {
+      background: linear-gradient(135deg, #ecfdf5, #f0fdfa);
+      border: 1px solid #a7f3d0;
+      border-radius: 18px; padding: 1.15rem; margin-bottom: 0.85rem;
+      display: flex; align-items: center; gap: 0.85rem;
+    }
+    .status-hero .sh-emoji {
+      width: 52px; height: 52px; border-radius: 50%;
+      background: #d1fae5; display: flex; align-items: center; justify-content: center;
+      font-size: 1.8rem; flex-shrink: 0;
+    }
+    .status-hero .sh-title { font-size: 1.15rem; font-weight: 900; color: #047857; }
+    .status-hero .sh-sub { font-size: 0.76rem; color: #059669; }
+
+    /* vitals grid */
+    .vitals { display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; }
+    .vital {
+      background: #fff; border: 1px solid var(--border);
+      border-radius: 12px; padding: 0.7rem 0.8rem;
+      position: relative;
+    }
+    .vital .v-dot {
+      position: absolute; top: 0.7rem; right: 0.7rem;
+      width: 9px; height: 9px; border-radius: 50%;
+    }
+    .v-dot.ok { background: var(--ok); }
+    .v-dot.warn { background: var(--warn); }
+    .vital .v-icon { font-size: 1rem; }
+    .vital .v-num { font-size: 1.25rem; font-weight: 900; color: var(--primary); line-height: 1.1; margin-top: 0.2rem; }
+    .vital .v-label { font-size: 0.68rem; color: var(--muted); }
+    .vital .v-unit { font-size: 0.72rem; font-weight: 600; color: var(--muted); }
+
+    /* alert list */
+    .alert-row {
+      display: flex; align-items: flex-start; gap: 0.6rem;
+      padding: 0.55rem 0; border-bottom: 1px solid #f1f5f4; font-size: 0.82rem;
+    }
+    .alert-row:last-child { border-bottom: none; }
+    .alert-row .a-ico { flex-shrink: 0; font-size: 0.95rem; }
+    .alert-row .a-time { color: var(--muted); font-size: 0.72rem; }
+    .alert-row.warn .a-txt { color: #b45309; }
+    .alert-row.ok .a-txt { color: #047857; }
+
+    /* schedule */
+    .sched-row {
+      display: flex; align-items: center; gap: 0.6rem;
+      padding: 0.55rem 0; border-bottom: 1px solid #f1f5f4; font-size: 0.82rem;
+    }
+    .sched-row:last-child { border-bottom: none; }
+    .sched-ico {
+      width: 34px; height: 34px; border-radius: 10px; flex-shrink: 0;
+      background: #f0fdfa; display: flex; align-items: center; justify-content: center; font-size: 1rem;
+    }
+    .sched-row .s-main { font-weight: 600; }
+    .sched-row .s-sub { font-size: 0.72rem; color: var(--muted); }
+
+    /* quick actions */
+    .quick-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; }
+    .quick-btn {
+      border: 1px solid var(--border); background: #fff;
+      border-radius: 14px; padding: 0.85rem 0.6rem;
+      font-family: inherit; font-size: 0.8rem; font-weight: 700; color: var(--primary);
+      cursor: pointer; text-align: center; transition: all .15s;
+      display: flex; flex-direction: column; align-items: center; gap: 0.35rem;
+    }
+    .quick-btn:active { transform: scale(0.96); }
+    .quick-btn .qb-ico { font-size: 1.4rem; }
+    .quick-btn.danger { background: #fef2f2; border-color: #fecaca; color: var(--danger); }
+
+    /* buttons */
+    .btn {
+      font-family: inherit; cursor: pointer; border: none;
+      border-radius: 12px; font-weight: 700; font-size: 0.85rem;
+      padding: 0.7rem 1rem; transition: all .15s; width: 100%;
+    }
+    .btn:active { transform: scale(0.97); }
+    .btn-primary { background: var(--care); color: #fff; }
+    .btn-outline { background: #fff; color: var(--care); border: 1.5px solid var(--care); }
+    .btn-ghost { background: #f0fdfa; color: var(--care); }
+    .btn-danger { background: var(--danger); color: #fff; }
+    .btn-sm { padding: 0.5rem 0.9rem; font-size: 0.78rem; width: auto; }
+
+    /* sub tabs */
+    .subtabs { display: flex; gap: 0.4rem; margin-bottom: 0.85rem; background: #eef2f1; padding: 4px; border-radius: 12px; }
+    .subtab {
+      flex: 1; text-align: center; padding: 0.5rem; border-radius: 9px;
+      font-size: 0.8rem; font-weight: 700; color: var(--muted); cursor: pointer; transition: all .15s;
+    }
+    .subtab.active { background: #fff; color: var(--care); box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
+
+    /* person card (caregiver / doctor) */
+    .person {
+      display: flex; align-items: center; gap: 0.75rem;
+    }
+    .person-avatar {
+      width: 50px; height: 50px; border-radius: 14px; flex-shrink: 0;
+      background: #f0fdfa; display: flex; align-items: center; justify-content: center; font-size: 1.7rem;
+    }
+    .person .p-name { font-weight: 800; font-size: 0.92rem; display: flex; align-items: center; gap: 0.35rem; }
+    .person .p-meta { font-size: 0.74rem; color: var(--muted); }
+    .verify-chip {
+      background: #ecfdf5; color: #047857; font-size: 0.64rem; font-weight: 800;
+      padding: 1px 7px; border-radius: 99px; border: 1px solid #a7f3d0;
+    }
+    .skill-chip {
+      display: inline-block; background: #f0fdfa; color: #0f766e;
+      font-size: 0.68rem; font-weight: 600; padding: 3px 9px;
+      border-radius: 99px; margin: 0.3rem 0.3rem 0 0;
+    }
+    .star { color: var(--gold); font-weight: 800; }
+
+    /* timeline */
+    .timeline { margin-top: 0.6rem; display: none; }
+    .timeline.open { display: block; }
+    .tl-row { display: flex; gap: 0.7rem; padding: 0.3rem 0; }
+    .tl-time { font-size: 0.72rem; font-weight: 800; color: var(--care); min-width: 42px; }
+    .tl-txt { font-size: 0.8rem; color: #374151; }
+
+    /* mini chat */
+    .chat-box {
+      background: #f8fafa; border: 1px solid var(--border);
+      border-radius: 14px; padding: 0.85rem; margin-bottom: 0.85rem;
+      max-height: 230px; overflow-y: auto;
+    }
+    .bubble {
+      max-width: 82%; padding: 0.55rem 0.8rem; border-radius: 14px;
+      font-size: 0.82rem; margin-bottom: 0.5rem; line-height: 1.45; animation: fade .25s ease;
+    }
+    .bubble.bot { background: #fff; border: 1px solid var(--border); border-bottom-left-radius: 4px; }
+    .bubble.user { background: var(--care); color: #fff; margin-left: auto; border-bottom-right-radius: 4px; }
+    .chip-row { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .chip {
+      background: #fff; border: 1.5px solid var(--care); color: var(--care);
+      font-family: inherit; font-size: 0.78rem; font-weight: 700;
+      padding: 0.4rem 0.85rem; border-radius: 99px; cursor: pointer; transition: all .15s;
+    }
+    .chip:active { transform: scale(0.95); }
+    .chip.dim { opacity: 0.45; }
+
+    /* progress bar */
+    .progress { height: 8px; background: #e5e7eb; border-radius: 99px; overflow: hidden; margin: 0.5rem 0; }
+    .progress > i { display: block; height: 100%; background: linear-gradient(90deg, var(--care), var(--care-light)); border-radius: 99px; }
+
+    /* device toggle */
+    .device-row {
+      display: flex; align-items: center; gap: 0.7rem;
+      padding: 0.65rem 0; border-bottom: 1px solid #f1f5f4;
+    }
+    .device-row:last-child { border-bottom: none; }
+    .device-ico {
+      width: 38px; height: 38px; border-radius: 11px; flex-shrink: 0;
+      background: #f0fdfa; display: flex; align-items: center; justify-content: center; font-size: 1.1rem;
+    }
+    .device-row .d-name { font-weight: 700; font-size: 0.85rem; }
+    .device-row .d-state { font-size: 0.72rem; color: var(--muted); }
+    .toggle {
+      margin-left: auto; width: 44px; height: 25px; border-radius: 99px;
+      background: var(--care); position: relative; cursor: pointer; transition: background .2s; flex-shrink: 0;
+    }
+    .toggle::after {
+      content: ''; position: absolute; top: 2.5px; left: 21px;
+      width: 20px; height: 20px; border-radius: 50%; background: #fff; transition: left .2s;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+    }
+    .toggle.off { background: #cbd5e1; }
+    .toggle.off::after { left: 2.5px; }
+
+    /* med checklist */
+    .med-row {
+      display: flex; align-items: center; gap: 0.7rem;
+      padding: 0.55rem 0; border-bottom: 1px solid #f1f5f4; cursor: pointer;
+    }
+    .med-row:last-child { border-bottom: none; }
+    .med-check {
+      width: 24px; height: 24px; border-radius: 8px; border: 2px solid var(--care);
+      flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+      font-size: 0.85rem; color: #fff; transition: all .15s;
+    }
+    .med-row.done .med-check { background: var(--care); }
+    .med-row.done .m-name { text-decoration: line-through; color: var(--muted); }
+    .med-row .m-name { font-weight: 600; font-size: 0.85rem; }
+    .med-row .m-time { font-size: 0.72rem; color: var(--muted); margin-left: auto; }
+
+    /* chronic chips */
+    .chronic { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.5rem; }
+    .chronic span {
+      background: #fff1f2; color: #be123c; border: 1px solid #fecdd3;
+      font-size: 0.72rem; font-weight: 600; padding: 3px 10px; border-radius: 99px;
+    }
+
+    /* profile header */
+    .profile-head {
+      background: linear-gradient(135deg, #134e4a, #0f766e); color: #fff;
+      border-radius: 18px; padding: 1.1rem; margin-bottom: 0.85rem;
+      display: flex; align-items: center; gap: 0.85rem;
+    }
+    .profile-head .ph-avatar {
+      width: 58px; height: 58px; border-radius: 50%; background: rgba(255,255,255,0.2);
+      display: flex; align-items: center; justify-content: center; font-size: 2rem; flex-shrink: 0;
+    }
+    .profile-head .ph-name { font-size: 1.1rem; font-weight: 900; }
+    .profile-head .ph-meta { font-size: 0.76rem; color: rgba(255,255,255,0.85); }
+
+    /* fall sim button */
+    .fall-btn {
+      width: 100%; border: 1.5px dashed #fca5a5; background: #fef2f2; color: #dc2626;
+      border-radius: 14px; padding: 0.85rem; font-family: inherit; font-weight: 800;
+      font-size: 0.88rem; cursor: pointer; transition: all .15s;
+    }
+    .fall-btn:active { transform: scale(0.97); }
+
+    /* BOTTOM NAV */
+    .bottom-nav {
+      flex-shrink: 0;
+      display: flex; background: #fff;
+      border-top: 1px solid var(--border);
+      padding: 0.4rem 0.3rem 0.7rem;
+    }
+    .nav-item {
+      flex: 1; background: none; border: none; font-family: inherit; cursor: pointer;
+      display: flex; flex-direction: column; align-items: center; gap: 0.15rem;
+      padding: 0.35rem 0; color: var(--muted); transition: color .15s;
+    }
+    .nav-item .ni-ico { font-size: 1.3rem; line-height: 1; filter: grayscale(0.4); transition: filter .15s; }
+    .nav-item .ni-label { font-size: 0.62rem; font-weight: 700; }
+    .nav-item.active { color: var(--care); }
+    .nav-item.active .ni-ico { filter: none; }
+
+    /* TOAST */
+    .toast {
+      position: absolute; bottom: 90px; left: 50%; transform: translateX(-50%) translateY(20px);
+      background: rgba(17,24,39,0.94); color: #fff;
+      padding: 0.7rem 1.1rem; border-radius: 12px;
+      font-size: 0.82rem; font-weight: 600; white-space: nowrap;
+      opacity: 0; pointer-events: none; transition: all .3s; z-index: 40;
+      max-width: 88%;
+    }
+    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+    /* MODAL: video call */
+    .overlay-screen {
+      position: absolute; inset: 0; z-index: 35;
+      display: none; flex-direction: column;
+    }
+    .overlay-screen.show { display: flex; }
+    .video-call {
+      background: linear-gradient(160deg, #0f172a, #134e4a);
+      color: #fff; height: 100%;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      padding: 2rem; text-align: center; position: relative;
+    }
+    .video-call .vc-avatar {
+      width: 120px; height: 120px; border-radius: 50%; background: rgba(255,255,255,0.12);
+      display: flex; align-items: center; justify-content: center; font-size: 4rem; margin-bottom: 1rem;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse { 0%,100% { box-shadow: 0 0 0 0 rgba(45,212,191,0.4); } 50% { box-shadow: 0 0 0 18px rgba(45,212,191,0); } }
+    .video-call .vc-name { font-size: 1.3rem; font-weight: 800; }
+    .video-call .vc-status { font-size: 0.85rem; color: var(--care-bright); margin-top: 0.3rem; }
+    .vc-controls { display: flex; gap: 1rem; position: absolute; bottom: 2.5rem; }
+    .vc-ctrl {
+      width: 56px; height: 56px; border-radius: 50%; border: none; cursor: pointer;
+      font-size: 1.4rem; background: rgba(255,255,255,0.15); color: #fff;
+      display: flex; align-items: center; justify-content: center; transition: all .15s;
+    }
+    .vc-ctrl:active { transform: scale(0.92); }
+    .vc-ctrl.end { background: var(--danger); }
+
+    /* FALL OVERLAY */
+    .fall-overlay {
+      position: absolute; inset: 0; z-index: 60;
+      background: rgba(185,28,28,0.97);
+      display: none; flex-direction: column; align-items: center; justify-content: center;
+      padding: 2rem; text-align: center; color: #fff;
+      animation: flash 1s infinite;
+    }
+    .fall-overlay.show { display: flex; }
+    @keyframes flash {
+      0%,100% { background: rgba(185,28,28,0.97); }
+      50% { background: rgba(220,38,38,0.99); }
+    }
+    .fall-overlay .fo-icon { font-size: 5rem; margin-bottom: 0.5rem; animation: shake .5s infinite; }
+    @keyframes shake { 0%,100% { transform: rotate(-8deg); } 50% { transform: rotate(8deg); } }
+    .fall-overlay h2 { font-size: 1.5rem; font-weight: 900; line-height: 1.2; }
+    .fall-overlay .fo-loc { font-size: 0.95rem; margin-top: 0.5rem; opacity: 0.95; }
+    .fall-overlay .fo-count {
+      margin: 1.5rem 0; font-size: 0.95rem; font-weight: 600;
+      background: rgba(0,0,0,0.25); padding: 0.7rem 1.2rem; border-radius: 12px;
+    }
+    .fall-overlay .fo-count b { font-size: 1.5rem; }
+    .fall-overlay .fo-actions { display: flex; flex-direction: column; gap: 0.6rem; width: 100%; max-width: 260px; }
+    .fall-overlay .btn-white { background: #fff; color: var(--danger); }
+    .fall-overlay .btn-blackline { background: rgba(0,0,0,0.2); color: #fff; border: 1.5px solid rgba(255,255,255,0.5); }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      .marketing { display: none; }
+      .stage { padding: 1rem 0.5rem 2rem; gap: 0; }
+    }
+    @media (max-width: 430px) {
+      .phone {
+        width: 100%; max-width: 100vw; height: calc(100vh - 60px);
+        border-radius: 0; padding: 0; box-shadow: none;
+      }
+      .phone-screen { border-radius: 0; }
+      .island { display: none; }
+      .statusbar { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <a href="/eldercare" class="back-link">← ElderCare VN</a>
+  <span class="topbar-badge">ETR601 · SEM40 · DEMO</span>
+</div>
+
+<!-- STAGE -->
+<div class="stage">
+
+  <!-- LEFT MARKETING PANEL -->
+  <div class="marketing">
+    <span class="mk-tag">📱 App Demo tương tác</span>
+    <h1>Một app để cả nhà <span>an tâm</span> chăm bố mẹ già</h1>
+    <p class="mk-sub">Bấm thử 5 trụ cột super-app — đây là màn hình của <strong>con cái</strong> theo dõi sức khỏe bố mẹ từ xa.</p>
+    <div class="mk-caption" id="mkCaption">
+      <div class="mc-title" id="mkTitle">🏠 Tổng quan</div>
+      <div class="mc-desc" id="mkDesc">Bảng điều khiển sức khỏe — trạng thái, sinh hiệu hôm nay, cảnh báo và lịch chăm sóc của Bà Hoa.</div>
+    </div>
+    <div class="mk-hint">👆 Bấm các tab dưới đáy điện thoại để chuyển màn</div>
+    <br/>
+    <span class="mk-mock-badge">⚠️ Dữ liệu minh họa · demo pitch</span>
+  </div>
+
+  <!-- PHONE -->
+  <div class="phone">
+    <div class="phone-screen">
+      <div class="island"></div>
+
+      <!-- status bar -->
+      <div class="statusbar">
+        <span>9:41</span>
+        <span>📶 🔋 100%</span>
+      </div>
+
+      <!-- app header -->
+      <div class="app-header">
+        <div class="app-avatar">🧑‍💼</div>
+        <div>
+          <div class="hi">Xin chào, Minh 👋</div>
+          <div class="sub">Đang chăm: Bà Nguyễn Thị Hoa · 72 tuổi</div>
+        </div>
+        <div class="bell" onclick="toast('🔔 3 thông báo mới về Bà Hoa')">
+          🔔<span class="bell-badge">3</span>
+        </div>
+      </div>
+
+      <!-- VIEWPORT -->
+      <div class="viewport" id="viewport">
+
+        <!-- SCREEN 1: TỔNG QUAN -->
+        <section class="screen active" id="screen-home">
+          <div class="status-hero">
+            <div class="sh-emoji">✅</div>
+            <div>
+              <div class="sh-title">Mẹ vẫn ổn</div>
+              <div class="sh-sub">Cập nhật 2 phút trước · Phòng khách</div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title">🩺 Sinh hiệu hôm nay · CareSense</div>
+            <div class="vitals">
+              <div class="vital"><span class="v-dot ok"></span><div class="v-icon">❤️</div><div class="v-num">78</div><div class="v-label">Nhịp tim <span class="v-unit">bpm</span></div></div>
+              <div class="vital"><span class="v-dot warn"></span><div class="v-icon">🩸</div><div class="v-num">132/85</div><div class="v-label">Huyết áp <span class="v-unit">mmHg</span></div></div>
+              <div class="vital"><span class="v-dot ok"></span><div class="v-icon">🩸</div><div class="v-num">6.1</div><div class="v-label">Đường huyết <span class="v-unit">mmol/L</span></div></div>
+              <div class="vital"><span class="v-dot ok"></span><div class="v-icon">🫁</div><div class="v-num">97%</div><div class="v-label">SpO₂</div></div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title">⚡ Cảnh báo gần đây</div>
+            <div class="alert-row warn">
+              <span class="a-ico">⚠️</span>
+              <div><div class="a-txt">Huyết áp hơi cao (132/85)</div><div class="a-time">Hôm nay · 7:00</div></div>
+            </div>
+            <div class="alert-row ok">
+              <span class="a-ico">✅</span>
+              <div><div class="a-txt">Đã uống thuốc huyết áp buổi sáng</div><div class="a-time">Hôm nay · 7:30</div></div>
+            </div>
+            <div class="alert-row ok">
+              <span class="a-ico">🚶</span>
+              <div><div class="a-txt">Đi bộ nhẹ 15 phút trong sân</div><div class="a-time">Hôm nay · 8:00</div></div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title">📅 Lịch sắp tới</div>
+            <div class="sched-row">
+              <div class="sched-ico">🩺</div>
+              <div><div class="s-main">Điều dưỡng Lan đến nhà</div><div class="s-sub">Hôm nay · 14:00 · Chăm sóc định kỳ</div></div>
+            </div>
+            <div class="sched-row">
+              <div class="sched-ico">📱</div>
+              <div><div class="s-main">Tái khám tim mạch — BS Hùng</div><div class="s-sub">Thứ 5 · 09:00 · Khám video</div></div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title">⚡ Thao tác nhanh</div>
+            <div class="quick-grid">
+              <button class="quick-btn" onclick="showScreen('care')"><span class="qb-ico">🩺</span>Đặt điều dưỡng</button>
+              <button class="quick-btn" onclick="showScreen('visit')"><span class="qb-ico">📹</span>Gọi video bác sĩ</button>
+              <button class="quick-btn danger" onclick="toast('🆘 Đang gọi tổng đài cấp cứu 24/7...')"><span class="qb-ico">🆘</span>Gọi khẩn cấp</button>
+              <button class="quick-btn" onclick="toast('💊 Đã thêm vào giỏ — giao thuốc tận nhà')"><span class="qb-ico">💊</span>Mua thuốc</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- SCREEN 2: CHĂM SÓC -->
+        <section class="screen" id="screen-care">
+          <div class="subtabs">
+            <div class="subtab active" data-sub="care-now" onclick="switchSub(this,'care')">Đang diễn ra</div>
+            <div class="subtab" data-sub="care-new" onclick="switchSub(this,'care')">Đặt mới</div>
+          </div>
+
+          <div class="sub-panel" data-sub="care-now">
+            <div class="card">
+              <div class="card-title">🩺 Điều dưỡng đang chăm</div>
+              <div class="person">
+                <div class="person-avatar">👩‍⚕️</div>
+                <div>
+                  <div class="p-name">Điều dưỡng Lan <span class="verify-chip">✔ Đã xác minh</span></div>
+                  <div class="p-meta"><span class="star">⭐ 4.9</span> · 320 ca · 6 năm kinh nghiệm</div>
+                </div>
+              </div>
+              <div>
+                <span class="skill-chip">Chăm sóc sau mổ</span>
+                <span class="skill-chip">Vật lý trị liệu</span>
+                <span class="skill-chip">Tiêm/truyền</span>
+              </div>
+              <button class="btn btn-outline" style="margin-top:0.85rem" onclick="toggleTimeline(this)">📋 Xem nhật ký ca trực</button>
+              <div class="timeline">
+                <div class="tl-row"><span class="tl-time">8:00</span><span class="tl-txt">Đo huyết áp 132/85 · nhịp tim 78</span></div>
+                <div class="tl-row"><span class="tl-time">8:15</span><span class="tl-txt">Cho uống thuốc huyết áp + tiểu đường</span></div>
+                <div class="tl-row"><span class="tl-time">8:30</span><span class="tl-txt">Hỗ trợ ăn sáng (cháo yến mạch)</span></div>
+                <div class="tl-row"><span class="tl-time">9:00</span><span class="tl-txt">Tập đi bộ nhẹ 15 phút trong sân</span></div>
+                <div class="tl-row"><span class="tl-time">9:30</span><span class="tl-txt">Massage khớp gối · ghi chú: đỡ đau hơn</span></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="sub-panel" data-sub="care-new" style="display:none">
+            <div class="card">
+              <div class="card-title">⭐ Điều dưỡng gợi ý gần bạn</div>
+              <div class="person" style="margin-bottom:0.6rem">
+                <div class="person-avatar">👨‍⚕️</div>
+                <div style="flex:1">
+                  <div class="p-name">Điều dưỡng Tuấn <span class="verify-chip">✔</span></div>
+                  <div class="p-meta"><span class="star">⭐ 4.8</span> · 100k/giờ · cách 1,2km</div>
+                </div>
+                <button class="btn btn-ghost btn-sm" onclick="toast('✅ Đã gửi yêu cầu đặt Điều dưỡng Tuấn')">Đặt</button>
+              </div>
+              <div class="person" style="margin-bottom:0.6rem">
+                <div class="person-avatar">👩‍⚕️</div>
+                <div style="flex:1">
+                  <div class="p-name">Điều dưỡng Hương <span class="verify-chip">✔</span></div>
+                  <div class="p-meta"><span class="star">⭐ 4.9</span> · 120k/giờ · cách 2,5km</div>
+                </div>
+                <button class="btn btn-ghost btn-sm" onclick="toast('✅ Đã gửi yêu cầu đặt Điều dưỡng Hương')">Đặt</button>
+              </div>
+              <div class="person">
+                <div class="person-avatar">👨‍⚕️</div>
+                <div style="flex:1">
+                  <div class="p-name">Điều dưỡng Nam <span class="verify-chip">✔</span></div>
+                  <div class="p-meta"><span class="star">⭐ 4.7</span> · 80k/giờ · cách 3,1km</div>
+                </div>
+                <button class="btn btn-ghost btn-sm" onclick="toast('✅ Đã gửi yêu cầu đặt Điều dưỡng Nam')">Đặt</button>
+              </div>
+            </div>
+            <div class="card" style="text-align:center;background:#f0fdfa;border-color:#99f6e4">
+              <div style="font-size:0.82rem;color:#0f766e;font-weight:600">💡 Tất cả điều dưỡng đều được xác minh chứng chỉ &amp; lý lịch tư pháp</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- SCREEN 3: KHÁM -->
+        <section class="screen" id="screen-visit">
+          <div class="card">
+            <div class="card-title">🤖 Trợ lý AI hỏi triệu chứng</div>
+            <div class="chat-box" id="chatBox">
+              <div class="bubble bot">Chào anh Minh 👋 Bà Hoa hôm nay có biểu hiện gì bất thường ạ? Chọn nhanh bên dưới nhé.</div>
+            </div>
+            <div class="chip-row" id="symptomChips">
+              <button class="chip" onclick="pickSymptom(this,'dizzy')">Mẹ chóng mặt</button>
+              <button class="chip" onclick="pickSymptom(this,'sleep')">Khó ngủ</button>
+              <button class="chip" onclick="pickSymptom(this,'joint')">Đau khớp</button>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title">📹 Khám video sắp tới</div>
+            <div class="person">
+              <div class="person-avatar">👨‍⚕️</div>
+              <div>
+                <div class="p-name">BS Hùng — Tim mạch</div>
+                <div class="p-meta">Thứ 5 · 09:00 · Tái khám định kỳ</div>
+              </div>
+            </div>
+            <button class="btn btn-primary" style="margin-top:0.85rem" onclick="openVideo()">🎥 Vào phòng khám</button>
+          </div>
+
+          <div class="card">
+            <div class="card-title">👨‍⚕️ Bác sĩ lão khoa · khám từ xa</div>
+            <div class="sched-row">
+              <div class="sched-ico">🫀</div>
+              <div style="flex:1"><div class="s-main">BS Hùng · Tim mạch</div><div class="s-sub"><span class="star">⭐ 4.9</span> · BV Bạch Mai</div></div>
+              <button class="btn btn-ghost btn-sm" onclick="toast('📅 Đã mở lịch đặt khám BS Hùng')">Đặt</button>
+            </div>
+            <div class="sched-row">
+              <div class="sched-ico">🦴</div>
+              <div style="flex:1"><div class="s-main">BS Mai · Cơ xương khớp</div><div class="s-sub"><span class="star">⭐ 4.8</span> · BV Việt Đức</div></div>
+              <button class="btn btn-ghost btn-sm" onclick="toast('📅 Đã mở lịch đặt khám BS Mai')">Đặt</button>
+            </div>
+            <div class="sched-row">
+              <div class="sched-ico">🧠</div>
+              <div style="flex:1"><div class="s-main">BS Sơn · Nội thần kinh</div><div class="s-sub"><span class="star">⭐ 4.9</span> · BV Lão khoa TW</div></div>
+              <button class="btn btn-ghost btn-sm" onclick="toast('📅 Đã mở lịch đặt khám BS Sơn')">Đặt</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- SCREEN 4: TÀI CHÍNH -->
+        <section class="screen" id="screen-fin">
+          <div class="card" style="background:linear-gradient(135deg,#0d9488,#0f766e);border:none;color:#fff">
+            <div class="card-title" style="color:rgba(255,255,255,0.85)">💳 Gói đang dùng · MedFin</div>
+            <div style="font-size:1.25rem;font-weight:900">ElderCare Plus</div>
+            <div style="font-size:0.85rem;opacity:0.9;margin-bottom:0.6rem">599.000đ / tháng · gia hạn 28/06</div>
+            <div style="font-size:0.8rem;line-height:1.7">
+              ✓ Khám video không giới hạn<br/>
+              ✓ 4 buổi điều dưỡng/tháng<br/>
+              ✓ Giám sát CareSense 24/7<br/>
+              ✓ Tổng đài cấp cứu ưu tiên
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title">🏥 Trả góp ca điều trị</div>
+            <div style="font-weight:800;font-size:0.92rem">Thay khớp háng</div>
+            <div style="font-size:0.82rem;color:var(--muted)">Tổng: 45.000.000đ · Trả góp 0% · 12 tháng</div>
+            <div style="font-size:1.15rem;font-weight:900;color:var(--care);margin-top:0.4rem">3.750.000đ <span style="font-size:0.78rem;color:var(--muted);font-weight:600">/ tháng</span></div>
+            <div class="progress"><i style="width:25%"></i></div>
+            <div style="display:flex;justify-content:space-between;font-size:0.74rem;color:var(--muted)">
+              <span>Đã trả 3/12 kỳ</span><span>Còn 33.750.000đ</span>
+            </div>
+            <button class="btn btn-outline" style="margin-top:0.7rem" onclick="toast('📄 Đang mở chi tiết hợp đồng trả góp')">Xem chi tiết</button>
+          </div>
+
+          <div class="card" style="background:#ecfdf5;border-color:#a7f3d0">
+            <div class="card-title" style="color:#047857">🛡️ Bảo hiểm bổ sung</div>
+            <div style="font-weight:800;color:#047857">Đã kích hoạt ✔</div>
+            <div style="font-size:0.82rem;color:#059669">Chi trả tới <strong>80%</strong> chi phí nằm viện ngoài BHYT · hạn mức 200 triệu/năm</div>
+          </div>
+
+          <div class="card">
+            <div class="card-title">🧾 Giao dịch gần đây</div>
+            <div class="alert-row"><span class="a-ico">🩺</span><div style="flex:1"><div>Buổi điều dưỡng — Lan</div><div class="a-time">10/06</div></div><div style="font-weight:700">−240.000đ</div></div>
+            <div class="alert-row"><span class="a-ico">💊</span><div style="flex:1"><div>Thuốc huyết áp + tiểu đường</div><div class="a-time">08/06</div></div><div style="font-weight:700">−385.000đ</div></div>
+            <div class="alert-row"><span class="a-ico">🏥</span><div style="flex:1"><div>Trả góp khớp háng — kỳ 3</div><div class="a-time">05/06</div></div><div style="font-weight:700">−3.750.000đ</div></div>
+          </div>
+        </section>
+
+        <!-- SCREEN 5: BỐ/MẸ -->
+        <section class="screen" id="screen-parent">
+          <div class="profile-head">
+            <div class="ph-avatar">👵</div>
+            <div>
+              <div class="ph-name">Bà Nguyễn Thị Hoa</div>
+              <div class="ph-meta">72 tuổi · Nhóm máu O · Cao 1m52 · 54kg</div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title">❤️‍🩹 Bệnh mạn tính</div>
+            <div class="chronic">
+              <span>Tăng huyết áp</span>
+              <span>Tiểu đường type 2</span>
+              <span>Thoái hóa khớp</span>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title">📡 CareSense · Thiết bị tại nhà</div>
+            <div class="device-row">
+              <div class="device-ico">📹</div>
+              <div><div class="d-name">Camera phòng khách</div><div class="d-state d-state-txt">Hoạt động · phát hiện té ngã</div></div>
+              <div class="toggle" onclick="toggleDevice(this)"></div>
+            </div>
+            <div class="device-row">
+              <div class="device-ico">⌚</div>
+              <div><div class="d-name">Vòng đeo tay sức khỏe</div><div class="d-state d-state-txt">Pin 82% · đo nhịp tim, SpO₂</div></div>
+              <div class="toggle" onclick="toggleDevice(this)"></div>
+            </div>
+            <div class="device-row">
+              <div class="device-ico">🛏️</div>
+              <div><div class="d-name">Cảm biến giường</div><div class="d-state d-state-txt">Theo dõi giấc ngủ &amp; rời giường ban đêm</div></div>
+              <div class="toggle" onclick="toggleDevice(this)"></div>
+            </div>
+          </div>
+
+          <div class="card" style="border-color:#fecaca;background:#fef9f9">
+            <div class="card-title" style="color:#dc2626">🚨 Mô phỏng sự cố (demo)</div>
+            <div style="font-size:0.8rem;color:var(--muted);margin-bottom:0.7rem">Bấm để xem CareSense phản ứng khi camera AI phát hiện té ngã.</div>
+            <button class="fall-btn" onclick="simulateFall()">▶️ Mô phỏng sự cố té ngã</button>
+          </div>
+
+          <div class="card">
+            <div class="card-title">💊 Lịch uống thuốc hôm nay</div>
+            <div class="med-row done" onclick="toggleMed(this)">
+              <div class="med-check">✓</div><div class="m-name">Amlodipine 5mg (huyết áp)</div><div class="m-time">7:30</div>
+            </div>
+            <div class="med-row done" onclick="toggleMed(this)">
+              <div class="med-check">✓</div><div class="m-name">Metformin 500mg (tiểu đường)</div><div class="m-time">7:30</div>
+            </div>
+            <div class="med-row" onclick="toggleMed(this)">
+              <div class="med-check"></div><div class="m-name">Metformin 500mg (chiều)</div><div class="m-time">18:00</div>
+            </div>
+            <div class="med-row" onclick="toggleMed(this)">
+              <div class="med-check"></div><div class="m-name">Glucosamine (khớp)</div><div class="m-time">20:00</div>
+            </div>
+          </div>
+        </section>
+
+      </div><!-- /viewport -->
+
+      <!-- VIDEO CALL OVERLAY -->
+      <div class="overlay-screen" id="videoOverlay">
+        <div class="video-call">
+          <div class="vc-avatar">👨‍⚕️</div>
+          <div class="vc-name">BS Hùng — Tim mạch</div>
+          <div class="vc-status" id="vcStatus">Đang kết nối...</div>
+          <div class="vc-controls">
+            <button class="vc-ctrl" onclick="toast('🎤 Đã tắt/bật micro')">🎤</button>
+            <button class="vc-ctrl" onclick="toast('📷 Đã tắt/bật camera')">📷</button>
+            <button class="vc-ctrl end" onclick="closeVideo()">📞</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- FALL OVERLAY -->
+      <div class="fall-overlay" id="fallOverlay">
+        <div class="fo-icon">🚨</div>
+        <h2>PHÁT HIỆN TÉ NGÃ</h2>
+        <div class="fo-loc">📹 Phòng khách · 14:32</div>
+        <div class="fo-count">Tự động gọi con cái &amp; tổng đài cấp cứu sau <b id="fallCount">10</b>s...</div>
+        <div class="fo-actions">
+          <button class="fall-overlay btn-white" style="width:100%;border:none;border-radius:12px;padding:0.8rem;font-family:inherit;font-weight:800;font-size:0.9rem;cursor:pointer" onclick="resolveFall()">✅ Tôi đã xử lý — Mẹ vẫn ổn</button>
+          <button class="fall-overlay btn-blackline" style="width:100%;border-radius:12px;padding:0.8rem;font-family:inherit;font-weight:700;font-size:0.9rem;cursor:pointer" onclick="callEmergency()">🆘 Gọi cấp cứu ngay</button>
+        </div>
+      </div>
+
+      <!-- TOAST -->
+      <div class="toast" id="toast"></div>
+
+      <!-- BOTTOM NAV -->
+      <nav class="bottom-nav">
+        <button class="nav-item active" data-screen="home" onclick="showScreen('home')"><span class="ni-ico">🏠</span><span class="ni-label">Tổng quan</span></button>
+        <button class="nav-item" data-screen="care" onclick="showScreen('care')"><span class="ni-ico">🩺</span><span class="ni-label">Chăm sóc</span></button>
+        <button class="nav-item" data-screen="visit" onclick="showScreen('visit')"><span class="ni-ico">📱</span><span class="ni-label">Khám</span></button>
+        <button class="nav-item" data-screen="fin" onclick="showScreen('fin')"><span class="ni-ico">💳</span><span class="ni-label">Tài chính</span></button>
+        <button class="nav-item" data-screen="parent" onclick="showScreen('parent')"><span class="ni-ico">👵</span><span class="ni-label">Bố/Mẹ</span></button>
+      </nav>
+
+    </div><!-- /phone-screen -->
+  </div><!-- /phone -->
+</div><!-- /stage -->
+
+<script>
+  // ===== caption metadata per screen (left marketing panel) =====
+  var CAPTIONS = {
+    home:   { t: '🏠 Tổng quan', d: 'Bảng điều khiển sức khỏe — trạng thái, sinh hiệu hôm nay, cảnh báo và lịch chăm sóc của Bà Hoa.' },
+    care:   { t: '🩺 Chăm sóc · CareConnect', d: 'Điều dưỡng đang chăm, nhật ký ca trực realtime, và đặt thêm điều dưỡng đã xác minh gần nhà.' },
+    visit:  { t: '📱 Khám · Tele & Booking', d: 'Trợ lý AI hỏi triệu chứng, đặt khám video với bác sĩ lão khoa, vào phòng khám từ xa.' },
+    fin:    { t: '💳 Tài chính · MedFin', d: 'Gói chăm sóc, trả góp 0% ca điều trị lớn, bảo hiểm bổ sung và lịch sử giao dịch.' },
+    parent: { t: '👵 Hồ sơ Bố/Mẹ · CareSense', d: 'Hồ sơ bệnh án, thiết bị giám sát tại nhà, lịch uống thuốc — và mô phỏng cảnh báo té ngã.' }
+  };
+
+  // ===== screen switching =====
+  function showScreen(id) {
+    var screens = document.querySelectorAll('.screen');
+    for (var i = 0; i < screens.length; i++) screens[i].classList.remove('active');
+    document.getElementById('screen-' + id).classList.add('active');
+
+    var items = document.querySelectorAll('.nav-item');
+    for (var j = 0; j < items.length; j++) {
+      items[j].classList.toggle('active', items[j].getAttribute('data-screen') === id);
+    }
+
+    // reset scroll of viewport
+    var vp = document.getElementById('viewport');
+    vp.scrollTop = 0;
+
+    // update marketing caption
+    var c = CAPTIONS[id];
+    if (c) {
+      document.getElementById('mkTitle').textContent = c.t;
+      document.getElementById('mkDesc').textContent = c.d;
+    }
+  }
+
+  // ===== toast helper =====
+  var toastTimer = null;
+  function toast(msg) {
+    var el = document.getElementById('toast');
+    el.textContent = msg;
+    el.classList.add('show');
+    if (toastTimer) clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () { el.classList.remove('show'); }, 2200);
+  }
+
+  // ===== sub tabs (Chăm sóc) =====
+  function switchSub(tabEl, group) {
+    var tabs = tabEl.parentNode.querySelectorAll('.subtab');
+    for (var i = 0; i < tabs.length; i++) tabs[i].classList.remove('active');
+    tabEl.classList.add('active');
+    var target = tabEl.getAttribute('data-sub');
+    var panels = document.querySelectorAll('#screen-' + group + ' .sub-panel');
+    for (var j = 0; j < panels.length; j++) {
+      panels[j].style.display = (panels[j].getAttribute('data-sub') === target) ? '' : 'none';
+    }
+  }
+
+  // ===== timeline toggle =====
+  function toggleTimeline(btn) {
+    var tl = btn.parentNode.querySelector('.timeline');
+    var open = tl.classList.toggle('open');
+    btn.textContent = open ? '📋 Ẩn nhật ký ca trực' : '📋 Xem nhật ký ca trực';
+  }
+
+  // ===== mini chat (symptom) =====
+  var SYMPTOMS = {
+    dizzy: { u: 'Mẹ chóng mặt', b: '🩺 Chóng mặt ở người tăng huyết áp cần lưu ý. Em gợi ý khám <b>Tim mạch / Nội thần kinh</b>. Anh muốn đặt khám video ngay hay tới viện?' },
+    sleep: { u: 'Khó ngủ', b: '😴 Mất ngủ kéo dài nên gặp <b>Nội thần kinh / Lão khoa</b>. Trong lúc chờ, hạn chế caffeine chiều &amp; giữ phòng tối. Đặt khám nhé?' },
+    joint: { u: 'Đau khớp', b: '🦴 Bà Hoa có thoái hóa khớp — nên gặp <b>Cơ xương khớp</b>. Có thể kết hợp vật lý trị liệu tại nhà với điều dưỡng Lan. Đặt khám?' }
+  };
+  function pickSymptom(chipEl, key) {
+    var box = document.getElementById('chatBox');
+    var s = SYMPTOMS[key];
+    // user bubble
+    var u = document.createElement('div');
+    u.className = 'bubble user';
+    u.textContent = s.u;
+    box.appendChild(u);
+    // dim chips
+    var chips = document.getElementById('symptomChips').querySelectorAll('.chip');
+    for (var i = 0; i < chips.length; i++) chips[i].classList.add('dim');
+    // bot reply + action buttons
+    setTimeout(function () {
+      var b = document.createElement('div');
+      b.className = 'bubble bot';
+      b.innerHTML = s.b;
+      box.appendChild(b);
+      var act = document.createElement('div');
+      act.className = 'chip-row';
+      act.style.marginTop = '0.2rem';
+      act.innerHTML = '<button class="chip" onclick="openVideo()">📹 Đặt khám video</button>' +
+                      '<button class="chip" onclick="toast(\'🏥 Đã đặt lịch khám tại viện\')">🏥 Khám tại viện</button>';
+      box.appendChild(act);
+      box.scrollTop = box.scrollHeight;
+    }, 450);
+    box.scrollTop = box.scrollHeight;
+  }
+
+  // ===== video call =====
+  var vcTimer = null;
+  function openVideo() {
+    document.getElementById('vcStatus').textContent = 'Đang kết nối...';
+    document.getElementById('videoOverlay').classList.add('show');
+    if (vcTimer) clearTimeout(vcTimer);
+    vcTimer = setTimeout(function () {
+      document.getElementById('vcStatus').textContent = '🟢 Đã kết nối · 00:01';
+    }, 1600);
+  }
+  function closeVideo() {
+    document.getElementById('videoOverlay').classList.remove('show');
+    if (vcTimer) clearTimeout(vcTimer);
+    toast('📞 Đã kết thúc cuộc gọi');
+  }
+
+  // ===== device toggle =====
+  function toggleDevice(el) {
+    var off = el.classList.toggle('off');
+    var stateTxt = el.parentNode.querySelector('.d-state-txt');
+    var name = el.parentNode.querySelector('.d-name').textContent;
+    if (off) {
+      el.setAttribute('data-prev', stateTxt.textContent);
+      stateTxt.textContent = 'Đã tắt';
+      toast('⏸️ Đã tắt: ' + name);
+    } else {
+      var prev = el.getAttribute('data-prev');
+      if (prev) stateTxt.textContent = prev;
+      toast('▶️ Đã bật: ' + name);
+    }
+  }
+
+  // ===== med checklist =====
+  function toggleMed(row) {
+    var done = row.classList.toggle('done');
+    var check = row.querySelector('.med-check');
+    check.textContent = done ? '✓' : '';
+    if (done) toast('💊 Đã đánh dấu uống thuốc');
+  }
+
+  // ===== fall simulation =====
+  var fallTimer = null;
+  var fallCount = 10;
+  function simulateFall() {
+    fallCount = 10;
+    document.getElementById('fallCount').textContent = fallCount;
+    document.getElementById('fallOverlay').classList.add('show');
+    if (fallTimer) clearInterval(fallTimer);
+    fallTimer = setInterval(function () {
+      fallCount--;
+      document.getElementById('fallCount').textContent = fallCount;
+      if (fallCount <= 0) {
+        clearInterval(fallTimer);
+        callEmergency();
+      }
+    }, 1000);
+  }
+  function stopFallTimer() {
+    if (fallTimer) { clearInterval(fallTimer); fallTimer = null; }
+  }
+  function resolveFall() {
+    stopFallTimer();
+    document.getElementById('fallOverlay').classList.remove('show');
+    toast('✅ Đã xác nhận an toàn — hủy báo động');
+  }
+  function callEmergency() {
+    stopFallTimer();
+    document.getElementById('fallOverlay').classList.remove('show');
+    toast('🆘 Đã gọi tổng đài cấp cứu & báo con cái!');
+  }
+</script>
+
+</body>
+</html>
