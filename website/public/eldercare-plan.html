@@ -297,6 +297,50 @@
     .backup-card h5 { font-size: 0.85rem; font-weight: 800; margin: 0.25rem 0; color: #115e59; }
     .backup-card p { font-size: 0.76rem; color: #374151; line-height: 1.5; }
 
+    /* ===== PHIÊN 3 — SEGMENT + MA TRẬN CHUYÊN GIA ===== */
+    .seg-section { background: #fff; }
+
+    /* 3 trục phân khúc */
+    .axis-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin: 1.25rem 0; }
+    .axis-card { border: 1px solid var(--border); border-radius: 14px; padding: 1.3rem; background: #fff; border-top: 4px solid var(--care); }
+    .axis-card.ax1 { border-top-color: var(--coral); }
+    .axis-card.ax2 { border-top-color: var(--care); }
+    .axis-card.ax3 { border-top-color: var(--gold); }
+    .axis-card .ax-tag { font-size: 0.7rem; font-weight: 800; letter-spacing: 0.5px; text-transform: uppercase; }
+    .axis-card.ax1 .ax-tag { color: var(--coral); }
+    .axis-card.ax2 .ax-tag { color: var(--care); }
+    .axis-card.ax3 .ax-tag { color: #d97706; }
+    .axis-card h4 { font-size: 1rem; font-weight: 800; margin: 0.25rem 0 0.6rem; }
+    .axis-seg { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-bottom: 0.6rem; }
+    .axis-seg span { background: #f0fdfa; color: #115e59; font-size: 0.72rem; font-weight: 700; padding: 3px 9px; border-radius: 99px; }
+    .axis-card.ax1 .axis-seg span { background: #fff1f2; color: #be123c; }
+    .axis-card.ax3 .axis-seg span { background: #fffbeb; color: #b45309; }
+    .axis-card p { font-size: 0.79rem; color: #4b5563; line-height: 1.55; }
+
+    /* Persona cards */
+    .persona-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px,1fr)); gap: 1rem; margin: 1.25rem 0; }
+    .persona-card { border: 1px solid var(--border); border-radius: 16px; padding: 1.4rem; background: #fff; position: relative; }
+    .persona-card .pe-top { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem; }
+    .persona-card .pe-ava { font-size: 2rem; width: 52px; height: 52px; border-radius: 14px; display: flex; align-items: center; justify-content: center; background: #f0fdfa; flex-shrink: 0; }
+    .persona-card.pp .pe-ava { background: #fff1f2; }
+    .persona-card .pe-name { font-size: 1rem; font-weight: 800; line-height: 1.2; }
+    .persona-card .pe-role { font-size: 0.74rem; font-weight: 700; color: var(--care); margin-top: 2px; }
+    .persona-card.pp .pe-role { color: var(--coral); }
+    .persona-card .pe-meta { font-size: 0.74rem; color: var(--muted); margin-top: 1px; }
+    .persona-card .pe-block { margin-top: 0.6rem; }
+    .persona-card .pe-block .pe-lab { font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; color: var(--muted); }
+    .persona-card .pe-block p { font-size: 0.8rem; color: #374151; line-height: 1.55; margin-top: 2px; }
+    .persona-card .pe-quote { font-size: 0.82rem; font-style: italic; color: #115e59; background: #f0fdfa; border-left: 3px solid var(--care); border-radius: 0 8px 8px 0; padding: 0.5rem 0.75rem; margin-top: 0.75rem; line-height: 1.5; }
+    .persona-card.pp .pe-quote { color: #be123c; background: #fff1f2; border-left-color: var(--coral); }
+
+    /* Ma trận chuyên gia */
+    .spec-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(215px,1fr)); gap: 0.85rem; margin: 1.25rem 0; }
+    .spec-card { border: 1px solid var(--border); border-radius: 12px; padding: 1rem 1.1rem; background: #fff; border-left: 4px solid var(--care); }
+    .spec-card .sp-icon { font-size: 1.3rem; }
+    .spec-card h5 { font-size: 0.86rem; font-weight: 800; color: #115e59; margin: 0.2rem 0 0.3rem; }
+    .spec-card p { font-size: 0.76rem; color: #4b5563; line-height: 1.5; }
+    .spec-card .sp-pain { display: inline-block; margin-top: 0.45rem; background: #f0fdfa; color: #115e59; font-size: 0.67rem; font-weight: 700; padding: 2px 8px; border-radius: 99px; }
+
     /* RESPONSIVE */
     @media (max-width: 768px) {
       nav { padding: 0 1rem; }
@@ -309,6 +353,7 @@
       .deep-inner { padding: 1.25rem 1.25rem; }
       .dual-grid, .rmq-grid { grid-template-columns: 1fr; }
       .funnel-stage { width: 100% !important; }
+      .axis-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -351,7 +396,7 @@
 <div class="subnav">
   <a href="#fin" class="active">💰 Tài chính</a>
   <a href="#marketing">📣 Marketing &amp; GTM</a>
-  <a href="#segment" class="soon">👥 Phân khúc &amp; chuyên gia</a>
+  <a href="#segment">👥 Phân khúc &amp; chuyên gia</a>
   <a href="#disease" class="soon">🏥 Bệnh lý &amp; đào tạo</a>
   <a href="#legal" class="soon">⚖️ Đạo đức &amp; pháp lý</a>
   <a href="#summary" class="soon">🧭 Tổng hợp</a>
@@ -1118,8 +1163,336 @@
   </div>
 </section>
 
+<!-- ============================ PHIÊN 3 — SEGMENT + MA TRẬN CHUYÊN GIA ============================ -->
+<section class="seg-section" id="segment">
+  <div class="container">
+    <div class="section-tag">Phần 3 · Phân khúc khách hàng &amp; Ma trận chuyên gia</div>
+    <h2>Ai trả tiền, ai được chăm —<br/>và chuyên gia nào giải đúng nỗi đau nào</h2>
+    <p class="section-desc">
+      ElderCare phục vụ một <strong>thị trường phân tầng sâu</strong>: người trả tiền (con cái) và người dùng (bố mẹ) khác nhau, và mỗi người già lại ở một mức độ phụ thuộc rất khác. Phần này chia phân khúc theo <strong>3 trục</strong> — người trả tiền · người dùng · địa lý — dựng persona đại diện, map nỗi đau đặc trưng từng nhóm, rồi nối mỗi nỗi đau tới <strong>đúng loại chuyên gia</strong> trong mạng lưới (điều dưỡng lão khoa, bác sĩ chuyên khoa, phục hồi chức năng, dược lâm sàng, dinh dưỡng, tâm lý, công tác xã hội…).
+    </p>
+    <span class="click-hint">👆 Các tiểu mục có nút "Phân tích sâu" — bấm để xem chiến thuật phục vụ &amp; quy tắc ghép chuyên gia</span>
+
+    <!-- 3.1 PHÂN KHÚC 3 TRỤC -->
+    <h3 class="fin-sub"><span class="badge-n">1</span> Phân khúc theo 3 trục</h3>
+    <p class="sub-desc">
+      Mỗi gia đình được định vị trên ba trục độc lập. Giao của ba trục cho ra "ô khách hàng" cụ thể để chọn gói, định giá &amp; phân bổ đội ngũ — ví dụ <em>con sống xa · bố mẹ phụ thuộc nặng · đô thị lớn</em> là ô ARPU cao nhất (gói Plus 599k + điều dưỡng thường trực).
+    </p>
+    <div class="axis-grid">
+      <div class="axis-card ax1">
+        <div class="ax-tag">💳 Trục A · Người trả tiền</div>
+        <h4>Con cái (30–50t)</h4>
+        <div class="axis-seg">
+          <span>Sống xa</span><span>Sống gần</span><span>Thu nhập cao</span><span>Trung lưu</span><span>Rành công nghệ</span><span>Ít rành</span>
+        </div>
+        <p>Phân theo <strong>khoảng cách địa lý</strong> tới bố mẹ (xa → cần giám sát từ xa &amp; điều dưỡng trọn gói; gần → cần hỗ trợ đột xuất), <strong>thu nhập</strong> (quyết định gói 299k→599k &amp; trả góp MedFin) và <strong>mức rành công nghệ</strong> (quyết định độ "cầm tay chỉ việc" của onboarding).</p>
+      </div>
+      <div class="axis-card ax2">
+        <div class="ax-tag">👵 Trục B · Người dùng</div>
+        <h4>Người già (≥60t) theo mức phụ thuộc</h4>
+        <div class="axis-seg">
+          <span>Tự chủ</span><span>Hỗ trợ một phần</span><span>Phụ thuộc nặng</span><span>Hậu phẫu</span><span>Sa sút trí tuệ</span>
+        </div>
+        <p>Trục quan trọng nhất cho vận hành. <strong>Tự chủ</strong> (chỉ cần theo dõi &amp; nhắc) → <strong>hỗ trợ một phần</strong> (điều dưỡng theo giờ) → <strong>phụ thuộc nặng</strong> (chăm thường trực) → <strong>hậu phẫu</strong> (phục hồi có thời hạn) → <strong>sa sút trí tuệ</strong> (giám sát đặc thù, người giám hộ ra quyết định).</p>
+      </div>
+      <div class="axis-card ax3">
+        <div class="ax-tag">📍 Trục C · Địa lý</div>
+        <h4>Đô thị lớn ↔ Tỉnh</h4>
+        <div class="axis-seg">
+          <span>HN/HCM</span><span>Đô thị loại 1</span><span>Tỉnh / nông thôn</span>
+        </div>
+        <p><strong>Đô thị lớn:</strong> mật độ cao → điều dưỡng đến nhà khả thi, ra mắt trước. <strong>Tỉnh:</strong> thiếu chuyên gia tại chỗ → mạnh về tele-kết nối chuyên gia vùng khác, thiết bị CareSense &amp; điều phối khám tuyến trên. Quyết định thứ tự mở rộng &amp; mix dịch vụ online/offline.</p>
+      </div>
+    </div>
+
+    <!-- PERSONA -->
+    <p class="sub-desc" style="margin-top:1.5rem;"><strong>Persona đại diện</strong> cho các ô khách hàng chính — dùng làm "kim chỉ nam" cho marketing, sản phẩm &amp; phân công chuyên gia:</p>
+    <div class="persona-grid">
+      <div class="persona-card pp">
+        <div class="pe-top">
+          <div class="pe-ava">👨‍💼</div>
+          <div>
+            <div class="pe-name">Anh Minh · 38t</div>
+            <div class="pe-role">Người trả tiền · con sống xa</div>
+            <div class="pe-meta">TP.HCM · thu nhập cao · rành công nghệ</div>
+          </div>
+        </div>
+        <div class="pe-block"><div class="pe-lab">Bối cảnh</div><p>Con duy nhất, làm IT ở HCM; mẹ (Bà Hoa, 72t) sống một mình ở Nghệ An. Về quê 2–3 lần/năm, lo nhất là mẹ té ngã hoặc cấp cứu mà không ai biết kịp.</p></div>
+        <div class="pe-block"><div class="pe-lab">Nỗi đau lõi</div><p>Khoảng cách &amp; áy náy "sandwich generation" — vừa nuôi con nhỏ vừa lo mẹ già, không thể có mặt khi cần.</p></div>
+        <div class="pe-quote">"Tôi sẵn sàng trả tiền chỉ để mỗi sáng biết chắc mẹ vẫn ổn."</div>
+      </div>
+      <div class="persona-card pp">
+        <div class="pe-top">
+          <div class="pe-ava">👩</div>
+          <div>
+            <div class="pe-name">Chị Lan · 45t</div>
+            <div class="pe-role">Người trả tiền · con sống gần</div>
+            <div class="pe-meta">Hà Nội · trung lưu · bận rộn</div>
+          </div>
+        </div>
+        <div class="pe-block"><div class="pe-lab">Bối cảnh</div><p>Sống cách bố (70t, sau mổ thay khớp háng) 20 phút; bận đi làm &amp; con cái nên không trực được ban ngày. Cần điều dưỡng theo giờ &amp; phục hồi chức năng đúng phác đồ.</p></div>
+        <div class="pe-block"><div class="pe-lab">Nỗi đau lõi</div><p>Không đủ thời gian &amp; chuyên môn để chăm hậu phẫu; sợ bố tập sai, tái nhập viện; chi phí mổ trả góp.</p></div>
+        <div class="pe-quote">"Tôi cần người có chuyên môn đến tận nhà, đúng giờ, đáng tin."</div>
+      </div>
+      <div class="persona-card">
+        <div class="pe-top">
+          <div class="pe-ava">👵</div>
+          <div>
+            <div class="pe-name">Bà Hoa · 72t</div>
+            <div class="pe-role">Người dùng · phụ thuộc một phần</div>
+            <div class="pe-meta">Nghệ An (tỉnh) · 3 bệnh mạn</div>
+          </div>
+        </div>
+        <div class="pe-block"><div class="pe-lab">Bối cảnh</div><p>Tăng huyết áp · ĐTĐ type 2 · thoái hóa khớp. Sống một mình, tự sinh hoạt được nhưng hay quên thuốc, đi lại khó, ngại làm phiền con.</p></div>
+        <div class="pe-block"><div class="pe-lab">Nỗi đau lõi</div><p>Theo dõi 3 bệnh mạn đều đặn, đa thuốc dễ nhầm, cô đơn; ở tỉnh thiếu bác sĩ chuyên khoa gần nhà.</p></div>
+        <div class="pe-quote">"Tôi muốn tự lo được, không phải lên thành phố khám hoài."</div>
+      </div>
+      <div class="persona-card">
+        <div class="pe-top">
+          <div class="pe-ava">👴</div>
+          <div>
+            <div class="pe-name">Ông Tâm · 80t</div>
+            <div class="pe-role">Người dùng · phụ thuộc nặng / sa sút trí tuệ</div>
+            <div class="pe-meta">Hà Nội (đô thị) · sau đột quỵ</div>
+          </div>
+        </div>
+        <div class="pe-block"><div class="pe-lab">Bối cảnh</div><p>Di chứng đột quỵ + sa sút trí tuệ giai đoạn đầu, cần chăm thường trực. Con cái lập người giám hộ để ra quyết định y tế &amp; tài chính.</p></div>
+        <div class="pe-block"><div class="pe-lab">Nỗi đau lõi</div><p>Giám sát 24/7, nguy cơ đi lạc/té, đa bệnh phối hợp nhiều chuyên khoa; gánh nặng &amp; kiệt sức cho người nhà.</p></div>
+        <div class="pe-quote">"Gia đình cần một đội chăm sóc thay phiên, không thể tự kham."</div>
+      </div>
+    </div>
+
+    <button class="deep-toggle" onclick="toggleDeep(this)" data-closed-label="Phân tích sâu: ô khách hàng × gói × ưu tiên ra mắt" data-open-label="Thu gọn">
+      <span class="dt-label">Phân tích sâu: ô khách hàng × gói × ưu tiên ra mắt</span><span class="chev">▼</span>
+    </button>
+    <div class="deep-panel">
+      <div class="deep-inner">
+        <h5>🎯 Từ 3 trục → ô khách hàng ưu tiên</h5>
+        <p>Giao ba trục tạo ma trận nhiều ô; ElderCare không phục vụ dàn trải mà <strong>ưu tiên theo giá trị &amp; khả năng phục vụ</strong>. Bảng dưới chọn ra các ô mũi nhọn cho 18 tháng đầu:</p>
+        <table class="deep-table">
+          <thead><tr><th>Ô khách hàng (A × B × C)</th><th>Gói &amp; ARPU</th><th>Vì sao ưu tiên</th></tr></thead>
+          <tbody>
+            <tr><td>Con xa · bố mẹ phụ thuộc một phần · đô thị lớn</td><td>Plus 599k + điều dưỡng giờ</td><td>Sẵn lòng chi cao, mật độ đủ để điều dưỡng đến nhà — ô "wow" mở thị trường.</td></tr>
+            <tr><td>Con gần · bố mẹ hậu phẫu · đô thị lớn</td><td>Care 399k + PHCN + MedFin trả góp</td><td>Nhu cầu cấp &amp; hữu hạn, dễ chứng minh giá trị; cross-sell MedFin ca mổ.</td></tr>
+            <tr><td>Con xa · bố mẹ tự chủ/một phần · tỉnh</td><td>Cơ bản 299k + CareSense + tele</td><td>Thiếu chuyên gia tại chỗ → tele &amp; thiết bị là lời giải khác biệt; CAC thấp qua referral.</td></tr>
+            <tr><td>Con cái · bố mẹ sa sút trí tuệ / phụ thuộc nặng</td><td>Gói cao + điều dưỡng thường trực</td><td>ARPU rất cao nhưng cần đội ngũ chuyên sâu — mở rộng sau khi đủ năng lực &amp; SOP.</td></tr>
+          </tbody>
+        </table>
+        <div class="deep-callout">⚖️ <strong>Nguyên tắc:</strong> mức độ phụ thuộc của người dùng (trục B) quyết định <em>chi phí phục vụ</em> &amp; loại chuyên gia; thu nhập + khoảng cách của người trả tiền (trục A) quyết định <em>khả năng &amp; mức chi trả</em>; địa lý (trục C) quyết định <em>mix online/offline</em>. Định giá &amp; phân công đội ngũ luôn đọc đồng thời cả ba.</div>
+      </div>
+    </div>
+
+    <!-- 3.2 BẢNG SEGMENT × NỖI ĐAU -->
+    <h3 class="fin-sub"><span class="badge-n">2</span> Bảng phân khúc × nỗi đau đặc trưng</h3>
+    <p class="sub-desc">
+      Mỗi phân khúc mang một <strong>chùm nỗi đau khác nhau</strong> — đây là đầu vào để thiết kế gói dịch vụ &amp; chọn chuyên gia (mục 3). Cột "Nỗi đau lõi" được dùng làm khóa nối sang ma trận chuyên gia bên dưới.
+    </p>
+    <div class="table-scroll">
+      <table class="fin-table" style="min-width:760px;">
+        <thead>
+          <tr><th>Phân khúc</th><th style="text-align:left;">Nỗi đau lõi đặc trưng</th><th style="text-align:left;">Kỳ vọng dịch vụ</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Con xa (payer)</td><td style="text-align:left;">Không nắm tình trạng bố mẹ realtime; lo cấp cứu/té ngã; áy náy</td><td style="text-align:left;">Giám sát từ xa, cảnh báo tức thì, báo cáo định kỳ</td></tr>
+          <tr><td>Con gần (payer)</td><td style="text-align:left;">Thiếu thời gian &amp; chuyên môn chăm; cần hỗ trợ đột xuất</td><td style="text-align:left;">Điều dưỡng theo giờ linh hoạt, đặt nhanh, minh bạch nhật ký</td></tr>
+          <tr><td>Người già tự chủ</td><td style="text-align:left;">Quên thuốc, theo dõi bệnh mạn, cô đơn</td><td style="text-align:left;">Nhắc thuốc, đo sinh hiệu, tele tái khám, kết nối cộng đồng</td></tr>
+          <tr><td>Hỗ trợ một phần</td><td style="text-align:left;">Đi lại khó, sinh hoạt cần trợ giúp, đa thuốc dễ nhầm</td><td style="text-align:left;">Điều dưỡng theo giờ, rà soát thuốc, dinh dưỡng, vận động</td></tr>
+          <tr><td>Phụ thuộc nặng</td><td style="text-align:left;">Cần chăm 24/7, loét tì đè, nguy cơ biến chứng</td><td style="text-align:left;">Điều dưỡng thường trực, điều phối đa chuyên khoa</td></tr>
+          <tr><td>Hậu phẫu</td><td style="text-align:left;">Phục hồi đúng phác đồ, sợ tái nhập viện, chi phí mổ</td><td style="text-align:left;">PHCN tại nhà, theo dõi vết mổ, MedFin trả góp</td></tr>
+          <tr><td>Sa sút trí tuệ</td><td style="text-align:left;">Đi lạc, lú lẫn, kích động, mất năng lực quyết định</td><td style="text-align:left;">Giám sát đặc thù, người giám hộ, chuyên gia thần kinh &amp; tâm lý</td></tr>
+          <tr><td>Ở tỉnh / nông thôn</td><td style="text-align:left;">Thiếu bác sĩ chuyên khoa gần nhà, đi tuyến trên xa &amp; tốn kém</td><td style="text-align:left;">Tele-kết nối chuyên gia vùng khác, thiết bị, điều phối khám</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="tnote">Phân khúc &amp; nỗi đau khớp persona Bà Hoa (pitch &amp; app demo) và insight khách hàng kép; ước tính nội bộ từ nghiên cứu định tính.</p>
+
+    <!-- 3.3 MA TRẬN NỖI ĐAU → CHUYÊN GIA -->
+    <h3 class="fin-sub"><span class="badge-n">3</span> Ma trận nỗi đau → chuyên gia đáp ứng</h3>
+    <p class="sub-desc">
+      Trái tim vận hành: mỗi nỗi đau được nối tới <strong>đúng (các) loại chuyên gia</strong> trong mạng lưới. Một ca thường cần <em>nhiều chuyên gia phối hợp</em> — điều dưỡng lão khoa là đầu mối chăm sóc, bác sĩ chuyên khoa &amp; các chuyên gia chức năng tham gia theo nhu cầu. Bảng dưới là quy tắc ghép (matching) mà AI sẽ học theo.
+    </p>
+    <div class="table-scroll">
+      <table class="fin-table" style="min-width:820px;">
+        <thead>
+          <tr><th>Nỗi đau / nhu cầu</th><th style="text-align:left;">Chuyên gia chủ trì</th><th style="text-align:left;">Chuyên gia phối hợp</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Theo dõi &amp; chăm sóc tổng quát tại nhà</td><td style="text-align:left;">Điều dưỡng lão khoa</td><td style="text-align:left;">Bác sĩ lão khoa (giám sát phác đồ)</td></tr>
+          <tr><td>Tăng huyết áp, rối loạn nhịp, suy tim</td><td style="text-align:left;">Bác sĩ tim mạch</td><td style="text-align:left;">Điều dưỡng, dược lâm sàng, dinh dưỡng</td></tr>
+          <tr><td>Đái tháo đường type 2 &amp; biến chứng</td><td style="text-align:left;">Bác sĩ nội tiết</td><td style="text-align:left;">Dinh dưỡng, dược lâm sàng, điều dưỡng</td></tr>
+          <tr><td>Thoái hóa khớp, loãng xương, đau mạn</td><td style="text-align:left;">Bác sĩ cơ xương khớp</td><td style="text-align:left;">Phục hồi chức năng, điều dưỡng</td></tr>
+          <tr><td>Hậu phẫu (thay khớp háng…), phục hồi vận động</td><td style="text-align:left;">Kỹ thuật viên phục hồi chức năng</td><td style="text-align:left;">Điều dưỡng chăm sau mổ, BS cơ xương khớp</td></tr>
+          <tr><td>Sa sút trí tuệ, đột quỵ, Parkinson</td><td style="text-align:left;">Bác sĩ thần kinh</td><td style="text-align:left;">Tâm lý, công tác xã hội, điều dưỡng, PHCN</td></tr>
+          <tr><td>Đa thuốc, nguy cơ tương tác thuốc</td><td style="text-align:left;">Dược sĩ lâm sàng</td><td style="text-align:left;">Bác sĩ điều trị, điều dưỡng</td></tr>
+          <tr><td>Suy dinh dưỡng, ăn uống theo bệnh mạn</td><td style="text-align:left;">Chuyên gia dinh dưỡng</td><td style="text-align:left;">Điều dưỡng, BS nội tiết/tim mạch</td></tr>
+          <tr><td>Cô đơn, trầm cảm, lo âu, kích động</td><td style="text-align:left;">Chuyên gia tâm lý</td><td style="text-align:left;">Công tác xã hội, BS thần kinh</td></tr>
+          <tr><td>Gánh nặng người nhà, kết nối nguồn lực, giám hộ</td><td style="text-align:left;">Nhân viên công tác xã hội</td><td style="text-align:left;">Tâm lý, điều dưỡng đầu mối</td></tr>
+          <tr><td>Cấp cứu, té ngã, biến cố đột ngột</td><td style="text-align:left;">Tổng đài y tế &amp; điều dưỡng trực</td><td style="text-align:left;">BS chuyên khoa liên quan, cấp cứu 115</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="sub-desc" style="margin-top:1.25rem;"><strong>Mạng lưới chuyên gia ElderCare</strong> — vai trò &amp; nỗi đau chính mỗi loại đảm nhận:</p>
+    <div class="spec-grid">
+      <div class="spec-card">
+        <div class="sp-icon">🩺</div>
+        <h5>Điều dưỡng lão khoa</h5>
+        <p>Đầu mối chăm sóc tại nhà: đo sinh hiệu, cho thuốc, chăm sau mổ, kết nối &amp; báo cáo cho gia đình.</p>
+        <span class="sp-pain">Chăm tổng quát · hậu phẫu · phụ thuộc</span>
+      </div>
+      <div class="spec-card">
+        <div class="sp-icon">👨‍⚕️</div>
+        <h5>Bác sĩ lão khoa</h5>
+        <p>Bác sĩ điều phối toàn cảnh đa bệnh ở người già, chuẩn phác đồ chăm sóc tổng thể.</p>
+        <span class="sp-pain">Đa bệnh · điều phối phác đồ</span>
+      </div>
+      <div class="spec-card">
+        <div class="sp-icon">❤️</div>
+        <h5>Bác sĩ tim mạch</h5>
+        <p>Tăng huyết áp, rối loạn nhịp, suy tim — theo dõi &amp; điều chỉnh điều trị từ xa.</p>
+        <span class="sp-pain">Tăng huyết áp · tim mạch</span>
+      </div>
+      <div class="spec-card">
+        <div class="sp-icon">🩸</div>
+        <h5>Bác sĩ nội tiết</h5>
+        <p>Đái tháo đường type 2 &amp; biến chứng, rối loạn chuyển hóa, theo dõi đường huyết.</p>
+        <span class="sp-pain">Tiểu đường · nội tiết</span>
+      </div>
+      <div class="spec-card">
+        <div class="sp-icon">🦴</div>
+        <h5>Bác sĩ cơ xương khớp</h5>
+        <p>Thoái hóa khớp, loãng xương, đau mạn tính &amp; nguy cơ gãy do té ngã.</p>
+        <span class="sp-pain">Thoái hóa khớp · loãng xương</span>
+      </div>
+      <div class="spec-card">
+        <div class="sp-icon">🧠</div>
+        <h5>Bác sĩ thần kinh</h5>
+        <p>Đột quỵ, Parkinson, sa sút trí tuệ/Alzheimer — chẩn đoán &amp; quản lý dài hạn.</p>
+        <span class="sp-pain">Sa sút trí tuệ · đột quỵ</span>
+      </div>
+      <div class="spec-card">
+        <div class="sp-icon">🏃</div>
+        <h5>Phục hồi chức năng</h5>
+        <p>KTV vật lý trị liệu: phục hồi sau mổ/đột quỵ, tập vận động, phòng té ngã tại nhà.</p>
+        <span class="sp-pain">Hậu phẫu · vận động</span>
+      </div>
+      <div class="spec-card">
+        <div class="sp-icon">💊</div>
+        <h5>Dược sĩ lâm sàng</h5>
+        <p>Rà soát đa thuốc, phát hiện tương tác, tối ưu đơn — giảm sai sót dùng thuốc ở người già.</p>
+        <span class="sp-pain">Đa thuốc · tương tác thuốc</span>
+      </div>
+      <div class="spec-card">
+        <div class="sp-icon">🥗</div>
+        <h5>Chuyên gia dinh dưỡng</h5>
+        <p>Chế độ ăn theo bệnh mạn (tiểu đường, tim mạch), chống suy dinh dưỡng người già.</p>
+        <span class="sp-pain">Dinh dưỡng · suy dinh dưỡng</span>
+      </div>
+      <div class="spec-card">
+        <div class="sp-icon">💬</div>
+        <h5>Chuyên gia tâm lý</h5>
+        <p>Trầm cảm, lo âu, cô đơn, kích động ở sa sút trí tuệ; hỗ trợ tinh thần người già &amp; người nhà.</p>
+        <span class="sp-pain">Cô đơn · trầm cảm</span>
+      </div>
+      <div class="spec-card">
+        <div class="sp-icon">🤝</div>
+        <h5>Công tác xã hội</h5>
+        <p>Kết nối nguồn lực, hỗ trợ người giám hộ, giảm gánh nặng &amp; kiệt sức cho gia đình.</p>
+        <span class="sp-pain">Gánh nặng người nhà · giám hộ</span>
+      </div>
+      <div class="spec-card">
+        <div class="sp-icon">🆘</div>
+        <h5>Tổng đài &amp; điều dưỡng trực</h5>
+        <p>Trực 24/7, xử lý cảnh báo té ngã/cấp cứu, điều phối tới bác sĩ chuyên khoa &amp; 115.</p>
+        <span class="sp-pain">Cấp cứu · té ngã</span>
+      </div>
+    </div>
+
+    <button class="deep-toggle" onclick="toggleDeep(this)" data-closed-label="Phân tích sâu: quy tắc ghép chuyên gia &amp; đội chăm đa ngành" data-open-label="Thu gọn">
+      <span class="dt-label">Phân tích sâu: quy tắc ghép chuyên gia &amp; đội chăm đa ngành</span><span class="chev">▼</span>
+    </button>
+    <div class="deep-panel">
+      <div class="deep-inner">
+        <h5>🧩 Đội chăm đa ngành (care team) theo mức phụ thuộc</h5>
+        <p>Người già hiếm khi chỉ có một bệnh — ElderCare tổ chức <strong>đội chăm đa ngành</strong> quanh mỗi ca, với điều dưỡng lão khoa làm <em>đầu mối điều phối</em>. Quy mô đội co giãn theo mức phụ thuộc:</p>
+        <table class="deep-table">
+          <thead><tr><th>Mức phụ thuộc</th><th>Đội chăm điển hình</th><th>Tần suất</th></tr></thead>
+          <tbody>
+            <tr><td>Tự chủ</td><td>Điều dưỡng từ xa + tele bác sĩ chuyên khoa khi cần</td><td>Theo dõi định kỳ</td></tr>
+            <tr><td>Hỗ trợ một phần</td><td>Điều dưỡng theo giờ + dược lâm sàng + dinh dưỡng</td><td>Vài buổi/tuần</td></tr>
+            <tr><td>Hậu phẫu</td><td>Điều dưỡng sau mổ + PHCN + BS cơ xương khớp</td><td>Hằng ngày, có thời hạn</td></tr>
+            <tr><td>Phụ thuộc nặng</td><td>Điều dưỡng thường trực + điều phối đa chuyên khoa</td><td>24/7</td></tr>
+            <tr><td>Sa sút trí tuệ</td><td>Điều dưỡng + BS thần kinh + tâm lý + công tác xã hội</td><td>Thường trực + giám sát</td></tr>
+          </tbody>
+        </table>
+        <div class="deep-stats">
+          <div class="deep-stat"><div class="ds-num">12</div><div class="ds-label">loại chuyên gia trong mạng lưới</div></div>
+          <div class="deep-stat"><div class="ds-num">1</div><div class="ds-label">điều dưỡng đầu mối/ca (single point)</div></div>
+          <div class="deep-stat"><div class="ds-num">3–5</div><div class="ds-label">chuyên gia/đội ca phức tạp</div></div>
+        </div>
+        <div class="deep-callout">🔗 Quy tắc ghép đọc đồng thời: <strong>nỗi đau lõi</strong> (chọn chuyên gia chủ trì) + <strong>bệnh kèm</strong> (thêm chuyên gia phối hợp) + <strong>địa lý</strong> (offline hay tele) + <strong>mức phụ thuộc</strong> (tần suất &amp; quy mô đội). Đây chính là không gian đặc trưng mà mô hình matching ở ô AI bên dưới tối ưu.</div>
+      </div>
+    </div>
+
+    <!-- ⚠️ RỦI RO & BACKUP -->
+    <div class="endbox risk">
+      <h4>⚠️ Rủi ro phân khúc &amp; chuyên gia · phương án backup</h4>
+      <p class="eb-desc">Mạng lưới chuyên gia là tài sản &amp; cũng là điểm yếu vận hành — mỗi rủi ro gắn giải pháp chủ động và phương án dự phòng.</p>
+      <div class="risk-row">
+        <div class="risk-item">
+          <div class="ri-head">🕳️ Thiếu chuyên gia ở một mảng (vd lão khoa, PHCN)</div>
+          <div class="ri-fix"><strong>Giải pháp:</strong> xây mạng lưới đa nguồn (bệnh viện đối tác, freelancer xác minh, trường y/điều dưỡng); dự báo nhu cầu theo cohort để tuyển trước.</div>
+          <div class="ri-backup">Backup: tele kết nối chuyên gia vùng/thành phố khác lấp chỗ trống; ưu tiên điều dưỡng đa năng đã đào tạo chéo cho nhu cầu cơ bản.</div>
+        </div>
+        <div class="risk-item">
+          <div class="ri-head">🎯 Phân loại sai segment / sai mức phụ thuộc</div>
+          <div class="ri-fix"><strong>Giải pháp:</strong> onboarding có bộ câu hỏi chuẩn hóa + đánh giá ban đầu bởi điều dưỡng; rà soát lại sau buổi đầu tiên.</div>
+          <div class="ri-backup">Backup: cơ chế "nâng/hạ cấp gói" linh hoạt &amp; con người review khi AI thiếu tự tin; hoàn phí nếu ghép sai.</div>
+        </div>
+        <div class="risk-item">
+          <div class="ri-head">⭐ Chuyên gia kém chất lượng làm hỏng niềm tin</div>
+          <div class="ri-fix"><strong>Giải pháp:</strong> xác minh chứng chỉ, đào tạo &amp; chấm điểm năng lực (xem Phiên 4), đánh giá 2 chiều sau mỗi ca, loại nếu dưới ngưỡng.</div>
+          <div class="ri-backup">Backup: bảo hiểm trách nhiệm nghề nghiệp; đội "chuyên gia dự phòng" thay thế trong 24h; giám sát chất lượng bằng AI.</div>
+        </div>
+        <div class="risk-item">
+          <div class="ri-head">📍 Vùng tỉnh thiếu cung offline → không phục vụ được</div>
+          <div class="ri-fix"><strong>Giải pháp:</strong> mô hình "tele-first" cho tỉnh: chuyên gia tuyến trên qua video + thiết bị CareSense + điều dưỡng địa phương cộng tác.</div>
+          <div class="ri-backup">Backup: hoãn ra mắt offline ở vùng cung mỏng, chỉ bán gói thiết bị + tele; mở rộng khi đủ mật độ caregiver.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 🤖 AI ỨNG DỤNG -->
+    <div class="endbox ai">
+      <h4>🤖 AI ứng dụng ở đâu (phân khúc &amp; ghép chuyên gia)</h4>
+      <p class="eb-desc">AI biến phân khúc &amp; ma trận chuyên gia ở trên thành tự động hóa: phân loại khách, ghép đúng chuyên gia và phân tầng mức độ ưu tiên.</p>
+      <div class="ai-row">
+        <div class="ai-item">
+          <div class="ai-head">🗂️ Phân loại segment tự động</div>
+          <p>Từ câu trả lời onboarding (khoảng cách, thu nhập, bệnh nền, mức tự chủ) → tự gán vào ô khách hàng &amp; gợi ý gói phù hợp.</p>
+          <span class="ai-model">Classification ML</span>
+        </div>
+        <div class="ai-item">
+          <div class="ai-head">🔗 Ghép đúng chuyên gia (matching)</div>
+          <p>Học từ ma trận nỗi đau→chuyên gia + vị trí, kỹ năng, đánh giá, lịch trống → đề xuất đội chăm tối ưu cho mỗi ca.</p>
+          <span class="ai-model">Recommendation / matching</span>
+        </div>
+        <div class="ai-item">
+          <div class="ai-head">🚦 Triage mức độ phụ thuộc</div>
+          <p>Phân tầng tự chủ → phụ thuộc nặng từ sinh hiệu &amp; dữ liệu chăm sóc; phát hiện ca cần nâng cấp đội chăm sớm.</p>
+          <span class="ai-model">Risk scoring / triage</span>
+        </div>
+        <div class="ai-item">
+          <div class="ai-head">📊 Dự báo nhu cầu chuyên gia</div>
+          <p>Dự phóng cầu từng loại chuyên gia theo vùng &amp; cohort để tuyển/đào tạo trước, tránh thiếu cung cục bộ.</p>
+          <span class="ai-model">Demand forecasting</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
 <!-- ====================================================================== -->
-<!-- PHIÊN 3 SẼ CHÈN: #segment (Phân khúc + ma trận chuyên gia)              -->
 <!-- PHIÊN 4 SẼ CHÈN: #disease (Bệnh lý + giáo trình training)               -->
 <!-- PHIÊN 5 SẼ CHÈN: #legal (Đạo đức & pháp lý)                             -->
 <!-- PHIÊN 6 SẼ CHÈN: #summary (Risk register tổng + bản đồ AI tổng)         -->
