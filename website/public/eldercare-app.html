@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ElderCare VN — App Demo (clickable prototype)</title>
-  <meta name="description" content="App demo tương tác ElderCare VN — clickable prototype 5 trụ cột: Tổng quan, Chăm sóc, Khám, Tài chính, Hồ sơ bố mẹ + mô phỏng cảnh báo té ngã. Dự án ETR601 SEM40HN." />
+  <meta name="description" content="App demo tương tác ElderCare VN — clickable prototype 5 trụ cột: Tổng quan, Chăm sóc, Khám, Tài chính, Hồ sơ bố mẹ. Chuyển hồ sơ Bà Hoa ↔ Ông Tâm, ngưỡng CareSense, đội chăm đa chuyên ngành, AI matching, MedFin, xác thực thuốc. Dự án ETR601 SEM40HN." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
@@ -139,7 +139,7 @@
     .app-header {
       flex-shrink: 0;
       background: linear-gradient(135deg, var(--care) 0%, #0f766e 100%);
-      color: #fff; padding: 0.6rem 1.1rem 1rem;
+      color: #fff; padding: 0.6rem 1.1rem 0.85rem;
       display: flex; align-items: center; gap: 0.7rem;
     }
     .app-avatar {
@@ -152,7 +152,7 @@
     .bell {
       margin-left: auto; position: relative; font-size: 1.25rem; cursor: pointer;
       width: 38px; height: 38px; border-radius: 50%;
-      background: rgba(255,255,255,0.15);
+      background: rgba(255,255,255,0.15); flex-shrink: 0;
       display: flex; align-items: center; justify-content: center;
     }
     .bell-badge {
@@ -162,6 +162,28 @@
       min-width: 16px; height: 16px; border-radius: 99px;
       display: flex; align-items: center; justify-content: center; padding: 0 4px;
       border: 2px solid #0f766e;
+    }
+
+    /* PERSONA SWITCH BAR */
+    .persona-bar {
+      flex-shrink: 0; width: 100%;
+      display: flex; align-items: center; gap: 0.6rem;
+      background: #ffffff; border: none; border-bottom: 1px solid var(--border);
+      padding: 0.5rem 1.1rem; cursor: pointer; font-family: inherit;
+      text-align: left; transition: background .15s;
+    }
+    .persona-bar:active { background: #f0fdfa; }
+    .persona-bar .pb-ava {
+      width: 34px; height: 34px; border-radius: 50%; background: #f0fdfa;
+      display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0;
+    }
+    .persona-bar .pb-info { display: flex; flex-direction: column; line-height: 1.25; min-width: 0; }
+    .persona-bar .pb-info b { font-size: 0.85rem; color: var(--primary); }
+    .persona-bar .pb-info span { font-size: 0.68rem; color: var(--muted); }
+    .persona-bar .pb-switch {
+      margin-left: auto; flex-shrink: 0;
+      background: #ecfeff; color: var(--care); border: 1px solid #99f6e4;
+      font-size: 0.68rem; font-weight: 800; padding: 4px 10px; border-radius: 99px;
     }
 
     /* VIEWPORT (scrollable screens) */
@@ -186,26 +208,34 @@
       display: flex; align-items: center; gap: 0.4rem;
     }
     .status-hero {
-      background: linear-gradient(135deg, #ecfdf5, #f0fdfa);
-      border: 1px solid #a7f3d0;
       border-radius: 18px; padding: 1.15rem; margin-bottom: 0.85rem;
       display: flex; align-items: center; gap: 0.85rem;
     }
+    .status-hero.ok { background: linear-gradient(135deg, #ecfdf5, #f0fdfa); border: 1px solid #a7f3d0; }
+    .status-hero.warn { background: linear-gradient(135deg, #fffbeb, #fff7ed); border: 1px solid #fcd9a8; }
     .status-hero .sh-emoji {
       width: 52px; height: 52px; border-radius: 50%;
-      background: #d1fae5; display: flex; align-items: center; justify-content: center;
+      display: flex; align-items: center; justify-content: center;
       font-size: 1.8rem; flex-shrink: 0;
     }
-    .status-hero .sh-title { font-size: 1.15rem; font-weight: 900; color: #047857; }
-    .status-hero .sh-sub { font-size: 0.76rem; color: #059669; }
+    .status-hero.ok .sh-emoji { background: #d1fae5; }
+    .status-hero.warn .sh-emoji { background: #fde9c8; }
+    .status-hero .sh-title { font-size: 1.15rem; font-weight: 900; }
+    .status-hero.ok .sh-title { color: #047857; }
+    .status-hero.warn .sh-title { color: #b45309; }
+    .status-hero .sh-sub { font-size: 0.76rem; }
+    .status-hero.ok .sh-sub { color: #059669; }
+    .status-hero.warn .sh-sub { color: #d97706; }
 
     /* vitals grid */
     .vitals { display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; }
     .vital {
       background: #fff; border: 1px solid var(--border);
       border-radius: 12px; padding: 0.7rem 0.8rem;
-      position: relative;
+      position: relative; cursor: pointer; text-align: left; font-family: inherit;
+      transition: all .15s;
     }
+    .vital:active { transform: scale(0.97); }
     .vital .v-dot {
       position: absolute; top: 0.7rem; right: 0.7rem;
       width: 9px; height: 9px; border-radius: 50%;
@@ -216,6 +246,7 @@
     .vital .v-num { font-size: 1.25rem; font-weight: 900; color: var(--primary); line-height: 1.1; margin-top: 0.2rem; }
     .vital .v-label { font-size: 0.68rem; color: var(--muted); }
     .vital .v-unit { font-size: 0.72rem; font-weight: 600; color: var(--muted); }
+    .vital .v-tap { font-size: 0.6rem; color: var(--care); font-weight: 700; margin-top: 0.25rem; }
 
     /* alert list */
     .alert-row {
@@ -225,8 +256,10 @@
     .alert-row:last-child { border-bottom: none; }
     .alert-row .a-ico { flex-shrink: 0; font-size: 0.95rem; }
     .alert-row .a-time { color: var(--muted); font-size: 0.72rem; }
+    .alert-row .a-who { color: var(--care); font-size: 0.68rem; font-weight: 700; }
     .alert-row.warn .a-txt { color: #b45309; }
     .alert-row.ok .a-txt { color: #047857; }
+    .alert-row.danger .a-txt { color: #dc2626; font-weight: 700; }
 
     /* schedule */
     .sched-row {
@@ -254,6 +287,17 @@
     .quick-btn .qb-ico { font-size: 1.4rem; }
     .quick-btn.danger { background: #fef2f2; border-color: #fecaca; color: var(--danger); }
 
+    /* backup-feature chips (P2 entry points) */
+    .extra-grid { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .extra-chip {
+      flex: 1 1 30%; border: 1px solid var(--border); background: #fff;
+      border-radius: 12px; padding: 0.6rem 0.4rem; cursor: pointer; font-family: inherit;
+      font-size: 0.66rem; font-weight: 700; color: var(--primary); text-align: center;
+      display: flex; flex-direction: column; align-items: center; gap: 0.25rem; transition: all .15s;
+    }
+    .extra-chip:active { transform: scale(0.96); }
+    .extra-chip .ec-ico { font-size: 1.2rem; }
+
     /* buttons */
     .btn {
       font-family: inherit; cursor: pointer; border: none;
@@ -276,18 +320,24 @@
     .subtab.active { background: #fff; color: var(--care); box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
 
     /* person card (caregiver / doctor) */
-    .person {
-      display: flex; align-items: center; gap: 0.75rem;
-    }
+    .person { display: flex; align-items: center; gap: 0.75rem; }
     .person-avatar {
       width: 50px; height: 50px; border-radius: 14px; flex-shrink: 0;
       background: #f0fdfa; display: flex; align-items: center; justify-content: center; font-size: 1.7rem;
     }
-    .person .p-name { font-weight: 800; font-size: 0.92rem; display: flex; align-items: center; gap: 0.35rem; }
+    .person .p-name { font-weight: 800; font-size: 0.92rem; display: flex; align-items: center; gap: 0.35rem; flex-wrap: wrap; }
     .person .p-meta { font-size: 0.74rem; color: var(--muted); }
     .verify-chip {
       background: #ecfdf5; color: #047857; font-size: 0.64rem; font-weight: 800;
       padding: 1px 7px; border-radius: 99px; border: 1px solid #a7f3d0;
+    }
+    .lic-chip {
+      background: #eff6ff; color: #1d4ed8; font-size: 0.62rem; font-weight: 800;
+      padding: 1px 7px; border-radius: 99px; border: 1px solid #bfdbfe;
+    }
+    .cert-chip {
+      background: #fefce8; color: #a16207; font-size: 0.62rem; font-weight: 800;
+      padding: 1px 7px; border-radius: 99px; border: 1px solid #fde68a;
     }
     .skill-chip {
       display: inline-block; background: #f0fdfa; color: #0f766e;
@@ -295,6 +345,30 @@
       border-radius: 99px; margin: 0.3rem 0.3rem 0 0;
     }
     .star { color: var(--gold); font-weight: 800; }
+
+    /* care team */
+    .team-lead {
+      display: flex; align-items: center; gap: 0.6rem;
+      background: #f0fdfa; border: 1px solid #99f6e4; border-radius: 12px;
+      padding: 0.6rem 0.7rem; margin-bottom: 0.5rem;
+    }
+    .team-lead .tl-ava {
+      width: 38px; height: 38px; border-radius: 10px; background: #ccfbf1;
+      display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0;
+    }
+    .team-lead .tl-role { font-size: 0.64rem; font-weight: 800; color: var(--care); text-transform: uppercase; letter-spacing: 0.5px; }
+    .team-lead .tl-name { font-size: 0.85rem; font-weight: 800; }
+    .team-member {
+      display: flex; align-items: center; gap: 0.6rem;
+      padding: 0.45rem 0; border-bottom: 1px solid #f1f5f4; font-size: 0.82rem;
+    }
+    .team-member:last-child { border-bottom: none; }
+    .team-member .tm-ico {
+      width: 30px; height: 30px; border-radius: 9px; background: #f8fafc; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center; font-size: 1rem;
+    }
+    .team-member .tm-role { font-size: 0.7rem; color: var(--muted); }
+    .team-member .tm-name { font-weight: 700; }
 
     /* timeline */
     .timeline { margin-top: 0.6rem; display: none; }
@@ -306,7 +380,7 @@
     /* mini chat */
     .chat-box {
       background: #f8fafa; border: 1px solid var(--border);
-      border-radius: 14px; padding: 0.85rem; margin-bottom: 0.85rem;
+      border-radius: 14px; padding: 0.85rem; margin-bottom: 0.6rem;
       max-height: 230px; overflow-y: auto;
     }
     .bubble {
@@ -323,10 +397,47 @@
     }
     .chip:active { transform: scale(0.95); }
     .chip.dim { opacity: 0.45; }
+    .chip.sel { background: var(--care); color: #fff; }
+    .ai-note {
+      font-size: 0.68rem; color: var(--muted); background: #f8fafc;
+      border: 1px dashed #cbd5e1; border-radius: 8px; padding: 0.4rem 0.6rem;
+      margin-bottom: 0.85rem; display: flex; align-items: flex-start; gap: 0.35rem;
+    }
 
     /* progress bar */
     .progress { height: 8px; background: #e5e7eb; border-radius: 99px; overflow: hidden; margin: 0.5rem 0; }
     .progress > i { display: block; height: 100%; background: linear-gradient(90deg, var(--care), var(--care-light)); border-radius: 99px; }
+
+    /* package tier cards */
+    .tier-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; }
+    .tier-card {
+      border: 1.5px solid var(--border); border-radius: 14px; padding: 0.8rem 0.7rem; background: #fff;
+      position: relative;
+    }
+    .tier-card.cur { border-color: var(--care); background: #f0fdfa; box-shadow: 0 2px 8px rgba(13,148,136,0.12); }
+    .tier-card .ti-name { font-size: 0.82rem; font-weight: 900; }
+    .tier-card .ti-price { font-size: 1.05rem; font-weight: 900; color: var(--care); }
+    .tier-card .ti-price span { font-size: 0.64rem; color: var(--muted); font-weight: 600; }
+    .tier-card ul { list-style: none; margin-top: 0.45rem; }
+    .tier-card li { font-size: 0.68rem; color: #374151; padding: 0.12rem 0 0.12rem 0.9rem; position: relative; }
+    .tier-card li::before { content: '✓'; position: absolute; left: 0; color: var(--care); font-weight: 900; }
+    .tier-card .ti-badge {
+      position: absolute; top: -9px; right: 8px;
+      background: var(--care); color: #fff; font-size: 0.58rem; font-weight: 800;
+      padding: 2px 8px; border-radius: 99px;
+    }
+
+    /* medfin score */
+    .score-card {
+      background: linear-gradient(135deg, #eff6ff, #f0fdfa);
+      border: 1px solid #bfdbfe; border-radius: 14px; padding: 0.85rem; margin-bottom: 0.85rem;
+    }
+    .score-row { display: flex; justify-content: space-between; font-size: 0.78rem; padding: 0.2rem 0; }
+    .score-row b { color: #1d4ed8; }
+    .score-badge {
+      display: inline-block; background: #dcfce7; color: #15803d;
+      font-size: 0.66rem; font-weight: 800; padding: 1px 9px; border-radius: 99px; border: 1px solid #86efac;
+    }
 
     /* device toggle */
     .device-row {
@@ -370,10 +481,11 @@
 
     /* chronic chips */
     .chronic { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.5rem; }
-    .chronic span {
-      background: #fff1f2; color: #be123c; border: 1px solid #fecdd3;
-      font-size: 0.72rem; font-weight: 600; padding: 3px 10px; border-radius: 99px;
+    .chronic button {
+      background: #fff1f2; color: #be123c; border: 1px solid #fecdd3; font-family: inherit;
+      font-size: 0.72rem; font-weight: 700; padding: 4px 11px; border-radius: 99px; cursor: pointer; transition: all .15s;
     }
+    .chronic button:active { transform: scale(0.95); }
 
     /* profile header */
     .profile-head {
@@ -388,12 +500,25 @@
     .profile-head .ph-name { font-size: 1.1rem; font-weight: 900; }
     .profile-head .ph-meta { font-size: 0.76rem; color: rgba(255,255,255,0.85); }
 
+    /* consent card */
+    .consent-card {
+      background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 14px; padding: 0.9rem; margin-bottom: 0.85rem;
+    }
+    .consent-card .cc-txt { font-size: 0.78rem; color: #1e3a8a; line-height: 1.5; }
+    .consent-row {
+      display: flex; align-items: center; gap: 0.7rem; margin-top: 0.7rem;
+      padding-top: 0.7rem; border-top: 1px solid #dbeafe;
+    }
+    .consent-row .cr-name { font-weight: 700; font-size: 0.82rem; color: #1e3a8a; }
+    .consent-row .cr-sub { font-size: 0.68rem; color: #3b82f6; }
+
     /* fall sim button */
     .fall-btn {
       width: 100%; border: 1.5px dashed #fca5a5; background: #fef2f2; color: #dc2626;
       border-radius: 14px; padding: 0.85rem; font-family: inherit; font-weight: 800;
-      font-size: 0.88rem; cursor: pointer; transition: all .15s;
+      font-size: 0.88rem; cursor: pointer; transition: all .15s; margin-bottom: 0.5rem;
     }
+    .fall-btn.amber { border-color: #fcd34d; background: #fffbeb; color: #b45309; margin-bottom: 0; }
     .fall-btn:active { transform: scale(0.97); }
 
     /* BOTTOM NAV */
@@ -418,18 +543,43 @@
       position: absolute; bottom: 90px; left: 50%; transform: translateX(-50%) translateY(20px);
       background: rgba(17,24,39,0.94); color: #fff;
       padding: 0.7rem 1.1rem; border-radius: 12px;
-      font-size: 0.82rem; font-weight: 600; white-space: nowrap;
-      opacity: 0; pointer-events: none; transition: all .3s; z-index: 40;
+      font-size: 0.82rem; font-weight: 600; text-align: center;
+      opacity: 0; pointer-events: none; transition: all .3s; z-index: 70;
       max-width: 88%;
     }
     .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
-    /* MODAL: video call */
+    /* BOTTOM SHEET */
+    .sheet-overlay {
+      position: absolute; inset: 0; z-index: 55;
+      background: rgba(0,0,0,0.42); display: none; align-items: flex-end;
+    }
+    .sheet-overlay.show { display: flex; }
+    .sheet {
+      background: #fff; width: 100%; border-radius: 22px 22px 0 0;
+      padding: 0.7rem 1.1rem 1.4rem; max-height: 82%; overflow-y: auto;
+      animation: slideup .28s cubic-bezier(.2,.8,.2,1);
+    }
+    @keyframes slideup { from { transform: translateY(100%); } to { transform: none; } }
+    .sheet-handle { width: 40px; height: 4px; background: #d1d5db; border-radius: 99px; margin: 0 auto 0.9rem; }
+    .sheet h3 { font-size: 1.02rem; font-weight: 900; margin-bottom: 0.2rem; }
+    .sheet .sh-sub2 { font-size: 0.78rem; color: var(--muted); margin-bottom: 0.85rem; }
+    .sheet-info {
+      display: flex; gap: 0.6rem; padding: 0.6rem 0; border-bottom: 1px solid #f1f5f4; font-size: 0.82rem;
+    }
+    .sheet-info:last-of-type { border-bottom: none; }
+    .sheet-info .si-lab { font-size: 0.66rem; font-weight: 800; color: var(--muted); text-transform: uppercase; min-width: 86px; flex-shrink: 0; padding-top: 1px; }
+    .sheet-info .si-val { color: var(--primary); }
+    .sheet-info .si-val b { color: var(--care); }
+
+    /* GENERIC OVERLAY SCREEN */
     .overlay-screen {
-      position: absolute; inset: 0; z-index: 35;
+      position: absolute; inset: 0; z-index: 60;
       display: none; flex-direction: column;
     }
     .overlay-screen.show { display: flex; }
+
+    /* video call */
     .video-call {
       background: linear-gradient(160deg, #0f172a, #134e4a);
       color: #fff; height: 100%;
@@ -453,9 +603,69 @@
     .vc-ctrl:active { transform: scale(0.92); }
     .vc-ctrl.end { background: var(--danger); }
 
-    /* FALL OVERLAY */
+    /* ONBOARDING */
+    .ob-wrap { background: #fff; height: 100%; display: flex; flex-direction: column; }
+    .ob-head {
+      background: linear-gradient(135deg, var(--care), #0f766e); color: #fff;
+      padding: 1rem 1.1rem; display: flex; align-items: center; gap: 0.7rem; flex-shrink: 0;
+    }
+    .ob-head .ob-close { margin-left: auto; background: rgba(255,255,255,0.18); border: none; color: #fff;
+      width: 32px; height: 32px; border-radius: 50%; font-size: 1rem; cursor: pointer; }
+    .ob-steps { display: flex; gap: 0.35rem; padding: 0.8rem 1.1rem 0; flex-shrink: 0; }
+    .ob-steps i { flex: 1; height: 4px; border-radius: 99px; background: #e5e7eb; }
+    .ob-steps i.on { background: var(--care); }
+    .ob-body { flex: 1; overflow-y: auto; padding: 1rem 1.1rem; }
+    .ob-body h3 { font-size: 1.05rem; font-weight: 900; margin-bottom: 0.3rem; }
+    .ob-body .ob-q { font-size: 0.8rem; color: var(--muted); margin-bottom: 0.9rem; }
+    .ob-opt {
+      display: block; width: 100%; text-align: left; font-family: inherit;
+      border: 1.5px solid var(--border); background: #fff; border-radius: 12px;
+      padding: 0.75rem 0.9rem; margin-bottom: 0.5rem; font-size: 0.85rem; font-weight: 700;
+      color: var(--primary); cursor: pointer; transition: all .15s;
+    }
+    .ob-opt.sel { border-color: var(--care); background: #f0fdfa; color: var(--care); }
+    .ob-opt .ob-od { font-size: 0.7rem; font-weight: 500; color: var(--muted); margin-top: 0.15rem; }
+    .ob-foot { padding: 0.85rem 1.1rem; border-top: 1px solid var(--border); flex-shrink: 0; }
+    .ob-result { background: #f0fdfa; border: 1px solid #99f6e4; border-radius: 14px; padding: 1rem; }
+    .ob-result .or-row { font-size: 0.82rem; margin-bottom: 0.4rem; }
+
+    /* PHARMACY / DRUG VERIFY */
+    .pharma-wrap { background: var(--light); height: 100%; display: flex; flex-direction: column; }
+    .pharma-head {
+      background: linear-gradient(135deg, #0d9488, #0f766e); color: #fff;
+      padding: 1rem 1.1rem; display: flex; align-items: center; gap: 0.7rem; flex-shrink: 0;
+    }
+    .pharma-head .ph-close { margin-left: auto; background: rgba(255,255,255,0.18); border: none; color: #fff;
+      width: 32px; height: 32px; border-radius: 50%; font-size: 1rem; cursor: pointer; }
+    .pharma-body { flex: 1; overflow-y: auto; padding: 1rem 1.1rem; }
+    .gpp-badge {
+      display: inline-flex; align-items: center; gap: 0.35rem;
+      background: #ecfdf5; color: #047857; border: 1px solid #a7f3d0;
+      font-size: 0.7rem; font-weight: 800; padding: 4px 11px; border-radius: 99px; margin-bottom: 0.6rem;
+    }
+    .scan-box {
+      border: 2px dashed #99f6e4; border-radius: 16px; background: #f0fdfa;
+      padding: 1.4rem; text-align: center; margin: 0.6rem 0;
+      position: relative; overflow: hidden;
+    }
+    .scan-box .scan-ico { font-size: 2.6rem; }
+    .scan-line {
+      position: absolute; left: 8%; right: 8%; height: 2px; background: var(--care);
+      box-shadow: 0 0 8px var(--care); top: 12%; display: none;
+    }
+    .scan-box.scanning .scan-line { display: block; animation: scanmove 1.1s linear infinite; }
+    @keyframes scanmove { 0% { top: 12%; } 100% { top: 88%; } }
+    .verify-result {
+      background: #ecfdf5; border: 1px solid #a7f3d0; border-radius: 14px;
+      padding: 0.9rem; margin-top: 0.6rem; display: none;
+    }
+    .verify-result.show { display: block; animation: fade .3s ease; }
+    .verify-result .vr-title { font-weight: 900; color: #047857; font-size: 0.95rem; }
+    .verify-result .vr-row { font-size: 0.78rem; color: #065f46; margin-top: 0.3rem; }
+
+    /* FALL / EMERGENCY OVERLAY */
     .fall-overlay {
-      position: absolute; inset: 0; z-index: 60;
+      position: absolute; inset: 0; z-index: 65;
       background: rgba(185,28,28,0.97);
       display: none; flex-direction: column; align-items: center; justify-content: center;
       padding: 2rem; text-align: center; color: #fff;
@@ -510,12 +720,12 @@
   <div class="marketing">
     <span class="mk-tag">📱 App Demo tương tác</span>
     <h1>Một app để cả nhà <span>an tâm</span> chăm bố mẹ già</h1>
-    <p class="mk-sub">Bấm thử 5 trụ cột super-app — đây là màn hình của <strong>con cái</strong> theo dõi sức khỏe bố mẹ từ xa.</p>
+    <p class="mk-sub">Bấm thử 5 trụ cột super-app — đây là màn hình của <strong>con cái</strong> theo dõi sức khỏe bố mẹ từ xa. Đổi hồ sơ <strong>Bà Hoa ↔ Ông Tâm</strong> để xem app thích ứng theo bệnh lý &amp; đội chăm.</p>
     <div class="mk-caption" id="mkCaption">
       <div class="mc-title" id="mkTitle">🏠 Tổng quan</div>
-      <div class="mc-desc" id="mkDesc">Bảng điều khiển sức khỏe — trạng thái, sinh hiệu hôm nay, cảnh báo và lịch chăm sóc của Bà Hoa.</div>
+      <div class="mc-desc" id="mkDesc">Bảng điều khiển sức khỏe — trạng thái, sinh hiệu hôm nay gắn ngưỡng cảnh báo, và lịch chăm sóc.</div>
     </div>
-    <div class="mk-hint">👆 Bấm các tab dưới đáy điện thoại để chuyển màn</div>
+    <div class="mk-hint">👆 Bấm tab dưới đáy · đổi hồ sơ · tap ô sinh hiệu để xem ngưỡng</div>
     <br/>
     <span class="mk-mock-badge">⚠️ Dữ liệu minh họa · demo pitch</span>
   </div>
@@ -534,298 +744,36 @@
       <!-- app header -->
       <div class="app-header">
         <div class="app-avatar">🧑‍💼</div>
-        <div>
+        <div style="min-width:0">
           <div class="hi">Xin chào, Minh 👋</div>
-          <div class="sub">Đang chăm: Bà Nguyễn Thị Hoa · 72 tuổi</div>
+          <div class="sub" id="appSub">Đang chăm: Bà Hoa · 72 tuổi</div>
         </div>
-        <div class="bell" onclick="toast('🔔 3 thông báo mới về Bà Hoa')">
-          🔔<span class="bell-badge">3</span>
+        <div class="bell" id="bell" onclick="toast('🔔 ' + bellMsg())">
+          🔔<span class="bell-badge" id="bellBadge">3</span>
         </div>
       </div>
 
+      <!-- PERSONA SWITCH -->
+      <button class="persona-bar" id="persona-switch" onclick="openProfileChooser()">
+        <span class="pb-ava" id="psAva">👵</span>
+        <span class="pb-info"><b id="psName">Bà Hoa</b><span id="psMeta">72t · Hỗ trợ một phần</span></span>
+        <span class="pb-switch">⇄ Đổi hồ sơ</span>
+      </button>
+
       <!-- VIEWPORT -->
       <div class="viewport" id="viewport">
-
-        <!-- SCREEN 1: TỔNG QUAN -->
-        <section class="screen active" id="screen-home">
-          <div class="status-hero">
-            <div class="sh-emoji">✅</div>
-            <div>
-              <div class="sh-title">Mẹ vẫn ổn</div>
-              <div class="sh-sub">Cập nhật 2 phút trước · Phòng khách</div>
-            </div>
-          </div>
-
-          <div class="card">
-            <div class="card-title">🩺 Sinh hiệu hôm nay · CareSense</div>
-            <div class="vitals">
-              <div class="vital"><span class="v-dot ok"></span><div class="v-icon">❤️</div><div class="v-num">78</div><div class="v-label">Nhịp tim <span class="v-unit">bpm</span></div></div>
-              <div class="vital"><span class="v-dot warn"></span><div class="v-icon">🩸</div><div class="v-num">132/85</div><div class="v-label">Huyết áp <span class="v-unit">mmHg</span></div></div>
-              <div class="vital"><span class="v-dot ok"></span><div class="v-icon">🩸</div><div class="v-num">6.1</div><div class="v-label">Đường huyết <span class="v-unit">mmol/L</span></div></div>
-              <div class="vital"><span class="v-dot ok"></span><div class="v-icon">🫁</div><div class="v-num">97%</div><div class="v-label">SpO₂</div></div>
-            </div>
-          </div>
-
-          <div class="card">
-            <div class="card-title">⚡ Cảnh báo gần đây</div>
-            <div class="alert-row warn">
-              <span class="a-ico">⚠️</span>
-              <div><div class="a-txt">Huyết áp hơi cao (132/85)</div><div class="a-time">Hôm nay · 7:00</div></div>
-            </div>
-            <div class="alert-row ok">
-              <span class="a-ico">✅</span>
-              <div><div class="a-txt">Đã uống thuốc huyết áp buổi sáng</div><div class="a-time">Hôm nay · 7:30</div></div>
-            </div>
-            <div class="alert-row ok">
-              <span class="a-ico">🚶</span>
-              <div><div class="a-txt">Đi bộ nhẹ 15 phút trong sân</div><div class="a-time">Hôm nay · 8:00</div></div>
-            </div>
-          </div>
-
-          <div class="card">
-            <div class="card-title">📅 Lịch sắp tới</div>
-            <div class="sched-row">
-              <div class="sched-ico">🩺</div>
-              <div><div class="s-main">Điều dưỡng Lan đến nhà</div><div class="s-sub">Hôm nay · 14:00 · Chăm sóc định kỳ</div></div>
-            </div>
-            <div class="sched-row">
-              <div class="sched-ico">📱</div>
-              <div><div class="s-main">Tái khám tim mạch — BS Hùng</div><div class="s-sub">Thứ 5 · 09:00 · Khám video</div></div>
-            </div>
-          </div>
-
-          <div class="card">
-            <div class="card-title">⚡ Thao tác nhanh</div>
-            <div class="quick-grid">
-              <button class="quick-btn" onclick="showScreen('care')"><span class="qb-ico">🩺</span>Đặt điều dưỡng</button>
-              <button class="quick-btn" onclick="showScreen('visit')"><span class="qb-ico">📹</span>Gọi video bác sĩ</button>
-              <button class="quick-btn danger" onclick="toast('🆘 Đang gọi tổng đài cấp cứu 24/7...')"><span class="qb-ico">🆘</span>Gọi khẩn cấp</button>
-              <button class="quick-btn" onclick="toast('💊 Đã thêm vào giỏ — giao thuốc tận nhà')"><span class="qb-ico">💊</span>Mua thuốc</button>
-            </div>
-          </div>
-        </section>
-
-        <!-- SCREEN 2: CHĂM SÓC -->
-        <section class="screen" id="screen-care">
-          <div class="subtabs">
-            <div class="subtab active" data-sub="care-now" onclick="switchSub(this,'care')">Đang diễn ra</div>
-            <div class="subtab" data-sub="care-new" onclick="switchSub(this,'care')">Đặt mới</div>
-          </div>
-
-          <div class="sub-panel" data-sub="care-now">
-            <div class="card">
-              <div class="card-title">🩺 Điều dưỡng đang chăm</div>
-              <div class="person">
-                <div class="person-avatar">👩‍⚕️</div>
-                <div>
-                  <div class="p-name">Điều dưỡng Lan <span class="verify-chip">✔ Đã xác minh</span></div>
-                  <div class="p-meta"><span class="star">⭐ 4.9</span> · 320 ca · 6 năm kinh nghiệm</div>
-                </div>
-              </div>
-              <div>
-                <span class="skill-chip">Chăm sóc sau mổ</span>
-                <span class="skill-chip">Vật lý trị liệu</span>
-                <span class="skill-chip">Tiêm/truyền</span>
-              </div>
-              <button class="btn btn-outline" style="margin-top:0.85rem" onclick="toggleTimeline(this)">📋 Xem nhật ký ca trực</button>
-              <div class="timeline">
-                <div class="tl-row"><span class="tl-time">8:00</span><span class="tl-txt">Đo huyết áp 132/85 · nhịp tim 78</span></div>
-                <div class="tl-row"><span class="tl-time">8:15</span><span class="tl-txt">Cho uống thuốc huyết áp + tiểu đường</span></div>
-                <div class="tl-row"><span class="tl-time">8:30</span><span class="tl-txt">Hỗ trợ ăn sáng (cháo yến mạch)</span></div>
-                <div class="tl-row"><span class="tl-time">9:00</span><span class="tl-txt">Tập đi bộ nhẹ 15 phút trong sân</span></div>
-                <div class="tl-row"><span class="tl-time">9:30</span><span class="tl-txt">Massage khớp gối · ghi chú: đỡ đau hơn</span></div>
-              </div>
-            </div>
-          </div>
-
-          <div class="sub-panel" data-sub="care-new" style="display:none">
-            <div class="card">
-              <div class="card-title">⭐ Điều dưỡng gợi ý gần bạn</div>
-              <div class="person" style="margin-bottom:0.6rem">
-                <div class="person-avatar">👨‍⚕️</div>
-                <div style="flex:1">
-                  <div class="p-name">Điều dưỡng Tuấn <span class="verify-chip">✔</span></div>
-                  <div class="p-meta"><span class="star">⭐ 4.8</span> · 100k/giờ · cách 1,2km</div>
-                </div>
-                <button class="btn btn-ghost btn-sm" onclick="toast('✅ Đã gửi yêu cầu đặt Điều dưỡng Tuấn')">Đặt</button>
-              </div>
-              <div class="person" style="margin-bottom:0.6rem">
-                <div class="person-avatar">👩‍⚕️</div>
-                <div style="flex:1">
-                  <div class="p-name">Điều dưỡng Hương <span class="verify-chip">✔</span></div>
-                  <div class="p-meta"><span class="star">⭐ 4.9</span> · 120k/giờ · cách 2,5km</div>
-                </div>
-                <button class="btn btn-ghost btn-sm" onclick="toast('✅ Đã gửi yêu cầu đặt Điều dưỡng Hương')">Đặt</button>
-              </div>
-              <div class="person">
-                <div class="person-avatar">👨‍⚕️</div>
-                <div style="flex:1">
-                  <div class="p-name">Điều dưỡng Nam <span class="verify-chip">✔</span></div>
-                  <div class="p-meta"><span class="star">⭐ 4.7</span> · 80k/giờ · cách 3,1km</div>
-                </div>
-                <button class="btn btn-ghost btn-sm" onclick="toast('✅ Đã gửi yêu cầu đặt Điều dưỡng Nam')">Đặt</button>
-              </div>
-            </div>
-            <div class="card" style="text-align:center;background:#f0fdfa;border-color:#99f6e4">
-              <div style="font-size:0.82rem;color:#0f766e;font-weight:600">💡 Tất cả điều dưỡng đều được xác minh chứng chỉ &amp; lý lịch tư pháp</div>
-            </div>
-          </div>
-        </section>
-
-        <!-- SCREEN 3: KHÁM -->
-        <section class="screen" id="screen-visit">
-          <div class="card">
-            <div class="card-title">🤖 Trợ lý AI hỏi triệu chứng</div>
-            <div class="chat-box" id="chatBox">
-              <div class="bubble bot">Chào anh Minh 👋 Bà Hoa hôm nay có biểu hiện gì bất thường ạ? Chọn nhanh bên dưới nhé.</div>
-            </div>
-            <div class="chip-row" id="symptomChips">
-              <button class="chip" onclick="pickSymptom(this,'dizzy')">Mẹ chóng mặt</button>
-              <button class="chip" onclick="pickSymptom(this,'sleep')">Khó ngủ</button>
-              <button class="chip" onclick="pickSymptom(this,'joint')">Đau khớp</button>
-            </div>
-          </div>
-
-          <div class="card">
-            <div class="card-title">📹 Khám video sắp tới</div>
-            <div class="person">
-              <div class="person-avatar">👨‍⚕️</div>
-              <div>
-                <div class="p-name">BS Hùng — Tim mạch</div>
-                <div class="p-meta">Thứ 5 · 09:00 · Tái khám định kỳ</div>
-              </div>
-            </div>
-            <button class="btn btn-primary" style="margin-top:0.85rem" onclick="openVideo()">🎥 Vào phòng khám</button>
-          </div>
-
-          <div class="card">
-            <div class="card-title">👨‍⚕️ Bác sĩ lão khoa · khám từ xa</div>
-            <div class="sched-row">
-              <div class="sched-ico">🫀</div>
-              <div style="flex:1"><div class="s-main">BS Hùng · Tim mạch</div><div class="s-sub"><span class="star">⭐ 4.9</span> · BV Bạch Mai</div></div>
-              <button class="btn btn-ghost btn-sm" onclick="toast('📅 Đã mở lịch đặt khám BS Hùng')">Đặt</button>
-            </div>
-            <div class="sched-row">
-              <div class="sched-ico">🦴</div>
-              <div style="flex:1"><div class="s-main">BS Mai · Cơ xương khớp</div><div class="s-sub"><span class="star">⭐ 4.8</span> · BV Việt Đức</div></div>
-              <button class="btn btn-ghost btn-sm" onclick="toast('📅 Đã mở lịch đặt khám BS Mai')">Đặt</button>
-            </div>
-            <div class="sched-row">
-              <div class="sched-ico">🧠</div>
-              <div style="flex:1"><div class="s-main">BS Sơn · Nội thần kinh</div><div class="s-sub"><span class="star">⭐ 4.9</span> · BV Lão khoa TW</div></div>
-              <button class="btn btn-ghost btn-sm" onclick="toast('📅 Đã mở lịch đặt khám BS Sơn')">Đặt</button>
-            </div>
-          </div>
-        </section>
-
-        <!-- SCREEN 4: TÀI CHÍNH -->
-        <section class="screen" id="screen-fin">
-          <div class="card" style="background:linear-gradient(135deg,#0d9488,#0f766e);border:none;color:#fff">
-            <div class="card-title" style="color:rgba(255,255,255,0.85)">💳 Gói đang dùng · MedFin</div>
-            <div style="font-size:1.25rem;font-weight:900">ElderCare Plus</div>
-            <div style="font-size:0.85rem;opacity:0.9;margin-bottom:0.6rem">599.000đ / tháng · gia hạn 28/06</div>
-            <div style="font-size:0.8rem;line-height:1.7">
-              ✓ Khám video không giới hạn<br/>
-              ✓ 4 buổi điều dưỡng/tháng<br/>
-              ✓ Giám sát CareSense 24/7<br/>
-              ✓ Tổng đài cấp cứu ưu tiên
-            </div>
-          </div>
-
-          <div class="card">
-            <div class="card-title">🏥 Trả góp ca điều trị</div>
-            <div style="font-weight:800;font-size:0.92rem">Thay khớp háng</div>
-            <div style="font-size:0.82rem;color:var(--muted)">Tổng: 45.000.000đ · Trả góp 0% · 12 tháng</div>
-            <div style="font-size:1.15rem;font-weight:900;color:var(--care);margin-top:0.4rem">3.750.000đ <span style="font-size:0.78rem;color:var(--muted);font-weight:600">/ tháng</span></div>
-            <div class="progress"><i style="width:25%"></i></div>
-            <div style="display:flex;justify-content:space-between;font-size:0.74rem;color:var(--muted)">
-              <span>Đã trả 3/12 kỳ</span><span>Còn 33.750.000đ</span>
-            </div>
-            <button class="btn btn-outline" style="margin-top:0.7rem" onclick="toast('📄 Đang mở chi tiết hợp đồng trả góp')">Xem chi tiết</button>
-          </div>
-
-          <div class="card" style="background:#ecfdf5;border-color:#a7f3d0">
-            <div class="card-title" style="color:#047857">🛡️ Bảo hiểm bổ sung</div>
-            <div style="font-weight:800;color:#047857">Đã kích hoạt ✔</div>
-            <div style="font-size:0.82rem;color:#059669">Chi trả tới <strong>80%</strong> chi phí nằm viện ngoài BHYT · hạn mức 200 triệu/năm</div>
-          </div>
-
-          <div class="card">
-            <div class="card-title">🧾 Giao dịch gần đây</div>
-            <div class="alert-row"><span class="a-ico">🩺</span><div style="flex:1"><div>Buổi điều dưỡng — Lan</div><div class="a-time">10/06</div></div><div style="font-weight:700">−240.000đ</div></div>
-            <div class="alert-row"><span class="a-ico">💊</span><div style="flex:1"><div>Thuốc huyết áp + tiểu đường</div><div class="a-time">08/06</div></div><div style="font-weight:700">−385.000đ</div></div>
-            <div class="alert-row"><span class="a-ico">🏥</span><div style="flex:1"><div>Trả góp khớp háng — kỳ 3</div><div class="a-time">05/06</div></div><div style="font-weight:700">−3.750.000đ</div></div>
-          </div>
-        </section>
-
-        <!-- SCREEN 5: BỐ/MẸ -->
-        <section class="screen" id="screen-parent">
-          <div class="profile-head">
-            <div class="ph-avatar">👵</div>
-            <div>
-              <div class="ph-name">Bà Nguyễn Thị Hoa</div>
-              <div class="ph-meta">72 tuổi · Nhóm máu O · Cao 1m52 · 54kg</div>
-            </div>
-          </div>
-
-          <div class="card">
-            <div class="card-title">❤️‍🩹 Bệnh mạn tính</div>
-            <div class="chronic">
-              <span>Tăng huyết áp</span>
-              <span>Tiểu đường type 2</span>
-              <span>Thoái hóa khớp</span>
-            </div>
-          </div>
-
-          <div class="card">
-            <div class="card-title">📡 CareSense · Thiết bị tại nhà</div>
-            <div class="device-row">
-              <div class="device-ico">📹</div>
-              <div><div class="d-name">Camera phòng khách</div><div class="d-state d-state-txt">Hoạt động · phát hiện té ngã</div></div>
-              <div class="toggle" onclick="toggleDevice(this)"></div>
-            </div>
-            <div class="device-row">
-              <div class="device-ico">⌚</div>
-              <div><div class="d-name">Vòng đeo tay sức khỏe</div><div class="d-state d-state-txt">Pin 82% · đo nhịp tim, SpO₂</div></div>
-              <div class="toggle" onclick="toggleDevice(this)"></div>
-            </div>
-            <div class="device-row">
-              <div class="device-ico">🛏️</div>
-              <div><div class="d-name">Cảm biến giường</div><div class="d-state d-state-txt">Theo dõi giấc ngủ &amp; rời giường ban đêm</div></div>
-              <div class="toggle" onclick="toggleDevice(this)"></div>
-            </div>
-          </div>
-
-          <div class="card" style="border-color:#fecaca;background:#fef9f9">
-            <div class="card-title" style="color:#dc2626">🚨 Mô phỏng sự cố (demo)</div>
-            <div style="font-size:0.8rem;color:var(--muted);margin-bottom:0.7rem">Bấm để xem CareSense phản ứng khi camera AI phát hiện té ngã.</div>
-            <button class="fall-btn" onclick="simulateFall()">▶️ Mô phỏng sự cố té ngã</button>
-          </div>
-
-          <div class="card">
-            <div class="card-title">💊 Lịch uống thuốc hôm nay</div>
-            <div class="med-row done" onclick="toggleMed(this)">
-              <div class="med-check">✓</div><div class="m-name">Amlodipine 5mg (huyết áp)</div><div class="m-time">7:30</div>
-            </div>
-            <div class="med-row done" onclick="toggleMed(this)">
-              <div class="med-check">✓</div><div class="m-name">Metformin 500mg (tiểu đường)</div><div class="m-time">7:30</div>
-            </div>
-            <div class="med-row" onclick="toggleMed(this)">
-              <div class="med-check"></div><div class="m-name">Metformin 500mg (chiều)</div><div class="m-time">18:00</div>
-            </div>
-            <div class="med-row" onclick="toggleMed(this)">
-              <div class="med-check"></div><div class="m-name">Glucosamine (khớp)</div><div class="m-time">20:00</div>
-            </div>
-          </div>
-        </section>
-
+        <section class="screen active" id="screen-home"></section>
+        <section class="screen" id="screen-care"></section>
+        <section class="screen" id="screen-visit"></section>
+        <section class="screen" id="screen-fin"></section>
+        <section class="screen" id="screen-parent"></section>
       </div><!-- /viewport -->
 
       <!-- VIDEO CALL OVERLAY -->
       <div class="overlay-screen" id="videoOverlay">
         <div class="video-call">
-          <div class="vc-avatar">👨‍⚕️</div>
-          <div class="vc-name">BS Hùng — Tim mạch</div>
+          <div class="vc-avatar" id="vcAva">👨‍⚕️</div>
+          <div class="vc-name" id="vcName">BS Hùng — Tim mạch</div>
           <div class="vc-status" id="vcStatus">Đang kết nối...</div>
           <div class="vc-controls">
             <button class="vc-ctrl" onclick="toast('🎤 Đã tắt/bật micro')">🎤</button>
@@ -835,15 +783,74 @@
         </div>
       </div>
 
-      <!-- FALL OVERLAY -->
+      <!-- ONBOARDING OVERLAY -->
+      <div class="overlay-screen" id="onboardOverlay">
+        <div class="ob-wrap">
+          <div class="ob-head">
+            <span style="font-size:1.3rem">➕</span>
+            <div><div style="font-weight:900;font-size:1rem">Thêm người thân</div>
+              <div style="font-size:0.7rem;opacity:0.9">AI phân loại &amp; gợi ý gói chăm</div></div>
+            <button class="ob-close" onclick="closeOnboard()">✕</button>
+          </div>
+          <div class="ob-steps"><i id="obs1"></i><i id="obs2"></i><i id="obs3"></i></div>
+          <div class="ob-body" id="obBody"></div>
+          <div class="ob-foot" id="obFoot"></div>
+        </div>
+      </div>
+
+      <!-- PHARMACY / DRUG VERIFY OVERLAY -->
+      <div class="overlay-screen" id="pharmaOverlay">
+        <div class="pharma-wrap">
+          <div class="pharma-head">
+            <span style="font-size:1.3rem">💊</span>
+            <div><div style="font-weight:900;font-size:1rem">Nhà thuốc ElderCare</div>
+              <div style="font-size:0.7rem;opacity:0.9">Giao thuốc tận nhà · chính hãng</div></div>
+            <button class="ph-close" onclick="closePharmacy()">✕</button>
+          </div>
+          <div class="pharma-body">
+            <span class="gpp-badge">🏥 Nhà thuốc đạt chuẩn GPP ✔ · liên kết chuỗi chính hãng</span>
+            <div class="card">
+              <div class="card-title">🧾 Đơn thuốc của Bà Hoa</div>
+              <div class="alert-row"><span class="a-ico">💊</span><div style="flex:1"><div style="font-weight:700">Amlodipine 5mg</div><div class="a-time">Huyết áp · 30 viên</div></div><div style="font-weight:700">82.000đ</div></div>
+              <div class="alert-row"><span class="a-ico">💊</span><div style="flex:1"><div style="font-weight:700">Metformin 500mg</div><div class="a-time">Tiểu đường · 60 viên</div></div><div style="font-weight:700">96.000đ</div></div>
+            </div>
+            <div class="card">
+              <div class="card-title">🛡️ Xác thực thuốc chống giả</div>
+              <div style="font-size:0.78rem;color:var(--muted);margin-bottom:0.3rem">Quét tem/mã trên vỉ thuốc — đối chiếu số đăng ký với cơ sở dữ liệu Cục Quản lý Dược.</div>
+              <div class="scan-box" id="scanBox">
+                <div class="scan-line"></div>
+                <div class="scan-ico" id="scanIco">📷</div>
+                <div style="font-size:0.78rem;font-weight:700;margin-top:0.4rem" id="scanTxt">Đưa vỉ thuốc vào khung để quét mã</div>
+              </div>
+              <button class="btn btn-primary" id="scanBtn" onclick="runVerify()">🔍 Xác thực thuốc</button>
+              <div class="verify-result" id="verifyResult">
+                <div class="vr-title">✅ Thuốc chính hãng — hợp lệ</div>
+                <div class="vr-row">Số đăng ký <b>VD-25318-16</b> · hợp lệ trong CSDL Cục Quản lý Dược (dav.gov.vn)</div>
+                <div class="vr-row">🔎 Đối chiếu bằng <b>computer vision</b> (nhận dạng tem chống giả + OCR số lô) · không phát hiện dấu hiệu làm giả.</div>
+                <div class="vr-row" style="color:var(--muted)">⚠️ Demo minh họa — số ĐK ví dụ.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FALL / EMERGENCY OVERLAY -->
       <div class="fall-overlay" id="fallOverlay">
-        <div class="fo-icon">🚨</div>
-        <h2>PHÁT HIỆN TÉ NGÃ</h2>
-        <div class="fo-loc">📹 Phòng khách · 14:32</div>
+        <div class="fo-icon" id="foIcon">🚨</div>
+        <h2 id="foTitle">PHÁT HIỆN TÉ NGÃ</h2>
+        <div class="fo-loc" id="foLoc">📹 Phòng khách · 14:32</div>
         <div class="fo-count">Tự động gọi con cái &amp; tổng đài cấp cứu sau <b id="fallCount">10</b>s...</div>
         <div class="fo-actions">
-          <button class="fall-overlay btn-white" style="width:100%;border:none;border-radius:12px;padding:0.8rem;font-family:inherit;font-weight:800;font-size:0.9rem;cursor:pointer" onclick="resolveFall()">✅ Tôi đã xử lý — Mẹ vẫn ổn</button>
-          <button class="fall-overlay btn-blackline" style="width:100%;border-radius:12px;padding:0.8rem;font-family:inherit;font-weight:700;font-size:0.9rem;cursor:pointer" onclick="callEmergency()">🆘 Gọi cấp cứu ngay</button>
+          <button class="btn-white" style="width:100%;border:none;border-radius:12px;padding:0.8rem;font-family:inherit;font-weight:800;font-size:0.9rem;cursor:pointer" onclick="resolveFall()">✅ Tôi đã xử lý — vẫn ổn</button>
+          <button class="btn-blackline" style="width:100%;border-radius:12px;padding:0.8rem;font-family:inherit;font-weight:700;font-size:0.9rem;cursor:pointer" onclick="callEmergency()">🆘 Gọi cấp cứu ngay</button>
+        </div>
+      </div>
+
+      <!-- BOTTOM SHEET -->
+      <div class="sheet-overlay" id="sheetOverlay" onclick="if(event.target===this)closeSheet()">
+        <div class="sheet" id="sheet">
+          <div class="sheet-handle"></div>
+          <div id="sheetBody"></div>
         </div>
       </div>
 
@@ -864,16 +871,457 @@
 </div><!-- /stage -->
 
 <script>
-  // ===== caption metadata per screen (left marketing panel) =====
-  var CAPTIONS = {
-    home:   { t: '🏠 Tổng quan', d: 'Bảng điều khiển sức khỏe — trạng thái, sinh hiệu hôm nay, cảnh báo và lịch chăm sóc của Bà Hoa.' },
-    care:   { t: '🩺 Chăm sóc · CareConnect', d: 'Điều dưỡng đang chăm, nhật ký ca trực realtime, và đặt thêm điều dưỡng đã xác minh gần nhà.' },
-    visit:  { t: '📱 Khám · Tele & Booking', d: 'Trợ lý AI hỏi triệu chứng, đặt khám video với bác sĩ lão khoa, vào phòng khám từ xa.' },
-    fin:    { t: '💳 Tài chính · MedFin', d: 'Gói chăm sóc, trả góp 0% ca điều trị lớn, bảo hiểm bổ sung và lịch sử giao dịch.' },
-    parent: { t: '👵 Hồ sơ Bố/Mẹ · CareSense', d: 'Hồ sơ bệnh án, thiết bị giám sát tại nhà, lịch uống thuốc — và mô phỏng cảnh báo té ngã.' }
+  // =====================================================================
+  // DATA — hai persona, mọi màn render từ đây (số khớp business plan 6 phiên)
+  // =====================================================================
+  var PROFILES = {
+    hoa: {
+      id: 'hoa', name: 'Bà Nguyễn Thị Hoa', short: 'Bà Hoa', avatar: '👵',
+      age: 72, rel: 'Mẹ', meta: '72 tuổi · Nhóm máu O · 1m52 · 54kg',
+      dependency: 'Hỗ trợ một phần', notif: 3,
+      headerSub: 'Đang chăm: Bà Hoa · 72 tuổi',
+      status: { cls: 'ok', emoji: '✅', title: 'Mẹ vẫn ổn', sub: 'Cập nhật 2 phút trước · Phòng khách' },
+      vitals: [
+        { ico:'❤️', num:'78', unit:'bpm', label:'Nhịp tim', st:'ok',
+          disease:'Theo dõi rối loạn nhịp', thr:'An toàn 60–100 bpm · &lt;50 hoặc &gt;100 kéo dài → cảnh báo', doc:'BS Tim mạch Hùng' },
+        { ico:'🩸', num:'132/85', unit:'mmHg', label:'Huyết áp', st:'warn',
+          disease:'Tăng huyết áp', thr:'Mục tiêu &lt;140/90 · ≥140/90 lặp lại → báo bác sĩ', doc:'BS Tim mạch Hùng' },
+        { ico:'🩸', num:'6.1', unit:'mmol/L', label:'Đường huyết', st:'ok',
+          disease:'Tiểu đường type 2', thr:'Lúc đói 4–7 · &gt;10 hoặc &lt;4 → báo bác sĩ', doc:'BS Nội tiết Vân' },
+        { ico:'🫁', num:'97%', unit:'SpO₂', label:'SpO₂', st:'ok',
+          disease:'Hô hấp', thr:'Bình thường ≥95% · &lt;92% → cảnh báo khẩn', doc:'Tổng đài y tế 24/7' }
+      ],
+      alerts: [
+        { cls:'warn', ico:'⚠️', txt:'Huyết áp hơi cao (132/85)', time:'Hôm nay · 7:00', who:'Theo dõi: BS Tim mạch Hùng' },
+        { cls:'ok', ico:'✅', txt:'Đã uống thuốc huyết áp buổi sáng', time:'Hôm nay · 7:30', who:'Nhắc bởi: Dược lâm sàng' },
+        { cls:'ok', ico:'🚶', txt:'Đi bộ nhẹ 15 phút trong sân', time:'Hôm nay · 8:00', who:'ĐD Lan hỗ trợ' }
+      ],
+      schedule: [
+        { ico:'🩺', main:'Điều dưỡng Lan đến nhà', sub:'Hôm nay · 14:00 · Chăm sóc định kỳ' },
+        { ico:'📱', main:'Tái khám tim mạch — BS Hùng', sub:'Thứ 5 · 09:00 · Khám video' }
+      ],
+      team: {
+        lead: { role:'Điều dưỡng lão khoa · chủ trì ca', name:'ĐD Lan', ico:'👩‍⚕️' },
+        members: [
+          { role:'Bác sĩ Tim mạch', name:'BS Hùng', ico:'🫀' },
+          { role:'Bác sĩ Nội tiết', name:'BS Vân', ico:'💉' },
+          { role:'Dược lâm sàng', name:'DS Mai', ico:'💊' }
+        ]
+      },
+      nurse: {
+        name:'Điều dưỡng Lan', ava:'👩‍⚕️', star:'4.9', exp:'320 ca · 6 năm kinh nghiệm',
+        cert:'Cấp 3 · Chăm sóc sau mổ', skills:['Chăm sóc sau mổ','Vật lý trị liệu','Tiêm/truyền'],
+        timeline:[
+          ['8:00','Đo huyết áp 132/85 · nhịp tim 78'],
+          ['8:15','Cho uống thuốc huyết áp + tiểu đường'],
+          ['8:30','Hỗ trợ ăn sáng (cháo yến mạch)'],
+          ['9:00','Tập đi bộ nhẹ 15 phút trong sân'],
+          ['9:30','Massage khớp gối · ghi chú: đỡ đau hơn']
+        ]
+      },
+      video: { ava:'👨‍⚕️', name:'BS Hùng — Tim mạch', sub:'Thứ 5 · 09:00 · Tái khám định kỳ' },
+      symptoms: [
+        { k:'dizzy', u:'Mẹ chóng mặt', spec:'Tim mạch · Nội thần kinh',
+          b:'🩺 Chóng mặt ở người <b>tăng huyết áp</b>. AI gợi ý <b>BS Tim mạch (Hùng)</b>, nếu kèm yếu/tê → <b>Nội thần kinh</b>. Đặt khám?' },
+        { k:'sleep', u:'Khó ngủ', spec:'Nội thần kinh · Lão khoa',
+          b:'😴 Mất ngủ kéo dài nên gặp <b>Nội thần kinh / Lão khoa</b>. Hạn chế caffeine chiều, giữ phòng tối. Đặt khám nhé?' },
+        { k:'joint', u:'Đau khớp', spec:'Cơ xương khớp · PHCN',
+          b:'🦴 Bà Hoa có <b>thoái hóa khớp</b> → AI ghép <b>BS Cơ xương khớp</b> + vật lý trị liệu tại nhà với ĐD Lan. Đặt khám?' }
+      ],
+      chronic: [
+        { name:'Tăng huyết áp', monitor:'Đo huyết áp 2 lần/ngày qua vòng đeo', thr:'≥140/90 lặp lại → cảnh báo bác sĩ', doc:'BS Tim mạch Hùng' },
+        { name:'Tiểu đường type 2', monitor:'Đường huyết sáng & tối', thr:'&gt;10 hoặc &lt;4 mmol/L → cảnh báo', doc:'BS Nội tiết Vân + Dược lâm sàng' },
+        { name:'Thoái hóa khớp', monitor:'Mức đau & khả năng vận động', thr:'Đau tăng / ngã → PHCN tại nhà', doc:'BS Cơ xương khớp + ĐD Lan' }
+      ],
+      devices: [
+        { ico:'📹', name:'Camera phòng khách', state:'Hoạt động · AI phát hiện té ngã', thr:'Phát hiện ngã → báo con cái + tổng đài 10s' },
+        { ico:'⌚', name:'Vòng đeo tay sức khỏe', state:'Pin 82% · đo nhịp tim, SpO₂, HA', thr:'Nhịp &gt;100/&lt;50 hoặc SpO₂ &lt;92% → cảnh báo' },
+        { ico:'🛏️', name:'Cảm biến giường', state:'Theo dõi giấc ngủ & rời giường đêm', thr:'Rời giường &gt;15 phút ban đêm → nhắc' }
+      ],
+      meds: [
+        { name:'Amlodipine 5mg (huyết áp)', time:'7:30', done:true },
+        { name:'Metformin 500mg (tiểu đường)', time:'7:30', done:true },
+        { name:'Metformin 500mg (chiều)', time:'18:00', done:false },
+        { name:'Glucosamine (khớp)', time:'20:00', done:false }
+      ],
+      consent: {
+        mode:'Đồng ý trực tiếp',
+        txt:'Bà Hoa còn đầy đủ năng lực hành vi — con cái xem dữ liệu sức khỏe theo <b>sự đồng ý trực tiếp</b> của bà (Nghị định 13/2023/NĐ-CP). Bà có thể thu hồi quyền bất cứ lúc nào.',
+        viewer:'Anh Minh (con trai)', viewerSub:'Quyền xem theo đồng ý của Bà Hoa', share:true
+      },
+      fin: {
+        tier:'plus',
+        installment:{ name:'Thay khớp háng', total:'45.000.000đ', months:12, perMonth:'3.750.000đ', paid:3, remain:'33.750.000đ', progress:25 },
+        transactions:[
+          { ico:'🩺', name:'Buổi điều dưỡng — Lan', time:'10/06', amt:'−240.000đ' },
+          { ico:'💊', name:'Thuốc huyết áp + tiểu đường', time:'08/06', amt:'−385.000đ' },
+          { ico:'🏥', name:'Trả góp khớp háng — kỳ 3', time:'05/06', amt:'−3.750.000đ' }
+        ]
+      },
+      fall: { loc:'📹 Phòng khách · 14:32' }
+    },
+
+    tam: {
+      id: 'tam', name: 'Ông Lê Văn Tâm', short: 'Ông Tâm', avatar: '👴',
+      age: 80, rel: 'Bố', meta: '80 tuổi · Nhóm máu A · 1m65 · 58kg',
+      dependency: 'Phụ thuộc nặng · sa sút trí tuệ', notif: 6,
+      headerSub: 'Đang chăm: Ông Tâm · 80 tuổi',
+      status: { cls: 'warn', emoji: '⚠️', title: 'Cần chú ý', sub: 'Huyết áp cao & 1 cảnh báo đi lạc sáng nay' },
+      vitals: [
+        { ico:'❤️', num:'92', unit:'bpm', label:'Nhịp tim', st:'warn',
+          disease:'Di chứng đột quỵ · rối loạn nhịp', thr:'An toàn 60–100 · &gt;100 kéo dài → báo BS thần kinh/tim mạch', doc:'BS Thần kinh Sơn' },
+        { ico:'🩸', num:'148/92', unit:'mmHg', label:'Huyết áp', st:'warn',
+          disease:'Tăng huyết áp sau đột quỵ', thr:'Mục tiêu &lt;140/90 · ≥150/95 → cảnh báo khẩn (nguy cơ tái đột quỵ)', doc:'BS Thần kinh Sơn' },
+        { ico:'🫁', num:'95%', unit:'SpO₂', label:'SpO₂', st:'ok',
+          disease:'Hô hấp · nguy cơ sặc', thr:'Bình thường ≥95% · &lt;92% → cảnh báo khẩn', doc:'Tổng đài y tế 24/7' },
+        { ico:'🚶', num:'1.2k', unit:'bước', label:'Vận động', st:'warn',
+          disease:'Parkinson nhẹ · nguy cơ té ngã', thr:'Ít vận động/dáng đi bất thường → buổi PHCN', doc:'KTV Phục hồi chức năng Dũng' }
+      ],
+      alerts: [
+        { cls:'danger', ico:'🚨', txt:'Phát hiện ra khỏi vùng an toàn 1 mình', time:'Hôm nay · 6:40', who:'Cảnh báo đi lạc → CTXH + người giám hộ' },
+        { cls:'warn', ico:'⚠️', txt:'Huyết áp cao (148/92)', time:'Hôm nay · 7:00', who:'Theo dõi: BS Thần kinh Sơn' },
+        { cls:'warn', ico:'💊', txt:'Quên uống thuốc Parkinson tối qua', time:'Hôm qua · 20:00', who:'Dược lâm sàng nhắc lịch' },
+        { cls:'ok', ico:'✅', txt:'ĐD thường trực đo sinh hiệu sáng', time:'Hôm nay · 8:00', who:'ĐD Bình (trực 24/7)' }
+      ],
+      schedule: [
+        { ico:'🩺', main:'Điều dưỡng Bình · ca chiều', sub:'Hôm nay · 13:00 · Trực thường xuyên' },
+        { ico:'🧠', main:'Khám thần kinh — BS Sơn', sub:'Thứ 4 · 10:00 · Khám video' },
+        { ico:'🏃', main:'Buổi phục hồi chức năng', sub:'Thứ 6 · 15:00 · Tập vận động tại nhà' }
+      ],
+      team: {
+        lead: { role:'Điều dưỡng thường trực 24/7 · chủ trì', name:'ĐD Bình', ico:'👨‍⚕️' },
+        members: [
+          { role:'Bác sĩ Thần kinh', name:'BS Sơn', ico:'🧠' },
+          { role:'Phục hồi chức năng', name:'KTV Dũng', ico:'🏃' },
+          { role:'Tâm lý', name:'CV Thu', ico:'🫶' },
+          { role:'Công tác xã hội', name:'CV Hà', ico:'🤝' }
+        ]
+      },
+      nurse: {
+        name:'Điều dưỡng Bình', ava:'👨‍⚕️', star:'4.9', exp:'410 ca · 8 năm · trực 24/7',
+        cert:'Cấp 4 · Chăm sa sút trí tuệ', skills:['Chăm sa sút trí tuệ','Phục hồi sau đột quỵ','Phòng chống té ngã','Cho ăn an toàn'],
+        timeline:[
+          ['7:00','Đo huyết áp 148/92 · báo BS Sơn theo dõi'],
+          ['7:30','Hỗ trợ vệ sinh & thay tư thế chống loét'],
+          ['8:00','Cho uống thuốc thần kinh + chống đông'],
+          ['9:00','Tập vận động thụ động tay/chân (PHCN)'],
+          ['10:00','Trò chuyện định hướng thời gian (chống lú lẫn)']
+        ]
+      },
+      video: { ava:'🧠', name:'BS Sơn — Thần kinh', sub:'Thứ 4 · 10:00 · Khám sa sút trí tuệ & Parkinson' },
+      symptoms: [
+        { k:'confuse', u:'Hay quên, lú lẫn', spec:'Thần kinh (sa sút trí tuệ) · Tâm lý',
+          b:'🧠 Lú lẫn tăng ở người <b>sa sút trí tuệ</b> → AI ghép <b>BS Thần kinh (Sơn)</b> + <b>chuyên viên Tâm lý</b>. Cần loại trừ nhiễm trùng/đường huyết. Đặt khám?' },
+        { k:'tremor', u:'Run tay, đi cứng', spec:'Thần kinh (Parkinson) · PHCN',
+          b:'🤲 Run khi nghỉ + cứng đờ gợi ý <b>Parkinson</b> → AI ghép <b>BS Thần kinh</b> + <b>Phục hồi chức năng</b> chỉnh liều & tập vận động. Đặt khám?' },
+        { k:'wander', u:'Đòi ra ngoài, dễ đi lạc', spec:'Công tác xã hội · định vị GPS',
+          b:'🧭 Nguy cơ <b>đi lạc</b> cao → AI ghép <b>Công tác xã hội (CV Hà)</b> + bật vòng định vị GPS & cảnh báo ra khỏi vùng an toàn. Bật ngay?' }
+      ],
+      chronic: [
+        { name:'Di chứng đột quỵ', monitor:'Huyết áp, yếu/liệt nửa người, nguy cơ sặc', thr:'HA ≥150/95 / yếu mới → cảnh báo khẩn tái đột quỵ', doc:'BS Thần kinh Sơn + PHCN' },
+        { name:'Parkinson nhẹ', monitor:'Run, cứng đờ, dáng đi & té ngã', thr:'Dáng đi xấu / ngã → PHCN chỉnh chương trình', doc:'BS Thần kinh + KTV Dũng' },
+        { name:'Sa sút trí tuệ', monitor:'Định hướng, hành vi, nguy cơ đi lạc', thr:'Ra khỏi vùng an toàn → cảnh báo đi lạc', doc:'BS Thần kinh + Tâm lý + CTXH' }
+      ],
+      devices: [
+        { ico:'📹', name:'Camera AI phòng ngủ & khách', state:'Hoạt động · phát hiện té ngã & dáng đi', thr:'Phát hiện ngã → báo trực 24/7 + con cái' },
+        { ico:'🧭', name:'Vòng định vị GPS', state:'Hoạt động · chống đi lạc', thr:'Ra khỏi vùng an toàn → cảnh báo đi lạc tức thì' },
+        { ico:'🚪', name:'Cảm biến cửa ra vào', state:'Hoạt động · giám sát mở cửa đêm', thr:'Mở cửa ra ngoài 22:00–6:00 → cảnh báo' },
+        { ico:'🛏️', name:'Cảm biến giường chống loét', state:'Theo dõi tư thế & rời giường', thr:'Nằm 1 tư thế &gt;2h → nhắc xoay trở' }
+      ],
+      meds: [
+        { name:'Levodopa (Parkinson)', time:'7:00', done:true },
+        { name:'Aspirin 81mg (chống đông sau đột quỵ)', time:'7:00', done:true },
+        { name:'Amlodipine 5mg (huyết áp)', time:'7:00', done:true },
+        { name:'Donepezil (sa sút trí tuệ)', time:'20:00', done:false }
+      ],
+      consent: {
+        mode:'Qua người giám hộ',
+        txt:'Ông Tâm <b>sa sút trí tuệ</b>, suy giảm năng lực hành vi — việc xem dữ liệu & quyết định chăm sóc thực hiện <b>qua người giám hộ hợp pháp</b> (theo Bộ luật Dân sự & Nghị định 13/2023). Mọi truy cập đều ghi nhật ký.',
+        viewer:'Anh Minh (con trai · người giám hộ)', viewerSub:'Quyền xem & quyết định thay theo giám hộ hợp pháp', share:true
+      },
+      fin: {
+        tier:'plus',
+        installment:{ name:'Phục hồi chức năng sau đột quỵ', total:'36.000.000đ', months:12, perMonth:'3.000.000đ', paid:2, remain:'30.000.000đ', progress:17 },
+        transactions:[
+          { ico:'🩺', name:'Điều dưỡng thường trực — Bình', time:'10/06', amt:'−1.200.000đ' },
+          { ico:'💊', name:'Thuốc thần kinh + chống đông', time:'08/06', amt:'−520.000đ' },
+          { ico:'🏃', name:'Phục hồi chức năng — kỳ 2', time:'05/06', amt:'−3.000.000đ' }
+        ]
+      },
+      fall: { loc:'📹 Phòng ngủ · 14:32' }
+    }
   };
 
-  // ===== screen switching =====
+  // ~12 nhóm chuyên gia (ma trận P3) — danh bạ khám từ xa
+  var DIRECTORY = [
+    { ico:'👩‍⚕️', name:'Điều dưỡng lão khoa', sub:'Chăm sóc tại nhà · chủ trì ca' },
+    { ico:'🧓', name:'Bác sĩ Lão khoa', sub:'Đánh giá tổng thể người cao tuổi' },
+    { ico:'🫀', name:'Bác sĩ Tim mạch', sub:'BS Hùng · BV Bạch Mai' },
+    { ico:'💉', name:'Bác sĩ Nội tiết', sub:'BS Vân · Tiểu đường, tuyến giáp' },
+    { ico:'🦴', name:'Bác sĩ Cơ xương khớp', sub:'BS Mai · BV Việt Đức' },
+    { ico:'🧠', name:'Bác sĩ Thần kinh', sub:'BS Sơn · Đột quỵ, Parkinson, sa sút' },
+    { ico:'🏃', name:'Phục hồi chức năng', sub:'KTV Dũng · vận động trị liệu' },
+    { ico:'💊', name:'Dược lâm sàng', sub:'DS Mai · rà soát đa thuốc' },
+    { ico:'🥗', name:'Dinh dưỡng', sub:'Khẩu phần cho bệnh mạn' },
+    { ico:'🫶', name:'Tâm lý', sub:'CV Thu · trầm cảm, cô đơn' },
+    { ico:'🤝', name:'Công tác xã hội', sub:'CV Hà · hỗ trợ giám hộ, đi lạc' },
+    { ico:'📞', name:'Tổng đài trực 24/7', sub:'Điều phối cấp cứu & SOS' }
+  ];
+
+  // gói chăm sóc (P1) — so sánh 2 tier
+  var TIERS = {
+    basic: { name:'ElderCare Cơ bản', price:'299.000đ', per:'/tháng', benefits:[
+      'Khám video 4 lượt/tháng','CareSense cơ bản · cảnh báo té ngã','SOS 1 chạm','Nhắc uống thuốc' ] },
+    plus: { name:'ElderCare Plus', price:'599.000đ', per:'/tháng', benefits:[
+      'Khám video không giới hạn','4 buổi điều dưỡng/tháng','CareSense 24/7 đầy đủ','Tổng đài cấp cứu ưu tiên','Đội chăm đa chuyên ngành' ] }
+  };
+
+  var current = 'hoa';
+  function P() { return PROFILES[current]; }
+  function bellMsg() { return P().notif + ' thông báo mới về ' + P().short; }
+
+  // =====================================================================
+  // RENDER
+  // =====================================================================
+  function esc(s) { return s; }
+
+  function renderHeader() {
+    var p = P();
+    document.getElementById('appSub').textContent = p.headerSub;
+    document.getElementById('psAva').textContent = p.avatar;
+    document.getElementById('psName').textContent = p.short;
+    document.getElementById('psMeta').textContent = p.age + 't · ' + p.dependency;
+    document.getElementById('bellBadge').textContent = p.notif;
+  }
+
+  function renderHome() {
+    var p = P();
+    var vitals = p.vitals.map(function (v, i) {
+      return '<button class="vital" onclick="openVitalSheet(' + i + ')">' +
+        '<span class="v-dot ' + v.st + '"></span>' +
+        '<div class="v-icon">' + v.ico + '</div>' +
+        '<div class="v-num">' + v.num + '</div>' +
+        '<div class="v-label">' + v.label + ' <span class="v-unit">' + v.unit + '</span></div>' +
+        '<div class="v-tap">Tap xem ngưỡng ›</div></button>';
+    }).join('');
+    var alerts = p.alerts.map(function (a) {
+      return '<div class="alert-row ' + a.cls + '"><span class="a-ico">' + a.ico + '</span>' +
+        '<div><div class="a-txt">' + a.txt + '</div><div class="a-time">' + a.time + '</div>' +
+        '<div class="a-who">' + a.who + '</div></div></div>';
+    }).join('');
+    var sched = p.schedule.map(function (s) {
+      return '<div class="sched-row"><div class="sched-ico">' + s.ico + '</div>' +
+        '<div><div class="s-main">' + s.main + '</div><div class="s-sub">' + s.sub + '</div></div></div>';
+    }).join('');
+
+    document.getElementById('screen-home').innerHTML =
+      '<div class="status-hero ' + p.status.cls + '"><div class="sh-emoji">' + p.status.emoji + '</div>' +
+        '<div><div class="sh-title">' + p.status.title + '</div><div class="sh-sub">' + p.status.sub + '</div></div></div>' +
+      '<div class="card"><div class="card-title">🩺 Sinh hiệu hôm nay · CareSense</div><div class="vitals">' + vitals + '</div>' +
+        '<div style="font-size:0.66rem;color:var(--muted);margin-top:0.6rem">👆 Mỗi ô gắn bệnh lý &amp; ngưỡng cảnh báo — tap để xem chuyên gia chịu trách nhiệm.</div></div>' +
+      '<div class="card"><div class="card-title">⚡ Cảnh báo gần đây</div>' + alerts + '</div>' +
+      '<div class="card"><div class="card-title">📅 Lịch sắp tới</div>' + sched + '</div>' +
+      '<div class="card"><div class="card-title">⚡ Thao tác nhanh</div><div class="quick-grid">' +
+        '<button class="quick-btn" onclick="showScreen(\'care\')"><span class="qb-ico">🩺</span>Đặt điều dưỡng</button>' +
+        '<button class="quick-btn" onclick="showScreen(\'visit\')"><span class="qb-ico">📹</span>Gọi video bác sĩ</button>' +
+        '<button class="quick-btn danger" onclick="toast(\'🆘 Đang gọi tổng đài cấp cứu 24/7...\')"><span class="qb-ico">🆘</span>Gọi khẩn cấp</button>' +
+        '<button class="quick-btn" onclick="openPharmacy()"><span class="qb-ico">💊</span>Mua thuốc</button>' +
+      '</div></div>' +
+      '<div class="card"><div class="card-title">✨ Tiện ích khác</div><div class="extra-grid">' +
+        '<button class="extra-chip" onclick="toast(\'👨‍👩‍👧 Cộng đồng con-chăm-bố-mẹ — sắp ra mắt\')"><span class="ec-ico">👨‍👩‍👧</span>Cộng đồng người chăm</button>' +
+        '<button class="extra-chip" onclick="toast(\'🚗 Đặt xe đưa đón đi khám — sắp ra mắt\')"><span class="ec-ico">🚗</span>Đưa đón đi khám</button>' +
+        '<button class="extra-chip" onclick="toast(\'🛒 Marketplace thiết bị y tế — sắp ra mắt\')"><span class="ec-ico">🛒</span>Thiết bị y tế</button>' +
+      '</div></div>';
+  }
+
+  function renderCare() {
+    var p = P(), n = p.nurse;
+    var skills = n.skills.map(function (s) { return '<span class="skill-chip">' + s + '</span>'; }).join('');
+    var tl = n.timeline.map(function (r) {
+      return '<div class="tl-row"><span class="tl-time">' + r[0] + '</span><span class="tl-txt">' + r[1] + '</span></div>';
+    }).join('');
+    var members = p.team.members.map(function (m) {
+      return '<div class="team-member"><div class="tm-ico">' + m.ico + '</div>' +
+        '<div><div class="tm-role">' + m.role + '</div><div class="tm-name">' + m.name + '</div></div></div>';
+    }).join('');
+
+    document.getElementById('screen-care').innerHTML =
+      '<div class="subtabs">' +
+        '<div class="subtab active" data-sub="care-now" onclick="switchSub(this,\'care\')">Đang diễn ra</div>' +
+        '<div class="subtab" data-sub="care-new" onclick="switchSub(this,\'care\')">Đặt mới</div></div>' +
+
+      '<div class="sub-panel" data-sub="care-now">' +
+        '<div class="card"><div class="card-title">🩺 Điều dưỡng đang chăm</div>' +
+          '<div class="person"><div class="person-avatar">' + n.ava + '</div><div>' +
+            '<div class="p-name">' + n.name + ' <span class="verify-chip">✔ Đã xác minh</span> <span class="lic-chip">Giấy phép hành nghề ✔</span></div>' +
+            '<div class="p-meta"><span class="star">⭐ ' + n.star + '</span> · ' + n.exp + '</div></div></div>' +
+          '<div style="margin-top:0.4rem"><span class="cert-chip">🎓 Chứng chỉ đào tạo ' + n.cert + '</span></div>' +
+          '<div>' + skills + '</div>' +
+          '<button class="btn btn-outline" style="margin-top:0.85rem" onclick="toggleTimeline(this)">📋 Xem nhật ký ca trực</button>' +
+          '<div class="timeline">' + tl + '</div></div>' +
+
+        '<div class="card"><div class="card-title">👥 Đội chăm đa chuyên ngành</div>' +
+          '<div class="team-lead"><div class="tl-ava">' + p.team.lead.ico + '</div>' +
+            '<div><div class="tl-role">' + p.team.lead.role + '</div><div class="tl-name">' + p.team.lead.name + '</div></div></div>' +
+          members +
+          '<div style="font-size:0.66rem;color:var(--muted);margin-top:0.55rem">Phối hợp theo nỗi đau &amp; bệnh lý của ' + p.short + ' (ma trận chuyên gia — Phiên 3).</div></div>' +
+      '</div>' +
+
+      '<div class="sub-panel" data-sub="care-new" style="display:none">' +
+        '<div class="card"><div class="card-title">⭐ Điều dưỡng gợi ý gần bạn</div>' +
+          caregiverCard('👨‍⚕️','Điều dưỡng Tuấn','4.8','100k/giờ · cách 1,2km','Cấp 2') +
+          caregiverCard('👩‍⚕️','Điều dưỡng Hương','4.9','120k/giờ · cách 2,5km','Cấp 3') +
+          caregiverCard('👨‍⚕️','Điều dưỡng Nam','4.7','80k/giờ · cách 3,1km','Cấp 1') +
+        '</div>' +
+        '<div class="card" style="text-align:center;background:#f0fdfa;border-color:#99f6e4">' +
+          '<div style="font-size:0.8rem;color:#0f766e;font-weight:600">💡 Tất cả điều dưỡng đều có <b>giấy phép hành nghề</b>, chứng chỉ đào tạo &amp; xác minh lý lịch tư pháp</div></div>' +
+        '<div class="card"><div class="card-title">✨ Dịch vụ hỗ trợ</div><div class="extra-grid">' +
+          '<button class="extra-chip" onclick="toast(\'🚗 Đặt xe đưa đón đi khám — sắp ra mắt\')"><span class="ec-ico">🚗</span>Đưa đón đi khám</button>' +
+          '<button class="extra-chip" onclick="toast(\'🛒 Thuê/mua thiết bị y tế — sắp ra mắt\')"><span class="ec-ico">🛒</span>Marketplace thiết bị</button>' +
+          '<button class="extra-chip" onclick="toast(\'👨‍👩‍👧 Cộng đồng người chăm — sắp ra mắt\')"><span class="ec-ico">👨‍👩‍👧</span>Cộng đồng</button>' +
+        '</div></div>' +
+      '</div>';
+  }
+
+  function caregiverCard(ava, name, star, meta, cert) {
+    return '<div class="person" style="margin-bottom:0.7rem"><div class="person-avatar">' + ava + '</div>' +
+      '<div style="flex:1"><div class="p-name">' + name + ' <span class="verify-chip">✔</span> <span class="cert-chip">🎓 ' + cert + '</span></div>' +
+      '<div class="p-meta"><span class="star">⭐ ' + star + '</span> · ' + meta + '</div></div>' +
+      '<button class="btn btn-ghost btn-sm" onclick="toast(\'✅ Đã gửi yêu cầu đặt ' + name + '\')">Đặt</button></div>';
+  }
+
+  function renderVisit() {
+    var p = P();
+    var chips = p.symptoms.map(function (s) {
+      return '<button class="chip" onclick="pickSymptom(this,\'' + s.k + '\')">' + s.u + '</button>';
+    }).join('');
+    var dir = DIRECTORY.map(function (d) {
+      return '<div class="sched-row"><div class="sched-ico">' + d.ico + '</div>' +
+        '<div style="flex:1"><div class="s-main">' + d.name + '</div>' +
+        '<div class="s-sub">' + d.sub + ' · <span class="lic-chip">Giấy phép ✔ · KCB từ xa Điều 80</span></div></div>' +
+        '<button class="btn btn-ghost btn-sm" onclick="toast(\'📅 Đã mở lịch đặt ' + d.name + '\')">Đặt</button></div>';
+    }).join('');
+
+    document.getElementById('screen-visit').innerHTML =
+      '<div class="card"><div class="card-title">🤖 Trợ lý AI hỏi triệu chứng</div>' +
+        '<div class="chat-box" id="chatBox"><div class="bubble bot">Chào anh Minh 👋 ' + p.short +
+          ' hôm nay có biểu hiện gì bất thường ạ? Chọn nhanh bên dưới — AI sẽ gợi ý đúng chuyên gia.</div></div>' +
+        '<div class="chip-row" id="symptomChips">' + chips + '</div>' +
+        '<div class="ai-note" style="margin-top:0.6rem"><span>🤖</span><span><b>AI gợi ý — không thay chẩn đoán bác sĩ.</b> Chẩn đoán &amp; kê đơn do bác sĩ có giấy phép quyết định (Luật KCB 2023, Điều 80).</span></div>' +
+      '</div>' +
+      '<div class="card"><div class="card-title">📹 Khám video sắp tới</div>' +
+        '<div class="person"><div class="person-avatar">' + p.video.ava + '</div><div>' +
+          '<div class="p-name">' + p.video.name + ' <span class="lic-chip">Giấy phép ✔ · Điều 80</span></div>' +
+          '<div class="p-meta">' + p.video.sub + '</div></div></div>' +
+        '<button class="btn btn-primary" style="margin-top:0.85rem" onclick="openVideo()">🎥 Vào phòng khám</button></div>' +
+      '<div class="card"><div class="card-title">🩺 Mạng lưới chuyên gia · khám từ xa</div>' + dir +
+        '<div style="font-size:0.66rem;color:var(--muted);margin-top:0.55rem">12 nhóm chuyên gia — ghép theo nỗi đau &amp; bệnh lý (ma trận Phiên 3). Mọi bác sĩ đều có giấy phép hành nghề &amp; được phép KCB từ xa.</div></div>';
+  }
+
+  function renderFin() {
+    var p = P(), f = p.fin, ins = f.installment;
+    var tiers = ['basic', 'plus'].map(function (key) {
+      var t = TIERS[key], cur = (f.tier === key);
+      var lis = t.benefits.map(function (b) { return '<li>' + b + '</li>'; }).join('');
+      return '<div class="tier-card' + (cur ? ' cur' : '') + '">' + (cur ? '<span class="ti-badge">Đang dùng</span>' : '') +
+        '<div class="ti-name">' + t.name + '</div>' +
+        '<div class="ti-price">' + t.price + '<span> ' + t.per + '</span></div><ul>' + lis + '</ul></div>';
+    }).join('');
+    var tx = f.transactions.map(function (t) {
+      return '<div class="alert-row"><span class="a-ico">' + t.ico + '</span>' +
+        '<div style="flex:1"><div>' + t.name + '</div><div class="a-time">' + t.time + '</div></div>' +
+        '<div style="font-weight:700">' + t.amt + '</div></div>';
+    }).join('');
+
+    document.getElementById('screen-fin').innerHTML =
+      '<div class="card"><div class="card-title">💳 Gói chăm sóc gia đình · so sánh</div>' +
+        '<div class="tier-grid">' + tiers + '</div>' +
+        '<button class="btn btn-outline" style="margin-top:0.7rem" onclick="toast(\'⬆️ Mở so sánh & nâng/hạ gói\')">Đổi gói</button></div>' +
+
+      '<div class="card"><div class="card-title">🏥 Trả góp ca điều trị · MedFin</div>' +
+        '<div style="font-weight:800;font-size:0.92rem">' + ins.name + '</div>' +
+        '<div style="font-size:0.82rem;color:var(--muted)">Tổng: ' + ins.total + ' · Trả góp 0% · ' + ins.months + ' tháng</div>' +
+        '<div style="font-size:1.15rem;font-weight:900;color:var(--care);margin-top:0.4rem">' + ins.perMonth +
+          ' <span style="font-size:0.78rem;color:var(--muted);font-weight:600">/ tháng</span></div>' +
+        '<div class="progress"><i style="width:' + ins.progress + '%"></i></div>' +
+        '<div style="display:flex;justify-content:space-between;font-size:0.74rem;color:var(--muted)">' +
+          '<span>Đã trả ' + ins.paid + '/' + ins.months + ' kỳ</span><span>Còn ' + ins.remain + '</span></div>' +
+        '<button class="btn btn-outline" style="margin-top:0.7rem" onclick="openScoreSheet()">📊 Xem đánh giá tín nhiệm</button></div>' +
+
+      '<div class="score-card"><div class="card-title" style="color:#1d4ed8">🤝 MedFin · đánh giá tín nhiệm (AI scoring)</div>' +
+        '<div class="score-row"><span>Điểm tín nhiệm</span><span class="score-badge">Tốt</span></div>' +
+        '<div class="score-row"><span>Hạn mức duyệt trước</span><b>50.000.000đ</b></div>' +
+        '<div class="score-row"><span>Ưu đãi</span><b>0% lãi · 12 tháng</b></div>' +
+        '<div style="font-size:0.68rem;color:#3b82f6;margin-top:0.4rem">Qua <b>đối tác tín dụng được cấp phép</b> · minh bạch lãi suất, không phí ẩn (Phiên 1 + Phiên 5).</div></div>' +
+
+      '<div class="card" style="background:#ecfdf5;border-color:#a7f3d0"><div class="card-title" style="color:#047857">🛡️ Bảo hiểm bổ sung</div>' +
+        '<div style="font-weight:800;color:#047857">Đã kích hoạt ✔</div>' +
+        '<div style="font-size:0.82rem;color:#059669">Chi trả tới <strong>80%</strong> chi phí nằm viện ngoài BHYT · hạn mức 200 triệu/năm</div></div>' +
+
+      '<div class="card"><div class="card-title">🧾 Giao dịch gần đây</div>' + tx + '</div>';
+  }
+
+  function renderParent() {
+    var p = P(), c = p.consent;
+    var chronic = p.chronic.map(function (d, i) {
+      return '<button onclick="openChronicSheet(' + i + ')">' + d.name + ' ›</button>';
+    }).join('');
+    var devices = p.devices.map(function (d) {
+      return '<div class="device-row"><div class="device-ico">' + d.ico + '</div>' +
+        '<div style="flex:1"><div class="d-name">' + d.name + '</div><div class="d-state d-state-txt">' + d.state + '</div>' +
+        '<div style="font-size:0.62rem;color:var(--care);font-weight:600;margin-top:0.1rem">⚠️ ' + d.thr + '</div></div>' +
+        '<div class="toggle" onclick="toggleDevice(this)"></div></div>';
+    }).join('');
+    var meds = p.meds.map(function (m) {
+      return '<div class="med-row' + (m.done ? ' done' : '') + '" onclick="toggleMed(this)">' +
+        '<div class="med-check">' + (m.done ? '✓' : '') + '</div>' +
+        '<div class="m-name">' + m.name + '</div><div class="m-time">' + m.time + '</div></div>';
+    }).join('');
+    var wander = (p.id === 'tam')
+      ? '<button class="fall-btn amber" onclick="simulateWander()">▶️ Mô phỏng cảnh báo đi lạc</button>'
+      : '';
+
+    document.getElementById('screen-parent').innerHTML =
+      '<div class="profile-head"><div class="ph-avatar">' + p.avatar + '</div>' +
+        '<div><div class="ph-name">' + p.name + '</div><div class="ph-meta">' + p.meta + ' · ' + p.dependency + '</div></div></div>' +
+
+      '<div class="card"><div class="card-title">❤️‍🩹 Bệnh mạn tính · tap để xem theo dõi</div>' +
+        '<div class="chronic">' + chronic + '</div></div>' +
+
+      '<div class="consent-card"><div class="card-title" style="color:#1d4ed8">🔐 Quyền xem dữ liệu &amp; đồng ý · ' + c.mode + '</div>' +
+        '<div class="cc-txt">' + c.txt + '</div>' +
+        '<div class="consent-row"><div style="flex:1"><div class="cr-name">' + c.viewer + '</div><div class="cr-sub">' + c.viewerSub + '</div></div>' +
+          '<div class="toggle' + (c.share ? '' : ' off') + '" onclick="toggleConsent(this)"></div></div></div>' +
+
+      '<div class="card"><div class="card-title">📡 CareSense · Thiết bị tại nhà</div>' + devices + '</div>' +
+
+      '<div class="card" style="border-color:#fecaca;background:#fef9f9"><div class="card-title" style="color:#dc2626">🚨 Mô phỏng sự cố (demo)</div>' +
+        '<div style="font-size:0.8rem;color:var(--muted);margin-bottom:0.7rem">Bấm để xem CareSense phản ứng khi AI phát hiện sự cố.</div>' +
+        '<button class="fall-btn" onclick="simulateFall()">▶️ Mô phỏng sự cố té ngã</button>' + wander + '</div>' +
+
+      '<div class="card"><div class="card-title">💊 Lịch uống thuốc hôm nay</div>' + meds + '</div>';
+  }
+
+  function renderAll() {
+    renderHeader();
+    renderHome();
+    renderCare();
+    renderVisit();
+    renderFin();
+    renderParent();
+  }
+
+  // =====================================================================
+  // NAV / HELPERS
+  // =====================================================================
+  var CAPTIONS = {
+    home:   { t: '🏠 Tổng quan', d: 'Trạng thái, sinh hiệu gắn ngưỡng cảnh báo & chuyên gia chịu trách nhiệm, lịch chăm sóc.' },
+    care:   { t: '🩺 Chăm sóc · CareConnect', d: 'Điều dưỡng (giấy phép + chứng chỉ đào tạo), nhật ký ca trực, và đội chăm đa chuyên ngành.' },
+    visit:  { t: '📱 Khám · Tele & Booking', d: 'AI hỏi triệu chứng → ghép đúng chuyên gia, khám video, mạng lưới 12 nhóm chuyên gia.' },
+    fin:    { t: '💳 Tài chính · MedFin', d: 'So sánh gói 299k/599k, trả góp 0% + đánh giá tín nhiệm, bảo hiểm bổ sung.' },
+    parent: { t: '👵 Hồ sơ Bố/Mẹ · CareSense', d: 'Bệnh mạn, thiết bị giám sát có ngưỡng, quyền xem dữ liệu/đồng ý, mô phỏng sự cố.' }
+  };
+
   function showScreen(id) {
     var screens = document.querySelectorAll('.screen');
     for (var i = 0; i < screens.length; i++) screens[i].classList.remove('active');
@@ -883,12 +1331,9 @@
     for (var j = 0; j < items.length; j++) {
       items[j].classList.toggle('active', items[j].getAttribute('data-screen') === id);
     }
-
-    // reset scroll of viewport
     var vp = document.getElementById('viewport');
     vp.scrollTop = 0;
 
-    // update marketing caption
     var c = CAPTIONS[id];
     if (c) {
       document.getElementById('mkTitle').textContent = c.t;
@@ -896,7 +1341,6 @@
     }
   }
 
-  // ===== toast helper =====
   var toastTimer = null;
   function toast(msg) {
     var el = document.getElementById('toast');
@@ -906,7 +1350,6 @@
     toastTimer = setTimeout(function () { el.classList.remove('show'); }, 2200);
   }
 
-  // ===== sub tabs (Chăm sóc) =====
   function switchSub(tabEl, group) {
     var tabs = tabEl.parentNode.querySelectorAll('.subtab');
     for (var i = 0; i < tabs.length; i++) tabs[i].classList.remove('active');
@@ -918,35 +1361,29 @@
     }
   }
 
-  // ===== timeline toggle =====
   function toggleTimeline(btn) {
     var tl = btn.parentNode.querySelector('.timeline');
     var open = tl.classList.toggle('open');
     btn.textContent = open ? '📋 Ẩn nhật ký ca trực' : '📋 Xem nhật ký ca trực';
   }
 
-  // ===== mini chat (symptom) =====
-  var SYMPTOMS = {
-    dizzy: { u: 'Mẹ chóng mặt', b: '🩺 Chóng mặt ở người tăng huyết áp cần lưu ý. Em gợi ý khám <b>Tim mạch / Nội thần kinh</b>. Anh muốn đặt khám video ngay hay tới viện?' },
-    sleep: { u: 'Khó ngủ', b: '😴 Mất ngủ kéo dài nên gặp <b>Nội thần kinh / Lão khoa</b>. Trong lúc chờ, hạn chế caffeine chiều &amp; giữ phòng tối. Đặt khám nhé?' },
-    joint: { u: 'Đau khớp', b: '🦴 Bà Hoa có thoái hóa khớp — nên gặp <b>Cơ xương khớp</b>. Có thể kết hợp vật lý trị liệu tại nhà với điều dưỡng Lan. Đặt khám?' }
-  };
+  // ===== mini chat (symptom → AI matching) =====
   function pickSymptom(chipEl, key) {
     var box = document.getElementById('chatBox');
-    var s = SYMPTOMS[key];
-    // user bubble
+    var list = P().symptoms, s = null;
+    for (var i = 0; i < list.length; i++) if (list[i].k === key) s = list[i];
+    if (!s) return;
     var u = document.createElement('div');
     u.className = 'bubble user';
     u.textContent = s.u;
     box.appendChild(u);
-    // dim chips
     var chips = document.getElementById('symptomChips').querySelectorAll('.chip');
-    for (var i = 0; i < chips.length; i++) chips[i].classList.add('dim');
-    // bot reply + action buttons
+    for (var j = 0; j < chips.length; j++) chips[j].classList.add('dim');
+    chipEl.classList.remove('dim'); chipEl.classList.add('sel');
     setTimeout(function () {
       var b = document.createElement('div');
       b.className = 'bubble bot';
-      b.innerHTML = s.b;
+      b.innerHTML = '🤖 <b>AI ghép chuyên gia:</b> ' + s.spec + '<br>' + s.b;
       box.appendChild(b);
       var act = document.createElement('div');
       act.className = 'chip-row';
@@ -962,6 +1399,9 @@
   // ===== video call =====
   var vcTimer = null;
   function openVideo() {
+    var v = P().video;
+    document.getElementById('vcAva').textContent = v.ava;
+    document.getElementById('vcName').textContent = v.name;
     document.getElementById('vcStatus').textContent = 'Đang kết nối...';
     document.getElementById('videoOverlay').classList.add('show');
     if (vcTimer) clearTimeout(vcTimer);
@@ -991,6 +1431,12 @@
     }
   }
 
+  function toggleConsent(el) {
+    var off = el.classList.toggle('off');
+    P().consent.share = !off;
+    toast(off ? '🔒 Đã tạm dừng chia sẻ dữ liệu' : '✅ Đã bật chia sẻ dữ liệu (có đồng ý)');
+  }
+
   // ===== med checklist =====
   function toggleMed(row) {
     var done = row.classList.toggle('done');
@@ -999,10 +1445,189 @@
     if (done) toast('💊 Đã đánh dấu uống thuốc');
   }
 
-  // ===== fall simulation =====
-  var fallTimer = null;
-  var fallCount = 10;
-  function simulateFall() {
+  // ===== bottom sheet =====
+  function openSheet(html) {
+    document.getElementById('sheetBody').innerHTML = html;
+    document.getElementById('sheetOverlay').classList.add('show');
+  }
+  function closeSheet() { document.getElementById('sheetOverlay').classList.remove('show'); }
+
+  function openVitalSheet(i) {
+    var v = P().vitals[i];
+    openSheet('<h3>' + v.ico + ' ' + v.label + ' · ' + v.num + ' ' + v.unit + '</h3>' +
+      '<div class="sh-sub2">CareSense theo dõi liên tục — gắn bệnh lý &amp; ngưỡng cảnh báo (Phiên 4).</div>' +
+      '<div class="sheet-info"><span class="si-lab">Theo dõi cho</span><span class="si-val">' + v.disease + '</span></div>' +
+      '<div class="sheet-info"><span class="si-lab">Ngưỡng cảnh báo</span><span class="si-val">' + v.thr + '</span></div>' +
+      '<div class="sheet-info"><span class="si-lab">Báo cho</span><span class="si-val"><b>' + v.doc + '</b> (chịu trách nhiệm)</span></div>' +
+      '<button class="btn btn-primary" style="margin-top:0.9rem" onclick="closeSheet()">Đã hiểu</button>');
+  }
+
+  function openChronicSheet(i) {
+    var d = P().chronic[i];
+    openSheet('<h3>❤️‍🩹 ' + d.name + '</h3>' +
+      '<div class="sh-sub2">Kế hoạch theo dõi &amp; đội chăm phụ trách (Phiên 3 + Phiên 4).</div>' +
+      '<div class="sheet-info"><span class="si-lab">Theo dõi gì</span><span class="si-val">' + d.monitor + '</span></div>' +
+      '<div class="sheet-info"><span class="si-lab">Ngưỡng cảnh báo</span><span class="si-val">' + d.thr + '</span></div>' +
+      '<div class="sheet-info"><span class="si-lab">Ai chăm</span><span class="si-val"><b>' + d.doc + '</b></span></div>' +
+      '<button class="btn btn-primary" style="margin-top:0.9rem" onclick="closeSheet()">Đã hiểu</button>');
+  }
+
+  function openScoreSheet() {
+    openSheet('<h3>🤝 MedFin · đánh giá tín nhiệm</h3>' +
+      '<div class="sh-sub2">AI scoring dựa trên lịch sử chi tiêu chăm sóc &amp; thu nhập khai báo — minh bạch, không phí ẩn (Phiên 1).</div>' +
+      '<div class="sheet-info"><span class="si-lab">Điểm tín nhiệm</span><span class="si-val"><b>Tốt</b> · duyệt nhanh</span></div>' +
+      '<div class="sheet-info"><span class="si-lab">Duyệt trước</span><span class="si-val"><b>50.000.000đ</b></span></div>' +
+      '<div class="sheet-info"><span class="si-lab">Lãi suất</span><span class="si-val">0% · 12 tháng (đối tác tài trợ)</span></div>' +
+      '<div class="sheet-info"><span class="si-lab">Đối tác</span><span class="si-val">Tổ chức tín dụng <b>được cấp phép</b> (Phiên 5)</span></div>' +
+      '<button class="btn btn-primary" style="margin-top:0.9rem" onclick="closeSheet();toast(\'✅ Đã gửi yêu cầu duyệt trả góp\')">Đăng ký trả góp 0%</button>');
+  }
+
+  function openConsentSheet() {
+    var c = P().consent;
+    openSheet('<h3>🔐 Xác nhận quyền xem dữ liệu</h3>' +
+      '<div class="sh-sub2">Khi mở hồ sơ ' + P().short + ' — cơ chế đồng ý: <b>' + c.mode + '</b></div>' +
+      '<div class="cc-txt" style="font-size:0.82rem;background:#eff6ff;border:1px solid #bfdbfe;border-radius:12px;padding:0.8rem;color:#1e3a8a">' + c.txt + '</div>' +
+      '<button class="btn btn-primary" style="margin-top:0.9rem" onclick="closeSheet()">Tôi đồng ý &amp; tiếp tục</button>');
+  }
+
+  // ===== profile chooser + switch =====
+  function openProfileChooser() {
+    var html = '<h3>⇄ Chọn hồ sơ người thân</h3><div class="sh-sub2">App tự thích ứng bệnh lý, đội chăm, cảnh báo &amp; gói theo từng người.</div>';
+    ['hoa', 'tam'].forEach(function (id) {
+      var p = PROFILES[id], cur = (id === current);
+      html += '<button class="ob-opt' + (cur ? ' sel' : '') + '" onclick="setProfile(\'' + id + '\')">' +
+        p.avatar + ' ' + p.name + (cur ? ' · đang xem' : '') +
+        '<div class="ob-od">' + p.age + ' tuổi · ' + p.dependency + '</div></button>';
+    });
+    html += '<button class="ob-opt" style="border-color:#99f6e4;color:var(--care)" onclick="startOnboard()">➕ Thêm người thân mới<div class="ob-od">Onboarding triage — AI gợi ý gói &amp; đội chăm</div></button>';
+    openSheet(html);
+  }
+
+  function setProfile(id) {
+    if (!PROFILES[id]) return;
+    var changed = (id !== current);
+    current = id;
+    renderAll();
+    closeSheet();
+    if (changed) {
+      toast('⇄ Đã chuyển sang hồ sơ ' + P().short);
+      setTimeout(openConsentSheet, 350);
+    }
+  }
+
+  // ===== onboarding triage (3 bước) =====
+  var ob = { step: 1, dep: null, diseases: [] };
+  var DEP_OPTS = [
+    { v:'Tự chủ', d:'Sinh hoạt độc lập, cần theo dõi định kỳ' },
+    { v:'Hỗ trợ một phần', d:'Cần hỗ trợ sinh hoạt & nhắc thuốc' },
+    { v:'Phụ thuộc nặng', d:'Cần chăm sóc thường xuyên/24-7' },
+    { v:'Hậu phẫu', d:'Phục hồi sau mổ, chăm sóc vết thương' },
+    { v:'Sa sút trí tuệ', d:'Suy giảm nhận thức, nguy cơ đi lạc' }
+  ];
+  var DIS_OPTS = ['Tăng huyết áp', 'Tiểu đường', 'Thoái hóa khớp', 'Tim mạch', 'Đột quỵ', 'Parkinson', 'Sa sút trí tuệ', 'COPD/hô hấp'];
+
+  function startOnboard() {
+    ob = { step: 1, dep: null, diseases: [] };
+    closeSheet();
+    document.getElementById('onboardOverlay').classList.add('show');
+    renderOnboard();
+  }
+  function closeOnboard() { document.getElementById('onboardOverlay').classList.remove('show'); }
+
+  function renderOnboard() {
+    document.getElementById('obs1').className = ob.step >= 1 ? 'on' : '';
+    document.getElementById('obs2').className = ob.step >= 2 ? 'on' : '';
+    document.getElementById('obs3').className = ob.step >= 3 ? 'on' : '';
+    var body = document.getElementById('obBody'), foot = document.getElementById('obFoot');
+
+    if (ob.step === 1) {
+      body.innerHTML = '<h3>Bước 1 · Mức độ phụ thuộc</h3><div class="ob-q">Người thân của bạn cần hỗ trợ ở mức nào?</div>' +
+        DEP_OPTS.map(function (o) {
+          return '<button class="ob-opt' + (ob.dep === o.v ? ' sel' : '') + '" onclick="obPickDep(\'' + o.v + '\')">' +
+            o.v + '<div class="ob-od">' + o.d + '</div></button>';
+        }).join('');
+      foot.innerHTML = '<button class="btn btn-primary" onclick="obNext()"' + (ob.dep ? '' : ' disabled style="opacity:.5"') + '>Tiếp tục →</button>';
+    } else if (ob.step === 2) {
+      body.innerHTML = '<h3>Bước 2 · Bệnh nền</h3><div class="ob-q">Chọn các bệnh nền đang có (chọn nhiều).</div><div class="chip-row">' +
+        DIS_OPTS.map(function (d) {
+          var sel = ob.diseases.indexOf(d) >= 0;
+          return '<button class="chip' + (sel ? ' sel' : '') + '" onclick="obToggleDis(\'' + d + '\')">' + d + '</button>';
+        }).join('') + '</div>';
+      foot.innerHTML = '<button class="btn btn-primary" onclick="obNext()">Phân tích bằng AI →</button>';
+    } else {
+      var rec = obRecommend();
+      body.innerHTML = '<h3>Bước 3 · AI gợi ý</h3><div class="ob-q">Dựa trên mức phụ thuộc &amp; bệnh nền, AI đề xuất:</div>' +
+        '<div class="ob-result">' +
+          '<div class="or-row">📋 <b>Mức:</b> ' + ob.dep + '</div>' +
+          '<div class="or-row">🩺 <b>Bệnh nền:</b> ' + (ob.diseases.length ? ob.diseases.join(', ') : 'chưa chọn') + '</div>' +
+          '<div class="or-row">📦 <b>Gói đề xuất:</b> ' + rec.pkg + '</div>' +
+          '<div class="or-row">👥 <b>Đội chăm:</b> ' + rec.team + '</div>' +
+          '<div class="or-row" style="color:var(--muted);font-size:0.72rem">🤖 Gợi ý tự động (triage + matching, Phiên 3) — đội ngũ y tế sẽ xác nhận lại.</div>' +
+        '</div>';
+      foot.innerHTML = '<button class="btn btn-primary" onclick="obFinish()">✅ Tạo hồ sơ &amp; đặt đội chăm</button>';
+    }
+  }
+  function obPickDep(v) { ob.dep = v; renderOnboard(); }
+  function obToggleDis(d) {
+    var i = ob.diseases.indexOf(d);
+    if (i >= 0) ob.diseases.splice(i, 1); else ob.diseases.push(d);
+    renderOnboard();
+  }
+  function obNext() {
+    if (ob.step === 1 && !ob.dep) return;
+    ob.step++;
+    renderOnboard();
+  }
+  function obRecommend() {
+    var heavy = (ob.dep === 'Phụ thuộc nặng' || ob.dep === 'Sa sút trí tuệ' || ob.dep === 'Hậu phẫu');
+    var pkg = heavy ? 'ElderCare Plus 599k/tháng (chăm sóc tăng cường)' : 'ElderCare Cơ bản 299k/tháng (có thể nâng cấp)';
+    var team = ['Điều dưỡng lão khoa (chủ trì)'];
+    if (ob.diseases.indexOf('Tăng huyết áp') >= 0 || ob.diseases.indexOf('Tim mạch') >= 0) team.push('BS Tim mạch');
+    if (ob.diseases.indexOf('Tiểu đường') >= 0) team.push('BS Nội tiết + Dược lâm sàng');
+    if (ob.diseases.indexOf('Thoái hóa khớp') >= 0) team.push('Cơ xương khớp + PHCN');
+    if (ob.diseases.indexOf('Đột quỵ') >= 0 || ob.diseases.indexOf('Parkinson') >= 0) team.push('BS Thần kinh + PHCN');
+    if (ob.diseases.indexOf('Sa sút trí tuệ') >= 0 || ob.dep === 'Sa sút trí tuệ') team.push('Tâm lý + Công tác xã hội');
+    if (ob.diseases.indexOf('COPD/hô hấp') >= 0) team.push('BS Hô hấp');
+    return { pkg: pkg, team: team.join(' · ') };
+  }
+  function obFinish() {
+    closeOnboard();
+    toast('✅ Đã tạo hồ sơ & gửi yêu cầu đội chăm (demo)');
+  }
+
+  // ===== pharmacy / drug verify =====
+  function openPharmacy() {
+    document.getElementById('verifyResult').classList.remove('show');
+    var sb = document.getElementById('scanBox');
+    sb.classList.remove('scanning');
+    document.getElementById('scanIco').textContent = '📷';
+    document.getElementById('scanTxt').textContent = 'Đưa vỉ thuốc vào khung để quét mã';
+    document.getElementById('scanBtn').style.display = '';
+    document.getElementById('pharmaOverlay').classList.add('show');
+  }
+  function closePharmacy() { document.getElementById('pharmaOverlay').classList.remove('show'); }
+  var scanTimer = null;
+  function runVerify() {
+    var sb = document.getElementById('scanBox');
+    sb.classList.add('scanning');
+    document.getElementById('scanIco').textContent = '🔎';
+    document.getElementById('scanTxt').textContent = 'Đang quét tem chống giả & đối chiếu Cục QLD...';
+    document.getElementById('scanBtn').style.display = 'none';
+    if (scanTimer) clearTimeout(scanTimer);
+    scanTimer = setTimeout(function () {
+      sb.classList.remove('scanning');
+      document.getElementById('scanIco').textContent = '✅';
+      document.getElementById('scanTxt').textContent = 'Đã xác thực';
+      document.getElementById('verifyResult').classList.add('show');
+    }, 1700);
+  }
+
+  // ===== fall / wander simulation =====
+  var fallTimer = null, fallCount = 10;
+  function startEmergency(icon, title, loc) {
+    document.getElementById('foIcon').textContent = icon;
+    document.getElementById('foTitle').textContent = title;
+    document.getElementById('foLoc').textContent = loc;
     fallCount = 10;
     document.getElementById('fallCount').textContent = fallCount;
     document.getElementById('fallOverlay').classList.add('show');
@@ -1010,15 +1635,12 @@
     fallTimer = setInterval(function () {
       fallCount--;
       document.getElementById('fallCount').textContent = fallCount;
-      if (fallCount <= 0) {
-        clearInterval(fallTimer);
-        callEmergency();
-      }
+      if (fallCount <= 0) { clearInterval(fallTimer); callEmergency(); }
     }, 1000);
   }
-  function stopFallTimer() {
-    if (fallTimer) { clearInterval(fallTimer); fallTimer = null; }
-  }
+  function simulateFall() { startEmergency('🚨', 'PHÁT HIỆN TÉ NGÃ', P().fall.loc); }
+  function simulateWander() { startEmergency('🧭', 'CẢNH BÁO ĐI LẠC', '🧭 Ra khỏi vùng an toàn · 14:32'); }
+  function stopFallTimer() { if (fallTimer) { clearInterval(fallTimer); fallTimer = null; } }
   function resolveFall() {
     stopFallTimer();
     document.getElementById('fallOverlay').classList.remove('show');
@@ -1027,8 +1649,11 @@
   function callEmergency() {
     stopFallTimer();
     document.getElementById('fallOverlay').classList.remove('show');
-    toast('🆘 Đã gọi tổng đài cấp cứu & báo con cái!');
+    toast('🆘 Đã gọi tổng đài & báo con cái/người giám hộ!');
   }
+
+  // ===== init =====
+  renderAll();
 </script>
 
 </body>
