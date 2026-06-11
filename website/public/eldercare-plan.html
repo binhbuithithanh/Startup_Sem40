@@ -393,6 +393,55 @@
     .train-step .ts-card li::before { content: '▸'; position: absolute; left: 0; color: var(--care); }
     .train-step .ts-cert { display: inline-block; margin-top: 0.55rem; font-size: 0.67rem; font-weight: 700; color: #92400e; background: #fffbeb; border-radius: 8px; padding: 3px 9px; }
 
+    /* ===== PHIÊN 5 — ĐẠO ĐỨC & PHÁP LÝ ===== */
+    .legal-section { background: #fff; }
+
+    /* Thẻ điều luật / văn bản pháp lý */
+    .law-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(330px,1fr)); gap: 1rem; margin: 1.25rem 0; }
+    .law-card { border: 1px solid var(--border); border-radius: 16px; padding: 1.4rem; background: #fff; border-left: 4px solid var(--care); position: relative; }
+    .law-card.l-data { border-left-color: #0891b2; }
+    .law-card.l-kcb { border-left-color: var(--care); }
+    .law-card.l-pharma { border-left-color: var(--gold); }
+    .law-card.l-ad { border-left-color: var(--coral); }
+    .law-card .lc-top { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.5rem; flex-wrap: wrap; }
+    .law-card .lc-ico { font-size: 1.45rem; }
+    .law-card .lc-num { display: inline-block; font-size: 0.67rem; font-weight: 800; letter-spacing: 0.3px; color: #fff; background: var(--care); padding: 3px 10px; border-radius: 99px; }
+    .law-card.l-data .lc-num { background: #0891b2; }
+    .law-card.l-pharma .lc-num { background: #d97706; }
+    .law-card.l-ad .lc-num { background: var(--coral); }
+    .law-card h4 { font-size: 0.98rem; font-weight: 800; margin: 0.15rem 0 0.25rem; line-height: 1.3; }
+    .law-card .lc-eff { font-size: 0.72rem; font-weight: 700; color: var(--muted); margin-bottom: 0.55rem; }
+    .law-card p { font-size: 0.8rem; color: #4b5563; line-height: 1.55; margin-bottom: 0.4rem; }
+    .law-card ul { list-style: none; margin: 0.35rem 0 0.2rem; }
+    .law-card ul li { font-size: 0.79rem; color: #374151; line-height: 1.5; padding: 3px 0 3px 1.15rem; position: relative; }
+    .law-card ul li::before { content: '§'; position: absolute; left: 0; color: var(--care); font-weight: 800; }
+    .law-card.l-data ul li::before { color: #0891b2; }
+    .law-card.l-pharma ul li::before { color: #d97706; }
+    .law-card.l-ad ul li::before { color: var(--coral); }
+    .law-card ul li strong { color: var(--primary); }
+
+    /* Box nhấn chống thuốc giả */
+    .anti-fake { background: linear-gradient(135deg, #fff7ed, #fffbeb); border: 1px solid #fdba74; border-radius: 14px; padding: 1.25rem 1.5rem; margin: 1.25rem 0; }
+    .anti-fake h5 { font-size: 0.95rem; font-weight: 800; color: #b45309; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem; }
+    .anti-fake ul { list-style: none; }
+    .anti-fake ul li { font-size: 0.82rem; color: #374151; line-height: 1.55; padding: 4px 0 4px 1.4rem; position: relative; }
+    .anti-fake ul li::before { content: '🛡️'; position: absolute; left: 0; font-size: 0.78rem; }
+    .anti-fake ul li strong { color: #92400e; }
+
+    /* Thẻ đạo đức (tension → giải pháp) */
+    .ethic-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(258px,1fr)); gap: 0.9rem; margin: 1.25rem 0; }
+    .ethic-card { border: 1px solid var(--border); border-radius: 14px; padding: 1.25rem; background: #fbfdfd; border-top: 4px solid #7c3aed; }
+    .ethic-card.e1 { border-top-color: var(--coral); }
+    .ethic-card.e2 { border-top-color: #7c3aed; }
+    .ethic-card.e3 { border-top-color: var(--gold); }
+    .ethic-card.e4 { border-top-color: var(--care); }
+    .ethic-card .et-ico { font-size: 1.5rem; }
+    .ethic-card h5 { font-size: 0.9rem; font-weight: 800; margin: 0.3rem 0 0.4rem; line-height: 1.3; }
+    .ethic-card .et-tension { font-size: 0.79rem; color: #4b5563; line-height: 1.55; }
+    .ethic-card .et-tension strong { color: var(--primary); }
+    .ethic-card .et-sol { display: block; margin-top: 0.6rem; font-size: 0.77rem; color: #115e59; background: #f0fdfa; border-radius: 8px; padding: 0.55rem 0.7rem; line-height: 1.5; }
+    .ethic-card .et-sol strong { color: var(--care); }
+
     /* RESPONSIVE */
     @media (max-width: 768px) {
       nav { padding: 0 1rem; }
@@ -410,6 +459,7 @@
       .train-step { padding: 0; }
       .train-step::before { display: none; }
       .train-step .ts-dot { margin: 0 auto 0.5rem; }
+      .law-grid, .ethic-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -454,7 +504,7 @@
   <a href="#marketing">📣 Marketing &amp; GTM</a>
   <a href="#segment">👥 Phân khúc &amp; chuyên gia</a>
   <a href="#disease">🏥 Bệnh lý &amp; đào tạo</a>
-  <a href="#legal" class="soon">⚖️ Đạo đức &amp; pháp lý</a>
+  <a href="#legal">⚖️ Đạo đức &amp; pháp lý</a>
   <a href="#summary" class="soon">🧭 Tổng hợp</a>
 </div>
 
@@ -1810,8 +1860,309 @@
   </div>
 </section>
 
+<!-- ============================ PHIÊN 5 — ĐẠO ĐỨC & PHÁP LÝ ============================ -->
+<section class="legal-section" id="legal">
+  <div class="container">
+    <div class="section-tag">Phần 5 · Đạo đức &amp; pháp lý</div>
+    <h2>Khung pháp lý &amp; đạo đức<br/>cho super-app sức khỏe người cao tuổi</h2>
+    <p class="section-desc">
+      Năm trụ cột doanh thu (Phần 1) đều chạm vào những lĩnh vực bị quản lý chặt nhất ở Việt Nam: <strong>dữ liệu sức khỏe nhạy cảm, hành nghề khám chữa bệnh, kinh doanh dược và quảng cáo y tế</strong>. Phần này lập bản đồ các văn bản pháp luật điều chỉnh từng trụ cột, cách ElderCare tuân thủ chủ động, và bốn vấn đề đạo đức cốt lõi khi chăm sóc người già — đặc biệt người <em>sa sút trí tuệ</em> (Ông Tâm 80t) cần người giám hộ ra quyết định.
+    </p>
+
+    <!-- 5.1 QUYỀN RIÊNG TƯ & BẢO MẬT DỮ LIỆU -->
+    <h3 class="fin-sub"><span class="badge-n">1</span> Quyền riêng tư &amp; bảo mật dữ liệu sức khỏe</h3>
+    <p class="sub-desc">
+      Mỗi ngày ElderCare thu thập huyết áp, đường huyết, SpO₂, dữ liệu cảm biến té ngã, định vị, hồ sơ bệnh án từ telehealth — tất cả là <strong>dữ liệu cá nhân nhạy cảm</strong> theo luật, chịu nghĩa vụ bảo vệ ở mức cao nhất. Đây cũng là nền tảng cho tính năng <em>phân quyền con cái xem dữ liệu bố mẹ</em> ở app demo.
+    </p>
+    <div class="law-grid">
+      <div class="law-card l-data">
+        <div class="lc-top"><span class="lc-ico">🛡️</span><span class="lc-num">Luật 91/2025/QH15</span></div>
+        <h4>Luật Bảo vệ dữ liệu cá nhân 2025</h4>
+        <div class="lc-eff">Thông qua 26/6/2025 · Hiệu lực 01/01/2026 · 5 chương, 39 điều<span class="src">QH15</span></div>
+        <p>Luật đầu tiên điều chỉnh toàn diện về dữ liệu cá nhân — khung pháp lý cao nhất ElderCare phải tuân thủ. Xác lập các quyền cơ bản của chủ thể dữ liệu:</p>
+        <ul>
+          <li>Quyền được <strong>biết</strong>, <strong>đồng ý</strong>, truy cập, chỉnh sửa, yêu cầu <strong>xóa</strong> dữ liệu</li>
+          <li>Quyền rút lại đồng ý &amp; phản đối xử lý bất cứ lúc nào</li>
+        </ul>
+        <p class="src-note">Nguồn: Luật số 91/2025/QH15, QH thông qua 26/6/2025, hiệu lực 01/01/2026 (đã có hiệu lực). Tham chiếu cổng thông tin Chính phủ &amp; Bộ Công an.</p>
+      </div>
+      <div class="law-card l-data">
+        <div class="lc-top"><span class="lc-ico">🔐</span><span class="lc-num">NĐ 13/2023/NĐ-CP</span></div>
+        <h4>Nghị định bảo vệ dữ liệu cá nhân</h4>
+        <div class="lc-eff">Ban hành 17/4/2023 · Hiệu lực 01/7/2023<span class="src">NĐ-CP</span></div>
+        <p>Nền tảng kỹ thuật &amp; quy trình, vẫn áp dụng song song với Luật 91/2025:</p>
+        <ul>
+          <li><strong>Điều 2.4 — dữ liệu nhạy cảm:</strong> "tình trạng sức khỏe &amp; đời tư ghi trong hồ sơ bệnh án" thuộc nhóm nhạy cảm → dữ liệu ElderCare thu thập chịu bảo vệ cao nhất</li>
+          <li><strong>Điều 11 — đồng ý:</strong> rõ ràng, cụ thể, chứng minh được; dữ liệu nhạy cảm cần cơ chế đồng ý chặt hơn &amp; thông báo loại nhạy cảm</li>
+          <li><strong>Điều 9 — quyền chủ thể:</strong> biết, đồng ý, truy cập, rút đồng ý, xóa, hạn chế xử lý, khiếu nại, bồi thường</li>
+        </ul>
+        <p class="src-note">Nguồn: Nghị định 13/2023/NĐ-CP, Chính phủ ban hành 17/4/2023, hiệu lực 01/7/2023 (vanban.chinhphu.vn). Số điều khoản đối chiếu toàn văn.</p>
+      </div>
+    </div>
+    <div class="deep-callout">👨‍👩‍👧 <strong>Phân quyền con cái xem dữ liệu bố mẹ:</strong> mỗi lần con cái được cấp quyền xem là một hành vi xử lý dữ liệu nhạy cảm → phải có <strong>đồng ý của chính người cao tuổi</strong> nếu còn năng lực hành vi; nếu mất năng lực (sa sút trí tuệ nặng), quyền do <em>người giám hộ hợp pháp</em> xác lập theo Bộ luật Dân sự. App ghi nhật ký ai-xem-gì-khi-nào (audit log), người già có thể thu hồi quyền bất cứ lúc nào.</div>
+    <p class="tnote">Mức phạt tham chiếu hiện hành: Nghị định 15/2020/NĐ-CP phạt 20–30 triệu đồng (cá nhân; tổ chức thường gấp đôi) với hành vi dùng sai mục đích, chia sẻ trái phép, hoặc không có biện pháp bảo vệ thông tin cá nhân<span class="src">NĐ 15/2020</span>. Khi nghị định xử phạt riêng theo Luật 91/2025 có hiệu lực, chế tài sẽ siết chặt hơn — ElderCare rà soát cập nhật định kỳ.</p>
+
+    <button class="deep-toggle" onclick="toggleDeep(this)" data-closed-label="Phân tích sâu: ElderCare triển khai bảo mật dữ liệu thế nào" data-open-label="Thu gọn">
+      <span class="dt-label">Phân tích sâu: ElderCare triển khai bảo mật dữ liệu thế nào</span><span class="chev">▼</span>
+    </button>
+    <div class="deep-panel">
+      <div class="deep-inner">
+        <h5>🔒 Từ điều luật → biện pháp kỹ thuật &amp; tổ chức</h5>
+        <p>Tuân thủ không chỉ là điều khoản trong hợp đồng — nó là kiến trúc hệ thống. Mỗi yêu cầu pháp lý ánh xạ thành một biện pháp cụ thể:</p>
+        <table class="deep-table">
+          <thead><tr><th>Yêu cầu pháp lý</th><th>Biện pháp ElderCare</th></tr></thead>
+          <tbody>
+            <tr><td>Dữ liệu nhạy cảm — bảo vệ cao nhất</td><td>Mã hóa khi truyền (TLS) &amp; khi lưu (at-rest); tách kho dữ liệu y tế khỏi dữ liệu vận hành</td></tr>
+            <tr><td>Đồng ý rõ ràng, rút được</td><td>Màn hình đồng ý phân lớp (data sức khỏe, chia sẻ con cái, telehealth riêng); nút thu hồi trong app</td></tr>
+            <tr><td>Quyền truy cập &amp; xóa</td><td>Người dùng tự xuất/yêu cầu xóa hồ sơ; quy trình xử lý có thời hạn</td></tr>
+            <tr><td>Phân quyền &amp; trách nhiệm giải trình</td><td>Phân quyền theo vai trò (RBAC), nhật ký audit bất biến ai truy cập dữ liệu nào</td></tr>
+            <tr><td>Lưu trữ dữ liệu trong nước</td><td>Hạ tầng &amp; lưu trữ tuân thủ yêu cầu nội địa hóa dữ liệu theo quy định</td></tr>
+          </tbody>
+        </table>
+        <div class="deep-callout">💡 Bảo mật là <strong>lợi thế cạnh tranh</strong>, không chỉ là chi phí tuân thủ: niềm tin là rào cản lớn nhất khi bán dịch vụ y tế cho người già — minh bạch về dữ liệu chính là điểm bán hàng.</div>
+      </div>
+    </div>
+
+    <!-- 5.2 HÀNH NGHỀ KCB & KHÁM TỪ XA -->
+    <h3 class="fin-sub"><span class="badge-n">2</span> Hành nghề khám chữa bệnh &amp; khám từ xa</h3>
+    <p class="sub-desc">
+      Trụ cột Tele &amp; mạng lưới điều dưỡng/bác sĩ (Phần 3·4) chỉ hợp pháp khi mỗi người hành nghề có <strong>giấy phép còn hiệu lực</strong> và mỗi ca telehealth gắn với <strong>cơ sở khám chữa bệnh được cấp phép</strong>. ElderCare là <em>nền tảng kết nối</em>, không tự đứng tên khám chữa bệnh.
+    </p>
+    <div class="law-grid">
+      <div class="law-card l-kcb">
+        <div class="lc-top"><span class="lc-ico">⚕️</span><span class="lc-num">Luật 15/2023/QH15</span></div>
+        <h4>Luật Khám bệnh, chữa bệnh 2023</h4>
+        <div class="lc-eff">Thông qua 09/01/2023 · Hiệu lực 01/01/2024 (thay Luật 2009)<span class="src">QH15</span></div>
+        <ul>
+          <li><strong>Điều 80 — KCB từ xa:</strong> phải theo phạm vi hành nghề; chữa bệnh từ xa theo danh mục bệnh do Bộ Y tế ban hành; người hành nghề <strong>chịu trách nhiệm</strong> chẩn đoán &amp; kê đơn; cơ sở phải bảo đảm hạ tầng CNTT, bảo mật &amp; lưu trữ dữ liệu</li>
+          <li><strong>Điều 19 &amp; 26 — giấy phép hành nghề</strong> (thay "chứng chỉ hành nghề" cũ): bác sĩ, điều dưỡng, kỹ thuật y, dinh dưỡng lâm sàng, tâm lý lâm sàng… phải có giấy phép còn hiệu lực &amp; đã đăng ký hành nghề</li>
+        </ul>
+        <p class="src-note">Nguồn: Luật Khám bệnh, chữa bệnh số 15/2023/QH15, QH thông qua 09/01/2023, hiệu lực 01/01/2024. Toàn văn xaydungchinhsach.chinhphu.vn / Bộ Y tế.</p>
+      </div>
+      <div class="law-card l-kcb">
+        <div class="lc-top"><span class="lc-ico">🏥</span><span class="lc-num">NĐ 96/2023/NĐ-CP</span></div>
+        <h4>Nghị định hướng dẫn Luật KCB 2023</h4>
+        <div class="lc-eff">Ban hành 30/12/2023 · Hiệu lực 01/01/2024<span class="src">NĐ-CP</span></div>
+        <p>Quy định chi tiết điều kiện cấp giấy phép hoạt động cơ sở KCB, hình thức tổ chức, nhân lực, cơ sở vật chất &amp; triển khai KCB từ xa.</p>
+        <ul>
+          <li>Nền tảng telehealth phải <strong>gắn với cơ sở KCB hợp pháp</strong></li>
+          <li>ElderCare hợp tác/liên kết cơ sở đã được cấp giấy phép hoạt động</li>
+        </ul>
+        <p class="src-note">Nguồn: Nghị định 96/2023/NĐ-CP quy định chi tiết Luật Khám bệnh, chữa bệnh, ban hành 30/12/2023, hiệu lực 01/01/2024.</p>
+      </div>
+    </div>
+    <p class="tnote">Chi tiết giáo trình &amp; lộ trình cấp chứng chỉ nội bộ ở <a href="#disease" style="color:var(--care);font-weight:700;">Phần 4</a> phải áp trên nền tảng pháp lý này: chứng chỉ nội bộ ElderCare bổ sung cho — không thay thế — giấy phép hành nghề do cơ quan y tế cấp. Điều dưỡng/bác sĩ trong mạng lưới đều phải có giấy phép hành nghề hợp lệ trước khi nhận ca.</p>
+
+    <button class="deep-toggle" onclick="toggleDeep(this)" data-closed-label="Phân tích sâu: ranh giới pháp lý nền tảng vs cơ sở khám chữa bệnh" data-open-label="Thu gọn">
+      <span class="dt-label">Phân tích sâu: ranh giới pháp lý nền tảng vs cơ sở khám chữa bệnh</span><span class="chev">▼</span>
+    </button>
+    <div class="deep-panel">
+      <div class="deep-inner">
+        <h5>⚖️ Mô hình "nền tảng kết nối" để hợp pháp hóa telehealth</h5>
+        <p>Rủi ro pháp lý lớn nhất của một healthtech là <strong>hành nghề KCB không phép</strong>. ElderCare tách bạch rõ vai trò:</p>
+        <ul>
+          <li><strong>ElderCare = nền tảng công nghệ:</strong> kết nối, lịch hẹn, hồ sơ, thanh toán, hạ tầng CNTT &amp; bảo mật — KHÔNG tự chẩn đoán/kê đơn.</li>
+          <li><strong>Cơ sở KCB đối tác:</strong> bác sĩ thuộc cơ sở được cấp phép thực hiện khám, chịu trách nhiệm chuyên môn theo Điều 80.</li>
+          <li><strong>Điều dưỡng tại nhà:</strong> dịch vụ chăm sóc theo phạm vi giấy phép hành nghề; việc rủi ro cao (kê đơn, chẩn đoán) thuộc bác sĩ.</li>
+        </ul>
+        <div class="deep-callout">🔗 Cùng mô hình mà Jio Health, Med247, Docosan áp dụng ở VN: nền tảng + phòng khám/cơ sở được cấp phép. ElderCare bổ sung lớp <em>chăm sóc tại nhà + tài chính y tế</em> trên cùng khung pháp lý.</div>
+      </div>
+    </div>
+
+    <!-- 5.3 DƯỢC & GIAO THUỐC — CHỐNG THUỐC GIẢ -->
+    <h3 class="fin-sub"><span class="badge-n">3</span> Kinh doanh dược, giao thuốc &amp; chống thuốc giả</h3>
+    <p class="sub-desc">
+      Trụ cột Pharma (markup thuốc &amp; thiết bị) là mảng dễ vi phạm nhất: bán thuốc kê đơn trái phép, thuốc giả, giao thuốc sai. ElderCare tuân thủ <strong>điều kiện kinh doanh dược, tiêu chuẩn GPP</strong> và xây <strong>chuỗi cung ứng xác thực</strong> chống thuốc giả.
+    </p>
+    <div class="law-grid">
+      <div class="law-card l-pharma">
+        <div class="lc-top"><span class="lc-ico">💊</span><span class="lc-num">Luật 105/2016 + 44/2024/QH15</span></div>
+        <h4>Luật Dược 2016, sửa đổi 2024</h4>
+        <div class="lc-eff">Luật Dược 105/2016/QH13 · sửa đổi Luật 44/2024/QH15, hiệu lực 01/7/2025<span class="src">QH</span></div>
+        <p><strong>Bán thuốc online (điểm mới 2024):</strong></p>
+        <ul>
+          <li>Chỉ được bán online <strong>thuốc không kê đơn (OTC)</strong>; thuốc kê đơn chỉ online khi cách ly y tế (bệnh truyền nhiễm nhóm A)</li>
+          <li><strong>Cấm</strong> online thuốc kiểm soát đặc biệt &amp; hạn chế bán lẻ</li>
+          <li>Phải đăng tải Giấy chứng nhận đủ điều kiện kinh doanh dược &amp; chứng chỉ hành nghề dược của người chịu trách nhiệm chuyên môn</li>
+        </ul>
+        <p class="src-note">Nguồn: Luật Dược 2016 (105/2016/QH13) sửa đổi bởi Luật 44/2024/QH15, hiệu lực 01/7/2025 (một số quy định từ 01/01/2025).</p>
+      </div>
+      <div class="law-card l-pharma">
+        <div class="lc-top"><span class="lc-ico">🏪</span><span class="lc-num">TT 02/2018/TT-BYT</span></div>
+        <h4>Thực hành tốt nhà thuốc (GPP)</h4>
+        <div class="lc-eff">Ban hành 22/01/2018 · Hiệu lực 01/7/2018 · sửa đổi TT 11/2025/TT-BYT<span class="src">TT-BYT</span></div>
+        <p>Tiêu chuẩn GPP cho nhà thuốc/quầy thuốc trên 3 nhóm:</p>
+        <ul>
+          <li><strong>Nhân sự:</strong> dược sĩ phụ trách chuyên môn có chứng chỉ hành nghề</li>
+          <li><strong>Cơ sở vật chất:</strong> bảo quản, nhiệt độ, sổ sách</li>
+          <li><strong>Hoạt động:</strong> bán theo đơn, tư vấn, truy xuất</li>
+        </ul>
+        <p class="src-note">Nguồn: Thông tư 02/2018/TT-BYT về Thực hành tốt cơ sở bán lẻ thuốc, hiệu lực 01/7/2018 (sửa đổi bởi TT 12/2020, TT 11/2025/TT-BYT).</p>
+      </div>
+    </div>
+    <div class="anti-fake">
+      <h5>🛡️ Chống thuốc giả — chuỗi cung ứng xác thực</h5>
+      <ul>
+        <li><strong>Chỉ nhập từ nguồn hợp pháp:</strong> cơ sở đạt GPP/GDP (thực hành tốt phân phối thuốc); dược liệu đạt GACP.</li>
+        <li><strong>Truy xuất số đăng ký lưu hành:</strong> tích hợp tra cứu cơ sở dữ liệu Cục Quản lý Dược (dav.gov.vn) — mỗi thuốc phải có số đăng ký hợp lệ.</li>
+        <li><strong>Không bán thuốc kê đơn trái phép:</strong> đơn thuốc điện tử từ bác sĩ có giấy phép; chặn bán thuốc kiểm soát đặc biệt qua app.</li>
+        <li><strong>Xác thực khi giao:</strong> kiểm tra tem/mã trên hộp, đối chiếu lô — số hóa bằng AI quét ảnh/mã (xem ô AI).</li>
+      </ul>
+    </div>
+    <p class="tnote">Luật Dược sửa đổi 2024 tăng cường công cụ giám sát chất lượng, hệ thống truy xuất nguồn gốc &amp; chế tài với thuốc giả. ElderCare ưu tiên liên kết chuỗi nhà thuốc GPP uy tín thay vì tự phân phối ở giai đoạn đầu — ước tính nội bộ về lộ trình.</p>
+
+    <button class="deep-toggle" onclick="toggleDeep(this)" data-closed-label="Phân tích sâu: quy trình giao thuốc tuân thủ end-to-end" data-open-label="Thu gọn">
+      <span class="dt-label">Phân tích sâu: quy trình giao thuốc tuân thủ end-to-end</span><span class="chev">▼</span>
+    </button>
+    <div class="deep-panel">
+      <div class="deep-inner">
+        <h5>📦 Đơn thuốc → giao tận nhà người già, mỗi bước có chốt pháp lý</h5>
+        <table class="deep-table">
+          <thead><tr><th>Bước</th><th>Chốt tuân thủ</th></tr></thead>
+          <tbody>
+            <tr><td>1. Kê đơn (telehealth)</td><td>Bác sĩ có giấy phép hành nghề; đơn thuốc điện tử hợp lệ theo Luật KCB</td></tr>
+            <tr><td>2. Tiếp nhận đơn</td><td>Dược sĩ GPP rà soát đơn, kiểm tra tương tác thuốc (người già đa thuốc)</td></tr>
+            <tr><td>3. Lấy thuốc</td><td>Từ kho/nhà thuốc đạt GPP; xác thực số đăng ký &amp; lô; thuốc kê đơn không bán nếu thiếu đơn</td></tr>
+            <tr><td>4. Đóng gói &amp; giao</td><td>Bảo quản đúng điều kiện; xác thực danh tính người nhận; hướng dẫn dùng thuốc</td></tr>
+            <tr><td>5. Hậu kiểm</td><td>Nhắc liều, theo dõi tác dụng phụ, báo cáo phản ứng có hại (pharmacovigilance)</td></tr>
+          </tbody>
+        </table>
+        <div class="deep-callout">⚠️ Với người cao tuổi dùng <strong>≥5 loại thuốc</strong> (đa thuốc — hội chứng lão khoa, Phần 4), bước rà soát tương tác của dược sĩ &amp; AI là điểm an toàn sống còn, không chỉ là thủ tục.</div>
+      </div>
+    </div>
+
+    <!-- 5.4 ĐẠO ĐỨC -->
+    <h3 class="fin-sub"><span class="badge-n">4</span> Bốn vấn đề đạo đức cốt lõi</h3>
+    <p class="sub-desc">
+      Chăm sóc người già đặt ra những căng thẳng đạo đức mà luật không trả lời hết — đặc biệt khi <strong>người trả tiền (con cái) khác người dùng (bố mẹ)</strong> và người dùng có thể đã mất năng lực quyết định. ElderCare nêu rõ lập trường cho từng tình huống.
+    </p>
+    <div class="ethic-grid">
+      <div class="ethic-card e1">
+        <div class="et-ico">✍️</div>
+        <h5>Đồng ý của người cao tuổi &amp; người giám hộ</h5>
+        <p class="et-tension"><strong>Căng thẳng:</strong> người sa sút trí tuệ (Ông Tâm 80t) có thể không còn năng lực hành vi để đồng ý dùng dịch vụ, chia sẻ dữ liệu, hay quyết định điều trị.</p>
+        <span class="et-sol"><strong>Lập trường:</strong> còn năng lực → tôn trọng quyết định của chính người già; mất năng lực → <em>người giám hộ hợp pháp</em> quyết định theo Bộ luật Dân sự, ưu tiên lợi ích tốt nhất của người được chăm, ghi nhận rõ ai là người giám hộ.</span>
+      </div>
+      <div class="ethic-card e2">
+        <div class="et-ico">📷</div>
+        <h5>Giám sát camera/cảm biến vs quyền riêng tư</h5>
+        <p class="et-tension"><strong>Căng thẳng:</strong> cảm biến té ngã, định vị, camera giúp an toàn nhưng có thể biến nhà người già thành nơi bị giám sát liên tục, mất phẩm giá.</p>
+        <span class="et-sol"><strong>Lập trường:</strong> tối thiểu hóa dữ liệu — ưu tiên cảm biến chuyển động/radar thay camera ở khu riêng tư (nhà vệ sinh, phòng ngủ); người già được biết &amp; tắt giám sát; dữ liệu chỉ để cảnh báo, không để "soi".</span>
+      </div>
+      <div class="ethic-card e3">
+        <div class="et-ico">⚖️</div>
+        <h5>Xung đột lợi ích: con cái (payer) vs bố mẹ (user)</h5>
+        <p class="et-tension"><strong>Căng thẳng:</strong> con cái trả tiền &amp; muốn kiểm soát; bố mẹ muốn tự chủ &amp; riêng tư. ElderCare phục vụ ai khi hai bên mâu thuẫn?</p>
+        <span class="et-sol"><strong>Lập trường:</strong> <em>người được chăm sóc là trung tâm</em>. Quyền riêng tư &amp; tự chủ của người già được bảo vệ; con cái xem dữ liệu theo phạm vi người già đồng ý; minh bạch hai chiều — bố mẹ luôn biết con đang xem gì.</span>
+      </div>
+      <div class="ethic-card e4">
+        <div class="et-ico">🤖</div>
+        <h5>AI không thay chẩn đoán của bác sĩ</h5>
+        <p class="et-tension"><strong>Căng thẳng:</strong> AI phát hiện bất thường, gợi ý phác đồ, decision support — ranh giới nào để AI không "hành nghề y" trái phép hay gây hại?</p>
+        <span class="et-sol"><strong>Lập trường:</strong> AI chỉ <em>hỗ trợ</em> — cảnh báo, sàng lọc, nhắc ngưỡng. Mọi chẩn đoán &amp; kê đơn thuộc bác sĩ có giấy phép (Điều 80). AI minh bạch về giới hạn, luôn có con người ra quyết định cuối (human-in-the-loop).</span>
+      </div>
+    </div>
+
+    <!-- Quảng cáo y tế + bảng tuân thủ tổng -->
+    <h3 class="fin-sub"><span class="badge-n">5</span> Quảng cáo y tế &amp; bảng tuân thủ 5 trụ cột</h3>
+    <p class="sub-desc">
+      Mọi nội dung marketing (Phần 2) về dịch vụ khám, thuốc, thực phẩm chức năng đều phải được <strong>cơ quan y tế xác nhận nội dung trước khi đăng</strong> — vi phạm quảng cáo y tế là rủi ro pháp lý &amp; uy tín lớn. Bảng dưới gom toàn bộ văn bản pháp lý theo từng trụ cột doanh thu.
+    </p>
+    <div class="law-grid">
+      <div class="law-card l-ad">
+        <div class="lc-top"><span class="lc-ico">📣</span><span class="lc-num">TT 09/2015/TT-BYT · NĐ 181/2013</span></div>
+        <h4>Xác nhận nội dung quảng cáo y tế</h4>
+        <div class="lc-eff">Luật Quảng cáo 16/2012/QH13 · NĐ 181/2013/NĐ-CP · TT 09/2015/TT-BYT<span class="src">BYT</span></div>
+        <ul>
+          <li>Thuốc, dịch vụ KCB, TPCN phải <strong>xác nhận nội dung quảng cáo</strong> trước khi đăng</li>
+          <li>Thẩm quyền: Cục Quản lý KCB (dịch vụ KCB) · Cục QL Dược (thuốc) · Cục ATTP (TPCN)</li>
+          <li>Lưu ý: Luật Quảng cáo đã có sửa đổi 2025 — rà soát số luật/hiệu lực mới nhất trước khi in tài liệu chính thức</li>
+        </ul>
+        <p class="src-note">Nguồn: Thông tư 09/2015/TT-BYT (xác nhận nội dung quảng cáo, ban hành 25/5/2015) &amp; Nghị định 181/2013/NĐ-CP hướng dẫn Luật Quảng cáo 16/2012/QH13.</p>
+      </div>
+    </div>
+    <div class="table-scroll">
+      <table class="fin-table">
+        <thead>
+          <tr><th>Trụ cột doanh thu</th><th>Văn bản pháp lý chính</th><th>Yêu cầu tuân thủ cốt lõi</th><th>Trạng thái</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>CareConnect (điều dưỡng tại nhà)</td><td>Luật KCB 15/2023 · NĐ 96/2023</td><td>Điều dưỡng có giấy phép hành nghề; chăm sóc trong phạm vi cấp phép</td><td><span class="pos">Thiết kế tuân thủ</span></td></tr>
+          <tr><td>Khám &amp; Telehealth</td><td>Luật KCB 15/2023 (Điều 80) · NĐ 96/2023</td><td>Gắn cơ sở KCB được cấp phép; bác sĩ chịu trách nhiệm chẩn đoán/kê đơn</td><td><span class="pos">Thiết kế tuân thủ</span></td></tr>
+          <tr><td>MedFin (tài chính y tế)</td><td>Pháp luật tín dụng tiêu dùng &amp; bảo hiểm</td><td>Hợp tác tổ chức tín dụng/bảo hiểm được cấp phép; minh bạch lãi suất</td><td><span class="hl">Hợp tác đối tác</span></td></tr>
+          <tr><td>CareSense (cảm biến/dữ liệu)</td><td>Luật 91/2025 · NĐ 13/2023</td><td>Dữ liệu nhạy cảm: đồng ý, mã hóa, phân quyền, lưu trữ nội địa</td><td><span class="pos">Thiết kế tuân thủ</span></td></tr>
+          <tr><td>Pharma (thuốc &amp; thiết bị)</td><td>Luật Dược 105/2016 + 44/2024 · GPP 02/2018</td><td>Điều kiện kinh doanh dược; OTC online; chống thuốc giả; không bán kê đơn trái phép</td><td><span class="hl">Liên kết GPP</span></td></tr>
+          <tr><td>Toàn bộ marketing</td><td>Luật Quảng cáo · NĐ 181/2013 · TT 09/2015</td><td>Xác nhận nội dung quảng cáo y tế trước khi đăng</td><td><span class="pos">Quy trình duyệt</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="tnote">"Trạng thái" phản ánh định hướng thiết kế tuân thủ của ElderCare — ước tính nội bộ; việc cấp phép thực tế phụ thuộc hồ sơ &amp; cơ quan quản lý. Bảng tổng hợp từ các văn bản đã dẫn nguồn ở trên.</p>
+
+    <!-- ⚠️ RỦI RO PHÁP LÝ & BACKUP -->
+    <div class="endbox risk">
+      <h4>⚠️ Rủi ro pháp lý &amp; phương án backup</h4>
+      <p class="eb-desc">Y tế là lĩnh vực pháp lý nặng nhất — một sự cố có thể đóng cửa cả công ty. Mỗi rủi ro gắn giải pháp tuân thủ chủ động và phương án dự phòng.</p>
+      <div class="risk-row">
+        <div class="risk-item">
+          <div class="ri-head">🔓 Rò rỉ / lộ dữ liệu sức khỏe nhạy cảm</div>
+          <div class="ri-fix"><strong>Giải pháp:</strong> mã hóa đầu-cuối, phân quyền RBAC, audit log, kiểm thử xâm nhập định kỳ, tuân thủ Luật 91/2025 &amp; NĐ 13/2023.</div>
+          <div class="ri-backup">Backup: quy trình ứng phó sự cố &amp; thông báo vi phạm, bảo hiểm an ninh mạng, sao lưu cách ly, DPO (cán bộ bảo vệ dữ liệu) chuyên trách.</div>
+        </div>
+        <div class="risk-item">
+          <div class="ri-head">⚖️ Kiện tụng do sự cố y khoa (telehealth, chăm tại nhà)</div>
+          <div class="ri-fix"><strong>Giải pháp:</strong> mô hình nền tảng + cơ sở được cấp phép; người hành nghề có giấy phép; SOP rõ ràng; AI chỉ hỗ trợ, bác sĩ ra quyết định cuối.</div>
+          <div class="ri-backup">Backup: bảo hiểm trách nhiệm nghề nghiệp cho cơ sở &amp; người hành nghề, hợp đồng phân định trách nhiệm rõ, quỹ dự phòng pháp lý &amp; đội pháp chế.</div>
+        </div>
+        <div class="risk-item">
+          <div class="ri-head">💊 Thuốc giả / bán thuốc kê đơn trái phép</div>
+          <div class="ri-fix"><strong>Giải pháp:</strong> chỉ lấy nguồn GPP/GDP, tra cứu số đăng ký Cục QL Dược, chặn bán thuốc kê đơn không đơn &amp; thuốc kiểm soát đặc biệt qua app.</div>
+          <div class="ri-backup">Backup: liên kết chuỗi nhà thuốc uy tín thay tự phân phối giai đoạn đầu; xác thực thuốc bằng AI; thu hồi &amp; truy vết lô khi có cảnh báo.</div>
+        </div>
+        <div class="risk-item">
+          <div class="ri-head">📣 Vi phạm quảng cáo y tế</div>
+          <div class="ri-fix"><strong>Giải pháp:</strong> quy trình duyệt nội dung bắt buộc; xin xác nhận nội dung quảng cáo (TT 09/2015) trước khi đăng; không hứa hẹn quá mức về hiệu quả điều trị.</div>
+          <div class="ri-backup">Backup: thư viện nội dung đã được duyệt; pháp chế rà soát chiến dịch; tránh hook "sợ té ngã" phản cảm (nối rủi ro marketing Phần 2).</div>
+        </div>
+        <div class="risk-item">
+          <div class="ri-head">📜 Thay đổi quy định pháp luật (luật mới, sửa đổi)</div>
+          <div class="ri-fix"><strong>Giải pháp:</strong> theo dõi chủ động các văn bản mới (Luật 91/2025, Luật Dược 44/2024, Luật Quảng cáo sửa đổi 2025); kiến trúc hệ thống linh hoạt để cập nhật.</div>
+          <div class="ri-backup">Backup: cố vấn pháp lý y tế, tham gia hiệp hội ngành, đệm thời gian tuân thủ; audit pháp lý định kỳ trước mỗi vòng gọi vốn.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 🤖 AI ỨNG DỤNG -->
+    <div class="endbox ai">
+      <h4>🤖 AI ứng dụng ở đâu (đạo đức &amp; pháp lý)</h4>
+      <p class="eb-desc">AI vừa giúp tuân thủ ở quy mô lớn, vừa bảo vệ quyền riêng tư &amp; an toàn — biến nghĩa vụ pháp lý ở trên thành công cụ vận hành tự động.</p>
+      <div class="ai-row">
+        <div class="ai-item">
+          <div class="ai-head">🚨 Phát hiện bất thường bảo mật</div>
+          <p>Giám sát truy cập dữ liệu sức khỏe, phát hiện hành vi bất thường (truy cập lạ, rò rỉ) theo thời gian thực để cảnh báo &amp; chặn sớm.</p>
+          <span class="ai-model">Anomaly detection</span>
+        </div>
+        <div class="ai-item">
+          <div class="ai-head">🕶️ Ẩn danh hóa &amp; tối thiểu dữ liệu</div>
+          <p>Tự động ẩn danh/giả danh dữ liệu khi phân tích &amp; huấn luyện; che thông tin định danh trong log &amp; báo cáo theo nguyên tắc tối thiểu hóa.</p>
+          <span class="ai-model">De-identification / PII redaction</span>
+        </div>
+        <div class="ai-item">
+          <div class="ai-head">✅ Kiểm tra tuân thủ tự động</div>
+          <p>Rà nội dung quảng cáo, đơn thuốc, hồ sơ hành nghề theo checklist pháp lý; cảnh báo trước khi đăng/giao nếu thiếu xác nhận hoặc giấy phép hết hạn.</p>
+          <span class="ai-model">Compliance NLP / rule engine</span>
+        </div>
+        <div class="ai-item">
+          <div class="ai-head">🔍 Xác thực thuốc bằng ảnh/mã</div>
+          <p>Quét ảnh hộp thuốc &amp; mã (QR/barcode) đối chiếu số đăng ký Cục QL Dược, phát hiện tem giả/lô bất thường ngay khi nhập kho &amp; khi giao.</p>
+          <span class="ai-model">Computer vision + DB lookup</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
 <!-- ====================================================================== -->
-<!-- PHIÊN 5 SẼ CHÈN: #legal (Đạo đức & pháp lý)                             -->
 <!-- PHIÊN 6 SẼ CHÈN: #summary (Risk register tổng + bản đồ AI tổng)         -->
 <!-- ====================================================================== -->
 
