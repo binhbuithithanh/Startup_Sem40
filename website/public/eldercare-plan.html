@@ -442,6 +442,50 @@
     .ethic-card .et-sol { display: block; margin-top: 0.6rem; font-size: 0.77rem; color: #115e59; background: #f0fdfa; border-radius: 8px; padding: 0.55rem 0.7rem; line-height: 1.5; }
     .ethic-card .et-sol strong { color: var(--care); }
 
+    /* ===== PHIÊN 6 — TỔNG HỢP (#summary) ===== */
+    .sum-section { background: var(--light); }
+    /* nhãn phần & mức độ trong risk register */
+    .pill { display: inline-block; font-size: 0.68rem; font-weight: 700; padding: 2px 9px; border-radius: 99px; white-space: nowrap; }
+    .pill.p-fin { background: #f0fdfa; color: #115e59; }
+    .pill.p-mkt { background: #fff1f2; color: #be123c; }
+    .pill.p-seg { background: #fef3c7; color: #92400e; }
+    .pill.p-dis { background: #eef2ff; color: #4338ca; }
+    .pill.p-legal { background: #f5f3ff; color: #6d28d9; }
+    .sev { display: inline-block; font-size: 0.72rem; font-weight: 800; padding: 1px 8px; border-radius: 6px; }
+    .sev.high { background: #fee2e2; color: #b91c1c; }
+    .sev.mid { background: #fef9c3; color: #a16207; }
+    .sev.low { background: #d1fae5; color: #047857; }
+    .reg-table td:first-child { white-space: normal; min-width: 150px; }
+    .reg-table td { white-space: normal; vertical-align: top; }
+    /* AI map theo tầng */
+    .aimap-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px,1fr)); gap: 1rem; margin: 1.25rem 0 0.5rem; }
+    .aimap-layer { background: #fff; border: 1px solid var(--border); border-radius: 16px; padding: 1.25rem 1.35rem; border-top: 4px solid var(--care); }
+    .aimap-layer.t1 { border-top-color: var(--gold); }
+    .aimap-layer.t2 { border-top-color: var(--coral); }
+    .aimap-layer.t3 { border-top-color: var(--care); }
+    .aimap-layer.t4 { border-top-color: #6d28d9; }
+    .aimap-layer .al-head { font-size: 0.98rem; font-weight: 800; color: var(--primary); margin-bottom: 0.2rem; display: flex; align-items: center; gap: 0.5rem; }
+    .aimap-layer .al-sub { font-size: 0.74rem; color: var(--muted); margin-bottom: 0.9rem; line-height: 1.4; }
+    .aimap-layer .al-item { padding: 0.6rem 0; border-top: 1px solid var(--border); }
+    .aimap-layer .al-item:first-of-type { border-top: none; }
+    .aimap-layer .al-name { font-size: 0.83rem; font-weight: 700; color: #1f2937; }
+    .aimap-layer .al-from { font-size: 0.68rem; font-weight: 600; color: var(--muted); margin-left: 4px; }
+    .aimap-layer .al-val { font-size: 0.76rem; color: #4b5563; line-height: 1.5; margin: 2px 0 4px; }
+    .aimap-layer .al-tag { display: inline-block; background: #f0fdfa; color: #115e59; font-size: 0.66rem; font-weight: 700; padding: 1px 8px; border-radius: 99px; }
+    /* CTA kêu gọi đầu tư */
+    .endbox.cta { background: linear-gradient(135deg, #ecfdfa, #f0fdfa); border: 1px solid #5eead4; }
+    .endbox.cta h4 { color: var(--care); }
+    .cta-steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap: 0.85rem; margin-top: 0.5rem; }
+    .cta-step { background: #fff; border: 1px solid #99f6e4; border-radius: 12px; padding: 1rem 1.15rem; }
+    .cta-step .cs-num { font-size: 0.7rem; font-weight: 800; color: var(--gold); letter-spacing: 1px; text-transform: uppercase; }
+    .cta-step .cs-name { font-size: 0.92rem; font-weight: 800; color: var(--primary); margin: 0.2rem 0; }
+    .cta-step p { font-size: 0.79rem; color: #4b5563; line-height: 1.5; }
+    .vision-box { background: linear-gradient(135deg, var(--primary), var(--care)); color: #fff; border-radius: 18px; padding: 2rem 2.25rem; margin: 1.5rem 0; }
+    .vision-box h4 { font-size: 1.2rem; font-weight: 800; margin-bottom: 0.6rem; }
+    .vision-box p { font-size: 0.92rem; line-height: 1.7; opacity: 0.95; margin-bottom: 0.75rem; }
+    .vision-box p:last-child { margin-bottom: 0; }
+    .vision-box strong { color: var(--gold); }
+
     /* RESPONSIVE */
     @media (max-width: 768px) {
       nav { padding: 0 1rem; }
@@ -460,6 +504,8 @@
       .train-step::before { display: none; }
       .train-step .ts-dot { margin: 0 auto 0.5rem; }
       .law-grid, .ethic-grid { grid-template-columns: 1fr; }
+      .aimap-grid, .cta-steps { grid-template-columns: 1fr; }
+      .vision-box { padding: 1.5rem 1.35rem; }
     }
   </style>
 </head>
@@ -505,7 +551,7 @@
   <a href="#segment">👥 Phân khúc &amp; chuyên gia</a>
   <a href="#disease">🏥 Bệnh lý &amp; đào tạo</a>
   <a href="#legal">⚖️ Đạo đức &amp; pháp lý</a>
-  <a href="#summary" class="soon">🧭 Tổng hợp</a>
+  <a href="#summary">🧭 Tổng hợp</a>
 </div>
 
 <!-- ============================ PHIÊN 1 — TÀI CHÍNH ============================ -->
@@ -2162,9 +2208,372 @@
   </div>
 </section>
 
-<!-- ====================================================================== -->
-<!-- PHIÊN 6 SẼ CHÈN: #summary (Risk register tổng + bản đồ AI tổng)         -->
-<!-- ====================================================================== -->
+<!-- ============================ PHIÊN 6 — TỔNG HỢP & DEPLOY ============================ -->
+<section class="sum-section" id="summary">
+  <div class="container">
+    <div class="section-tag">Phần 6 · Tổng hợp &amp; tầm nhìn</div>
+    <h2>Khép lại kế hoạch: bản đồ rủi ro toàn diện,<br/>hệ thần kinh AI &amp; cơ hội tỉ đô có cơ sở</h2>
+    <p class="section-desc">
+      Phần cuối này <strong>gom toàn bộ 5 phần trước</strong> thành hai bức tranh quản trị mà nhà đầu tư cần thấy: một <em>risk register tổng</em> (mọi rủi ro · mức độ · giải pháp · backup · phòng ban chịu trách nhiệm) và một <em>bản đồ AI toàn hệ thống</em> theo 4 tầng. Đóng lại bằng kết luận tài chính &amp; lộ trình gọi vốn — vì sao ElderCare là cơ hội tỉ đô có cơ sở, không phải lời hứa suông.
+    </p>
+    <span class="click-hint">🧭 Đây là phần tổng hợp — số liệu khớp 100% Phần 1–5; con số tự suy gắn nhãn "ước tính nội bộ"</span>
+
+    <!-- 6.1 RISK REGISTER TỔNG -->
+    <h3 class="fin-sub"><span class="badge-n">1</span> Risk register tổng — 23 rủi ro toàn hệ thống</h3>
+    <p class="sub-desc">
+      Gom mọi rủi ro đã nêu ở 5 phần thành một sổ đăng ký rủi ro duy nhất. <strong>Mức độ tác động</strong> &amp; <strong>khả năng xảy ra</strong> phân loại Cao / Trung bình / Thấp (<span class="sev high">Cao</span> <span class="sev mid">TB</span> <span class="sev low">Thấp</span>); mỗi rủi ro có giải pháp chủ động, phương án backup và <strong>owner</strong> (phòng ban chịu trách nhiệm). Đây là bản đồ để hội đồng quản trị &amp; nhà đầu tư theo dõi định kỳ.
+    </p>
+    <div class="table-scroll">
+      <table class="fin-table reg-table" style="min-width:1080px;">
+        <thead>
+          <tr>
+            <th style="text-align:left;">Rủi ro</th>
+            <th style="text-align:left;">Phần</th>
+            <th>Tác động</th>
+            <th>Khả năng</th>
+            <th style="text-align:left;">Giải pháp chủ động</th>
+            <th style="text-align:left;">Phương án backup</th>
+            <th style="text-align:left;">Owner</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- TÀI CHÍNH -->
+          <tr>
+            <td style="text-align:left;">Burn quá nhanh, cạn tiền trước hòa vốn</td>
+            <td><span class="pill p-fin">Tài chính</span></td>
+            <td><span class="sev high">Cao</span></td>
+            <td><span class="sev mid">TB</span></td>
+            <td style="text-align:left;">Quản trị runway 14–30 th/vòng; gọi vốn trước khi cạn 6 th; kỷ luật chi theo milestone.</td>
+            <td style="text-align:left;">Cắt burn, thu hẹp trụ cột chưa sinh lời, bridge round, hoãn mở rộng địa lý.</td>
+            <td style="text-align:left;">Tài chính / CFO</td>
+          </tr>
+          <tr>
+            <td style="text-align:left;">Không gọi được vòng vốn tiếp theo</td>
+            <td><span class="pill p-fin">Tài chính</span></td>
+            <td><span class="sev high">Cao</span></td>
+            <td><span class="sev mid">TB</span></td>
+            <td style="text-align:left;">Đạt milestone mở khóa từng vòng (user, GMV, UE dương từng trụ cột); đa dạng quỹ trong &amp; ngoài nước.</td>
+            <td style="text-align:left;">Bridge/extension từ NĐT hiện hữu, venture debt, đẩy nhanh đường tới hòa vốn để tự nuôi.</td>
+            <td style="text-align:left;">Ban điều hành / CFO</td>
+          </tr>
+          <tr>
+            <td style="text-align:left;">Churn cao → unit economics âm</td>
+            <td><span class="pill p-fin">Tài chính</span></td>
+            <td><span class="sev high">Cao</span></td>
+            <td><span class="sev mid">TB</span></td>
+            <td style="text-align:left;">Giữ LTV/CAC ≥ 3× (mục tiêu 5,8×); tăng retention bằng giá trị recurring (nhắc thuốc, giám sát, tele).</td>
+            <td style="text-align:left;">Mô hình dự báo churn can thiệp sớm; gói phễu miễn phí giữ chân; tái cấu trúc pricing.</td>
+            <td style="text-align:left;">Tăng trưởng / Sản phẩm</td>
+          </tr>
+          <tr>
+            <td style="text-align:left;">MedFin: nợ xấu &amp; rủi ro lãi suất trả góp</td>
+            <td><span class="pill p-fin">Tài chính</span></td>
+            <td><span class="sev mid">TB</span></td>
+            <td><span class="sev mid">TB</span></td>
+            <td style="text-align:left;">Scoring tín dụng AI; hợp tác tổ chức tín dụng được cấp phép chịu rủi ro; minh bạch lãi suất.</td>
+            <td style="text-align:left;">Mô hình giới thiệu (referral) không ôm bảng cân đối; quỹ dự phòng nợ xấu; siết hạn mức.</td>
+            <td style="text-align:left;">MedFin / Tài chính</td>
+          </tr>
+          <tr>
+            <td style="text-align:left;">Rủi ro tỷ giá (FX) khi chi phí/định giá theo USD</td>
+            <td><span class="pill p-fin">Tài chính</span></td>
+            <td><span class="sev low">Thấp</span></td>
+            <td><span class="sev mid">TB</span></td>
+            <td style="text-align:left;">Doanh thu &amp; chi phí chủ yếu bằng VND; giữ tỷ giá tham chiếu 25,5 trong model; đệm dự phòng.</td>
+            <td style="text-align:left;">Phòng vệ tỷ giá khi huy động USD lớn; ưu tiên nhà cung cấp nội địa.</td>
+            <td style="text-align:left;">Tài chính / CFO</td>
+          </tr>
+          <!-- MARKETING -->
+          <tr>
+            <td style="text-align:left;">CAC tăng vượt kế hoạch (~480k blended)</td>
+            <td><span class="pill p-mkt">Marketing</span></td>
+            <td><span class="sev high">Cao</span></td>
+            <td><span class="sev mid">TB</span></td>
+            <td style="text-align:left;">Đa kênh cân đối (digital/BV/KOL/BHXH/referral); tối ưu bandit theo phễu; đẩy referral chi phí thấp.</td>
+            <td style="text-align:left;">Dồn ngân sách về kênh hiệu quả nhất; tăng tỷ trọng organic &amp; PR uy tín y tế.</td>
+            <td style="text-align:left;">Marketing</td>
+          </tr>
+          <tr>
+            <td style="text-align:left;">Phụ thuộc một nền tảng quảng cáo</td>
+            <td><span class="pill p-mkt">Marketing</span></td>
+            <td><span class="sev mid">TB</span></td>
+            <td><span class="sev mid">TB</span></td>
+            <td style="text-align:left;">Phân bổ ngân sách nhiều nền tảng; xây kênh sở hữu (CRM, cộng đồng, referral gia đình).</td>
+            <td style="text-align:left;">Chuyển hướng sang BV/BHXH/hội người cao tuổi &amp; KOL bác sĩ khi 1 kênh tăng giá/khóa.</td>
+            <td style="text-align:left;">Marketing</td>
+          </tr>
+          <tr>
+            <td style="text-align:left;">Viral / lan truyền không đạt kỳ vọng</td>
+            <td><span class="pill p-mkt">Marketing</span></td>
+            <td><span class="sev mid">TB</span></td>
+            <td><span class="sev mid">TB</span></td>
+            <td style="text-align:left;">Mũi nhọn "wow" CareSense cảnh báo té ngã tạo câu chuyện chia sẻ; nội dung cá nhân hóa generative.</td>
+            <td style="text-align:left;">Danh mục tính năng backup (nhắc thuốc free, cộng đồng con-chăm-bố-mẹ) làm phễu thay thế.</td>
+            <td style="text-align:left;">Marketing / Sản phẩm</td>
+          </tr>
+          <tr>
+            <td style="text-align:left;">Niềm tin thấp với app cho người cao tuổi</td>
+            <td><span class="pill p-mkt">Marketing</span></td>
+            <td><span class="sev high">Cao</span></td>
+            <td><span class="sev mid">TB</span></td>
+            <td style="text-align:left;">Bảo chứng bác sĩ &amp; cơ sở KCB cấp phép; PR uy tín y tế; minh bạch nhật ký chăm sóc cho con cái.</td>
+            <td style="text-align:left;">Hợp tác bệnh viện/hội người cao tuổi làm điểm tin cậy; chứng thực từ KOL bác sĩ.</td>
+            <td style="text-align:left;">Marketing / Đối ngoại</td>
+          </tr>
+          <tr>
+            <td style="text-align:left;">Hook "sợ té ngã" gây phản cảm / lo sợ quá mức</td>
+            <td><span class="pill p-mkt">Marketing</span></td>
+            <td><span class="sev low">Thấp</span></td>
+            <td><span class="sev mid">TB</span></td>
+            <td style="text-align:left;">Thông điệp tích cực "an tâm" thay vì "dọa"; quy trình duyệt nội dung; tránh hứa hẹn quá mức.</td>
+            <td style="text-align:left;">Thư viện nội dung đã duyệt; pháp chế rà chiến dịch (nối rủi ro quảng cáo y tế Phần 5).</td>
+            <td style="text-align:left;">Marketing / Pháp chế</td>
+          </tr>
+          <!-- SEGMENT & CHUYÊN GIA -->
+          <tr>
+            <td style="text-align:left;">Thiếu chuyên gia ở một mảng chuyên khoa</td>
+            <td><span class="pill p-seg">Phân khúc</span></td>
+            <td><span class="sev mid">TB</span></td>
+            <td><span class="sev mid">TB</span></td>
+            <td style="text-align:left;">Mạng lưới 12 nhóm chuyên gia + dự báo nhu cầu (demand forecasting) để tuyển trước.</td>
+            <td style="text-align:left;">Tele kết nối chuyên gia vùng khác; đội dự phòng &amp; cộng tác viên theo ca.</td>
+            <td style="text-align:left;">Vận hành chăm sóc</td>
+          </tr>
+          <tr>
+            <td style="text-align:left;">Phân loại sai segment khách hàng</td>
+            <td><span class="pill p-seg">Phân khúc</span></td>
+            <td><span class="sev mid">TB</span></td>
+            <td><span class="sev low">Thấp</span></td>
+            <td style="text-align:left;">Onboarding chuẩn hóa; AI phân loại segment + review của điều dưỡng đầu mối.</td>
+            <td style="text-align:left;">Đánh giá lại định kỳ; điều chỉnh gói &amp; đội chăm khi tình trạng thay đổi.</td>
+            <td style="text-align:left;">Sản phẩm / Vận hành</td>
+          </tr>
+          <tr>
+            <td style="text-align:left;">Chuyên gia / điều dưỡng kém chất lượng</td>
+            <td><span class="pill p-seg">Phân khúc</span></td>
+            <td><span class="sev high">Cao</span></td>
+            <td><span class="sev mid">TB</span></td>
+            <td style="text-align:left;">Xác minh chứng chỉ &amp; giấy phép hành nghề; chấm điểm chất lượng; bảo hiểm trách nhiệm.</td>
+            <td style="text-align:left;">Đội dự phòng 24h thay thế; cơ chế phản hồi &amp; loại trừ; tái đào tạo bắt buộc.</td>
+            <td style="text-align:left;">Vận hành / Y khoa</td>
+          </tr>
+          <tr>
+            <td style="text-align:left;">Tỉnh / nông thôn thiếu cung dịch vụ offline</td>
+            <td><span class="pill p-seg">Phân khúc</span></td>
+            <td><span class="sev mid">TB</span></td>
+            <td><span class="sev high">Cao</span></td>
+            <td style="text-align:left;">Chiến lược tele-first ở tỉnh; điều phối khám tuyến trên; thiết bị CareSense gửi tận nơi.</td>
+            <td style="text-align:left;">Hợp tác phòng khám/nhà thuốc địa phương; mở rộng đô thị lớn trước rồi lan tỉnh.</td>
+            <td style="text-align:left;">Vận hành / Mở rộng</td>
+          </tr>
+          <!-- BỆNH LÝ & ĐÀO TẠO -->
+          <tr>
+            <td style="text-align:left;">Đào tạo đội ngũ không kịp tốc độ scale</td>
+            <td><span class="pill p-dis">Đào tạo</span></td>
+            <td><span class="sev high">Cao</span></td>
+            <td><span class="sev mid">TB</span></td>
+            <td style="text-align:left;">E-learning cá nhân hóa + giáo trình 4 cấp; hợp tác trường y; dự báo nhu cầu nhân lực.</td>
+            <td style="text-align:left;">Thuê ngoài/cộng tác viên có chứng chỉ giai đoạn cao điểm; giãn tốc độ mở rộng theo năng lực đào tạo.</td>
+            <td style="text-align:left;">Đào tạo / Nhân sự</td>
+          </tr>
+          <tr>
+            <td style="text-align:left;">Chất lượng chăm sóc không đồng đều</td>
+            <td><span class="pill p-dis">Đào tạo</span></td>
+            <td><span class="sev high">Cao</span></td>
+            <td><span class="sev mid">TB</span></td>
+            <td style="text-align:left;">Chuẩn hóa SOP + checklist; thi sát hạch năng lực; chấm điểm thực hành bằng AI vision.</td>
+            <td style="text-align:left;">Giám sát ngẫu nhiên &amp; phản hồi khách hàng; tái đào tạo bắt buộc khi điểm thấp.</td>
+            <td style="text-align:left;">Y khoa / Đào tạo</td>
+          </tr>
+          <tr>
+            <td style="text-align:left;">Sai sót y khoa trong chăm sóc / tele</td>
+            <td><span class="pill p-dis">Đào tạo</span></td>
+            <td><span class="sev high">Cao</span></td>
+            <td><span class="sev low">Thấp</span></td>
+            <td style="text-align:left;">Phân quyền theo cấp năng lực; decision support tại giường; bác sĩ giấy phép ra quyết định cuối.</td>
+            <td style="text-align:left;">Bảo hiểm trách nhiệm nghề nghiệp; quy trình báo cáo sự cố &amp; rút kinh nghiệm; pháp chế.</td>
+            <td style="text-align:left;">Y khoa / Pháp chế</td>
+          </tr>
+          <tr>
+            <td style="text-align:left;">Giáo trình / phác đồ lạc hậu</td>
+            <td><span class="pill p-dis">Đào tạo</span></td>
+            <td><span class="sev low">Thấp</span></td>
+            <td><span class="sev mid">TB</span></td>
+            <td style="text-align:left;">Hội đồng chuyên môn cập nhật định kỳ; theo dõi hướng dẫn điều trị mới; nhắc tái đào tạo.</td>
+            <td style="text-align:left;">Cố vấn chuyên khoa bên ngoài; cập nhật e-learning nhanh khi có phác đồ mới.</td>
+            <td style="text-align:left;">Hội đồng Y khoa</td>
+          </tr>
+          <!-- PHÁP LÝ -->
+          <tr>
+            <td style="text-align:left;">Rò rỉ / lộ dữ liệu sức khỏe nhạy cảm</td>
+            <td><span class="pill p-legal">Pháp lý</span></td>
+            <td><span class="sev high">Cao</span></td>
+            <td><span class="sev low">Thấp</span></td>
+            <td style="text-align:left;">Mã hóa đầu-cuối, RBAC, audit log, kiểm thử xâm nhập; tuân thủ Luật 91/2025 &amp; NĐ 13/2023.</td>
+            <td style="text-align:left;">Quy trình ứng phó &amp; thông báo vi phạm; bảo hiểm an ninh mạng; DPO chuyên trách.</td>
+            <td style="text-align:left;">Bảo mật / DPO</td>
+          </tr>
+          <tr>
+            <td style="text-align:left;">Kiện tụng do sự cố y khoa</td>
+            <td><span class="pill p-legal">Pháp lý</span></td>
+            <td><span class="sev high">Cao</span></td>
+            <td><span class="sev low">Thấp</span></td>
+            <td style="text-align:left;">Mô hình nền tảng + cơ sở cấp phép; người hành nghề có giấy phép; SOP rõ; AI chỉ hỗ trợ.</td>
+            <td style="text-align:left;">Bảo hiểm trách nhiệm; hợp đồng phân định trách nhiệm; quỹ &amp; đội pháp chế dự phòng.</td>
+            <td style="text-align:left;">Pháp chế / Y khoa</td>
+          </tr>
+          <tr>
+            <td style="text-align:left;">Thuốc giả / bán thuốc kê đơn trái phép</td>
+            <td><span class="pill p-legal">Pháp lý</span></td>
+            <td><span class="sev high">Cao</span></td>
+            <td><span class="sev low">Thấp</span></td>
+            <td style="text-align:left;">Nguồn GPP/GDP; tra số đăng ký Cục QL Dược; chặn bán thuốc kê đơn không đơn qua app.</td>
+            <td style="text-align:left;">Liên kết chuỗi nhà thuốc uy tín giai đoạn đầu; xác thực thuốc bằng AI; thu hồi &amp; truy vết lô.</td>
+            <td style="text-align:left;">Dược / Vận hành</td>
+          </tr>
+          <tr>
+            <td style="text-align:left;">Vi phạm quảng cáo y tế</td>
+            <td><span class="pill p-legal">Pháp lý</span></td>
+            <td><span class="sev mid">TB</span></td>
+            <td><span class="sev mid">TB</span></td>
+            <td style="text-align:left;">Quy trình duyệt nội dung; xin xác nhận quảng cáo (TT 09/2015) trước khi đăng; không hứa quá mức.</td>
+            <td style="text-align:left;">Thư viện nội dung đã duyệt; pháp chế rà chiến dịch (nối rủi ro hook Phần 2).</td>
+            <td style="text-align:left;">Pháp chế / Marketing</td>
+          </tr>
+          <tr>
+            <td style="text-align:left;">Thay đổi quy định pháp luật</td>
+            <td><span class="pill p-legal">Pháp lý</span></td>
+            <td><span class="sev mid">TB</span></td>
+            <td><span class="sev high">Cao</span></td>
+            <td style="text-align:left;">Theo dõi chủ động văn bản mới (Luật 91/2025, Dược 44/2024, QC sửa đổi 2025); kiến trúc linh hoạt.</td>
+            <td style="text-align:left;">Cố vấn pháp lý y tế; tham gia hiệp hội ngành; audit pháp lý trước mỗi vòng gọi vốn.</td>
+            <td style="text-align:left;">Pháp chế</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="tnote">Risk register tổng hợp đầy đủ rủi ro từ Phần 1–5; mức độ tác động &amp; khả năng xảy ra là <em>ước tính nội bộ</em> để ưu tiên quản trị, rà soát định kỳ tại hội đồng.</p>
+
+    <!-- 6.2 BẢN ĐỒ AI TỔNG -->
+    <h3 class="fin-sub"><span class="badge-n">2</span> Bản đồ AI toàn hệ thống — 4 tầng, 20 ứng dụng</h3>
+    <p class="sub-desc">
+      Gom mọi ứng dụng AI từ 5 phần (22 mục, hợp nhất 2 mục trùng — tối ưu CAC &amp; dự báo churn xuất hiện ở cả Phần 1 &amp; 2) thành <strong>4 tầng</strong>: (1) dự báo &amp; tối ưu, (2) matching &amp; triage, (3) vận hành chăm sóc &amp; đào tạo, (4) tuân thủ &amp; bảo mật. Đây là "hệ thần kinh" giúp ElderCare vận hành ở quy mô lớn với chi phí biên thấp — nguyên tắc xuyên suốt: <strong>AI hỗ trợ, con người (bác sĩ có giấy phép) ra quyết định cuối</strong>.
+    </p>
+    <div class="aimap-grid">
+      <!-- TẦNG 1 -->
+      <div class="aimap-layer t1">
+        <div class="al-head">📈 Tầng 1 · Dự báo &amp; tối ưu</div>
+        <div class="al-sub">Lái tăng trưởng &amp; tài chính bằng dữ liệu</div>
+        <div class="al-item"><div class="al-name">Dự báo cohort &amp; churn<span class="al-from">· Tài chính</span></div><p class="al-val">Dự phóng doanh thu theo cohort, cảnh báo khách sắp rời để giữ chân.</p><span class="al-tag">Time-series / churn model</span></div>
+        <div class="al-item"><div class="al-name">Dự phóng Monte Carlo<span class="al-from">· Tài chính</span></div><p class="al-val">Mô phỏng kịch bản P&amp;L &amp; định giá (base/bull/bear) để dự phòng.</p><span class="al-tag">Monte Carlo</span></div>
+        <div class="al-item"><div class="al-name">Pricing động<span class="al-from">· Tài chính</span></div><p class="al-val">Tối ưu giá gói &amp; combo theo nhu cầu &amp; độ nhạy giá từng segment.</p><span class="al-tag">Dynamic pricing</span></div>
+        <div class="al-item"><div class="al-name">Tối ưu CAC theo kênh<span class="al-from">· Marketing</span></div><p class="al-val">Phân bổ ngân sách quảng cáo tự động theo hiệu quả từng kênh/phễu.</p><span class="al-tag">Multi-armed bandit / MMM</span></div>
+        <div class="al-item"><div class="al-name">Dự báo nhu cầu chuyên gia<span class="al-from">· Phân khúc</span></div><p class="al-val">Ước lượng nhu cầu từng chuyên khoa theo vùng để tuyển &amp; điều phối trước.</p><span class="al-tag">Demand forecasting</span></div>
+      </div>
+      <!-- TẦNG 2 -->
+      <div class="aimap-layer t2">
+        <div class="al-head">🔀 Tầng 2 · Matching &amp; triage</div>
+        <div class="al-sub">Ghép đúng người – đúng nhu cầu – đúng rủi ro</div>
+        <div class="al-item"><div class="al-name">Phân loại segment<span class="al-from">· Phân khúc</span></div><p class="al-val">Tự động xếp khách vào phân khúc từ dữ liệu onboarding để cá nhân hóa gói.</p><span class="al-tag">Classification</span></div>
+        <div class="al-item"><div class="al-name">Matching ghép chuyên gia<span class="al-from">· Phân khúc</span></div><p class="al-val">Gợi ý đúng (các) chuyên gia cho từng nỗi đau theo ma trận Phần 3.</p><span class="al-tag">Recommendation</span></div>
+        <div class="al-item"><div class="al-name">Triage mức phụ thuộc<span class="al-from">· Phân khúc</span></div><p class="al-val">Phân loại mức độ phụ thuộc &amp; rủi ro để xếp đội chăm phù hợp.</p><span class="al-tag">Risk scoring</span></div>
+        <div class="al-item"><div class="al-name">Scoring tín dụng MedFin<span class="al-from">· Tài chính</span></div><p class="al-val">Chấm điểm tín dụng cho trả góp y tế, giảm nợ xấu trước khi duyệt.</p><span class="al-tag">Credit scoring</span></div>
+      </div>
+      <!-- TẦNG 3 -->
+      <div class="aimap-layer t3">
+        <div class="al-head">🩺 Tầng 3 · Vận hành chăm sóc &amp; đào tạo</div>
+        <div class="al-sub">Nâng chất lượng &amp; năng suất đội ngũ</div>
+        <div class="al-item"><div class="al-name">Chatbot tư vấn đầu phễu<span class="al-from">· Marketing</span></div><p class="al-val">Trả lời &amp; tư vấn 24/7, dẫn dắt con cái vào phễu, sàng lọc nhu cầu.</p><span class="al-tag">LLM / RAG</span></div>
+        <div class="al-item"><div class="al-name">Cá nhân hóa nội dung<span class="al-from">· Marketing</span></div><p class="al-val">Sinh nội dung &amp; nhắc nhở phù hợp từng khách (con cái / người già).</p><span class="al-tag">Generative</span></div>
+        <div class="al-item"><div class="al-name">E-learning cá nhân hóa<span class="al-from">· Đào tạo</span></div><p class="al-val">Lộ trình học thích ứng theo năng lực điều dưỡng/caregiver.</p><span class="al-tag">Adaptive learning</span></div>
+        <div class="al-item"><div class="al-name">Mô phỏng ca bệnh<span class="al-from">· Đào tạo</span></div><p class="al-val">Bệnh nhân ảo để luyện xử trí tình huống trước khi chăm thật.</p><span class="al-tag">LLM patient sim</span></div>
+        <div class="al-item"><div class="al-name">Chấm điểm thực hành<span class="al-from">· Đào tạo</span></div><p class="al-val">Đánh giá kỹ thuật chăm sóc qua video để chuẩn hóa chất lượng.</p><span class="al-tag">Vision + scoring</span></div>
+        <div class="al-item"><div class="al-name">Nhắc tái đào tạo<span class="al-from">· Đào tạo</span></div><p class="al-val">Tự động nhắc chu kỳ tái đào tạo &amp; cập nhật chứng chỉ.</p><span class="al-tag">Rule engine</span></div>
+        <div class="al-item"><div class="al-name">Hỗ trợ quyết định tại giường<span class="al-from">· Đào tạo</span></div><p class="al-val">Gợi ý xử trí theo phác đồ — <em>không thay chẩn đoán bác sĩ</em>.</p><span class="al-tag">Clinical decision support</span></div>
+      </div>
+      <!-- TẦNG 4 -->
+      <div class="aimap-layer t4">
+        <div class="al-head">🛡️ Tầng 4 · Tuân thủ &amp; bảo mật</div>
+        <div class="al-sub">Biến nghĩa vụ pháp lý thành tự động hóa</div>
+        <div class="al-item"><div class="al-name">Phát hiện bất thường bảo mật<span class="al-from">· Pháp lý</span></div><p class="al-val">Giám sát truy cập dữ liệu sức khỏe, cảnh báo &amp; chặn hành vi lạ realtime.</p><span class="al-tag">Anomaly detection</span></div>
+        <div class="al-item"><div class="al-name">Ẩn danh hóa &amp; tối thiểu dữ liệu<span class="al-from">· Pháp lý</span></div><p class="al-val">Che PII trong log/báo cáo, ẩn danh khi phân tích &amp; huấn luyện.</p><span class="al-tag">De-identification</span></div>
+        <div class="al-item"><div class="al-name">Kiểm tra tuân thủ tự động<span class="al-from">· Pháp lý</span></div><p class="al-val">Rà quảng cáo, đơn thuốc, giấy phép theo checklist; cảnh báo trước khi đăng/giao.</p><span class="al-tag">Compliance NLP</span></div>
+        <div class="al-item"><div class="al-name">Xác thực thuốc bằng ảnh/mã<span class="al-from">· Pháp lý</span></div><p class="al-val">Đối chiếu số đăng ký Cục QL Dược, phát hiện tem giả/lô bất thường.</p><span class="al-tag">Computer vision + DB</span></div>
+      </div>
+    </div>
+    <button class="deep-toggle" onclick="toggleDeep(this)" data-closed-label="Phân tích sâu: nguyên tắc dữ liệu &amp; vai trò con người trong vòng lặp" data-open-label="Thu gọn">
+      <span class="dt-label">Phân tích sâu: nguyên tắc dữ liệu &amp; vai trò con người trong vòng lặp</span> <span class="chev">▼</span>
+    </button>
+    <div class="deep-panel">
+      <div class="deep-inner">
+        <div class="deep-callout">
+          <strong>Nguyên tắc thiết kế AI của ElderCare:</strong> (1) <strong>Human-in-the-loop</strong> ở mọi quyết định y khoa — AI gợi ý, bác sĩ/điều dưỡng có giấy phép quyết định; (2) <strong>Privacy-by-design</strong> — tối thiểu hóa &amp; ẩn danh dữ liệu, tuân thủ Luật 91/2025 &amp; NĐ 13/2023 (Phần 5); (3) <strong>Bắt đầu đơn giản</strong> — luật &amp; rule engine trước, mô hình học máy khi đủ dữ liệu, tránh "AI hóa" quá sớm.
+        </div>
+        <table class="deep-table">
+          <thead><tr><th>Tầng AI</th><th>Giá trị kinh tế chính</th><th>Nối tới chỉ số tài chính (Phần 1)</th></tr></thead>
+          <tbody>
+            <tr><td>Dự báo &amp; tối ưu</td><td>Giảm CAC, tăng retention, định giá tốt hơn</td><td>LTV/CAC 5,8× · payback 5,2 th</td></tr>
+            <tr><td>Matching &amp; triage</td><td>Tăng tỷ lệ ghép đúng, giảm nợ xấu MedFin</td><td>Gross margin blended ~62%</td></tr>
+            <tr><td>Vận hành &amp; đào tạo</td><td>Scale đội ngũ nhanh, chất lượng đồng đều</td><td>Đòn bẩy OpEx → EBITDA dương Năm 5</td></tr>
+            <tr><td>Tuân thủ &amp; bảo mật</td><td>Giảm rủi ro pháp lý &amp; chi phí sự cố</td><td>Bảo vệ định giá EV ~1.740 tỷ</td></tr>
+          </tbody>
+        </table>
+        <p class="src-note">Bản đồ AI tổng hợp từ 5 ô "🤖 AI ứng dụng" của Phần 1–5; phân tầng &amp; nối giá trị kinh tế là <em>ước tính nội bộ</em>.</p>
+      </div>
+    </div>
+
+    <!-- 6.3 KẾT LUẬN & TẦM NHÌN -->
+    <h3 class="fin-sub"><span class="badge-n">3</span> Kết luận &amp; tầm nhìn — vì sao là cơ hội tỉ đô</h3>
+    <p class="sub-desc">
+      Những con số dưới đây khép lại toàn bộ kế hoạch: một thị trường lớn &amp; già hóa nhanh, mô hình super-app 5 dòng doanh thu với unit economics lành mạnh, đường tới hòa vốn rõ ràng và lộ trình gọi vốn 4 vòng có milestone.
+    </p>
+    <div class="kpi-grid">
+      <div class="kpi"><div class="k-num">14,2tr</div><div class="k-label">Người cao tuổi VN (TAM thị trường)</div></div>
+      <div class="kpi"><div class="k-num gold">5</div><div class="k-label">Trụ cột doanh thu super-app</div></div>
+      <div class="kpi"><div class="k-num">5,8×</div><div class="k-label">LTV / CAC (đơn vị kinh tế lành mạnh)</div></div>
+      <div class="kpi"><div class="k-num coral">Năm 5</div><div class="k-label">Break-even EBITDA &amp; dòng tiền</div></div>
+      <div class="kpi"><div class="k-num gold">~1.740 tỷ</div><div class="k-label">Định giá EV base (~$68M)</div></div>
+      <div class="kpi"><div class="k-num">4 vòng</div><div class="k-label">Seed → Series C gọi vốn</div></div>
+    </div>
+    <div class="vision-box">
+      <h4>🌏 Tầm nhìn: hạ tầng chăm sóc người cao tuổi của Việt Nam</h4>
+      <p>
+        Việt Nam đang già hóa nhanh nhất khu vực: <strong>14,2 triệu người cao tuổi</strong> với TAM ~115.000 tỷ đồng, SAM ~18.000 tỷ. ElderCare không bán một tính năng đơn lẻ mà xây <strong>super-app 5 trụ cột</strong> — CareConnect (điều dưỡng tại nhà), Khám &amp; Telehealth, MedFin (tài chính y tế), CareSense (cảm biến cảnh báo té ngã), Pharma — bao trọn hành trình chăm sóc, tạo doanh thu recurring &amp; rào cản chuyển đổi.
+      </p>
+      <p>
+        Mô hình tài chính cho thấy SOM <strong>~900 tỷ đồng vào Năm 5</strong>, EBITDA &amp; dòng tiền hòa vốn ngay Năm 5, định giá cơ sở <strong>EV ~1.740 tỷ (~$68M)</strong> — và <strong>~$163M ở kịch bản bull</strong>. Với LTV/CAC 5,8×, gross margin ~62% và đòn bẩy AI giữ chi phí biên thấp, đây là cơ hội tỉ đô <strong>có cơ sở số liệu</strong>, không phải lời hứa.
+      </p>
+      <p>
+        Lộ trình: <strong>Seed (38 tỷ/$1,5M)</strong> chứng minh mô hình &amp; mũi nhọn CareSense → <strong>Series A</strong> mở rộng đô thị lớn → <strong>Series B</strong> phủ tỉnh &amp; hoàn thiện 5 trụ cột → <strong>Series C (1.275 tỷ/$50M)</strong> dẫn đầu thị trường &amp; chuẩn bị thoái vốn. Mỗi vòng mở khóa bằng milestone đo được ở risk register &amp; mô hình tài chính trên.
+      </p>
+    </div>
+
+    <!-- 🧭 BƯỚC TIẾP THEO / KÊU GỌI ĐẦU TƯ -->
+    <div class="endbox cta">
+      <h4>🧭 Bước tiếp theo &amp; lời mời đồng hành</h4>
+      <p class="eb-desc">Phần tổng hợp này chính là bản đồ rủi ro &amp; AI của toàn doanh nghiệp. Ba bước kế tiếp để biến kế hoạch thành hiện thực:</p>
+      <div class="cta-steps">
+        <div class="cta-step">
+          <div class="cs-num">Bước 1</div>
+          <div class="cs-name">Gọi vòng Seed</div>
+          <p>38 tỷ/$1,5M để hoàn thiện MVP 5 trụ cột, ra mắt mũi nhọn CareSense cảnh báo té ngã &amp; chứng minh unit economics tại 2 đô thị lớn.</p>
+        </div>
+        <div class="cta-step">
+          <div class="cs-num">Bước 2</div>
+          <div class="cs-name">Chuẩn hóa &amp; tuân thủ</div>
+          <p>Hoàn thiện pháp lý (Luật 91/2025, KCB 15/2023, Dược), SOP &amp; giáo trình training 4 cấp, mạng lưới 12 nhóm chuyên gia trước khi scale.</p>
+        </div>
+        <div class="cta-step">
+          <div class="cs-num">Bước 3</div>
+          <div class="cs-name">Nhân rộng &amp; dẫn đầu</div>
+          <p>Series A→C: phủ tỉnh, mở khóa MedFin &amp; Pharma, đạt hòa vốn Năm 5, hướng tới định giá tỉ đô &amp; vị thế hạ tầng chăm sóc người cao tuổi quốc gia.</p>
+        </div>
+      </div>
+      <p class="tnote" style="margin-top:1rem;">Xem thêm: <a href="/eldercare" style="color:var(--care);font-weight:600;">bản pitch đầy đủ</a> · <a href="/eldercare-app" style="color:var(--care);font-weight:600;">app demo clickable</a> · <a href="/eldercare-financial-model.xlsx" style="color:var(--care);font-weight:600;">model tài chính động (.xlsx)</a>. Mọi số liệu khớp Phần 1–5; con số tự suy gắn nhãn "ước tính nội bộ".</p>
+    </div>
+
+  </div>
+</section>
 
 <!-- FOOTER -->
 <footer>
