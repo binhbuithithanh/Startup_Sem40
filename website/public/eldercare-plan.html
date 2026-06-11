@@ -236,6 +236,67 @@
     footer .footer-logo { font-size: 1.5rem; font-weight: 900; color: #fff; margin-bottom: 0.5rem; }
     footer .footer-logo span { color: var(--care-light); }
 
+    /* ===== PHIÊN 2 — MARKETING & GTM ===== */
+    .mkt-section { background: var(--light); }
+    /* download model button (đặt trong section Tài chính) */
+    .dl-model { display: inline-flex; align-items: center; gap: 0.5rem; background: linear-gradient(135deg, var(--gold), #fbbf24); color: #3a2a05; padding: 11px 22px; border-radius: 10px; font-weight: 700; font-size: 0.86rem; text-decoration: none; box-shadow: 0 6px 20px rgba(245,166,35,0.32); transition: transform .2s, box-shadow .2s; margin: 0.25rem 0 0.5rem; }
+    .dl-model:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(245,166,35,0.42); }
+    .dl-note { font-size: 0.74rem; color: var(--muted); font-style: italic; margin-bottom: 0.5rem; }
+
+    /* dual customer (con cái payer / bố mẹ user) */
+    .dual-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.25rem 0; }
+    .dual-card { border-radius: 14px; padding: 1.4rem; border: 1px solid var(--border); background: #fff; position: relative; overflow: hidden; }
+    .dual-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; }
+    .dual-card.payer::before { background: linear-gradient(90deg, var(--coral), #fda4af); }
+    .dual-card.user::before { background: linear-gradient(90deg, var(--care), var(--care-light)); }
+    .dual-card .dc-role { font-size: 0.72rem; font-weight: 800; letter-spacing: 0.5px; text-transform: uppercase; }
+    .dual-card.payer .dc-role { color: var(--coral); }
+    .dual-card.user .dc-role { color: var(--care); }
+    .dual-card h4 { font-size: 1.05rem; font-weight: 800; margin: 0.2rem 0 0.5rem; }
+    .dual-card ul { list-style: none; }
+    .dual-card ul li { font-size: 0.82rem; color: #4b5563; line-height: 1.5; padding: 4px 0 4px 1.2rem; position: relative; }
+    .dual-card ul li::before { content: '▸'; position: absolute; left: 0; }
+    .dual-card.payer ul li::before { color: var(--coral); }
+    .dual-card.user ul li::before { color: var(--care); }
+    .dual-card ul li strong { color: var(--primary); }
+
+    /* messaging / brand pills */
+    .msg-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap: 0.85rem; margin: 1rem 0; }
+    .msg-card { background: #fff; border: 1px solid var(--border); border-left: 4px solid var(--care); border-radius: 12px; padding: 1rem 1.15rem; }
+    .msg-card .mc-tag { font-size: 0.7rem; font-weight: 800; color: var(--care); text-transform: uppercase; letter-spacing: 0.5px; }
+    .msg-card .mc-line { font-size: 0.92rem; font-weight: 700; color: var(--primary); margin: 0.2rem 0; line-height: 1.4; }
+    .msg-card p { font-size: 0.78rem; color: #4b5563; line-height: 1.5; }
+
+    /* funnel */
+    .funnel { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; margin: 1.25rem 0; }
+    .funnel-stage { border-radius: 12px; padding: 0.85rem 1.25rem; color: #fff; text-align: center; }
+    .funnel-stage .fs-name { font-size: 0.9rem; font-weight: 800; }
+    .funnel-stage .fs-meta { font-size: 0.73rem; opacity: 0.93; margin-top: 2px; }
+    .funnel-stage.f1 { width: 100%; background: linear-gradient(135deg, #0d9488, #14b8a6); }
+    .funnel-stage.f2 { width: 84%; background: linear-gradient(135deg, #0891b2, #06b6d4); }
+    .funnel-stage.f3 { width: 66%; background: linear-gradient(135deg, #0e7490, #0891b2); }
+    .funnel-stage.f4 { width: 48%; background: linear-gradient(135deg, #115e59, #0d9488); }
+    .funnel-stage.f5 { width: 32%; background: linear-gradient(135deg, var(--coral), #f43f5e); }
+
+    /* roadmap theo quý */
+    .rmq-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin: 1.25rem 0; }
+    .rmq-card { border: 1px solid var(--border); border-radius: 14px; padding: 1.2rem; background: #fff; border-top: 4px solid var(--care); }
+    .rmq-card.q1 { border-top-color: var(--care); }
+    .rmq-card.q2 { border-top-color: #0891b2; }
+    .rmq-card.q3 { border-top-color: var(--gold); }
+    .rmq-card.q4 { border-top-color: var(--coral); }
+    .rmq-card .rmq-q { font-size: 0.72rem; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; color: var(--care); }
+    .rmq-card h4 { font-size: 0.93rem; font-weight: 800; margin: 0.3rem 0 0.4rem; }
+    .rmq-card p { font-size: 0.77rem; color: #4b5563; line-height: 1.5; }
+    .rmq-card .rmq-tag { display: inline-block; margin-top: 0.5rem; background: #f0fdfa; color: #115e59; font-size: 0.68rem; font-weight: 700; padding: 2px 9px; border-radius: 99px; }
+
+    /* backup feature catalog */
+    .backup-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap: 0.85rem; margin: 1rem 0; }
+    .backup-card { border: 1px dashed #5eead4; border-radius: 12px; padding: 1rem 1.15rem; background: #f0fdfa; }
+    .backup-card .bc-icon { font-size: 1.35rem; }
+    .backup-card h5 { font-size: 0.85rem; font-weight: 800; margin: 0.25rem 0; color: #115e59; }
+    .backup-card p { font-size: 0.76rem; color: #374151; line-height: 1.5; }
+
     /* RESPONSIVE */
     @media (max-width: 768px) {
       nav { padding: 0 1rem; }
@@ -246,6 +307,8 @@
       section { padding: 3.5rem 1.25rem; }
       .scenario-grid { grid-template-columns: 1fr; }
       .deep-inner { padding: 1.25rem 1.25rem; }
+      .dual-grid, .rmq-grid { grid-template-columns: 1fr; }
+      .funnel-stage { width: 100% !important; }
     }
   </style>
 </head>
@@ -287,7 +350,7 @@
 <!-- STICKY SUB-NAV — MỤC LỤC 6 PHẦN -->
 <div class="subnav">
   <a href="#fin" class="active">💰 Tài chính</a>
-  <a href="#marketing" class="soon">📣 Marketing &amp; GTM</a>
+  <a href="#marketing">📣 Marketing &amp; GTM</a>
   <a href="#segment" class="soon">👥 Phân khúc &amp; chuyên gia</a>
   <a href="#disease" class="soon">🏥 Bệnh lý &amp; đào tạo</a>
   <a href="#legal" class="soon">⚖️ Đạo đức &amp; pháp lý</a>
@@ -303,6 +366,11 @@
       Phần này dựng mô hình tài chính đầy đủ cho ElderCare VN theo chuẩn phân tích đầu tư (CFA L1–L3): cấu trúc doanh thu super-app, unit economics, dự phóng P&amp;L 5 năm, kế hoạch nhân sự, 4 vòng gọi vốn kèm cap table, burn/runway/break-even và định giá DCF + so sánh bội số. Mọi con số đều gắn nguồn hoặc nhãn <em>"ước tính nội bộ"</em>.
     </p>
     <span class="click-hint">👆 Mỗi tiểu mục có nút "Phân tích sâu" — bấm để xem giả định, công thức &amp; dẫn nguồn</span>
+
+    <div>
+      <a href="/eldercare-financial-model.xlsx" class="dl-model" download>📥 Tải model tài chính động (.xlsx)</a>
+      <p class="dl-note">File Excel công thức sống: Assumptions · Revenue build 5 trụ cột · P&amp;L 5 năm · Unit economics · Cap table · DCF + sensitivity (base/bull/bear). Đổi giả định → mọi kết quả tự tính lại.</p>
+    </div>
 
     <!-- 1.1 MÔ HÌNH DOANH THU 5 TRỤ CỘT -->
     <h3 class="fin-sub"><span class="badge-n">1</span> Mô hình doanh thu — 5 trụ cột xếp chồng</h3>
@@ -780,8 +848,277 @@
   </div>
 </section>
 
+<!-- ============================ PHIÊN 2 — MARKETING & GTM ============================ -->
+<section class="mkt-section" id="marketing">
+  <div class="container">
+    <div class="section-tag">Phần 2 · Marketing &amp; Go-to-Market</div>
+    <h2>Chiến lược tiếp cận thị trường:<br/>bán sự an tâm cho con cái, chăm sức khỏe cho bố mẹ</h2>
+    <p class="section-desc">
+      ElderCare có một đặc thù marketing hiếm gặp: <strong>người trả tiền và người dùng là hai người khác nhau</strong>. Con cái (30–50 tuổi, sống xa, bận rộn) mua sự an tâm; bố mẹ già là người trực tiếp được chăm. Toàn bộ GTM xoay quanh việc thuyết phục người trả tiền và giữ chân người dùng — với chi phí thu hút khách (CAC) blended ~480k/gia đình, đa kênh, lấy <em>cảnh báo té ngã</em> làm "wow-moment" mở phễu.
+    </p>
+    <span class="click-hint">👆 Các tiểu mục có nút "Phân tích sâu" — bấm để xem chiến thuật, ngân sách &amp; chỉ số chi tiết</span>
+
+    <!-- 2.1 ĐỊNH VỊ & KHÁCH HÀNG KÉP -->
+    <h3 class="fin-sub"><span class="badge-n">1</span> Chiến lược tổng &amp; định vị — khách hàng kép</h3>
+    <p class="sub-desc">
+      Mọi quyết định marketing tách bạch hai vai: <strong>người trả tiền (con cái)</strong> cần được thuyết phục bằng sự an tâm &amp; tin cậy; <strong>người dùng (bố mẹ)</strong> cần trải nghiệm đơn giản, ấm áp để giữ chân. Định vị lõi: <em>"Một chạm để biết bố mẹ vẫn ổn."</em>
+    </p>
+    <div class="dual-grid">
+      <div class="dual-card payer">
+        <div class="dc-role">💳 Người trả tiền — Con cái 30–50t</div>
+        <h4>Mua sự an tâm từ xa</h4>
+        <ul>
+          <li><strong>Nỗi đau:</strong> ở xa, bận, lo bố mẹ té ngã/cấp cứu mà không biết; áy náy không chăm được.</li>
+          <li><strong>Thông điệp:</strong> "An tâm dù ở xa" — theo dõi sinh hiệu, cảnh báo tức thì, điều dưỡng &amp; bác sĩ chỉ một chạm.</li>
+          <li><strong>Kênh chạm:</strong> FB/TikTok/Google, KOL bác sĩ, referral từ bạn bè cùng cảnh "sandwich generation".</li>
+          <li><strong>Quyết định mua:</strong> cảm xúc (sợ &amp; áy náy) + lý trí (rẻ hơn thuê người, minh bạch).</li>
+        </ul>
+      </div>
+      <div class="dual-card user">
+        <div class="dc-role">👵 Người dùng — Bố/mẹ ≥60t</div>
+        <h4>Được chăm, giữ tự chủ</h4>
+        <ul>
+          <li><strong>Nỗi đau:</strong> sợ phiền con, ngại công nghệ, cô đơn, bệnh mạn tính phải theo dõi đều.</li>
+          <li><strong>Thông điệp:</strong> "Sống khỏe &amp; tự chủ tại nhà" — không phải vào viện dưỡng lão, con vẫn dõi theo.</li>
+          <li><strong>Trải nghiệm:</strong> thiết bị tự động (không phải thao tác), điều dưỡng thật đến nhà, giao diện chữ to dễ dùng.</li>
+          <li><strong>Giữ chân:</strong> quen người chăm + thiết bị đã lắp → rào cản rời bỏ cao (xem unit economics).</li>
+        </ul>
+      </div>
+    </div>
+    <div class="msg-grid">
+      <div class="msg-card">
+        <div class="mc-tag">Tagline lõi</div>
+        <div class="mc-line">"Một chạm để biết bố mẹ vẫn ổn."</div>
+        <p>Câu chốt cho con cái — gắn cảm xúc an tâm với hành động cụ thể trong app.</p>
+      </div>
+      <div class="msg-card">
+        <div class="mc-tag">Định vị thương hiệu</div>
+        <div class="mc-line">Tin cậy y tế + ấm áp gia đình</div>
+        <p>Palette teal (y tế đáng tin) phối coral ấm; bảo chứng bác sĩ &amp; điều dưỡng xác minh làm xương sống niềm tin.</p>
+      </div>
+      <div class="msg-card">
+        <div class="mc-tag">Khác biệt hóa</div>
+        <div class="mc-line">Super-app, không phải một dịch vụ lẻ</div>
+        <p>Đối thủ bán từng mảnh (đặt khám, hoặc thuê điều dưỡng); ElderCare gói trọn hành trình chăm bố mẹ.</p>
+      </div>
+    </div>
+
+    <!-- 2.2 KÊNH & PHỄU -->
+    <h3 class="fin-sub"><span class="badge-n">2</span> Kênh &amp; phễu chuyển đổi (CAC blended ~480k)</h3>
+    <p class="sub-desc">
+      Năm kênh acquisition, mỗi kênh có vai trò &amp; chi phí (CAC) khác nhau. Bình quân gia quyền ra <strong>CAC blended ~480k/gia đình</strong> (≈$19) — khớp giả định ở phần Tài chính. Referral &amp; kênh đối tác y tế kéo CAC trung bình xuống; digital là kênh quy mô nhưng đắt nhất.
+    </p>
+    <div class="table-scroll">
+      <table class="fin-table">
+        <thead>
+          <tr><th>Kênh</th><th>Nhắm vào</th><th>Vai trò trong phễu</th><th>% khách mới</th><th>CAC/gia đình</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Digital (FB / TikTok / Google)</td><td>Con cái 30–50t</td><td>Top-funnel — nhận biết &amp; quy mô</td><td>40%</td><td class="neg">~650k</td></tr>
+          <tr><td>Bệnh viện / phòng khám đối tác</td><td>Gia đình có người vừa xuất viện</td><td>Mid-funnel — đúng nhu cầu, tin cậy cao</td><td>22%</td><td>~420k</td></tr>
+          <tr><td>KOL bác sĩ / chuyên gia lão khoa</td><td>Con cái + uy tín y khoa</td><td>Bảo chứng niềm tin, mở phễu</td><td>13%</td><td class="neg">~600k</td></tr>
+          <tr><td>BHXH / hội người cao tuổi / phường</td><td>Người già &amp; gia đình cộng đồng</td><td>Phủ rộng chi phí thấp, B2B2C</td><td>10%</td><td class="pos">~300k</td></tr>
+          <tr><td>Referral gia đình (giới thiệu)</td><td>Khách hài lòng → bạn bè</td><td>Bottom-funnel — rẻ &amp; chất lượng nhất</td><td>15%</td><td class="pos">~180k</td></tr>
+          <tr class="row-total"><td>Blended (bình quân gia quyền)</td><td>—</td><td>—</td><td>100%</td><td>~480k (≈$19)</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="tnote">% khách mới &amp; CAC từng kênh là ước tính nội bộ; blended ≈ 0,40×650 + 0,22×420 + 0,13×600 + 0,10×300 + 0,15×180 ≈ <strong>480k</strong>, khớp CAC blended phần Tài chính. CAC digital VN tham chiếu CPM/CPC Meta/Google ngành sức khỏe; referral &amp; partner tự nhiên rẻ hơn nhiều.</p>
+
+    <p class="sub-desc" style="margin-top:1.75rem;"><strong>Phễu chuyển đổi (AARRR rút gọn)</strong> — từ tiếp cận con cái đến gia đình trung thành giới thiệu tiếp:</p>
+    <div class="funnel">
+      <div class="funnel-stage f1"><div class="fs-name">👀 Tiếp cận / Nhận biết</div><div class="fs-meta">Quảng cáo cảm xúc "sợ té ngã" + KOL bác sĩ → traffic</div></div>
+      <div class="funnel-stage f2"><div class="fs-name">💡 Quan tâm — tải app / để lại SĐT</div><div class="fs-meta">Landing kể câu chuyện Bà Hoa 72t; chatbot tư vấn đầu phễu</div></div>
+      <div class="funnel-stage f3"><div class="fs-name">🎁 Dùng thử miễn phí</div><div class="fs-meta">Gói nhắc thuốc + theo dõi sinh hiệu free 14 ngày (phễu)</div></div>
+      <div class="funnel-stage f4"><div class="fs-name">💳 Trả phí — gói gia đình</div><div class="fs-meta">Upsell điều dưỡng / thiết bị CareSense → ARPU lên</div></div>
+      <div class="funnel-stage f5"><div class="fs-name">❤️ Trung thành &amp; giới thiệu</div><div class="fs-meta">Referral → CAC rẻ nhất, vòng lặp tăng trưởng</div></div>
+    </div>
+
+    <button class="deep-toggle" data-closed-label="Phân tích sâu: vai trò từng kênh, ngân sách &amp; tối ưu CAC theo phễu" data-open-label="Thu gọn" onclick="toggleDeep(this)">
+      <span>🔍</span><span class="dt-label">Phân tích sâu: vai trò từng kênh, ngân sách &amp; tối ưu CAC theo phễu</span><span class="chev">▼</span>
+    </button>
+    <div class="deep-panel"><div class="deep-inner">
+      <h5>🎯 Chiến lược kênh theo giai đoạn</h5>
+      <p>Giai đoạn đầu (pilot TP.HCM) dựa vào <strong>kênh đối tác y tế</strong> (bệnh viện/phòng khám) vì khách đến đúng lúc có nhu cầu (vừa xuất viện, người nhà cần chăm) — chuyển đổi cao, niềm tin sẵn. Khi mở rộng, <strong>digital</strong> gánh quy mô nhưng phải kèm <strong>KOL bác sĩ</strong> để giữ niềm tin (người già &amp; con cái không tin quảng cáo y tế thuần). Cuối cùng <strong>referral</strong> trở thành động cơ chính khi retention tốt — CAC giảm dần theo thời gian (đã phản ánh trong P&amp;L: marketing %DT 139% → 14%).</p>
+      <div class="deep-stats">
+        <div class="deep-stat"><div class="ds-num">~480k</div><div class="ds-label">CAC blended (≈$19)</div></div>
+        <div class="deep-stat"><div class="ds-num">5,8×</div><div class="ds-label">LTV/CAC mục tiêu</div></div>
+        <div class="deep-stat"><div class="ds-num">15%+</div><div class="ds-label">Khách đến từ referral (CAC ~180k)</div></div>
+        <div class="deep-stat"><div class="ds-num">2 phía</div><div class="ds-label">Cũng cần acquire nguồn cung điều dưỡng</div></div>
+      </div>
+      <h5>💰 Phân bổ ngân sách marketing (giai đoạn scale, ước tính)</h5>
+      <table class="deep-table">
+        <thead><tr><th>Hạng mục</th><th>% ngân sách S&amp;M</th><th>Ghi chú</th></tr></thead>
+        <tbody>
+          <tr><td>Digital performance (FB/TikTok/Google)</td><td>40%</td><td>Đo bằng CAC/ROAS theo cohort, tối ưu bằng bandit</td></tr>
+          <tr><td>Đối tác y tế (BV/phòng khám/BHXH)</td><td>22%</td><td>Chiết khấu giới thiệu, đặt kiosk, đào tạo nhân viên</td></tr>
+          <tr><td>KOL / PR / nội dung bác sĩ</td><td>18%</td><td>Bảo chứng niềm tin, content giáo dục sức khỏe người già</td></tr>
+          <tr><td>Referral &amp; loyalty</td><td>12%</td><td>Thưởng giới thiệu 2 chiều; rẻ &amp; chất lượng cao</td></tr>
+          <tr><td>Brand / sự kiện cộng đồng</td><td>8%</td><td>Hội người cao tuổi, khám sàng lọc miễn phí</td></tr>
+        </tbody>
+      </table>
+      <div class="deep-callout">💡 <strong>Nguyên tắc:</strong> không phụ thuộc &gt;40% vào một nền tảng quảng cáo duy nhất; mỗi đồng marketing phải truy được về CAC/LTV theo kênh để dồn tiền vào kênh hiệu quả nhất (xem ô AI cuối phần).</div>
+      <p class="src-note">CAC theo kênh &amp; phân bổ ngân sách: ước tính nội bộ, hiệu chỉnh theo CPM/CPC ngành sức khỏe VN trên Meta/Google. Khung phễu AARRR (Dave McClure).</p>
+    </div></div>
+
+    <!-- 2.3 FEATURE ROLLOUT ROADMAP -->
+    <h3 class="fin-sub"><span class="badge-n">3</span> Lộ trình tung tính năng (rollout) theo quý</h3>
+    <p class="sub-desc">
+      Thứ tự tung tính năng được thiết kế theo <strong>tâm lý mua</strong>, không theo độ dễ kỹ thuật: bắt đầu bằng thứ tạo <em>cảm xúc &amp; "wow"</em> mạnh nhất (cảnh báo té ngã + điều dưỡng), xây niềm tin, rồi mới bán recurring → tài chính → thương mại. Mỗi mảng mở khóa mảng kế tiếp.
+    </p>
+    <div class="rmq-grid">
+      <div class="rmq-card q1">
+        <div class="rmq-q">Q1–Q2 · Năm 1</div>
+        <h4>🚨 CareSense + 🩺 CareConnect</h4>
+        <p>Cảnh báo té ngã + theo dõi sinh hiệu (mũi nhọn "wow") và đặt điều dưỡng xác minh tại nhà. Pilot TP.HCM.</p>
+        <span class="rmq-tag">Tạo cảm xúc &amp; an tâm</span>
+      </div>
+      <div class="rmq-card q2">
+        <div class="rmq-q">Q3–Q4 · Năm 1</div>
+        <h4>📱 TeleSpecialist + gói sub</h4>
+        <p>Khám video chuyên khoa lão khoa/tim mạch + gói gia đình 299–599k/tháng (recurring) sau khi đã có niềm tin.</p>
+        <span class="rmq-tag">Chuyển sang recurring</span>
+      </div>
+      <div class="rmq-card q3">
+        <div class="rmq-q">Q1–Q2 · Năm 2</div>
+        <h4>💳 MedFin</h4>
+        <p>Trả góp ca mổ/điều trị + bảo hiểm bổ sung — tung khi đã có tệp khách trả phí &amp; dữ liệu để scoring tín dụng.</p>
+        <span class="rmq-tag">Cần giấy phép tài chính</span>
+      </div>
+      <div class="rmq-card q4">
+        <div class="rmq-q">Q3–Q4 · Năm 2</div>
+        <h4>💊 Pharma &amp; thiết bị</h4>
+        <p>Giao thuốc kê đơn (chuẩn GPP) &amp; marketplace thiết bị y tế — tận dụng tệp khách &amp; tần suất sẵn có để bán thêm.</p>
+        <span class="rmq-tag">Tăng tần suất &amp; ARPU</span>
+      </div>
+    </div>
+    <p class="tnote">Lý do thứ tự: (1) <strong>té ngã</strong> là nỗi sợ lớn nhất → hook cảm xúc mở phễu; (2) điều dưỡng tạo trải nghiệm vật lý đáng tin; (3) khi đã tin, bán <strong>subscription</strong> recurring dễ hơn; (4) MedFin &amp; Pharma cần giấy phép + dữ liệu khách nên tung sau. Lộ trình &amp; mốc quý là ước tính nội bộ, khớp use-of-funds Seed→Series A phần Tài chính.</p>
+
+    <!-- 2.4 KỊCH BẢN THẤT BẠI + PIVOT -->
+    <h3 class="fin-sub"><span class="badge-n">4</span> Kịch bản thất bại &amp; pivot — tín hiệu → hành động</h3>
+    <p class="sub-desc">
+      Lean Startup: mỗi giả định marketing gắn một <strong>ngưỡng tín hiệu thất bại</strong> đo được, và một hành động pivot cụ thể nếu chạm ngưỡng — để không "đốt" tiền vào giả định sai.
+    </p>
+    <div class="table-scroll">
+      <table class="fin-table">
+        <thead>
+          <tr><th>Giả định</th><th>🚩 Tín hiệu thất bại</th><th>➡️ Hành động / pivot</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Cảnh báo té ngã là hook mở phễu</td><td>CTR quảng cáo &lt;1% &amp; cài đặt thiết bị thấp sau 2 quý</td><td>Đổi hook sang "theo dõi bệnh mạn tính" hoặc "đặt điều dưỡng nhanh"; A/B nhiều thông điệp</td></tr>
+          <tr><td>Con cái sẵn sàng trả gói 299–599k/th</td><td>Tỷ lệ free→paid &lt;5%; churn tháng 1 &gt;8%</td><td>Tung gói rẻ hơn (199k) hoặc per-use; chuyển nhấn vào MedFin/điều dưỡng theo nhu cầu</td></tr>
+          <tr><td>Digital là kênh quy mô chính</td><td>CAC digital &gt;800k kéo dài 2 quý</td><td>Dồn về kênh đối tác y tế &amp; referral; cắt ngân sách digital, B2B2C qua bảo hiểm/doanh nghiệp</td></tr>
+          <tr><td>App self-serve cho con cái</td><td>Người già không dùng được, con phải thao tác hộ → bỏ</td><td>Tăng dịch vụ "có người thật" (concierge chăm sóc), giảm phụ thuộc app cho người già</td></tr>
+          <tr><td>5 trụ cột cùng kéo khách</td><td>Chỉ 1–2 trụ cột có retention, còn lại ế</td><td>Thu hẹp về trụ cột thắng (vd CareConnect + CareSense), hoãn trụ cột yếu — "đốt có kỷ luật"</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="tnote">Ngưỡng tín hiệu là ước tính nội bộ, sẽ hiệu chỉnh theo dữ liệu pilot thật. Mỗi vòng gọi vốn gắn các Go/No-Go metric này (khớp milestone phần Tài chính).</p>
+
+    <!-- 2.5 DANH MỤC TÍNH NĂNG BACKUP -->
+    <h3 class="fin-sub"><span class="badge-n">5</span> Danh mục tính năng BACKUP dự phòng</h3>
+    <p class="sub-desc">
+      Kho tính năng dự bị để tung khi tính năng chính chưa kéo được retention/tăng trưởng — phần lớn là <strong>phễu chi phí thấp</strong> hoặc tăng gắn kết, có thể kích hoạt nhanh.
+    </p>
+    <div class="backup-grid">
+      <div class="backup-card">
+        <div class="bc-icon">💊</div>
+        <h5>Nhắc thuốc miễn phí (phễu)</h5>
+        <p>Tính năng free thu hút &amp; giữ người già mở app hằng ngày → bàn đạp upsell gói trả phí.</p>
+      </div>
+      <div class="backup-card">
+        <div class="bc-icon">👨‍👩‍👧</div>
+        <h5>Cộng đồng "con chăm bố mẹ"</h5>
+        <p>Forum/nhóm chia sẻ kinh nghiệm chăm sóc → tăng gắn kết, viral hữu cơ, giảm CAC.</p>
+      </div>
+      <div class="backup-card">
+        <div class="bc-icon">🛒</div>
+        <h5>Marketplace thiết bị y tế</h5>
+        <p>Bán/cho thuê thiết bị (máy đo HA, xe lăn...) độc lập với gói — dòng tiền &amp; phễu mới.</p>
+      </div>
+      <div class="backup-card">
+        <div class="bc-icon">🚕</div>
+        <h5>Đưa đón đi khám</h5>
+        <p>Dịch vụ xe đưa người già đi viện — nỗi đau rõ ràng, dễ bán riêng lẻ, tạo tần suất.</p>
+      </div>
+      <div class="backup-card">
+        <div class="bc-icon">📔</div>
+        <h5>Sổ sức khỏe gia đình chia sẻ</h5>
+        <p>Hồ sơ sức khỏe số nhiều con cùng xem → tăng số người dùng/1 gia đình, gắn kết cao.</p>
+      </div>
+      <div class="backup-card">
+        <div class="bc-icon">🆘</div>
+        <h5>Nút gọi khẩn cấp 1 chạm</h5>
+        <p>Thiết bị/nút SOS giá rẻ bán độc lập — hook an tâm chi phí thấp, mở phễu CareSense.</p>
+      </div>
+    </div>
+    <p class="tnote">Danh mục backup là ước tính nội bộ; ưu tiên tung theo tín hiệu thị trường từ bảng pivot ở trên.</p>
+
+    <!-- ⚠️ RỦI RO MARKETING & BACKUP -->
+    <div class="endbox risk">
+      <h4>⚠️ Rủi ro marketing &amp; phương án backup</h4>
+      <p class="eb-desc">Mỗi rủi ro gắn giải pháp chủ động và phương án dự phòng nếu giải pháp chính không hiệu quả.</p>
+      <div class="risk-row">
+        <div class="risk-item">
+          <div class="ri-head">📈 CAC tăng vượt ngưỡng (digital đắt dần)</div>
+          <div class="ri-fix"><strong>Giải pháp:</strong> đa kênh, dồn dần sang referral &amp; đối tác y tế (CAC thấp); tối ưu sáng tạo &amp; nhắm mục tiêu bằng AI.</div>
+          <div class="ri-backup">Backup: nếu CAC blended &gt;700k, cắt digital, chuyển B2B2C qua bảo hiểm/doanh nghiệp &amp; hội người cao tuổi.</div>
+        </div>
+        <div class="risk-item">
+          <div class="ri-head">🔗 Phụ thuộc một nền tảng (Meta/TikTok)</div>
+          <div class="ri-fix"><strong>Giải pháp:</strong> trần ≤40% ngân sách/1 nền tảng; xây kênh sở hữu (app, email/Zalo, cộng đồng) &amp; SEO nội dung sức khỏe.</div>
+          <div class="ri-backup">Backup: chuyển ngân sách sang kênh đối tác offline &amp; referral khi một nền tảng đổi thuật toán/đội giá.</div>
+        </div>
+        <div class="risk-item">
+          <div class="ri-head">🌊 Viral / referral không đạt kỳ vọng</div>
+          <div class="ri-fix"><strong>Giải pháp:</strong> chương trình thưởng giới thiệu 2 chiều; tối ưu trải nghiệm "wow" (té ngã, điều dưỡng) để khách tự kể.</div>
+          <div class="ri-backup">Backup: tăng kênh trả phí &amp; đối tác để bù; chấp nhận CAC cao hơn tạm thời, siết retention trước.</div>
+        </div>
+        <div class="risk-item">
+          <div class="ri-head">🤝 Niềm tin thấp với dịch vụ y tế online (người già)</div>
+          <div class="ri-fix"><strong>Giải pháp:</strong> bảo chứng bác sĩ/điều dưỡng xác minh, PR uy tín y tế, hợp tác bệnh viện; minh bạch hồ sơ &amp; đánh giá.</div>
+          <div class="ri-backup">Backup: mô hình "có người thật" (concierge, điều dưỡng đến nhà) dẫn dắt, app chỉ là lớp hỗ trợ — giảm rào cản công nghệ.</div>
+        </div>
+        <div class="risk-item">
+          <div class="ri-head">🎭 Thông điệp "sợ té ngã" gây phản cảm / không chuyển đổi</div>
+          <div class="ri-fix"><strong>Giải pháp:</strong> A/B nhiều tông (an tâm tích cực vs cảnh báo); cân bằng cảm xúc sợ với hình ảnh ấm áp gia đình.</div>
+          <div class="ri-backup">Backup: đổi hook sang "theo dõi bệnh mạn tính" hoặc "chăm sóc tận nơi" theo bảng pivot.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 🤖 AI ỨNG DỤNG -->
+    <div class="endbox ai">
+      <h4>🤖 AI ứng dụng ở đâu (trong marketing)</h4>
+      <p class="eb-desc">AI tối ưu trực tiếp các đòn bẩy GTM: cá nhân hóa nội dung, phân bổ ngân sách, chatbot đầu phễu và giữ chân khách.</p>
+      <div class="ai-row">
+        <div class="ai-item">
+          <div class="ai-head">✍️ Cá nhân hóa nội dung</div>
+          <p>Sinh &amp; chọn thông điệp/sáng tạo theo phân khúc con cái (thu nhập, ở xa/gần, mức lo lắng) để tăng tỷ lệ chuyển đổi.</p>
+          <span class="ai-model">Generative + recommendation</span>
+        </div>
+        <div class="ai-item">
+          <div class="ai-head">🎯 Tối ưu quảng cáo</div>
+          <p>Phân bổ ngân sách đa kênh theo thời gian thực, dồn tiền vào kênh có LTV/CAC tốt nhất; tự dừng creative kém.</p>
+          <span class="ai-model">Multi-armed bandit / MMM</span>
+        </div>
+        <div class="ai-item">
+          <div class="ai-head">💬 Chatbot tư vấn đầu phễu</div>
+          <p>Trợ lý hỏi nhu cầu (bố mẹ bệnh gì, ở đâu) → gợi ý gói &amp; đặt lịch ngay trên landing, hạ ma sát chuyển đổi.</p>
+          <span class="ai-model">LLM hội thoại (RAG)</span>
+        </div>
+        <div class="ai-item">
+          <div class="ai-head">🔮 Dự đoán &amp; chặn churn</div>
+          <p>Phát hiện gia đình có dấu hiệu rời (giảm mở app, bỏ lịch) → kích hoạt ưu đãi/điều dưỡng gọi giữ chân.</p>
+          <span class="ai-model">Churn prediction ML</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
 <!-- ====================================================================== -->
-<!-- PHIÊN 2 SẼ CHÈN: #marketing (Marketing & GTM)                           -->
 <!-- PHIÊN 3 SẼ CHÈN: #segment (Phân khúc + ma trận chuyên gia)              -->
 <!-- PHIÊN 4 SẼ CHÈN: #disease (Bệnh lý + giáo trình training)               -->
 <!-- PHIÊN 5 SẼ CHÈN: #legal (Đạo đức & pháp lý)                             -->
@@ -811,6 +1148,24 @@
     const label = btn.querySelector('.dt-label');
     if (label) label.textContent = open ? (btn.dataset.openLabel || 'Thu gọn') : (btn.dataset.closedLabel || 'Xem chi tiết');
   }
+
+  // Scroll-spy: tô sáng mục đang xem trong sticky sub-nav
+  (function () {
+    const links = Array.from(document.querySelectorAll('.subnav a:not(.soon)'));
+    const sections = links
+      .map(a => document.querySelector(a.getAttribute('href')))
+      .filter(Boolean);
+    function spy() {
+      let current = sections[0];
+      for (const s of sections) {
+        if (window.scrollY >= s.offsetTop - 160) current = s;
+      }
+      links.forEach(a => a.classList.toggle('active', current && a.getAttribute('href') === '#' + current.id));
+    }
+    window.addEventListener('scroll', spy, { passive: true });
+    window.addEventListener('resize', spy);
+    spy();
+  })();
 </script>
 </body>
 </html>
