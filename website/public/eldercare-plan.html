@@ -234,6 +234,40 @@
 
     .click-hint { display: inline-flex; align-items: center; gap: 0.4rem; background: rgba(13,148,136,0.08); color: var(--care); font-size: 0.75rem; font-weight: 600; padding: 4px 12px; border-radius: 99px; margin-bottom: 1.25rem; }
 
+    /* ===== PHIÊN 7 — HAI KỊCH BẢN TÀI CHÍNH (tab A vs B) ===== */
+    .fin-plan-tabs { display: flex; flex-wrap: wrap; gap: 0.6rem; margin: 1.25rem 0 1.5rem; }
+    .fin-plan-tab {
+      flex: 1 1 260px; display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+      background: #fff; color: var(--muted); border: 2px solid var(--border);
+      padding: 13px 20px; border-radius: 12px; font-family: 'Inter', sans-serif;
+      font-size: 0.92rem; font-weight: 700; cursor: pointer; transition: all .2s; text-align: center; line-height: 1.3;
+    }
+    .fin-plan-tab:hover { border-color: var(--care-light); color: var(--care); }
+    .fin-plan-tab.active { background: linear-gradient(135deg, var(--care), var(--care-light)); color: #fff; border-color: var(--care); box-shadow: 0 8px 24px rgba(13,148,136,0.32); }
+    .fin-plan-tab.plan-a.active { background: linear-gradient(135deg, var(--gold), #fbbf24); border-color: var(--gold); color: #3a2a05; box-shadow: 0 8px 24px rgba(245,166,35,0.32); }
+    .fin-plan-panel { display: none; }
+    .fin-plan-panel.active { display: block; animation: fadePlan .35s ease; }
+    @keyframes fadePlan { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+    .plan-compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.25rem 0; }
+    .plan-card { border-radius: 14px; padding: 1.4rem 1.5rem; border: 1px solid var(--border); background: #fff; position: relative; overflow: hidden; }
+    .plan-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; }
+    .plan-card.pa::before { background: linear-gradient(90deg, var(--gold), #fbbf24); }
+    .plan-card.pb::before { background: linear-gradient(90deg, var(--care), var(--care-light)); }
+    .plan-card .pc-tag { font-size: 0.72rem; font-weight: 800; letter-spacing: 0.5px; text-transform: uppercase; }
+    .plan-card.pa .pc-tag { color: #b45309; }
+    .plan-card.pb .pc-tag { color: var(--care); }
+    .plan-card h4 { font-size: 1.1rem; font-weight: 800; margin: 0.2rem 0 0.7rem; }
+    .plan-card ul { list-style: none; margin: 0; }
+    .plan-card ul li { font-size: 0.83rem; color: #4b5563; line-height: 1.55; padding: 5px 0 5px 1.3rem; position: relative; }
+    .plan-card.pa ul li::before { content: '◆'; position: absolute; left: 0; color: var(--gold); font-size: 0.7rem; top: 7px; }
+    .plan-card.pb ul li::before { content: '◆'; position: absolute; left: 0; color: var(--care); font-size: 0.7rem; top: 7px; }
+    .plan-jump { display: inline-flex; align-items: center; gap: 0.4rem; color: var(--care); font-weight: 700; font-size: 0.82rem; text-decoration: none; border-bottom: 1px dashed var(--care-light); }
+    .plan-jump:hover { color: #115e59; }
+    @media (max-width: 720px) {
+      .fin-plan-tab { flex: 1 1 100%; }
+      .plan-compare-grid { grid-template-columns: 1fr; }
+    }
+
     /* FOOTER */
     footer { background: #0d0d1a; padding: 3rem 2rem; text-align: center; color: rgba(255,255,255,0.4); font-size: 0.82rem; }
     footer .footer-logo { font-size: 1.5rem; font-weight: 900; color: #fff; margin-bottom: 0.5rem; }
@@ -555,6 +589,9 @@
   <a href="#disease">🏥 Bệnh lý &amp; đào tạo</a>
   <a href="#legal">⚖️ Đạo đức &amp; pháp lý</a>
   <a href="#summary">🧭 Tổng hợp</a>
+  <a href="#competitors" class="soon">🥊 Đối thủ</a>
+  <a href="#fiveforces" class="soon">🛡️ Five Forces</a>
+  <a href="#canvas" class="soon">🧩 Canvas</a>
   <a href="#glossary">📖 Thuật ngữ</a>
 </div>
 
@@ -1044,6 +1081,132 @@
           <span class="ai-model">Monte Carlo simulation</span>
         </div>
       </div>
+    </div>
+
+    <!-- 8 — HAI KỊCH BẢN TÀI CHÍNH: TỈ ĐÔ vs LÃI NGAY (Phiên 7) -->
+    <h3 class="fin-sub" id="fin-plans"><span class="badge-n">8</span> Hai kịch bản tài chính — Tỉ đô vs Lãi ngay</h3>
+    <p class="sub-desc">
+      Toàn bộ mô hình phía trên là <strong>Kế hoạch A · Tỉ đô</strong> — đốt vốn 4 năm để chiếm thị phần, EBITDA mới hòa vốn Năm 5, cần ~4 vòng gọi vốn &amp; ~289 tỷ tài trợ lỗ lũy kế. Nhưng ElderCare có một con đường thứ hai: <strong>Kế hoạch B · Lãi ngay</strong> — mô hình <em>asset-light</em>, dòng tiền dương &amp; lãi ròng <strong>+10 tỷ ngay Năm 1</strong>, mọi năm đều có lãi, founders giữ kiểm soát. Bấm để so sánh.
+    </p>
+
+    <div class="fin-plan-tabs">
+      <button class="fin-plan-tab plan-a" id="tab-a" onclick="switchPlan('a')">💎 Kế hoạch A · Tỉ đô (đốt vốn)</button>
+      <button class="fin-plan-tab active" id="tab-b" onclick="switchPlan('b')">💰 Kế hoạch B · Lãi ngay từ năm đầu</button>
+    </div>
+
+    <!-- PANEL A -->
+    <div class="fin-plan-panel" id="panel-a">
+      <div class="deep-callout" style="margin-top:0;">💎 <strong>Kế hoạch A · Tỉ đô</strong> là toàn bộ mô hình đã trình bày ở tiểu mục <strong>1–7</strong> phía trên: 5 trụ cột doanh thu, doanh thu Y5 ~948 tỷ, đốt vốn có kỷ luật để land-grab thị trường già hóa, EBITDA hòa vốn Năm 5 (+30 tỷ), 4 vòng gọi vốn Seed→Series C, định giá DCF base ~$68M với tầm nhìn "tỉ đô" ở Năm 8–10.</div>
+      <ul style="list-style:none;margin:1rem 0;">
+        <li style="padding:5px 0 5px 1.4rem;position:relative;font-size:0.86rem;color:#374151;"><span style="position:absolute;left:0;color:var(--gold);">◆</span> <strong>Mục tiêu:</strong> tối đa hóa thị phần &amp; định giá (vision tỉ đô), chấp nhận lỗ 4 năm.</li>
+        <li style="padding:5px 0 5px 1.4rem;position:relative;font-size:0.86rem;color:#374151;"><span style="position:absolute;left:0;color:var(--gold);">◆</span> <strong>Kết quả Năm 1:</strong> lỗ sau thuế −29,7 tỷ; lỗ lũy kế đỉnh ~289 tỷ; net dương từ Năm 5.</li>
+        <li style="padding:5px 0 5px 1.4rem;position:relative;font-size:0.86rem;color:#374151;"><span style="position:absolute;left:0;color:var(--gold);">◆</span> <strong>Vốn:</strong> 4 vòng, founders còn ~34% sau Series C.</li>
+      </ul>
+      <p class="sub-desc" style="margin-bottom:0;">👉 Xem <a href="#fin-plans" class="plan-jump" onclick="document.querySelectorAll('.fin-section .fin-sub')[2].scrollIntoView({behavior:'smooth'});return false;">bảng P&amp;L đầy đủ Kế hoạch A ở tiểu mục 3 phía trên ↑</a> (Dự phóng P&amp;L 5 năm).</p>
+    </div>
+
+    <!-- PANEL B -->
+    <div class="fin-plan-panel active" id="panel-b">
+      <p class="sub-desc" style="margin-top:0;">
+        <strong>Triết lý: default-alive.</strong> Không đốt vốn, không theo đuổi tỉ đô bằng mọi giá. ElderCare giữ <strong>3 trụ cột sinh tiền ngay &amp; vốn mỏng</strong> — CareConnect (hoa hồng điều dưỡng 20%, GM ~85%, mũi nhọn) + Telehealth/subscription gói gia đình (GM ~60%) + Dược &amp; thiết bị markup (GM ~25%, bán lại không tồn kho lớn) — <strong>hoãn</strong> MedFin (chỉ giới thiệu ăn phí, không gánh dư nợ) &amp; CareSense tự sản xuất (thuê lại thiết bị bên thứ ba). Tập trung TP.HCM, marketing lean ~15–19% doanh thu, một vòng seed nhỏ hoặc bootstrapped.
+      </p>
+
+      <!-- So sánh A vs B -->
+      <div class="plan-compare-grid">
+        <div class="plan-card pa">
+          <div class="pc-tag">💎 Kế hoạch A · Tỉ đô</div>
+          <h4>Đốt vốn chiếm thị phần</h4>
+          <ul>
+            <li><strong>Mục tiêu:</strong> tối đa thị phần &amp; định giá tỉ đô</li>
+            <li><strong>Mô hình:</strong> 5 trụ cột đầy đủ, gánh capex &amp; dư nợ MedFin</li>
+            <li><strong>Trụ cột:</strong> tự sản xuất CareSense, MedFin giữ book trả góp</li>
+            <li><strong>Địa lý:</strong> phủ toàn quốc nhanh (land-grab)</li>
+            <li><strong>Marketing:</strong> tới ~139% doanh thu Năm 1 (đốt mở thị trường)</li>
+            <li><strong>Gọi vốn:</strong> 4 vòng Seed→Series C (~1.973 tỷ); founders ~34%</li>
+            <li><strong>Kết quả Năm 1:</strong> <span style="color:#dc2626;font-weight:800;">lỗ −29,7 tỷ</span>; net dương từ Năm 5</li>
+          </ul>
+        </div>
+        <div class="plan-card pb">
+          <div class="pc-tag">💰 Kế hoạch B · Lãi ngay</div>
+          <h4>Asset-light, default-alive</h4>
+          <ul>
+            <li><strong>Mục tiêu:</strong> lợi nhuận &amp; kiểm soát, sống sót chắc chắn</li>
+            <li><strong>Mô hình:</strong> asset-light, vốn mỏng, dòng tiền dương</li>
+            <li><strong>Trụ cột:</strong> thuê lại thiết bị; MedFin chỉ "originate-to-distribute" ăn phí</li>
+            <li><strong>Địa lý:</strong> tập trung TP.HCM (+ Hà Nội năm 2–3), hữu cơ</li>
+            <li><strong>Marketing:</strong> ~15–19% doanh thu ngay từ Năm 1</li>
+            <li><strong>Gọi vốn:</strong> 1 vòng seed ~15–20 tỷ hoặc bootstrapped; founders &gt;80%</li>
+            <li><strong>Kết quả Năm 1:</strong> <span style="color:var(--care);font-weight:800;">lãi ròng +10,0 tỷ</span>; mọi năm đều dương</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- P&L 5 năm Kế hoạch B -->
+      <p class="sub-desc"><strong>Dự phóng P&amp;L 5 năm — Kế hoạch B (asset-light).</strong> Doanh thu dựng từ <em>gia đình trả phí × net ARPU × 12</em> trên 3 trụ cột vốn mỏng. Lãi ròng dương ngay Năm 1 (+10,0 tỷ) &amp; tăng đều; thuế TNDN 20% áp ngay vì có lãi từ Năm 1 (không lỗ lũy kế che chắn). Đơn vị: <strong>tỷ VND</strong>.</p>
+      <div class="table-scroll">
+        <table class="fin-table">
+          <thead>
+            <tr><th>Chỉ tiêu (tỷ VND)</th><th>Năm 1</th><th>Năm 2</th><th>Năm 3</th><th>Năm 4</th><th>Năm 5</th></tr>
+          </thead>
+          <tbody>
+            <tr class="row-sub"><td>Gia đình trả phí (bình quân, nghìn)</td><td>92</td><td>150</td><td>215</td><td>295</td><td>375</td></tr>
+            <tr class="row-sub"><td>Net ARPU (nghìn/tháng)</td><td>64</td><td>68</td><td>72</td><td>76</td><td>80</td></tr>
+            <tr><td>Doanh thu thuần (net)</td><td>70,7</td><td>122,4</td><td>185,8</td><td>269,0</td><td class="hl">360,0</td></tr>
+            <tr class="row-sub"><td>Gross margin (%)</td><td>54%</td><td>56%</td><td>58%</td><td>60%</td><td>62%</td></tr>
+            <tr><td>Giá vốn (COGS)</td><td>32,5</td><td>53,9</td><td>78,0</td><td>107,6</td><td>136,8</td></tr>
+            <tr class="row-total"><td>Lợi nhuận gộp</td><td>38,2</td><td>68,5</td><td>107,8</td><td>161,4</td><td>223,2</td></tr>
+            <tr class="row-sub"><td>— Nhân sự (lương)</td><td>6,0</td><td>12,0</td><td>20,0</td><td>33,0</td><td>49,0</td></tr>
+            <tr class="row-sub"><td>— Marketing (S&amp;M)</td><td>13,4</td><td>22,0</td><td>31,6</td><td>43,0</td><td>54,0</td></tr>
+            <tr class="row-sub"><td>— Công nghệ (cloud/AI/license)</td><td>3,5</td><td>5,5</td><td>8,0</td><td>11,0</td><td>14,5</td></tr>
+            <tr class="row-sub"><td>— Vận hành &amp; G&amp;A</td><td>1,8</td><td>6,0</td><td>10,4</td><td>15,4</td><td>20,2</td></tr>
+            <tr><td>Tổng OpEx</td><td>24,7</td><td>45,5</td><td>70,0</td><td>102,4</td><td>137,7</td></tr>
+            <tr class="row-total"><td>EBITDA</td><td class="pos">+13,5</td><td class="pos">+23,0</td><td class="pos">+37,8</td><td class="pos">+59,0</td><td class="pos">+85,5</td></tr>
+            <tr class="row-sub"><td>Khấu hao (D&amp;A)</td><td>1,0</td><td>1,8</td><td>2,8</td><td>4,0</td><td>5,5</td></tr>
+            <tr><td>EBIT</td><td class="pos">+12,5</td><td class="pos">+21,2</td><td class="pos">+35,0</td><td class="pos">+55,0</td><td class="pos">+80,0</td></tr>
+            <tr class="row-sub"><td>Thuế TNDN (20%, áp ngay — có lãi từ Y1)</td><td>2,5</td><td>4,2</td><td>7,0</td><td>11,0</td><td>16,0</td></tr>
+            <tr class="row-total"><td>Lợi nhuận sau thuế (net)</td><td class="pos">+10,0</td><td class="pos">+17,0</td><td class="pos">+28,0</td><td class="pos">+44,0</td><td class="hl">+64,0</td></tr>
+            <tr class="row-sub"><td>Biên lãi ròng (%)</td><td>14,1%</td><td>13,9%</td><td>15,1%</td><td>16,4%</td><td>17,8%</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="tnote">Toàn bộ dự phóng Kế hoạch B là <em>ước tính nội bộ</em>. Net ARPU thấp hơn Kế hoạch A (64–80k vs 110–152k) vì hoãn MedFin &amp; CareSense tự sản xuất — đổi lại biên gộp ổn định &amp; chi phí vốn thấp. Thuế TNDN VN 20% áp ngay vì có lãi liên tục từ Năm 1 (net = EBIT × 0,8). Không có lỗ lũy kế.</p>
+
+      <!-- KPI grid -->
+      <div class="kpi-grid">
+        <div class="kpi"><div class="k-num">+10 tỷ</div><div class="k-label">Lãi ròng Năm 1 (ngay)</div></div>
+        <div class="kpi"><div class="k-num gold">14,1%</div><div class="k-label">Biên lãi ròng Năm 1</div></div>
+        <div class="kpi"><div class="k-num">Năm 1</div><div class="k-label">Break-even NGAY (EBITDA &amp; net dương)</div></div>
+        <div class="kpi"><div class="k-num">~15–20 tỷ</div><div class="k-label">Vốn cần (vs ~289 tỷ lỗ lũy kế của A)</div></div>
+        <div class="kpi"><div class="k-num">&gt;80%</div><div class="k-label">Founders giữ kiểm soát</div></div>
+        <div class="kpi"><div class="k-num">+64 tỷ</div><div class="k-label">Lãi ròng Năm 5 (biên 17,8%)</div></div>
+      </div>
+      <p class="tnote">Vốn ~15–20 tỷ ở Kế hoạch B chỉ để khởi động &amp; đệm vốn lưu động (mô hình tự nuôi từ Năm 1) — đối lập với ~289 tỷ tài trợ lỗ lũy kế của Kế hoạch A. Pha loãng ≤15–20% → founders giữ &gt;80%. Ước tính nội bộ.</p>
+
+      <button class="deep-toggle" data-closed-label="Khi nào chọn A, khi nào chọn B? (phân tích đánh đổi)" data-open-label="Thu gọn" onclick="toggleDeep(this)">
+        <span>🔍</span><span class="dt-label">Khi nào chọn A, khi nào chọn B? (phân tích đánh đổi)</span><span class="chev">▼</span>
+      </button>
+      <div class="deep-panel"><div class="deep-inner">
+        <h5>⚖️ Đánh đổi cốt lõi: tăng trưởng &amp; thị phần vs lợi nhuận &amp; kiểm soát</h5>
+        <p><strong>Kế hoạch A (Tỉ đô)</strong> tối đa hóa <em>thị phần &amp; định giá</em>: đốt vốn 4 năm để chiếm "land-grab" cửa sổ già hóa trước đối thủ, đổi lấy lỗ lũy kế ~289 tỷ &amp; <strong>phụ thuộc gọi vốn liên tục</strong> (mỗi vòng phải thuyết phục nhà đầu tư mới; rủi ro down-round / không gọi được vòng tiếp). Đổi lại nếu thành công, định giá tiềm năng "tỉ đô" cao hơn nhiều và chiếm vị thế thống lĩnh khó bị soán.</p>
+        <p><strong>Kế hoạch B (Lãi ngay)</strong> tối ưu <em>lợi nhuận, kiểm soát &amp; sống sót chắc chắn</em>: lãi ròng dương ngay, không phụ thuộc thị trường vốn, founders giữ &gt;80%. Đánh đổi là <strong>tăng trưởng chậm hơn</strong> (DT Y5 ~360 tỷ vs ~948 tỷ của A) và <strong>rủi ro mất cửa sổ thị phần</strong>: nếu đối thủ đốt vốn chiếm thị trường trước, ElderCare có thể bị khóa ngoài các phân khúc lớn dù vẫn có lãi.</p>
+        <div class="deep-stats">
+          <div class="deep-stat"><div class="ds-num">948 vs 360</div><div class="ds-label">DT Y5 (tỷ): A đốt vốn vs B lãi ngay</div></div>
+          <div class="deep-stat"><div class="ds-num">−289 vs 0</div><div class="ds-label">Lỗ lũy kế đỉnh (tỷ): A vs B</div></div>
+          <div class="deep-stat"><div class="ds-num">34% vs &gt;80%</div><div class="ds-label">Founders giữ sau gọi vốn</div></div>
+          <div class="deep-stat"><div class="ds-num">Năm 5 vs Năm 1</div><div class="ds-label">Thời điểm break-even</div></div>
+        </div>
+        <h5>🧭 Khi nào nên nghiêng về B?</h5>
+        <ul>
+          <li><strong>Thị trường vốn thắt chặt</strong> (winter VC, định giá healthtech bị derate) → khó gọi 4 vòng → B an toàn hơn nhiều.</li>
+          <li><strong>Founders muốn giữ quyền kiểm soát</strong> &amp; không muốn pha loãng sâu / áp lực exit của quỹ.</li>
+          <li><strong>Chưa có đối thủ đốt vốn mạnh</strong> ở phân khúc người cao tuổi VN → cửa sổ thị phần chưa cấp bách → có thể tăng trưởng hữu cơ mà vẫn giữ vị thế.</li>
+          <li><strong>Chiến lược lai:</strong> khởi đầu theo B để chứng minh lãi &amp; unit-economics dương, rồi <em>tùy chọn</em> bật sang A (gọi vốn lớn) khi thị trường vốn thuận lợi — "default-alive" tạo đòn bẩy đàm phán tốt hơn với nhà đầu tư.</li>
+        </ul>
+        <div class="deep-callout">💡 <strong>Kết luận:</strong> B không phải "phiên bản kém tham vọng" mà là <em>chiến lược quyền chọn</em> — sống sót chắc chắn &amp; sinh lời sớm giúp ElderCare không bao giờ ở thế bị ép, đồng thời vẫn để ngỏ cửa nâng cấp lên kịch bản tỉ đô khi điều kiện cho phép.</div>
+        <p class="src-note">Khung "default-alive vs default-dead" theo Paul Graham (YC). Mọi con số P&amp;L &amp; ngưỡng vốn của hai kịch bản: ước tính nội bộ ElderCare VN.</p>
+      </div></div>
+
+      <p class="tnote">⚠️ <strong>Rủi ro Kế hoạch B (ước tính nội bộ):</strong> tăng trưởng chậm hơn có thể khiến ElderCare <em>mất thị phần vào tay đối thủ đốt vốn</em> chiếm trước ở phân khúc lớn; mô hình phụ thuộc mạnh vào <em>giữ chân nguồn cung điều dưỡng</em> trên CareConnect (nếu điều dưỡng rời/bị các nền tảng khác hút mất, biên hoa hồng 20% &amp; doanh thu mũi nhọn lung lay). Mọi số tự suy đều gắn nhãn "ước tính nội bộ".</p>
     </div>
 
   </div>
@@ -2579,6 +2742,15 @@
   </div>
 </section>
 
+<!-- ============================ PHIÊN 8 — ĐỐI THỦ CẠNH TRANH (#competitors) ============================ -->
+<!-- PLACEHOLDER PHIÊN 8: chèn <section class="comp-section" id="competitors">...</section> vào đây. Bỏ class .soon của link #competitors trong sub-nav. -->
+
+<!-- ============================ PHIÊN 9 — FIVE FORCES (#fiveforces) ============================ -->
+<!-- PLACEHOLDER PHIÊN 9: chèn <section class="ff-section" id="fiveforces">...</section> vào đây. Bỏ class .soon của link #fiveforces trong sub-nav. -->
+
+<!-- ============================ PHIÊN 10 — BUSINESS MODEL CANVAS (#canvas) ============================ -->
+<!-- PLACEHOLDER PHIÊN 10: chèn <section class="bmc-section" id="canvas">...</section> vào đây. Bỏ class .soon của link #canvas trong sub-nav. -->
+
 <!-- ============================ PHỤ LỤC — THUẬT NGỮ ============================ -->
 <section class="glossary-section" id="glossary">
   <div class="container">
@@ -2693,6 +2865,20 @@
     btn.classList.toggle('active', open);
     const label = btn.querySelector('.dt-label');
     if (label) label.textContent = open ? (btn.dataset.openLabel || 'Thu gọn') : (btn.dataset.closedLabel || 'Xem chi tiết');
+  }
+
+  // Phiên 7 — chuyển đổi hai kịch bản tài chính A (Tỉ đô) / B (Lãi ngay)
+  function switchPlan(which) {
+    const tabA = document.getElementById('tab-a');
+    const tabB = document.getElementById('tab-b');
+    const panelA = document.getElementById('panel-a');
+    const panelB = document.getElementById('panel-b');
+    if (!tabA || !tabB || !panelA || !panelB) return;
+    const isA = which === 'a';
+    tabA.classList.toggle('active', isA);
+    tabB.classList.toggle('active', !isA);
+    panelA.classList.toggle('active', isA);
+    panelB.classList.toggle('active', !isA);
   }
 
   // Scroll-spy: tô sáng mục đang xem trong sticky sub-nav
