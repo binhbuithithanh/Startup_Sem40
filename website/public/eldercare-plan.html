@@ -580,6 +580,41 @@
     .pos-note { font-size: 0.86rem; color: #374151; line-height: 1.6; max-width: 760px; margin: 2.2rem auto 0; background: var(--light); border-left: 4px solid var(--coral); padding: 0.9rem 1.1rem; border-radius: 0 12px 12px 0; }
     .pos-note strong { color: var(--care); }
 
+    /* ===================== PHIÊN 9 — FIVE FORCES (#fiveforces) ===================== */
+    .ff-section { background: var(--light); }
+    /* badge mức độ */
+    .ff-lvl { display: inline-block; font-size: 0.66rem; font-weight: 800; letter-spacing: 0.5px; text-transform: uppercase; padding: 3px 11px; border-radius: 99px; white-space: nowrap; }
+    .lvl-high { background: rgba(251,113,133,0.14); color: var(--coral); border: 1px solid rgba(251,113,133,0.4); }
+    .lvl-mid  { background: rgba(245,166,35,0.15); color: #b9770e; border: 1px solid rgba(245,166,35,0.45); }
+    .lvl-low  { background: rgba(13,148,136,0.12); color: var(--care); border: 1px solid rgba(13,148,136,0.35); }
+    /* sơ đồ 5 lực */
+    .ff-diagram { display: grid; grid-template-columns: 1fr 1.1fr 1fr; grid-template-rows: auto auto auto;
+      grid-template-areas: ". top ." "left center right" ". bottom ."; gap: 0.9rem; max-width: 820px; margin: 1.5rem auto 0.5rem; align-items: stretch; }
+    .ff-force { background: #fff; border: 1px solid var(--border); border-radius: 14px; padding: 1rem 1.1rem; display: flex; flex-direction: column; gap: 0.5rem; box-shadow: 0 2px 10px rgba(13,148,136,0.05); }
+    .ff-force .fx-ico { font-size: 1.4rem; }
+    .ff-force .fx-name { font-size: 0.86rem; font-weight: 800; color: var(--primary); line-height: 1.3; }
+    .ff-force.top { grid-area: top; } .ff-force.bottom { grid-area: bottom; }
+    .ff-force.left { grid-area: left; } .ff-force.right { grid-area: right; }
+    .ff-center { grid-area: center; background: linear-gradient(135deg, var(--care), var(--care-light)); color: #fff;
+      border: none; border-radius: 16px; padding: 1.4rem 1.2rem; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; gap: 0.5rem; box-shadow: 0 10px 30px rgba(13,148,136,0.32); }
+    .ff-center .fc-ico { font-size: 1.8rem; }
+    .ff-center .fc-name { font-size: 1rem; font-weight: 900; line-height: 1.3; }
+    .ff-center .fc-sub { font-size: 0.74rem; opacity: 0.92; line-height: 1.4; }
+    .ff-center .ff-lvl { background: rgba(255,255,255,0.22); color: #fff; border: 1px solid rgba(255,255,255,0.5); }
+    .ff-diag-note { font-size: 0.78rem; color: var(--muted); text-align: center; margin: 0.4rem auto 0; }
+    /* force-card grid */
+    .ff-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(330px, 1fr)); gap: 1.1rem; margin-top: 1.25rem; }
+    .force-card { background: #fff; border: 1px solid var(--border); border-radius: 16px; padding: 1.3rem 1.4rem; display: flex; flex-direction: column; gap: 0.7rem; }
+    .force-card.lvl-high-bd { border-top: 4px solid var(--coral); }
+    .force-card.lvl-mid-bd  { border-top: 4px solid var(--gold); }
+    .force-card .fc-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 0.75rem; }
+    .force-card .fc-title { font-size: 0.98rem; font-weight: 800; color: var(--primary); line-height: 1.35; display: flex; align-items: center; gap: 0.45rem; }
+    .force-card .fc-block { font-size: 0.85rem; color: #374151; line-height: 1.6; }
+    .force-card .fc-block .fc-lab { display: block; font-size: 0.72rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; color: var(--care); margin-bottom: 0.15rem; }
+    .force-card .fc-impl { background: var(--light); border-left: 4px solid var(--care); border-radius: 0 10px 10px 0; padding: 0.7rem 0.9rem; }
+    .force-card .fc-impl .fc-lab { color: var(--care); }
+    .force-card a.fc-link { color: var(--care); font-weight: 700; border-bottom: 1px dashed var(--care-light); text-decoration: none; }
+
     @media (max-width: 768px) {
       nav { padding: 0 1rem; }
       .nav-tabs { gap: 0; }
@@ -603,6 +638,9 @@
       .comp-card .cc-cols { grid-template-columns: 1fr; }
       .pos-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
       .pos-map { min-width: 480px; }
+      .ff-diagram { grid-template-columns: 1fr; grid-template-areas: "top" "left" "center" "right" "bottom"; }
+      .ff-grid { grid-template-columns: 1fr; }
+      .force-card .fc-top { flex-direction: column; }
     }
   </style>
 </head>
@@ -650,7 +688,7 @@
   <a href="#legal">⚖️ Đạo đức &amp; pháp lý</a>
   <a href="#summary">🧭 Tổng hợp</a>
   <a href="#competitors">🥊 Đối thủ</a>
-  <a href="#fiveforces" class="soon">🛡️ Five Forces</a>
+  <a href="#fiveforces">🛡️ Five Forces</a>
   <a href="#canvas" class="soon">🧩 Canvas</a>
   <a href="#glossary">📖 Thuật ngữ</a>
 </div>
@@ -3061,7 +3099,229 @@
 <!-- PLACEHOLDER PHIÊN 8: đã chèn section #competitors ở trên. -->
 
 <!-- ============================ PHIÊN 9 — FIVE FORCES (#fiveforces) ============================ -->
-<!-- PLACEHOLDER PHIÊN 9: chèn <section class="ff-section" id="fiveforces">...</section> vào đây. Bỏ class .soon của link #fiveforces trong sub-nav. -->
+<section class="ff-section" id="fiveforces">
+  <div class="container">
+    <div class="section-tag">Phần 8 · Five Forces</div>
+    <h2>Năm áp lực cạnh tranh Porter —<br/>vì sao mô hình asset-light (Kịch bản B) vẫn có lãi</h2>
+    <p class="section-desc">
+      Phân tích 5 lực của Michael Porter cho ElderCare <strong>trong khung Kịch bản B (lãi ngay · asset-light)</strong>: tập trung <strong>điều dưỡng tại nhà</strong> (CareConnect, hoa hồng ~20%) + <strong>telehealth/subscription</strong> + <strong>dược markup</strong>, ra mắt tại <strong>TP.HCM</strong> — tạm gác MedFin/CareSense tự sản xuất. Vì chọn mô hình nhẹ vốn, rào cản gia nhập thấp và vài lực khá mạnh; phần dưới chỉ ra ElderCare hóa giải bằng <strong>khác biệt hóa chuyên biệt lão khoa + moat mềm</strong> (mạng cung, thương hiệu, chi phí chuyển đổi) thay vì đốt vốn. Đánh giá mức độ là <strong>ước tính nội bộ</strong>.
+    </p>
+    <span class="click-hint">👆 Tiểu mục 3 có nút "Phân tích sâu" — bấm để xem vì sao asset-light vẫn hấp dẫn</span>
+
+    <!-- 8.1 — SƠ ĐỒ 5 LỰC -->
+    <h3 class="fin-sub"><span class="badge-n">1</span> Sơ đồ năm lực cạnh tranh</h3>
+    <p class="sub-desc">Ô giữa = cạnh tranh nội bộ ngành; bốn ô xung quanh là các lực ép vào. Nhãn màu = mức độ áp lực: <span class="ff-lvl lvl-high">Cao</span> <span class="ff-lvl lvl-mid">Trung bình</span> <span class="ff-lvl lvl-low">Thấp</span> (ước tính nội bộ).</p>
+    <div class="ff-diagram">
+      <div class="ff-force top">
+        <span class="fx-ico">🚪</span>
+        <span class="fx-name">Đối thủ tiềm năng gia nhập</span>
+        <span class="ff-lvl lvl-mid">Trung bình–Cao</span>
+      </div>
+      <div class="ff-force left">
+        <span class="fx-ico">🩺</span>
+        <span class="fx-name">Quyền lực nhà cung cấp<br/>(điều dưỡng · bác sĩ lão khoa)</span>
+        <span class="ff-lvl lvl-high">Cao</span>
+      </div>
+      <div class="ff-center">
+        <span class="fc-ico">⚔️</span>
+        <span class="fc-name">Cạnh tranh nội bộ ngành</span>
+        <span class="fc-sub">Chăm sóc người già tại nhà &amp; telehealth Việt Nam</span>
+        <span class="ff-lvl">Trung bình–Cao</span>
+      </div>
+      <div class="ff-force right">
+        <span class="fx-ico">👨‍👩‍👧</span>
+        <span class="fx-name">Quyền lực người mua<br/>(con cái trả tiền)</span>
+        <span class="ff-lvl lvl-mid">Trung bình–Cao</span>
+      </div>
+      <div class="ff-force bottom">
+        <span class="fx-ico">🔄</span>
+        <span class="fx-name">Sản phẩm/dịch vụ thay thế</span>
+        <span class="ff-lvl lvl-high">Cao</span>
+      </div>
+    </div>
+    <p class="ff-diag-note">Hai lực mạnh nhất là <strong>nhà cung cấp</strong> &amp; <strong>sản phẩm thay thế</strong> (Cao); ba lực còn lại Trung bình–Cao. Moat của ElderCare nhắm chính vào việc hạ hai lực Cao này.</p>
+
+    <!-- 8.2 — PHÂN TÍCH TỪNG LỰC -->
+    <h3 class="fin-sub"><span class="badge-n">2</span> Phân tích từng lực</h3>
+    <p class="sub-desc">Mỗi lực: mức độ (màu) · <strong>vì sao</strong> · <strong>hàm ý chiến lược cho ElderCare (Kịch bản B)</strong>.</p>
+    <div class="ff-grid">
+
+      <!-- Lực 1 -->
+      <div class="force-card lvl-mid-bd">
+        <div class="fc-top">
+          <div class="fc-title">⚔️ Cạnh tranh nội bộ ngành</div>
+          <span class="ff-lvl lvl-mid">Trung bình–Cao</span>
+        </div>
+        <div class="fc-block"><span class="fc-lab">Vì sao</span>Nhiều startup cùng làn — <a href="#competitors" class="fc-link">Jio Health, bTaskee/bCare, Bluecare, Med247, Wellcare</a> — nhưng thị trường <strong>phân mảnh</strong>, chưa ai thống lĩnh mảng chuyên biệt <strong>người cao tuổi + super-app</strong>. Cạnh tranh có nhưng chưa thành chiến giá toàn ngành; mỗi bên mạnh một góc khác nhau.</div>
+        <div class="fc-block fc-impl"><span class="fc-lab">Hàm ý cho ElderCare (KB B)</span>Khác biệt hóa <strong>chuyên sâu lão khoa</strong> (đa thuốc, hậu phẫu, care-team) thay vì đua giá ở dịch vụ phổ thông; chiếm ô giao "chuyên người già × super-app" mà bản đồ định vị ở <a href="#competitors" class="fc-link">Phần 7</a> còn bỏ ngỏ.</div>
+      </div>
+
+      <!-- Lực 2 -->
+      <div class="force-card lvl-mid-bd">
+        <div class="fc-top">
+          <div class="fc-title">🚪 Đối thủ tiềm năng gia nhập</div>
+          <span class="ff-lvl lvl-mid">Trung bình–Cao</span>
+        </div>
+        <div class="fc-block"><span class="fc-lab">Vì sao</span>Rào cản vốn của mô hình asset-light <strong>thấp</strong> — ai cũng có thể dựng app đặt điều dưỡng. Đáng lo là <strong>ông lớn</strong> (Vinmec, FPT Long Châu, hãng bảo hiểm, chuỗi viện dưỡng lão) có thể nhảy vào với sẵn vốn, thương hiệu &amp; tệp khách.</div>
+        <div class="fc-block fc-impl"><span class="fc-lab">Hàm ý cho ElderCare (KB B)</span>Xây "hào" (moat) sớm: <strong>mạng điều dưỡng đã xác minh</strong> + <strong>đối tác bệnh viện</strong> (kênh hậu phẫu) + <strong>thương hiệu tin cậy với người già</strong> + dữ liệu/AI + <strong>super-app stacking</strong> nâng chi phí chuyển đổi. Với ông lớn: ưu tiên hợp tác/white-label thay vì đối đầu trực diện.</div>
+      </div>
+
+      <!-- Lực 3 -->
+      <div class="force-card lvl-high-bd">
+        <div class="fc-top">
+          <div class="fc-title">🩺 Quyền lực nhà cung cấp</div>
+          <span class="ff-lvl lvl-high">Cao</span>
+        </div>
+        <div class="fc-block"><span class="fc-lab">Vì sao</span>Nguồn cung khan hiếm cốt lõi là <strong>điều dưỡng &amp; bác sĩ lão khoa giỏi</strong> (cùng nhà thuốc GPP &amp; hãng thiết bị). Nhân lực có tay nghề ít, dễ được đối thủ chào kéo — họ nắm thế thương lượng cao trên cả giá lẫn tính sẵn sàng.</div>
+        <div class="fc-block fc-impl"><span class="fc-lab">Hàm ý cho ElderCare (KB B)</span>Giữ cung bằng <strong>thu nhập ổn định + dòng việc đều</strong>, <strong>đào tạo/chứng chỉ 4 cấp</strong> (nối <a href="#disease" class="fc-link">Phần 4</a>), thương hiệu &amp; lộ trình thăng tiến → biến điều dưỡng thành đối tác gắn bó thay vì lao động giao dịch.</div>
+      </div>
+
+      <!-- Lực 4 -->
+      <div class="force-card lvl-mid-bd">
+        <div class="fc-top">
+          <div class="fc-title">👨‍👩‍👧 Quyền lực người mua</div>
+          <span class="ff-lvl lvl-mid">Trung bình–Cao</span>
+        </div>
+        <div class="fc-block"><span class="fc-lab">Vì sao</span>Người trả tiền (con cái) có <strong>nhiều lựa chọn &amp; nhạy giá</strong>; ở giao dịch đơn lẻ, chuyển sang đối thủ rất dễ — chỉ cần một lần đặt dịch vụ qua app khác.</div>
+        <div class="fc-block fc-impl"><span class="fc-lab">Hàm ý cho ElderCare (KB B)</span>Hạ lực này bằng <strong>care-team gắn kết</strong>, <strong>gói subscription</strong>, thiết bị tại nhà &amp; <strong>dữ liệu sức khỏe tích lũy</strong> → chi phí chuyển đổi cao, giữ chân &amp; tăng LTV thay vì lệ thuộc giao dịch lẻ.</div>
+      </div>
+
+      <!-- Lực 5 -->
+      <div class="force-card lvl-high-bd">
+        <div class="fc-top">
+          <div class="fc-title">🔄 Sản phẩm/dịch vụ thay thế</div>
+          <span class="ff-lvl lvl-high">Cao</span>
+        </div>
+        <div class="fc-block"><span class="fc-lab">Vì sao</span>Thay thế phi chính thức rất phổ biến ở VN: <strong>giúp việc/người nhà tự chăm</strong> (rẻ), trung tâm/viện dưỡng lão, phòng khám truyền thống, <strong>tự mua thuốc</strong>. Đây là lực ép giá &amp; cầu mạnh nhất.</div>
+        <div class="fc-block fc-impl"><span class="fc-lab">Hàm ý cho ElderCare (KB B)</span>Khác biệt hóa bằng <strong>minh bạch – an toàn – chuyên môn y tế – giám sát từ xa – tiện lợi</strong> vượt trội so với thay thế phi chính thức; chứng minh giá trị "đáng tin cho bố mẹ" để biện minh mức giá cao hơn người giúp việc.</div>
+      </div>
+
+    </div>
+
+    <!-- 8.3 — BẢNG TỔNG HỢP + DEEP -->
+    <h3 class="fin-sub"><span class="badge-n">3</span> Bảng tổng hợp năm lực</h3>
+    <p class="sub-desc">Mức độ là <strong>ước tính nội bộ</strong>; cột phải là phản ứng chiến lược trong khung Kịch bản B.</p>
+    <div class="table-scroll">
+      <table class="fin-table" style="min-width:760px;">
+        <thead>
+          <tr>
+            <th style="text-align:left;">Lực cạnh tranh</th>
+            <th>Mức độ</th>
+            <th style="text-align:left;">Yếu tố chính đẩy lực</th>
+            <th style="text-align:left;">Phản ứng chiến lược ElderCare</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="text-align:left;">⚔️ Cạnh tranh nội bộ ngành</td>
+            <td><span class="ff-lvl lvl-mid">TB–Cao</span></td>
+            <td style="text-align:left;">Nhiều startup nhưng phân mảnh, chưa ai chuyên người già + super-app</td>
+            <td style="text-align:left;">Khác biệt hóa lão khoa, chiếm ô giao trống, không lao vào chiến giá</td>
+          </tr>
+          <tr>
+            <td style="text-align:left;">🚪 Đối thủ tiềm năng gia nhập</td>
+            <td><span class="ff-lvl lvl-mid">TB–Cao</span></td>
+            <td style="text-align:left;">Vốn asset-light thấp; ông lớn (Vinmec, Long Châu, bảo hiểm) có thể nhảy vào</td>
+            <td style="text-align:left;">Moat: mạng cung xác minh + đối tác viện + thương hiệu + stacking; hợp tác ông lớn</td>
+          </tr>
+          <tr>
+            <td style="text-align:left;">🩺 Quyền lực nhà cung cấp</td>
+            <td><span class="ff-lvl lvl-high">Cao</span></td>
+            <td style="text-align:left;">Điều dưỡng/bác sĩ lão khoa giỏi khan hiếm, dễ bị kéo sang đối thủ</td>
+            <td style="text-align:left;">Thu nhập ổn định + đào tạo/chứng chỉ + dòng việc đều + lộ trình thăng tiến</td>
+          </tr>
+          <tr>
+            <td style="text-align:left;">👨‍👩‍👧 Quyền lực người mua</td>
+            <td><span class="ff-lvl lvl-mid">TB–Cao</span></td>
+            <td style="text-align:left;">Con cái nhiều lựa chọn, nhạy giá, đổi nhà cung cấp dễ ở giao dịch lẻ</td>
+            <td style="text-align:left;">Care-team + subscription + thiết bị + dữ liệu → chi phí chuyển đổi cao</td>
+          </tr>
+          <tr>
+            <td style="text-align:left;">🔄 Sản phẩm thay thế</td>
+            <td><span class="ff-lvl lvl-high">Cao</span></td>
+            <td style="text-align:left;">Giúp việc/người nhà, viện dưỡng lão, phòng khám, tự mua thuốc (rẻ, phổ biến)</td>
+            <td style="text-align:left;">Minh bạch – an toàn – chuyên môn – giám sát từ xa – tiện lợi vượt trội</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="tnote">Đọc bảng: <strong>2 lực Cao</strong> (nhà cung cấp, thay thế) &amp; <strong>3 lực Trung bình–Cao</strong>. Không lực nào ở mức Thấp — ngành cạnh tranh thực sự, nên lợi thế phải đến từ <em>moat mềm</em> chứ không từ rào cản tự nhiên.</p>
+
+    <button class="deep-toggle" onclick="toggleDeep(this)" data-closed-label="Phân tích sâu: vì sao mô hình asset-light vẫn hấp dẫn?" data-open-label="Thu gọn">
+      <span class="dt-label">Phân tích sâu: vì sao mô hình asset-light vẫn hấp dẫn?</span><span class="chev">▼</span>
+    </button>
+    <div class="deep-panel">
+      <div class="deep-inner">
+        <h5>🛡️ Năm lực mạnh — nhưng ElderCare vẫn lãi ngay</h5>
+        <p>Five Forces cho thấy một ngành <strong>cạnh tranh thật</strong>: không lực nào ở mức Thấp. Nhưng "ngành khó" không đồng nghĩa "không thắng được" — ElderCare có lãi ngay vì <strong>không cố thắng cả ngành</strong>, mà chọn ngách chuyên biệt &amp; dựng moat mềm thay vì đốt vốn:</p>
+        <div class="deep-stats">
+          <div class="deep-stat"><div class="ds-num" style="font-size:1.4rem;font-weight:800;color:var(--coral);">2</div><div class="ds-label"><strong>lực ở mức Cao</strong> (nhà cung cấp · sản phẩm thay thế) — hai mặt trận trọng tâm phải hóa giải bằng giữ chân cung &amp; chứng minh giá trị an toàn.</div></div>
+          <div class="deep-stat"><div class="ds-num" style="font-size:1.4rem;font-weight:800;color:var(--gold);">3</div><div class="ds-label"><strong>lực Trung bình–Cao</strong> (nội bộ ngành · gia nhập mới · người mua) — quản trị được bằng khác biệt hóa &amp; chi phí chuyển đổi.</div></div>
+          <div class="deep-stat"><div class="ds-num" style="font-size:1.4rem;font-weight:800;color:var(--care);">4</div><div class="ds-label"><strong>lớp moat mềm</strong> xếp chồng (mạng cung xác minh · đối tác viện · thương hiệu người già · super-app stacking) — copy một lớp dễ, copy cả bốn khó.</div></div>
+          <div class="deep-stat"><div class="ds-num" style="font-size:1.4rem;font-weight:800;color:var(--care);">0</div><div class="ds-label"><strong>đồng đốt vốn ôm tài sản</strong> — asset-light cho phép trụ lâu hơn bên đốt vốn &amp; sinh lời ngay Năm 1.</div></div>
+        </div>
+        <div class="deep-callout">⚖️ <strong>Luận điểm:</strong> dù vài lực mạnh, ElderCare hấp dẫn vì chọn <em>ngách chuyên biệt lão khoa</em> + <em>moat mềm</em> (mạng cung + thương hiệu + chuyển đổi khó) thay vì cạnh tranh bằng đốt vốn. Hai lực Cao đều đánh vào con người (cung điều dưỡng) &amp; niềm tin (so với thay thế phi chính thức) — đúng hai thứ mô hình asset-light xây tốt nhất mà không cần ôm tài sản nặng.</div>
+      </div>
+    </div>
+
+    <!-- ⚠️ RỦI RO CẤU TRÚC NGÀNH -->
+    <div class="endbox risk">
+      <h4>⚠️ Rủi ro cấu trúc ngành &amp; phương án backup</h4>
+      <p class="eb-desc">Mỗi rủi ro đến từ cấu trúc 5 lực gắn giải pháp chủ động &amp; phương án dự phòng.</p>
+      <div class="risk-row">
+        <div class="risk-item">
+          <div class="ri-head">🏥 Ông lớn nhảy vào (gia nhập mới)</div>
+          <div class="ri-fix"><strong>Giải pháp:</strong> dựng moat sớm &amp; ưu tiên <strong>hợp tác/white-label</strong> với viện, bảo hiểm thay vì đối đầu — trở thành lớp điều dưỡng ngoài viện cho họ.</div>
+          <div class="ri-backup">Backup: nếu họ tự đóng kín, cân nhắc <strong>M&amp;A/đối tác chiến lược</strong>; dồn vào phân khúc &amp; vùng họ chưa phủ, nhấn tính trung lập đa-bệnh-viện.</div>
+        </div>
+        <div class="risk-item">
+          <div class="ri-head">🩺 Điều dưỡng bỏ đi hàng loạt (nhà cung cấp)</div>
+          <div class="ri-fix"><strong>Giải pháp:</strong> <strong>giữ chân</strong> bằng thu nhập ổn định, đào tạo/chứng chỉ, thương hiệu &amp; lộ trình thăng tiến; ký độc quyền mềm với nhóm nòng cốt.</div>
+          <div class="ri-backup">Backup: <strong>dự phòng cung</strong> — pipeline tuyển dày, đối tác trường điều dưỡng &amp; ĐH Y, vùng đệm năng lực để không lệ thuộc một nhóm.</div>
+        </div>
+        <div class="risk-item">
+          <div class="ri-head">🔄 Khách dạt sang thay thế rẻ (sản phẩm thay thế)</div>
+          <div class="ri-fix"><strong>Giải pháp:</strong> <strong>chứng minh giá trị an toàn</strong> — minh bạch hồ sơ, chuyên môn y tế, giám sát từ xa; định vị "đáng tin cho bố mẹ" để biện minh chênh giá so với giúp việc.</div>
+          <div class="ri-backup">Backup: gói "lõi tối giản" giá cạnh tranh cho phân khúc nhạy giá, bù biên bằng upsell dược &amp; telehealth.</div>
+        </div>
+        <div class="risk-item">
+          <div class="ri-head">💸 Chiến giá toàn ngành (cạnh tranh nội bộ)</div>
+          <div class="ri-fix"><strong>Giải pháp:</strong> <strong>giữ ngách lãi</strong> — không đua giá ở dịch vụ phổ thông; giữ biên bằng chuyên biệt lão khoa &amp; retention cao của care-team.</div>
+          <div class="ri-backup">Backup: mô hình asset-light cho phép trụ lâu hơn bên đốt vốn; nếu cần, thu hẹp về ô nhu cầu cấp &amp; rõ (hậu phẫu, bệnh mạn) nơi sẵn lòng chi trả cao.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 🤖 AI ỨNG DỤNG -->
+    <div class="endbox ai">
+      <h4>🤖 AI ứng dụng (trong cấu trúc ngành)</h4>
+      <p class="eb-desc">AI giúp ElderCare đọc &amp; phản ứng với động lực 5 lực nhanh hơn — từ cung điều dưỡng đến giữ chân hai phía.</p>
+      <div class="ai-row">
+        <div class="ai-item">
+          <div class="ai-head">🔭 Giám sát động lực ngành &amp; đối thủ</div>
+          <p>Theo dõi tự động giá gói, khuyến mãi &amp; bước đi của Jio/Med247/Bluecare/bCare để cảnh báo sớm thay đổi cấu trúc cạnh tranh.</p>
+          <span class="ai-model">Web monitoring / signals</span>
+        </div>
+        <div class="ai-item">
+          <div class="ai-head">📈 Dự báo nguồn cung điều dưỡng</div>
+          <p>Dự báo cung-cầu điều dưỡng theo khu vực &amp; thời điểm để chủ động tuyển, điều phối, giảm rủi ro thiếu hụt (lực nhà cung cấp).</p>
+          <span class="ai-model">Demand-supply forecasting</span>
+        </div>
+        <div class="ai-item">
+          <div class="ai-head">🤝 Tối ưu giữ chân cung &amp; cầu</div>
+          <p>Dự báo điều dưỡng có nguy cơ rời &amp; gia đình có nguy cơ churn, can thiệp sớm (ưu đãi, chăm sóc chủ động) để hạ hai lực cung-mua.</p>
+          <span class="ai-model">Churn / uplift modeling</span>
+        </div>
+        <div class="ai-item">
+          <div class="ai-head">💲 Định giá theo độ co giãn</div>
+          <p>Định giá &amp; ưu đãi theo độ co giãn cầu từng phân khúc để giữ biên trước lực người mua &amp; sản phẩm thay thế mà không mất khách.</p>
+          <span class="ai-model">Price elasticity / bandit</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
 
 <!-- ============================ PHIÊN 10 — BUSINESS MODEL CANVAS (#canvas) ============================ -->
 <!-- PLACEHOLDER PHIÊN 10: chèn <section class="bmc-section" id="canvas">...</section> vào đây. Bỏ class .soon của link #canvas trong sub-nav. -->
