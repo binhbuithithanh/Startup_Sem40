@@ -524,6 +524,62 @@
     .vision-box strong { color: var(--gold); }
 
     /* RESPONSIVE */
+    /* ===================== PHIÊN 8 — ĐỐI THỦ CẠNH TRANH ===================== */
+    .comp-section { background: #fff; }
+    .comp-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 1.25rem; margin: 1.25rem 0 0.5rem; }
+    .comp-card { background: var(--light); border: 1px solid var(--border); border-radius: 16px; padding: 1.25rem 1.3rem; display: flex; flex-direction: column; position: relative; overflow: hidden; }
+    .comp-card::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--care), var(--care-light)); }
+    .comp-card .cc-head { display: flex; align-items: center; gap: 0.7rem; margin-bottom: 0.5rem; }
+    .comp-card .cc-logo { font-size: 1.9rem; line-height: 1; flex-shrink: 0; }
+    .comp-card .cc-name { font-size: 1.15rem; font-weight: 800; letter-spacing: -0.4px; color: var(--primary); }
+    .comp-card .cc-pos { font-size: 0.78rem; color: var(--muted); font-weight: 600; margin-top: 1px; }
+    .comp-card .cc-meta { display: flex; flex-direction: column; gap: 0.45rem; margin: 0.4rem 0 0.7rem; }
+    .comp-card .cc-line { font-size: 0.8rem; color: #374151; line-height: 1.45; }
+    .comp-card .cc-line .cc-lab { font-weight: 800; color: var(--care); }
+    .comp-card .cc-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; margin-bottom: 0.7rem; }
+    .comp-card .cc-box { border-radius: 10px; padding: 0.6rem 0.7rem; }
+    .comp-card .cc-box.str { background: rgba(13,148,136,0.08); border: 1px solid #99f6e4; }
+    .comp-card .cc-box.wk { background: rgba(251,113,133,0.08); border: 1px solid #fecdd3; }
+    .comp-card .cc-box h6 { font-size: 0.72rem; font-weight: 800; margin-bottom: 0.35rem; letter-spacing: 0.3px; }
+    .comp-card .cc-box.str h6 { color: #115e59; }
+    .comp-card .cc-box.wk h6 { color: #be123c; }
+    .comp-card .cc-box ul { list-style: none; margin: 0; padding: 0; }
+    .comp-card .cc-box li { font-size: 0.74rem; color: #374151; line-height: 1.4; padding-left: 0.9rem; position: relative; margin-bottom: 0.25rem; }
+    .comp-card .cc-box.str li::before { content: "✓"; position: absolute; left: 0; color: var(--care); font-weight: 800; }
+    .comp-card .cc-box.wk li::before { content: "✕"; position: absolute; left: 0; color: var(--coral); font-weight: 800; }
+    .comp-card .cc-overlap { font-size: 0.76rem; color: #374151; background: #fff; border: 1px solid var(--border); border-radius: 10px; padding: 0.55rem 0.7rem; margin-bottom: 0.5rem; line-height: 1.45; }
+    .comp-card .cc-win { font-size: 0.78rem; color: #fff; background: linear-gradient(135deg, var(--care), var(--care-light)); border-radius: 10px; padding: 0.6rem 0.75rem; line-height: 1.45; margin-top: auto; }
+    .comp-card .cc-win strong { color: #fff; }
+    .comp-card .cc-overlap strong { color: var(--coral); }
+    /* bảng so sánh */
+    .comp-section .fin-table .cap-y { color: var(--care); font-weight: 800; }
+    .comp-section .fin-table .cap-n { color: var(--coral); font-weight: 700; }
+    .comp-section .fin-table .cap-p { color: var(--gold); font-weight: 700; }
+    .comp-section .fin-table tr.hl { background: rgba(13,148,136,0.1); }
+    .comp-section .fin-table tr.hl td { font-weight: 700; color: var(--primary); }
+    .comp-section .fin-table tr.hl td:first-child { color: var(--care); }
+    /* positioning map */
+    .pos-wrap { margin: 1.25rem 0 0.5rem; }
+    .pos-map { position: relative; width: 100%; max-width: 640px; aspect-ratio: 1 / 0.78; margin: 0 auto; background:
+      linear-gradient(135deg, rgba(13,148,136,0.05), rgba(45,212,191,0.1) 70%);
+      border: 1px solid var(--border); border-radius: 16px; }
+    .pos-map .pos-quad { position: absolute; font-size: 0.66rem; font-weight: 700; color: var(--muted); opacity: 0.6; text-transform: uppercase; letter-spacing: 0.5px; }
+    .pos-map .pos-axis-x { position: absolute; bottom: -1.4rem; left: 0; right: 0; text-align: center; font-size: 0.74rem; font-weight: 700; color: var(--care); }
+    .pos-map .pos-axis-y { position: absolute; left: -1.4rem; top: 50%; transform: rotate(-90deg) translateX(50%); transform-origin: left center; font-size: 0.74rem; font-weight: 700; color: var(--care); white-space: nowrap; }
+    .pos-map .pos-arrow-x, .pos-map .pos-arrow-y { position: absolute; background: var(--border); }
+    .pos-map .pos-arrow-x { left: 6%; right: 6%; bottom: 8%; height: 2px; }
+    .pos-map .pos-arrow-y { left: 8%; top: 6%; bottom: 8%; width: 2px; }
+    .pos-dot { position: absolute; transform: translate(-50%, 50%); display: flex; flex-direction: column; align-items: center; gap: 2px; z-index: 2; }
+    .pos-dot .pd-mark { width: 14px; height: 14px; border-radius: 50%; background: var(--muted); border: 2px solid #fff; box-shadow: 0 1px 4px rgba(0,0,0,0.2); }
+    .pos-dot .pd-label { font-size: 0.68rem; font-weight: 700; color: #374151; background: #fff; padding: 1px 6px; border-radius: 6px; border: 1px solid var(--border); white-space: nowrap; }
+    .pos-dot.is-ec { z-index: 5; }
+    .pos-dot.is-ec .pd-mark { width: 22px; height: 22px; background: var(--coral); border: 3px solid var(--care); box-shadow: 0 4px 14px rgba(251,113,133,0.5); }
+    .pos-dot.is-ec .pd-label { font-size: 0.76rem; color: #fff; background: linear-gradient(135deg, var(--care), var(--coral)); border-color: var(--care); }
+    .pos-gap { position: absolute; right: 5%; top: 6%; width: 40%; height: 40%; border: 2px dashed var(--coral); border-radius: 14px; background: rgba(251,113,133,0.06); z-index: 1; }
+    .pos-gap span { position: absolute; top: -0.5rem; left: 0.6rem; font-size: 0.62rem; font-weight: 800; color: var(--coral); background: #fff; padding: 0 5px; }
+    .pos-note { font-size: 0.86rem; color: #374151; line-height: 1.6; max-width: 760px; margin: 2.2rem auto 0; background: var(--light); border-left: 4px solid var(--coral); padding: 0.9rem 1.1rem; border-radius: 0 12px 12px 0; }
+    .pos-note strong { color: var(--care); }
+
     @media (max-width: 768px) {
       nav { padding: 0 1rem; }
       .nav-tabs { gap: 0; }
@@ -543,6 +599,10 @@
       .law-grid, .ethic-grid { grid-template-columns: 1fr; }
       .aimap-grid, .cta-steps { grid-template-columns: 1fr; }
       .vision-box { padding: 1.5rem 1.35rem; }
+      .comp-grid { grid-template-columns: 1fr; }
+      .comp-card .cc-cols { grid-template-columns: 1fr; }
+      .pos-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+      .pos-map { min-width: 480px; }
     }
   </style>
 </head>
@@ -589,7 +649,7 @@
   <a href="#disease">🏥 Bệnh lý &amp; đào tạo</a>
   <a href="#legal">⚖️ Đạo đức &amp; pháp lý</a>
   <a href="#summary">🧭 Tổng hợp</a>
-  <a href="#competitors" class="soon">🥊 Đối thủ</a>
+  <a href="#competitors">🥊 Đối thủ</a>
   <a href="#fiveforces" class="soon">🛡️ Five Forces</a>
   <a href="#canvas" class="soon">🧩 Canvas</a>
   <a href="#glossary">📖 Thuật ngữ</a>
@@ -2743,7 +2803,262 @@
 </section>
 
 <!-- ============================ PHIÊN 8 — ĐỐI THỦ CẠNH TRANH (#competitors) ============================ -->
-<!-- PLACEHOLDER PHIÊN 8: chèn <section class="comp-section" id="competitors">...</section> vào đây. Bỏ class .soon của link #competitors trong sub-nav. -->
+<section class="comp-section" id="competitors">
+  <div class="container">
+    <div class="section-tag">Phần 7 · Đối thủ cạnh tranh</div>
+    <h2>Ai đang ở trên sân —<br/>và vì sao Kịch bản B chừa cho ElderCare một góc trống</h2>
+    <p class="section-desc">
+      Phân tích này đọc bản đồ cạnh tranh <strong>qua lăng kính Kịch bản B (lãi ngay · asset-light)</strong>: ElderCare tập trung <strong>điều dưỡng tại nhà</strong> (CareConnect, hoa hồng ~20%), <strong>telehealth/subscription</strong> &amp; <strong>dược markup</strong>, ra mắt tại <strong>TP.HCM</strong>, sinh lời ngay Năm 1 — tạm gác MedFin/CareSense tự sản xuất. Vì thế đối thủ "trực tiếp" ở đây là những bên cùng phục vụ <strong>chăm sóc/điều dưỡng tại nhà &amp; telehealth cho người Việt</strong>, càng gần phân khúc người cao tuổi càng đáng lo. Năm đối thủ dưới được chọn vì trùng mô hình asset-light đó; số liệu vốn &amp; quy mô dẫn nguồn công khai, chỉ số nội bộ ElderCare gắn nhãn "ước tính".
+    </p>
+    <span class="click-hint">👆 Tiểu mục 3 có nút "Phân tích sâu" — bấm để xem moat (lợi thế bền vững) của ElderCare</span>
+
+    <!-- 7.1 — 5 THẺ ĐỐI THỦ -->
+    <h3 class="fin-sub"><span class="badge-n">1</span> Năm đối thủ cạnh tranh trực tiếp</h3>
+    <p class="sub-desc">Mỗi thẻ tóm tắt mô hình doanh thu, vốn đã gọi/nhà đầu tư, điểm mạnh – yếu, mảng <strong>trùng</strong> với ElderCare và <strong>chỗ ElderCare thắng</strong> trong khung Kịch bản B.</p>
+    <div class="comp-grid">
+
+      <!-- Jio Health -->
+      <div class="comp-card">
+        <div class="cc-head">
+          <span class="cc-logo">🩺</span>
+          <div><div class="cc-name">Jio Health</div><div class="cc-pos">Hệ sinh thái online-offline (TP.HCM)</div></div>
+        </div>
+        <div class="cc-meta">
+          <div class="cc-line"><span class="cc-lab">Mô hình:</span> telemedicine + smart clinic + ~300 nhà thuốc Jio + <strong>chăm sóc tại nhà theo yêu cầu</strong>; doanh thu khám/thuốc/home-care.</div>
+          <div class="cc-line"><span class="cc-lab">Vốn:</span> ~$30,4M qua 3 vòng; Series B $20M (2022) do Heritas Capital dẫn, có Monk's Hill, Kasikorn, Fuchsia <span class="src">MobiHealthNews 2022</span>.</div>
+        </div>
+        <div class="cc-cols">
+          <div class="cc-box str"><h6>Điểm mạnh</h6><ul><li>Vốn lớn nhất nhóm, hạ tầng clinic + nhà thuốc</li><li>Đã có sẵn home-care &amp; e-prescription</li><li>Thương hiệu telehealth top tại HCM</li></ul></div>
+          <div class="cc-box wk"><h6>Điểm yếu</h6><ul><li>Nặng tài sản (clinic vật lý) — không asset-light</li><li>Không chuyên người cao tuổi</li><li>Đốt vốn, chưa rõ có lãi</li></ul></div>
+        </div>
+        <div class="cc-overlap"><strong>Trùng:</strong> home-care + telehealth + dược — đối thủ trùng mô hình nhất.</div>
+        <div class="cc-win"><strong>ElderCare thắng:</strong> asset-light (không ôm clinic) → có lãi ngay; care-team &amp; SOP chuyên lão khoa, retention bệnh mạn cao hơn.</div>
+      </div>
+
+      <!-- bTaskee / bCare -->
+      <div class="comp-card">
+        <div class="cc-head">
+          <span class="cc-logo">🧹</span>
+          <div><div class="cc-name">bTaskee · bCare</div><div class="cc-pos">Super-app dịch vụ tại nhà (TP.HCM)</div></div>
+        </div>
+        <div class="cc-meta">
+          <div class="cc-line"><span class="cc-lab">Mô hình:</span> marketplace giúp việc/dịch vụ tại nhà ăn hoa hồng; nhánh <strong>bCare</strong> hợp tác ĐH Y Dược TP.HCM làm <strong>chăm sóc người cao tuổi tại nhà</strong>.</div>
+          <div class="cc-line"><span class="cc-lab">Vốn:</span> 3 nhà đầu tư tổ chức (Nextrans, Cooau/Contrau Ventures…); &gt;1tr khách 4 nước <span class="src">Crunchbase / VietnamNews 2024</span>.</div>
+        </div>
+        <div class="cc-cols">
+          <div class="cc-box str"><h6>Điểm mạnh</h6><ul><li>Marketplace asset-light đã quy mô lớn</li><li>Tệp khách gia đình sẵn để cross-sell</li><li>Đối tác đào tạo y khoa cho bCare</li></ul></div>
+          <div class="cc-box wk"><h6>Điểm yếu</h6><ul><li>Gốc giúp việc, chưa phải y tế chuyên sâu</li><li>bCare còn mới, chưa có telehealth/dược</li><li>Không có chuỗi chăm sóc lâm sàng khép kín</li></ul></div>
+        </div>
+        <div class="cc-overlap"><strong>Trùng:</strong> điều dưỡng/chăm sóc tại nhà cho người già, cùng cơ chế hoa hồng marketplace.</div>
+        <div class="cc-win"><strong>ElderCare thắng:</strong> chiều sâu lâm sàng (lão khoa, đa thuốc, telehealth nối bác sĩ) thay vì dịch vụ phổ thông; định vị chuyên người cao tuổi.</div>
+      </div>
+
+      <!-- Bluecare -->
+      <div class="comp-card">
+        <div class="cc-head">
+          <span class="cc-logo">💙</span>
+          <div><div class="cc-name">Bluecare</div><div class="cc-pos">App đặt điều dưỡng tại nhà (Hà Nội)</div></div>
+        </div>
+        <div class="cc-meta">
+          <div class="cc-line"><span class="cc-lab">Mô hình:</span> app đặt <strong>điều dưỡng/chăm sóc tại nhà</strong> — chăm người già &amp; người bệnh, mẹ &amp; bé, PHCN, thay băng; ăn hoa hồng kết nối điều dưỡng chứng chỉ.</div>
+          <div class="cc-line"><span class="cc-lab">Vốn:</span> không công bố vòng lớn (ước tính tự lực/early-stage); phủ Bình Dương, Đồng Nai, Đà Nẵng, Hải Phòng, Nghệ An… <span class="src">VEN 2020</span>.</div>
+        </div>
+        <div class="cc-cols">
+          <div class="cc-box str"><h6>Điểm mạnh</h6><ul><li>Chuyên đúng điều dưỡng tại nhà, chuẩn chăm sóc Hà Lan</li><li>Đã phủ nhiều tỉnh, tăng trưởng tốt</li><li>Asset-light, sát mô hình B nhất</li></ul></div>
+          <div class="cc-box wk"><h6>Điểm yếu</h6><ul><li>Vốn mỏng, thiếu telehealth/dược/AI</li><li>Mạnh ở Hà Nội, yếu thương hiệu tại HCM</li><li>Không có super-app stacking</li></ul></div>
+        </div>
+        <div class="cc-overlap"><strong>Trùng:</strong> chính xác mảng điều dưỡng tại nhà có yếu tố người cao tuổi — đối thủ "cùng làn" nhất.</div>
+        <div class="cc-win"><strong>ElderCare thắng:</strong> chồng thêm telehealth + dược + giám sát AI thành super-app; vốn &amp; thương hiệu HCM mạnh hơn; gói subscription giữ recurring.</div>
+      </div>
+
+      <!-- Med247 -->
+      <div class="comp-card">
+        <div class="cc-head">
+          <span class="cc-logo">⏱️</span>
+          <div><div class="cc-name">Med247</div><div class="cc-pos">Bác sĩ gia đình 24/7 + clinic</div></div>
+        </div>
+        <div class="cc-meta">
+          <div class="cc-line"><span class="cc-lab">Mô hình:</span> đặt khám + telehealth + chuỗi clinic tiện ích "bác sĩ gia đình 24/7"; doanh thu khám &amp; thuê bao chăm sóc.</div>
+          <div class="cc-line"><span class="cc-lab">Vốn:</span> Series A $4,5M do Altara Ventures dẫn (có Pavilion/Temasek, East Ventures, Venturra) <span class="src">MobiHealthNews 2022</span>; seed từ KK Fund.</div>
+        </div>
+        <div class="cc-cols">
+          <div class="cc-box str"><h6>Điểm mạnh</h6><ul><li>Mô hình "family doctor" hợp chăm bệnh mạn</li><li>Có cả online + clinic, nhà đầu tư mạnh</li><li>Thuê bao chăm sóc liên tục</li></ul></div>
+          <div class="cc-box wk"><h6>Điểm yếu</h6><ul><li>Có clinic vật lý → bớt asset-light</li><li>Không chuyên người cao tuổi tại nhà</li><li>Home-care điều dưỡng không phải lõi</li></ul></div>
+        </div>
+        <div class="cc-overlap"><strong>Trùng:</strong> telehealth + thuê bao chăm sóc bệnh mạn — cạnh tranh trực tiếp ở trụ telehealth/subscription.</div>
+        <div class="cc-win"><strong>ElderCare thắng:</strong> điều dưỡng tại nhà là lõi (Med247 yếu mảng này); chuyên lão khoa &amp; đa thuốc, mô hình asset-light lãi sớm.</div>
+      </div>
+
+      <!-- Wellcare -->
+      <div class="comp-card">
+        <div class="cc-head">
+          <span class="cc-logo">📞</span>
+          <div><div class="cc-name">Wellcare</div><div class="cc-pos">Telemedicine &amp; tư vấn từ xa</div></div>
+        </div>
+        <div class="cc-meta">
+          <div class="cc-line"><span class="cc-lab">Mô hình:</span> nền tảng <strong>tư vấn bác sĩ từ xa</strong>, sức khỏe tinh thần &amp; wellness cho cá nhân/doanh nghiệp; doanh thu phí tư vấn &amp; B2B.</div>
+          <div class="cc-line"><span class="cc-lab">Vốn:</span> early-stage, quy mô nhỏ (~24 nhân sự, TP.HCM) — không công bố vòng lớn <span class="src">Crunchbase / PitchBook 2024</span>.</div>
+        </div>
+        <div class="cc-cols">
+          <div class="cc-box str"><h6>Điểm mạnh</h6><ul><li>Thuần telehealth, asset-light nhẹ vốn</li><li>Có kênh B2B doanh nghiệp</li><li>Định vị primary care từ xa lâu năm</li></ul></div>
+          <div class="cc-box wk"><h6>Điểm yếu</h6><ul><li>Không có điều dưỡng tại nhà/dược</li><li>Quy mô &amp; vốn nhỏ, ít hiện diện người già</li><li>Thiếu chuỗi dịch vụ vật lý &amp; thiết bị</li></ul></div>
+        </div>
+        <div class="cc-overlap"><strong>Trùng:</strong> trụ telehealth/tư vấn từ xa — cạnh tranh ở phần khám &amp; theo dõi online.</div>
+        <div class="cc-win"><strong>ElderCare thắng:</strong> telehealth chỉ là 1 trụ; cộng điều dưỡng tại nhà + dược + chuyên người già → trọn hành trình, rào cản rời bỏ cao.</div>
+      </div>
+
+    </div>
+    <p class="src-note">Nguồn vốn &amp; mô hình: MobiHealthNews/Monk's Hill (Jio Series B $20M, 2022); MobiHealthNews/BioSpectrum (Med247 Series A $4,5M, 2022); Crunchbase &amp; VietnamNews (bTaskee/bCare, 2024); Vietnam Economic News (Bluecare, 2020); Crunchbase/PitchBook (Wellcare, 2024). Chỉ số &amp; định vị ElderCare: ước tính nội bộ.</p>
+
+    <!-- 7.2 — BẢNG SO SÁNH NĂNG LỰC -->
+    <h3 class="fin-sub"><span class="badge-n">2</span> Bảng so sánh năng lực</h3>
+    <p class="sub-desc">✓ = mạnh/có · ◐ = một phần · ✗ = không. Hàng ElderCare đọc theo <strong>Kịch bản B</strong> (điều dưỡng tại nhà + telehealth + dược là lõi; thiết bị-AI &amp; tài chính y tế ở mức một phần/lộ trình).</p>
+    <div class="table-scroll">
+      <table class="fin-table" style="min-width:880px;">
+        <thead>
+          <tr>
+            <th style="text-align:left;">Tiêu chí</th>
+            <th>Điều dưỡng tại nhà</th>
+            <th>Telehealth</th>
+            <th>Dược giao tận nhà</th>
+            <th>Thiết bị-AI giám sát</th>
+            <th>Tài chính y tế</th>
+            <th>Chuyên người già</th>
+            <th>Phủ địa lý</th>
+            <th>Mô hình có lãi</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="hl">
+            <td style="text-align:left;">ElderCare (Kịch bản B)</td>
+            <td class="cap-y">✓</td><td class="cap-y">✓</td><td class="cap-y">✓</td><td class="cap-p">◐</td><td class="cap-p">◐</td><td class="cap-y">✓</td><td class="cap-p">◐</td><td class="cap-y">✓</td>
+          </tr>
+          <tr>
+            <td style="text-align:left;">Jio Health</td>
+            <td class="cap-y">✓</td><td class="cap-y">✓</td><td class="cap-y">✓</td><td class="cap-p">◐</td><td class="cap-n">✗</td><td class="cap-n">✗</td><td class="cap-y">✓</td><td class="cap-n">✗</td>
+          </tr>
+          <tr>
+            <td style="text-align:left;">bTaskee · bCare</td>
+            <td class="cap-p">◐</td><td class="cap-n">✗</td><td class="cap-n">✗</td><td class="cap-n">✗</td><td class="cap-n">✗</td><td class="cap-p">◐</td><td class="cap-y">✓</td><td class="cap-y">✓</td>
+          </tr>
+          <tr>
+            <td style="text-align:left;">Bluecare</td>
+            <td class="cap-y">✓</td><td class="cap-n">✗</td><td class="cap-n">✗</td><td class="cap-n">✗</td><td class="cap-n">✗</td><td class="cap-p">◐</td><td class="cap-y">✓</td><td class="cap-p">◐</td>
+          </tr>
+          <tr>
+            <td style="text-align:left;">Med247</td>
+            <td class="cap-n">✗</td><td class="cap-y">✓</td><td class="cap-p">◐</td><td class="cap-n">✗</td><td class="cap-n">✗</td><td class="cap-n">✗</td><td class="cap-p">◐</td><td class="cap-n">✗</td>
+          </tr>
+          <tr>
+            <td style="text-align:left;">Wellcare</td>
+            <td class="cap-n">✗</td><td class="cap-y">✓</td><td class="cap-n">✗</td><td class="cap-n">✗</td><td class="cap-n">✗</td><td class="cap-n">✗</td><td class="cap-p">◐</td><td class="cap-p">◐</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="tnote">Đọc bảng: không đối thủ nào phủ đồng thời <em>điều dưỡng tại nhà + telehealth + dược + chuyên người già + có lãi</em>. Jio rộng nhưng không chuyên người già &amp; chưa rõ lãi; Bluecare/bCare chuyên home-care nhưng thiếu telehealth/dược. Ô giao đó chính là chỗ Kịch bản B nhắm tới.</p>
+
+    <!-- 7.3 — BẢN ĐỒ ĐỊNH VỊ -->
+    <h3 class="fin-sub"><span class="badge-n">3</span> Bản đồ định vị &amp; khoảng trống thị trường</h3>
+    <p class="sub-desc">Trục ngang = <strong>độ rộng dịch vụ</strong> (đơn lẻ → super-app); trục dọc = <strong>mức chuyên biệt người cao tuổi</strong> (chung → chuyên sâu). Góc trên-phải "super-app × chuyên người già" gần như bỏ ngỏ — đó là vị trí ElderCare.</p>
+    <div class="pos-wrap">
+      <div class="pos-map">
+        <div class="pos-arrow-x"></div>
+        <div class="pos-arrow-y"></div>
+        <div class="pos-gap"><span>KHOẢNG TRỐNG</span></div>
+        <div class="pos-quad" style="top:0.6rem;left:0.8rem;">Chuyên sâu · đơn lẻ</div>
+        <div class="pos-quad" style="bottom:2.2rem;left:0.8rem;">Chung · đơn lẻ</div>
+        <div class="pos-quad" style="bottom:2.2rem;right:0.8rem;">Chung · super-app</div>
+        <!-- dots: left% = độ rộng dịch vụ, bottom% = chuyên người già -->
+        <div class="pos-dot" style="left:18%;bottom:78%;"><span class="pd-mark"></span><span class="pd-label">Bluecare</span></div>
+        <div class="pos-dot" style="left:30%;bottom:60%;"><span class="pd-mark"></span><span class="pd-label">bCare</span></div>
+        <div class="pos-dot" style="left:38%;bottom:22%;"><span class="pd-mark"></span><span class="pd-label">Wellcare</span></div>
+        <div class="pos-dot" style="left:52%;bottom:28%;"><span class="pd-mark"></span><span class="pd-label">Med247</span></div>
+        <div class="pos-dot" style="left:74%;bottom:40%;"><span class="pd-mark"></span><span class="pd-label">Jio Health</span></div>
+        <div class="pos-dot is-ec" style="left:86%;bottom:86%;"><span class="pd-mark"></span><span class="pd-label">ElderCare</span></div>
+        <div class="pos-axis-x">Độ rộng dịch vụ →</div>
+        <div class="pos-axis-y">Chuyên biệt người cao tuổi →</div>
+      </div>
+      <p class="pos-note"><strong>Khoảng trống thị trường:</strong> các đối thủ hoặc <em>rộng nhưng chung chung</em> (Jio, Med247 — phục vụ mọi lứa tuổi) hoặc <em>chuyên home-care nhưng hẹp</em> (Bluecare, bCare — chỉ một dịch vụ). Chưa ai vừa <strong>super-app</strong> vừa <strong>chuyên sâu người cao tuổi</strong>. Kịch bản B chiếm ô này bằng combo điều dưỡng tại nhà + telehealth + dược, định vị thẳng vào 14,2 triệu người già &amp; người trả tiền là con cái — biến "rộng" và "chuyên" từ hai lựa chọn loại trừ thành một đề xuất giá trị.</p>
+    </div>
+
+    <button class="deep-toggle" onclick="toggleDeep(this)" data-closed-label="Phân tích sâu: moat — lợi thế cạnh tranh bền vững" data-open-label="Thu gọn">
+      <span class="dt-label">Phân tích sâu: moat — lợi thế cạnh tranh bền vững</span><span class="chev">▼</span>
+    </button>
+    <div class="deep-panel">
+      <div class="deep-inner">
+        <h5>🛡️ Bốn lớp moat khó sao chép</h5>
+        <p>Lợi thế của ElderCare không nằm ở một tính năng mà ở <strong>sự xếp chồng (stacking)</strong> nhiều lớp — đối thủ copy được một lớp nhưng khó copy cả bốn cùng lúc:</p>
+        <div class="deep-stats">
+          <div class="deep-stat"><div class="ds-num" style="font-size:1.4rem;font-weight:800;color:var(--care);">①</div><div class="ds-label"><strong>Mạng điều dưỡng xác minh</strong> — vetting, chứng chỉ, đào tạo 4 cấp, đánh giá thực địa: hai mặt cung-cầu càng dày càng khó bắt kịp.</div></div>
+          <div class="deep-stat"><div class="ds-num" style="font-size:1.4rem;font-weight:800;color:var(--care);">②</div><div class="ds-label"><strong>Đối tác bệnh viện &amp; chuyên gia</strong> — luồng chuyển tuyến, hội chẩn, ĐH Y; quan hệ &amp; uy tín mất nhiều năm xây.</div></div>
+          <div class="deep-stat"><div class="ds-num" style="font-size:1.4rem;font-weight:800;color:var(--care);">③</div><div class="ds-label"><strong>Thương hiệu tin cậy với người già</strong> — niềm tin là yếu tố mua hàng số 1; "đáng tin cho bố mẹ" rất dính (sticky).</div></div>
+          <div class="deep-stat"><div class="ds-num" style="font-size:1.4rem;font-weight:800;color:var(--care);">④</div><div class="ds-label"><strong>Super-app stacking</strong> — điều dưỡng + telehealth + dược trong một hồ sơ: chi phí chuyển đổi cao, ARPU &amp; LTV tăng theo số trụ.</div></div>
+        </div>
+        <div class="deep-callout">⚖️ <strong>Vì sao bền:</strong> Bluecare/bCare có lớp ① nhưng thiếu ②–④; Jio/Med247 có quy mô nhưng không chuyên người già (lớp ③). ElderCare là bên duy nhất ráp đủ bốn lớp <em>quanh đúng một phân khúc</em> — đó là rào cản cộng dồn (compounding moat) mà mô hình asset-light vẫn dựng được mà không cần đốt vốn ôm tài sản.</div>
+      </div>
+    </div>
+
+    <!-- ⚠️ RỦI RO CẠNH TRANH -->
+    <div class="endbox risk">
+      <h4>⚠️ Rủi ro cạnh tranh &amp; phương án backup</h4>
+      <p class="eb-desc">Mỗi rủi ro cạnh tranh gắn giải pháp chủ động và phương án dự phòng nếu giải pháp chính thất bại.</p>
+      <div class="risk-row">
+        <div class="risk-item">
+          <div class="ri-head">💸 Đối thủ đốt vốn phá giá</div>
+          <div class="ri-fix"><strong>Giải pháp:</strong> không đua giá ở dịch vụ phổ thông; giữ biên bằng <strong>dịch vụ chuyên biệt người già</strong> (lão khoa, đa thuốc) &amp; retention cao của care-team — khách dính vì chất lượng, không vì giá rẻ nhất.</div>
+          <div class="ri-backup">Backup: gói "lõi tối giản" giá cạnh tranh cho phân khúc nhạy giá, bù biên bằng upsell dược &amp; telehealth; mô hình asset-light cho phép trụ lâu hơn bên đốt vốn.</div>
+        </div>
+        <div class="risk-item">
+          <div class="ri-head">🏥 Ông lớn (Vinmec/bệnh viện) tự làm app</div>
+          <div class="ri-fix"><strong>Giải pháp:</strong> <strong>hợp tác thay vì đối đầu</strong> — trở thành lớp điều dưỡng tại nhà &amp; điều phối ngoài viện cho họ (white-label/referral), tận dụng luồng bệnh nhân của viện.</div>
+          <div class="ri-backup">Backup: nếu họ tự đóng kín, dồn vào phân khúc người già ngoài hệ thống một viện &amp; vùng họ chưa phủ; nhấn tính trung lập đa-bệnh-viện của ElderCare.</div>
+        </div>
+        <div class="risk-item">
+          <div class="ri-head">🔀 Telehealth (Jio/Med247) lấn sang home-care</div>
+          <div class="ri-fix"><strong>Giải pháp:</strong> <strong>tăng tốc moat điều dưỡng</strong> — phủ dày mạng điều dưỡng xác minh tại HCM trước, ký độc quyền mềm &amp; chuẩn đào tạo để nâng rào cản cung.</div>
+          <div class="ri-backup">Backup: nếu họ vào nhanh, dùng chuyên sâu lão khoa &amp; super-app stacking làm khác biệt; cân nhắc M&amp;A/đối tác với bên home-care nhỏ để giữ lợi thế quy mô.</div>
+        </div>
+        <div class="risk-item">
+          <div class="ri-head">🌱 Thị trường còn nhỏ / giáo dục chậm</div>
+          <div class="ri-fix"><strong>Giải pháp:</strong> <strong>đa kênh tiếp cận</strong> — đánh trúng người trả tiền (con cái) qua digital + hợp tác bệnh viện/phòng khám &amp; chính quyền địa phương để giáo dục thị trường người già.</div>
+          <div class="ri-backup">Backup: bắt đầu từ ô nhu cầu cấp &amp; rõ (hậu phẫu, bệnh mạn nặng) nơi sẵn lòng chi trả cao, lấy dòng tiền nuôi việc mở rộng giáo dục thị trường dần.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 🤖 AI ỨNG DỤNG -->
+    <div class="endbox ai">
+      <h4>🤖 AI ứng dụng (trong cạnh tranh)</h4>
+      <p class="eb-desc">AI giúp ElderCare phản ứng nhanh hơn đối thủ — từ theo dõi giá, soi điểm yếu, đến giữ khách trước khi bị kéo đi.</p>
+      <div class="ai-row">
+        <div class="ai-item">
+          <div class="ai-head">🔭 Competitive intelligence</div>
+          <p>Theo dõi tự động giá gói &amp; khuyến mãi của Jio/Med247/Bluecare/bCare theo thời gian thực, cảnh báo khi đối thủ đổi chính sách để phản ứng kịp.</p>
+          <span class="ai-model">Web scraping + monitoring</span>
+        </div>
+        <div class="ai-item">
+          <div class="ai-head">📝 Phân tích review đối thủ (NLP)</div>
+          <p>Khai thác đánh giá app store &amp; mạng xã hội của đối thủ bằng NLP để tìm điểm đau khách chưa được giải → biến thành lợi thế sản phẩm &amp; thông điệp.</p>
+          <span class="ai-model">NLP / aspect sentiment</span>
+        </div>
+        <div class="ai-item">
+          <div class="ai-head">💲 Định giá phản ứng (dynamic pricing)</div>
+          <p>Tự điều chỉnh giá/ưu đãi theo động thái đối thủ &amp; độ co giãn cầu từng phân khúc, giữ biên mà không mất khách nhạy giá.</p>
+          <span class="ai-model">Price elasticity / bandit</span>
+        </div>
+        <div class="ai-item">
+          <div class="ai-head">🛟 Churn-prediction giữ khách</div>
+          <p>Dự báo gia đình có nguy cơ rời sang đối thủ &amp; can thiệp sớm (ưu đãi, chăm sóc chủ động) trước khi họ bị kéo đi.</p>
+          <span class="ai-model">Churn / uplift modeling</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PLACEHOLDER PHIÊN 8: đã chèn section #competitors ở trên. -->
 
 <!-- ============================ PHIÊN 9 — FIVE FORCES (#fiveforces) ============================ -->
 <!-- PLACEHOLDER PHIÊN 9: chèn <section class="ff-section" id="fiveforces">...</section> vào đây. Bỏ class .soon của link #fiveforces trong sub-nav. -->
