@@ -225,6 +225,9 @@
     .deep-table { width: 100%; border-collapse: collapse; margin: 0.75rem 0; font-size: 0.82rem; }
     .deep-table th { text-align: left; padding: 0.5rem 0.75rem; background: #f0fdfa; color: #115e59; font-weight: 700; border-bottom: 2px solid #99f6e4; }
     .deep-table td { padding: 0.5rem 0.75rem; border-bottom: 1px solid var(--border); color: #374151; vertical-align: top; }
+    .glossary-section .deep-table td:first-child { white-space: normal; width: 30%; }
+    .glossary-section .term { color: var(--care); font-weight: 800; }
+    .glossary-section .term .en { color: var(--muted); font-weight: 600; font-size: 0.95em; }
     .src { display: inline-block; font-size: 0.68rem; font-weight: 600; color: var(--muted); background: #f3f4f6; padding: 1px 8px; border-radius: 99px; margin-left: 4px; vertical-align: middle; }
     .src-note { font-size: 0.72rem; color: var(--muted); font-style: italic; margin-top: 0.75rem; }
     .deep-callout { background: linear-gradient(135deg, #ecfdfa, #f0fdfa); border: 1px solid #5eead4; border-radius: 12px; padding: 1rem 1.25rem; margin: 1rem 0; font-size: 0.86rem; color: #115e59; line-height: 1.6; }
@@ -552,6 +555,7 @@
   <a href="#disease">🏥 Bệnh lý &amp; đào tạo</a>
   <a href="#legal">⚖️ Đạo đức &amp; pháp lý</a>
   <a href="#summary">🧭 Tổng hợp</a>
+  <a href="#glossary">📖 Thuật ngữ</a>
 </div>
 
 <!-- ============================ PHIÊN 1 — TÀI CHÍNH ============================ -->
@@ -2572,6 +2576,98 @@
       <p class="tnote" style="margin-top:1rem;">Xem thêm: <a href="/eldercare" style="color:var(--care);font-weight:600;">bản pitch đầy đủ</a> · <a href="/eldercare-app" style="color:var(--care);font-weight:600;">app demo clickable</a> · <a href="/eldercare-financial-model.xlsx" style="color:var(--care);font-weight:600;">model tài chính động (.xlsx)</a>. Mọi số liệu khớp Phần 1–5; con số tự suy gắn nhãn "ước tính nội bộ".</p>
     </div>
 
+  </div>
+</section>
+
+<!-- ============================ PHỤ LỤC — THUẬT NGỮ ============================ -->
+<section class="glossary-section" id="glossary">
+  <div class="container">
+    <div class="section-tag">Phụ lục · Thuật ngữ</div>
+    <h2>Từ điển thuật ngữ kinh tế &amp; tài chính</h2>
+    <p class="section-desc">
+      Tổng hợp toàn bộ thuật ngữ kinh tế &amp; tài chính được dùng xuyên suốt bản kế hoạch.
+      Mỗi thuật ngữ được giải thích bằng tiếng Việt dễ hiểu và gắn trực tiếp với con số thực tế
+      của ElderCare VN, để người đọc đối chiếu nhanh khi gặp trong các phần trước.
+    </p>
+
+    <h3 class="fin-sub"><span class="badge-n">1</span> Kinh tế đơn vị (Unit Economics)</h3>
+    <table class="deep-table">
+      <tr><th>Thuật ngữ</th><th>Giải thích &amp; giá trị trong dự án</th></tr>
+      <tr><td><span class="term">Doanh thu bình quân/khách <span class="en">(ARPU — Average Revenue Per User)</span></span></td><td>Doanh thu thuần bình quân trên mỗi khách (gia đình) mỗi tháng. Dự án: <strong>~150k/gia đình/tháng</strong> (Năm 5).</td></tr>
+      <tr><td><span class="term">Chi phí thu hút khách <span class="en">(CAC — Customer Acquisition Cost)</span></span></td><td>Chi phí trung bình để có thêm 1 khách trả phí. Dự án: blended <strong>~480k/gia đình (~$19)</strong>.</td></tr>
+      <tr><td><span class="term">Giá trị vòng đời khách <span class="en">(LTV — Lifetime Value)</span></span></td><td>Tổng lợi nhuận gộp một khách mang lại trong cả vòng đời. Dự án: <strong>~2,8 triệu (~$110)</strong>.</td></tr>
+      <tr><td><span class="term">Tỷ lệ LTV/CAC</span></td><td>Thước đo hiệu quả tăng trưởng; trên 3× được coi là lành mạnh. Dự án: <strong>5,8×</strong>.</td></tr>
+      <tr><td><span class="term">Tỷ lệ rời bỏ <span class="en">(Churn)</span></span></td><td>Phần trăm khách ngừng dùng mỗi kỳ; nghịch đảo ra tuổi thọ khách. Dự án: <strong>3,3%/tháng → vòng đời ~30 tháng</strong>.</td></tr>
+      <tr><td><span class="term">Kỳ hoàn vốn CAC <span class="en">(Payback period)</span></span></td><td>Số tháng để doanh thu thuần bù lại chi phí thu hút khách (CAC). Dự án: <strong>~5,2 tháng</strong>.</td></tr>
+      <tr><td><span class="term">Nhóm khách theo kỳ / Tỷ lệ giữ chân <span class="en">(Cohort / Retention)</span></span></td><td>Theo dõi phần trăm khách của một tháng gia nhập còn ở lại qua thời gian.</td></tr>
+      <tr><td><span class="term">Doanh thu lặp lại <span class="en">(Recurring revenue)</span></span></td><td>Doanh thu đều đặn từ gói thuê bao (subscription) thay vì bán một lần.</td></tr>
+      <tr><td><span class="term">Doanh thu định kỳ tháng/năm <span class="en">(MRR / ARR)</span></span></td><td>Doanh thu định kỳ tính theo tháng (MRR) hoặc theo năm (ARR).</td></tr>
+      <tr><td><span class="term">Tổng giá trị giao dịch <span class="en">(GMV — Gross Merchandise Value)</span></span></td><td>Tổng giá trị giao dịch qua nền tảng (vd tổng tiền điều dưỡng); nền tảng chỉ giữ lại một phần.</td></tr>
+      <tr><td><span class="term">Tỷ lệ ăn chia <span class="en">(Take-rate)</span></span></td><td>Phần trăm nền tảng giữ lại trên mỗi giao dịch. Dự án: <strong>20% GMV điều dưỡng (CareConnect)</strong>.</td></tr>
+    </table>
+
+    <h3 class="fin-sub"><span class="badge-n">2</span> Báo cáo kết quả &amp; lợi nhuận (P&amp;L / Profitability)</h3>
+    <table class="deep-table">
+      <tr><th>Thuật ngữ</th><th>Giải thích &amp; giá trị trong dự án</th></tr>
+      <tr><td><span class="term">Doanh thu thuần <span class="en">(Net revenue)</span></span></td><td>Doanh thu sau khi trừ giảm trừ. Dự án: <strong>7,9 → 948 tỷ (Năm 1→5)</strong>.</td></tr>
+      <tr><td><span class="term">Giá vốn <span class="en">(COGS — Cost of Goods Sold)</span></span></td><td>Chi phí trực tiếp tạo ra dịch vụ.</td></tr>
+      <tr><td><span class="term">Biên lợi nhuận gộp <span class="en">(Gross margin)</span></span></td><td>(Doanh thu − giá vốn) chia cho doanh thu. Dự án: blended <strong>~62%</strong>.</td></tr>
+      <tr><td><span class="term">Chi phí vận hành <span class="en">(OpEx — Operating Expenses)</span></span></td><td>Chi phí vận hành: nhân sự, marketing, công nghệ, G&amp;A.</td></tr>
+      <tr><td><span class="term">EBITDA</span></td><td>Lợi nhuận trước lãi vay, thuế &amp; khấu hao — đo hiệu quả vận hành cốt lõi. Dự án: <strong>hòa vốn EBITDA Năm 5 (+30,2 tỷ)</strong>.</td></tr>
+      <tr><td><span class="term">EBIT</span></td><td>Lợi nhuận trước lãi vay &amp; thuế (sau khấu hao).</td></tr>
+      <tr><td><span class="term">Báo cáo KQKD <span class="en">(P&amp;L — Profit &amp; Loss)</span></span></td><td>Bảng tổng hợp doanh thu − chi phí → lãi/lỗ theo kỳ.</td></tr>
+      <tr><td><span class="term">Biên lãi ròng <span class="en">(NIM — Net Interest Margin)</span></span></td><td>Chênh lệch giữa lãi cho vay và chi phí vốn. Dự án: <strong>MedFin 6–9%/năm</strong>.</td></tr>
+    </table>
+
+    <h3 class="fin-sub"><span class="badge-n">3</span> Dòng tiền &amp; vốn (Cash &amp; Capital)</h3>
+    <table class="deep-table">
+      <tr><th>Thuật ngữ</th><th>Giải thích &amp; giá trị trong dự án</th></tr>
+      <tr><td><span class="term">Tốc độ đốt tiền <span class="en">(Burn rate)</span></span></td><td>Tiền mặt thâm hụt mỗi tháng khi chưa có lãi. Dự án: <strong>~2,7 tỷ/tháng (Năm 1)</strong>.</td></tr>
+      <tr><td><span class="term">Runway</span></td><td>Số tháng công ty còn trụ được với tiền mặt hiện có trước khi cần gọi vốn tiếp.</td></tr>
+      <tr><td><span class="term">Hòa vốn <span class="en">(Break-even)</span></span></td><td>Điểm doanh thu đủ bù toàn bộ chi phí. Dự án: <strong>Năm 5</strong>.</td></tr>
+      <tr><td><span class="term">Dòng tiền tự do <span class="en">(FCF — Free Cash Flow)</span></span></td><td>Tiền mặt còn lại sau chi phí vận hành &amp; đầu tư — đầu vào của định giá DCF.</td></tr>
+    </table>
+
+    <h3 class="fin-sub"><span class="badge-n">4</span> Gọi vốn &amp; sở hữu (Fundraising &amp; Ownership)</h3>
+    <table class="deep-table">
+      <tr><th>Thuật ngữ</th><th>Giải thích &amp; giá trị trong dự án</th></tr>
+      <tr><td><span class="term">Các vòng gọi vốn <span class="en">(Seed / Series A–C)</span></span></td><td>Các vòng gọi vốn theo giai đoạn. Dự án: <strong>38 → 150 → 510 → 1.275 tỷ</strong>.</td></tr>
+      <tr><td><span class="term">Định giá trước / sau tiền <span class="en">(Pre-money / Post-money valuation)</span></span></td><td>Định giá công ty trước / sau khi nhận tiền đầu tư (post = pre + số tiền gọi).</td></tr>
+      <tr><td><span class="term">Pha loãng <span class="en">(Dilution)</span></span></td><td>Phần trăm sở hữu giảm khi phát hành thêm cổ phần. Dự án: <strong>nhà sáng lập giữ ~34,3% sau Series C</strong>.</td></tr>
+      <tr><td><span class="term">Bảng cơ cấu vốn <span class="en">(Cap table)</span></span></td><td>Bảng liệt kê ai sở hữu bao nhiêu phần trăm qua các vòng.</td></tr>
+      <tr><td><span class="term">Quỹ cổ phần nhân viên <span class="en">(ESOP — Employee Stock Option Pool)</span></span></td><td>Quỹ cổ phần dành cho nhân viên. Dự án: <strong>12% ban đầu</strong>.</td></tr>
+      <tr><td><span class="term">Gọi vốn theo cột mốc <span class="en">(Milestone-based funding)</span></span></td><td>Mỗi vòng chỉ mở khóa khi đạt cột mốc (PMF, số gia đình, unit-econ dương…).</td></tr>
+    </table>
+
+    <h3 class="fin-sub"><span class="badge-n">5</span> Định giá (Valuation)</h3>
+    <table class="deep-table">
+      <tr><th>Thuật ngữ</th><th>Giải thích &amp; giá trị trong dự án</th></tr>
+      <tr><td><span class="term">Chiết khấu dòng tiền <span class="en">(DCF — Discounted Cash Flow)</span></span></td><td>Định giá bằng cách chiết khấu dòng tiền tương lai về hiện tại. Dự án: <strong>EV base ~1.740 tỷ (~$68M)</strong>.</td></tr>
+      <tr><td><span class="term">Suất chiết khấu <span class="en">(WACC — Weighted Average Cost of Capital)</span></span></td><td>Tỷ lệ chiết khấu phản ánh rủi ro &amp; chi phí vốn. Dự án: <strong>~20%</strong>.</td></tr>
+      <tr><td><span class="term">Mô hình định giá tài sản vốn <span class="en">(CAPM)</span></span></td><td>Công thức tính chi phí vốn cổ phần: Ke = Rf + β×ERP.</td></tr>
+      <tr><td><span class="term">Hệ số beta <span class="en">(β)</span></span></td><td>Độ nhạy rủi ro của ngành so với thị trường. Dự án: <strong>1,11 (Healthcare Info &amp; Tech)</strong>.</td></tr>
+      <tr><td><span class="term">Phần bù rủi ro vốn cổ phần <span class="en">(ERP — Equity Risk Premium)</span></span></td><td>Lợi suất tăng thêm nhà đầu tư đòi hỏi so với phi rủi ro. Dự án: <strong>8,13%</strong>.</td></tr>
+      <tr><td><span class="term">Lãi suất phi rủi ro <span class="en">(Rf — Risk-free rate)</span></span></td><td>Lợi suất trái phiếu chính phủ. Dự án: <strong>4,5% (TPCP VN 10 năm)</strong>.</td></tr>
+      <tr><td><span class="term">Giá trị cuối kỳ <span class="en">(Terminal value)</span></span></td><td>Giá trị doanh nghiệp sau giai đoạn dự phóng rõ ràng. Dự án: <strong>948 tỷ × 5,0 = 4.740 tỷ → PV 1.905 tỷ</strong>.</td></tr>
+      <tr><td><span class="term">Bội số thoái vốn <span class="en">(Exit multiple)</span></span></td><td>Bội số (vd ×EBITDA hay ×doanh thu) giả định khi thoái vốn. Dự án: <strong>5,0× (base)</strong>.</td></tr>
+      <tr><td><span class="term">Giá trị hiện tại (ròng) <span class="en">(NPV / PV)</span></span></td><td>Giá trị hiện tại (ròng) của dòng tiền tương lai sau chiết khấu.</td></tr>
+      <tr><td><span class="term">Phân tích độ nhạy <span class="en">(Sensitivity analysis)</span></span></td><td>Chạy nhiều kịch bản đổi giả định. Dự án: <strong>Bear ~460 tỷ / Base ~1.740 tỷ / Bull ~4.160 tỷ</strong>.</td></tr>
+      <tr><td><span class="term">Phần bù giai đoạn <span class="en">(Stage premium)</span></span></td><td>Rủi ro cộng thêm cho startup giai đoạn sớm. Dự án: <strong>+6,5%</strong>.</td></tr>
+      <tr><td><span class="term">Giá trị doanh nghiệp <span class="en">(EV — Enterprise Value)</span></span></td><td>Tổng giá trị hoạt động kinh doanh.</td></tr>
+    </table>
+
+    <h3 class="fin-sub"><span class="badge-n">6</span> Thị trường &amp; chiến lược (Market &amp; Strategy)</h3>
+    <table class="deep-table">
+      <tr><th>Thuật ngữ</th><th>Giải thích &amp; giá trị trong dự án</th></tr>
+      <tr><td><span class="term">TAM / SAM / SOM</span></td><td>Tổng cầu / thị trường phục vụ được / thị phần mục tiêu. Dự án: <strong>115k / 18k / 900 tỷ (Năm 5)</strong>.</td></tr>
+      <tr><td><span class="term">Sản phẩm khớp thị trường <span class="en">(PMF — Product-Market Fit)</span></span></td><td>Điểm sản phẩm thực sự khớp nhu cầu thị trường (giữ chân &amp; truyền miệng tốt).</td></tr>
+      <tr><td><span class="term">B2B2C</span></td><td>Bán qua một tổ chức trung gian (bảo hiểm/doanh nghiệp/phường hội) để tới người dùng cuối.</td></tr>
+      <tr><td><span class="term">Cấp vốn rồi chuyển giao <span class="en">(Originate-to-distribute)</span></span></td><td>Cấp khoản vay rồi chuyển cho bên thứ ba (ngân hàng) nắm giữ — giảm rủi ro nợ xấu trên bảng cân đối. Dùng cho MedFin.</td></tr>
+      <tr><td><span class="term">Default alive</span></td><td>Trạng thái tự sống được tới hòa vốn mà không cần gọi thêm vốn.</td></tr>
+      <tr><td><span class="term">Phễu tăng trưởng <span class="en">(AARRR funnel)</span></span></td><td>Phễu tăng trưởng: Acquisition → Activation → Retention → Referral → Revenue.</td></tr>
+    </table>
+
+    <p class="tnote">Các con số trong bảng được trích từ chính bản kế hoạch ElderCare VN ở các phần phía trên (Tài chính, Marketing, Phân khúc…).</p>
   </div>
 </section>
 
