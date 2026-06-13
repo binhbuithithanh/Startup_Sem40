@@ -8,6 +8,10 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -551,7 +555,7 @@
 
     /* BOTTOM SHEET */
     .sheet-overlay {
-      position: absolute; inset: 0; z-index: 55;
+      position: absolute; inset: 0; z-index: 66;
       background: rgba(0,0,0,0.42); display: none; align-items: flex-end;
     }
     .sheet-overlay.show { display: flex; }
@@ -662,6 +666,108 @@
     .verify-result.show { display: block; animation: fade .3s ease; }
     .verify-result .vr-title { font-weight: 900; color: #047857; font-size: 0.95rem; }
     .verify-result .vr-row { font-size: 0.78rem; color: #065f46; margin-top: 0.3rem; }
+
+    /* NEARBY RADAR — quét người chăm địa phương */
+    .nearby-wrap { background: var(--light); height: 100%; display: flex; flex-direction: column; }
+    .nearby-head {
+      background: linear-gradient(135deg, #0d9488, #0f766e); color: #fff;
+      padding: 1rem 1.1rem; display: flex; align-items: center; gap: 0.7rem; flex-shrink: 0;
+    }
+    .nearby-head .nb-close { margin-left: auto; background: rgba(255,255,255,0.18); border: none; color: #fff;
+      width: 32px; height: 32px; border-radius: 50%; font-size: 1rem; cursor: pointer; }
+    .nearby-body { flex: 1; overflow-y: auto; padding: 1rem 1.1rem; }
+    .loc-bar {
+      display: flex; align-items: center; gap: 0.45rem; width: 100%; text-align: left;
+      background: #fff; border: 1px solid var(--border); border-radius: 12px; cursor: pointer;
+      padding: 0.6rem 0.85rem; font-size: 0.78rem; font-weight: 700; color: var(--primary);
+      font-family: inherit; transition: all .15s;
+    }
+    .loc-bar:active { transform: scale(0.99); }
+    .loc-bar .lb-sub { font-weight: 500; color: var(--muted); }
+    .loc-bar .lb-change { margin-left: auto; flex-shrink: 0; color: var(--care);
+      font-size: 0.72rem; font-weight: 800; background: #f0fdfa; padding: 3px 9px; border-radius: 99px; }
+
+    /* view toggle: radar / map */
+    .nb-viewtabs { display: flex; gap: 0.4rem; background: #eef2f1; border-radius: 99px; padding: 3px; margin: 0.7rem 0 0.2rem; }
+    .nb-viewtab { flex: 1; border: none; background: transparent; font-family: inherit; cursor: pointer;
+      font-size: 0.78rem; font-weight: 700; color: var(--muted); padding: 0.45rem; border-radius: 99px; transition: all .15s; }
+    .nb-viewtab.active { background: #fff; color: var(--care); box-shadow: 0 1px 4px rgba(0,0,0,0.1); }
+
+    /* filter chips by caregiver type */
+    .nb-filters { display: flex; gap: 0.4rem; overflow-x: auto; padding: 0.2rem 0 0.1rem; margin: 0.4rem 0 0.2rem; -webkit-overflow-scrolling: touch; }
+    .nb-filters::-webkit-scrollbar { display: none; }
+    .nb-fchip { flex-shrink: 0; border: 1.5px solid var(--border); background: #fff; font-family: inherit;
+      font-size: 0.74rem; font-weight: 700; color: var(--muted); padding: 0.35rem 0.8rem; border-radius: 99px; cursor: pointer; transition: all .15s; }
+    .nb-fchip.active { border-color: var(--care); background: #f0fdfa; color: var(--care); }
+
+    /* real map (Leaflet / OpenStreetMap) */
+    #nearbyMap { width: 100%; height: 260px; border-radius: 16px; margin: 0.6rem 0 0.2rem;
+      border: 1px solid rgba(13,148,136,0.3); display: none; z-index: 1; }
+    .map-home { width: 38px; height: 38px; border-radius: 50%; background: var(--care);
+      border: 2px solid #fff; display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; box-shadow: 0 2px 8px rgba(0,0,0,0.4); }
+    .map-blip { width: 32px; height: 32px; border-radius: 50%; background: #fff; border: 2px solid var(--care);
+      display: flex; align-items: center; justify-content: center; font-size: 0.95rem; box-shadow: 0 2px 8px rgba(0,0,0,0.35); }
+    .leaflet-popup-content { font-family: 'Inter', sans-serif; font-size: 0.78rem; line-height: 1.45; margin: 0.6rem 0.7rem; }
+    .leaflet-popup-content b { color: var(--care); }
+
+    .radar {
+      position: relative; width: 250px; height: 250px; margin: 1.1rem auto 0.5rem;
+      border-radius: 50%; overflow: hidden;
+      background: radial-gradient(circle at center, #0e3a35 0%, #0a1c2b 82%);
+      border: 1px solid rgba(45,212,191,0.4);
+      box-shadow: inset 0 0 32px rgba(0,0,0,0.45), 0 10px 26px rgba(13,148,136,0.28);
+    }
+    .radar .ring { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+      border: 1px solid rgba(45,212,191,0.22); border-radius: 50%; }
+    .radar .ring.r1 { width: 33%; height: 33%; }
+    .radar .ring.r2 { width: 66%; height: 66%; }
+    .radar .ring.r3 { width: 99%; height: 99%; }
+    .radar .axis { position: absolute; background: rgba(45,212,191,0.16); }
+    .radar .axis.h { top: 50%; left: 0; right: 0; height: 1px; }
+    .radar .axis.v { left: 50%; top: 0; bottom: 0; width: 1px; }
+    .radar .sweep { position: absolute; inset: 0; border-radius: 50%; display: none;
+      background: conic-gradient(from 0deg, rgba(45,212,191,0) 0deg, rgba(45,212,191,0) 290deg, rgba(45,212,191,0.12) 330deg, rgba(94,234,212,0.55) 360deg); }
+    .radar.scanning .sweep { display: block; animation: radarsweep 1.5s linear infinite; }
+    @keyframes radarsweep { to { transform: rotate(360deg); } }
+    .radar .center-pin {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); z-index: 3;
+      width: 36px; height: 36px; border-radius: 50%;
+      background: rgba(94,234,212,0.18); border: 1.5px solid var(--care-bright);
+      display: flex; align-items: center; justify-content: center; font-size: 1.05rem;
+      animation: pulse 2s infinite;
+    }
+    .radar .center-label { position: absolute; top: calc(50% + 24px); left: 50%; transform: translateX(-50%);
+      font-size: 0.6rem; font-weight: 700; color: var(--care-bright); white-space: nowrap; z-index: 3; }
+    .radar .blip {
+      position: absolute; width: 30px; height: 30px; margin: -15px 0 0 -15px; border-radius: 50%;
+      background: #fff; border: 2px solid var(--care); z-index: 4; cursor: pointer;
+      display: flex; align-items: center; justify-content: center; font-size: 0.9rem;
+      opacity: 0; transform: scale(0.3); box-shadow: 0 3px 10px rgba(0,0,0,0.35);
+      transition: opacity .35s ease, transform .35s ease;
+    }
+    .radar .blip.show { opacity: 1; transform: scale(1); }
+    .radar .blip:active { transform: scale(0.88); }
+
+    .nearby-count { display: none; background: #ecfdf5; border: 1px solid #a7f3d0; color: #065f46;
+      border-radius: 12px; padding: 0.7rem 0.9rem; font-size: 0.85rem; text-align: center; margin: 0.5rem 0 0.2rem; }
+    .nearby-count.show { display: block; animation: fade .3s ease; }
+
+    .nb-card { background: #fff; border: 1px solid var(--border); border-radius: 14px;
+      padding: 0.85rem; margin-bottom: 0.7rem; animation: fade .35s ease; }
+    .nb-top { display: flex; align-items: flex-start; gap: 0.6rem; }
+    .nb-ava { width: 46px; height: 46px; border-radius: 13px; background: #f0fdfa; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center; font-size: 1.6rem; }
+    .nb-name { font-weight: 800; font-size: 0.88rem; }
+    .nb-role { font-size: 0.74rem; color: var(--care); font-weight: 600; }
+    .nb-meta { font-size: 0.74rem; color: var(--muted); margin-top: 0.1rem; }
+    .nb-tag { background: #fef3c7; color: #b45309; font-size: 0.62rem; font-weight: 800;
+      padding: 3px 9px; border-radius: 99px; white-space: nowrap; flex-shrink: 0; }
+    .nb-sub { font-size: 0.74rem; color: var(--muted); margin-top: 0.5rem; }
+    .nb-skills { margin-top: 0.35rem; }
+    .nb-acts { display: flex; gap: 0.5rem; margin-top: 0.65rem; }
+    .nb-acts .btn { flex: 1; }
+    .nearby-cta { background: linear-gradient(135deg, #f0fdfa, #e0f2fe); border-color: #99f6e4; }
 
     /* FALL / EMERGENCY OVERLAY */
     .fall-overlay {
@@ -834,6 +940,48 @@
         </div>
       </div>
 
+      <!-- NEARBY RADAR OVERLAY -->
+      <div class="overlay-screen" id="nearbyOverlay">
+        <div class="nearby-wrap">
+          <div class="nearby-head">
+            <span style="font-size:1.3rem">📍</span>
+            <div><div style="font-weight:900;font-size:1rem">Người chăm quanh đây</div>
+              <div style="font-size:0.7rem;opacity:0.9">Quét địa phương · điều dưỡng &amp; hộ lý gần bạn</div></div>
+            <button class="nb-close" onclick="closeNearby()">✕</button>
+          </div>
+          <div class="nearby-body">
+            <button class="loc-bar" onclick="openAreaPicker()">📌 <span id="nearbyAddr">—</span><span class="lb-change">Đổi địa bàn ›</span></button>
+
+            <div class="nb-viewtabs">
+              <button class="nb-viewtab active" id="vt-radar" onclick="setNearbyView('radar')">📡 Radar</button>
+              <button class="nb-viewtab" id="vt-map" onclick="setNearbyView('map')">🗺️ Bản đồ thật</button>
+            </div>
+
+            <div class="radar" id="radar">
+              <div class="ring r1"></div><div class="ring r2"></div><div class="ring r3"></div>
+              <div class="axis h"></div><div class="axis v"></div>
+              <div class="sweep"></div>
+              <div class="center-pin">🏠</div>
+              <div class="center-label" id="radarLabel">Nhà người thân</div>
+            </div>
+
+            <div id="nearbyMap"></div>
+
+            <div style="text-align:center;font-size:0.7rem;color:var(--muted);margin:0.4rem 0 0.5rem">Bán kính quét: <b>3 km</b> · ưu tiên người ở gần để đến nhanh</div>
+
+            <button class="btn btn-primary" id="nearbyScanBtn" style="width:100%" onclick="runNearbyScan()">📡 Quét quanh đây tìm người chăm</button>
+
+            <div class="nearby-count" id="nearbyCount"></div>
+            <div class="nb-filters" id="nearbyFilters" style="display:none"></div>
+            <div id="nearbyResults"></div>
+
+            <div class="card" style="text-align:center;background:#f0fdfa;border-color:#99f6e4;margin-top:0.3rem">
+              <div style="font-size:0.74rem;color:#0f766e;font-weight:600">💡 Mạng lưới <b>người lao động địa phương</b> — tạo việc làm tại chỗ. Tất cả đều có <b>giấy phép/chứng chỉ</b>, xác minh <b>lý lịch tư pháp</b> &amp; đánh giá thật.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <!-- FALL / EMERGENCY OVERLAY -->
       <div class="fall-overlay" id="fallOverlay">
         <div class="fo-icon" id="foIcon">🚨</div>
@@ -958,7 +1106,16 @@
           { ico:'🏥', name:'Trả góp khớp háng — kỳ 3', time:'05/06', amt:'−3.750.000đ' }
         ]
       },
-      fall: { loc:'📹 Phòng khách · 14:32' }
+      fall: { loc:'📹 Phòng khách · 14:32' },
+      addr: 'Phường Khương Trung · Q. Thanh Xuân · Hà Nội',
+      home: { lat: 21.0006, lng: 105.8203 },
+      nearby: [
+        { ava:'👩‍⚕️', name:'ĐD Hương', type:'nurse', role:'Điều dưỡng lão khoa', star:'4.9', km:'0,8', eta:'~10 phút', price:'120k/giờ', ward:'cùng phường Khương Trung', tag:'Sẵn sàng ngay', skills:['Tiêm/truyền','Chăm tiểu đường','Đo sinh hiệu'], deg:300, dist:0.42 },
+        { ava:'🧑‍⚕️', name:'Hộ lý Tuấn', type:'aide', role:'Hộ lý · chăm tại nhà', star:'4.8', km:'1,2', eta:'~15 phút', price:'90k/giờ', ward:'P. Khương Đình', tag:'Rảnh chiều nay', skills:['Vệ sinh cá nhân','Hỗ trợ ăn uống'], deg:40, dist:0.58 },
+        { ava:'🏃', name:'KTV Nam', type:'rehab', role:'Vật lý trị liệu tại nhà', star:'4.8', km:'2,3', eta:'~22 phút', price:'150k/buổi', ward:'P. Thanh Xuân Trung', tag:'Đặt trước 1 ngày', skills:['Phục hồi khớp','Tập đi bộ'], deg:160, dist:0.84 },
+        { ava:'🧕', name:'Cô Lan', type:'helper', role:'Người chăm bán thời gian', star:'4.7', km:'1,6', eta:'~18 phút', price:'70k/giờ', ward:'P. Hạ Đình', tag:'Theo giờ', skills:['Đưa đón đi khám','Nấu ăn kiêng'], deg:215, dist:0.7 },
+        { ava:'👨‍⚕️', name:'ĐD Phúc', type:'nurse', role:'Điều dưỡng · tiêm tại nhà', star:'4.6', km:'2,9', eta:'~25 phút', price:'110k/giờ', ward:'P. Nhân Chính', tag:'Sẵn sàng tối nay', skills:['Tiêm/truyền','Đo sinh hiệu'], deg:100, dist:0.92 }
+      ]
     },
 
     tam: {
@@ -1048,9 +1205,31 @@
           { ico:'🏃', name:'Phục hồi chức năng — kỳ 2', time:'05/06', amt:'−3.000.000đ' }
         ]
       },
-      fall: { loc:'📹 Phòng ngủ · 14:32' }
+      fall: { loc:'📹 Phòng ngủ · 14:32' },
+      addr: 'Phường Nghĩa Tân · Q. Cầu Giấy · Hà Nội',
+      home: { lat: 21.0352, lng: 105.7900 },
+      nearby: [
+        { ava:'👨‍⚕️', name:'ĐD Bình', type:'nurse', role:'Điều dưỡng trực 24/7', star:'4.9', km:'0,6', eta:'~8 phút', price:'140k/giờ', ward:'cùng phường Nghĩa Tân', tag:'Sẵn sàng ngay', skills:['Chăm sa sút trí tuệ','Phòng té ngã','Cho ăn an toàn'], deg:305, dist:0.4 },
+        { ava:'🧑‍⚕️', name:'Hộ lý Dũng', type:'aide', role:'Hộ lý trực đêm', star:'4.8', km:'1,1', eta:'~12 phút', price:'1,2tr/đêm', ward:'P. Dịch Vọng', tag:'Nhận ca đêm nay', skills:['Trực đêm','Xoay trở chống loét'], deg:45, dist:0.56 },
+        { ava:'🤝', name:'CV Hà', type:'social', role:'Công tác xã hội · phòng đi lạc', star:'4.7', km:'1,7', eta:'~16 phút', price:'Theo buổi', ward:'P. Mai Dịch', tag:'Tư vấn miễn phí', skills:['Định vị GPS','Hỗ trợ giám hộ'], deg:215, dist:0.7 },
+        { ava:'🏃', name:'KTV Dũng', type:'rehab', role:'PHCN sau đột quỵ', star:'4.8', km:'2,4', eta:'~20 phút', price:'150k/buổi', ward:'P. Quan Hoa', tag:'Đặt trước 1 ngày', skills:['Tập vận động','Chống cứng khớp'], deg:160, dist:0.86 },
+        { ava:'🧕', name:'Cô Thu', type:'helper', role:'Người chăm ban ngày', star:'4.6', km:'3,0', eta:'~24 phút', price:'80k/giờ', ward:'P. Yên Hòa', tag:'Rảnh ban ngày', skills:['Trò chuyện chống lú lẫn','Cho ăn an toàn'], deg:110, dist:0.93 }
+      ]
     }
   };
+
+  // địa bàn Hà Nội (đổi địa bàn quét) + nhãn loại người chăm
+  var AREAS = [
+    { name: 'Q. Thanh Xuân · Hà Nội', lat: 21.0006, lng: 105.8203 },
+    { name: 'Q. Cầu Giấy · Hà Nội', lat: 21.0352, lng: 105.7900 },
+    { name: 'Q. Đống Đa · Hà Nội', lat: 21.0190, lng: 105.8290 },
+    { name: 'Q. Hoàn Kiếm · Hà Nội', lat: 21.0285, lng: 105.8542 },
+    { name: 'Q. Hai Bà Trưng · Hà Nội', lat: 21.0050, lng: 105.8560 },
+    { name: 'Q. Hà Đông · Hà Nội', lat: 20.9710, lng: 105.7788 },
+    { name: 'Q. Tây Hồ · Hà Nội', lat: 21.0700, lng: 105.8200 }
+  ];
+  var TYPE_LABELS = { nurse:'Điều dưỡng', aide:'Hộ lý', rehab:'PHCN/VLTL', helper:'Người chăm', social:'CTXH' };
+  var TYPE_ORDER = ['nurse', 'aide', 'rehab', 'helper', 'social'];
 
   // ~12 nhóm chuyên gia (ma trận P3) — danh bạ khám từ xa
   var DIRECTORY = [
@@ -1128,6 +1307,7 @@
         '<button class="quick-btn" onclick="openPharmacy()"><span class="qb-ico">💊</span>Mua thuốc</button>' +
       '</div></div>' +
       '<div class="card"><div class="card-title">✨ Tiện ích khác</div><div class="extra-grid">' +
+        '<button class="extra-chip" onclick="openNearby()"><span class="ec-ico">📍</span>Người chăm quanh đây</button>' +
         '<button class="extra-chip" onclick="toast(\'👨‍👩‍👧 Cộng đồng con-chăm-bố-mẹ — sắp ra mắt\')"><span class="ec-ico">👨‍👩‍👧</span>Cộng đồng người chăm</button>' +
         '<button class="extra-chip" onclick="toast(\'🚗 Đặt xe đưa đón đi khám — sắp ra mắt\')"><span class="ec-ico">🚗</span>Đưa đón đi khám</button>' +
         '<button class="extra-chip" onclick="toast(\'🛒 Marketplace thiết bị y tế — sắp ra mắt\')"><span class="ec-ico">🛒</span>Thiết bị y tế</button>' +
@@ -1168,6 +1348,9 @@
       '</div>' +
 
       '<div class="sub-panel" data-sub="care-new" style="display:none">' +
+        '<div class="card nearby-cta"><div class="card-title">📍 Quét quanh đây tìm người chăm</div>' +
+          '<div style="font-size:0.8rem;color:#0f766e;margin-bottom:0.7rem">Tìm điều dưỡng, hộ lý &amp; người chăm <b>địa phương</b> đã xác minh trong bán kính 3km quanh nhà ' + p.short + ' — đến trong ngày.</div>' +
+          '<button class="btn btn-primary" style="width:100%" onclick="openNearby()">📡 Quét người chăm gần đây</button></div>' +
         '<div class="card"><div class="card-title">⭐ Điều dưỡng gợi ý gần bạn</div>' +
           caregiverCard('👨‍⚕️','Điều dưỡng Tuấn','4.8','100k/giờ · cách 1,2km','Cấp 2') +
           caregiverCard('👩‍⚕️','Điều dưỡng Hương','4.9','120k/giờ · cách 2,5km','Cấp 3') +
@@ -1650,6 +1833,235 @@
     stopFallTimer();
     document.getElementById('fallOverlay').classList.remove('show');
     toast('🆘 Đã gọi tổng đài & báo con cái/người giám hộ!');
+  }
+
+  // ===== nearby radar + map (quét người chăm địa phương) =====
+  var nbTimers = [];
+  var nbView = 'radar', nbFilter = 'all', nbArea = null, nbRevealed = false;
+  var nbMap = null, nbHomeMarker = null, nbMarkers = [];
+  function clearNbTimers() { for (var i = 0; i < nbTimers.length; i++) clearTimeout(nbTimers[i]); nbTimers = []; }
+
+  function filteredNearby(p) {
+    return (nbFilter === 'all') ? p.nearby : p.nearby.filter(function (n) { return n.type === nbFilter; });
+  }
+
+  function buildRadarBlips(p) {
+    var radar = document.getElementById('radar');
+    var old = radar.querySelectorAll('.blip');
+    for (var i = 0; i < old.length; i++) radar.removeChild(old[i]);
+    p.nearby.forEach(function (n) {
+      var rad = n.deg * Math.PI / 180;
+      var R = n.dist * 46; // % bán kính (radar ~ nửa rộng)
+      var x = 50 + R * Math.cos(rad);
+      var y = 50 + R * Math.sin(rad);
+      var b = document.createElement('div');
+      b.className = 'blip';
+      b.setAttribute('data-type', n.type);
+      b.style.left = x + '%';
+      b.style.top = y + '%';
+      b.textContent = n.ava;
+      b.setAttribute('title', n.name);
+      b.onclick = function () { toast('📍 ' + n.name + ' · cách ' + n.km + 'km · ' + n.eta); };
+      radar.appendChild(b);
+    });
+  }
+  function applyFilterToBlips() {
+    var blips = document.querySelectorAll('#radar .blip');
+    for (var i = 0; i < blips.length; i++) {
+      var match = (nbFilter === 'all' || blips[i].getAttribute('data-type') === nbFilter);
+      blips[i].style.display = match ? '' : 'none';
+      if (nbRevealed && match) blips[i].classList.add('show');
+    }
+  }
+
+  function openNearby() {
+    var p = P();
+    nbView = 'radar'; nbFilter = 'all'; nbRevealed = false;
+    nbArea = { name: p.addr, lat: p.home.lat, lng: p.home.lng };
+    document.getElementById('nearbyAddr').textContent = p.addr;
+    document.getElementById('radarLabel').textContent = 'Nhà ' + p.short;
+    document.getElementById('radar').classList.remove('scanning');
+    document.getElementById('radar').style.display = '';
+    document.getElementById('nearbyMap').style.display = 'none';
+    document.getElementById('vt-radar').classList.add('active');
+    document.getElementById('vt-map').classList.remove('active');
+    document.getElementById('nearbyCount').className = 'nearby-count';
+    document.getElementById('nearbyCount').innerHTML = '';
+    document.getElementById('nearbyFilters').style.display = 'none';
+    document.getElementById('nearbyFilters').innerHTML = '';
+    document.getElementById('nearbyResults').innerHTML = '';
+    var btn = document.getElementById('nearbyScanBtn');
+    btn.style.display = ''; btn.disabled = false;
+    btn.textContent = '📡 Quét quanh đây tìm người chăm';
+    clearNbTimers();
+    buildRadarBlips(p);
+    document.getElementById('nearbyOverlay').classList.add('show');
+  }
+  function closeNearby() {
+    document.getElementById('nearbyOverlay').classList.remove('show');
+    document.getElementById('radar').classList.remove('scanning');
+    clearNbTimers();
+  }
+
+  function runNearbyScan() {
+    var p = P(), radar = document.getElementById('radar');
+    var btn = document.getElementById('nearbyScanBtn');
+    radar.classList.add('scanning');
+    btn.disabled = true;
+    btn.textContent = '📡 Đang quét quanh đây...';
+    document.getElementById('nearbyCount').className = 'nearby-count';
+    document.getElementById('nearbyResults').innerHTML = '';
+    var blips = radar.querySelectorAll('.blip');
+    for (var i = 0; i < blips.length; i++) blips[i].classList.remove('show');
+    clearNbTimers();
+    // hiện từng blip dần như đang dò được tín hiệu
+    p.nearby.forEach(function (n, idx) {
+      nbTimers.push(setTimeout(function () {
+        if (blips[idx]) blips[idx].classList.add('show');
+      }, 550 + idx * 360));
+    });
+    // kết thúc quét → hiện kết quả
+    nbTimers.push(setTimeout(function () {
+      radar.classList.remove('scanning');
+      btn.style.display = 'none';
+      revealNearby(p);
+    }, 600 + p.nearby.length * 360 + 350));
+  }
+
+  function revealNearby(p) {
+    nbRevealed = true;
+    buildFilterChips(p);
+    renderNearbyResults(p);
+    if (nbView === 'map') { ensureMap(); renderMapMarkers(p); }
+  }
+
+  function buildFilterChips(p) {
+    var types = [];
+    TYPE_ORDER.forEach(function (t) {
+      if (p.nearby.some(function (n) { return n.type === t; })) types.push(t);
+    });
+    var html = '<button class="nb-fchip' + (nbFilter === 'all' ? ' active' : '') + '" onclick="setNearbyFilter(\'all\')">Tất cả</button>';
+    types.forEach(function (t) {
+      html += '<button class="nb-fchip' + (nbFilter === t ? ' active' : '') + '" onclick="setNearbyFilter(\'' + t + '\')">' + TYPE_LABELS[t] + '</button>';
+    });
+    var fb = document.getElementById('nearbyFilters');
+    fb.innerHTML = html;
+    fb.style.display = 'flex';
+  }
+  function setNearbyFilter(t) {
+    nbFilter = t;
+    var p = P();
+    buildFilterChips(p);
+    renderNearbyResults(p);
+    applyFilterToBlips();
+    if (nbMap) renderMapMarkers(p);
+  }
+
+  function renderNearbyResults(p) {
+    var list = filteredNearby(p);
+    var cnt = document.getElementById('nearbyCount');
+    var what = (nbFilter === 'all') ? 'người chăm' : TYPE_LABELS[nbFilter];
+    cnt.innerHTML = '📍 Tìm thấy <b>' + list.length + ' ' + what + '</b> quanh ' + nbArea.name.split(' · ')[0] + ' · bán kính 3km';
+    cnt.className = 'nearby-count show';
+    document.getElementById('nearbyResults').innerHTML = list.length
+      ? list.map(nearbyCard).join('')
+      : '<div style="text-align:center;color:var(--muted);font-size:0.82rem;padding:1rem">Không có ' + what + ' trong bán kính. Thử mở rộng hoặc đổi địa bàn.</div>';
+  }
+
+  // view toggle radar / map
+  function setNearbyView(v) {
+    nbView = v;
+    document.getElementById('vt-radar').classList.toggle('active', v === 'radar');
+    document.getElementById('vt-map').classList.toggle('active', v === 'map');
+    document.getElementById('radar').style.display = (v === 'radar') ? '' : 'none';
+    document.getElementById('nearbyMap').style.display = (v === 'map') ? 'block' : 'none';
+    if (v === 'radar' && nbRevealed) applyFilterToBlips();
+    if (v === 'map') {
+      var p = P();
+      if (!nbRevealed) { // chuyển sang bản đồ là thấy luôn, không cần quét
+        document.getElementById('nearbyScanBtn').style.display = 'none';
+        revealNearby(p);
+      } else {
+        ensureMap(); renderMapMarkers(p);
+      }
+    }
+  }
+
+  function ensureMap() {
+    if (nbMap || typeof L === 'undefined') return;
+    nbMap = L.map('nearbyMap', { zoomControl: true, attributionControl: true })
+      .setView([nbArea.lat, nbArea.lng], 14);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+      { maxZoom: 19, attribution: '© OpenStreetMap' }).addTo(nbMap);
+  }
+  function renderMapMarkers(p) {
+    if (!nbMap) return;
+    for (var i = 0; i < nbMarkers.length; i++) nbMap.removeLayer(nbMarkers[i]);
+    nbMarkers = [];
+    if (nbHomeMarker) { nbMap.removeLayer(nbHomeMarker); nbHomeMarker = null; }
+    var homeIcon = L.divIcon({ className: '', html: '<div class="map-home">🏠</div>', iconSize: [38, 38], iconAnchor: [19, 19] });
+    nbHomeMarker = L.marker([nbArea.lat, nbArea.lng], { icon: homeIcon }).addTo(nbMap)
+      .bindPopup('🏠 <b>Nhà ' + p.short + '</b><br>' + nbArea.name);
+    var cosLat = Math.cos(nbArea.lat * Math.PI / 180);
+    filteredNearby(p).forEach(function (n) {
+      var km = parseFloat(String(n.km).replace(',', '.')) || 1;
+      var rad = n.deg * Math.PI / 180;
+      var dLat = (km / 111) * Math.sin(rad);
+      var dLng = (km / (111 * cosLat)) * Math.cos(rad);
+      var ic = L.divIcon({ className: '', html: '<div class="map-blip">' + n.ava + '</div>', iconSize: [32, 32], iconAnchor: [16, 16] });
+      var m = L.marker([nbArea.lat + dLat, nbArea.lng + dLng], { icon: ic, title: n.name }).addTo(nbMap)
+        .bindPopup('<b>' + n.name + '</b> · ⭐' + n.star + '<br>' + n.role + '<br>📍 cách ' + n.km + 'km · ' + n.eta + '<br>💰 ' + n.price);
+      nbMarkers.push(m);
+    });
+    nbMap.setView([nbArea.lat, nbArea.lng], 14);
+    setTimeout(function () { nbMap.invalidateSize(); }, 60);
+  }
+
+  // đổi địa bàn
+  function openAreaPicker() {
+    var html = '<h3>📍 Đổi địa bàn quét</h3><div class="sh-sub2">Chọn khu vực ở Hà Nội — bản đồ &amp; radar sẽ quét lại quanh địa bàn mới.</div>';
+    AREAS.forEach(function (a, i) {
+      var cur = (nbArea && a.name === nbArea.name);
+      html += '<button class="ob-opt' + (cur ? ' sel' : '') + '" onclick="pickArea(' + i + ')">' +
+        '📌 ' + a.name + (cur ? ' · đang quét' : '') + '</button>';
+    });
+    openSheet(html);
+  }
+  function pickArea(i) {
+    var a = AREAS[i], p = P();
+    nbArea = { name: a.name, lat: a.lat, lng: a.lng };
+    document.getElementById('nearbyAddr').textContent = a.name;
+    closeSheet();
+    toast('📍 Đang quét quanh ' + a.name.split(' · ')[0]);
+    if (nbMap) nbMap.setView([a.lat, a.lng], 14);
+    if (nbView === 'map') { ensureMap(); renderMapMarkers(p); if (!nbRevealed) revealNearby(p); }
+    else { // radar: quét lại để thấy hiệu ứng dò
+      document.getElementById('nearbyScanBtn').style.display = '';
+      document.getElementById('nearbyScanBtn').disabled = false;
+      document.getElementById('nearbyScanBtn').textContent = '📡 Quét quanh đây tìm người chăm';
+      document.getElementById('nearbyCount').className = 'nearby-count';
+      document.getElementById('nearbyFilters').style.display = 'none';
+      document.getElementById('nearbyResults').innerHTML = '';
+      nbRevealed = false; nbFilter = 'all';
+      var blips = document.querySelectorAll('#radar .blip');
+      for (var k = 0; k < blips.length; k++) { blips[k].classList.remove('show'); blips[k].style.display = ''; }
+      runNearbyScan();
+    }
+  }
+
+  function nearbyCard(n) {
+    var skills = n.skills.map(function (s) { return '<span class="skill-chip">' + s + '</span>'; }).join('');
+    return '<div class="nb-card"><div class="nb-top"><div class="nb-ava">' + n.ava + '</div>' +
+      '<div style="flex:1"><div class="nb-name">' + n.name + ' <span class="verify-chip">✔</span></div>' +
+      '<div class="nb-role">' + n.role + '</div>' +
+      '<div class="nb-meta"><span class="star">⭐ ' + n.star + '</span> · cách ' + n.km + 'km · ' + n.eta + '</div></div>' +
+      '<span class="nb-tag">' + n.tag + '</span></div>' +
+      '<div class="nb-sub">📍 ' + n.ward + ' · 💰 ' + n.price + ' · <span class="lic-chip">Lý lịch tư pháp ✔</span></div>' +
+      '<div class="nb-skills">' + skills + '</div>' +
+      '<div class="nb-acts">' +
+        '<button class="btn btn-ghost btn-sm" onclick="toast(\'💬 Đã mở khung chat với ' + n.name + '\')">💬 Nhắn</button>' +
+        '<button class="btn btn-primary btn-sm" onclick="toast(\'✅ Đã gửi yêu cầu đặt ' + n.name + ' — đến ' + n.eta + '\')">Đặt ngay</button>' +
+      '</div></div>';
   }
 
   // ===== init =====
