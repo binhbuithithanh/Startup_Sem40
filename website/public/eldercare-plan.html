@@ -692,6 +692,24 @@
         grid-template-areas: "kp" "ka" "kr" "vp" "cr" "ch" "cs" "cost" "rev"; }
       .bmc-cost ul, .bmc-rev ul { columns: 1; }
     }
+
+    /* ===== TAB CHUYÊN MÔN ===== */
+    .exp-steel { background: #fff5f6; border: 1px solid #fecdd3; border-left: 4px solid var(--coral); border-radius: 14px; padding: 1.4rem 1.6rem; margin: 1.25rem 0 0.5rem; }
+    .exp-steel .es-tag { font-size: 0.72rem; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; color: #be123c; margin-bottom: 0.4rem; }
+    .exp-steel .es-quote { font-size: 0.98rem; color: #7f1d1d; font-style: italic; line-height: 1.6; font-weight: 600; }
+    .exp-steel p { font-size: 0.84rem; color: #4b5563; line-height: 1.6; margin-top: 0.7rem; }
+    .exp-tier { display: grid; grid-template-columns: 36px 1fr; gap: 0.85rem; align-items: start; background: var(--light); border: 1px solid var(--border); border-radius: 12px; padding: 1rem 1.15rem; margin-bottom: 0.7rem; }
+    .exp-tier .et-n { width: 32px; height: 32px; border-radius: 8px; background: var(--care); color: #fff; font-weight: 800; font-size: 0.9rem; display: flex; align-items: center; justify-content: center; }
+    .exp-tier .et-name { font-size: 0.92rem; font-weight: 800; color: var(--primary); margin-bottom: 0.2rem; }
+    .exp-tier .et-desc { font-size: 0.82rem; color: #4b5563; line-height: 1.55; }
+    .exp-tier .et-desc strong { color: var(--care); }
+    .exp-mile { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px,1fr)); gap: 0.85rem; margin: 1.25rem 0 0.5rem; }
+    .exp-mile-card { background: #fff; border: 1px solid var(--border); border-top: 4px solid var(--care); border-radius: 14px; padding: 1.1rem 1.2rem; }
+    .exp-mile-card .em-when { font-size: 0.72rem; font-weight: 800; letter-spacing: 0.5px; text-transform: uppercase; color: var(--care); }
+    .exp-mile-card .em-scale { font-size: 0.74rem; color: var(--muted); margin: 0.15rem 0 0.5rem; }
+    .exp-mile-card ul { list-style: none; margin: 0; padding: 0; }
+    .exp-mile-card li { font-size: 0.8rem; color: #374151; line-height: 1.45; padding-left: 1rem; position: relative; margin-bottom: 0.3rem; }
+    .exp-mile-card li::before { content: '▸'; position: absolute; left: 0; color: var(--care); }
   </style>
 </head>
 <body>
@@ -740,6 +758,7 @@
   <a href="#competitors">🥊 Đối thủ</a>
   <a href="#fiveforces">🛡️ Five Forces</a>
   <a href="#canvas">🧩 Canvas</a>
+  <a href="#expertise">🧑‍⚕️ Chuyên môn</a>
   <a href="#glossary">📖 Thuật ngữ</a>
 </div>
 
@@ -3567,6 +3586,234 @@
         <a href="/eldercare">🎤 Pitch deck</a>
         <a href="/eldercare-app">📱 App demo</a>
         <a href="/eldercare-financial-model.xlsx" download>📊 Model tài chính (.xlsx)</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================ PHẢN BIỆN — NĂNG LỰC CHUYÊN MÔN ============================ -->
+<section class="comp-section" id="expertise">
+  <div class="container">
+    <div class="section-tag">Phản biện · Đội ngũ</div>
+    <h2>"Sáu founder không ai làm y/dược" —<br/>vì sao đây là khoảng trống lấp được, không phải tử huyệt</h2>
+    <p class="section-desc">
+      Đây là câu hỏi <strong>hợp lý nhất</strong> mà một nhà đầu tư tỉnh táo sẽ đặt ra. Phần này không né tránh: chúng tôi nêu thẳng phản biện, rồi chứng minh bằng <strong>bản chất mô hình kinh doanh</strong>, <strong>tiền lệ ngành</strong> và một <strong>kế hoạch nhân sự chuyên môn 4 tầng</strong> — chi phí kiểm soát được, đúng luật, và <strong>vẫn gọn trong OpEx của Kịch bản B (lãi ngay, net +10 tỷ Năm 1)</strong>.
+    </p>
+
+    <!-- 1 — STEEL-MAN PHẢN BIỆN -->
+    <div class="exp-steel">
+      <div class="es-tag">⚠️ Phản biện của nhà đầu tư (nêu nguyên văn, không làm nhẹ)</div>
+      <div class="es-quote">"Cả 6 nhà sáng lập đều nền tảng tài chính / kinh tế / công nghệ — không ai có background y, dược hay y tế. Một startup chăm sóc sức khỏe người già mà đội ngũ sáng lập thiếu chuyên môn lâm sàng thì khả năng thất bại rất cao."</div>
+      <p>Chúng tôi <strong>thừa nhận đây là rủi ro thật và là câu hỏi đúng đắn</strong>. Sai lầm sẽ là phủ nhận nó. Đúng đắn là trả lời bằng cấu trúc: (1) năng lực lõi nào thực sự quyết định thắng–thua của mô hình này, (2) chuyên môn lâm sàng được hợp thức hóa &amp; mua/thuê thế nào, (3) ngành đã có tiền lệ ra sao. Ba phần dưới trả lời lần lượt.</p>
+    </div>
+
+    <!-- 2 — BA LUẬN ĐIỂM BÁC BỎ -->
+    <h3 class="fin-sub"><span class="badge-n">1</span> Ba luận điểm bác bỏ</h3>
+    <p class="sub-desc">Không phải "chúng tôi cũng giỏi y khoa", mà là: <strong>năng lực quyết định thành bại của một nền tảng vận hành &amp; phân phối dịch vụ y tế nằm đúng sở trường của 6 founder</strong> — còn chuyên môn lâm sàng là thứ thuê &amp; hợp thức hóa được.</p>
+    <div class="comp-grid">
+
+      <div class="comp-card">
+        <div class="cc-head">
+          <span class="cc-logo">🧩</span>
+          <div><div class="cc-name">A · Bản chất công ty</div><div class="cc-pos">Nền tảng vận hành, không phải R&amp;D y khoa</div></div>
+        </div>
+        <div class="cc-meta">
+          <div class="cc-line">ElderCare là <strong>công ty nền tảng vận hành &amp; phân phối dịch vụ</strong>: marketplace điều dưỡng, telehealth kết nối, logistics dược. Chúng tôi <strong>không nghiên cứu–sản xuất thuốc hay thiết bị y tế</strong> (đó là việc của Kịch bản A, đã gác lại).</div>
+          <div class="cc-line"><span class="cc-lab">Vì vậy năng lực lõi =</span> vận hành chuẩn (SOP), xây lòng tin với người già &amp; con cái, công nghệ, tài chính / unit-economics, và tuân thủ pháp lý.</div>
+        </div>
+        <div class="cc-win"><strong>Đúng sở trường 6 founder:</strong> tài chính – công nghệ – vận hành – tăng trưởng. Đây mới là thứ làm vỡ hay thắng một marketplace dịch vụ, chứ không phải khả năng kê đơn.</div>
+      </div>
+
+      <div class="comp-card">
+        <div class="cc-head">
+          <span class="cc-logo">🔑</span>
+          <div><div class="cc-name">B · Cái khó vs cái thuê được</div><div class="cc-pos">Chuyên môn lâm sàng mua/thuê &amp; hợp thức hóa được</div></div>
+        </div>
+        <div class="cc-meta">
+          <div class="cc-line"><span class="cc-lab">Thuê được &amp; hợp thức hóa qua giấy phép:</span> giám đốc y khoa, dược sĩ phụ trách, điều dưỡng hành nghề — đây chính là cách <strong>pháp luật yêu cầu</strong> hợp thức hóa chuyên môn (cross-link <a href="#legal">#legal</a>).</div>
+          <div class="cc-line"><span class="cc-lab">Cái KHÓ thuê:</span> vận hành cân bằng hai phía cung–cầu, gọi vốn, dựng công nghệ, tăng trưởng có lãi — không tuyển một người là xong. Đó mới là nút thắt, và đó là việc founder làm.</div>
+        </div>
+        <div class="cc-win"><strong>Phân vai đúng:</strong> founder giữ nút thắt thật; chuyên gia có giấy phép giữ trách nhiệm lâm sàng &amp; pháp lý. Không ai đứng sai chỗ.</div>
+      </div>
+
+      <div class="comp-card">
+        <div class="cc-head">
+          <span class="cc-logo">🏆</span>
+          <div><div class="cc-name">C · Tiền lệ ngành</div><div class="cc-pos">Healthtech lớn do founder không phải bác sĩ lập</div></div>
+        </div>
+        <div class="cc-meta">
+          <div class="cc-line"><strong>Halodoc</strong> (Indonesia, telehealth &gt;20.000 nhân sự y tế kết nối): Jonathan Sudharta nền <strong>kinh tế &amp; thương mại điện tử</strong>, xuất thân trình dược viên — không phải bác sĩ.</div>
+          <div class="cc-line"><strong>Babylon Health</strong> (Anh): Ali Parsa nền <strong>kỹ sư &amp; tài chính / đầu tư</strong>, không phải bác sĩ.</div>
+          <div class="cc-line"><strong>Ping An Good Doctor</strong> (TQ): sinh ra từ tập đoàn <strong>bảo hiểm – tài chính</strong> Ping An, không phải bệnh viện.</div>
+        </div>
+        <div class="cc-win"><strong>Kết:</strong> founder bác sĩ <strong>không phải điều kiện cần</strong> của một healthtech nền tảng. Cái cần là vận hành + công nghệ + tài chính + thuê đúng chuyên môn.</div>
+      </div>
+
+    </div>
+    <p class="src-note">Tiền lệ: Halodoc — Jonathan Sudharta nền kinh tế/TMĐT (Crunchbase; HealthTech Alpha, 2024); Babylon Health — Ali Parsa nền kỹ sư/tài chính (Wikipedia; TechRound, 2024); Ping An Good Doctor — nền tập đoàn bảo hiểm Ping An. Định vị ElderCare: ước tính nội bộ.</p>
+
+    <!-- 3 — KẾ HOẠCH 4 TẦNG + BẢNG CHI PHÍ -->
+    <h3 class="fin-sub"><span class="badge-n">2</span> Kế hoạch lấp khoảng trống — 4 tầng nhân sự chuyên môn</h3>
+    <p class="sub-desc">Cấu trúc theo nguyên tắc Kịch bản B: <strong>tối đa hóa độ tin cậy lâm sàng &amp; tuân thủ với chi phí tiền mặt tối thiểu</strong> — ưu tiên equity nhỏ &amp; retainer linh hoạt, chỉ chuyển full-time khi cột mốc doanh thu cho phép.</p>
+
+    <div class="exp-tier"><div class="et-n">1</div><div><div class="et-name">Hội đồng cố vấn y khoa (Medical Advisory Board)</div><div class="et-desc">3–5 KOL: bác sĩ <strong>lão khoa</strong>, dược sĩ lâm sàng, điều dưỡng trưởng. Trả chủ yếu bằng <strong>equity nhỏ ~0,1–0,3%/người</strong> + phụ cấp họp ~5–10tr/tháng. Cố vấn phác đồ, chuẩn chăm sóc, uy tín thương hiệu. <strong>Chi phí tiền mặt rất thấp.</strong></div></div></div>
+    <div class="exp-tier"><div class="et-n">2</div><div><div class="et-name">Giám đốc Y khoa (Medical Director) — bán thời gian / retainer</div><div class="et-desc">Bác sĩ <strong>có giấy phép hành nghề</strong>, chịu trách nhiệm chuyên môn &amp; pháp lý — <strong>điều kiện cần để cấp phép</strong> (cross-link <a href="#legal">#legal</a>). Retainer ~<strong>30–50tr/tháng</strong> ở Năm 0–1, chuyển full-time khi quy mô đủ lớn.</div></div></div>
+    <div class="exp-tier"><div class="et-n">3</div><div><div class="et-name">Nhân sự vận hành chuyên môn — tuyển theo cột mốc</div><div class="et-desc">Điều dưỡng trưởng (Head of Clinical Ops); <strong>Dược sĩ phụ trách</strong> — <strong>BẮT BUỘC theo Luật Dược</strong> cho mảng bán thuốc/thiết bị (cross-link <a href="#legal">#legal</a>); QA / thẩm định hồ sơ điều dưỡng. Tuyển dần khi mở từng mảng.</div></div></div>
+    <div class="exp-tier"><div class="et-n">4</div><div><div class="et-name">Đối tác thể chế</div><div class="et-desc">Hợp tác <strong>trường ĐH Y Dược / bệnh viện</strong> thuê ngoài đào tạo &amp; thẩm định chuẩn chăm sóc — chính cách đối thủ bTaskee/bCare đã làm (cross-link <a href="#competitors">#competitors</a>). Biến chi phí cố định thành phí dịch vụ linh hoạt.</div></div></div>
+
+    <div class="table-scroll">
+      <table class="fin-table">
+        <thead>
+          <tr><th>Vai trò</th><th>Hình thức</th><th>Chi phí tiền mặt / năm</th><th>Thời điểm</th><th>Ghi chú</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Hội đồng cố vấn (3–5 KOL)</td><td>Equity ~0,1–0,3%/ng + phụ cấp họp</td><td>~360 tr</td><td>Trước launch</td><td>Tiền mặt thấp, chủ yếu equity nhỏ</td></tr>
+          <tr><td>Giám đốc Y khoa</td><td>Retainer bán thời gian</td><td>~480 tr</td><td>Trước launch</td><td>~40tr/th; chịu trách nhiệm pháp lý</td></tr>
+          <tr><td>Dược sĩ phụ trách</td><td>Part-time → full-time</td><td>~300 tr</td><td>Khi mở mảng dược</td><td>Bắt buộc theo Luật Dược</td></tr>
+          <tr><td>Điều dưỡng trưởng (Clinical Ops)</td><td>Full-time</td><td>~360 tr</td><td>Năm 1</td><td>Chuẩn hóa SOP &amp; đào tạo</td></tr>
+          <tr><td>QA / thẩm định hồ sơ ĐD</td><td>Full-time</td><td>~240 tr</td><td>Năm 1</td><td>Kiểm soát chất lượng lâm sàng</td></tr>
+          <tr><td>Đối tác ĐH Y / bệnh viện</td><td>Phí dịch vụ thuê ngoài</td><td>~120 tr</td><td>Theo nhu cầu</td><td>Đào tạo &amp; thẩm định linh hoạt</td></tr>
+          <tr class="row-total"><td>Tổng chi phí tiền mặt chuyên môn / năm</td><td>—</td><td class="pos">~1,86 tỷ</td><td>Năm 1 (đỉnh)</td><td>Ước tính nội bộ</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="tnote">Ước tính nội bộ. Tổng ~1,86 tỷ/năm nằm <strong>gọn trong dòng OpEx nhân sự của P&amp;L Kịch bản B</strong> (cross-link <a href="#fin">#fin</a>): nó là một phần của khối chi phí lương–vận hành đã được tính, <strong>không phải khoản phát sinh ngoài kế hoạch</strong>, nên <strong>không phá vỡ net +10 tỷ Năm 1</strong>. Năm 0 thấp hơn (chỉ tầng 1–2 + dược sĩ part-time).</p>
+
+    <!-- 4 — BẢNG PHÂN VAI -->
+    <h3 class="fin-sub"><span class="badge-n">3</span> Phân vai rõ ràng — founder vs chuyên gia thuê</h3>
+    <p class="sub-desc">Ranh giới minh bạch: founder cầm những việc <strong>không thuê được mà quyết định sống còn</strong>; chuyên gia có giấy phép cầm <strong>trách nhiệm lâm sàng &amp; pháp lý</strong>.</p>
+    <div class="table-scroll">
+      <table class="fin-table">
+        <thead><tr><th>Founder phụ trách (nội lực)</th><th>Chuyên gia thuê / cố vấn phụ trách (giấy phép)</th></tr></thead>
+        <tbody>
+          <tr><td>Chiến lược &amp; mô hình kinh doanh</td><td>Phác đồ &amp; quy trình lâm sàng</td></tr>
+          <tr><td>Vận hành nền tảng &amp; marketplace 2 phía</td><td>Chuẩn chăm sóc &amp; chất lượng dịch vụ</td></tr>
+          <tr><td>Công nghệ, sản phẩm, AI</td><td>Thẩm định &amp; cấp chứng chỉ điều dưỡng</td></tr>
+          <tr><td>Tài chính, unit-economics, gọi vốn</td><td>Trách nhiệm chuyên môn &amp; pháp lý (Medical Director)</td></tr>
+          <tr><td>Tăng trưởng &amp; thương hiệu</td><td>Phụ trách dược, kê &amp; cấp phát thuốc (Dược sĩ phụ trách)</td></tr>
+          <tr><td>Bảo mật &amp; tuân thủ dữ liệu</td><td>Giám sát tuân thủ lâm sàng (QA)</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 5 — LỘ TRÌNH TUYỂN THEO CỘT MỐC -->
+    <h3 class="fin-sub"><span class="badge-n">4</span> Lộ trình tuyển theo cột mốc (gắn quy mô KB B)</h3>
+    <div class="exp-mile">
+      <div class="exp-mile-card">
+        <div class="em-when">Trước launch</div>
+        <div class="em-scale">Seed nhỏ 15–20 tỷ · chuẩn bị cấp phép</div>
+        <ul>
+          <li>Hội đồng cố vấn 3–5 KOL (equity nhỏ)</li>
+          <li>Giám đốc Y khoa retainer bán thời gian</li>
+          <li>Dược sĩ phụ trách part-time</li>
+        </ul>
+      </div>
+      <div class="exp-mile-card">
+        <div class="em-when">Năm 1</div>
+        <div class="em-scale">Lãi ngay · net +10 tỷ · ra mắt HCM</div>
+        <ul>
+          <li>Điều dưỡng trưởng (Clinical Ops) full-time</li>
+          <li>QA / thẩm định hồ sơ ĐD full-time</li>
+          <li>Dược sĩ phụ trách lên full-time khi mở dược</li>
+        </ul>
+      </div>
+      <div class="exp-mile-card">
+        <div class="em-when">Năm 2</div>
+        <div class="em-scale">Mở rộng địa bàn (thêm Hà Nội)</div>
+        <ul>
+          <li>Mở rộng clinical team theo địa bàn</li>
+          <li>Giám đốc Y khoa cân nhắc full-time</li>
+          <li>Thêm điều dưỡng trưởng vùng / QA vùng</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 6 — DEEP TOGGLE: VÌ SAO KHÔNG CẦN CO-FOUNDER BÁC SĨ -->
+    <button class="deep-toggle" onclick="toggleDeep(this)" data-closed-label="Vì sao KHÔNG cần co-founder bác sĩ ngay từ đầu?" data-open-label="Thu gọn">
+      <span class="dt-label">Vì sao KHÔNG cần co-founder bác sĩ ngay từ đầu?</span><span class="chev">▼</span>
+    </button>
+    <div class="deep-panel">
+      <div class="deep-inner">
+        <h5>⚖️ Co-founder bác sĩ (equity lớn, vĩnh viễn) vs Advisory + nhân sự thuê</h5>
+        <p>Một lựa chọn là <strong>mời bác sĩ làm đồng sáng lập</strong>, đổi lấy equity lớn (thường ~10–20%) và <strong>vĩnh viễn</strong>. Nghe có vẻ "chắc tay lâm sàng", nhưng với mô hình <strong>asset-light Kịch bản B</strong>, đây là đánh đổi không tối ưu:</p>
+        <div class="deep-table-wrap">
+          <table class="deep-table">
+            <thead><tr><th>Tiêu chí</th><th>Co-founder bác sĩ</th><th>Advisory board + thuê</th></tr></thead>
+            <tbody>
+              <tr><td>Chi phí equity</td><td>~10–20% vĩnh viễn</td><td>~0,1–0,3%/cố vấn (rất nhỏ)</td></tr>
+              <tr><td>Chi phí tiền mặt</td><td>Lương full-time cố định</td><td>Retainer / part-time, kiểm soát được</td></tr>
+              <tr><td>Linh hoạt</td><td>Khó thay đổi, ràng buộc dài</td><td>Điều chỉnh theo cột mốc &amp; mảng</td></tr>
+              <tr><td>Độ phủ chuyên môn</td><td>1 chuyên khoa của 1 người</td><td>Nhiều chuyên khoa (3–5 KOL)</td></tr>
+              <tr><td>Đủ độ tin cậy lâm sàng &amp; pháp lý?</td><td>Có</td><td>Có (Medical Director có giấy phép)</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Với asset-light B, <strong>thuê chuyên môn linh hoạt &amp; rẻ hơn nhiều</strong> mà vẫn <strong>đủ độ tin cậy lâm sàng &amp; hợp pháp</strong> (Medical Director có giấy phép gánh trách nhiệm; advisory board phủ nhiều chuyên khoa). Quan trọng hơn: giữ được <strong>equity cho founders (&gt;80%)</strong> — đúng triết lý kiểm soát của Kịch bản B. Để ngỏ khả năng mời bác sĩ làm partner cấp cao <em>sau</em> khi đã chứng minh mô hình, thay vì cho equity lớn từ đầu.</p>
+      </div>
+    </div>
+
+    <!-- 7 — HAI ENDBOX -->
+    <div class="endbox risk">
+      <h4>⚠️ Rủi ro còn lại &amp; phương án dự phòng</h4>
+      <p class="eb-desc">Thuê chuyên môn không phải không có rủi ro — dưới đây là cách kiểm soát từng kịch bản xấu.</p>
+      <div class="risk-row">
+        <div class="risk-item">
+          <div class="ri-head">Giám đốc Y khoa rời đi</div>
+          <div class="ri-fix">Duy trì <strong>pipeline 2–3 ứng viên</strong> sẵn sàng + advisory board nối tiếp tạm thời để không gián đoạn trách nhiệm pháp lý.</div>
+          <div class="ri-backup">Hợp đồng có điều khoản bàn giao &amp; thời gian thông báo.</div>
+        </div>
+        <div class="risk-item">
+          <div class="ri-head">Tuyển dược sĩ / chứng chỉ chậm</div>
+          <div class="ri-fix"><strong>Hoãn mảng tương ứng</strong> — không launch mảng chưa đủ điều kiện pháp lý; bật các trụ khác trước (điều dưỡng, telehealth) để vẫn có doanh thu.</div>
+          <div class="ri-backup">Không đánh đổi tuân thủ lấy tốc độ.</div>
+        </div>
+        <div class="risk-item">
+          <div class="ri-head">Chất lượng lâm sàng không đồng đều</div>
+          <div class="ri-fix"><strong>QA + chứng chỉ 4 cấp</strong> (xem <a href="#disease">#disease</a>) làm hàng rào kiểm soát; thẩm định hồ sơ định kỳ.</div>
+          <div class="ri-backup">Advisory board review ngẫu nhiên ca khó.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="endbox ai">
+      <h4>🤖 AI giảm phụ thuộc vào nhân lực bác sĩ</h4>
+      <p class="eb-desc">Công nghệ là đòn bẩy chuyên môn: chuẩn hóa quy trình giúp một Medical Director giám sát được nhiều ca hơn.</p>
+      <div class="ai-row">
+        <div class="ai-item">
+          <div class="ai-head">🩺 AI triage / decision-support</div>
+          <p>Gợi ý phân loại &amp; cảnh báo có <strong>human-in-the-loop</strong> — bác sĩ/điều dưỡng vẫn ra quyết định cuối, nhưng xử lý nhanh &amp; nhất quán hơn.</p>
+          <span class="ai-model">Đòn bẩy chuyên môn</span>
+        </div>
+        <div class="ai-item">
+          <div class="ai-head">📋 Chuẩn hóa quy trình (SOP số hóa)</div>
+          <p>Quy trình chuẩn hóa &amp; checklist số → 1 Medical Director <strong>giám sát được nhiều ca</strong>, giảm số giờ bác sĩ cần cho mỗi đơn vị dịch vụ.</p>
+          <span class="ai-model">Hiệu suất / chi phí</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 8 — KẾT -->
+    <div class="vision-box">
+      <h4>🏁 Kết luận — Khoảng trống lấp được, kế hoạch giữ lãi</h4>
+      <div class="kpi-grid">
+        <div class="kpi"><div class="k-num">&gt;80%</div><div class="k-label">Equity founders giữ lại</div></div>
+        <div class="kpi"><div class="k-num">~1,86 tỷ</div><div class="k-label">Chi phí chuyên môn/năm — gọn trong OpEx</div></div>
+        <div class="kpi"><div class="k-num">+10 tỷ</div><div class="k-label">Net Năm 1 vẫn nguyên</div></div>
+        <div class="kpi"><div class="k-num">0 đồng</div><div class="k-label">Phá vỡ kế hoạch B</div></div>
+        <div class="kpi"><div class="k-num">3–5</div><div class="k-label">Cố vấn KOL (advisory board)</div></div>
+        <div class="kpi"><div class="k-num">Đúng luật</div><div class="k-label">Dược sĩ phụ trách + Medical Director</div></div>
+      </div>
+      <p>
+        Việc 6 founder không có nền y/dược <strong>không phải điểm tử huyệt</strong>. ElderCare là nền tảng vận hành &amp; phân phối — năng lực quyết định thắng–thua (vận hành, công nghệ, tài chính, tuân thủ) đúng sở trường đội ngũ; còn chuyên môn lâm sàng được <strong>thuê &amp; hợp thức hóa qua nhân sự có giấy phép</strong>, như chính tiền lệ Halodoc, Babylon, Ping An.
+      </p>
+      <p>
+        Đây là khoảng trống lấp được bằng một <strong>kế hoạch nhân sự rẻ, khả thi, đúng luật</strong> — vẫn giữ lãi (net +10 tỷ Năm 1) và giữ quyền kiểm soát (founders &gt;80%). Đúng triết lý Kịch bản B.
+      </p>
+      <div class="bmc-links">
+        <a href="/eldercare">🎤 Pitch deck</a>
+        <a href="/eldercare-app">📱 App demo</a>
+        <a href="#fin">💰 Tài chính</a>
       </div>
     </div>
 
