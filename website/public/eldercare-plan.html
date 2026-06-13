@@ -615,6 +615,53 @@
     .force-card .fc-impl .fc-lab { color: var(--care); }
     .force-card a.fc-link { color: var(--care); font-weight: 700; border-bottom: 1px dashed var(--care-light); text-decoration: none; }
 
+    /* ===================== PHIÊN 10 — BUSINESS MODEL CANVAS (#canvas) ===================== */
+    .bmc-section { background: #fff; }
+    .bmc-scenario-note { display: inline-block; background: rgba(13,148,136,0.1); color: var(--care); border: 1px solid rgba(13,148,136,0.32);
+      font-size: 0.78rem; font-weight: 700; padding: 6px 14px; border-radius: 99px; margin-bottom: 0.25rem; }
+    /* Lưới canvas 9 ô theo Osterwalder */
+    .bmc-grid { display: grid; gap: 0.85rem; margin: 1.5rem 0 0.5rem;
+      grid-template-columns: repeat(5, 1fr);
+      grid-template-rows: auto auto auto;
+      grid-template-areas:
+        "kp ka vp cr cs"
+        "kp kr vp ch cs"
+        "cost cost cost rev rev"; }
+    .bmc-cell { background: #fff; border: 1px solid var(--border); border-radius: 14px; padding: 1rem 1.05rem;
+      display: flex; flex-direction: column; gap: 0.45rem; box-shadow: 0 2px 10px rgba(13,148,136,0.05); }
+    .bmc-cell .bmc-h { display: flex; align-items: center; gap: 0.45rem; font-size: 0.82rem; font-weight: 800; color: var(--primary); line-height: 1.3; }
+    .bmc-cell .bmc-h .bmc-ico { font-size: 1.05rem; }
+    .bmc-cell .bmc-sub { font-size: 0.66rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.4px; color: var(--muted); margin-top: -0.2rem; }
+    .bmc-cell ul { list-style: none; margin: 0.15rem 0 0; }
+    .bmc-cell ul li { font-size: 0.74rem; color: #374151; line-height: 1.45; padding: 3px 0 3px 0.95rem; position: relative; }
+    .bmc-cell ul li::before { content: '·'; position: absolute; left: 0; color: var(--care); font-weight: 900; }
+    .bmc-kp { grid-area: kp; } .bmc-ka { grid-area: ka; } .bmc-kr { grid-area: kr; }
+    .bmc-cr { grid-area: cr; } .bmc-ch { grid-area: ch; } .bmc-cs { grid-area: cs; }
+    /* ô Value Proposition — nổi bật, cao gấp đôi */
+    .bmc-vp { grid-area: vp; background: linear-gradient(150deg, var(--care), var(--care-light)); color: #fff; border: none;
+      box-shadow: 0 12px 30px rgba(13,148,136,0.3); justify-content: flex-start; }
+    .bmc-vp .bmc-h { color: #fff; }
+    .bmc-vp .bmc-sub { color: rgba(255,255,255,0.85); }
+    .bmc-vp .bmc-tag { font-size: 0.86rem; font-weight: 800; line-height: 1.4; margin: 0.2rem 0 0.35rem; }
+    .bmc-vp ul li { color: rgba(255,255,255,0.95); }
+    .bmc-vp ul li::before { color: #fff; }
+    /* hai ô đáy rộng ngang */
+    .bmc-cost { grid-area: cost; border-top: 4px solid var(--coral); }
+    .bmc-rev { grid-area: rev; border-top: 4px solid var(--care); }
+    .bmc-cost ul, .bmc-rev ul { columns: 2; column-gap: 1.1rem; }
+    .bmc-cost ul li::before { color: var(--coral); }
+    .bmc-cell .bmc-note { font-size: 0.72rem; color: var(--muted); font-style: italic; margin-top: 0.35rem; }
+    .bmc-rev .bmc-note { color: var(--care); font-style: normal; font-weight: 700; }
+    /* bảng so sánh kịch bản A trong deep-panel */
+    .bmc-cmp { width: 100%; border-collapse: collapse; margin: 0.5rem 0 0.25rem; font-size: 0.82rem; }
+    .bmc-cmp th, .bmc-cmp td { text-align: left; padding: 0.55rem 0.7rem; border-bottom: 1px solid var(--border); vertical-align: top; line-height: 1.5; }
+    .bmc-cmp th { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.4px; color: var(--care); }
+    .bmc-cmp td:first-child { font-weight: 800; color: var(--primary); white-space: nowrap; }
+    .bmc-links { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1rem; }
+    .bmc-links a { display: inline-flex; align-items: center; gap: 0.4rem; background: rgba(255,255,255,0.16); color: #fff;
+      border: 1px solid rgba(255,255,255,0.45); border-radius: 99px; padding: 8px 16px; font-size: 0.82rem; font-weight: 700; text-decoration: none; transition: all .2s; }
+    .bmc-links a:hover { background: #fff; color: var(--care); }
+
     @media (max-width: 768px) {
       nav { padding: 0 1rem; }
       .nav-tabs { gap: 0; }
@@ -641,6 +688,9 @@
       .ff-diagram { grid-template-columns: 1fr; grid-template-areas: "top" "left" "center" "right" "bottom"; }
       .ff-grid { grid-template-columns: 1fr; }
       .force-card .fc-top { flex-direction: column; }
+      .bmc-grid { grid-template-columns: 1fr; grid-template-rows: none;
+        grid-template-areas: "kp" "ka" "kr" "vp" "cr" "ch" "cs" "cost" "rev"; }
+      .bmc-cost ul, .bmc-rev ul { columns: 1; }
     }
   </style>
 </head>
@@ -689,7 +739,7 @@
   <a href="#summary">🧭 Tổng hợp</a>
   <a href="#competitors">🥊 Đối thủ</a>
   <a href="#fiveforces">🛡️ Five Forces</a>
-  <a href="#canvas" class="soon">🧩 Canvas</a>
+  <a href="#canvas">🧩 Canvas</a>
   <a href="#glossary">📖 Thuật ngữ</a>
 </div>
 
@@ -3324,7 +3374,204 @@
 </section>
 
 <!-- ============================ PHIÊN 10 — BUSINESS MODEL CANVAS (#canvas) ============================ -->
-<!-- PLACEHOLDER PHIÊN 10: chèn <section class="bmc-section" id="canvas">...</section> vào đây. Bỏ class .soon của link #canvas trong sub-nav. -->
+<section class="bmc-section" id="canvas">
+  <div class="container">
+    <div class="section-tag">Phần 9 · Business Model Canvas</div>
+    <h2>Business Model Canvas —<br/>tổng hợp 9 ô theo Kịch bản B (lãi ngay, asset-light)</h2>
+    <p class="section-desc">
+      <span class="bmc-scenario-note">🎯 Kịch bản đã chọn: B — lãi ngay, asset-light</span><br/>
+      Đây là phần <strong>tổng hợp</strong> gom toàn bộ mô hình kinh doanh ElderCare VN vào 9 ô Business Model Canvas của Osterwalder, đặt trong bối cảnh <strong>Kịch bản B</strong>: giữ 3 trụ cột lõi (CareConnect · Telehealth/subscription · Dược &amp; thiết bị), hoãn MedFin tự cấp vốn &amp; tự sản xuất CareSense, tập trung TP.HCM→HN, marketing lean. Mô hình cho <strong>net Năm 1 ≈ +10 tỷ</strong>, mọi năm dương, Y5 doanh thu ~360 tỷ · net ~64 tỷ.
+    </p>
+
+    <!-- 1 — CANVAS 9 Ô -->
+    <h3 class="fin-sub"><span class="badge-n">1</span> Canvas 9 ô — một trang gói toàn bộ mô hình</h3>
+    <div class="bmc-grid">
+
+      <!-- Key Partners -->
+      <div class="bmc-cell bmc-kp">
+        <div class="bmc-h"><span class="bmc-ico">🤝</span> Đối tác chính</div>
+        <div class="bmc-sub">Key Partners</div>
+        <ul>
+          <li>Bệnh viện &amp; phòng khám (kênh khách hậu phẫu)</li>
+          <li>Nhà thuốc đạt chuẩn GPP</li>
+          <li>Hãng thiết bị y tế (thuê lại CareSense)</li>
+          <li>Công ty tài chính được cấp phép (MedFin — chỉ giới thiệu)</li>
+          <li>Mạng điều dưỡng &amp; cộng tác viên chăm sóc</li>
+          <li>KOL bác sĩ &amp; chuyên gia lão khoa</li>
+          <li>Hội người cao tuổi · BHXH</li>
+        </ul>
+      </div>
+
+      <!-- Key Activities -->
+      <div class="bmc-cell bmc-ka">
+        <div class="bmc-h"><span class="bmc-ico">⚙️</span> Hoạt động chính</div>
+        <div class="bmc-sub">Key Activities</div>
+        <ul>
+          <li>Vận hành marketplace điều dưỡng &amp; xác minh chất lượng</li>
+          <li>Telehealth &amp; điều phối đội chăm sóc</li>
+          <li>Đào tạo &amp; cấp chứng chỉ điều dưỡng</li>
+          <li>Giao thuốc hợp chuẩn</li>
+          <li>Phát triển nền tảng &amp; AI</li>
+        </ul>
+      </div>
+
+      <!-- Key Resources -->
+      <div class="bmc-cell bmc-kr">
+        <div class="bmc-h"><span class="bmc-ico">🏛️</span> Nguồn lực chính</div>
+        <div class="bmc-sub">Key Resources</div>
+        <ul>
+          <li>Mạng điều dưỡng đã xác minh</li>
+          <li>Nền tảng công nghệ + AI</li>
+          <li>Thương hiệu tin cậy với người già</li>
+          <li>Dữ liệu sức khỏe</li>
+          <li>Quan hệ đối tác bệnh viện</li>
+          <li>Đội ngũ y tế điều phối</li>
+        </ul>
+      </div>
+
+      <!-- Value Propositions (ô giữa nổi bật) -->
+      <div class="bmc-cell bmc-vp">
+        <div class="bmc-h"><span class="bmc-ico">💎</span> Giá trị đề xuất</div>
+        <div class="bmc-sub">Value Propositions</div>
+        <div class="bmc-tag">"Một chạm để biết bố mẹ vẫn ổn"</div>
+        <ul>
+          <li>Super-app chăm sóc người cao tuổi — tin cậy, an toàn, chuyên biệt lão khoa</li>
+          <li><strong>Cho con cái:</strong> an tâm · minh bạch · tiện</li>
+          <li><strong>Cho người già:</strong> được chăm tại nhà chuyên nghiệp</li>
+          <li>Asset-light &amp; có lãi ngay — bền vững, kiểm soát</li>
+          <li>Chuyên biệt người già (khác đối thủ chung chung)</li>
+        </ul>
+      </div>
+
+      <!-- Customer Relationships -->
+      <div class="bmc-cell bmc-cr">
+        <div class="bmc-h"><span class="bmc-ico">💬</span> Quan hệ khách hàng</div>
+        <div class="bmc-sub">Customer Relationships</div>
+        <ul>
+          <li>Care-team gắn kết</li>
+          <li>App self-service</li>
+          <li>Tổng đài 24/7</li>
+          <li>Cộng đồng con-chăm-bố-mẹ</li>
+          <li>Retention chủ động</li>
+        </ul>
+      </div>
+
+      <!-- Channels -->
+      <div class="bmc-cell bmc-ch">
+        <div class="bmc-h"><span class="bmc-ico">📡</span> Kênh</div>
+        <div class="bmc-sub">Channels</div>
+        <ul>
+          <li>App / web</li>
+          <li>Đối tác bệnh viện &amp; phòng khám</li>
+          <li>Digital nhắm con cái 30–50t</li>
+          <li>KOL bác sĩ</li>
+          <li>Referral gia đình</li>
+          <li>Hội người cao tuổi</li>
+        </ul>
+      </div>
+
+      <!-- Customer Segments -->
+      <div class="bmc-cell bmc-cs">
+        <div class="bmc-h"><span class="bmc-ico">👥</span> Phân khúc khách hàng</div>
+        <div class="bmc-sub">Customer Segments · phân khúc kép</div>
+        <ul>
+          <li><strong>PAYER</strong> — con cái sống xa/gần, thu nhập khá, 30–50t</li>
+          <li><strong>USER</strong> — người già: tự chủ · một phần · phụ thuộc nặng · hậu phẫu · sa sút trí tuệ</li>
+          <li>Persona: Anh Minh (38t, payer con xa)</li>
+          <li>Bà Hoa (72t, user một phần)</li>
+          <li>Ông Tâm (80t, phụ thuộc nặng)</li>
+        </ul>
+      </div>
+
+      <!-- Cost Structure -->
+      <div class="bmc-cell bmc-cost">
+        <div class="bmc-h"><span class="bmc-ico">💸</span> Cơ cấu chi phí <span style="font-size:0.66rem;font-weight:700;color:var(--coral);">· asset-light, lean</span></div>
+        <div class="bmc-sub">Cost Structure</div>
+        <ul>
+          <li>Nhân sự (khoản lớn nhất)</li>
+          <li>Marketing lean ~15–20% doanh thu</li>
+          <li>Công nghệ · cloud · AI</li>
+          <li>Vận hành &amp; G&amp;A</li>
+          <li>KHÔNG capex sản xuất thiết bị</li>
+          <li>KHÔNG gánh dư nợ tín dụng</li>
+        </ul>
+        <div class="bmc-note">→ Nhờ cấu trúc tinh gọn này mà ElderCare có lãi ngay từ Năm 1.</div>
+      </div>
+
+      <!-- Revenue Streams -->
+      <div class="bmc-cell bmc-rev">
+        <div class="bmc-h"><span class="bmc-ico">💰</span> Dòng doanh thu</div>
+        <div class="bmc-sub">Revenue Streams</div>
+        <ul>
+          <li>Hoa hồng CareConnect 20% (GM ~85%)</li>
+          <li>Subscription gói gia đình 299–599k/th (GM ~60%)</li>
+          <li>Phí khám telehealth</li>
+          <li>Markup dược &amp; thiết bị 12–18% (GM ~25%)</li>
+          <li>Phí giới thiệu MedFin / bảo hiểm</li>
+          <li>Phí thuê thiết bị CareSense</li>
+        </ul>
+        <div class="bmc-note">→ Net Năm 1 ≈ +10 tỷ · Y5 net ~64 tỷ.</div>
+      </div>
+
+    </div>
+
+    <!-- 2 — DEEP: KHÁC GÌ NẾU CHỌN KỊCH BẢN A -->
+    <button class="deep-toggle" data-closed-label="Canvas này khác gì nếu chọn Kịch bản A (tỉ đô)?" data-open-label="Thu gọn" onclick="toggleDeep(this)">
+      <span>🔍</span><span class="dt-label">Canvas này khác gì nếu chọn Kịch bản A (tỉ đô)?</span><span class="chev">▼</span>
+    </button>
+    <div class="deep-panel"><div class="deep-inner">
+      <h5>🔀 Ba ô đổi nhiều nhất khi chuyển từ B (lãi ngay) sang A (tỉ đô)</h5>
+      <p>Tám trong chín ô về bản chất giữ nguyên — cùng giá trị đề xuất, cùng phân khúc kép, cùng kênh &amp; đối tác. Khác biệt dồn vào ba ô tài chính &amp; nguồn lực:</p>
+      <table class="bmc-cmp">
+        <thead><tr><th>Ô canvas</th><th>Kịch bản B (đang chọn)</th><th>Kịch bản A (tỉ đô)</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>Cơ cấu chi phí</td>
+            <td>Marketing lean ~15–20% DT; không capex thiết bị; không gánh dư nợ MedFin → lãi ngay.</td>
+            <td>Đốt marketing để chiếm thị phần; capex tự sản xuất CareSense; gánh dư nợ tín dụng MedFin → lỗ nhiều năm đầu.</td>
+          </tr>
+          <tr>
+            <td>Dòng doanh thu</td>
+            <td>3 trụ cột lõi trước, MedFin/CareSense ở dạng phí giới thiệu &amp; thuê lại.</td>
+            <td>Bật <strong>full 5 trụ cột sớm</strong> (gồm tự vận hành MedFin &amp; CareSense) để tối đa TAM.</td>
+          </tr>
+          <tr>
+            <td>Nguồn lực chính</td>
+            <td>1 seed nhỏ ~15–20 tỷ / bootstrapped; founders giữ &gt;80%.</td>
+            <td>Cần <strong>4 vòng gọi vốn</strong> (Seed→Series C); pha loãng mạnh; thêm vốn cho dây chuyền &amp; pool tín dụng.</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>Canvas hiện tại được tối ưu cho <strong>lãi ngay &amp; kiểm soát</strong>: dòng tiền dương sớm, ít phụ thuộc vốn ngoài, founders giữ quyền chi phối. Kịch bản A có trần lớn hơn nhưng đánh đổi bằng rủi ro vốn &amp; thời gian hòa vốn dài hơn — để ngỏ như lộ trình nâng cấp khi đã chứng minh được unit economics.</p>
+      <p class="src-note">Số liệu Kịch bản A/B: tổng hợp tiểu mục 8 phần Tài chính (sub-tab "Lãi ngay") — ước tính nội bộ.</p>
+    </div></div>
+
+    <!-- KẾT LUẬN -->
+    <div class="vision-box">
+      <h4>🏁 Kết luận — Vì sao chọn Kịch bản B</h4>
+      <div class="kpi-grid">
+        <div class="kpi"><div class="k-num">+10 tỷ</div><div class="k-label">Net lợi nhuận Năm 1</div></div>
+        <div class="kpi"><div class="k-num">~14%</div><div class="k-label">Biên ròng</div></div>
+        <div class="kpi"><div class="k-num">Năm 1</div><div class="k-label">Break-even ngay</div></div>
+        <div class="kpi"><div class="k-num">15–20 tỷ</div><div class="k-label">Vốn cần (1 seed nhỏ)</div></div>
+        <div class="kpi"><div class="k-num">&gt;80%</div><div class="k-label">Founders giữ quyền</div></div>
+        <div class="kpi"><div class="k-num">~64 tỷ</div><div class="k-label">Net Năm 5</div></div>
+      </div>
+      <p>
+        Business Model Canvas cho thấy ElderCare VN không cần đốt vốn để có một mô hình hấp dẫn: cùng một giá trị đề xuất chuyên biệt lão khoa &amp; phân khúc kép payer–user, Kịch bản B chỉ tinh gọn ô <strong>chi phí</strong> và <strong>nguồn lực</strong> để có dòng tiền dương ngay từ Năm 1.
+      </p>
+      <p>
+        Đây là con đường <strong>ít rủi ro, founders giữ quyền chi phối</strong>, vẫn để ngỏ lộ trình nâng cấp lên Kịch bản A khi unit economics đã được chứng minh. Một mô hình lãi ngay là nền móng vững nhất cho tham vọng tỉ đô.
+      </p>
+      <div class="bmc-links">
+        <a href="/eldercare">🎤 Pitch deck</a>
+        <a href="/eldercare-app">📱 App demo</a>
+        <a href="/eldercare-financial-model.xlsx" download>📊 Model tài chính (.xlsx)</a>
+      </div>
+    </div>
+
+  </div>
+</section>
 
 <!-- ============================ PHỤ LỤC — THUẬT NGỮ ============================ -->
 <section class="glossary-section" id="glossary">
