@@ -268,6 +268,30 @@
       .plan-compare-grid { grid-template-columns: 1fr; }
     }
 
+    /* ===== PHẢN BIỆN & Q&A ===== */
+    .qa-section { background: var(--light); }
+    .qa-intro { background: #fff; border: 1px solid var(--border); border-left: 4px solid var(--gold); border-radius: 14px; padding: 1.25rem 1.5rem; margin-bottom: 2rem; font-size: 0.88rem; color: #374151; line-height: 1.65; }
+    .qa-intro strong { color: var(--primary); }
+    .qa-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(480px, 1fr)); gap: 1.25rem; margin-top: 1.25rem; }
+    .qa-card { background: #fff; border: 1px solid var(--border); border-radius: 16px; overflow: hidden; }
+    .qa-card-head { background: linear-gradient(135deg, var(--primary) 0%, #1a2a46 100%); padding: 1.1rem 1.4rem; display: flex; align-items: flex-start; gap: 0.85rem; }
+    .qa-avatar { width: 42px; height: 42px; border-radius: 10px; background: rgba(255,255,255,0.12); display: flex; align-items: center; justify-content: center; font-size: 1.25rem; flex-shrink: 0; }
+    .qa-meta { flex: 1; min-width: 0; }
+    .qa-name { font-size: 0.95rem; font-weight: 800; color: #fff; line-height: 1.2; }
+    .qa-role { font-size: 0.74rem; color: rgba(255,255,255,0.6); margin-top: 2px; }
+    .qa-lc { display: inline-flex; align-items: center; gap: 0.3rem; margin-top: 5px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.18); border-radius: 99px; padding: 2px 9px; }
+    .qa-lc .lc-n { font-size: 0.75rem; font-weight: 800; color: var(--gold); }
+    .qa-lc .lc-t { font-size: 0.68rem; color: rgba(255,255,255,0.65); }
+    .qa-vibe { font-size: 0.72rem; color: rgba(255,255,255,0.5); font-style: italic; margin-top: 4px; }
+    .qa-body { padding: 1.1rem 1.4rem; }
+    .qa-q { font-size: 0.88rem; font-weight: 700; color: var(--primary); line-height: 1.55; margin-bottom: 0.85rem; padding-left: 1rem; border-left: 3px solid var(--gold); }
+    .qa-q::before { content: 'Câu hỏi: '; font-size: 0.68rem; font-weight: 800; letter-spacing: 0.5px; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: 2px; }
+    .qa-a { font-size: 0.84rem; color: #374151; line-height: 1.65; }
+    .qa-a strong { color: var(--care); }
+    .qa-a .qa-src { display: inline-block; font-size: 0.68rem; font-weight: 600; color: var(--muted); background: #f0fdfa; border: 1px solid #99f6e4; padding: 1px 8px; border-radius: 99px; margin-left: 3px; vertical-align: middle; }
+    .qa-a em { color: #6b7280; font-style: italic; }
+    @media (max-width: 600px) { .qa-grid { grid-template-columns: 1fr; } }
+
     /* FOOTER */
     footer { background: #0d0d1a; padding: 3rem 2rem; text-align: center; color: rgba(255,255,255,0.4); font-size: 0.82rem; }
     footer .footer-logo { font-size: 1.5rem; font-weight: 900; color: #fff; margin-bottom: 0.5rem; }
@@ -763,6 +787,7 @@
   <a href="#founders">🤝 Nhà sáng lập</a>
   <a href="#experience">❤️ Trải nghiệm KH</a>
   <a href="#glossary">📖 Thuật ngữ</a>
+  <a href="#phanbien">🎤 Phản biện</a>
 </div>
 
 <!-- ============================ PHIÊN 1 — TÀI CHÍNH ============================ -->
@@ -4532,8 +4557,312 @@
   </div>
 </section>
 
-<!-- FOOTER -->
-<footer>
+<!-- ============================ PHẢN BIỆN & Q&A ============================ -->
+<section class="qa-section" id="phanbien">
+  <div class="container">
+    <div class="section-tag">Phụ lục · Phản biện & Q&A</div>
+    <h2>Dự kiến phản biện từ lớp ETR601 SEM40HN</h2>
+    <p class="section-desc">
+      14 câu hỏi dự kiến từ các học viên trong lớp — được phân tích theo <strong>thần số học (Đường đời)</strong>
+      và background nghề nghiệp để dự báo góc tiếp cận. Câu trả lời trích trực tiếp số liệu từ bản kế hoạch này.
+    </p>
+
+    <div class="qa-intro">
+      <strong>Phương pháp:</strong> Mỗi học viên có Đường đời tính từ ngày sinh (tổng các chữ số → giảm về 1–9 hoặc giữ nguyên số master 11/22/33) phản ánh năng lượng tư duy và góc tiếp cận khi phản biện. Kết hợp với kinh nghiệm nghề nghiệp thực tế, ta dự báo được <em>câu hỏi nào sẽ được đặt ra và bằng lăng kính nào</em>. Toàn bộ câu trả lời bám sát số liệu và phân tích CÓ SẴN trong bản kế hoạch — những phần chưa có dữ liệu cụ thể được ghi rõ là giả định demo.
+      <span style="display:inline-flex;align-items:center;gap:0.35rem;background:#fffbeb;border:1px solid #fde68a;color:#92400e;font-size:0.72rem;font-weight:700;padding:2px 9px;border-radius:99px;margin-left:6px;">Dữ liệu minh họa</span>
+    </div>
+
+    <div class="qa-grid">
+
+      <!-- 1. Nguyễn Xuân Trường — ĐL 8 -->
+      <div class="qa-card">
+        <div class="qa-card-head">
+          <div class="qa-avatar">💼</div>
+          <div class="qa-meta">
+            <div class="qa-name">Nguyễn Xuân Trường</div>
+            <div class="qa-role">Giám đốc · MCP Vietnam</div>
+            <div class="qa-lc"><span class="lc-n">8</span><span class="lc-t">Tiền · Quyền lực · ROI</span></div>
+            <div class="qa-vibe">Hỏi số thật, không nghe chuyện định tính</div>
+          </div>
+        </div>
+        <div class="qa-body">
+          <div class="qa-q">CAC của các bạn là bao nhiêu, LTV bao nhiêu? Tỷ lệ LTV/CAC có thực sự đạt được không? Khi nào mới hòa vốn — nói rõ bằng số, đừng dùng chữ "dự kiến".</div>
+          <div class="qa-a">
+            CAC blended <strong>~480.000 VND/gia đình (~$19)</strong>, LTV theo lợi nhuận gộp <strong>~2,8 triệu (~$110)</strong>, LTV/CAC <strong>5,8×</strong> — vượt ngưỡng lành mạnh 3× của ngành (chuẩn HubiFi SaaS 2024).<span class="qa-src">#fin</span> Payback CAC chỉ <strong>~5,2 tháng</strong>, thấp hơn nhiều so với telehealth Mỹ (~$180 CAC, payback 12+ tháng). Kịch bản B (lãi ngay) sinh lợi nhuận ròng <strong>+10 tỷ ngay Năm 1</strong>, không cần chờ hòa vốn EBITDA Năm 5 như Kế hoạch A. Biên gộp mũi nhọn CareConnect là <strong>~85%</strong> — đây là con số thật, không "dự kiến".
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. Đặng Hồng Đức — ĐL 7 -->
+      <div class="qa-card">
+        <div class="qa-card-head">
+          <div class="qa-avatar">🔍</div>
+          <div class="qa-meta">
+            <div class="qa-name">Đặng Hồng Đức</div>
+            <div class="qa-role">Giám đốc · HD Group (TM-DV)</div>
+            <div class="qa-lc"><span class="lc-n">7</span><span class="lc-t">Hoài nghi · Phân tích sâu</span></div>
+            <div class="qa-vibe">Tìm điểm yếu trong luận điểm, không tin số đẹp</div>
+          </div>
+        </div>
+        <div class="qa-body">
+          <div class="qa-q">Rào cản gia nhập của mô hình này gần như bằng 0 — ai cũng có thể làm marketplace điều dưỡng. Vì sao bạn tự tin ElderCare không bị copy và bị đánh bật?</div>
+          <div class="qa-a">
+            Five Forces của Porter cho thấy rào cản gia nhập thấp là <strong>có thật</strong> — chúng tôi không phủ nhận.<span class="qa-src">#fiveforces</span> Nhưng "moat mềm" của ElderCare đến từ ba lớp: (1) <strong>mạng lưới cung điều dưỡng được xác minh lão khoa</strong> — mất 12–18 tháng xây; (2) <strong>switching cost cảm xúc</strong> — gia đình đã quen người chăm, thiết bị đã lắp tại nhà, không muốn đổi; (3) <strong>định vị super-app × chuyên người già</strong> — khoảng trống chưa ai chiếm.<span class="qa-src">#competitors</span> Bản đồ cạnh tranh cho thấy Jio Health, bCare, Bluecare, Med247 đều hoặc rộng nhưng chung chung, hoặc chuyên nhưng hẹp — chưa ai làm cả hai cùng lúc.
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. Dương Minh Đức — ĐL 2 -->
+      <div class="qa-card">
+        <div class="qa-card-head">
+          <div class="qa-avatar">💻</div>
+          <div class="qa-meta">
+            <div class="qa-name">Dương Minh Đức</div>
+            <div class="qa-role">Chuyên viên CNTT · FPT IS</div>
+            <div class="qa-lc"><span class="lc-n">2</span><span class="lc-t">Công nghệ · Đối tác · Chi tiết kỹ thuật</span></div>
+            <div class="qa-vibe">Hỏi kiến trúc hệ thống và compliance</div>
+          </div>
+        </div>
+        <div class="qa-body">
+          <div class="qa-q">Dữ liệu y tế cá nhân (huyết áp, bệnh án, định vị) của người già được bảo vệ thế nào? Các bạn có tuân thủ Nghị định 13/2023 và Luật Bảo vệ dữ liệu cá nhân 2025 không?</div>
+          <div class="qa-a">
+            Đây là rủi ro pháp lý số 1 mà chúng tôi đã thiết kế vào kiến trúc từ đầu.<span class="qa-src">#legal</span> ElderCare thu thập huyết áp, SpO₂, định vị, hồ sơ bệnh án — tất cả là <strong>dữ liệu cá nhân nhạy cảm</strong> theo Luật 91/2025 và Nghị định 13/2023/NĐ-CP (Điều 2.4). Biện pháp cụ thể: mã hóa end-to-end, kiểm soát truy cập dựa trên vai trò, audit log đầy đủ (ai xem gì khi nào), đồng ý có chữ ký trước khi thu thập, quyền thu hồi đồng ý bất cứ lúc nào. Phân quyền con cái xem dữ liệu bố mẹ phải có <strong>đồng ý của chính người cao tuổi</strong>. Mức phạt hiện hành theo NĐ 15/2020 là 20–30 triệu/vi phạm — chúng tôi coi đây là chi phí tuân thủ bắt buộc, không phải tùy chọn.
+          </div>
+        </div>
+      </div>
+
+      <!-- 4. Nguyễn Minh Trang — ĐL 4 -->
+      <div class="qa-card">
+        <div class="qa-card-head">
+          <div class="qa-avatar">🏗️</div>
+          <div class="qa-meta">
+            <div class="qa-name">Nguyễn Minh Trang</div>
+            <div class="qa-role">Admin · One Mount (VinID)</div>
+            <div class="qa-lc"><span class="lc-n">4</span><span class="lc-t">Quy trình · Cấu trúc vận hành</span></div>
+            <div class="qa-vibe">Từ super-app VinID — hiểu thách thức vận hành đa dịch vụ</div>
+          </div>
+        </div>
+        <div class="qa-body">
+          <div class="qa-q">Vận hành một super-app y tế 5 trụ cột cùng lúc cực kỳ phức tạp. Các bạn có bao nhiêu người và quy trình vận hành cụ thể ra sao, đặc biệt khi 6 founder còn đi làm full-time?</div>
+          <div class="qa-a">
+            Kịch bản B (lãi ngay) <strong>không chạy 5 trụ cột ngay</strong> — tập trung 3 trụ cột sinh tiền trước: CareConnect + Telehealth + Dược markup; tạm gác MedFin và CareSense tự sản xuất.<span class="qa-src">#fin</span> Về nhân sự: Business Model Canvas cho thấy 4 tầng — nhóm kỹ thuật/sản phẩm (founder), <strong>Medical Director retainer 30–50tr/tháng</strong>, điều dưỡng trưởng + ops manager vận hành 9-5 hằng ngày, mạng lưới caregiver cộng tác viên.<span class="qa-src">#expertise</span> Founder giữ "nút thắt chiến lược", đội thuê chạy daily ops — không cần founder bỏ việc ngay. P&L Năm 1 có <strong>40 người</strong> toàn bộ bộ máy.
+          </div>
+        </div>
+      </div>
+
+      <!-- 5. Vũ Đức Mạnh — ĐL 3 -->
+      <div class="qa-card">
+        <div class="qa-card-head">
+          <div class="qa-avatar">🚀</div>
+          <div class="qa-meta">
+            <div class="qa-name">Vũ Đức Mạnh</div>
+            <div class="qa-role">CEO · QTONZ Technology Global</div>
+            <div class="qa-lc"><span class="lc-n">3</span><span class="lc-t">Tầm nhìn · Giao tiếp · Mở rộng</span></div>
+            <div class="qa-vibe">Hỏi về tham vọng dài hạn và chiến lược quốc tế</div>
+          </div>
+        </div>
+        <div class="qa-body">
+          <div class="qa-q">TAM của các bạn là bao nhiêu và lộ trình mở rộng ra thị trường quốc tế như thế nào? Tầm nhìn "tỉ đô" dựa trên gì?</div>
+          <div class="qa-a">
+            TAM Việt Nam: <strong>~115.000 tỷ đồng</strong> (14,2 triệu người cao tuổi), SAM <strong>~18.000 tỷ</strong>, SOM mục tiêu <strong>~900 tỷ vào Năm 5</strong> — chỉ chiếm ~5% SAM, còn rất nhiều dư địa.<span class="qa-src">#summary</span> Lộ trình: pilot Hà Nội (Năm 1–2), mở TP.HCM + Đà Nẵng (Series A), phủ toàn quốc (Series B: 110k gia đình), rồi mới xét khu vực (Series C: $300M post-money). "Tỉ đô" thuộc tầm nhìn Năm 8–10 khi mở rộng khu vực — Đông Nam Á đang già hóa song song Việt Nam. DCF base cho thấy EV <strong>~1.740 tỷ (~$68M)</strong> trong 5 năm; kịch bản bull <strong>~$163M</strong>.
+          </div>
+        </div>
+      </div>
+
+      <!-- 6. Vũ Thị Minh Lý — ĐL 33/6 -->
+      <div class="qa-card">
+        <div class="qa-card-head">
+          <div class="qa-avatar">🤝</div>
+          <div class="qa-meta">
+            <div class="qa-name">Vũ Thị Minh Lý</div>
+            <div class="qa-role">Trưởng phòng kinh doanh · Giải pháp CN VN</div>
+            <div class="qa-lc"><span class="lc-n">33/6</span><span class="lc-t">Bán hàng · Chăm sóc · Niềm tin</span></div>
+            <div class="qa-vibe">Hiểu tâm lý khách hàng — hỏi về xây dựng niềm tin</div>
+          </div>
+        </div>
+        <div class="qa-body">
+          <div class="qa-q">Người cao tuổi rất ngại người lạ vào nhà, con cái cũng cần được thuyết phục. Chiến lược tạo niềm tin cụ thể ra sao? Kênh bán hàng nào hiệu quả nhất?</div>
+          <div class="qa-a">
+            Chiến lược tạo niềm tin dựa trên 3 lớp.<span class="qa-src">#marketing</span> Thứ nhất, kênh <strong>đối tác y tế</strong> (bệnh viện/phòng khám) là mũi nhọn giai đoạn đầu — khách đến đúng lúc có nhu cầu (vừa xuất viện), chuyển đổi cao, niềm tin sẵn; CAC kênh này chỉ <strong>~300k</strong>. Thứ hai, <strong>KOL bác sĩ lão khoa</strong> bảo chứng thương hiệu non trẻ — người già và con cái không tin quảng cáo y tế thuần. Thứ ba, <strong>onboarding tại nhà bởi người thật</strong>: điều dưỡng mặc đồng phục, đeo thẻ định danh có mã QR, gọi đúng tên thường gọi — chống nỗi sợ bị lừa đảo của người cao tuổi.<span class="qa-src">#experience</span> CAC blended ~480k, trong đó referral chỉ <strong>~180k</strong> — giữ chân tốt chính là kênh bán hàng rẻ nhất.
+          </div>
+        </div>
+      </div>
+
+      <!-- 7. Lộc Tuấn Hùng — ĐL 11 -->
+      <div class="qa-card">
+        <div class="qa-card-head">
+          <div class="qa-avatar">🤖</div>
+          <div class="qa-meta">
+            <div class="qa-name">Lộc Tuấn Hùng</div>
+            <div class="qa-role">AI Engineer · NBG High Tech</div>
+            <div class="qa-lc"><span class="lc-n">11</span><span class="lc-t">AI · Lý tưởng · Chiều sâu kỹ thuật</span></div>
+            <div class="qa-vibe">Đặt câu hỏi về độ chính xác và dữ liệu huấn luyện AI</div>
+          </div>
+        </div>
+        <div class="qa-body">
+          <div class="qa-q">Fall detection của các bạn hoạt động thế nào? Accuracy bao nhiêu %? Dữ liệu huấn luyện từ đâu? False positive rate cao sẽ làm phiền gia đình và mất niềm tin?</div>
+          <div class="qa-a">
+            Cần thành thật: <strong>AI fall detection trong bản kế hoạch này là tính năng demo, chưa có số accuracy nội bộ thực đo</strong>.<span class="qa-src">Giả định demo</span> CareSense dùng kết hợp camera AI + wearable + cảm biến radar — đây là cách tiếp cận đa modal giảm false positive so với chỉ dùng camera. Nguyên tắc thiết kế: <strong>AI chỉ là lớp cảnh báo bổ sung, con người (điều dưỡng trực) ra quyết định cuối</strong> — onboarding ghi rõ điều này để tránh over-promise.<span class="qa-src">#legal</span> Về dữ liệu huấn luyện: giai đoạn đầu sử dụng dataset mở (HAR, EPIC-Kitchens, UR Fall) kết hợp fine-tune trên dữ liệu thu thập từ pilot có consent. False positive → điều dưỡng nhận cảnh báo và xác minh trước khi leo thang — đây là SOP đã thiết kế.
+          </div>
+        </div>
+      </div>
+
+      <!-- 8. Hoàng Trọng Định — ĐL 11/2 -->
+      <div class="qa-card">
+        <div class="qa-card-head">
+          <div class="qa-avatar">🏥</div>
+          <div class="qa-meta">
+            <div class="qa-name">Hoàng Trọng Định</div>
+            <div class="qa-role">GĐ Kinh doanh · NATEK (sinh 1978)</div>
+            <div class="qa-lc"><span class="lc-n">11/2</span><span class="lc-t">Thị trường thực · B2B · Đối tác chiến lược</span></div>
+            <div class="qa-vibe">Kinh nghiệm lâu năm — hỏi kênh B2B và ai thực sự trả tiền</div>
+          </div>
+        </div>
+        <div class="qa-body">
+          <div class="qa-q">Thị trường THẬT của các bạn là ai — cá nhân hay doanh nghiệp? Hợp tác bệnh viện, bảo hiểm thực sự khả thi không? Ai thực sự là người trả tiền cuối cùng?</div>
+          <div class="qa-a">
+            Mô hình là <strong>B2C với lớp B2B2C</strong>.<span class="qa-src">#segment</span> Người trả tiền chính là <strong>con cái 30–50 tuổi</strong> — không phải người già. Business Model Canvas xác định 3 nhóm đối tác chính: bệnh viện/phòng khám (nguồn khách hậu phẫu, CAC thấp ~300k, chuyển đổi cao), BHXH/hội người cao tuổi/phường (phủ rộng chi phí thấp), và công ty tài chính được cấp phép (đối tác MedFin).<span class="qa-src">#canvas</span> Kênh bệnh viện không trả tiền cho chúng tôi — chúng tôi trả hoa hồng giới thiệu (referral fee) cho bệnh viện và nhận khách từ họ. Bảo hiểm sức khỏe tư nhân là hướng B2B dài hạn (Series B+), khi đã có đủ dữ liệu chứng minh giảm nhập viện.
+          </div>
+        </div>
+      </div>
+
+      <!-- 9. Vũ Thiều Quân — ĐL 3 -->
+      <div class="qa-card">
+        <div class="qa-card-head">
+          <div class="qa-avatar">⚙️</div>
+          <div class="qa-meta">
+            <div class="qa-name">Vũ Thiều Quân</div>
+            <div class="qa-role">Delivery Manager · FPT Software</div>
+            <div class="qa-lc"><span class="lc-n">3</span><span class="lc-t">Giao tiếp · Tầm nhìn · Hiện thực hóa</span></div>
+            <div class="qa-vibe">Từ FPT Software — hỏi timeline và khả năng triển khai thực tế</div>
+          </div>
+        </div>
+        <div class="qa-body">
+          <div class="qa-q">MVP của các bạn gồm những gì? Timeline build cụ thể ra sao? Với 6 founder không ai có background y tế/dược, đội ngũ kỹ thuật để build thực sự ở đâu?</div>
+          <div class="qa-a">
+            MVP Q1–Q2 tập trung 2 tính năng "wow": <strong>cảnh báo té ngã (CareSense) + đặt điều dưỡng tại nhà (CareConnect)</strong> — pilot Hà Nội.<span class="qa-src">#marketing</span> Q3 thêm subscription gói gia đình + telehealth cơ bản; Q4 tích hợp Pharma. Về đội kỹ thuật: 4/6 founder có nền tảng tài chính/kế toán/CNTT — phần CNTT có thể build MVP được.<span class="qa-src">#founders</span> Phần thiếu (chuyên môn y tế) được bù bằng <strong>Medical Director retainer 30–50tr/tháng</strong> và đội điều dưỡng trưởng. P&L Năm 1 có nhóm "công nghệ & sản phẩm" 12 người với chi phí 7–55tr/người/tháng theo mức ITviec 2024. Stack kỹ thuật và kiến trúc là giả định demo — sẽ cụ thể hóa sau khi gọi được Seed.
+          </div>
+        </div>
+      </div>
+
+      <!-- 10. Hoàng Thị Diệu Hương — ĐL 4 -->
+      <div class="qa-card">
+        <div class="qa-card-head">
+          <div class="qa-avatar">👩‍💼</div>
+          <div class="qa-meta">
+            <div class="qa-name">Hoàng Thị Diệu Hương</div>
+            <div class="qa-role">Giám đốc</div>
+            <div class="qa-lc"><span class="lc-n">4</span><span class="lc-t">Vận hành · Kiểm soát chất lượng · Cấu trúc</span></div>
+            <div class="qa-vibe">Hỏi về chuẩn dịch vụ và quản lý chất lượng caregiver</div>
+          </div>
+        </div>
+        <div class="qa-body">
+          <div class="qa-q">Làm sao tuyển đủ điều dưỡng chất lượng? Nếu caregiver kém hoặc vi phạm chuẩn mực khi ở nhà người già, các bạn xử lý thế nào? Ai chịu trách nhiệm?</div>
+          <div class="qa-a">
+            Lộ trình chứng chỉ 4 cấp nội bộ (Sơ cấp → Lão khoa cơ bản → Lão khoa nâng cao → Chuyên sâu bệnh lý nặng) vừa đảm bảo chất lượng vừa là thang thăng tiến thu nhập — giữ chân caregiver giỏi.<span class="qa-src">#disease</span> Cơ chế kiểm soát: xác minh giấy phép hành nghề trước khi nhận ca, chấm điểm chất lượng sau mỗi ca (feedback con cái + người già), cảnh báo AI khi chỉ số bất thường. Nếu caregiver kém: <strong>thay thế trong 24h, "chuyên gia dự phòng" on-call</strong>, bảo hiểm trách nhiệm nghề nghiệp chi trả khi xác định lỗi.<span class="qa-src">#legal</span> Audit log đầy đủ phân định rõ trách nhiệm: lỗi chuyên môn thuộc người hành nghề; lỗi điều phối thuộc ElderCare.
+          </div>
+        </div>
+      </div>
+
+      <!-- 11. Lê Quang Vũ — ĐL 8 -->
+      <div class="qa-card">
+        <div class="qa-card-head">
+          <div class="qa-avatar">🖥️</div>
+          <div class="qa-meta">
+            <div class="qa-name">Lê Quang Vũ</div>
+            <div class="qa-role">Quản lý CNTT · Vinschool</div>
+            <div class="qa-lc"><span class="lc-n">8</span><span class="lc-t">Chi phí công nghệ · Bảo mật · Scale</span></div>
+            <div class="qa-vibe">Quản lý hệ thống lớn — hỏi chi phí và khả năng mở rộng hạ tầng</div>
+          </div>
+        </div>
+        <div class="qa-body">
+          <div class="qa-q">Chi phí công nghệ vận hành hằng năm là bao nhiêu? Khi có 100k hay 500k gia đình, hạ tầng có scale được không? Bảo mật hệ thống y tế thế nào?</div>
+          <div class="qa-a">
+            P&L 5 năm cho thấy chi phí công nghệ và sản phẩm chiếm <strong>~25–30% OpEx</strong> các năm đầu.<span class="qa-src">#fin</span> Đội công nghệ Năm 1 là 12 người (7–55tr/tháng theo ITviec 2024), scale lên 50 người Năm 3 khi có Series A. Về hạ tầng: mô hình cloud-native (thuê AWS/GCP theo dùng) phù hợp scale từ 6k → 520k gia đình mà không cần đầu tư server vật lý — đây là ưu điểm của asset-light. Bảo mật: mã hóa end-to-end, audit log, kiểm soát truy cập vai trò — tuân thủ Luật An toàn thông tin mạng 86/2015 và Nghị định 13/2023.<span class="qa-src">#legal</span> Chi tiết kiến trúc kỹ thuật cụ thể là <em>giả định demo</em> — sẽ được xác định sau Seed khi thuê CTO chuyên nghiệp.
+          </div>
+        </div>
+      </div>
+
+      <!-- 12. Phạm Thu Trang — ĐL 7 -->
+      <div class="qa-card">
+        <div class="qa-card-head">
+          <div class="qa-avatar">📊</div>
+          <div class="qa-meta">
+            <div class="qa-name">Phạm Thu Trang</div>
+            <div class="qa-role">GĐ BI · Minh Phúc Transformation</div>
+            <div class="qa-lc"><span class="lc-n">7</span><span class="lc-t">Dữ liệu · Nguồn · Tư duy phân tích</span></div>
+            <div class="qa-vibe">Chuyên BI — hỏi nguồn gốc và độ tin cậy của số liệu</div>
+          </div>
+        </div>
+        <div class="qa-body">
+          <div class="qa-q">TAM 115.000 tỷ và SAM 18.000 tỷ lấy từ nguồn nào? Các giả định doanh thu (ARPU, churn 3,3%, LTV/CAC 5,8×) có cơ sở thực nào không hay là tự ước tính?</div>
+          <div class="qa-a">
+            Minh bạch hoàn toàn: <strong>TAM/SAM là ước tính nội bộ</strong> dựa trên 14,2 triệu người cao tuổi VN × chi tiêu y tế trung bình, không phải từ báo cáo thị trường có phí.<span class="qa-src">#summary</span> CAC/LTV/churn VN là ước tính — chưa có bộ dữ liệu công khai về unit economics telehealth VN; chúng tôi scale xuống từ benchmark quốc tế: CAC telehealth Mỹ ~$180 (SovDoc 2024), LTV/CAC tốt ≥3× (HubiFi 2024), churn app sức khỏe (ColumnContent 2025), retention ~85% (DrugPatentWatch 2024 — mô hình Hims).<span class="qa-src">#fin</span> P&L dựng theo cohort: số gia đình × ARPU × 12 — phương pháp standard. Mọi số tự ước tính đều được gắn nhãn "ước tính nội bộ" trong bản kế hoạch. Độ chính xác sẽ được xác nhận khi có dữ liệu thực từ pilot Hà Nội.
+          </div>
+        </div>
+      </div>
+
+      <!-- 13. Nguyễn Minh Phương — ĐL 7 -->
+      <div class="qa-card">
+        <div class="qa-card-head">
+          <div class="qa-avatar">⚖️</div>
+          <div class="qa-meta">
+            <div class="qa-name">Nguyễn Minh Phương</div>
+            <div class="qa-role">Trợ lý Giám đốc · Việt Phương Đông</div>
+            <div class="qa-lc"><span class="lc-n">7</span><span class="lc-t">Rủi ro · Hoài nghi · Phân tích pháp lý</span></div>
+            <div class="qa-vibe">Hỏi về trách nhiệm pháp lý khi xảy ra sự cố nghiêm trọng</div>
+          </div>
+        </div>
+        <div class="qa-body">
+          <div class="qa-q">Nếu người già tử vong hoặc bị thương nặng khi đang dùng dịch vụ ElderCare — ai chịu trách nhiệm pháp lý? Các bạn có bảo hiểm trách nhiệm không? Cơ chế giải quyết tranh chấp ra sao?</div>
+          <div class="qa-a">
+            Đây là rủi ro pháp lý lớn nhất và chúng tôi đã thiết kế 5 lớp phòng vệ.<span class="qa-src">#legal</span> (1) Điều khoản dịch vụ minh bạch giới hạn vai trò AI; (2) <strong>Bảo hiểm trách nhiệm nghề nghiệp</strong> cho cả cơ sở KCB đối tác lẫn người hành nghề; (3) Audit log đầy đủ chứng minh quy trình đúng chuẩn; (4) Mô hình nền tảng + cơ sở được cấp phép <strong>phân tán trách nhiệm</strong>: lỗi chuyên môn → người hành nghề và cơ sở KCB chịu; lỗi thiết bị → nhà sản xuất có số đăng ký lưu hành; ElderCare chịu phần điều phối mình kiểm soát; (5) Thang giải quyết tranh chấp 4 bước: care manager tiếp nhận &lt;2h → hòa giải nội bộ → trọng tài thương mại → tòa án. Không hứa "không bao giờ bị kiện" — mà hứa quy trình chuẩn, bảo hiểm đủ, trách nhiệm rõ ràng.
+          </div>
+        </div>
+      </div>
+
+      <!-- 14. Lại Thị Bảo Hiền — ĐL 7 -->
+      <div class="qa-card">
+        <div class="qa-card-head">
+          <div class="qa-avatar">❤️</div>
+          <div class="qa-meta">
+            <div class="qa-name">Lại Thị Bảo Hiền</div>
+            <div class="qa-role">Học viên ETR601 SEM40HN</div>
+            <div class="qa-lc"><span class="lc-n">7</span><span class="lc-t">Hoài nghi · Phân tích · Chiều sâu</span></div>
+            <div class="qa-vibe">Hỏi về vòng đời thực của khách hàng khi người thân mất</div>
+          </div>
+        </div>
+        <div class="qa-body">
+          <div class="qa-q">Khách hàng chăm sóc người già sẽ rời khi người thân qua đời hoặc phục hồi — churn tự nhiên này rất cao. Làm sao giữ chân và LTV có thực sự đạt 30 tháng không?</div>
+          <div class="qa-a">
+            Đây là câu hỏi sắc sảo nhất về unit economics. Tab Trải nghiệm & Giữ chân cho thấy: retention ~<strong>85%/năm</strong>, NRR ~<strong>110%</strong> (gia đình tái tục + nâng gói), ~<strong>35% khách mới đến từ giới thiệu</strong>.<span class="qa-src">#experience</span> Churn tự nhiên khi người thân mất là có thật — nhưng chúng tôi kỳ vọng nhiều gia đình chuyển sang chăm người già khác trong gia đình (ông/bà kế tiếp), hoặc giới thiệu cho bạn bè có nhu cầu tương tự. Churn 3,3%/tháng → vòng đời ~30 tháng là <strong>ước tính nội bộ</strong> benchmark từ mô hình Hims (bệnh mạn tính theo dõi suốt đời).<span class="qa-src">#fin</span> Rào cản rời bỏ cao vì: gia đình đã quen người chăm, đã lắp thiết bị, đã có hồ sơ sức khỏe — chuyển sang đối thủ nghĩa là bắt đầu lại từ đầu. NRR >100% nghĩa là upsell bù đắp được churn tự nhiên.
+          </div>
+        </div>
+      </div>
+
+    </div><!-- end qa-grid -->
+
+    <div class="endbox ai" style="margin-top:2rem;">
+      <h4>🎯 Tóm tắt chiến lược trả lời phản biện</h4>
+      <div class="eb-desc">Ba nguyên tắc xuyên suốt khi trả lời câu hỏi từ hội đồng:</div>
+      <div class="ai-row">
+        <div class="ai-item">
+          <div class="ai-head">📌 Trích số thật, gắn section</div>
+          <p>Mọi câu trả lời đều trích số liệu cụ thể từ bản kế hoạch. Khi bị hỏi số, không nói "dự kiến" mà nói "ước tính nội bộ, đây là phương pháp tính" — minh bạch về độ tin cậy.</p>
+        </div>
+        <div class="ai-item">
+          <div class="ai-head">🛡️ Thừa nhận điểm yếu trước</div>
+          <p>Rào cản gia nhập thấp, dữ liệu VN chưa có, AI fall detection là demo — thừa nhận thẳng thắn rồi giải thích kế hoạch bù đắp. Không phủ nhận sẽ mất điểm tin cậy.</p>
+        </div>
+        <div class="ai-item">
+          <div class="ai-head">⚡ Kịch bản B là chốt chặn</div>
+          <p>Khi bị tấn công về rủi ro đốt vốn / unit economics / hòa vốn: chốt về Kịch bản B (lãi ngay +10 tỷ Năm 1, founders giữ &gt;80%, không phụ thuộc vốn ngoài) — đây là lá chắn mạnh nhất.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
   <div class="footer-logo">Elder<span>Care</span> VN</div>
   <p style="margin-bottom:0.5rem;">Kế hoạch kinh doanh · Super-app chăm sóc sức khỏe người cao tuổi · ETR601.22 · SEM40HN · FSB — FPT School of Business</p>
   <p>Môn học: Khởi nghiệp và Đổi mới Sáng tạo trong Kỷ nguyên AI · Giảng viên: Dr. Phạm Quang Ngọc</p>
