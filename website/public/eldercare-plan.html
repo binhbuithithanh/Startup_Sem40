@@ -245,6 +245,7 @@
     .fin-plan-tab:hover { border-color: var(--care-light); color: var(--care); }
     .fin-plan-tab.active { background: linear-gradient(135deg, var(--care), var(--care-light)); color: #fff; border-color: var(--care); box-shadow: 0 8px 24px rgba(13,148,136,0.32); }
     .fin-plan-tab.plan-a.active { background: linear-gradient(135deg, var(--gold), #fbbf24); border-color: var(--gold); color: #3a2a05; box-shadow: 0 8px 24px rgba(245,166,35,0.32); }
+    .fin-plan-tab.plan-c.active { background: linear-gradient(135deg, #0891b2, #22d3ee); border-color: #0891b2; color: #fff; box-shadow: 0 8px 24px rgba(8,145,178,0.32); }
     .fin-plan-panel { display: none; }
     .fin-plan-panel.active { display: block; animation: fadePlan .35s ease; }
     @keyframes fadePlan { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
@@ -1279,14 +1280,15 @@
     </div>
 
     <!-- 8 — HAI KỊCH BẢN TÀI CHÍNH: TỈ ĐÔ vs LÃI NGAY (Phiên 7) -->
-    <h3 class="fin-sub" id="fin-plans"><span class="badge-n">8</span> Hai kịch bản tài chính — Tỉ đô vs Lãi ngay</h3>
+    <h3 class="fin-sub" id="fin-plans"><span class="badge-n">8</span> Ba kịch bản tài chính — Tỉ đô · Lãi ngay · Vốn mồi 50tr</h3>
     <p class="sub-desc">
-      Toàn bộ mô hình phía trên là <strong>Kế hoạch A · Tỉ đô</strong> — đốt vốn 4 năm để chiếm thị phần, EBITDA mới hòa vốn Năm 5, cần ~4 vòng gọi vốn &amp; ~289 tỷ tài trợ lỗ lũy kế. Nhưng ElderCare có một con đường thứ hai: <strong>Kế hoạch B · Lãi ngay</strong> — mô hình <em>asset-light</em>, dòng tiền dương &amp; lãi ròng <strong>+10 tỷ ngay Năm 1</strong>, mọi năm đều có lãi, founders giữ kiểm soát. Bấm để so sánh.
+      Toàn bộ mô hình phía trên là <strong>Kế hoạch A · Tỉ đô</strong> — đốt vốn 4 năm để chiếm thị phần, EBITDA mới hòa vốn Năm 5, cần ~4 vòng gọi vốn &amp; ~289 tỷ tài trợ lỗ lũy kế. ElderCare có thêm hai con đường: <strong>Kế hoạch B · Lãi ngay</strong> — mô hình <em>asset-light</em>, dòng tiền dương &amp; lãi ròng <strong>+10 tỷ ngay Năm 1</strong>; và <strong>Kế hoạch C · Vốn mồi 50 triệu</strong> — khởi nghiệp tinh gọn tuyệt đối, broker thủ công, hoà vốn tháng 4. Bấm để so sánh.
     </p>
 
     <div class="fin-plan-tabs">
       <button class="fin-plan-tab plan-a" id="tab-a" onclick="switchPlan('a')">💎 Kế hoạch A · Tỉ đô (đốt vốn)</button>
       <button class="fin-plan-tab active" id="tab-b" onclick="switchPlan('b')">💰 Kế hoạch B · Lãi ngay từ năm đầu</button>
+      <button class="fin-plan-tab plan-c" id="tab-c" onclick="switchPlan('c')">🌱 Kế hoạch C · Vốn mồi 50 triệu</button>
     </div>
 
     <!-- PANEL A -->
@@ -1402,6 +1404,117 @@
       </div></div>
 
       <p class="tnote">⚠️ <strong>Rủi ro Kế hoạch B (ước tính nội bộ):</strong> tăng trưởng chậm hơn có thể khiến ElderCare <em>mất thị phần vào tay đối thủ đốt vốn</em> chiếm trước ở phân khúc lớn; mô hình phụ thuộc mạnh vào <em>giữ chân nguồn cung điều dưỡng</em> trên CareConnect (nếu điều dưỡng rời/bị các nền tảng khác hút mất, biên hoa hồng 20% &amp; doanh thu mũi nhọn lung lay). Mọi số tự suy đều gắn nhãn "ước tính nội bộ".</p>
+    </div>
+
+    <!-- PANEL C -->
+    <div class="fin-plan-panel" id="panel-c">
+      <div class="deep-callout" style="margin-top:0;border-left-color:#0891b2;background:rgba(8,145,178,0.06);">
+        🌱 <strong>Kịch bản C — Vốn mồi 50 triệu · Khởi nghiệp tinh gọn, dòng tiền dương</strong><br/>
+        <em>Tư duy tối thiểu rủi ro — không vay nợ, validate trước khi scale, dùng traction làm bậc thang lên Kịch bản A/B.</em>
+        <span class="bmc-scenario-note" style="margin-left:0.6rem;font-size:0.78rem;">Dữ liệu minh họa demo</span>
+      </div>
+
+      <!-- Mô hình -->
+      <h4 style="font-size:1rem;font-weight:800;color:#0891b2;margin:1.5rem 0 0.75rem;display:flex;align-items:center;gap:0.5rem;">
+        🔧 Mô hình vận hành — Broker thủ công CareConnect
+      </h4>
+      <div style="background:#f0f9ff;border:1px solid #bae6fd;border-radius:12px;padding:1.2rem 1.4rem;margin-bottom:1.25rem;">
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:0.6rem;">
+          <li style="font-size:0.88rem;color:#374151;padding-left:1.4rem;position:relative;"><span style="position:absolute;left:0;color:#0891b2;">▶</span> <strong>KHÔNG build app/AI ngay.</strong> Broker thủ công (CareConnect): Zalo + Google Form + điện thoại — match gia đình ↔ người chăm đã sàng lọc, ăn <strong>hoa hồng 18%</strong>.</li>
+          <li style="font-size:0.88rem;color:#374151;padding-left:1.4rem;position:relative;"><span style="position:absolute;left:0;color:#0891b2;">▶</span> <strong>Đánh trúng 1 quận Hà Nội</strong> (Cầu Giấy / Hà Đông — đông người cao tuổi, thu nhập khá). Thắng 1 quận rồi mới lan rộng.</li>
+          <li style="font-size:0.88rem;color:#374151;padding-left:1.4rem;position:relative;"><span style="position:absolute;left:0;color:#0891b2;">▶</span> <strong>Caregiver được gia đình trả trực tiếp</strong> → COGS gần 0 (asset-light tuyệt đối). Biên gộp cao từ tháng đầu có doanh thu.</li>
+          <li style="font-size:0.88rem;color:#374151;padding-left:1.4rem;position:relative;"><span style="position:absolute;left:0;color:#0891b2;">▶</span> <strong>Stagger vốn:</strong> không tiêu hết 50tr tháng đầu, luôn giữ runway ≥ 6 tháng — không bao giờ bị bất ngờ cạn tiền.</li>
+        </ul>
+      </div>
+
+      <!-- Phân bổ vốn -->
+      <h4 style="font-size:1rem;font-weight:800;color:#0891b2;margin:1.25rem 0 0.75rem;display:flex;align-items:center;gap:0.5rem;">
+        💼 Phân bổ vốn 50 triệu VND
+      </h4>
+      <div style="background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:1.2rem 1.4rem;margin-bottom:1.25rem;">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.6rem 1.5rem;">
+          <div style="font-size:0.87rem;color:#374151;display:flex;justify-content:space-between;padding:0.45rem 0;border-bottom:1px solid #f3f4f6;"><span>📣 Marketing &amp; tạo lead (FB/Zalo ads, tờ rơi nhà thuốc/phòng khám)</span><strong style="color:#0891b2;white-space:nowrap;padding-left:0.5rem;">18tr</strong></div>
+          <div style="font-size:0.87rem;color:#374151;display:flex;justify-content:space-between;padding:0.45rem 0;border-bottom:1px solid #f3f4f6;"><span>🧑‍⚕️ Tuyển + sàng lọc + đào tạo nhanh caregiver</span><strong style="color:#0891b2;white-space:nowrap;padding-left:0.5rem;">5tr</strong></div>
+          <div style="font-size:0.87rem;color:#374151;display:flex;justify-content:space-between;padding:0.45rem 0;border-bottom:1px solid #f3f4f6;"><span>⚙️ Vận hành (sim, phần mềm rẻ, đồng phục, name card)</span><strong style="color:#0891b2;white-space:nowrap;padding-left:0.5rem;">5tr</strong></div>
+          <div style="font-size:0.87rem;color:#374151;display:flex;justify-content:space-between;padding:0.45rem 0;border-bottom:1px solid #f3f4f6;"><span>📋 Pháp lý + đăng ký hộ kinh doanh</span><strong style="color:#0891b2;white-space:nowrap;padding-left:0.5rem;">3tr</strong></div>
+          <div style="font-size:0.87rem;color:#374151;display:flex;justify-content:space-between;padding:0.45rem 0;grid-column:1/-1;border-bottom:none;"><span>🛡️ Dự phòng vận hành (runway đệm)</span><strong style="color:#0891b2;white-space:nowrap;padding-left:0.5rem;">19tr</strong></div>
+        </div>
+        <div style="margin-top:0.75rem;padding-top:0.75rem;border-top:2px solid #bae6fd;display:flex;justify-content:space-between;font-weight:800;font-size:0.95rem;color:#0c4a6e;"><span>Tổng vốn mồi</span><span>50tr VND</span></div>
+      </div>
+
+      <!-- Đơn vị kinh tế -->
+      <h4 style="font-size:1rem;font-weight:800;color:#0891b2;margin:1.25rem 0 0.5rem;">📊 Đơn vị kinh tế (nhất quán với #fin phía trên)</h4>
+      <div style="display:flex;flex-wrap:wrap;gap:0.6rem;margin-bottom:1.25rem;">
+        <span style="background:#f0f9ff;border:1px solid #bae6fd;border-radius:8px;padding:0.4rem 0.8rem;font-size:0.83rem;color:#0c4a6e;font-weight:600;">CAC 480k</span>
+        <span style="background:#f0f9ff;border:1px solid #bae6fd;border-radius:8px;padding:0.4rem 0.8rem;font-size:0.83rem;color:#0c4a6e;font-weight:600;">Hoa hồng trung bình 900k/khách/tháng</span>
+        <span style="background:#f0f9ff;border:1px solid #bae6fd;border-radius:8px;padding:0.4rem 0.8rem;font-size:0.83rem;color:#0c4a6e;font-weight:600;">Churn ~3%/tháng</span>
+        <span style="background:#f0f9ff;border:1px solid #bae6fd;border-radius:8px;padding:0.4rem 0.8rem;font-size:0.83rem;color:#0c4a6e;font-weight:600;">LTV/CAC 5,8×</span>
+        <span style="background:#f0f9ff;border:1px solid #bae6fd;border-radius:8px;padding:0.4rem 0.8rem;font-size:0.83rem;color:#0c4a6e;font-weight:600;">Referral 35% (giảm CAC theo thời gian)</span>
+      </div>
+
+      <!-- Bảng P&L 12 tháng -->
+      <h4 style="font-size:1rem;font-weight:800;color:#0891b2;margin:1.25rem 0 0.5rem;">📅 P&amp;L dự phóng 12 tháng — Kế hoạch C</h4>
+      <p class="sub-desc" style="margin-bottom:0.75rem;">Đơn vị: <strong>triệu VND</strong>. M4 là điểm hoà vốn — tháng đầu tiên dòng tiền dương. Tiền mặt thấp nhất là 35,4tr (M2) — không bao giờ âm vốn.</p>
+      <div class="table-scroll">
+        <table class="fin-table">
+          <thead>
+            <tr>
+              <th style="text-align:left;">Tháng</th>
+              <th>Khách mới</th>
+              <th>Khách active</th>
+              <th>DT hoa hồng (tr)</th>
+              <th>Chi phí (tr)</th>
+              <th>Dòng tiền tháng (tr)</th>
+              <th>Tiền mặt còn (tr)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>M1 · Setup</td><td>0</td><td>0</td><td>0</td><td>12</td><td class="neg">−12</td><td>38</td></tr>
+            <tr><td>M2 · Ra mắt</td><td>6</td><td>6</td><td>5,4</td><td>8</td><td class="neg">−2,6</td><td>35,4</td></tr>
+            <tr><td>M3</td><td>10</td><td>16</td><td>14,4</td><td>9</td><td class="pos">+5,4</td><td>40,8</td></tr>
+            <tr style="background:rgba(8,145,178,0.08);font-weight:800;"><td style="color:#0891b2;">M4 · HOÀ VỐN ✓</td><td>14</td><td>30</td><td>27</td><td>13</td><td class="pos">+14</td><td>54,8</td></tr>
+            <tr><td>M5</td><td>18</td><td>47</td><td>42,3</td><td>18</td><td class="pos">+24</td><td>79</td></tr>
+            <tr><td>M6</td><td>20</td><td>66</td><td>59,4</td><td>22</td><td class="pos">+37</td><td>116</td></tr>
+            <tr><td>M7</td><td>22</td><td>86</td><td>77</td><td>26</td><td class="pos">+51</td><td>167</td></tr>
+            <tr><td>M8</td><td>24</td><td>107</td><td>96</td><td>30</td><td class="pos">+66</td><td>233</td></tr>
+            <tr><td>M9</td><td>26</td><td>130</td><td>117</td><td>35</td><td class="pos">+82</td><td>315</td></tr>
+            <tr><td>M10</td><td>28</td><td>154</td><td>139</td><td>40</td><td class="pos">+99</td><td>414</td></tr>
+            <tr><td>M11</td><td>30</td><td>179</td><td>161</td><td>45</td><td class="pos">+116</td><td>530</td></tr>
+            <tr class="row-total"><td>M12 · Cuối năm</td><td>32</td><td>206</td><td>185</td><td>52</td><td class="pos">+133</td><td class="hl">663</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Tổng kết Y1 -->
+      <div style="background:linear-gradient(135deg,rgba(8,145,178,0.08),rgba(34,211,238,0.06));border:2px solid #7dd3fc;border-radius:14px;padding:1.3rem 1.5rem;margin:1.25rem 0;">
+        <h4 style="font-size:1rem;font-weight:800;color:#0c4a6e;margin-bottom:0.8rem;">🏆 Tổng kết Năm 1 — Kế hoạch C</h4>
+        <div class="kpi-grid" style="grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:0.75rem;margin:0;">
+          <div class="kpi"><div class="k-num" style="color:#0891b2;">Tháng 4</div><div class="k-label">Hoà vốn (dòng tiền dương)</div></div>
+          <div class="kpi"><div class="k-num" style="color:#0891b2;">35,4tr</div><div class="k-label">Tiền mặt thấp nhất (M2) — không âm vốn</div></div>
+          <div class="kpi"><div class="k-num" style="color:#0891b2;">~924tr</div><div class="k-label">Doanh thu hoa hồng Y1</div></div>
+          <div class="kpi"><div class="k-num" style="color:#0891b2;">~570tr</div><div class="k-label">Lãi ròng cả năm</div></div>
+          <div class="kpi"><div class="k-num" style="color:#0891b2;">206</div><div class="k-label">Khách recurring cuối năm</div></div>
+          <div class="kpi"><div class="k-num gold">663tr</div><div class="k-label">Tiền mặt cuối M12</div></div>
+        </div>
+      </div>
+
+      <!-- Box vì sao chắc thắng -->
+      <h4 style="font-size:1rem;font-weight:800;color:#0891b2;margin:1.25rem 0 0.75rem;display:flex;align-items:center;gap:0.5rem;">🎯 Vì sao gần như chắc thắng — Tư duy tối thiểu rủi ro (1%)</h4>
+      <div style="background:#f0fdf4;border:1px solid #86efac;border-radius:12px;padding:1.2rem 1.5rem;margin-bottom:1.25rem;">
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:0.65rem;">
+          <li style="font-size:0.87rem;color:#374151;padding-left:1.4rem;position:relative;"><span style="position:absolute;left:0;color:#16a34a;font-weight:800;">✓</span> <strong>Recurring revenue + COGS gần 0</strong> → biên lãi gộp cao, dòng tiền dương ngay từ M3, không cần scale mới có lãi.</li>
+          <li style="font-size:0.87rem;color:#374151;padding-left:1.4rem;position:relative;"><span style="position:absolute;left:0;color:#16a34a;font-weight:800;">✓</span> <strong>Tiêu vốn theo nhịp doanh thu, không all-in</strong> → không thể cháy túi; runway luôn ≥6 tháng ngay cả kịch bản xấu nhất.</li>
+          <li style="font-size:0.87rem;color:#374151;padding-left:1.4rem;position:relative;"><span style="position:absolute;left:0;color:#16a34a;font-weight:800;">✓</span> <strong>Không vay nợ, không phụ thuộc nhà đầu tư</strong> → quyết định kinh doanh hoàn toàn tự chủ; không bị ép exit hay dilute.</li>
+          <li style="font-size:0.87rem;color:#374151;padding-left:1.4rem;position:relative;"><span style="position:absolute;left:0;color:#16a34a;font-weight:800;">✓</span> <strong>Validate nhu cầu thật trước khi đổ tiền vào tech</strong> — app/AI làm sau khi đã có 200 khách trả tiền; không build sản phẩm đoán mò.</li>
+          <li style="font-size:0.87rem;color:#374151;padding-left:1.4rem;position:relative;"><span style="position:absolute;left:0;color:#16a34a;font-weight:800;">✓</span> <strong>Tận dụng referral 35%</strong> (số từ #experience) → CAC giảm dần theo thời gian, không phụ thuộc ads mãi.</li>
+          <li style="font-size:0.87rem;color:#374151;padding-left:1.4rem;position:relative;"><span style="position:absolute;left:0;color:#16a34a;font-weight:800;">✓</span> <strong>Lộ trình lên hạng:</strong> C chứng minh nhu cầu → traction 206 khách + dòng tiền dương → gọi vốn cho A/B (kỳ lân) từ vị thế mạnh, không bị ép.</li>
+        </ul>
+        <div class="deep-callout" style="margin:1rem 0 0;border-left-color:#16a34a;background:rgba(22,163,74,0.06);">
+          💡 <strong>Lộ trình:</strong> C (chứng minh traction) → 206 khách recurring + dòng tiền dương → gọi vốn cho A/B với bargaining power tối đa — không ai có thể ép giá một startup đã profitable.
+        </div>
+      </div>
+
+      <p class="tnote">⚠️ <strong>Lưu ý (ước tính nội bộ, kịch bản thận trọng minh họa):</strong> số liệu P&amp;L 12 tháng là ước tính thận trọng để demo tính khả thi — thực tế có thể khác do tốc độ tuyển khách, cạnh tranh địa phương, chi phí marketing thực tế. CAC 480k, hoa hồng 900k/tháng, churn 3%/tháng &amp; LTV/CAC 5,8× nhất quán với unit economics ở tiểu mục 2 phía trên. Mọi số đều là <em>dữ liệu minh họa demo</em>.</p>
     </div>
 
   </div>
@@ -4887,16 +5000,12 @@
 
   // Phiên 7 — chuyển đổi hai kịch bản tài chính A (Tỉ đô) / B (Lãi ngay)
   function switchPlan(which) {
-    const tabA = document.getElementById('tab-a');
-    const tabB = document.getElementById('tab-b');
-    const panelA = document.getElementById('panel-a');
-    const panelB = document.getElementById('panel-b');
-    if (!tabA || !tabB || !panelA || !panelB) return;
-    const isA = which === 'a';
-    tabA.classList.toggle('active', isA);
-    tabB.classList.toggle('active', !isA);
-    panelA.classList.toggle('active', isA);
-    panelB.classList.toggle('active', !isA);
+    ['a', 'b', 'c'].forEach(function(p) {
+      const tab = document.getElementById('tab-' + p);
+      const panel = document.getElementById('panel-' + p);
+      if (tab) tab.classList.toggle('active', p === which);
+      if (panel) panel.classList.toggle('active', p === which);
+    });
   }
 
   // Scroll-spy: tô sáng mục đang xem trong sticky sub-nav
