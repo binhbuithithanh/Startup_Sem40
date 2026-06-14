@@ -795,6 +795,98 @@
     .fall-overlay .btn-white { background: #fff; color: var(--danger); }
     .fall-overlay .btn-blackline { background: rgba(0,0,0,0.2); color: #fff; border: 1.5px solid rgba(255,255,255,0.5); }
 
+    /* ===== CAMERA AI — phát hiện té ngã ===== */
+    .cam-overlay {
+      position: absolute; inset: 0; z-index: 64; display: none;
+      flex-direction: column; background: #0b1220; color: #e5eefb;
+      font-family: inherit;
+    }
+    .cam-overlay.show { display: flex; }
+    .cam-top {
+      display: flex; align-items: center; gap: 0.5rem; padding: 0.7rem 0.9rem;
+      background: #0b1220; border-bottom: 1px solid rgba(148,163,184,0.18);
+    }
+    .cam-top .cam-back { background: none; border: none; color: #94a3b8; font-size: 1.2rem; cursor: pointer; padding: 0; line-height: 1; }
+    .cam-live { display: flex; align-items: center; gap: 0.35rem; font-size: 0.7rem; font-weight: 800; color: #fca5a5; letter-spacing: 0.5px; }
+    .cam-live .dot { width: 8px; height: 8px; border-radius: 50%; background: #ef4444; animation: livepulse 1.2s infinite; }
+    @keyframes livepulse { 0%,100% { opacity: 1; } 50% { opacity: 0.25; } }
+    .cam-title { font-size: 0.78rem; font-weight: 700; color: #cbd5e1; }
+    .cam-clock { margin-left: auto; font-size: 0.7rem; color: #64748b; font-variant-numeric: tabular-nums; }
+
+    /* khung hình camera */
+    .cam-stage { position: relative; flex: none; width: 100%; aspect-ratio: 7 / 5; background: #060912; overflow: hidden; }
+    .cam-feed { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+    /* nhiễu/grain + scanline cho cảm giác CCTV */
+    .cam-stage::after {
+      content: ''; position: absolute; inset: 0; pointer-events: none;
+      background: repeating-linear-gradient(0deg, rgba(255,255,255,0.02) 0 1px, transparent 1px 3px);
+      mix-blend-mode: overlay; opacity: 0.5;
+    }
+    .cam-scan { position: absolute; left: 0; right: 0; height: 28%; pointer-events: none;
+      background: linear-gradient(180deg, transparent, rgba(56,189,248,0.10), transparent);
+      animation: camscan 3.2s linear infinite; }
+    @keyframes camscan { 0% { top: -30%; } 100% { top: 100%; } }
+    .cam-flash { position: absolute; inset: 0; pointer-events: none; background: #ef4444; opacity: 0; }
+    .cam-flash.on { animation: camflash 0.6s ease-out 3; }
+    @keyframes camflash { 0% { opacity: 0.45; } 100% { opacity: 0; } }
+
+    /* HUD góc */
+    .cam-hud-tl { position: absolute; top: 8px; left: 8px; font-size: 0.6rem; color: #7dd3fc; font-weight: 700; line-height: 1.5; text-shadow: 0 1px 2px #000; }
+    .cam-hud-tr { position: absolute; top: 8px; right: 8px; font-size: 0.58rem; color: #94a3b8; text-align: right; line-height: 1.5; font-variant-numeric: tabular-nums; text-shadow: 0 1px 2px #000; }
+    .cam-rec { color: #fca5a5; }
+
+    /* pill trạng thái AI */
+    .cam-status {
+      position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%);
+      display: flex; align-items: center; gap: 0.45rem; white-space: nowrap;
+      padding: 0.4rem 0.8rem; border-radius: 999px; font-size: 0.72rem; font-weight: 800;
+      background: rgba(16,185,129,0.16); color: #6ee7b7; border: 1px solid rgba(16,185,129,0.5);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.4); transition: all 0.3s;
+    }
+    .cam-status .s-dot { width: 8px; height: 8px; border-radius: 50%; background: currentColor; }
+    .cam-status.warn { background: rgba(245,158,11,0.18); color: #fcd34d; border-color: rgba(245,158,11,0.6); }
+    .cam-status.danger { background: rgba(239,68,68,0.22); color: #fca5a5; border-color: rgba(239,68,68,0.7); animation: statpulse 0.7s infinite; }
+    @keyframes statpulse { 0%,100% { box-shadow: 0 0 0 0 rgba(239,68,68,0.5); } 50% { box-shadow: 0 0 0 6px rgba(239,68,68,0); } }
+
+    /* bảng phân tích dưới */
+    .cam-panel { background: #0b1220; border-top: 1px solid rgba(148,163,184,0.18); padding: 0.7rem 0.9rem 0.9rem; }
+    .cam-meter-row { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.6rem; }
+    .cam-meter-row .ml { font-size: 0.66rem; color: #94a3b8; width: 92px; flex-shrink: 0; }
+    .cam-meter { flex: 1; height: 8px; border-radius: 999px; background: rgba(148,163,184,0.18); overflow: hidden; }
+    .cam-meter > i { display: block; height: 100%; width: 4%; border-radius: 999px; background: #34d399; transition: width 0.5s ease, background 0.3s; }
+    .cam-meter.danger > i { background: #ef4444; }
+    .cam-meter.warn > i { background: #f59e0b; }
+    .cam-meter-row .mv { font-size: 0.7rem; font-weight: 800; width: 42px; text-align: right; font-variant-numeric: tabular-nums; }
+
+    .cam-log { max-height: 84px; overflow-y: auto; font-size: 0.66rem; line-height: 1.7; color: #cbd5e1; }
+    .cam-log .lg { display: flex; gap: 0.5rem; }
+    .cam-log .lg .t { color: #475569; flex-shrink: 0; font-variant-numeric: tabular-nums; }
+    .cam-log .lg.danger { color: #fca5a5; font-weight: 700; }
+    .cam-log .lg.warn { color: #fcd34d; }
+
+    .cam-replay {
+      margin-top: 0.7rem; width: 100%; padding: 0.7rem; border-radius: 12px; border: 1px solid rgba(148,163,184,0.3);
+      background: rgba(148,163,184,0.1); color: #e5eefb; font-family: inherit; font-weight: 700; font-size: 0.8rem;
+      cursor: pointer; display: none;
+    }
+    .cam-replay.show { display: block; }
+
+    /* skeleton pose */
+    #poseFigure { transition: transform 0.7s cubic-bezier(.55,.06,.3,1.0); transform-box: view-box; transform-origin: 0px 0px; }
+    #poseFigure.idle { animation: poseSway 2.4s ease-in-out infinite; }
+    @keyframes poseSway { 0%,100% { transform: translate(150px,150px) rotate(-1.8deg); } 50% { transform: translate(150px,150px) rotate(1.8deg); } }
+    .pose-line { stroke: #38bdf8; stroke-width: 2.2; stroke-linecap: round; fill: none; filter: drop-shadow(0 0 3px rgba(56,189,248,0.8)); }
+    .pose-joint { fill: #e0f2fe; stroke: #0ea5e9; stroke-width: 1; }
+    #poseFigure.warn .pose-line { stroke: #fbbf24; filter: drop-shadow(0 0 3px rgba(251,191,36,0.8)); }
+    #poseFigure.warn .pose-joint { stroke: #f59e0b; }
+    #poseFigure.danger .pose-line { stroke: #f87171; filter: drop-shadow(0 0 4px rgba(248,113,113,0.9)); }
+    #poseFigure.danger .pose-joint { stroke: #ef4444; }
+    .bbox { fill: none; stroke-width: 2; transition: stroke 0.3s ease; }
+    .bbox.g { stroke: #34d399; }
+    .bbox.a { stroke: #f59e0b; }
+    .bbox.d { stroke: #ef4444; }
+    .bbox-label { font: 800 9px ui-sans-serif, system-ui; }
+
     /* RESPONSIVE */
     @media (max-width: 900px) {
       .marketing { display: none; }
@@ -991,6 +1083,84 @@
         <div class="fo-actions">
           <button class="btn-white" style="width:100%;border:none;border-radius:12px;padding:0.8rem;font-family:inherit;font-weight:800;font-size:0.9rem;cursor:pointer" onclick="resolveFall()">✅ Tôi đã xử lý — vẫn ổn</button>
           <button class="btn-blackline" style="width:100%;border-radius:12px;padding:0.8rem;font-family:inherit;font-weight:700;font-size:0.9rem;cursor:pointer" onclick="callEmergency()">🆘 Gọi cấp cứu ngay</button>
+        </div>
+      </div>
+
+      <!-- CAMERA AI — phát hiện té ngã -->
+      <div class="cam-overlay" id="camOverlay">
+        <div class="cam-top">
+          <button class="cam-back" onclick="closeCam()">‹</button>
+          <span class="cam-live"><span class="dot"></span>LIVE</span>
+          <span class="cam-title" id="camTitle">Camera Phòng khách</span>
+          <span class="cam-clock" id="camClock">14:32:01</span>
+        </div>
+
+        <div class="cam-stage">
+          <svg class="cam-feed" id="camFeed" viewBox="0 0 280 200" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+            <!-- nền phòng -->
+            <rect x="0" y="0" width="280" height="200" fill="#0a1426"/>
+            <rect x="0" y="150" width="280" height="50" fill="#111e35"/>
+            <line x1="0" y1="150" x2="280" y2="150" stroke="#1e3356" stroke-width="1.5"/>
+            <!-- ghế sofa -->
+            <rect x="18" y="120" width="60" height="30" rx="5" fill="#16284a"/>
+            <rect x="18" y="104" width="60" height="20" rx="5" fill="#1b3257"/>
+            <!-- bàn -->
+            <rect x="208" y="128" width="46" height="22" rx="3" fill="#16284a"/>
+            <!-- người + skeleton: figure đặt ở floor, đứng tại x~150 -->
+            <g id="poseFigure" transform="translate(150 150)">
+              <!-- thân mờ (silhouette) -->
+              <ellipse class="pose-body" cx="0" cy="-45" rx="13" ry="40" fill="rgba(125,211,252,0.10)"/>
+              <!-- xương -->
+              <line class="pose-line" x1="0" y1="-71" x2="0" y2="-30"/>      <!-- cột sống -->
+              <line class="pose-line" x1="-14" y1="-64" x2="14" y2="-64"/>   <!-- vai -->
+              <line class="pose-line" x1="-10" y1="-30" x2="10" y2="-30"/>   <!-- hông -->
+              <line class="pose-line" x1="-14" y1="-64" x2="-20" y2="-48"/>  <!-- tay trái -->
+              <line class="pose-line" x1="-20" y1="-48" x2="-22" y2="-30"/>
+              <line class="pose-line" x1="14" y1="-64" x2="20" y2="-48"/>    <!-- tay phải -->
+              <line class="pose-line" x1="20" y1="-48" x2="22" y2="-30"/>
+              <line class="pose-line" x1="-10" y1="-30" x2="-12" y2="-12"/>  <!-- chân trái -->
+              <line class="pose-line" x1="-12" y1="-12" x2="-12" y2="0"/>
+              <line class="pose-line" x1="10" y1="-30" x2="12" y2="-12"/>    <!-- chân phải -->
+              <line class="pose-line" x1="12" y1="-12" x2="12" y2="0"/>
+              <!-- khớp -->
+              <circle class="pose-joint" cx="0" cy="-71" r="2.6"/>
+              <circle class="pose-joint" cx="-14" cy="-64" r="2.6"/>
+              <circle class="pose-joint" cx="14" cy="-64" r="2.6"/>
+              <circle class="pose-joint" cx="-20" cy="-48" r="2.4"/>
+              <circle class="pose-joint" cx="20" cy="-48" r="2.4"/>
+              <circle class="pose-joint" cx="0" cy="-30" r="2.6"/>
+              <circle class="pose-joint" cx="-10" cy="-30" r="2.4"/>
+              <circle class="pose-joint" cx="10" cy="-30" r="2.4"/>
+              <circle class="pose-joint" cx="-12" cy="-12" r="2.4"/>
+              <circle class="pose-joint" cx="12" cy="-12" r="2.4"/>
+              <!-- đầu -->
+              <circle class="pose-line" cx="0" cy="-80" r="9" fill="rgba(56,189,248,0.12)"/>
+              <circle class="pose-joint" cx="0" cy="-80" r="2.6"/>
+            </g>
+            <!-- bounding box + nhãn -->
+            <g id="camBox">
+              <rect id="bboxRect" class="bbox g" x="124" y="60" width="52" height="92" rx="2"/>
+              <rect id="bboxTag" x="124" y="50" width="62" height="11" rx="1.5" fill="#34d399"/>
+              <text id="bboxText" class="bbox-label" x="127" y="59" fill="#06210f">Người · 98%</text>
+            </g>
+          </svg>
+          <div class="cam-scan"></div>
+          <div class="cam-flash" id="camFlash"></div>
+
+          <div class="cam-hud-tl">CareSense AI v2.1<br>Model: PoseNet-Fall</div>
+          <div class="cam-hud-tr"><span class="cam-rec">● REC</span><br><span id="camFps">24</span> FPS · 1080p</div>
+
+          <div class="cam-status" id="camStatus"><span class="s-dot"></span><span id="camStatusTxt">Đang phân tích…</span></div>
+        </div>
+
+        <div class="cam-panel">
+          <div class="cam-meter-row">
+            <span class="ml">Độ tin cậy té ngã</span>
+            <div class="cam-meter" id="camConfMeter"><i id="camConfBar"></i></div>
+            <span class="mv" id="camConfVal">0%</span>
+          </div>
+          <div class="cam-log" id="camLog"></div>
+          <button class="cam-replay" id="camReplay" onclick="runCamSequence()">↻ Xem lại mô phỏng</button>
         </div>
       </div>
 
@@ -1480,7 +1650,7 @@
 
       '<div class="card" style="border-color:#fecaca;background:#fef9f9"><div class="card-title" style="color:#dc2626">🚨 Mô phỏng sự cố (demo)</div>' +
         '<div style="font-size:0.8rem;color:var(--muted);margin-bottom:0.7rem">Bấm để xem CareSense phản ứng khi AI phát hiện sự cố.</div>' +
-        '<button class="fall-btn" onclick="simulateFall()">▶️ Mô phỏng sự cố té ngã</button>' + wander + '</div>' +
+        '<button class="fall-btn" onclick="simulateFall()">📹 Xem camera AI phát hiện té ngã</button>' + wander + '</div>' +
 
       '<div class="card"><div class="card-title">💊 Lịch uống thuốc hôm nay</div>' + meds + '</div>';
   }
@@ -1821,8 +1991,130 @@
       if (fallCount <= 0) { clearInterval(fallTimer); callEmergency(); }
     }, 1000);
   }
-  function simulateFall() { startEmergency('🚨', 'PHÁT HIỆN TÉ NGÃ', P().fall.loc); }
+  function simulateFall() { openCam(); }
   function simulateWander() { startEmergency('🧭', 'CẢNH BÁO ĐI LẠC', '🧭 Ra khỏi vùng an toàn · 14:32'); }
+
+  // ===== CAMERA AI demo (phát hiện té ngã) =====
+  var camTimers = [], camClockTimer = null, camFpsTimer = null, camSecs = 0;
+  function camT(fn, ms) { camTimers.push(setTimeout(fn, ms)); }
+  function clearCamTimers() {
+    for (var i = 0; i < camTimers.length; i++) clearTimeout(camTimers[i]);
+    camTimers = [];
+    if (camClockTimer) { clearInterval(camClockTimer); camClockTimer = null; }
+    if (camFpsTimer) { clearInterval(camFpsTimer); camFpsTimer = null; }
+  }
+  function camPad(n) { return (n < 10 ? '0' : '') + n; }
+  function camClockStr() {
+    var base = 14 * 3600 + 32 * 60 + camSecs;
+    var h = Math.floor(base / 3600) % 24, m = Math.floor((base % 3600) / 60), s = base % 60;
+    return camPad(h) + ':' + camPad(m) + ':' + camPad(s);
+  }
+  function camLogAdd(txt, cls) {
+    var log = document.getElementById('camLog');
+    var row = document.createElement('div');
+    row.className = 'lg' + (cls ? ' ' + cls : '');
+    row.innerHTML = '<span class="t">' + camClockStr() + '</span><span>' + txt + '</span>';
+    log.appendChild(row);
+    log.scrollTop = log.scrollHeight;
+  }
+  function camSetStatus(txt, cls) {
+    document.getElementById('camStatus').className = 'cam-status' + (cls ? ' ' + cls : '');
+    document.getElementById('camStatusTxt').textContent = txt;
+  }
+  function camSetConf(pct, cls) {
+    document.getElementById('camConfBar').style.width = Math.max(4, pct) + '%';
+    document.getElementById('camConfMeter').className = 'cam-meter' + (cls ? ' ' + cls : '');
+    document.getElementById('camConfVal').textContent = pct + '%';
+  }
+  function camSetBox(x, y, w, h, tagW, txt, cls) {
+    var r = document.getElementById('bboxRect');
+    r.setAttribute('x', x); r.setAttribute('y', y); r.setAttribute('width', w); r.setAttribute('height', h);
+    r.setAttribute('class', 'bbox ' + cls);
+    var tag = document.getElementById('bboxTag');
+    var fill = cls === 'd' ? '#ef4444' : (cls === 'a' ? '#f59e0b' : '#34d399');
+    tag.setAttribute('x', x); tag.setAttribute('y', y - 10); tag.setAttribute('width', tagW); tag.setAttribute('fill', fill);
+    var t = document.getElementById('bboxText');
+    t.setAttribute('x', +x + 3); t.setAttribute('y', +y - 1);
+    t.setAttribute('fill', cls === 'g' ? '#06210f' : '#1a0606');
+    t.textContent = txt;
+  }
+  function camPose(transform, cls, idle) {
+    var f = document.getElementById('poseFigure');
+    f.classList.remove('idle');
+    f.setAttribute('class', cls || '');
+    if (idle) { f.style.transform = ''; f.classList.add('idle'); }
+    else { f.style.transform = transform; }
+  }
+
+  function openCam() {
+    var p = P();
+    document.getElementById('camTitle').textContent = (p.fall.loc.replace('📹 ', '').split(' · ')[0]) || 'Camera Phòng khách';
+    document.getElementById('camOverlay').classList.add('show');
+    runCamSequence();
+  }
+  function closeCam() {
+    clearCamTimers();
+    document.getElementById('camOverlay').classList.remove('show');
+  }
+
+  function runCamSequence() {
+    clearCamTimers();
+    camSecs = 0;
+    document.getElementById('camLog').innerHTML = '';
+    document.getElementById('camReplay').classList.remove('show');
+    document.getElementById('camClock').textContent = camClockStr();
+    document.getElementById('camFlash').classList.remove('on');
+
+    // đồng hồ + FPS chạy nền
+    camClockTimer = setInterval(function () {
+      camSecs++; document.getElementById('camClock').textContent = camClockStr();
+    }, 1000);
+    camFpsTimer = setInterval(function () {
+      document.getElementById('camFps').textContent = 23 + Math.floor(Math.random() * 3);
+    }, 600);
+
+    // T0 — bình thường
+    camPose('', '', true);
+    camSetBox(124, 60, 52, 92, 62, 'Người · 98%', 'g');
+    camSetStatus('Bình thường · đang đứng', '');
+    camSetConf(3, '');
+    camLogAdd('Phát hiện 1 người trong khung hình (98%)');
+    camLogAdd('Theo dõi 17 điểm khớp · dáng đi ổn định');
+
+    // T1.6 — mất thăng bằng
+    camT(function () {
+      camPose('translate(150px,150px) rotate(-15deg)', 'warn', false);
+      camSetBox(118, 64, 64, 88, 70, 'Nghiêng · 61%', 'a');
+      camSetStatus('Mất thăng bằng — dáng đi bất thường', 'warn');
+      camSetConf(48, 'warn');
+      camLogAdd('⚠️ Trọng tâm lệch đột ngột · nghiêng 15°', 'warn');
+    }, 1700);
+
+    // T3.0 — TÉ NGÃ
+    camT(function () {
+      camPose('translate(150px,150px) rotate(-84deg)', 'danger', false);
+      document.getElementById('camFlash').classList.add('on');
+      camSetBox(68, 126, 134, 28, 92, 'TÉ NGÃ · 96%', 'd');
+      camSetStatus('🔴 PHÁT HIỆN TÉ NGÃ', 'danger');
+      camSetConf(96, 'danger');
+      camLogAdd('🔴 TÉ NGÃ XÁC NHẬN — người nằm sàn (96%)', 'danger');
+      navigator.vibrate && navigator.vibrate([120, 60, 120]);
+    }, 3000);
+
+    // T4.2 — kiểm tra cử động
+    camT(function () {
+      camSetStatus('Kiểm tra phản ứng — không cử động', 'danger');
+      camLogAdd('Không phát hiện cử động trong 1,2s', 'danger');
+      camSetConf(98, 'danger');
+    }, 4200);
+
+    // T5.5 — kích hoạt báo động đỏ
+    camT(function () {
+      camLogAdd('🆘 Kích hoạt quy trình cấp cứu', 'danger');
+      document.getElementById('camReplay').classList.add('show');
+      startEmergency('🚨', 'PHÁT HIỆN TÉ NGÃ', P().fall.loc);
+    }, 5500);
+  }
   function stopFallTimer() { if (fallTimer) { clearInterval(fallTimer); fallTimer = null; } }
   function resolveFall() {
     stopFallTimer();
