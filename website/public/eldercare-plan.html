@@ -735,6 +735,103 @@
     .exp-mile-card ul { list-style: none; margin: 0; padding: 0; }
     .exp-mile-card li { font-size: 0.8rem; color: #374151; line-height: 1.45; padding-left: 1rem; position: relative; margin-bottom: 0.3rem; }
     .exp-mile-card li::before { content: '▸'; position: absolute; left: 0; color: var(--care); }
+
+    /* ===== TAB SẢN PHẨM & DỊCH VỤ — DESIGN THINKING ===== */
+    .product-section { background: var(--light); }
+
+    /* 5 bước Design Thinking */
+    .dt-steps { display: flex; flex-direction: column; gap: 1.5rem; margin: 1.5rem 0; }
+    .dt-step { background: #fff; border: 1px solid var(--border); border-radius: 16px; overflow: hidden; }
+    .dt-step-head {
+      display: flex; align-items: center; gap: 1rem; padding: 1.25rem 1.5rem;
+      border-left: 5px solid var(--care);
+    }
+    .dt-step.s1 .dt-step-head { border-left-color: var(--coral); background: linear-gradient(90deg,#fff1f2,#fff); }
+    .dt-step.s2 .dt-step-head { border-left-color: #7c3aed; background: linear-gradient(90deg,#f5f3ff,#fff); }
+    .dt-step.s3 .dt-step-head { border-left-color: var(--gold); background: linear-gradient(90deg,#fffbeb,#fff); }
+    .dt-step.s4 .dt-step-head { border-left-color: var(--care); background: linear-gradient(90deg,#f0fdfa,#fff); }
+    .dt-step.s5 .dt-step-head { border-left-color: #0891b2; background: linear-gradient(90deg,#ecfeff,#fff); }
+    .dt-num { width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; font-weight: 900; color: #fff; flex-shrink: 0; }
+    .dt-step.s1 .dt-num { background: var(--coral); }
+    .dt-step.s2 .dt-num { background: #7c3aed; }
+    .dt-step.s3 .dt-num { background: var(--gold); color: #3a2a05; }
+    .dt-step.s4 .dt-num { background: var(--care); }
+    .dt-step.s5 .dt-num { background: #0891b2; }
+    .dt-head-text .dt-phase { font-size: 0.68rem; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; }
+    .dt-step.s1 .dt-phase { color: var(--coral); }
+    .dt-step.s2 .dt-phase { color: #7c3aed; }
+    .dt-step.s3 .dt-phase { color: #d97706; }
+    .dt-step.s4 .dt-phase { color: var(--care); }
+    .dt-step.s5 .dt-phase { color: #0891b2; }
+    .dt-head-text h4 { font-size: 1.1rem; font-weight: 800; margin: 0.1rem 0 0; line-height: 1.2; }
+    .dt-body { padding: 1.25rem 1.5rem; border-top: 1px solid var(--border); }
+    .dt-body p { font-size: 0.88rem; color: #374151; line-height: 1.7; margin-bottom: 0.75rem; }
+    .dt-body p:last-child { margin-bottom: 0; }
+    .dt-body strong { color: var(--primary); }
+    .dt-insight-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px,1fr)); gap: 0.85rem; margin: 0.75rem 0; }
+    .dt-insight { border-radius: 12px; padding: 1rem 1.1rem; border: 1px solid var(--border); background: #f9fafb; }
+    .dt-insight .di-persona { font-size: 0.7rem; font-weight: 800; letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 0.4rem; }
+    .dt-insight.hoa .di-persona { color: var(--care); }
+    .dt-insight.tam .di-persona { color: #7c3aed; }
+    .dt-insight h5 { font-size: 0.88rem; font-weight: 800; margin-bottom: 0.3rem; }
+    .dt-insight p { font-size: 0.8rem; color: #4b5563; margin-bottom: 0; }
+    .dt-insight .di-quote { font-size: 0.82rem; font-style: italic; margin-top: 0.5rem; padding: 0.4rem 0.7rem; border-radius: 6px; }
+    .dt-insight.hoa .di-quote { background: #f0fdfa; color: #115e59; border-left: 3px solid var(--care); }
+    .dt-insight.tam .di-quote { background: #f5f3ff; color: #5b21b6; border-left: 3px solid #7c3aed; }
+    .hmw-box { background: linear-gradient(135deg,#f0fdfa,#ecfdf5); border: 2px solid var(--care); border-radius: 14px; padding: 1.25rem 1.5rem; margin: 0.75rem 0; }
+    .hmw-box .hmw-label { font-size: 0.68rem; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; color: var(--care); margin-bottom: 0.35rem; }
+    .hmw-box .hmw-q { font-size: 1.02rem; font-weight: 800; color: #065f46; line-height: 1.45; }
+    .dt-idea-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap: 0.7rem; margin: 0.75rem 0; }
+    .dt-idea { background: #fffbeb; border: 1px solid #fde68a; border-radius: 12px; padding: 0.85rem 1rem; }
+    .dt-idea .di-ico { font-size: 1.2rem; }
+    .dt-idea h5 { font-size: 0.85rem; font-weight: 800; color: #92400e; margin: 0.25rem 0 0.2rem; }
+    .dt-idea p { font-size: 0.76rem; color: #374151; line-height: 1.5; margin: 0; }
+    .dt-proto-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap: 0.85rem; margin: 0.75rem 0; }
+    .dt-proto-card { background: #fff; border: 1px solid #99f6e4; border-radius: 12px; padding: 1rem 1.1rem; border-top: 3px solid var(--care); }
+    .dt-proto-card .dp-screen { font-size: 0.68rem; font-weight: 800; letter-spacing: 0.5px; text-transform: uppercase; color: var(--care); margin-bottom: 0.3rem; }
+    .dt-proto-card h5 { font-size: 0.88rem; font-weight: 800; margin-bottom: 0.3rem; }
+    .dt-proto-card ul { list-style: none; margin: 0; padding: 0; }
+    .dt-proto-card li { font-size: 0.77rem; color: #374151; line-height: 1.45; padding: 3px 0 3px 1rem; position: relative; }
+    .dt-proto-card li::before { content: '▸'; position: absolute; left: 0; color: var(--care); }
+    .dt-test-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap: 0.85rem; margin: 0.75rem 0; }
+    .dt-test-card { background: #fff; border: 1px solid #bae6fd; border-radius: 12px; padding: 1rem 1.1rem; border-left: 4px solid #0891b2; }
+    .dt-test-card .dtc-label { font-size: 0.68rem; font-weight: 800; letter-spacing: 0.5px; text-transform: uppercase; color: #0891b2; margin-bottom: 0.3rem; }
+    .dt-test-card h5 { font-size: 0.88rem; font-weight: 800; margin-bottom: 0.25rem; }
+    .dt-test-card p { font-size: 0.78rem; color: #374151; line-height: 1.5; margin: 0; }
+
+    /* Bảng danh mục dịch vụ */
+    .svc-catalog { margin: 1.5rem 0; }
+    .svc-cat-head { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 1rem; }
+    .svc-cat-head h3 { font-size: 1.15rem; font-weight: 800; }
+    .demo-badge { display: inline-flex; align-items: center; gap: 0.3rem; background: #fffbeb; border: 1px solid #fde68a; color: #92400e; font-size: 0.68rem; font-weight: 700; padding: 2px 9px; border-radius: 99px; }
+    .svc-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px,1fr)); gap: 1rem; }
+    .svc-card { background: #fff; border: 1px solid var(--border); border-radius: 14px; padding: 1.25rem 1.4rem; position: relative; overflow: hidden; }
+    .svc-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; }
+    .svc-card.sc1::before { background: linear-gradient(90deg, var(--care), var(--care-light)); }
+    .svc-card.sc2::before { background: linear-gradient(90deg, #0891b2, #22d3ee); }
+    .svc-card.sc3::before { background: linear-gradient(90deg, #7c3aed, #a78bfa); }
+    .svc-card.sc4::before { background: linear-gradient(90deg, var(--gold), #fbbf24); }
+    .svc-card.sc5::before { background: linear-gradient(90deg, var(--coral), #fda4af); }
+    .svc-card .sv-tag { font-size: 0.68rem; font-weight: 800; letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 0.25rem; }
+    .svc-card.sc1 .sv-tag { color: var(--care); }
+    .svc-card.sc2 .sv-tag { color: #0891b2; }
+    .svc-card.sc3 .sv-tag { color: #7c3aed; }
+    .svc-card.sc4 .sv-tag { color: #d97706; }
+    .svc-card.sc5 .sv-tag { color: var(--coral); }
+    .svc-card h4 { font-size: 1rem; font-weight: 800; margin: 0 0 0.5rem; }
+    .svc-card .sv-price { display: inline-block; margin-bottom: 0.6rem; font-size: 0.78rem; font-weight: 700; background: #f0fdfa; color: #115e59; padding: 2px 10px; border-radius: 99px; }
+    .svc-card ul { list-style: none; margin: 0; padding: 0; }
+    .svc-card li { font-size: 0.79rem; color: #374151; line-height: 1.45; padding: 3px 0 3px 1.1rem; position: relative; }
+    .svc-card.sc1 li::before { content: '▸'; position: absolute; left: 0; color: var(--care); }
+    .svc-card.sc2 li::before { content: '▸'; position: absolute; left: 0; color: #0891b2; }
+    .svc-card.sc3 li::before { content: '▸'; position: absolute; left: 0; color: #7c3aed; }
+    .svc-card.sc4 li::before { content: '▸'; position: absolute; left: 0; color: #d97706; }
+    .svc-card.sc5 li::before { content: '▸'; position: absolute; left: 0; color: var(--coral); }
+
+    @media (max-width: 600px) {
+      .dt-step-head { padding: 1rem 1.1rem; }
+      .dt-body { padding: 1rem 1.1rem; }
+    }
   </style>
 </head>
 <body>
@@ -789,6 +886,7 @@
   <a href="#experience">❤️ Trải nghiệm KH</a>
   <a href="#glossary">📖 Thuật ngữ</a>
   <a href="#phanbien">🎤 Phản biện</a>
+  <a href="#product">🛠️ Sản phẩm &amp; DV</a>
 </div>
 
 <!-- ============================ PHIÊN 1 — TÀI CHÍNH ============================ -->
@@ -2756,9 +2854,9 @@
 <section class="sum-section" id="summary">
   <div class="container">
     <div class="section-tag">Phần 6 · Tổng hợp &amp; tầm nhìn</div>
-    <h2>Khép lại kế hoạch: bản đồ rủi ro toàn diện,<br/>hệ thần kinh AI &amp; cơ hội tỉ đô có cơ sở</h2>
+    <h2>Khép lại kế hoạch: bản đồ rủi ro toàn diện,<br/>hệ thần kinh AI &amp; nền móng lãi ngay / default-alive</h2>
     <p class="section-desc">
-      Phần cuối này <strong>gom toàn bộ 5 phần trước</strong> thành hai bức tranh quản trị mà nhà đầu tư cần thấy: một <em>risk register tổng</em> (mọi rủi ro · mức độ · giải pháp · backup · phòng ban chịu trách nhiệm) và một <em>bản đồ AI toàn hệ thống</em> theo 4 tầng. Đóng lại bằng kết luận tài chính &amp; lộ trình gọi vốn — vì sao ElderCare là cơ hội tỉ đô có cơ sở, không phải lời hứa suông.
+      Phần cuối này <strong>gom toàn bộ 5 phần trước</strong> thành hai bức tranh quản trị mà nhà đầu tư cần thấy: một <em>risk register tổng</em> (mọi rủi ro · mức độ · giải pháp · backup · phòng ban chịu trách nhiệm) và một <em>bản đồ AI toàn hệ thống</em> theo 4 tầng. Đóng lại bằng kết luận tài chính &amp; tầm nhìn — vì sao mô hình lãi ngay (asset-light) là nền móng vững, sống sót chắc chắn cho ElderCare, không phải lời hứa suông.
     </p>
     <span class="click-hint">🧭 Đây là phần tổng hợp — số liệu khớp 100% Phần 1–5; con số tự suy gắn nhãn "ước tính nội bộ"</span>
 
@@ -3059,7 +3157,7 @@
             <tr><td>Dự báo &amp; tối ưu</td><td>Giảm CAC, tăng retention, định giá tốt hơn</td><td>LTV/CAC 5,8× · payback 5,2 th</td></tr>
             <tr><td>Matching &amp; triage</td><td>Tăng tỷ lệ ghép đúng, giảm nợ xấu MedFin</td><td>Gross margin blended ~62%</td></tr>
             <tr><td>Vận hành &amp; đào tạo</td><td>Scale đội ngũ nhanh, chất lượng đồng đều</td><td>Đòn bẩy OpEx → EBITDA dương Năm 5</td></tr>
-            <tr><td>Tuân thủ &amp; bảo mật</td><td>Giảm rủi ro pháp lý &amp; chi phí sự cố</td><td>Bảo vệ định giá EV ~1.740 tỷ</td></tr>
+            <tr><td>Tuân thủ &amp; bảo mật</td><td>Giảm rủi ro pháp lý &amp; chi phí sự cố</td><td>Bảo vệ biên lợi nhuận &amp; dòng tiền</td></tr>
           </tbody>
         </table>
         <p class="src-note">Bản đồ AI tổng hợp từ 5 ô "🤖 AI ứng dụng" của Phần 1–5; phân tầng &amp; nối giá trị kinh tế là <em>ước tính nội bộ</em>.</p>
@@ -3067,28 +3165,28 @@
     </div>
 
     <!-- 6.3 KẾT LUẬN & TẦM NHÌN -->
-    <h3 class="fin-sub"><span class="badge-n">3</span> Kết luận &amp; tầm nhìn — vì sao là cơ hội tỉ đô</h3>
+    <h3 class="fin-sub"><span class="badge-n">3</span> Kết luận &amp; tầm nhìn — vì sao lãi ngay là nền móng vững nhất</h3>
     <p class="sub-desc">
-      Những con số dưới đây khép lại toàn bộ kế hoạch: một thị trường lớn &amp; già hóa nhanh, mô hình super-app 5 dòng doanh thu với unit economics lành mạnh, đường tới hòa vốn rõ ràng và lộ trình gọi vốn 4 vòng có milestone.
+      Những con số dưới đây khép lại toàn bộ kế hoạch: một thị trường lớn &amp; già hóa nhanh, mô hình asset-light 3 trụ cột sinh tiền ngay với unit economics lành mạnh, dòng tiền dương từ Năm 1 và một vòng seed nhỏ (hoặc bootstrapped) — founders giữ quyền kiểm soát xuyên suốt.
     </p>
     <div class="kpi-grid">
       <div class="kpi"><div class="k-num">14,2tr</div><div class="k-label">Người cao tuổi VN (TAM thị trường)</div></div>
-      <div class="kpi"><div class="k-num gold">5</div><div class="k-label">Trụ cột doanh thu super-app</div></div>
-      <div class="kpi"><div class="k-num">5,8×</div><div class="k-label">LTV / CAC (đơn vị kinh tế lành mạnh)</div></div>
-      <div class="kpi"><div class="k-num coral">Năm 5</div><div class="k-label">Break-even EBITDA &amp; dòng tiền</div></div>
-      <div class="kpi"><div class="k-num gold">~1.740 tỷ</div><div class="k-label">Định giá EV base (~$68M)</div></div>
-      <div class="kpi"><div class="k-num">4 vòng</div><div class="k-label">Seed → Series C gọi vốn</div></div>
+      <div class="kpi"><div class="k-num gold">3</div><div class="k-label">Trụ cột vốn mỏng (CareConnect · Telehealth · Dược)</div></div>
+      <div class="kpi"><div class="k-num">+10 tỷ</div><div class="k-label">Lãi ròng Năm 1 (ước tính nội bộ)</div></div>
+      <div class="kpi"><div class="k-num coral">Năm 1</div><div class="k-label">Dòng tiền dương — không chờ đến Năm 5</div></div>
+      <div class="kpi"><div class="k-num gold">&gt;80%</div><div class="k-label">Founders giữ kiểm soát sau gọi vốn</div></div>
+      <div class="kpi"><div class="k-num">15–20 tỷ</div><div class="k-label">Vốn khởi động (seed nhỏ hoặc bootstrapped)</div></div>
     </div>
     <div class="vision-box">
       <h4>🌏 Tầm nhìn: hạ tầng chăm sóc người cao tuổi của Việt Nam</h4>
       <p>
-        Việt Nam đang già hóa nhanh nhất khu vực: <strong>14,2 triệu người cao tuổi</strong> với TAM ~115.000 tỷ đồng, SAM ~18.000 tỷ. ElderCare không bán một tính năng đơn lẻ mà xây <strong>super-app 5 trụ cột</strong> — CareConnect (điều dưỡng tại nhà), Khám &amp; Telehealth, MedFin (tài chính y tế), CareSense (cảm biến cảnh báo té ngã), Pharma — bao trọn hành trình chăm sóc, tạo doanh thu recurring &amp; rào cản chuyển đổi.
+        Việt Nam đang già hóa nhanh nhất khu vực: <strong>14,2 triệu người cao tuổi</strong> với TAM ~115.000 tỷ đồng, SAM ~18.000 tỷ. Thay vì đốt vốn chiếm thị phần bằng super-app 5 trụ cột ngay từ đầu, ElderCare chọn con đường <strong>asset-light 3 trụ cột vốn mỏng</strong> — CareConnect (hoa hồng điều dưỡng 20%, GM ~85%, mũi nhọn), Telehealth/subscription gói gia đình (GM ~60%), Dược &amp; thiết bị markup (GM ~25%, không tồn kho lớn) — tạo doanh thu recurring ngay từ Năm 1 mà không cần gánh capex nặng.
       </p>
       <p>
-        Mô hình tài chính cho thấy SOM <strong>~900 tỷ đồng vào Năm 5</strong>, EBITDA &amp; dòng tiền hòa vốn ngay Năm 5, định giá cơ sở <strong>EV ~1.740 tỷ (~$68M)</strong> — và <strong>~$163M ở kịch bản bull</strong>. Với LTV/CAC 5,8×, gross margin ~62% và đòn bẩy AI giữ chi phí biên thấp, đây là cơ hội tỉ đô <strong>có cơ sở số liệu</strong>, không phải lời hứa.
+        Mô hình tài chính Kế hoạch B cho thấy <strong>lãi ròng +10 tỷ ngay Năm 1</strong>, biên lãi ròng ổn định 14–18% qua 5 năm, doanh thu Năm 5 ước tính ~360 tỷ. MedFin chỉ "originate-to-distribute" ăn phí giới thiệu (không gánh dư nợ); CareSense dùng thiết bị thuê bên thứ ba. Với vốn khởi động chỉ <strong>~15–20 tỷ</strong> và pha loãng ≤15–20%, founders giữ &gt;80% quyền kiểm soát — <em>đòn bẩy đàm phán tốt hơn với nhà đầu tư khi đã có lãi</em>. <em>(Ước tính nội bộ.)</em>
       </p>
       <p>
-        Lộ trình: <strong>Seed (38 tỷ/$1,5M)</strong> chứng minh mô hình &amp; mũi nhọn CareSense → <strong>Series A</strong> mở rộng đô thị lớn → <strong>Series B</strong> phủ tỉnh &amp; hoàn thiện 5 trụ cột → <strong>Series C (1.275 tỷ/$50M)</strong> dẫn đầu thị trường &amp; chuẩn bị thoái vốn. Mỗi vòng mở khóa bằng milestone đo được ở risk register &amp; mô hình tài chính trên.
+        Kế hoạch B không đóng cửa tham vọng lớn hơn: khi unit economics được chứng minh qua dữ liệu thực, ElderCare có thể <strong>nâng cấp lên Kế hoạch A</strong> (gọi vốn lớn, phủ toàn quốc, 5 trụ cột đầy đủ) từ thế mạnh — không phải từ thế bị ép vì cạn tiền. Đây là <em>optionality</em>, không phải base case; base case là <strong>sống sót chắc chắn &amp; sinh lời sớm</strong> tại Hà Nội trước.
       </p>
     </div>
 
@@ -3099,18 +3197,18 @@
       <div class="cta-steps">
         <div class="cta-step">
           <div class="cs-num">Bước 1</div>
-          <div class="cs-name">Gọi vòng Seed</div>
-          <p>38 tỷ/$1,5M để hoàn thiện MVP 5 trụ cột, ra mắt mũi nhọn CareSense cảnh báo té ngã &amp; chứng minh unit economics tại 2 đô thị lớn.</p>
+          <div class="cs-name">Seed nhỏ hoặc bootstrapped — ra mắt Hà Nội</div>
+          <p>~15–20 tỷ (hoặc bootstrap) để hoàn thiện MVP 3 trụ cột vốn mỏng (CareConnect · Telehealth · Dược), chứng minh <strong>lãi ròng dương ngay Năm 1</strong> &amp; unit economics tại Hà Nội. Pha loãng ≤15–20%, founders giữ &gt;80%. <em>(Ước tính nội bộ.)</em></p>
         </div>
         <div class="cta-step">
           <div class="cs-num">Bước 2</div>
           <div class="cs-name">Chuẩn hóa &amp; tuân thủ</div>
-          <p>Hoàn thiện pháp lý (Luật 91/2025, KCB 15/2023, Dược), SOP &amp; giáo trình training 4 cấp, mạng lưới 12 nhóm chuyên gia trước khi scale.</p>
+          <p>Hoàn thiện pháp lý (Luật 91/2025, KCB 15/2023, Dược), SOP &amp; giáo trình training 4 cấp, mạng lưới chuyên gia trước khi scale — nền móng vững để nhân rộng có lãi.</p>
         </div>
         <div class="cta-step">
           <div class="cs-num">Bước 3</div>
-          <div class="cs-name">Nhân rộng &amp; dẫn đầu</div>
-          <p>Series A→C: phủ tỉnh, mở khóa MedFin &amp; Pharma, đạt hòa vốn Năm 5, hướng tới định giá tỉ đô &amp; vị thế hạ tầng chăm sóc người cao tuổi quốc gia.</p>
+          <div class="cs-name">Nhân rộng có lãi → optionality Năm 4–5</div>
+          <p>Mở rộng hữu cơ ra TP.HCM &amp; các tỉnh lớn; khi unit economics được chứng minh, <strong>Năm 4–5 lựa chọn</strong>: strategic exit với đối tác chiến lược <em>hoặc</em> nâng cấp lên Kế hoạch A (gọi vốn lớn, 5 trụ cột đầy đủ) — từ thế mạnh có lãi, không phải từ thế bị ép.</p>
         </div>
       </div>
       <p class="tnote" style="margin-top:1rem;">Xem thêm: <a href="/eldercare" style="color:var(--care);font-weight:600;">bản pitch đầy đủ</a> · <a href="/eldercare-app" style="color:var(--care);font-weight:600;">app demo clickable</a> · <a href="/eldercare-financial-model.xlsx" style="color:var(--care);font-weight:600;">model tài chính động (.xlsx)</a>. Mọi số liệu khớp Phần 1–5; con số tự suy gắn nhãn "ước tính nội bộ".</p>
@@ -4676,6 +4774,353 @@
     </table>
 
     <p class="tnote">Các con số trong bảng được trích từ chính bản kế hoạch ElderCare VN ở các phần phía trên (Tài chính, Marketing, Phân khúc…).</p>
+  </div>
+</section>
+
+<!-- ============================ SẢN PHẨM & DỊCH VỤ — DESIGN THINKING ============================ -->
+<section class="product-section" id="product">
+  <div class="container">
+    <div class="section-tag">Phần · Sản phẩm &amp; Dịch vụ</div>
+    <h2>Hành trình thiết kế sản phẩm<br/>theo <span style="color:var(--care)">Design Thinking</span> 5 bước</h2>
+    <p class="section-desc">
+      Sản phẩm ElderCare VN không được xây dựng từ ý tưởng ban đầu — nó được định hình qua 5 giai đoạn Design Thinking: thấu cảm nỗi đau thật, định nghĩa vấn đề cốt lõi, lên ý tưởng, tạo nguyên mẫu và liên tục kiểm thử. Trang này gom lại toàn bộ "tại sao" và "cái gì" của sản phẩm vào một chỗ.
+    </p>
+    <span class="click-hint">👆 Mỗi giai đoạn ánh xạ thẳng vào tính năng thật trong <a href="/eldercare-app" style="color:var(--care);font-weight:700;">app demo /eldercare-app</a></span>
+
+    <!-- ======== 5 BƯỚC DESIGN THINKING ======== -->
+    <div class="dt-steps">
+
+      <!-- BƯỚC 1: EMPATHIZE -->
+      <div class="dt-step s1">
+        <div class="dt-step-head">
+          <div class="dt-num">1</div>
+          <div class="dt-head-text">
+            <div class="dt-phase">Empathize · Thấu cảm</div>
+            <h4>Nghe nỗi đau thật từ 2 góc nhìn: người già &amp; con cái ở xa</h4>
+          </div>
+        </div>
+        <div class="dt-body">
+          <p>Chúng tôi bắt đầu bằng cách "sống cùng" hai nhóm người dùng: <strong>người cao tuổi tại nhà</strong> (người dùng trực tiếp) và <strong>con cái bận rộn ở xa</strong> (người chi tiền, người quyết định). Hai persona đại diện cho hai mức độ chăm sóc khác nhau.</p>
+
+          <div class="dt-insight-grid">
+            <div class="dt-insight hoa">
+              <div class="di-persona">Persona 1 · Bà Hoa, 72 tuổi · Hà Nội</div>
+              <h5>Nhẹ — sống độc lập, cần giám sát</h5>
+              <p>Tăng huyết áp, tiểu đường. Con gái ở TP.HCM, gọi video mỗi tối. Tự uống thuốc nhưng hay quên. Sợ té ngã một mình trong nhà.</p>
+              <div class="di-quote">"Con bé cứ lo lắng, mà mẹ thì muốn sống ở nhà mình, không vào viện dưỡng lão."</div>
+            </div>
+            <div class="dt-insight tam">
+              <div class="di-persona">Persona 2 · Ông Tâm, 78 tuổi · Hà Nội</div>
+              <h5>Nặng — sa sút trí tuệ, cần chăm 24/7</h5>
+              <p>Parkinson + sa sút trí tuệ. Uống nhiều thuốc thần kinh, chống đông. Con trai có gia đình riêng, không thể ở bên toàn thời gian. Nguy cơ té ngã cao.</p>
+              <div class="di-quote">"Bố quên cả tên mình rồi. Nhưng không thể để bố vào viện — ông sợ lắm."</div>
+            </div>
+          </div>
+
+          <p><strong>Nỗi đau chung của con cái:</strong> lo lắng không biết bố/mẹ ăn uống, uống thuốc, có an toàn không — nhưng không thể ở bên 24/7. Không có công cụ nào cho họ "nhìn thấy" thực trạng từ xa.</p>
+          <p><strong>Nỗi đau của người già:</strong> không muốn rời nhà, không muốn làm phiền con, nhưng cần được chăm sóc chuyên nghiệp và có người đồng hành khi sự cố xảy ra.</p>
+        </div>
+      </div>
+
+      <!-- BƯỚC 2: DEFINE -->
+      <div class="dt-step s2">
+        <div class="dt-step-head">
+          <div class="dt-num">2</div>
+          <div class="dt-head-text">
+            <div class="dt-phase">Define · Định nghĩa vấn đề</div>
+            <h4>Chốt lại "Point of View" — vấn đề nào đáng giải nhất?</h4>
+          </div>
+        </div>
+        <div class="dt-body">
+          <p>Từ hàng chục điểm đau, chúng tôi lọc ra <strong>vấn đề cốt lõi duy nhất</strong> mà nếu giải được, sẽ kéo theo toàn bộ hệ sinh thái còn lại.</p>
+
+          <div class="hmw-box">
+            <div class="hmw-label">How Might We · Câu hỏi thiết kế</div>
+            <div class="hmw-q">"Làm sao để con cái ở xa <strong>yên tâm</strong> rằng bố/mẹ già đang được chăm sóc chuyên nghiệp, an toàn 24/7 — <strong>ngay tại nhà mình</strong>, với chi phí thấp hơn viện dưỡng lão?"</div>
+          </div>
+
+          <p><strong>Point of View (POV) chính thức:</strong></p>
+          <p>Con cái bận rộn (25–50 tuổi, ở xa) <em>cần</em> một hệ thống theo dõi &amp; chăm sóc đáng tin cậy cho bố/mẹ cao tuổi tại nhà, <em>vì</em> họ không thể có mặt 24/7 nhưng vẫn muốn đảm bảo sự an toàn, chất lượng thuốc và chất lượng chăm sóc — điều mà cả người chăm tự thuê lẫn viện dưỡng lão đều không đáp ứng được đồng thời.</p>
+
+          <p><strong>Vấn đề phụ (derived problems) từ POV:</strong> thiếu điều dưỡng xác minh chuyên lão khoa · thuốc giả/quên thuốc · không ai phát hiện té ngã kịp thời · con cái không có dữ liệu sức khỏe real-time · chi phí viện dưỡng lão 10–30 triệu/tháng quá cao.</p>
+        </div>
+      </div>
+
+      <!-- BƯỚC 3: IDEATE -->
+      <div class="dt-step s3">
+        <div class="dt-step-head">
+          <div class="dt-num">3</div>
+          <div class="dt-head-text">
+            <div class="dt-phase">Ideate · Lên ý tưởng</div>
+            <h4>Brainstorm các hướng giải pháp — trước khi chốt sản phẩm</h4>
+          </div>
+        </div>
+        <div class="dt-body">
+          <p>Thay vì nhảy ngay vào code, chúng tôi brainstorm 6 hướng giải pháp khác nhau. Mỗi hướng trả lời một phần vấn đề. Sản phẩm cuối cùng là <strong>tích hợp có chọn lọc</strong> những hướng có đòn bẩy cao nhất.</p>
+
+          <div class="dt-idea-grid">
+            <div class="dt-idea">
+              <div class="di-ico">🩺</div>
+              <h5>Marketplace điều dưỡng xác minh</h5>
+              <p>Kết nối gia đình với điều dưỡng đã kiểm tra lý lịch, chứng chỉ lão khoa. Take-rate 20%.</p>
+            </div>
+            <div class="dt-idea">
+              <div class="di-ico">📱</div>
+              <h5>Video call + telehealth lão khoa</h5>
+              <p>Khám từ xa với bác sĩ chuyên lão, không cần đến bệnh viện. Subscription 299–599k/tháng.</p>
+            </div>
+            <div class="dt-idea">
+              <div class="di-ico">📡</div>
+              <h5>Thiết bị giám sát tại nhà</h5>
+              <p>Cảm biến đo sinh hiệu (huyết áp, SpO₂), phát hiện té ngã bằng AI vision. Cảnh báo real-time.</p>
+            </div>
+            <div class="dt-idea">
+              <div class="di-ico">💊</div>
+              <h5>Quản lý &amp; giao thuốc</h5>
+              <p>Đơn thuốc điện tử, nhắc uống thuốc, xác thực thuốc chống giả, giao thuốc tận nơi.</p>
+            </div>
+            <div class="dt-idea">
+              <div class="di-ico">💳</div>
+              <h5>Tài chính y tế (MedFin)</h5>
+              <p>Trả góp ca điều trị lớn, AI scoring tín dụng, bảo hiểm sức khỏe bổ sung cho người già.</p>
+            </div>
+            <div class="dt-idea">
+              <div class="di-ico">👨‍👩‍👧</div>
+              <h5>Dashboard gia đình real-time</h5>
+              <p>Con cái theo dõi sinh hiệu, nhật ký ca trực, nhắc thuốc, lịch khám từ bất cứ đâu.</p>
+            </div>
+          </div>
+
+          <p><strong>Kết quả lọc:</strong> hướng 1 + 2 + 4 + 6 trở thành <em>Kịch bản B — Lãi ngay</em> (3 trụ cột sinh tiền từ đầu). Hướng 3 + 5 vào lộ trình Năm 2–3 khi đã có PMF.</p>
+        </div>
+      </div>
+
+      <!-- BƯỚC 4: PROTOTYPE -->
+      <div class="dt-step s4">
+        <div class="dt-step-head">
+          <div class="dt-num">4</div>
+          <div class="dt-head-text">
+            <div class="dt-phase">Prototype · Tạo nguyên mẫu</div>
+            <h4>App demo clickable — 5 màn, 2 persona, tính năng thật</h4>
+          </div>
+        </div>
+        <div class="dt-body">
+          <p>Thay vì mô tả bằng slide, chúng tôi xây dựng một <strong>clickable prototype hoàn chỉnh</strong> tại <a href="/eldercare-app" style="color:var(--care);font-weight:700;border-bottom:1px dashed var(--care-light);">/eldercare-app</a> — data-driven theo 2 persona (Bà Hoa / Ông Tâm), toàn bộ tính năng tương tác được. Đổi persona → toàn bộ dữ liệu thay đổi theo.</p>
+
+          <div class="dt-proto-grid">
+            <div class="dt-proto-card">
+              <div class="dp-screen">Màn 1 · Home</div>
+              <h5>Tổng quan sức khỏe</h5>
+              <ul>
+                <li>Sinh hiệu hôm nay (CareSense): huyết áp, SpO₂, nhịp tim</li>
+                <li>Timeline sự kiện &amp; cảnh báo</li>
+                <li>Quick actions: video call, mua thuốc, SOS</li>
+                <li>Lịch uống thuốc hôm nay</li>
+              </ul>
+            </div>
+            <div class="dt-proto-card">
+              <div class="dp-screen">Màn 2 · Chăm sóc · CareConnect</div>
+              <h5>Đội chăm &amp; tìm người chăm</h5>
+              <ul>
+                <li>Đội chăm đa chuyên ngành theo bệnh lý persona</li>
+                <li>Nhật ký ca trực điều dưỡng</li>
+                <li>Radar quét người chăm quanh đây (Leaflet/OSM)</li>
+                <li>Bộ lọc: điều dưỡng / hộ lý / dược lâm sàng / bác sĩ</li>
+              </ul>
+            </div>
+            <div class="dt-proto-card">
+              <div class="dp-screen">Màn 3 · Khám · Telehealth</div>
+              <h5>Video call &amp; đơn thuốc</h5>
+              <ul>
+                <li>Video call bác sĩ lão khoa (overlay full-screen)</li>
+                <li>Đơn thuốc điện tử của persona</li>
+                <li>Xác thực thuốc chống giả (quét mã GPP)</li>
+                <li>Nhà thuốc ElderCare — giao tận nhà</li>
+              </ul>
+            </div>
+            <div class="dt-proto-card">
+              <div class="dp-screen">Màn 4 · Tài chính · MedFin</div>
+              <h5>Gói chăm &amp; tài chính y tế</h5>
+              <ul>
+                <li>So sánh gói Cơ bản 299k vs Plus 599k/tháng</li>
+                <li>Trả góp ca điều trị lớn (khớp háng ~45tr)</li>
+                <li>AI scoring tín dụng sức khỏe</li>
+                <li>Bảo hiểm sức khỏe bổ sung người già</li>
+              </ul>
+            </div>
+            <div class="dt-proto-card">
+              <div class="dp-screen">Màn 5 · Hồ sơ · CareSense</div>
+              <h5>Dashboard bố/mẹ &amp; thiết bị</h5>
+              <ul>
+                <li>Bệnh mạn, ngưỡng cảnh báo theo persona</li>
+                <li>Thiết bị CareSense tại nhà (cảm biến té ngã)</li>
+                <li>Mô phỏng sự cố &amp; phản hồi AI</li>
+                <li>Quyền xem dữ liệu &amp; đồng ý (PDPD)</li>
+              </ul>
+            </div>
+            <div class="dt-proto-card">
+              <div class="dp-screen">Tính năng đặc biệt</div>
+              <h5>SOS / Té ngã &amp; Onboarding</h5>
+              <ul>
+                <li>Fall/SOS overlay — đếm ngược 10s, gọi cấp cứu</li>
+                <li>Onboarding triage 3 bước — AI gợi ý gói &amp; đội chăm</li>
+                <li>AI symptom matching (mini chat)</li>
+                <li>Đổi địa bàn — 7 quận Hà Nội</li>
+              </ul>
+            </div>
+          </div>
+
+          <div style="display:flex;flex-wrap:wrap;gap:0.75rem;margin-top:1rem;">
+            <a href="/eldercare-app" style="display:inline-flex;align-items:center;gap:0.5rem;background:var(--care);color:#fff;padding:10px 22px;border-radius:10px;font-weight:700;font-size:0.88rem;text-decoration:none;">▶️ Xem app demo tương tác</a>
+            <a href="/eldercare" style="display:inline-flex;align-items:center;gap:0.5rem;background:#fff;color:var(--care);border:2px solid var(--care);padding:10px 22px;border-radius:10px;font-weight:700;font-size:0.88rem;text-decoration:none;">👵 Landing ElderCare VN</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- BƯỚC 5: TEST -->
+      <div class="dt-step s5">
+        <div class="dt-step-head">
+          <div class="dt-num">5</div>
+          <div class="dt-head-text">
+            <div class="dt-phase">Test · Kiểm thử &amp; lặp</div>
+            <h4>Validate với người dùng thật — vòng lặp cải tiến liên tục</h4>
+          </div>
+        </div>
+        <div class="dt-body">
+          <p>Design Thinking không dừng ở nguyên mẫu. Mỗi tính năng phải được <strong>kiểm thử với người dùng thật</strong> và cải tiến dựa trên phản hồi. Dưới đây là kế hoạch validate cho từng nhóm tính năng.</p>
+
+          <div class="dt-test-grid">
+            <div class="dt-test-card">
+              <div class="dtc-label">Kênh validate · Điều dưỡng</div>
+              <h5>CareConnect — khớp cung-cầu</h5>
+              <p>Phỏng vấn 30 điều dưỡng tại Hà Nội về chứng chỉ, lịch làm, mức thu nhập kỳ vọng. Metric: thời gian khớp (target &lt;2h) và tỷ lệ ca hoàn thành ≥95%.</p>
+            </div>
+            <div class="dt-test-card">
+              <div class="dtc-label">Kênh validate · Gia đình</div>
+              <h5>Dashboard &amp; SOS — yên tâm từ xa</h5>
+              <p>Thử nghiệm với 20 gia đình có người già ở Hà Nội. Metric: NPS ≥40, tỷ lệ mở app hằng ngày ≥60%, tỷ lệ tái tục tháng 2 ≥70%.</p>
+            </div>
+            <div class="dt-test-card">
+              <div class="dtc-label">Kênh validate · Người già</div>
+              <h5>CareSense &amp; nhắc thuốc — tuân thủ</h5>
+              <p>Thử nghiệm 15 thiết bị cảm biến tại nhà 3 tháng. Metric: tỷ lệ uống đúng thuốc tăng từ ~60% lên ≥85%, zero false-negative SOS.</p>
+            </div>
+            <div class="dt-test-card">
+              <div class="dtc-label">Kênh validate · Bác sĩ</div>
+              <h5>Telehealth — chất lượng khám</h5>
+              <p>Đánh giá chéo 50 ca telehealth với 5 bác sĩ lão khoa. Metric: thời gian xử lý phác đồ &lt;24h, bệnh nhân hài lòng ≥4,5/5.</p>
+            </div>
+            <div class="dt-test-card">
+              <div class="dtc-label">Vòng lặp cải tiến</div>
+              <h5>Iteration — Build-Measure-Learn</h5>
+              <p>Sprint 2 tuần: collect feedback → prioritize backlog → release → measure. Mục tiêu: 3 vòng lặp trước khi scale quận 2.</p>
+            </div>
+            <div class="dt-test-card">
+              <div class="dtc-label">Ngưỡng PMF</div>
+              <h5>Khi nào đủ Product-Market Fit?</h5>
+              <p>Khi ≥40% người dùng nói "rất thất vọng nếu ElderCare biến mất" (Sean Ellis test), AND churn tháng &lt;4%, AND NRR ≥110%.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- end dt-steps -->
+
+    <!-- ======== DANH MỤC SẢN PHẨM & DỊCH VỤ ======== -->
+    <div class="svc-catalog">
+      <div class="svc-cat-head">
+        <h3 class="fin-sub" style="margin:0;"><span class="badge-n">★</span> Danh mục Sản phẩm &amp; Dịch vụ</h3>
+        <span class="demo-badge">Dữ liệu minh họa</span>
+      </div>
+      <p class="sub-desc">Tổng hợp toàn bộ sản phẩm/dịch vụ của ElderCare VN lấy từ app demo và business plan. Giá và tính năng là ước tính demo để minh họa mô hình.</p>
+
+      <div class="svc-grid">
+        <div class="svc-card sc1">
+          <div class="sv-tag">Trụ cột 1 · CareConnect</div>
+          <h4>Dịch vụ Điều dưỡng tại nhà</h4>
+          <div class="sv-price">Take-rate 20% · GM ~85%</div>
+          <ul>
+            <li>Điều dưỡng có giấy phép + chứng chỉ lão khoa</li>
+            <li>Hộ lý chăm sóc sinh hoạt hằng ngày</li>
+            <li>Dược lâm sàng — rà soát đa thuốc</li>
+            <li>Nhật ký ca trực số, chấm công thực địa</li>
+            <li>Radar quét người chăm gần nhà (7 quận HN)</li>
+            <li>Bảo hiểm trách nhiệm người chăm</li>
+          </ul>
+        </div>
+        <div class="svc-card sc2">
+          <div class="sv-tag">Trụ cột 2 · Telehealth &amp; Dược</div>
+          <h4>Khám từ xa &amp; Quản lý thuốc</h4>
+          <div class="sv-price">Gói Cơ bản 299k/th · Gói Plus 599k/th</div>
+          <ul>
+            <li>Video call bác sĩ lão khoa chuyên sâu</li>
+            <li>Đơn thuốc điện tử theo bệnh lý persona</li>
+            <li>Nhắc uống thuốc theo lịch chính xác</li>
+            <li>Xác thực thuốc chống giả — quét mã GPP</li>
+            <li>Nhà thuốc ElderCare — giao tận nhà chính hãng</li>
+            <li>Gói Cơ bản: 4 lượt/tháng · Gói Plus: không giới hạn</li>
+          </ul>
+        </div>
+        <div class="svc-card sc3">
+          <div class="sv-tag">Trụ cột 3 · CareSense</div>
+          <h4>Giám sát &amp; Cảnh báo 24/7</h4>
+          <div class="sv-price">Thiết bị + subscription theo dõi</div>
+          <ul>
+            <li>Cảm biến sinh hiệu: huyết áp, SpO₂, nhịp tim</li>
+            <li>AI phát hiện té ngã — SOS 1 chạm</li>
+            <li>Đếm ngược 10s — tự gọi con cái &amp; 115</li>
+            <li>Dashboard sinh hiệu real-time cho gia đình</li>
+            <li>Ngưỡng cảnh báo cá nhân hóa theo bệnh lý</li>
+            <li>Cơ bản (gói 299k) vs 24/7 đầy đủ (gói 599k)</li>
+          </ul>
+        </div>
+        <div class="svc-card sc4">
+          <div class="sv-tag">Trụ cột 4 · MedFin</div>
+          <h4>Tài chính y tế</h4>
+          <div class="sv-price">NIM 6–9% · Hoa hồng BH 10–25%</div>
+          <ul>
+            <li>Trả góp ca điều trị lớn (vd khớp háng ~45tr, 12 tháng)</li>
+            <li>AI scoring tín dụng sức khỏe</li>
+            <li>Bảo hiểm sức khỏe bổ sung người cao tuổi</li>
+            <li>Kết nối tổ chức tín dụng được cấp phép</li>
+            <li>Originate-to-distribute — không ôm bảng cân đối</li>
+          </ul>
+        </div>
+        <div class="svc-card sc5">
+          <div class="sv-tag">Trải nghiệm · Onboarding &amp; Triage</div>
+          <h4>Kết nạp &amp; phân loại thông minh</h4>
+          <div class="sv-price">Tích hợp trong app · không phí riêng</div>
+          <ul>
+            <li>Onboarding triage 3 bước — AI gợi ý gói &amp; đội chăm</li>
+            <li>AI symptom matching qua mini chat</li>
+            <li>Đổi persona / thêm người thân mới</li>
+            <li>Phân quyền xem dữ liệu theo đồng ý PDPD</li>
+            <li>Đội chăm đa chuyên ngành theo mức độ bệnh lý</li>
+          </ul>
+        </div>
+      </div>
+    </div><!-- end svc-catalog -->
+
+    <!-- ENDBOX: DT kết nối với tài chính -->
+    <div class="endbox ai" style="margin-top:2rem;">
+      <h4>🔗 Design Thinking → Tài chính: sản phẩm tốt tạo ra unit economics tốt</h4>
+      <div class="eb-desc">Mỗi quyết định thiết kế sản phẩm đều có hệ quả tài chính trực tiếp.</div>
+      <div class="ai-row">
+        <div class="ai-item">
+          <div class="ai-head">💊 Xác thực thuốc → Retention cao</div>
+          <p>Tính năng xác thực chống giả tạo niềm tin với gia đình → churn tháng thấp (&lt;3,3%) → LTV tăng → LTV/CAC đạt 5,8×.</p>
+        </div>
+        <div class="ai-item">
+          <div class="ai-head">📡 CareSense → Switching cost</div>
+          <p>Thiết bị đã lắp tại nhà, gia đình đã quen giao diện → rào cản rời bỏ tăng → NRR 110%, churn khó tăng.</p>
+        </div>
+        <div class="ai-item">
+          <div class="ai-head">🤖 Onboarding triage → CAC thấp</div>
+          <p>AI gợi ý gói/đội chăm ngay từ đầu → khách hàng chọn gói phù hợp → ít churm sớm → CAC blended ~480k, payback ~5,2 tháng.</p>
+        </div>
+      </div>
+    </div>
+
   </div>
 </section>
 
