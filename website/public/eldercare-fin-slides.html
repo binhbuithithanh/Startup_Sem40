@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>ElderCare VN — Tài chính trong 5 phút</title>
+<style>
+  :root{
+    --teal:#0d9488; --teal-d:#0f766e; --teal-l:#2dd4bf; --teal-b:#5eead4;
+    --gold:#f5a623; --coral:#fb7185; --green:#16a34a;
+    --ink:#0f172a; --muted:#64748b; --line:#e2e8f0; --bg:#f8fafc;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html,body{height:100%;}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    background:#0b1220; color:var(--ink); overflow:hidden;
+  }
+
+  /* Stage */
+  #stage{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;}
+  .slide{
+    position:absolute;inset:0;display:none;flex-direction:column;
+    padding:5.5vh 7vw 8vh;background:var(--bg);
+    animation:fade .45s ease;overflow:hidden;
+  }
+  .slide.active{display:flex;}
+  @keyframes fade{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:none;}}
+
+  /* Top accent bar */
+  .slide::before{content:"";position:absolute;top:0;left:0;right:0;height:7px;
+    background:linear-gradient(90deg,var(--teal),var(--teal-l),var(--gold));}
+
+  .kicker{font-size:1.05vw;font-weight:800;letter-spacing:.22em;text-transform:uppercase;
+    color:var(--teal);margin-bottom:1.6vh;display:flex;align-items:center;gap:.6em;}
+  .kicker .dot{width:.7em;height:.7em;border-radius:50%;background:var(--gold);}
+  h1{font-size:4.6vw;line-height:1.05;font-weight:900;color:var(--ink);letter-spacing:-.02em;}
+  h2{font-size:3.2vw;line-height:1.08;font-weight:900;color:var(--ink);letter-spacing:-.02em;margin-bottom:2.4vh;}
+  .lead{font-size:1.7vw;line-height:1.5;color:var(--muted);max-width:62ch;margin-top:2.2vh;}
+  .accent{color:var(--teal);}
+  .accent-g{color:var(--gold);}
+  .accent-c{color:var(--coral);}
+
+  /* Cover */
+  #s1{background:linear-gradient(140deg,#0f766e 0%,#0d9488 45%,#0b1220 130%);color:#fff;justify-content:center;}
+  #s1::before{background:linear-gradient(90deg,var(--gold),var(--teal-b));}
+  #s1 h1{color:#fff;font-size:5.4vw;}
+  #s1 .kicker{color:var(--teal-b);}
+  #s1 .lead{color:rgba(255,255,255,.86);}
+  .badge-demo{display:inline-block;margin-top:3.5vh;font-size:1vw;font-weight:700;
+    background:rgba(255,255,255,.14);color:#fff;padding:.6em 1.2em;border-radius:999px;
+    border:1px solid rgba(255,255,255,.3);}
+
+  /* Big number rows */
+  .bignums{display:flex;gap:2vw;margin-top:auto;margin-bottom:1vh;flex-wrap:wrap;}
+  .bn{flex:1;min-width:180px;background:#fff;border:1px solid var(--line);border-radius:18px;
+    padding:2.6vh 1.6vw;box-shadow:0 10px 30px rgba(13,148,136,.07);}
+  .bn .n{font-size:3vw;font-weight:900;color:var(--teal);letter-spacing:-.02em;line-height:1;}
+  .bn .n.g{color:var(--gold);} .bn .n.c{color:var(--coral);} .bn .n.gr{color:var(--green);}
+  .bn .l{font-size:1.05vw;color:var(--muted);margin-top:1vh;line-height:1.35;font-weight:600;}
+
+  /* Analogy strip */
+  .analogy{margin-top:2.6vh;background:#ecfdf5;border:1px solid #a7f3d0;border-left:6px solid var(--teal);
+    border-radius:14px;padding:2.2vh 1.8vw;font-size:1.5vw;line-height:1.5;color:#065f46;max-width:70ch;}
+  .analogy b{color:var(--teal-d);}
+
+  /* 3 doors cards */
+  .doors{display:flex;gap:1.6vw;margin-top:1vh;flex:1;align-items:stretch;}
+  .door{flex:1;background:#fff;border:2px solid var(--line);border-radius:20px;padding:3vh 1.7vw;
+    display:flex;flex-direction:column;box-shadow:0 8px 26px rgba(15,23,42,.06);position:relative;overflow:hidden;}
+  .door::before{content:"";position:absolute;top:0;left:0;right:0;height:6px;}
+  .door.c::before{background:var(--teal-l);} .door.b::before{background:var(--green);} .door.a::before{background:var(--gold);}
+  .door .tag{font-size:1vw;font-weight:800;letter-spacing:.12em;text-transform:uppercase;}
+  .door.c .tag{color:var(--teal);} .door.b .tag{color:var(--green);} .door.a .tag{color:#b45309;}
+  .door .name{font-size:1.9vw;font-weight:900;margin:.5vh 0 .2vh;color:var(--ink);}
+  .door .sub{font-size:1.05vw;color:var(--muted);margin-bottom:2vh;font-weight:600;}
+  .door .hero-n{font-size:2.7vw;font-weight:900;line-height:1;margin-bottom:.4vh;}
+  .door.c .hero-n{color:var(--teal);} .door.b .hero-n{color:var(--green);} .door.a .hero-n{color:var(--gold);}
+  .door .hero-l{font-size:1vw;color:var(--muted);font-weight:600;margin-bottom:auto;}
+  .door ul{list-style:none;margin-top:2vh;display:flex;flex-direction:column;gap:1vh;}
+  .door li{font-size:1.05vw;line-height:1.35;color:#334155;padding-left:1.5em;position:relative;}
+  .door li::before{content:"✓";position:absolute;left:0;font-weight:900;}
+  .door.c li::before{color:var(--teal);} .door.b li::before{color:var(--green);} .door.a li::before{color:var(--gold);}
+  .door .risk{font-size:.95vw;margin-top:1.6vh;padding-top:1.4vh;border-top:1px dashed var(--line);color:var(--muted);}
+
+  /* Timeline (plan C) */
+  .tl{display:flex;gap:1vw;margin-top:1vh;flex:1;align-items:flex-end;}
+  .tl .bar{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:1vh;}
+  .tl .col{width:100%;border-radius:10px 10px 0 0;background:linear-gradient(180deg,var(--teal-l),var(--teal));
+    display:flex;align-items:flex-start;justify-content:center;color:#fff;font-weight:800;font-size:1vw;padding-top:.8vh;
+    transition:height .4s;}
+  .tl .col.neg{background:linear-gradient(180deg,#fda4af,var(--coral));}
+  .tl .col.hl{background:linear-gradient(180deg,var(--gold),#d97706);}
+  .tl .mlabel{font-size:.95vw;font-weight:700;color:var(--muted);}
+  .tl .bar.mark .mlabel{color:var(--teal-d);font-weight:900;}
+
+  /* Simple compare table */
+  table.cmp{width:100%;border-collapse:collapse;margin-top:1vh;font-size:1.3vw;background:#fff;
+    border-radius:16px;overflow:hidden;box-shadow:0 8px 26px rgba(15,23,42,.06);}
+  table.cmp th,table.cmp td{padding:1.8vh 1.4vw;text-align:left;border-bottom:1px solid var(--line);}
+  table.cmp thead th{background:var(--teal);color:#fff;font-weight:800;font-size:1.25vw;}
+  table.cmp tbody tr:last-child td{border-bottom:none;}
+  table.cmp td:first-child{font-weight:800;color:var(--ink);}
+  table.cmp tbody td.col-c{color:var(--teal);font-weight:800;}
+  table.cmp tbody td.col-b{color:var(--green);font-weight:800;}
+  table.cmp tbody td.col-a{color:#b45309;font-weight:800;}
+  table.cmp tbody tr:nth-child(even){background:#f8fafc;}
+
+  /* Closing */
+  #s9{background:linear-gradient(140deg,#0f766e,#0d9488 50%,#0b1220 140%);color:#fff;justify-content:center;}
+  #s9::before{background:linear-gradient(90deg,var(--gold),var(--teal-b));}
+  #s9 h2{color:#fff;font-size:3.6vw;}
+  #s9 .lead{color:rgba(255,255,255,.9);}
+  #s9 .rec{margin-top:3.5vh;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.28);
+    border-radius:16px;padding:2.4vh 2vw;font-size:1.55vw;line-height:1.5;max-width:72ch;}
+  #s9 .rec b{color:var(--teal-b);}
+
+  /* Footer / chrome */
+  .foot{position:fixed;bottom:0;left:0;right:0;height:5vh;display:flex;align-items:center;
+    justify-content:space-between;padding:0 2vw;font-size:.85vw;color:var(--muted);
+    background:rgba(255,255,255,.0);pointer-events:none;z-index:20;}
+  .foot .left{font-weight:700;color:var(--teal-d);}
+  #s1 ~ .foot,.foot{mix-blend-mode:normal;}
+  .dots{position:fixed;bottom:2vh;left:50%;transform:translateX(-50%);display:flex;gap:.7vw;z-index:30;}
+  .dots b{width:.85vw;height:.85vw;max-width:11px;max-height:11px;min-width:7px;min-height:7px;border-radius:50%;
+    background:rgba(15,23,42,.18);cursor:pointer;transition:.2s;}
+  .dots b.on{background:var(--teal);transform:scale(1.35);}
+  .counter{position:fixed;top:2.2vh;right:2.4vw;font-size:1vw;font-weight:800;color:var(--muted);z-index:30;
+    background:rgba(255,255,255,.7);padding:.3em .8em;border-radius:999px;backdrop-filter:blur(6px);}
+  #s1.active ~ .counter,#s9.active ~ .counter{color:#fff;background:rgba(255,255,255,.18);}
+
+  /* arrows */
+  .arrow{position:fixed;top:50%;transform:translateY(-50%);width:3.2vw;height:3.2vw;max-width:46px;max-height:46px;
+    min-width:34px;min-height:34px;border-radius:50%;background:rgba(255,255,255,.8);border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:30;font-size:1.4vw;color:var(--teal);
+    box-shadow:0 4px 14px rgba(15,23,42,.12);transition:.2s;user-select:none;}
+  .arrow:hover{background:#fff;transform:translateY(-50%) scale(1.08);}
+  #prev{left:1.5vw;} #next{right:1.5vw;}
+
+  /* speaker notes */
+  #notes{position:fixed;left:0;right:0;bottom:0;max-height:34vh;overflow:auto;
+    background:#0f172a;color:#e2e8f0;padding:2.4vh 6vw;font-size:1.05vw;line-height:1.6;
+    transform:translateY(105%);transition:transform .35s;z-index:40;border-top:4px solid var(--gold);}
+  #notes.open{transform:none;}
+  #notes h4{color:var(--gold);font-size:1.1vw;margin-bottom:1vh;letter-spacing:.05em;}
+  #notes .t{color:var(--teal-b);font-weight:800;}
+  .hint{position:fixed;bottom:2vh;right:2vw;font-size:.8vw;color:var(--muted);z-index:25;opacity:.7;}
+
+  @media (max-width:760px){
+    h1{font-size:8vw;} #s1 h1{font-size:9vw;} h2{font-size:6.5vw;}
+    .lead{font-size:4vw;} .kicker{font-size:3vw;}
+    .doors{flex-direction:column;overflow:auto;} .door .name{font-size:5vw;} .door .hero-n{font-size:7vw;}
+    .door li,.door .sub,.door .tag,.door .hero-l{font-size:3.4vw;}
+    .bn .n{font-size:8vw;} .bn .l{font-size:3.2vw;} .analogy{font-size:4vw;}
+    table.cmp{font-size:3vw;} table.cmp thead th{font-size:3vw;}
+    .counter,.kicker{font-size:3vw;} .tl .col,.tl .mlabel{font-size:2.6vw;}
+  }
+</style>
+</head>
+<body>
+
+<div id="stage">
+
+  <!-- 1 · COVER -->
+  <section class="slide active" id="s1">
+    <div class="kicker"><span class="dot"></span>ElderCare VN · Bức tranh tài chính</div>
+    <h1>Tiền vào từ đâu,<br/>lời lãi ra sao<span class="accent-g">.</span></h1>
+    <p class="lead">Toàn bộ phần tài chính ElderCare VN — kể trong 5 phút, không thuật ngữ, ai cũng hiểu.</p>
+    <span class="badge-demo">📊 Số liệu minh họa demo · Đơn vị: VND</span>
+  </section>
+
+  <!-- 2 · HOW WE MAKE MONEY -->
+  <section class="slide" id="s2">
+    <div class="kicker"><span class="dot"></span>1 · Kiếm tiền thế nào</div>
+    <h2>Thu phí <span class="accent">đều đặn hằng tháng</span> — như tiền thuê bao</h2>
+    <p class="lead">Mỗi gia đình có người già trả một khoản nhỏ mỗi tháng để dùng dịch vụ chăm sóc. Giống Netflix hay gói cước điện thoại: khách ở lại càng lâu, tiền về càng đều.</p>
+    <div class="bignums">
+      <div class="bn"><div class="n">5 nguồn</div><div class="l">Điều dưỡng tại nhà · Khám từ xa · Thuốc · Cảm biến té ngã · Tài chính y tế</div></div>
+      <div class="bn"><div class="n g">~110k</div><div class="l">Một gia đình trả bình quân mỗi tháng (năm đầu)</div></div>
+      <div class="bn"><div class="n">Đều &amp; lặp lại</div><div class="l">Doanh thu quay vòng — không phải bán một lần rồi thôi</div></div>
+    </div>
+  </section>
+
+  <!-- 3 · UNIT ECONOMICS SIMPLE -->
+  <section class="slide" id="s3">
+    <div class="kicker"><span class="dot"></span>2 · Một khách lời bao nhiêu</div>
+    <h2>Bỏ ra <span class="accent-c">~480 nghìn</span> để có khách → thu về <span class="accent">~2,8 triệu</span></h2>
+    <div class="bignums" style="margin-top:1vh;">
+      <div class="bn"><div class="n c">480k</div><div class="l">Chi phí quảng cáo để có 1 khách mới</div></div>
+      <div class="bn"><div class="n">2,8 triệu</div><div class="l">Tổng tiền lời một khách mang lại suốt thời gian gắn bó</div></div>
+      <div class="bn"><div class="n g">5,8 lần</div><div class="l">Thu về gấp ~6 lần số bỏ ra — bỏ 1 đồng, lấy lại gần 6 đồng</div></div>
+    </div>
+    <div class="analogy">💡 Hiểu đơn giản: mỗi đồng bỏ ra tìm khách, ElderCare thu lại gần <b>6 đồng</b>. Chuẩn ngành coi <b>3 lần</b> là tốt — ta gần gấp đôi mức "tốt".</div>
+  </section>
+
+  <!-- 4 · THREE DOORS -->
+  <section class="slide" id="s4">
+    <div class="kicker"><span class="dot"></span>3 · Ba con đường để chọn</div>
+    <h2>Cùng một ý tưởng — <span class="accent">ba cách làm</span> theo khẩu vị rủi ro</h2>
+    <div class="doors">
+      <div class="door c">
+        <div class="tag">🌱 Khởi đầu nhỏ</div>
+        <div class="name">Kế hoạch C</div>
+        <div class="sub">Vốn mồi 50 triệu</div>
+        <div class="hero-n">Hoà vốn tháng 4</div>
+        <div class="hero-l">Tự làm, không cần nhà đầu tư</div>
+        <ul><li>Gần như chắc thắng</li><li>Không vay nợ</li></ul>
+      </div>
+      <div class="door b">
+        <div class="tag">💰 Lãi ngay</div>
+        <div class="name">Kế hoạch B</div>
+        <div class="sub">Mô hình gọn nhẹ</div>
+        <div class="hero-n">+10 tỷ năm 1</div>
+        <div class="hero-l">Có lãi từ năm đầu tiên</div>
+        <ul><li>Chủ giữ &gt;80% công ty</li><li>Vốn cần ~15–20 tỷ</li></ul>
+      </div>
+      <div class="door a">
+        <div class="tag">🚀 Tỉ đô</div>
+        <div class="name">Kế hoạch A</div>
+        <div class="sub">Chiếm thị trường</div>
+        <div class="hero-n">~1.740 tỷ</div>
+        <div class="hero-l">Định giá công ty (~$68 triệu)</div>
+        <ul><li>Chịu lỗ 4 năm để bứt phá</li><li>Cần gọi vốn nhiều vòng</li></ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 · PLAN C -->
+  <section class="slide" id="s5">
+    <div class="kicker"><span class="dot"></span>Cửa C · An toàn nhất</div>
+    <h2>50 triệu vốn mồi → <span class="accent">tháng 4 đã có lãi</span></h2>
+    <p class="lead">Không xây app vội. Chỉ làm "người mai mối": ghép gia đình với người chăm đã được tuyển chọn qua Zalo &amp; điện thoại, ăn hoa hồng. Tiền về ngay, chi phí gần như bằng 0.</p>
+    <div class="tl">
+      <div class="bar"><div class="col neg" style="height:14%;">−12</div><div class="mlabel">T1</div></div>
+      <div class="bar"><div class="col neg" style="height:8%;">−3</div><div class="mlabel">T2</div></div>
+      <div class="bar"><div class="col" style="height:16%;">+5</div><div class="mlabel">T3</div></div>
+      <div class="bar mark"><div class="col hl" style="height:28%;">+14</div><div class="mlabel">T4 ✓ hoà vốn</div></div>
+      <div class="bar"><div class="col" style="height:44%;">+37</div><div class="mlabel">T6</div></div>
+      <div class="bar"><div class="col" style="height:70%;">+82</div><div class="mlabel">T9</div></div>
+      <div class="bar"><div class="col hl" style="height:100%;">+133</div><div class="mlabel">T12</div></div>
+    </div>
+    <div class="bignums" style="margin-top:2vh;">
+      <div class="bn"><div class="n">35,4 triệu</div><div class="l">Tiền mặt thấp nhất — không bao giờ cạn vốn</div></div>
+      <div class="bn"><div class="n g">~570 triệu</div><div class="l">Lãi cả năm đầu</div></div>
+      <div class="bn"><div class="n">663 triệu</div><div class="l">Tiền mặt trong tay cuối năm</div></div>
+    </div>
+  </section>
+
+  <!-- 6 · PLAN B -->
+  <section class="slide" id="s6">
+    <div class="kicker"><span class="dot"></span>Cửa B · Lãi ngay &amp; tự chủ</div>
+    <h2>Có lãi <span class="accent">ngay từ năm đầu</span>, không cần đốt tiền</h2>
+    <p class="lead">Chỉ làm 3 việc chắc ăn nhất (chăm tại nhà · khám từ xa · thuốc &amp; thiết bị), bỏ qua thứ tốn vốn. Năm nào cũng có lãi, người sáng lập vẫn nắm hơn 80% công ty.</p>
+    <div class="bignums">
+      <div class="bn"><div class="n gr">+10 tỷ</div><div class="l">Lãi ròng ngay năm 1</div></div>
+      <div class="bn"><div class="n gr">+64 tỷ</div><div class="l">Lãi ròng năm 5</div></div>
+      <div class="bn"><div class="n">~15–20 tỷ</div><div class="l">Vốn cần — thay vì ~289 tỷ phải bù lỗ của Cửa A</div></div>
+      <div class="bn"><div class="n g">&gt;80%</div><div class="l">Phần công ty người sáng lập giữ lại</div></div>
+    </div>
+    <div class="analogy" style="background:#f0fdf4;border-color:#86efac;border-left-color:var(--green);color:#14532d;">🟢 Đánh đổi: lớn chậm hơn Cửa A (doanh thu năm 5 ~360 tỷ so với ~948 tỷ) — nhưng <b>chắc chắn sống</b>, không phụ thuộc nhà đầu tư.</div>
+  </section>
+
+  <!-- 7 · PLAN A -->
+  <section class="slide" id="s7">
+    <div class="kicker"><span class="dot"></span>Cửa A · Tham vọng tỉ đô</div>
+    <h2>Chịu lỗ 4 năm để <span class="accent-g">chiếm cả thị trường</span></h2>
+    <p class="lead">Việt Nam già hóa nhanh nhất khu vực — 14,2 triệu người cao tuổi. Cửa A "đốt vốn có kỷ luật" để giành thị phần trước đối thủ, đổi lấy định giá lớn. Năm 5 bắt đầu có lãi.</p>
+    <div class="bignums">
+      <div class="bn"><div class="n">948 tỷ</div><div class="l">Doanh thu năm 5 (mới ~5% thị trường — còn rất nhiều chỗ)</div></div>
+      <div class="bn"><div class="n c">~289 tỷ</div><div class="l">Tổng lỗ phải bù trong 4 năm đầu (cần nhà đầu tư rót)</div></div>
+      <div class="bn"><div class="n gr">Năm 5</div><div class="l">Bắt đầu có lãi (+30 tỷ) sau khi đã chiếm chỗ</div></div>
+      <div class="bn"><div class="n g">~1.740 tỷ</div><div class="l">Định giá công ty hôm nay (~$68 triệu)</div></div>
+    </div>
+    <div class="analogy" style="background:#fffbeb;border-color:#fcd34d;border-left-color:var(--gold);color:#78350f;">🟡 Như mở chuỗi thật nhanh: chịu lỗ ban đầu để phủ khắp nơi, ai vào sau khó đuổi kịp. Rủi ro: phải gọi vốn liên tục 4 vòng.</div>
+  </section>
+
+  <!-- 8 · COMPARE -->
+  <section class="slide" id="s8">
+    <div class="kicker"><span class="dot"></span>So sánh nhanh</div>
+    <h2>Ba cửa — một bảng <span class="accent">nhìn là hiểu</span></h2>
+    <table class="cmp">
+      <thead><tr><th>Tiêu chí</th><th class="col-c">🌱 C · Vốn mồi</th><th class="col-b">💰 B · Lãi ngay</th><th class="col-a">🚀 A · Tỉ đô</th></tr></thead>
+      <tbody>
+        <tr><td>Vốn cần</td><td class="col-c">50 triệu</td><td class="col-b">15–20 tỷ</td><td class="col-a">~1.973 tỷ (4 vòng)</td></tr>
+        <tr><td>Khi nào có lãi</td><td class="col-c">Tháng 4</td><td class="col-b">Năm 1</td><td class="col-a">Năm 5</td></tr>
+        <tr><td>Rủi ro</td><td class="col-c">Rất thấp</td><td class="col-b">Thấp</td><td class="col-a">Cao</td></tr>
+        <tr><td>Phần thưởng</td><td class="col-c">Chắc thắng nhỏ</td><td class="col-b">Lời đều, tự chủ</td><td class="col-a">Tỉ đô</td></tr>
+        <tr><td>Người sáng lập giữ</td><td class="col-c">~100%</td><td class="col-b">&gt;80%</td><td class="col-a">~34%</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 9 · CLOSING -->
+  <section class="slide" id="s9">
+    <div class="kicker" style="color:var(--teal-b);"><span class="dot"></span>Chốt lại</div>
+    <h2>Một cỗ máy kiếm tiền —<br/>ba tốc độ để chọn.</h2>
+    <p class="lead">Cả ba đều dựa trên cùng một sự thật: dân số già hóa, gia đình sẵn sàng trả tiền chăm sóc đều mỗi tháng, mỗi đồng marketing thu về gần 6 đồng.</p>
+    <div class="rec">👉 Khuyến nghị: <b>bắt đầu từ Cửa C</b> (50 triệu, chắc thắng) để chứng minh nhu cầu thật — rồi dùng kết quả đó gọi vốn cho Cửa A/B từ thế mạnh, không bị ép giá.</div>
+  </section>
+
+</div>
+
+<!-- chrome -->
+<div class="counter"><span id="cur">1</span> / 9</div>
+<div class="arrow" id="prev">‹</div>
+<div class="arrow" id="next">›</div>
+<div class="dots" id="dots"></div>
+<div class="foot"><span class="left">ElderCare VN</span><span>← → để chuyển · phím S xem ghi chú nói · F toàn màn hình</span></div>
+
+<!-- speaker notes -->
+<div id="notes"><h4>🎤 GHI CHÚ NGƯỜI NÓI</h4><div id="notes-body"></div></div>
+
+<script>
+const NOTES=[
+  `<span class="t">[~15 giây]</span> "5 phút tới, tôi kể phần tiền của ElderCare — không con số rối, ai cũng hiểu. Ba câu hỏi: tiền vào từ đâu, một khách lời bao nhiêu, và ta có mấy cách làm."`,
+  `<span class="t">[~40 giây]</span> "Cách kiếm tiền giống tiền thuê bao điện thoại: mỗi gia đình có người già trả một khoản nhỏ ĐỀU mỗi tháng. Có 5 nguồn thu nhưng cốt lõi là khách ở lại lâu → tiền về đều, không phải bán một lần rồi hết."`,
+  `<span class="t">[~45 giây]</span> "Câu hỏi quan trọng nhất với nhà đầu tư: bỏ ra bao nhiêu, thu về bao nhiêu? Bỏ ~480 nghìn quảng cáo để có 1 khách, khách đó mang lại ~2,8 triệu. Tức gần 6 lần. Ngành coi 3 lần là tốt — ta gần gấp đôi. Đây là dấu hiệu mô hình lành mạnh."`,
+  `<span class="t">[~40 giây]</span> "Cùng ý tưởng này, chúng tôi có BA cách làm theo khẩu vị rủi ro. C: nhỏ, chắc thắng. B: lãi ngay, tự chủ. A: tham vọng tỉ đô. Tôi đi nhanh từng cửa."`,
+  `<span class="t">[~50 giây]</span> "Cửa C an toàn nhất: chỉ 50 triệu vốn. Không xây app vội — làm người mai mối, ghép gia đình với người chăm, ăn hoa hồng. Nhìn biểu đồ: hai tháng đầu âm nhẹ, THÁNG 4 đã hoà vốn, cuối năm cầm 663 triệu. Tiền thấp nhất vẫn 35 triệu — không bao giờ cháy túi."`,
+  `<span class="t">[~45 giây]</span> "Cửa B: có lãi NGAY năm đầu, +10 tỷ. Chỉ làm 3 việc chắc ăn, bỏ thứ tốn vốn. Vốn cần 15–20 tỷ thay vì gần 300 tỷ phải bù lỗ như Cửa A. Người sáng lập giữ hơn 80% công ty. Đánh đổi: lớn chậm hơn, nhưng chắc chắn sống."`,
+  `<span class="t">[~45 giây]</span> "Cửa A là giấc mơ tỉ đô. Việt Nam già hóa nhanh nhất khu vực — 14 triệu người cao tuổi. Chịu lỗ 4 năm để chiếm chỗ trước đối thủ, năm 5 có lãi. Định giá hôm nay ~1.740 tỷ, tức ~68 triệu đô. Rủi ro: phải gọi vốn liên tục."`,
+  `<span class="t">[~30 giây]</span> "Tóm trong một bảng: vốn — C 50 triệu, B vài chục tỷ, A gần 2.000 tỷ. Có lãi — C tháng 4, B năm 1, A năm 5. Rủi ro tăng dần, phần thưởng cũng tăng dần. Chọn cửa nào là chọn khẩu vị."`,
+  `<span class="t">[~25 giây]</span> "Kết: một cỗ máy, ba tốc độ. Cả ba đều đứng trên cùng sự thật — dân già hóa, gia đình trả đều, mỗi đồng marketing thu về 6 đồng. Khuyến nghị: bắt đầu từ C cho chắc, rồi dùng kết quả thật gọi vốn lên A/B. Xin cảm ơn."`
+];
+
+const slides=[...document.querySelectorAll('.slide')];
+const dotsWrap=document.getElementById('dots');
+const cur=document.getElementById('cur');
+const notesEl=document.getElementById('notes');
+const notesBody=document.getElementById('notes-body');
+let i=0;
+slides.forEach((_,k)=>{const b=document.createElement('b');b.onclick=()=>go(k);dotsWrap.appendChild(b);});
+const dots=[...dotsWrap.children];
+function go(n){
+  i=Math.max(0,Math.min(slides.length-1,n));
+  slides.forEach((s,k)=>s.classList.toggle('active',k===i));
+  dots.forEach((d,k)=>d.classList.toggle('on',k===i));
+  cur.textContent=i+1;
+  notesBody.innerHTML=NOTES[i];
+}
+function next(){go(i+1);} function prev(){go(i-1);}
+document.getElementById('next').onclick=next;
+document.getElementById('prev').onclick=prev;
+document.addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight'||e.key==='PageDown'||e.key===' '){e.preventDefault();next();}
+  else if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();prev();}
+  else if(e.key==='Home'){go(0);} else if(e.key==='End'){go(slides.length-1);}
+  else if(e.key==='s'||e.key==='S'){notesEl.classList.toggle('open');}
+  else if(e.key==='f'||e.key==='F'){
+    if(!document.fullscreenElement)document.documentElement.requestFullscreen();
+    else document.exitFullscreen();
+  }
+});
+// touch swipe
+let tx=0;
+document.addEventListener('touchstart',e=>tx=e.touches[0].clientX,{passive:true});
+document.addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-tx;if(Math.abs(dx)>50){dx<0?next():prev();}},{passive:true});
+const startParam=parseInt(new URLSearchParams(location.search).get('s'),10);
+go(Number.isFinite(startParam)?startParam-1:0);
+</script>
+</body>
+</html>
