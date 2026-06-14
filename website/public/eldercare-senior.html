@@ -1,0 +1,1143 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ElderCare VN — Chế độ Người Cao Tuổi (app cụ già tự dùng)</title>
+  <meta name="description" content="App demo tương tác ElderCare VN — Chế độ Người Cao Tuổi: giao diện cực đơn giản, chữ to, nút lớn, để chính ông bà tự dùng. Nhắc thuốc, 1 chạm gọi con cháu, SOS, trợ lý giọng nói, phát hiện té ngã. Hai hồ sơ Bà Hoa ↔ Ông Tâm. Dự án ETR601 SEM40HN." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --primary: #1a1a2e;       /* dark text */
+      --ink: #1a1a2e;
+      --care: #0d9488;          /* brand teal */
+      --care-dark: #0f766e;
+      --care-light: #2dd4bf;
+      --cream: #fbfaf7;         /* light screen interior */
+      --cream-card: #ffffff;
+      --muted: #5b6470;
+      --border: #e3e0d8;
+      --ok: #16a34a;
+      --warn: #d97706;
+      --danger: #dc2626;
+      --gold: #f5a623;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #0d1b2a 0%, #1a1a2e 45%, #0d2b29 100%);
+      background-attachment: fixed;
+      color: #fff;
+      min-height: 100vh;
+      line-height: 1.45;
+    }
+
+    /* ======================= WEB WRAPPER ======================= */
+    .topbar {
+      position: sticky; top: 0; z-index: 50;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0.85rem 1.5rem;
+      background: rgba(13,27,42,0.6);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .back-link {
+      color: rgba(255,255,255,0.85); text-decoration: none;
+      font-size: 0.85rem; font-weight: 600;
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      padding: 6px 12px; border-radius: 8px;
+      border: 1px solid rgba(255,255,255,0.14);
+      transition: all .2s;
+    }
+    .back-link:hover { background: rgba(255,255,255,0.08); }
+    .topbar-badge {
+      background: rgba(13,148,136,0.18); color: var(--care-light);
+      border: 1px solid rgba(45,212,191,0.35);
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.5px;
+      padding: 4px 12px; border-radius: 99px;
+    }
+
+    .stage {
+      display: flex; align-items: center; justify-content: center;
+      gap: 3rem; flex-wrap: wrap;
+      padding: 2.5rem 1.5rem 3rem;
+      max-width: 1200px; margin: 0 auto;
+    }
+    .marketing { flex: 1 1 280px; max-width: 380px; }
+    .marketing .mk-tag {
+      display: inline-block;
+      background: rgba(13,148,136,0.15);
+      border: 1px solid rgba(13,148,136,0.4);
+      color: var(--care-light); font-size: 0.72rem; font-weight: 700;
+      padding: 5px 14px; border-radius: 99px;
+      letter-spacing: 1px; text-transform: uppercase; margin-bottom: 1.25rem;
+    }
+    .marketing h1 {
+      font-size: 2.1rem; font-weight: 900; letter-spacing: -1px;
+      line-height: 1.1; margin-bottom: 0.75rem;
+    }
+    .marketing h1 span { color: var(--care-light); }
+    .marketing .mk-sub { color: rgba(255,255,255,0.62); font-size: 0.98rem; margin-bottom: 1.5rem; }
+    .mk-caption {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-left: 3px solid var(--care);
+      border-radius: 10px; padding: 0.9rem 1.1rem; margin-bottom: 0.85rem;
+    }
+    .mk-caption .mc-title { font-size: 0.92rem; font-weight: 700; color: #fff; margin-bottom: 0.2rem; display:flex; gap:0.45rem; align-items:center; }
+    .mk-caption .mc-desc { font-size: 0.82rem; color: rgba(255,255,255,0.6); line-height: 1.5; }
+    .mk-mock-badge {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      background: rgba(245,166,35,0.12); border: 1px solid rgba(245,166,35,0.35);
+      color: var(--gold); font-size: 0.72rem; font-weight: 600;
+      padding: 4px 12px; border-radius: 99px; margin-top: 1rem;
+    }
+
+    /* ======================= PHONE FRAME ======================= */
+    .phone {
+      flex: 0 0 auto;
+      width: 392px; height: 812px;
+      background: #0a0a14;
+      border-radius: 48px;
+      padding: 12px;
+      box-shadow: 0 40px 80px rgba(0,0,0,0.55), 0 0 0 2px rgba(255,255,255,0.06);
+      position: relative;
+    }
+    .phone-screen {
+      position: relative;
+      width: 100%; height: 100%;
+      background: var(--cream);
+      border-radius: 38px;
+      overflow: hidden;
+      display: flex; flex-direction: column;
+      color: var(--ink);
+    }
+    .island {
+      position: absolute; top: 10px; left: 50%; transform: translateX(-50%);
+      width: 110px; height: 30px; background: #0a0a14; border-radius: 99px; z-index: 30;
+    }
+    .statusbar {
+      height: 44px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 1.5rem; font-size: 0.82rem; font-weight: 700; color: var(--ink);
+    }
+
+    /* APP HEADER — large, friendly */
+    .app-header {
+      flex-shrink: 0;
+      background: linear-gradient(135deg, var(--care) 0%, var(--care-dark) 100%);
+      color: #fff; padding: 0.7rem 1.1rem 0.85rem;
+      display: flex; align-items: center; gap: 0.75rem;
+    }
+    .app-avatar {
+      width: 52px; height: 52px; border-radius: 50%;
+      background: rgba(255,255,255,0.24); flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center; font-size: 1.7rem;
+    }
+    .app-header .hi { font-size: 1.15rem; font-weight: 900; line-height: 1.15; }
+    .app-header .sub { font-size: 0.82rem; color: rgba(255,255,255,0.9); margin-top:1px; }
+
+    /* PERSONA SWITCH BAR */
+    .persona-bar {
+      flex-shrink: 0; width: 100%;
+      display: flex; align-items: center; gap: 0.6rem;
+      background: #fff; border: none; border-bottom: 1px solid var(--border);
+      padding: 0.55rem 1.1rem; cursor: pointer; font-family: inherit;
+      text-align: left; transition: background .15s;
+    }
+    .persona-bar:active { background: #f0fdfa; }
+    .persona-bar .pb-ava {
+      width: 38px; height: 38px; border-radius: 50%; background: #f0fdfa;
+      display: flex; align-items: center; justify-content: center; font-size: 1.35rem; flex-shrink: 0;
+    }
+    .persona-bar .pb-info { display: flex; flex-direction: column; line-height: 1.25; min-width: 0; }
+    .persona-bar .pb-info b { font-size: 0.92rem; color: var(--ink); }
+    .persona-bar .pb-info span { font-size: 0.72rem; color: var(--muted); }
+    .persona-bar .pb-switch {
+      margin-left: auto; flex-shrink: 0;
+      background: #ecfeff; color: var(--care); border: 1px solid #99f6e4;
+      font-size: 0.74rem; font-weight: 800; padding: 5px 12px; border-radius: 99px;
+    }
+
+    /* VIEWPORT */
+    .viewport { flex: 1; overflow-y: auto; overflow-x: hidden; -webkit-overflow-scrolling: touch; position: relative; }
+    .viewport::-webkit-scrollbar { width: 0; }
+    .screen { display: none; padding: 1.1rem 1.1rem 1.6rem; }
+    .screen.active { display: block; animation: fade .25s ease; }
+    @keyframes fade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+
+    /* simple-mode badge */
+    .simple-banner {
+      display:none; align-items:center; gap:0.5rem;
+      background:#fffbeb; border:1px solid #fcd9a8; color:#b45309;
+      border-radius:14px; padding:0.7rem 0.9rem; font-size:0.92rem; font-weight:700;
+      margin-bottom:0.9rem;
+    }
+    body.simple .simple-banner { display:flex; }
+
+    /* ======================= BIG CARDS ======================= */
+    .big-card {
+      background: var(--cream-card); border: 1px solid var(--border);
+      border-radius: 22px; padding: 1.15rem; margin-bottom: 1rem;
+      box-shadow: 0 2px 10px rgba(26,26,46,0.04);
+    }
+    .card-label {
+      font-size: 0.92rem; font-weight: 800; color: var(--muted);
+      margin-bottom: 0.7rem; display: flex; align-items: center; gap: 0.5rem;
+    }
+
+    /* live clock */
+    .clock-card { text-align: center; background: linear-gradient(135deg, #f0fdfa, #ecfeff); border-color:#99f6e4; }
+    .clock-time { font-size: 3.4rem; font-weight: 900; color: var(--care-dark); line-height: 1; letter-spacing: -1px; }
+    .clock-date { font-size: 1.05rem; font-weight: 700; color: var(--ink); margin-top: 0.35rem; }
+    body.simple .clock-time { font-size: 3.9rem; }
+
+    /* orientation card (Ông Tâm) */
+    .orient-card {
+      display:none; align-items:center; gap:0.85rem;
+      background: linear-gradient(135deg,#ecfdf5,#f0fdfa); border:1px solid #a7f3d0;
+      border-radius:22px; padding:1.1rem; margin-bottom:1rem;
+    }
+    body.simple .orient-card { display:flex; }
+    .orient-card .oc-emoji { font-size:2.4rem; flex-shrink:0; }
+    .orient-card .oc-title { font-size:1.2rem; font-weight:900; color:#047857; }
+    .orient-card .oc-sub { font-size:0.92rem; color:#059669; }
+
+    /* med-next card */
+    .next-med {
+      display: flex; align-items: center; gap: 0.9rem;
+      background: linear-gradient(135deg,#fff7ed,#fffbeb); border:1px solid #fcd9a8;
+      border-radius: 22px; padding: 1.1rem; margin-bottom: 1rem; width:100%;
+      cursor:pointer; font-family:inherit; text-align:left; transition: transform .12s;
+    }
+    .next-med:active { transform: scale(0.985); }
+    .next-med .nm-pill { font-size: 2.4rem; flex-shrink:0; }
+    .next-med .nm-when { font-size: 0.85rem; font-weight:800; color: var(--warn); text-transform:uppercase; letter-spacing:0.5px; }
+    .next-med .nm-name { font-size: 1.15rem; font-weight: 900; color: var(--ink); }
+    .next-med .nm-dose { font-size: 0.92rem; color: var(--muted); }
+    .next-med .nm-go { margin-left:auto; font-size:1.6rem; color:var(--warn); flex-shrink:0; }
+
+    /* family call card on home */
+    .call-card {
+      display: flex; align-items: center; gap: 0.9rem;
+      background: var(--cream-card); border:1px solid var(--border);
+      border-radius: 22px; padding: 1.1rem; margin-bottom: 1rem; width:100%;
+      cursor:pointer; font-family:inherit; text-align:left; transition: transform .12s;
+    }
+    .call-card:active { transform: scale(0.985); }
+    .call-card .cc-ava { width:54px; height:54px; border-radius:50%; background:#f0fdfa; flex-shrink:0;
+      display:flex; align-items:center; justify-content:center; font-size:2rem; }
+    .call-card .cc-name { font-size:1.15rem; font-weight:900; color:var(--ink); }
+    .call-card .cc-rel { font-size:0.9rem; color:var(--muted); }
+    .call-card .cc-go { margin-left:auto; font-size:1.7rem; color:var(--care); flex-shrink:0; }
+
+    /* SOS big button */
+    .sos-btn {
+      width: 100%; border:none; cursor:pointer; font-family:inherit;
+      background: linear-gradient(135deg,#ef4444,#dc2626); color:#fff;
+      border-radius: 24px; padding: 1.35rem 1rem; margin-top:0.3rem;
+      font-size: 1.7rem; font-weight: 900; letter-spacing:0.5px;
+      display:flex; align-items:center; justify-content:center; gap:0.7rem;
+      box-shadow: 0 10px 28px rgba(220,38,38,0.4);
+      transition: transform .12s;
+    }
+    .sos-btn:active { transform: scale(0.97); }
+    .sos-btn .sos-sub { display:block; font-size:0.85rem; font-weight:700; opacity:0.92; margin-top:0.25rem; }
+    .sos-btn .sos-ring { font-size:2rem; }
+
+    /* ===== MEDS SCREEN ===== */
+    .med-progress {
+      background: var(--cream-card); border:1px solid var(--border); border-radius:22px;
+      padding:1.1rem; margin-bottom:1rem; text-align:center;
+    }
+    .med-progress .mp-num { font-size:2.2rem; font-weight:900; color:var(--care-dark); }
+    .med-progress .mp-lab { font-size:0.95rem; color:var(--muted); font-weight:600; }
+    .progress { height:14px; background:#e6efed; border-radius:99px; overflow:hidden; margin-top:0.7rem; }
+    .progress > i { display:block; height:100%; background:linear-gradient(90deg,var(--care),var(--care-light)); border-radius:99px; transition:width .4s; }
+
+    .med-group-title { font-size:1.1rem; font-weight:900; color:var(--ink); margin:1.1rem 0 0.7rem; display:flex; align-items:center; gap:0.5rem; }
+    .med-item {
+      display:flex; align-items:center; gap:0.9rem;
+      background: var(--cream-card); border:1.5px solid var(--border);
+      border-radius:20px; padding:1rem; margin-bottom:0.75rem; transition:all .2s;
+    }
+    .med-item.done { background:#ecfdf5; border-color:#a7f3d0; }
+    .med-item .mi-pill { width:50px; height:50px; border-radius:14px; background:#f0fdfa; flex-shrink:0;
+      display:flex; align-items:center; justify-content:center; font-size:1.7rem; }
+    .med-item.done .mi-pill { background:#d1fae5; }
+    .med-item .mi-name { font-size:1.08rem; font-weight:800; color:var(--ink); }
+    .med-item.done .mi-name { color:#047857; }
+    .med-item .mi-dose { font-size:0.9rem; color:var(--muted); }
+    .med-take {
+      margin-left:auto; flex-shrink:0; min-height:60px; min-width:118px;
+      border:none; cursor:pointer; font-family:inherit;
+      background:var(--care); color:#fff; border-radius:16px;
+      font-size:1rem; font-weight:800; padding:0 1rem;
+      display:flex; align-items:center; justify-content:center; gap:0.4rem;
+      transition:transform .12s;
+    }
+    .med-take:active { transform:scale(0.95); }
+    .med-item.done .med-take { background:#d1fae5; color:#047857; }
+
+    /* ===== FAMILY SCREEN ===== */
+    .fam-grid { display:grid; grid-template-columns:1fr 1fr; gap:0.85rem; }
+    .fam-card {
+      background:var(--cream-card); border:1.5px solid var(--border);
+      border-radius:22px; padding:1.1rem 0.8rem; text-align:center;
+      cursor:pointer; font-family:inherit; transition:transform .12s;
+      display:flex; flex-direction:column; align-items:center; gap:0.4rem;
+    }
+    .fam-card:active { transform:scale(0.96); }
+    .fam-ava { width:76px; height:76px; border-radius:50%; background:#f0fdfa;
+      display:flex; align-items:center; justify-content:center; font-size:2.8rem; }
+    .fam-name { font-size:1.1rem; font-weight:900; color:var(--ink); }
+    .fam-rel { font-size:0.88rem; color:var(--muted); }
+    .fam-call-ico { font-size:1.5rem; color:var(--care); }
+    .call-all {
+      width:100%; margin-bottom:1rem; border:none; cursor:pointer; font-family:inherit;
+      background:var(--care); color:#fff; border-radius:20px; padding:1.1rem;
+      font-size:1.2rem; font-weight:900; display:flex; align-items:center; justify-content:center; gap:0.6rem;
+      box-shadow:0 8px 22px rgba(13,148,136,0.3); transition:transform .12s;
+    }
+    .call-all:active { transform:scale(0.97); }
+
+    /* ===== HEALTH SCREEN ===== */
+    .mood-row { display:flex; gap:0.7rem; }
+    .mood-btn {
+      flex:1; border:2px solid var(--border); background:var(--cream-card);
+      border-radius:20px; padding:1rem 0.4rem; cursor:pointer; font-family:inherit;
+      display:flex; flex-direction:column; align-items:center; gap:0.4rem; transition:all .18s;
+    }
+    .mood-btn:active { transform:scale(0.95); }
+    .mood-btn .mb-face { font-size:2.6rem; line-height:1; }
+    .mood-btn .mb-lab { font-size:0.95rem; font-weight:800; color:var(--ink); }
+    .mood-btn.sel { border-color:var(--care); background:#f0fdfa; box-shadow:0 4px 14px rgba(13,148,136,0.18); }
+    .mood-btn.sel.warn { border-color:var(--warn); background:#fffbeb; }
+
+    .measure-card { display:flex; align-items:center; gap:0.9rem; }
+    .measure-ico { width:56px; height:56px; border-radius:16px; background:#fef2f2; flex-shrink:0;
+      display:flex; align-items:center; justify-content:center; font-size:2rem; }
+    .measure-ico.heart { background:#fef2f2; }
+    .measure-ico.bp { background:#eff6ff; }
+    .measure-val { font-size:1.6rem; font-weight:900; color:var(--ink); line-height:1; }
+    .measure-val.dim { color:var(--muted); font-size:1.15rem; font-weight:700; }
+    .measure-lab { font-size:0.9rem; color:var(--muted); }
+    .measure-btn {
+      margin-left:auto; flex-shrink:0; min-height:54px;
+      border:1.5px solid var(--care); background:#fff; color:var(--care);
+      border-radius:14px; font-family:inherit; font-size:0.98rem; font-weight:800;
+      padding:0 1.05rem; cursor:pointer; transition:transform .12s;
+    }
+    .measure-btn:active { transform:scale(0.95); }
+    .measure-btn.busy { background:#f0fdfa; color:var(--muted); }
+
+    /* ===== HELP SCREEN ===== */
+    .help-btn {
+      width:100%; border:none; cursor:pointer; font-family:inherit;
+      border-radius:20px; padding:1.1rem 1.2rem; margin-bottom:0.85rem;
+      display:flex; align-items:center; gap:0.9rem; text-align:left;
+      font-size:1.15rem; font-weight:800; transition:transform .12s;
+    }
+    .help-btn:active { transform:scale(0.98); }
+    .help-btn .hb-ico { font-size:1.9rem; flex-shrink:0; }
+    .help-btn .hb-sub { display:block; font-size:0.85rem; font-weight:600; opacity:0.85; margin-top:1px; }
+    .help-btn .hb-go { margin-left:auto; font-size:1.4rem; opacity:0.6; }
+    .help-btn.sos { background:linear-gradient(135deg,#ef4444,#dc2626); color:#fff; box-shadow:0 8px 22px rgba(220,38,38,0.35); }
+    .help-btn.care { background:var(--cream-card); border:1.5px solid var(--border); color:var(--ink); }
+    .help-btn.amb { background:#fff1f2; border:1.5px solid #fecdd3; color:#be123c; }
+    .help-btn.fam { background:#f0fdfa; border:1.5px solid #99f6e4; color:var(--care-dark); }
+    .help-btn.fall { background:#fffbeb; border:1.5px dashed #fcd34d; color:#b45309; }
+
+    .faq-q {
+      background:var(--cream-card); border:1px solid var(--border); border-radius:18px;
+      padding:1rem; margin-bottom:0.7rem; cursor:pointer;
+    }
+    .faq-q .fq-title { font-size:1.05rem; font-weight:800; color:var(--ink); display:flex; align-items:center; gap:0.5rem; }
+    .faq-q .fq-ans { font-size:0.95rem; color:var(--muted); margin-top:0.5rem; display:none; line-height:1.55; }
+    .faq-q.open .fq-ans { display:block; }
+
+    /* ======================= BOTTOM NAV ======================= */
+    .bottom-nav {
+      flex-shrink: 0;
+      display: flex; background: #fff;
+      border-top: 1px solid var(--border);
+      padding: 0.5rem 0.3rem 0.85rem;
+    }
+    .nav-item {
+      flex: 1; background: none; border: none; font-family: inherit; cursor: pointer;
+      display: flex; flex-direction: column; align-items: center; gap: 0.2rem;
+      padding: 0.4rem 0; color: var(--muted); transition: color .15s;
+    }
+    .nav-item .ni-ico { font-size: 1.7rem; line-height: 1; filter: grayscale(0.35); transition: filter .15s; }
+    .nav-item .ni-label { font-size: 0.74rem; font-weight: 800; }
+    .nav-item.active { color: var(--care); }
+    .nav-item.active .ni-ico { filter: none; }
+    /* simple mode hides some nav items */
+    body.simple .nav-item[data-screen="health"] { display:none; }
+
+    /* ======================= FLOATING VOICE MIC ======================= */
+    .mic-fab {
+      position:absolute; right:16px; bottom:96px; z-index:55;
+      width:64px; height:64px; border-radius:50%; border:none; cursor:pointer;
+      background:linear-gradient(135deg,var(--care),var(--care-dark)); color:#fff;
+      font-size:1.8rem; display:flex; align-items:center; justify-content:center;
+      box-shadow:0 8px 22px rgba(13,148,136,0.45);
+      animation:micpulse 2.4s infinite;
+    }
+    @keyframes micpulse { 0%,100% { box-shadow:0 8px 22px rgba(13,148,136,0.45),0 0 0 0 rgba(45,212,191,0.5); } 50% { box-shadow:0 8px 22px rgba(13,148,136,0.45),0 0 0 14px rgba(45,212,191,0); } }
+    .mic-fab:active { transform:scale(0.93); }
+
+    /* ======================= TOAST ======================= */
+    .toast {
+      position:absolute; bottom:96px; left:50%; transform:translateX(-50%) translateY(20px);
+      background:rgba(17,24,39,0.95); color:#fff;
+      padding:0.85rem 1.3rem; border-radius:14px;
+      font-size:0.98rem; font-weight:700; text-align:center;
+      opacity:0; pointer-events:none; transition:all .3s; z-index:70; max-width:88%;
+    }
+    .toast.show { opacity:1; transform:translateX(-50%) translateY(0); }
+
+    /* ======================= BOTTOM SHEET (z 66) ======================= */
+    .sheet-overlay { position:absolute; inset:0; z-index:66; background:rgba(0,0,0,0.45); display:none; align-items:flex-end; }
+    .sheet-overlay.show { display:flex; }
+    .sheet {
+      background:#fff; width:100%; border-radius:26px 26px 0 0;
+      padding:0.8rem 1.2rem 1.6rem; max-height:82%; overflow-y:auto;
+      animation:slideup .28s cubic-bezier(.2,.8,.2,1);
+    }
+    @keyframes slideup { from { transform:translateY(100%); } to { transform:none; } }
+    .sheet-handle { width:44px; height:5px; background:#d1d5db; border-radius:99px; margin:0 auto 1rem; }
+    .sheet h3 { font-size:1.3rem; font-weight:900; margin-bottom:0.4rem; color:var(--ink); }
+    .sheet .sh-sub2 { font-size:1rem; color:var(--muted); margin-bottom:1.1rem; }
+    .sheet .btn-row { display:flex; gap:0.7rem; }
+    .sheet-btn {
+      flex:1; border:none; cursor:pointer; font-family:inherit; min-height:62px;
+      border-radius:18px; font-size:1.15rem; font-weight:900; transition:transform .12s;
+    }
+    .sheet-btn:active { transform:scale(0.96); }
+    .sheet-btn.yes { background:var(--care); color:#fff; }
+    .sheet-btn.no { background:#f1f5f4; color:var(--ink); }
+    .sheet-choose {
+      display:flex; align-items:center; gap:0.8rem; width:100%;
+      border:1.5px solid var(--border); background:#fff; border-radius:18px;
+      padding:1rem; margin-bottom:0.7rem; cursor:pointer; font-family:inherit; text-align:left; transition:all .15s;
+    }
+    .sheet-choose:active { background:#f0fdfa; }
+    .sheet-choose.cur { border-color:var(--care); background:#f0fdfa; }
+    .sheet-choose .sc-ava { width:52px; height:52px; border-radius:50%; background:#f0fdfa; flex-shrink:0;
+      display:flex; align-items:center; justify-content:center; font-size:1.9rem; }
+    .sheet-choose .sc-name { font-size:1.1rem; font-weight:900; color:var(--ink); }
+    .sheet-choose .sc-sub { font-size:0.88rem; color:var(--muted); }
+    .sheet-choose .sc-cur { margin-left:auto; color:var(--care); font-size:1.4rem; }
+
+    /* ======================= OVERLAY (z 60) ======================= */
+    .overlay-screen { position:absolute; inset:0; z-index:60; display:none; flex-direction:column; }
+    .overlay-screen.show { display:flex; }
+
+    /* video call */
+    .video-call {
+      background:linear-gradient(160deg,#0f172a,#134e4a); color:#fff; height:100%;
+      display:flex; flex-direction:column; align-items:center; justify-content:center;
+      padding:2rem; text-align:center; position:relative;
+    }
+    .video-call .vc-avatar {
+      width:150px; height:150px; border-radius:50%; background:rgba(255,255,255,0.13);
+      display:flex; align-items:center; justify-content:center; font-size:5rem; margin-bottom:1.2rem;
+      animation:vcpulse 2s infinite;
+    }
+    @keyframes vcpulse { 0%,100% { box-shadow:0 0 0 0 rgba(45,212,191,0.4); } 50% { box-shadow:0 0 0 22px rgba(45,212,191,0); } }
+    .video-call .vc-name { font-size:1.7rem; font-weight:900; }
+    .video-call .vc-status { font-size:1.05rem; color:var(--care-light); margin-top:0.4rem; }
+    .vc-controls { display:flex; gap:1.3rem; position:absolute; bottom:3rem; }
+    .vc-ctrl {
+      width:74px; height:74px; border-radius:50%; border:none; cursor:pointer;
+      font-size:1.8rem; background:rgba(255,255,255,0.16); color:#fff;
+      display:flex; align-items:center; justify-content:center; transition:transform .12s;
+    }
+    .vc-ctrl:active { transform:scale(0.92); }
+    .vc-ctrl.end { background:var(--danger); }
+    .vc-end-label { position:absolute; bottom:1.1rem; font-size:0.9rem; color:rgba(255,255,255,0.65); }
+
+    /* voice assistant */
+    .voice-overlay {
+      background:linear-gradient(160deg,#0e3a35,#0a1c2b); color:#fff; height:100%;
+      display:flex; flex-direction:column; align-items:center; justify-content:center;
+      padding:2rem; text-align:center; position:relative;
+    }
+    .voice-close { position:absolute; top:1.2rem; right:1.2rem; width:44px; height:44px; border-radius:50%;
+      border:none; background:rgba(255,255,255,0.15); color:#fff; font-size:1.3rem; cursor:pointer; }
+    .voice-mic {
+      width:130px; height:130px; border-radius:50%; position:relative;
+      background:linear-gradient(135deg,var(--care),var(--care-light));
+      display:flex; align-items:center; justify-content:center; font-size:3.4rem; color:#fff;
+      margin-bottom:1.6rem;
+    }
+    .voice-mic::before, .voice-mic::after {
+      content:''; position:absolute; inset:0; border-radius:50%;
+      border:2px solid rgba(94,234,212,0.55); animation:wave 2s infinite;
+    }
+    .voice-mic::after { animation-delay:1s; }
+    @keyframes wave { 0% { transform:scale(1); opacity:0.7; } 100% { transform:scale(1.9); opacity:0; } }
+    .voice-listen { font-size:0.95rem; color:var(--care-light); font-weight:700; letter-spacing:0.5px; text-transform:uppercase; }
+    .voice-said { font-size:1.5rem; font-weight:900; margin-top:0.6rem; max-width:300px; line-height:1.35; min-height:2.2em; }
+    .voice-said .vq { color:var(--care-light); }
+    .voice-doing { font-size:1rem; color:rgba(255,255,255,0.7); margin-top:1rem; min-height:1.4em; }
+    .voice-samples { display:flex; flex-wrap:wrap; gap:0.5rem; justify-content:center; margin-top:1.6rem; max-width:320px; }
+    .voice-chip {
+      background:rgba(255,255,255,0.1); border:1px solid rgba(94,234,212,0.4); color:#fff;
+      font-family:inherit; font-size:0.92rem; font-weight:700; padding:0.5rem 1rem; border-radius:99px; cursor:pointer;
+    }
+    .voice-chip:active { transform:scale(0.95); }
+
+    /* FALL / EMERGENCY OVERLAY (z 65) */
+    .fall-overlay {
+      position:absolute; inset:0; z-index:65;
+      background:rgba(185,28,28,0.97);
+      display:none; flex-direction:column; align-items:center; justify-content:center;
+      padding:2rem; text-align:center; color:#fff; animation:flash 1s infinite;
+    }
+    .fall-overlay.show { display:flex; }
+    @keyframes flash { 0%,100% { background:rgba(185,28,28,0.97); } 50% { background:rgba(220,38,38,0.99); } }
+    .fall-overlay .fo-icon { font-size:5.5rem; margin-bottom:0.5rem; animation:shake .5s infinite; }
+    @keyframes shake { 0%,100% { transform:rotate(-8deg); } 50% { transform:rotate(8deg); } }
+    .fall-overlay h2 { font-size:1.75rem; font-weight:900; line-height:1.2; }
+    .fall-overlay .fo-q { font-size:1.25rem; margin-top:0.6rem; font-weight:700; }
+    .fall-overlay .fo-count {
+      margin:1.6rem 0; font-size:1.05rem; font-weight:700;
+      background:rgba(0,0,0,0.25); padding:0.8rem 1.3rem; border-radius:14px;
+    }
+    .fall-overlay .fo-count b { font-size:2.2rem; }
+    .fall-overlay .fo-actions { display:flex; flex-direction:column; gap:0.8rem; width:100%; max-width:280px; }
+    .fall-overlay .fo-btn { border:none; cursor:pointer; font-family:inherit; min-height:68px; border-radius:18px; font-size:1.3rem; font-weight:900; transition:transform .12s; }
+    .fall-overlay .fo-btn:active { transform:scale(0.96); }
+    .fall-overlay .btn-white { background:#fff; color:var(--danger); }
+    .fall-overlay .btn-blackline { background:rgba(0,0,0,0.22); color:#fff; border:1.5px solid rgba(255,255,255,0.55); }
+    .fall-overlay .fo-done { display:none; }
+    .fall-overlay.resolved .fo-icon, .fall-overlay.resolved .fo-q, .fall-overlay.resolved .fo-count, .fall-overlay.resolved .fo-actions, .fall-overlay.resolved h2 { display:none; }
+    .fall-overlay.resolved .fo-done { display:block; }
+    .fall-overlay.resolved { animation:none; background:rgba(22,101,52,0.97); }
+    .fo-done .fd-ico { font-size:5rem; margin-bottom:0.6rem; }
+    .fo-done h2 { display:block !important; font-size:1.6rem; }
+    .fo-done p { font-size:1.05rem; margin-top:0.6rem; }
+    .fo-done .fo-btn { margin-top:1.6rem; max-width:280px; }
+
+    @media (max-width: 480px) {
+      .stage { padding:1.2rem 0.6rem 2rem; gap:1.5rem; }
+      .phone { width:100%; max-width:392px; height:760px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="back-link" href="/eldercare">← Về ElderCare VN</a>
+    <span class="topbar-badge">Chế độ Người Cao Tuổi</span>
+  </div>
+
+  <div class="stage">
+    <!-- MARKETING COLUMN -->
+    <div class="marketing">
+      <span class="mk-tag">Chế độ Người Cao Tuổi</span>
+      <h1>App để <span>chính ông bà</span> tự dùng</h1>
+      <p class="mk-sub">Khác với app cho con cháu — đây là giao diện cực đơn giản, chữ to, nút lớn, 1 chạm. Ông bà tự uống thuốc đúng giờ, tự gọi con cháu, tự bấm SOS khi cần.</p>
+
+      <div class="mk-caption">
+        <div class="mc-title">🔠 Chữ to, nút lớn, độ tương phản cao</div>
+        <div class="mc-desc">Thiết kế accessibility-first: nền sáng, chữ tối, mỗi màn chỉ 1 việc chính.</div>
+      </div>
+      <div class="mk-caption">
+        <div class="mc-title">💊 Nhắc thuốc theo cữ</div>
+        <div class="mc-desc">Sáng / trưa / tối — bấm "Tôi đã uống" là xong, có tiến độ trong ngày.</div>
+      </div>
+      <div class="mk-caption">
+        <div class="mc-title">📞 1 chạm gọi con cháu</div>
+        <div class="mc-desc">Lưới ảnh con cháu, chạm 1 cái là gọi video. Có nút "Gọi tất cả".</div>
+      </div>
+      <div class="mk-caption">
+        <div class="mc-title">🎙️ Trợ lý giọng nói &amp; SOS</div>
+        <div class="mc-desc">Nói "Gọi cho con gái" là app làm giúp. Nút SOS đỏ lớn luôn trong tầm tay.</div>
+      </div>
+      <div class="mk-caption">
+        <div class="mc-title">🛟 Phát hiện té ngã</div>
+        <div class="mc-desc">Nếu ngã, app hỏi "Bạn có ổn không?" 10 giây — không phản hồi sẽ báo người thân &amp; 115.</div>
+      </div>
+
+      <div class="mk-mock-badge">🧪 Dữ liệu minh họa — demo môn ETR601</div>
+    </div>
+
+    <!-- PHONE -->
+    <div class="phone">
+      <div class="island"></div>
+      <div class="phone-screen">
+        <div class="statusbar">
+          <span id="sbClock">9:41</span>
+          <span>📶 🔋 100%</span>
+        </div>
+
+        <!-- APP HEADER -->
+        <div class="app-header">
+          <div class="app-avatar" id="hdAva">👵</div>
+          <div>
+            <div class="hi" id="hdHi">Chào buổi sáng, Bà Hoa</div>
+            <div class="sub" id="hdSub">ElderCare VN · luôn bên cạnh ông bà</div>
+          </div>
+        </div>
+
+        <!-- PERSONA SWITCH -->
+        <button class="persona-bar" onclick="openProfileChooser()">
+          <span class="pb-ava" id="pbAva">👵</span>
+          <span class="pb-info">
+            <b id="pbName">Bà Nguyễn Thị Hoa</b>
+            <span id="pbSub">72 tuổi · Hỗ trợ một phần</span>
+          </span>
+          <span class="pb-switch">Đổi người ⇄</span>
+        </button>
+
+        <!-- VIEWPORT -->
+        <div class="viewport">
+          <section class="screen active" id="screen-home"></section>
+          <section class="screen" id="screen-meds"></section>
+          <section class="screen" id="screen-family"></section>
+          <section class="screen" id="screen-health"></section>
+          <section class="screen" id="screen-help"></section>
+        </div>
+
+        <!-- FLOATING VOICE MIC -->
+        <button class="mic-fab" onclick="openVoice()" aria-label="Trợ lý giọng nói">🎙️</button>
+
+        <!-- TOAST -->
+        <div class="toast" id="toast"></div>
+
+        <!-- BOTTOM SHEET -->
+        <div class="sheet-overlay" id="sheetOverlay" onclick="if(event.target===this)closeSheet()">
+          <div class="sheet" id="sheet"></div>
+        </div>
+
+        <!-- OVERLAYS -->
+        <div class="overlay-screen" id="videoOverlay">
+          <div class="video-call">
+            <div class="vc-avatar" id="vcAva">👩</div>
+            <div class="vc-name" id="vcName">Con gái — Lan</div>
+            <div class="vc-status" id="vcStatus">Đang gọi…</div>
+            <div class="vc-controls">
+              <button class="vc-ctrl">🔇</button>
+              <button class="vc-ctrl end" onclick="closeVideo()">📞</button>
+              <button class="vc-ctrl">📷</button>
+            </div>
+            <div class="vc-end-label">Bấm nút đỏ để kết thúc</div>
+          </div>
+        </div>
+
+        <div class="overlay-screen" id="voiceOverlay">
+          <div class="voice-overlay">
+            <button class="voice-close" onclick="closeVoice()">✕</button>
+            <div class="voice-mic">🎙️</div>
+            <div class="voice-listen" id="voiceListen">Đang nghe…</div>
+            <div class="voice-said" id="voiceSaid">Bà nói: <span class="vq">“…”</span></div>
+            <div class="voice-doing" id="voiceDoing"></div>
+            <div class="voice-samples" id="voiceSamples"></div>
+          </div>
+        </div>
+
+        <!-- FALL OVERLAY -->
+        <div class="fall-overlay" id="fallOverlay">
+          <div class="fo-icon">🆘</div>
+          <h2>Hình như bạn vừa bị ngã!</h2>
+          <div class="fo-loc" id="foLoc"></div>
+          <div class="fo-q">Bạn có ổn không?</div>
+          <div class="fo-count">Tự báo người thân sau <b id="foCount">10</b> giây</div>
+          <div class="fo-actions">
+            <button class="fo-btn btn-white" onclick="fallImOk()">✅ Tôi vẫn ổn</button>
+            <button class="fo-btn btn-blackline" onclick="fallNeedHelp()">🚨 Tôi cần giúp ngay</button>
+          </div>
+          <div class="fo-done">
+            <div class="fd-ico">📞</div>
+            <h2>Đã báo người thân &amp; 115</h2>
+            <p id="foDoneTxt">Con cháu và tổng đài y tế đang trên đường tới. Bạn cứ ngồi yên, đừng cử động mạnh.</p>
+            <button class="fo-btn btn-white" onclick="closeFall()">Đã hiểu</button>
+          </div>
+        </div>
+
+        <!-- BOTTOM NAV -->
+        <div class="bottom-nav">
+          <button class="nav-item active" data-screen="home" onclick="showScreen('home')"><span class="ni-ico">🏠</span><span class="ni-label">Trang chính</span></button>
+          <button class="nav-item" data-screen="meds" onclick="showScreen('meds')"><span class="ni-ico">💊</span><span class="ni-label">Uống thuốc</span></button>
+          <button class="nav-item" data-screen="family" onclick="showScreen('family')"><span class="ni-ico">📞</span><span class="ni-label">Người thân</span></button>
+          <button class="nav-item" data-screen="health" onclick="showScreen('health')"><span class="ni-ico">❤️</span><span class="ni-label">Sức khỏe</span></button>
+          <button class="nav-item" data-screen="help" onclick="showScreen('help')"><span class="ni-ico">🆘</span><span class="ni-label">Trợ giúp</span></button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script>
+  // =====================================================================
+  // DATA — hai persona. Mọi màn render từ đây.
+  // =====================================================================
+  var PROFILES = {
+    hoa: {
+      id:'hoa', name:'Bà Nguyễn Thị Hoa', short:'Bà Hoa', avatar:'👵',
+      sub:'72 tuổi · Hỗ trợ một phần', simple:false,
+      greetName:'Bà Hoa',
+      orient:null,
+      nextMed:{ when:'Cữ tối · sắp tới', name:'Metformin 500mg', dose:'1 viên · trước khi ăn tối' },
+      meds:[
+        { group:'morning', name:'Amlodipine 5mg', dose:'1 viên · huyết áp', done:true },
+        { group:'morning', name:'Metformin 500mg', dose:'1 viên · tiểu đường', done:true },
+        { group:'noon', name:'Vitamin D + Canxi', dose:'1 viên · sau ăn trưa', done:true },
+        { group:'evening', name:'Metformin 500mg', dose:'1 viên · trước ăn tối', done:false }
+      ],
+      family:[
+        { ava:'👩', name:'Lan', rel:'Con gái' },
+        { ava:'👨', name:'Minh', rel:'Con trai' },
+        { ava:'👧', name:'Bé Na', rel:'Cháu ngoại' },
+        { ava:'👩‍⚕️', name:'ĐD Hương', rel:'Điều dưỡng' }
+      ],
+      heart:'78', bp:'132/85',
+      nearestCarer:{ name:'ĐD Hương', dist:'cách 0,8 km · ~10 phút' },
+      fallLoc:'📹 Phòng khách · vừa xong'
+    },
+    tam: {
+      id:'tam', name:'Ông Lê Văn Tâm', short:'Ông Tâm', avatar:'👴',
+      sub:'80 tuổi · Sa sút trí tuệ', simple:true,
+      greetName:'Ông Tâm',
+      orient:{ emoji:'🏠', title:'Ông đang ở nhà, an toàn', sub:'Có con cháu và người chăm bên cạnh' },
+      nextMed:{ when:'Bây giờ · đến giờ uống', name:'Aricept 5mg', dose:'1 viên · sau ăn sáng' },
+      meds:[
+        { group:'morning', name:'Aricept 5mg', dose:'1 viên · trí nhớ', done:false },
+        { group:'morning', name:'Aspirin 81mg', dose:'1 viên · sau đột quỵ', done:true },
+        { group:'evening', name:'Thuốc huyết áp', dose:'1 viên · buổi tối', done:false }
+      ],
+      family:[
+        { ava:'👨', name:'Sơn', rel:'Con trai' },
+        { ava:'👩', name:'Hoa', rel:'Con dâu' },
+        { ava:'👨‍⚕️', name:'Hộ lý Tuấn', rel:'Người chăm' }
+      ],
+      heart:'92', bp:'148/92',
+      nearestCarer:{ name:'Hộ lý Tuấn', dist:'cách 0,5 km · ~7 phút' },
+      fallLoc:'📹 Phòng ngủ · vừa xong'
+    }
+  };
+
+  var current = 'hoa';
+  function P() { return PROFILES[current]; }
+
+  var moodPicked = {};     // per-persona mood
+  var measured = {};       // per-persona heart-measured flag
+
+  function greetingPrefix() {
+    var h = new Date().getHours();
+    if (h < 11) return 'Chào buổi sáng';
+    if (h < 14) return 'Chào buổi trưa';
+    if (h < 18) return 'Chào buổi chiều';
+    return 'Chào buổi tối';
+  }
+
+  function fullDateVN() {
+    var days = ['Chủ Nhật','Thứ Hai','Thứ Ba','Thứ Tư','Thứ Năm','Thứ Sáu','Thứ Bảy'];
+    var d = new Date();
+    return days[d.getDay()] + ', ngày ' + d.getDate() + '/' + (d.getMonth()+1) + '/' + d.getFullYear();
+  }
+
+  // ---------------- HEADER + PERSONA BAR ----------------
+  function renderHeader() {
+    var p = P();
+    document.getElementById('hdAva').textContent = p.avatar;
+    document.getElementById('hdHi').textContent = greetingPrefix() + ', ' + p.greetName;
+    document.getElementById('hdSub').textContent = 'ElderCare VN · luôn bên cạnh ông bà';
+    document.getElementById('pbAva').textContent = p.avatar;
+    document.getElementById('pbName').textContent = p.name;
+    document.getElementById('pbSub').textContent = p.sub;
+    document.body.classList.toggle('simple', !!p.simple);
+  }
+
+  // ---------------- HOME ----------------
+  function renderHome() {
+    var p = P();
+    var orientHtml = '';
+    if (p.orient) {
+      orientHtml = '<div class="orient-card">' +
+        '<div class="oc-emoji">' + p.orient.emoji + '</div>' +
+        '<div><div class="oc-title">' + p.orient.title + '</div>' +
+        '<div class="oc-sub">' + p.orient.sub + '</div></div></div>';
+    }
+    var dateLine = p.simple
+      ? '<div class="clock-date">Hôm nay là ' + fullDateVN() + '</div>'
+      : '<div class="clock-date" id="homeDate">' + fullDateVN() + '</div>';
+
+    var firstFam = p.family[0];
+
+    document.getElementById('screen-home').innerHTML =
+      '<div class="simple-banner">🔆 Chế độ đơn giản — chữ to hơn, ít nút hơn</div>' +
+      orientHtml +
+      '<div class="big-card clock-card">' +
+        '<div class="clock-time" id="homeClock">--:--</div>' +
+        dateLine +
+      '</div>' +
+      '<button class="next-med" onclick="showScreen(\'meds\')">' +
+        '<span class="nm-pill">💊</span>' +
+        '<span><span class="nm-when">' + p.nextMed.when + '</span>' +
+        '<div class="nm-name">' + p.nextMed.name + '</div>' +
+        '<div class="nm-dose">' + p.nextMed.dose + '</div></span>' +
+        '<span class="nm-go">›</span>' +
+      '</button>' +
+      '<button class="call-card" onclick="openVideo(\'' + firstFam.ava + '\',\'' + firstFam.name + '\',\'' + firstFam.rel + '\')">' +
+        '<span class="cc-ava">' + firstFam.ava + '</span>' +
+        '<span><div style="font-size:0.85rem;font-weight:800;color:var(--care);text-transform:uppercase;letter-spacing:0.5px">Gọi nhanh</div>' +
+        '<div class="cc-name">' + firstFam.name + '</div>' +
+        '<div class="cc-rel">' + firstFam.rel + ' · chạm để gọi video</div></span>' +
+        '<span class="cc-go">📹</span>' +
+      '</button>' +
+      '<button class="sos-btn" onclick="triggerSOS()">' +
+        '<span class="sos-ring">🆘</span><span>KHẨN CẤP — SOS' +
+        '<span class="sos-sub">Bấm khi cần giúp ngay</span></span>' +
+      '</button>';
+  }
+
+  // ---------------- MEDS ----------------
+  function renderMeds() {
+    var p = P();
+    var done = p.meds.filter(function(m){ return m.done; }).length;
+    var total = p.meds.length;
+    var pct = Math.round(done/total*100);
+
+    var groups = [
+      { key:'morning', label:'☀️ Buổi sáng' },
+      { key:'noon', label:'🍚 Buổi trưa' },
+      { key:'evening', label:'🌙 Buổi tối' }
+    ];
+    var body = '';
+    groups.forEach(function(g) {
+      var items = p.meds.filter(function(m){ return m.group === g.key; });
+      if (!items.length) return;
+      body += '<div class="med-group-title">' + g.label + '</div>';
+      items.forEach(function(m) {
+        var idx = p.meds.indexOf(m);
+        body += '<div class="med-item' + (m.done ? ' done' : '') + '" id="med-' + idx + '">' +
+          '<div class="mi-pill">💊</div>' +
+          '<div><div class="mi-name">' + m.name + '</div><div class="mi-dose">' + m.dose + '</div></div>' +
+          '<button class="med-take" onclick="askTakeMed(' + idx + ')">' +
+            (m.done ? '✓ Đã uống' : 'Tôi đã uống') + '</button>' +
+        '</div>';
+      });
+    });
+
+    document.getElementById('screen-meds').innerHTML =
+      '<div class="simple-banner">🔆 Chế độ đơn giản — chỉ tập trung thuốc &amp; gọi con</div>' +
+      '<div class="med-progress">' +
+        '<div class="mp-num">' + done + '/' + total + ' cữ</div>' +
+        '<div class="mp-lab">đã uống hôm nay — cố lên ạ!</div>' +
+        '<div class="progress"><i style="width:' + pct + '%"></i></div>' +
+      '</div>' + body;
+  }
+
+  function askTakeMed(idx) {
+    var m = P().meds[idx];
+    if (m.done) { openSheet(
+      '<h3>💊 ' + m.name + '</h3>' +
+      '<p class="sh-sub2">Bà đã đánh dấu uống thuốc này rồi. Bỏ đánh dấu?</p>' +
+      '<div class="btn-row"><button class="sheet-btn no" onclick="closeSheet()">Để nguyên</button>' +
+      '<button class="sheet-btn yes" onclick="setMed(' + idx + ',false)">Bỏ đánh dấu</button></div>'); return; }
+    openSheet(
+      '<h3>💊 Uống ' + m.name + '?</h3>' +
+      '<p class="sh-sub2">' + m.dose + '</p>' +
+      '<div class="btn-row"><button class="sheet-btn no" onclick="closeSheet()">Chưa uống</button>' +
+      '<button class="sheet-btn yes" onclick="setMed(' + idx + ',true)">✓ Đã uống rồi</button></div>');
+  }
+  function setMed(idx, val) {
+    P().meds[idx].done = val;
+    closeSheet();
+    renderMeds();
+    renderHome();
+    toast(val ? '✅ Đã ghi nhận uống thuốc' : 'Đã bỏ đánh dấu');
+  }
+
+  // ---------------- FAMILY ----------------
+  function renderFamily() {
+    var p = P();
+    var cards = p.family.map(function(f) {
+      return '<button class="fam-card" onclick="openVideo(\'' + f.ava + '\',\'' + f.name + '\',\'' + f.rel + '\')">' +
+        '<span class="fam-ava">' + f.ava + '</span>' +
+        '<span class="fam-name">' + f.name + '</span>' +
+        '<span class="fam-rel">' + f.rel + '</span>' +
+        '<span class="fam-call-ico">📹 Gọi</span>' +
+      '</button>';
+    }).join('');
+
+    document.getElementById('screen-family').innerHTML =
+      '<div class="simple-banner">🔆 Chế độ đơn giản — chạm 1 cái để gọi</div>' +
+      '<button class="call-all" onclick="callAll()">📞 Gọi tất cả con cháu</button>' +
+      '<div class="fam-grid">' + cards + '</div>';
+  }
+  function callAll() {
+    toast('📞 Đang gọi nhóm gia đình…');
+    var f = P().family[0];
+    setTimeout(function(){ openVideo(f.ava, f.name, f.rel); }, 900);
+  }
+
+  // ---------------- HEALTH ----------------
+  function renderHealth() {
+    var p = P();
+    var mood = moodPicked[current] || '';
+    function mc(key, face, lab, warn) {
+      var sel = mood === key ? (' sel' + (warn ? ' warn' : '')) : '';
+      return '<button class="mood-btn' + sel + '" onclick="pickMood(\'' + key + '\')">' +
+        '<span class="mb-face">' + face + '</span><span class="mb-lab">' + lab + '</span></button>';
+    }
+
+    var heartShown = measured[current];
+    var heartVal = heartShown
+      ? '<div class="measure-val">' + p.heart + ' <span style="font-size:0.95rem;color:var(--muted)">bpm</span></div><div class="measure-lab">Nhịp tim · vừa đo</div>'
+      : '<div class="measure-val dim">— bpm</div><div class="measure-lab">Nhịp tim · chưa đo</div>';
+
+    document.getElementById('screen-health').innerHTML =
+      '<div class="big-card">' +
+        '<div class="card-label">😊 Hôm nay bà thấy thế nào?</div>' +
+        '<div class="mood-row">' +
+          mc('good','😀','Khỏe',false) +
+          mc('ok','😐','Bình thường',false) +
+          mc('tired','😣','Mệt',true) +
+        '</div>' +
+      '</div>' +
+      '<div class="big-card measure-card">' +
+        '<div class="measure-ico heart">❤️</div>' +
+        '<div id="heartBox">' + heartVal + '</div>' +
+        '<button class="measure-btn" id="heartBtn" onclick="measureHeart()">Đo ngay</button>' +
+      '</div>' +
+      '<div class="big-card measure-card">' +
+        '<div class="measure-ico bp">🩸</div>' +
+        '<div><div class="measure-val">' + p.bp + '</div><div class="measure-lab">Huyết áp · sáng nay</div></div>' +
+        '<button class="measure-btn" onclick="toast(\'🩸 Đã ghi lại huyết áp\')">Ghi lại</button>' +
+      '</div>';
+  }
+  function pickMood(key) {
+    moodPicked[current] = key;
+    renderHealth();
+    var msg = { good:'😀 Tuyệt vời! Con cháu sẽ rất vui.', ok:'😐 Đã ghi nhận. Bà nhớ uống đủ nước nhé.', tired:'😣 Đã báo con cháu &amp; điều dưỡng để hỏi thăm bà.' };
+    toast(msg[key]);
+  }
+  function measureHeart() {
+    var btn = document.getElementById('heartBtn');
+    btn.classList.add('busy'); btn.textContent = 'Đang đo…';
+    document.getElementById('heartBox').innerHTML = '<div class="measure-val dim">❤️ Đang đo…</div><div class="measure-lab">Giữ yên tay 2 giây</div>';
+    setTimeout(function() {
+      measured[current] = true;
+      renderHealth();
+      toast('❤️ Nhịp tim ' + P().heart + ' bpm — bình thường');
+    }, 2000);
+  }
+
+  // ---------------- HELP ----------------
+  function renderHelp() {
+    var p = P();
+    var nc = p.nearestCarer;
+    var firstFam = p.family[0];
+    var faq = [
+      { q:'❓ Làm sao gọi con cháu?', a:'Bấm nút 📞 "Người thân" ở dưới màn hình, rồi chạm vào ảnh người bà muốn gọi. Chỉ 1 chạm là gọi được.' },
+      { q:'❓ Làm sao đánh dấu đã uống thuốc?', a:'Bấm nút 💊 "Uống thuốc" ở dưới, rồi bấm "Tôi đã uống" cạnh tên thuốc. Thuốc sẽ chuyển sang màu xanh.' },
+      { q:'❓ Khi nào bấm nút SOS đỏ?', a:'Khi bà thấy mệt nhiều, đau ngực, khó thở, hoặc cần giúp ngay. Bấm là con cháu và tổng đài y tế được báo liền.' }
+    ];
+    var faqHtml = faq.map(function(f, i) {
+      return '<div class="faq-q" id="faq-' + i + '" onclick="toggleFaq(' + i + ')">' +
+        '<div class="fq-title">' + f.q + '</div><div class="fq-ans">' + f.a + '</div></div>';
+    }).join('');
+
+    document.getElementById('screen-help').innerHTML =
+      '<div class="simple-banner">🔆 Chế độ đơn giản — các nút giúp đỡ to rõ</div>' +
+      '<button class="help-btn sos" onclick="triggerSOS()">' +
+        '<span class="hb-ico">🆘</span><span>Bấm SOS khẩn cấp<span class="hb-sub">Báo con cháu &amp; 115 ngay</span></span><span class="hb-go">›</span></button>' +
+      '<button class="help-btn care" onclick="openVideo(\'🧑‍⚕️\',\'' + nc.name + '\',\'Người chăm gần nhất\')">' +
+        '<span class="hb-ico">🧑‍⚕️</span><span>Gọi người chăm gần nhất<span class="hb-sub">' + nc.name + ' · ' + nc.dist + '</span></span><span class="hb-go">›</span></button>' +
+      '<button class="help-btn fam" onclick="openVideo(\'' + firstFam.ava + '\',\'' + firstFam.name + '\',\'' + firstFam.rel + '\')">' +
+        '<span class="hb-ico">📞</span><span>Gọi con cháu<span class="hb-sub">' + firstFam.name + ' (' + firstFam.rel + ')</span></span><span class="hb-go">›</span></button>' +
+      '<button class="help-btn amb" onclick="callAmbulance()">' +
+        '<span class="hb-ico">🚑</span><span>Gọi cấp cứu 115<span class="hb-sub">Tổng đài y tế khẩn cấp</span></span><span class="hb-go">›</span></button>' +
+      '<button class="help-btn fall" onclick="simulateFall()">' +
+        '<span class="hb-ico">🛟</span><span>Mô phỏng té ngã (demo)<span class="hb-sub">Thử tính năng phát hiện ngã</span></span><span class="hb-go">›</span></button>' +
+      '<div class="card-label" style="margin-top:1.4rem">🙋 Câu hỏi hay gặp</div>' +
+      faqHtml;
+  }
+  function toggleFaq(i) { document.getElementById('faq-' + i).classList.toggle('open'); }
+  function callAmbulance() { openVideo('🚑','Cấp cứu 115','Tổng đài y tế'); toast('🚑 Đang kết nối 115…'); }
+
+  // =====================================================================
+  // CORE NAV + RENDER
+  // =====================================================================
+  function renderAll() {
+    renderHeader();
+    renderHome();
+    renderMeds();
+    renderFamily();
+    renderHealth();
+    renderHelp();
+  }
+  function showScreen(id) {
+    // simple personas have no health screen — redirect
+    if (id === 'health' && P().simple) id = 'home';
+    document.querySelectorAll('.screen').forEach(function(s){ s.classList.remove('active'); });
+    var el = document.getElementById('screen-' + id);
+    if (el) el.classList.add('active');
+    document.querySelectorAll('.nav-item').forEach(function(n){
+      n.classList.toggle('active', n.getAttribute('data-screen') === id);
+    });
+    var vp = document.querySelector('.viewport'); if (vp) vp.scrollTop = 0;
+  }
+
+  // ---------------- TOAST ----------------
+  var toastTimer;
+  function toast(msg) {
+    var el = document.getElementById('toast');
+    el.innerHTML = msg; el.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function(){ el.classList.remove('show'); }, 2400);
+  }
+
+  // ---------------- SHEET ----------------
+  function openSheet(html) {
+    document.getElementById('sheet').innerHTML = '<div class="sheet-handle"></div>' + html;
+    document.getElementById('sheetOverlay').classList.add('show');
+  }
+  function closeSheet() { document.getElementById('sheetOverlay').classList.remove('show'); }
+
+  // ---------------- PERSONA CHOOSER ----------------
+  function openProfileChooser() {
+    var html = '<h3>Đổi người dùng app</h3><p class="sh-sub2">Chọn hồ sơ người cao tuổi:</p>';
+    ['hoa','tam'].forEach(function(id) {
+      var p = PROFILES[id];
+      html += '<button class="sheet-choose' + (id === current ? ' cur' : '') + '" onclick="setProfile(\'' + id + '\')">' +
+        '<span class="sc-ava">' + p.avatar + '</span>' +
+        '<span><div class="sc-name">' + p.name + '</div><div class="sc-sub">' + p.sub + '</div></span>' +
+        (id === current ? '<span class="sc-cur">✓</span>' : '') +
+      '</button>';
+    });
+    openSheet(html);
+  }
+  function setProfile(id) {
+    current = id;
+    closeSheet();
+    renderAll();
+    showScreen('home');
+    toast('Đã chuyển sang ' + PROFILES[id].short);
+  }
+
+  // ---------------- VIDEO CALL ----------------
+  var vcTimer;
+  function openVideo(ava, name, rel) {
+    document.getElementById('vcAva').textContent = ava || '👩';
+    document.getElementById('vcName').textContent = (rel ? rel + ' — ' : '') + (name || '');
+    var st = document.getElementById('vcStatus');
+    st.textContent = 'Đang gọi…';
+    document.getElementById('videoOverlay').classList.add('show');
+    clearTimeout(vcTimer);
+    vcTimer = setTimeout(function(){ st.textContent = '🟢 Đã kết nối · 00:03'; }, 1800);
+  }
+  function closeVideo() {
+    document.getElementById('videoOverlay').classList.remove('show');
+    clearTimeout(vcTimer);
+    toast('📞 Đã kết thúc cuộc gọi');
+  }
+
+  // ---------------- VOICE ASSISTANT ----------------
+  var VOICE_SAMPLES = [
+    { q:'Gọi cho con gái', do:'📞 Đang gọi con gái cho bà…', act:function(){ var f=P().family[0]; openVideo(f.ava,f.name,f.rel); } },
+    { q:'Tôi đã uống thuốc rồi', do:'✅ Đã ghi nhận bà uống thuốc.', act:function(){ var i=P().meds.findIndex(function(m){return !m.done;}); if(i>=0){P().meds[i].done=true; renderMeds(); renderHome();} } },
+    { q:'Tôi thấy mệt', do:'😣 Đã báo con cháu &amp; điều dưỡng tới hỏi thăm.', act:function(){ moodPicked[current]='tired'; renderHealth(); } },
+    { q:'Gọi cấp cứu', do:'🚑 Đang kết nối 115…', act:function(){ callAmbulance(); } }
+  ];
+  function openVoice() {
+    document.getElementById('voiceOverlay').classList.add('show');
+    document.getElementById('voiceListen').textContent = 'Đang nghe…';
+    document.getElementById('voiceSaid').innerHTML = 'Bà nói: <span class="vq">“…”</span>';
+    document.getElementById('voiceDoing').innerHTML = '';
+    var box = document.getElementById('voiceSamples');
+    box.innerHTML = VOICE_SAMPLES.map(function(s, i) {
+      return '<button class="voice-chip" onclick="voiceSay(' + i + ')">“' + s.q + '”</button>';
+    }).join('');
+  }
+  function closeVoice() {
+    document.getElementById('voiceOverlay').classList.remove('show');
+  }
+  function voiceSay(i) {
+    var s = VOICE_SAMPLES[i];
+    document.getElementById('voiceListen').textContent = 'Bà vừa nói:';
+    document.getElementById('voiceSaid').innerHTML = 'Bà nói: <span class="vq">“' + s.q + '”</span>';
+    document.getElementById('voiceDoing').innerHTML = '⏳ Trợ lý đang thực hiện…';
+    setTimeout(function() {
+      document.getElementById('voiceDoing').innerHTML = s.do;
+      setTimeout(function() {
+        closeVoice();
+        s.act();
+      }, 1100);
+    }, 1000);
+  }
+
+  // ---------------- SOS ----------------
+  function triggerSOS() {
+    openSheet(
+      '<h3>🆘 Bấm SOS khẩn cấp?</h3>' +
+      '<p class="sh-sub2">Con cháu và tổng đài y tế 115 sẽ được báo ngay lập tức.</p>' +
+      '<div class="btn-row"><button class="sheet-btn no" onclick="closeSheet()">Không, hủy</button>' +
+      '<button class="sheet-btn yes" style="background:var(--danger)" onclick="confirmSOS()">🆘 Báo ngay</button></div>');
+  }
+  function confirmSOS() {
+    closeSheet();
+    var f = P().family[0];
+    toast('🆘 Đã báo con cháu &amp; 115 — đang gọi…');
+    setTimeout(function(){ openVideo(f.ava, f.name, f.rel); }, 1100);
+  }
+
+  // ---------------- FALL DETECTION ----------------
+  var fallTimer, fallCount;
+  function simulateFall() {
+    var ov = document.getElementById('fallOverlay');
+    ov.classList.remove('resolved');
+    document.getElementById('foLoc').textContent = P().fallLoc;
+    fallCount = 10;
+    document.getElementById('foCount').textContent = fallCount;
+    ov.classList.add('show');
+    clearInterval(fallTimer);
+    fallTimer = setInterval(function() {
+      fallCount--;
+      document.getElementById('foCount').textContent = fallCount;
+      if (fallCount <= 0) { clearInterval(fallTimer); fallNeedHelp(); }
+    }, 1000);
+  }
+  function fallImOk() {
+    clearInterval(fallTimer);
+    closeFall();
+    toast('✅ Tốt quá! Đã báo con cháu là bà vẫn ổn.');
+  }
+  function fallNeedHelp() {
+    clearInterval(fallTimer);
+    var ov = document.getElementById('fallOverlay');
+    document.getElementById('foDoneTxt').textContent = P().short + ' cứ ngồi yên, đừng cử động mạnh. Con cháu và 115 đang trên đường tới.';
+    ov.classList.add('resolved');
+  }
+  function closeFall() {
+    document.getElementById('fallOverlay').classList.remove('show');
+    document.getElementById('fallOverlay').classList.remove('resolved');
+  }
+
+  // ---------------- LIVE CLOCK ----------------
+  function tickClock() {
+    var d = new Date();
+    var hh = d.getHours();
+    var mm = ('0' + d.getMinutes()).slice(-2);
+    var ss = ('0' + d.getSeconds()).slice(-2);
+    var h12 = hh % 12; if (h12 === 0) h12 = 12;
+    document.getElementById('sbClock').textContent = h12 + ':' + mm;
+    var hc = document.getElementById('homeClock');
+    if (hc) hc.textContent = ('0' + hh).slice(-2) + ':' + mm + ':' + ss;
+  }
+
+  // ---------------- INIT ----------------
+  renderAll();
+  showScreen('home');
+  tickClock();
+  setInterval(tickClock, 1000);
+</script>
+</body>
+</html>
