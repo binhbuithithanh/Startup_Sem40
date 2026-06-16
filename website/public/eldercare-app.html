@@ -887,6 +887,132 @@
     .bbox.d { stroke: #ef4444; }
     .bbox-label { font: 800 9px ui-sans-serif, system-ui; }
 
+    /* ===== GENERIC OVERLAY (refer / report / chấm công / privacy...) ===== */
+    .ov-wrap { background: var(--light); height: 100%; display: flex; flex-direction: column; }
+    .ov-head { color: #fff; padding: 1rem 1.1rem; display: flex; align-items: center; gap: 0.7rem; flex-shrink: 0; }
+    .ov-head.teal { background: linear-gradient(135deg, #0d9488, #0f766e); }
+    .ov-head.violet { background: linear-gradient(135deg, #6d28d9, #4338ca); }
+    .ov-head.amber { background: linear-gradient(135deg, #d97706, #b45309); }
+    .ov-head.blue { background: linear-gradient(135deg, #1d4ed8, #1e3a8a); }
+    .ov-head .ov-close { margin-left: auto; background: rgba(255,255,255,0.18); border: none; color: #fff;
+      width: 32px; height: 32px; border-radius: 50%; font-size: 1rem; cursor: pointer; flex-shrink: 0; }
+    .ov-body { flex: 1; overflow-y: auto; padding: 1rem 1.1rem; }
+
+    /* ===== REFERRAL ===== */
+    .ref-code { display: flex; align-items: center; gap: 0.5rem; background: #f0fdfa; border: 1.5px dashed #5eead4;
+      border-radius: 14px; padding: 0.75rem 0.9rem; margin: 0.2rem 0 0.4rem; }
+    .ref-code b { flex: 1; font-size: 1.25rem; letter-spacing: 2px; color: var(--care); }
+    .ref-channels { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.5rem; margin-top: 0.3rem; }
+    .ref-ch { display: flex; flex-direction: column; align-items: center; gap: 0.25rem; padding: 0.7rem 0.2rem;
+      border: 1px solid var(--border); border-radius: 12px; background: #fff; font-size: 0.62rem; font-weight: 700;
+      color: var(--primary); cursor: pointer; font-family: inherit; transition: transform .12s; }
+    .ref-ch:active { transform: scale(0.95); }
+    .ref-ch .rc-ico { font-size: 1.3rem; }
+    .ref-stat { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem; text-align: center; }
+    .ref-stat .rs { background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 0.6rem 0.3rem; }
+    .ref-stat .rs b { display: block; font-size: 1.25rem; color: var(--care); }
+    .ref-stat .rs span { font-size: 0.62rem; color: var(--muted); }
+
+    /* ===== AI HEALTH REPORT ===== */
+    .rep-period { display: flex; gap: 0.4rem; margin-bottom: 0.2rem; }
+    .rep-period button { flex: 1; padding: 0.45rem; border-radius: 10px; border: 1px solid var(--border); background: #fff;
+      font-family: inherit; font-weight: 700; font-size: 0.74rem; color: var(--muted); cursor: pointer; }
+    .rep-period button.on { background: var(--care); color: #fff; border-color: var(--care); }
+    .insight { border-radius: 12px; padding: 0.8rem 0.9rem; font-size: 0.8rem; line-height: 1.5; display: flex; gap: 0.55rem; }
+    .insight.warn { background: #fffbeb; border: 1px solid #fcd34d; color: #92400e; }
+    .insight.ok { background: #ecfdf5; border: 1px solid #a7f3d0; color: #047857; }
+    .insight .in-ico { font-size: 1.1rem; flex-shrink: 0; }
+    .trend { padding: 0.7rem 0; border-bottom: 1px solid #f1f5f4; }
+    .trend:last-child { border-bottom: none; }
+    .trend-top { display: flex; align-items: baseline; gap: 0.5rem; margin-bottom: 0.25rem; }
+    .trend-top .tt-name { font-size: 0.8rem; font-weight: 700; flex: 1; }
+    .trend-top .tt-val { font-size: 0.86rem; font-weight: 900; }
+    .trend-top .tt-delta { font-size: 0.68rem; font-weight: 800; padding: 0.05rem 0.4rem; border-radius: 99px; }
+    .tt-delta.up { background: #fef2f2; color: #dc2626; }
+    .tt-delta.down { background: #ecfdf5; color: #059669; }
+    .tt-delta.flat { background: #f1f5f9; color: #64748b; }
+    .spark { width: 100%; height: 38px; display: block; }
+    .compliance-bar { height: 9px; border-radius: 99px; background: #eef2f1; overflow: hidden; }
+    .compliance-bar > i { display: block; height: 100%; border-radius: 99px; background: var(--care); }
+
+    /* ===== PHARMACY DELIVERY STEPPER ===== */
+    .dlv-step { display: flex; gap: 0.7rem; position: relative; padding-bottom: 0.9rem; }
+    .dlv-step:last-child { padding-bottom: 0; }
+    .dlv-step::before { content: ''; position: absolute; left: 12px; top: 26px; bottom: -2px; width: 2px; background: #e5e7eb; }
+    .dlv-step:last-child::before { display: none; }
+    .dlv-dot { width: 26px; height: 26px; border-radius: 50%; background: #e5e7eb; color: #94a3b8; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center; font-size: 0.85rem; z-index: 1; transition: all .3s; }
+    .dlv-step.done .dlv-dot { background: var(--care); color: #fff; }
+    .dlv-step.active .dlv-dot { background: var(--care); color: #fff; animation: pulse 1.6s infinite; }
+    .dlv-step.done::before, .dlv-step.active::before { background: var(--care); }
+    .dlv-body .ds-main { font-size: 0.82rem; font-weight: 700; }
+    .dlv-body .ds-sub { font-size: 0.68rem; color: var(--muted); margin-top: 0.1rem; }
+    .dlv-step.pending .ds-main { color: #9ca3af; }
+    .refill-row { display: flex; align-items: center; gap: 0.6rem; padding: 0.6rem 0; }
+    .refill-row .rr-main { flex: 1; }
+    .refill-row .rr-name { font-size: 0.8rem; font-weight: 700; }
+    .refill-row .rr-sub { font-size: 0.66rem; color: var(--muted); }
+
+    /* ===== CHẤM CÔNG CA TRỰC ===== */
+    .live-pill { display: inline-flex; align-items: center; gap: 0.35rem; font-size: 0.62rem; font-weight: 800;
+      color: #dc2626; background: #fef2f2; border-radius: 99px; padding: 0.15rem 0.5rem; }
+    .live-pill .lp-dot { width: 7px; height: 7px; border-radius: 50%; background: #ef4444; animation: livepulse 1.2s infinite; }
+    .photo-proof { height: 110px; border-radius: 12px; display: flex; flex-direction: column; align-items: center;
+      justify-content: center; gap: 0.2rem; color: #fff; font-size: 0.7rem; font-weight: 700;
+      background: linear-gradient(135deg, #134e4a, #0d9488); position: relative; overflow: hidden; }
+    .photo-proof .pp-big { font-size: 2.2rem; }
+    .photo-proof .pp-stamp { position: absolute; bottom: 6px; right: 8px; font-size: 0.56rem; opacity: 0.85; font-weight: 600; }
+    .task-check { display: flex; gap: 0.6rem; align-items: flex-start; padding: 0.5rem 0; border-bottom: 1px solid #f1f5f4; }
+    .task-check:last-child { border-bottom: none; }
+    .task-check .tc-tick { width: 20px; height: 20px; border-radius: 50%; flex-shrink: 0; display: flex;
+      align-items: center; justify-content: center; font-size: 0.68rem; }
+    .task-check.done .tc-tick { background: var(--care); color: #fff; }
+    .task-check.now .tc-tick { background: #fef3c7; color: #b45309; border: 1.5px dashed #f59e0b; }
+    .task-check.todo .tc-tick { background: #eef2f1; color: #9ca3af; }
+    .task-check .tc-main { flex: 1; font-size: 0.8rem; font-weight: 600; }
+    .task-check.todo .tc-main { color: #9ca3af; font-weight: 500; }
+    .task-check .tc-time { font-size: 0.66rem; color: var(--muted); flex-shrink: 0; }
+    .bill-row { display: flex; justify-content: space-between; font-size: 0.82rem; padding: 0.3rem 0; }
+    .bill-row.total { font-weight: 900; font-size: 0.95rem; border-top: 1px solid var(--border); margin-top: 0.3rem; padding-top: 0.5rem; }
+
+    /* ===== PRIVACY / QUYỀN RIÊNG TƯ ===== */
+    .acc-row { display: flex; align-items: center; gap: 0.6rem; padding: 0.65rem 0; border-bottom: 1px solid #f1f5f4; }
+    .acc-row:last-child { border-bottom: none; }
+    .acc-row .ac-ava { font-size: 1.5rem; }
+    .acc-row .ac-main { flex: 1; }
+    .acc-row .ac-name { font-size: 0.82rem; font-weight: 700; }
+    .acc-row .ac-scope { font-size: 0.66rem; color: var(--muted); }
+    .log-row { display: flex; gap: 0.5rem; font-size: 0.72rem; padding: 0.4rem 0; border-bottom: 1px solid #f6f8f7; }
+    .log-row:last-child { border-bottom: none; }
+    .log-row .lr-t { color: #94a3b8; flex-shrink: 0; font-variant-numeric: tabular-nums; }
+
+    /* ===== CỔNG NGƯỜI CHĂM ===== */
+    .cg-tabs { display: flex; gap: 0.3rem; background: #eef2f1; border-radius: 12px; padding: 0.25rem; margin-bottom: 0.8rem; }
+    .cg-tab { flex: 1; text-align: center; padding: 0.45rem 0.2rem; border-radius: 9px; font-size: 0.66rem; font-weight: 700;
+      color: var(--muted); cursor: pointer; border: none; background: none; font-family: inherit; }
+    .cg-tab.on { background: #fff; color: var(--care); box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+    .earn-big { font-size: 1.7rem; font-weight: 900; color: var(--care); line-height: 1.1; }
+    .lvl-card { border: 1.5px solid var(--border); border-radius: 12px; padding: 0.7rem 0.8rem; margin-bottom: 0.55rem; }
+    .lvl-card.done { border-color: #a7f3d0; background: #f0fdf4; }
+    .lvl-card.now { border-color: #5eead4; background: #f0fdfa; }
+    .lvl-card.lock { opacity: 0.55; }
+    .lvl-top { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.2rem; }
+    .lvl-top .lt-name { font-size: 0.85rem; font-weight: 800; flex: 1; }
+    .lvl-badge { font-size: 0.58rem; font-weight: 800; padding: 0.12rem 0.5rem; border-radius: 99px; }
+    .lvl-badge.g { background: #dcfce7; color: #16a34a; }
+    .lvl-badge.a { background: #fef3c7; color: #b45309; }
+    .lvl-badge.x { background: #f1f5f9; color: #94a3b8; }
+    .lvl-card .lt-sub { font-size: 0.7rem; color: var(--muted); }
+    .job-card { border: 1px solid var(--border); border-radius: 12px; padding: 0.75rem 0.8rem; margin-bottom: 0.6rem; }
+    .job-card .jc-top { display: flex; align-items: center; gap: 0.6rem; }
+    .job-card .jc-ava { font-size: 1.8rem; }
+    .job-card .jc-name { font-size: 0.85rem; font-weight: 800; }
+    .job-card .jc-meta { font-size: 0.68rem; color: var(--muted); }
+    .job-card .jc-pay { margin-left: auto; text-align: right; }
+    .job-card .jc-pay b { color: var(--care); font-size: 0.92rem; }
+    .job-tags { display: flex; flex-wrap: wrap; gap: 0.3rem; margin-top: 0.5rem; }
+    .job-tag { font-size: 0.6rem; font-weight: 700; background: #f0fdfa; color: #0f766e; border-radius: 99px; padding: 0.1rem 0.5rem; }
+
     /* RESPONSIVE */
     @media (max-width: 900px) {
       .marketing { display: none; }
@@ -1005,30 +1131,85 @@
               <div style="font-size:0.7rem;opacity:0.9">Giao thuốc tận nhà · chính hãng</div></div>
             <button class="ph-close" onclick="closePharmacy()">✕</button>
           </div>
-          <div class="pharma-body">
-            <span class="gpp-badge">🏥 Nhà thuốc đạt chuẩn GPP ✔ · liên kết chuỗi chính hãng</span>
-            <div class="card">
-              <div class="card-title">🧾 Đơn thuốc của Bà Hoa</div>
-              <div class="alert-row"><span class="a-ico">💊</span><div style="flex:1"><div style="font-weight:700">Amlodipine 5mg</div><div class="a-time">Huyết áp · 30 viên</div></div><div style="font-weight:700">82.000đ</div></div>
-              <div class="alert-row"><span class="a-ico">💊</span><div style="flex:1"><div style="font-weight:700">Metformin 500mg</div><div class="a-time">Tiểu đường · 60 viên</div></div><div style="font-weight:700">96.000đ</div></div>
-            </div>
-            <div class="card">
-              <div class="card-title">🛡️ Xác thực thuốc chống giả</div>
-              <div style="font-size:0.78rem;color:var(--muted);margin-bottom:0.3rem">Quét tem/mã trên vỉ thuốc — đối chiếu số đăng ký với cơ sở dữ liệu Cục Quản lý Dược.</div>
-              <div class="scan-box" id="scanBox">
-                <div class="scan-line"></div>
-                <div class="scan-ico" id="scanIco">📷</div>
-                <div style="font-size:0.78rem;font-weight:700;margin-top:0.4rem" id="scanTxt">Đưa vỉ thuốc vào khung để quét mã</div>
-              </div>
-              <button class="btn btn-primary" id="scanBtn" onclick="runVerify()">🔍 Xác thực thuốc</button>
-              <div class="verify-result" id="verifyResult">
-                <div class="vr-title">✅ Thuốc chính hãng — hợp lệ</div>
-                <div class="vr-row">Số đăng ký <b>VD-25318-16</b> · hợp lệ trong CSDL Cục Quản lý Dược (dav.gov.vn)</div>
-                <div class="vr-row">🔎 Đối chiếu bằng <b>computer vision</b> (nhận dạng tem chống giả + OCR số lô) · không phát hiện dấu hiệu làm giả.</div>
-                <div class="vr-row" style="color:var(--muted)">⚠️ Demo minh họa — số ĐK ví dụ.</div>
-              </div>
-            </div>
+          <div class="pharma-body" id="pharmaBody"></div>
+        </div>
+      </div>
+
+      <!-- REFERRAL / MỜI GIA ĐÌNH OVERLAY -->
+      <div class="overlay-screen" id="referOverlay">
+        <div class="ov-wrap">
+          <div class="ov-head teal">
+            <span style="font-size:1.3rem">🎁</span>
+            <div><div style="font-weight:900;font-size:1rem">Mời gia đình &amp; nhận quà</div>
+              <div style="font-size:0.7rem;opacity:0.9">Giới thiệu — cả hai cùng có lợi</div></div>
+            <button class="ov-close" onclick="closeRefer()">✕</button>
           </div>
+          <div class="ov-body" id="referBody"></div>
+        </div>
+      </div>
+
+      <!-- BÁO CÁO SỨC KHỎE AI OVERLAY -->
+      <div class="overlay-screen" id="reportOverlay">
+        <div class="ov-wrap">
+          <div class="ov-head violet">
+            <span style="font-size:1.3rem">📈</span>
+            <div><div style="font-weight:900;font-size:1rem">Báo cáo sức khỏe AI</div>
+              <div style="font-size:0.7rem;opacity:0.9">Xu hướng &amp; cảnh báo sớm · CareSense</div></div>
+            <button class="ov-close" onclick="closeReport()">✕</button>
+          </div>
+          <div class="ov-body" id="reportBody"></div>
+        </div>
+      </div>
+
+      <!-- CHẤM CÔNG CA TRỰC OVERLAY -->
+      <div class="overlay-screen" id="shiftOverlay">
+        <div class="ov-wrap">
+          <div class="ov-head teal">
+            <span style="font-size:1.3rem">🕒</span>
+            <div><div style="font-weight:900;font-size:1rem">Chấm công ca trực</div>
+              <div style="font-size:0.7rem;opacity:0.9">Minh bạch giờ chăm · con cái xem realtime</div></div>
+            <button class="ov-close" onclick="closeShift()">✕</button>
+          </div>
+          <div class="ov-body" id="shiftBody"></div>
+        </div>
+      </div>
+
+      <!-- TRUNG TÂM QUYỀN RIÊNG TƯ OVERLAY -->
+      <div class="overlay-screen" id="privacyOverlay">
+        <div class="ov-wrap">
+          <div class="ov-head blue">
+            <span style="font-size:1.3rem">🔐</span>
+            <div><div style="font-weight:900;font-size:1rem">Trung tâm quyền riêng tư</div>
+              <div style="font-size:0.7rem;opacity:0.9">Bạn kiểm soát ai xem được gì</div></div>
+            <button class="ov-close" onclick="closePrivacy()">✕</button>
+          </div>
+          <div class="ov-body" id="privacyBody"></div>
+        </div>
+      </div>
+
+      <!-- BẢO HIỂM CHĂM SÓC DÀI HẠN OVERLAY -->
+      <div class="overlay-screen" id="ltcOverlay">
+        <div class="ov-wrap">
+          <div class="ov-head amber">
+            <span style="font-size:1.3rem">🛡️</span>
+            <div><div style="font-weight:900;font-size:1rem">Bảo hiểm chăm sóc dài hạn</div>
+              <div style="font-size:0.7rem;opacity:0.9">An tâm khi cần chăm dài ngày</div></div>
+            <button class="ov-close" onclick="closeLtc()">✕</button>
+          </div>
+          <div class="ov-body" id="ltcBody"></div>
+        </div>
+      </div>
+
+      <!-- CỔNG NGƯỜI CHĂM OVERLAY -->
+      <div class="overlay-screen" id="caregiverOverlay">
+        <div class="ov-wrap">
+          <div class="ov-head teal">
+            <span style="font-size:1.3rem">🩺</span>
+            <div><div style="font-weight:900;font-size:1rem">ElderCare · Người chăm</div>
+              <div style="font-size:0.7rem;opacity:0.9">App dành cho điều dưỡng &amp; hộ lý đối tác</div></div>
+            <button class="ov-close" onclick="closeCaregiver()">✕</button>
+          </div>
+          <div class="ov-body" id="caregiverBody"></div>
         </div>
       </div>
 
@@ -1477,10 +1658,10 @@
         '<button class="quick-btn" onclick="openPharmacy()"><span class="qb-ico">💊</span>Mua thuốc</button>' +
       '</div></div>' +
       '<div class="card"><div class="card-title">✨ Tiện ích khác</div><div class="extra-grid">' +
+        '<button class="extra-chip" onclick="openReport()"><span class="ec-ico">📈</span>Báo cáo sức khỏe AI</button>' +
+        '<button class="extra-chip" onclick="openPharmacy()"><span class="ec-ico">💊</span>Nhà thuốc giao tận nhà</button>' +
+        '<button class="extra-chip" onclick="openRefer()"><span class="ec-ico">🎁</span>Mời gia đình · nhận quà</button>' +
         '<button class="extra-chip" onclick="openNearby()"><span class="ec-ico">📍</span>Người chăm quanh đây</button>' +
-        '<button class="extra-chip" onclick="toast(\'👨‍👩‍👧 Cộng đồng con-chăm-bố-mẹ — sắp ra mắt\')"><span class="ec-ico">👨‍👩‍👧</span>Cộng đồng người chăm</button>' +
-        '<button class="extra-chip" onclick="toast(\'🚗 Đặt xe đưa đón đi khám — sắp ra mắt\')"><span class="ec-ico">🚗</span>Đưa đón đi khám</button>' +
-        '<button class="extra-chip" onclick="toast(\'🛒 Marketplace thiết bị y tế — sắp ra mắt\')"><span class="ec-ico">🛒</span>Thiết bị y tế</button>' +
       '</div></div>';
   }
 
@@ -1508,6 +1689,7 @@
           '<div style="margin-top:0.4rem"><span class="cert-chip">🎓 Chứng chỉ đào tạo ' + n.cert + '</span></div>' +
           '<div>' + skills + '</div>' +
           '<button class="btn btn-outline" style="margin-top:0.85rem" onclick="toggleTimeline(this)">📋 Xem nhật ký ca trực</button>' +
+          '<button class="btn btn-primary" style="margin-top:0.5rem" onclick="openShift()">🕒 Chấm công ca trực · xem realtime</button>' +
           '<div class="timeline">' + tl + '</div></div>' +
 
         '<div class="card"><div class="card-title">👥 Đội chăm đa chuyên ngành</div>' +
@@ -1609,7 +1791,8 @@
 
       '<div class="card" style="background:#ecfdf5;border-color:#a7f3d0"><div class="card-title" style="color:#047857">🛡️ Bảo hiểm bổ sung</div>' +
         '<div style="font-weight:800;color:#047857">Đã kích hoạt ✔</div>' +
-        '<div style="font-size:0.82rem;color:#059669">Chi trả tới <strong>80%</strong> chi phí nằm viện ngoài BHYT · hạn mức 200 triệu/năm</div></div>' +
+        '<div style="font-size:0.82rem;color:#059669">Chi trả tới <strong>80%</strong> chi phí nằm viện ngoài BHYT · hạn mức 200 triệu/năm</div>' +
+        '<button class="btn btn-outline" style="width:100%;margin-top:0.7rem;border-color:#6ee7b7;color:#047857" onclick="openLtc()">🛡️ Bảo hiểm chăm sóc dài hạn (LTC)</button></div>' +
 
       '<div class="card"><div class="card-title">🧾 Giao dịch gần đây</div>' + tx + '</div>';
   }
@@ -1644,7 +1827,8 @@
       '<div class="consent-card"><div class="card-title" style="color:#1d4ed8">🔐 Quyền xem dữ liệu &amp; đồng ý · ' + c.mode + '</div>' +
         '<div class="cc-txt">' + c.txt + '</div>' +
         '<div class="consent-row"><div style="flex:1"><div class="cr-name">' + c.viewer + '</div><div class="cr-sub">' + c.viewerSub + '</div></div>' +
-          '<div class="toggle' + (c.share ? '' : ' off') + '" onclick="toggleConsent(this)"></div></div></div>' +
+          '<div class="toggle' + (c.share ? '' : ' off') + '" onclick="toggleConsent(this)"></div></div>' +
+        '<button class="btn btn-outline" style="width:100%;margin-top:0.7rem" onclick="openPrivacy()">🔐 Trung tâm quyền riêng tư &amp; camera</button></div>' +
 
       '<div class="card"><div class="card-title">📡 CareSense · Thiết bị tại nhà</div>' + devices + '</div>' +
 
@@ -1853,6 +2037,7 @@
         '<div class="ob-od">' + p.age + ' tuổi · ' + p.dependency + '</div></button>';
     });
     html += '<button class="ob-opt" style="border-color:#99f6e4;color:var(--care)" onclick="startOnboard()">➕ Thêm người thân mới<div class="ob-od">Onboarding triage — AI gợi ý gói &amp; đội chăm</div></button>';
+    html += '<button class="ob-opt" style="border-color:#c7d2fe;color:#4338ca" onclick="openCaregiver()">🩺 Chế độ Người chăm (đối tác)<div class="ob-od">App phía cung — đào tạo, nhận ca, thu nhập</div></button>';
     openSheet(html);
   }
 
@@ -1948,17 +2133,65 @@
     toast('✅ Đã tạo hồ sơ & gửi yêu cầu đội chăm (demo)');
   }
 
-  // ===== pharmacy / drug verify =====
+  // ===== pharmacy: đơn thuốc → dược sĩ duyệt → giao tận nhà (Luật Dược) =====
+  // giá demo theo thứ tự thuốc trong hồ sơ
+  var RX_PRICE = [82000, 96000, 64000, 58000, 120000, 75000];
+  function vnd(n) { return n.toLocaleString('vi-VN') + 'đ'; }
+  function rxFromProfile(p) {
+    return p.meds.map(function (m, i) {
+      var nm = m.name.replace(/\s*\(([^)]*)\)/, '');
+      var use = (m.name.match(/\(([^)]*)\)/) || [, 'điều trị nền'])[1];
+      return { name: nm, use: use, qty: (i % 2 === 0 ? 30 : 60), price: RX_PRICE[i % RX_PRICE.length] };
+    });
+  }
+  function renderPharmacy() {
+    var p = P(), rx = rxFromProfile(p);
+    var sub = rx.reduce(function (s, r) { return s + r.price; }, 0);
+    var ship = 0;
+    var rows = rx.map(function (r) {
+      return '<div class="alert-row"><span class="a-ico">💊</span><div style="flex:1">' +
+        '<div style="font-weight:700">' + r.name + '</div><div class="a-time">' + r.use + ' · ' + r.qty + ' viên</div></div>' +
+        '<div style="font-weight:700">' + vnd(r.price) + '</div></div>';
+    }).join('');
+    var chronic = rx.slice(0, 2).map(function (r, i) {
+      return '<div class="refill-row"><div class="rr-main"><div class="rr-name">' + r.name + '</div>' +
+        '<div class="rr-sub">Tự động giao lại mỗi 30 ngày</div></div>' +
+        '<div class="toggle' + (i === 0 ? '' : ' off') + '" onclick="toggleDevice(this)"></div></div>';
+    }).join('');
+    document.getElementById('pharmaBody').innerHTML =
+      '<span class="gpp-badge">🏥 Nhà thuốc đạt chuẩn GPP ✔ · liên kết chuỗi chính hãng</span>' +
+
+      '<div class="card" style="border-color:#bfdbfe;background:#f5f9ff">' +
+        '<div class="card-title" style="color:#1d4ed8">🧑‍⚕️ Dược sĩ phụ trách</div>' +
+        '<div class="person"><div class="person-avatar">👨‍⚕️</div><div>' +
+        '<div class="p-name">DS. Trần Thu Hà <span class="lic-chip">CCHN Dược ✔</span></div>' +
+        '<div class="p-meta">Duyệt đơn &amp; tư vấn · BẮT BUỘC theo Luật Dược 2016</div></div></div></div>' +
+
+      '<div class="card"><div class="card-title">🧾 Đơn thuốc của ' + p.short + '</div>' + rows +
+        '<div class="alert-row" style="border:none"><div style="flex:1;font-weight:800">Tạm tính</div><div style="font-weight:800">' + vnd(sub) + '</div></div>' +
+        '<div class="alert-row" style="border:none;padding-top:0"><div style="flex:1;color:#059669;font-weight:700">Phí giao tận nhà</div><div style="color:#059669;font-weight:800">Miễn phí</div></div>' +
+        '<button class="btn btn-primary" style="width:100%;margin-top:0.5rem" onclick="startDelivery()">🛵 Đặt &amp; giao tận nhà · ' + vnd(sub + ship) + '</button></div>' +
+
+      '<div class="card"><div class="card-title">🔁 Tự động giao lại thuốc mạn tính</div>' +
+        '<div style="font-size:0.72rem;color:var(--muted);margin-bottom:0.3rem">Thuốc dùng dài hạn — app tự nhắc &amp; giao trước khi hết, khỏi quên.</div>' + chronic + '</div>' +
+
+      '<div class="card"><div class="card-title">🛡️ Xác thực thuốc chống giả</div>' +
+        '<div style="font-size:0.78rem;color:var(--muted);margin-bottom:0.3rem">Quét tem/mã trên vỉ thuốc — đối chiếu số đăng ký với CSDL Cục Quản lý Dược.</div>' +
+        '<div class="scan-box" id="scanBox"><div class="scan-line"></div>' +
+          '<div class="scan-ico" id="scanIco">📷</div>' +
+          '<div style="font-size:0.78rem;font-weight:700;margin-top:0.4rem" id="scanTxt">Đưa vỉ thuốc vào khung để quét mã</div></div>' +
+        '<button class="btn btn-primary" id="scanBtn" onclick="runVerify()">🔍 Xác thực thuốc</button>' +
+        '<div class="verify-result" id="verifyResult">' +
+          '<div class="vr-title">✅ Thuốc chính hãng — hợp lệ</div>' +
+          '<div class="vr-row">Số đăng ký <b>VD-25318-16</b> · hợp lệ trong CSDL Cục Quản lý Dược (dav.gov.vn)</div>' +
+          '<div class="vr-row">🔎 Đối chiếu bằng <b>computer vision</b> (nhận dạng tem chống giả + OCR số lô) · không phát hiện dấu hiệu làm giả.</div>' +
+          '<div class="vr-row" style="color:var(--muted)">⚠️ Demo minh họa — số ĐK ví dụ.</div></div></div>';
+  }
   function openPharmacy() {
-    document.getElementById('verifyResult').classList.remove('show');
-    var sb = document.getElementById('scanBox');
-    sb.classList.remove('scanning');
-    document.getElementById('scanIco').textContent = '📷';
-    document.getElementById('scanTxt').textContent = 'Đưa vỉ thuốc vào khung để quét mã';
-    document.getElementById('scanBtn').style.display = '';
+    renderPharmacy();
     document.getElementById('pharmaOverlay').classList.add('show');
   }
-  function closePharmacy() { document.getElementById('pharmaOverlay').classList.remove('show'); }
+  function closePharmacy() { clearDelivery(); document.getElementById('pharmaOverlay').classList.remove('show'); }
   var scanTimer = null;
   function runVerify() {
     var sb = document.getElementById('scanBox');
@@ -1974,6 +2207,352 @@
       document.getElementById('verifyResult').classList.add('show');
     }, 1700);
   }
+
+  // giao thuốc — stepper động
+  var dlvTimers = [];
+  function clearDelivery() { for (var i = 0; i < dlvTimers.length; i++) clearTimeout(dlvTimers[i]); dlvTimers = []; }
+  var DLV_STEPS = [
+    { ico: '🧾', main: 'Đã đặt đơn', sub: 'Đơn được gửi tới nhà thuốc' },
+    { ico: '🧑‍⚕️', main: 'Dược sĩ duyệt đơn', sub: 'DS. Thu Hà kiểm tra tương tác thuốc' },
+    { ico: '📦', main: 'Đang lấy &amp; đóng gói', sub: 'Niêm phong + dán tem xác thực' },
+    { ico: '🛵', main: 'Shipper đang giao', sub: 'Anh Hùng · 0,8km · ~12 phút' },
+    { ico: '🏠', main: 'Giao tận tay', sub: 'Xác nhận đúng người nhận' }
+  ];
+  function startDelivery() {
+    clearDelivery();
+    var p = P();
+    var stepsHtml = DLV_STEPS.map(function (s, i) {
+      return '<div class="dlv-step pending" id="dlv-' + i + '"><div class="dlv-dot">' + (i + 1) + '</div>' +
+        '<div class="dlv-body"><div class="ds-main">' + s.main + '</div><div class="ds-sub">' + s.sub + '</div></div></div>';
+    }).join('');
+    document.getElementById('pharmaBody').innerHTML =
+      '<span class="gpp-badge">🛵 Đang giao tới ' + p.short + '</span>' +
+      '<div class="card"><div class="card-title">📍 Theo dõi đơn thuốc</div>' + stepsHtml + '</div>' +
+      '<div class="card" style="text-align:center;background:#f0fdfa;border-color:#99f6e4">' +
+        '<div style="font-size:0.78rem;color:#0f766e">Mọi đơn đều qua <b>dược sĩ có CCHN duyệt</b> trước khi giao — đúng Luật Dược.</div></div>' +
+      '<button class="btn btn-outline" style="width:100%" onclick="renderPharmacy()">← Về đơn thuốc</button>';
+    DLV_STEPS.forEach(function (s, i) {
+      dlvTimers.push(setTimeout(function () {
+        if (i > 0) { var prev = document.getElementById('dlv-' + (i - 1)); if (prev) prev.className = 'dlv-step done'; }
+        var cur = document.getElementById('dlv-' + i);
+        if (cur) { cur.className = 'dlv-step active'; cur.querySelector('.dlv-dot').innerHTML = s.ico; }
+        if (i === DLV_STEPS.length - 1) {
+          dlvTimers.push(setTimeout(function () {
+            cur.className = 'dlv-step done'; toast('✅ Đã giao thuốc tận nhà cho ' + p.short);
+          }, 1400));
+        }
+      }, 900 + i * 1500));
+    });
+  }
+
+  // ===== referral / mời gia đình (Marketing — 35% khách từ giới thiệu) =====
+  function openRefer() {
+    var p = P();
+    document.getElementById('referBody').innerHTML =
+      '<div class="card"><div class="card-title">🎟️ Mã giới thiệu của bạn</div>' +
+        '<div class="ref-code"><b>MINH-2024</b>' +
+          '<button class="btn btn-ghost btn-sm" onclick="toast(\'📋 Đã sao chép mã MINH-2024\')">Sao chép</button></div>' +
+        '<div style="font-size:0.78rem;color:var(--muted)">Bạn bè nhập mã khi đăng ký → <b style="color:var(--care)">cả hai nhận 100.000đ</b> credit chăm sóc.</div></div>' +
+
+      '<div class="card"><div class="card-title">📤 Mời qua</div><div class="ref-channels">' +
+        '<button class="ref-ch" onclick="toast(\'💬 Mở Zalo để mời\')"><span class="rc-ico">💬</span>Zalo</button>' +
+        '<button class="ref-ch" onclick="toast(\'📘 Mở Facebook để mời\')"><span class="rc-ico">📘</span>Facebook</button>' +
+        '<button class="ref-ch" onclick="toast(\'✉️ Soạn tin nhắn mời\')"><span class="rc-ico">✉️</span>SMS</button>' +
+        '<button class="ref-ch" onclick="toast(\'🔗 Đã sao chép liên kết mời\')"><span class="rc-ico">🔗</span>Liên kết</button>' +
+      '</div></div>' +
+
+      '<div class="card" style="background:#f5f3ff;border-color:#ddd6fe"><div class="card-title" style="color:#6d28d9">👨‍👩‍👧 Mời người thân cùng chăm ' + p.short + '</div>' +
+        '<div style="font-size:0.78rem;color:#5b21b6;margin-bottom:0.6rem">Anh chị em cùng xem sức khỏe, chia ca chăm &amp; chi phí — không ai lo một mình.</div>' +
+        '<button class="btn btn-primary" style="width:100%" onclick="toast(\'✅ Đã gửi lời mời đồng chăm sóc\')">+ Mời anh/chị/em vào hồ sơ</button></div>' +
+
+      '<div class="card"><div class="card-title">🏆 Thành tích giới thiệu</div><div class="ref-stat">' +
+        '<div class="rs"><b>3</b><span>Đã mời</span></div>' +
+        '<div class="rs"><b>2</b><span>Đã tham gia</span></div>' +
+        '<div class="rs"><b>200k</b><span>Credit nhận</span></div></div>' +
+        '<div style="font-size:0.66rem;color:var(--muted);margin-top:0.6rem">📊 35% khách hàng mới đến từ giới thiệu — kênh tăng trưởng rẻ nhất (Marketing, plan).</div></div>';
+    document.getElementById('referOverlay').classList.add('show');
+  }
+  function closeRefer() { document.getElementById('referOverlay').classList.remove('show'); }
+
+  // ===== báo cáo sức khỏe AI + cảnh báo sớm (data moat) =====
+  function sparkline(vals, color) {
+    var min = Math.min.apply(null, vals), max = Math.max.apply(null, vals), rng = (max - min) || 1;
+    var W = 240, H = 38, n = vals.length;
+    var pts = vals.map(function (v, i) {
+      var x = (i / (n - 1)) * (W - 8) + 4;
+      var y = H - 5 - ((v - min) / rng) * (H - 12);
+      return x.toFixed(1) + ',' + y.toFixed(1);
+    });
+    var last = pts[pts.length - 1].split(',');
+    return '<svg class="spark" viewBox="0 0 ' + W + ' ' + H + '" preserveAspectRatio="none">' +
+      '<polyline points="' + pts.join(' ') + '" fill="none" stroke="' + color + '" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>' +
+      '<circle cx="' + last[0] + '" cy="' + last[1] + '" r="3" fill="' + color + '"/></svg>';
+  }
+  var reportPeriod = 'week';
+  function reportTrends(p) {
+    // dữ liệu xu hướng minh họa theo persona
+    if (p.id === 'tam') return [
+      { name: 'Huyết áp tâm thu', unit: 'mmHg', vals: [138, 142, 145, 149, 152, 158, 162], delta: '+24', dir: 'up', color: '#ef4444' },
+      { name: 'Nhịp tim', unit: 'bpm', vals: [74, 76, 75, 78, 80, 79, 82], delta: '+8', dir: 'up', color: '#f59e0b' },
+      { name: 'SpO₂', unit: '%', vals: [96, 96, 95, 96, 95, 95, 94], delta: '-2', dir: 'down', color: '#0d9488' },
+      { name: 'Số bước/ngày', unit: 'bước', vals: [1200, 1100, 900, 850, 700, 650, 600], delta: '-50%', dir: 'down', color: '#6d28d9' }
+    ];
+    return [
+      { name: 'Huyết áp tâm thu', unit: 'mmHg', vals: [118, 120, 122, 121, 124, 128, 132], delta: '+14', dir: 'up', color: '#f59e0b' },
+      { name: 'Nhịp tim', unit: 'bpm', vals: [76, 78, 77, 79, 78, 77, 78], delta: '±0', dir: 'flat', color: '#0d9488' },
+      { name: 'Đường huyết', unit: 'mmol/L', vals: [6.4, 6.2, 6.1, 6.0, 6.1, 6.0, 6.1], delta: '-0.3', dir: 'down', color: '#0d9488' },
+      { name: 'Số bước/ngày', unit: 'bước', vals: [3200, 3400, 3100, 3600, 3500, 3800, 4000], delta: '+25%', dir: 'down', color: '#6d28d9' }
+    ];
+  }
+  function openReport() {
+    var p = P(), tr = reportTrends(p);
+    var insight = (p.id === 'tam')
+      ? '<div class="insight warn"><span class="in-ico">⚠️</span><div><b>Phát hiện sớm:</b> Huyết áp tâm thu tăng đều 7 ngày (138→162) kèm vận động giảm 50%. AI khuyến nghị <b>tái khám Tim mạch trong 48h</b> &amp; rà soát thuốc với BS phụ trách.</div></div>'
+      : '<div class="insight warn"><span class="in-ico">📈</span><div><b>Theo dõi:</b> Huyết áp tâm thu nhích dần (118→132) 7 ngày qua. Chưa tới ngưỡng, nhưng AI gợi ý <b>giảm muối + đo lại 3 ngày tới</b>. Các chỉ số khác ổn định.</div></div>';
+    var rows = tr.map(function (t) {
+      var dcls = t.dir === 'up' ? 'up' : (t.dir === 'down' ? 'down' : 'flat');
+      return '<div class="trend"><div class="trend-top"><span class="tt-name">' + t.name + '</span>' +
+        '<span class="tt-val">' + t.vals[t.vals.length - 1] + ' <span style="font-size:0.66rem;color:var(--muted);font-weight:600">' + t.unit + '</span></span>' +
+        '<span class="tt-delta ' + dcls + '">' + t.delta + '</span></div>' +
+        sparkline(t.vals, t.color) + '</div>';
+    }).join('');
+    document.getElementById('reportBody').innerHTML =
+      '<div class="rep-period">' +
+        '<button class="' + (reportPeriod === 'week' ? 'on' : '') + '" onclick="setReportPeriod(\'week\')">7 ngày</button>' +
+        '<button class="' + (reportPeriod === 'month' ? 'on' : '') + '" onclick="setReportPeriod(\'month\')">30 ngày</button>' +
+        '<button class="' + (reportPeriod === 'quarter' ? 'on' : '') + '" onclick="setReportPeriod(\'quarter\')">3 tháng</button></div>' +
+      insight +
+      '<div class="card" style="margin-top:0.7rem"><div class="card-title">📊 Xu hướng sinh hiệu</div>' + rows + '</div>' +
+      '<div class="card"><div class="card-title">💊 Tuân thủ uống thuốc</div>' +
+        '<div style="display:flex;justify-content:space-between;font-size:0.82rem;margin-bottom:0.4rem"><span>Tuần này</span><b style="color:var(--care)">' + (p.id === 'tam' ? '78%' : '94%') + '</b></div>' +
+        '<div class="compliance-bar"><i style="width:' + (p.id === 'tam' ? '78' : '94') + '%"></i></div>' +
+        '<div style="font-size:0.66rem;color:var(--muted);margin-top:0.5rem">' + (p.id === 'tam' ? '⚠️ Bỏ lỡ 3 liều chiều — đã nhắc người chăm.' : 'Tốt — duy trì đều đặn.') + '</div></div>' +
+      '<div class="card" style="background:#f5f3ff;border-color:#ddd6fe"><div style="font-size:0.74rem;color:#5b21b6">🧠 <b>App tích lũy dữ liệu từ ngày 1</b> — phát hiện xu hướng <i>trước</i> khi thành biến cố. Đây là lợi thế dữ liệu khó sao chép (plan).</div></div>' +
+      '<button class="btn btn-primary" style="width:100%;margin-top:0.2rem" onclick="toast(\'📤 Đã gửi báo cáo cho con cái & BS phụ trách\')">📤 Gửi báo cáo cho gia đình &amp; bác sĩ</button>';
+    document.getElementById('reportOverlay').classList.add('show');
+  }
+  function setReportPeriod(per) { reportPeriod = per; openReport(); }
+  function closeReport() { document.getElementById('reportOverlay').classList.remove('show'); }
+
+  // ===== chấm công ca trực (minh bạch giờ + tính GMV) =====
+  function openShift() {
+    var p = P(), n = p.nurse;
+    var rate = (p.id === 'tam') ? 140000 : 100000; // giá giờ theo độ nặng
+    var tasks = [
+      { t: '08:02', s: 'done', m: 'Check-in tại nhà ' + p.short + ' (GPS khớp ✔)' },
+      { t: '08:15', s: 'done', m: 'Đo huyết áp &amp; nhịp tim — ghi CareSense' },
+      { t: '08:30', s: 'done', m: 'Cho uống thuốc sáng đúng liều' },
+      { t: '09:00', s: 'done', m: 'Tập phục hồi chức năng 30 phút' },
+      { t: '09:40', s: 'now', m: 'Hỗ trợ ăn sáng &amp; vệ sinh cá nhân' },
+      { t: '11:00', s: 'todo', m: 'Đo lại sinh hiệu trước khi kết ca' },
+      { t: '12:00', s: 'todo', m: 'Check-out &amp; bàn giao nhật ký' }
+    ];
+    var rows = tasks.map(function (x) {
+      var tick = x.s === 'done' ? '✓' : (x.s === 'now' ? '•' : '');
+      return '<div class="task-check ' + x.s + '"><div class="tc-tick">' + tick + '</div>' +
+        '<div class="tc-main">' + x.m + '</div><div class="tc-time">' + x.t + '</div></div>';
+    }).join('');
+    var hoursDone = 3.6, billed = Math.round(rate * hoursDone), fee = Math.round(billed * 0.2);
+    document.getElementById('shiftBody').innerHTML =
+      '<div class="card"><div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.5rem">' +
+          '<span class="live-pill"><span class="lp-dot"></span>ĐANG TRỰC</span>' +
+          '<span style="font-size:0.66rem;color:var(--muted)">👁️ Con cái đang xem realtime</span></div>' +
+        '<div class="person"><div class="person-avatar">' + n.ava + '</div><div>' +
+          '<div class="p-name">' + n.name + ' <span class="verify-chip">✔ Đã xác minh</span></div>' +
+          '<div class="p-meta">Ca hôm nay · 08:00–12:00 · ⭐ ' + n.star + '</div></div></div></div>' +
+
+      '<div class="card"><div class="card-title">📸 Ảnh xác nhận có mặt</div>' +
+        '<div class="photo-proof"><span class="pp-big">📷</span>Ảnh check-in tại nhà ' + p.short +
+          '<span class="pp-stamp">📍 ' + p.addr.split('·')[0].trim() + ' · 08:02</span></div>' +
+        '<div style="font-size:0.66rem;color:var(--muted);margin-top:0.4rem">Ảnh + GPS gắn thời gian — chống chấm công khống.</div></div>' +
+
+      '<div class="card"><div class="card-title">📋 Nhật ký việc đã làm</div>' + rows + '</div>' +
+
+      '<div class="card"><div class="card-title">🧾 Giờ công &amp; chi phí (minh bạch)</div>' +
+        '<div class="bill-row"><span>Đơn giá</span><span>' + vnd(rate) + '/giờ</span></div>' +
+        '<div class="bill-row"><span>Đã trực</span><span>3 giờ 36 phút</span></div>' +
+        '<div class="bill-row total"><span>Tạm tính ca</span><span style="color:var(--care)">' + vnd(billed) + '</span></div>' +
+        '<div style="font-size:0.64rem;color:var(--muted);margin-top:0.5rem">Trong đó nền tảng giữ ' + vnd(fee) + ' (20% GMV) — phần còn lại trả thẳng người chăm. Tính theo giờ thực, không làm tròn lên.</div>' +
+        '<button class="btn btn-outline" style="width:100%;margin-top:0.7rem" onclick="toast(\'✅ Đã xác nhận ca trực — cảm ơn!\')">✅ Xác nhận ca khi kết thúc</button></div>';
+    document.getElementById('shiftOverlay').classList.add('show');
+  }
+  function closeShift() { document.getElementById('shiftOverlay').classList.remove('show'); }
+
+  // ===== trung tâm quyền riêng tư (Pháp lý — ATTT, Nghị định 13/2023) =====
+  function openPrivacy() {
+    var p = P();
+    var viewers = [
+      { ava: '🧑‍💼', name: 'Minh (con trai · người giám hộ)', scope: 'Toàn quyền — hồ sơ y tế, vị trí, camera', on: true, lock: true },
+      { ava: '👩‍⚕️', name: p.nurse.name + ' (điều dưỡng)', scope: 'Sinh hiệu + lịch chăm trong ca trực', on: true, lock: false },
+      { ava: '🩺', name: 'BS phụ trách (khám từ xa)', scope: 'Hồ sơ y tế + đơn thuốc khi có lịch khám', on: true, lock: false },
+      { ava: '👨‍👩‍👧', name: 'Người thân đồng chăm', scope: 'Sinh hiệu + cảnh báo (không xem camera)', on: false, lock: false }
+    ];
+    var vRows = viewers.map(function (v, i) {
+      return '<div class="acc-row"><span class="ac-ava">' + v.ava + '</span>' +
+        '<div class="ac-main"><div class="ac-name">' + v.name + '</div><div class="ac-scope">' + v.scope + '</div></div>' +
+        (v.lock ? '<span style="font-size:0.6rem;color:var(--muted)">🔒 Cố định</span>'
+                : '<div class="toggle' + (v.on ? '' : ' off') + '" onclick="toggleDevice(this)"></div>') + '</div>';
+    }).join('');
+    document.getElementById('privacyBody').innerHTML =
+      '<span class="gpp-badge" style="background:#eff6ff;color:#1d4ed8;border-color:#bfdbfe">🔐 Mã hóa đầu-cuối · tuân thủ Nghị định 13/2023 về dữ liệu cá nhân</span>' +
+
+      '<div class="card"><div class="card-title">👥 Ai xem được gì</div>' + vRows + '</div>' +
+
+      '<div class="card"><div class="card-title">📹 Camera AI &amp; dữ liệu sinh trắc</div>' +
+        '<div class="acc-row"><div class="ac-main"><div class="ac-name">Chỉ lưu clip khi có sự cố</div>' +
+          '<div class="ac-scope">Bình thường không ghi hình — chỉ giữ 30s quanh lúc té ngã</div></div>' +
+          '<div class="toggle" onclick="toggleDevice(this)"></div></div>' +
+        '<div class="acc-row"><div class="ac-main"><div class="ac-name">Xử lý AI ngay trên thiết bị</div>' +
+          '<div class="ac-scope">Nhận dạng dáng/khuôn mặt chạy on-device, không gửi hình thô lên cloud</div></div>' +
+          '<div class="toggle" onclick="toggleDevice(this)"></div></div>' +
+        '<div class="acc-row"><div class="ac-main"><div class="ac-name">Xóa dữ liệu sinh trắc</div>' +
+          '<div class="ac-scope">Yêu cầu xóa vĩnh viễn mẫu khuôn mặt/dáng đi</div></div>' +
+          '<button class="btn btn-ghost btn-sm" onclick="toast(\'🗑️ Đã gửi yêu cầu xóa dữ liệu sinh trắc\')">Xóa</button></div></div>' +
+
+      '<div class="card"><div class="card-title">🧾 Nhật ký truy cập gần đây</div>' +
+        '<div class="log-row"><span class="lr-t">Hôm nay 09:12</span><span>👩‍⚕️ ' + p.nurse.name + ' xem sinh hiệu</span></div>' +
+        '<div class="log-row"><span class="lr-t">Hôm nay 07:40</span><span>🧑‍💼 Minh xem báo cáo sức khỏe</span></div>' +
+        '<div class="log-row"><span class="lr-t">Hôm qua 20:05</span><span>🩺 BS Hùng xem hồ sơ trước khám</span></div></div>' +
+
+      '<button class="btn btn-outline" style="width:100%" onclick="toast(\'⏸️ Đã tạm dừng chia sẻ — chỉ người giám hộ xem được\')">⏸️ Tạm dừng mọi chia sẻ (rút đồng ý 1 chạm)</button>';
+    document.getElementById('privacyOverlay').classList.add('show');
+  }
+  function closePrivacy() { document.getElementById('privacyOverlay').classList.remove('show'); }
+
+  // ===== bảo hiểm chăm sóc dài hạn (LTC) =====
+  function openLtc() {
+    var p = P();
+    var tiers = [
+      { name: 'Cơ bản', price: '189k', per: '/tháng', benefit: '300k/ngày chăm · trần 60 triệu/năm', cur: false },
+      { name: 'Tiêu chuẩn', price: '349k', per: '/tháng', benefit: '600k/ngày chăm · trần 150 triệu/năm', cur: true },
+      { name: 'Cao cấp', price: '590k', per: '/tháng', benefit: '1 triệu/ngày · trần 300 triệu/năm + điều dưỡng riêng', cur: false }
+    ];
+    var cards = tiers.map(function (t) {
+      return '<div class="tier-card' + (t.cur ? ' cur' : '') + '">' + (t.cur ? '<span class="ti-badge">Phù hợp</span>' : '') +
+        '<div class="ti-name">' + t.name + '</div>' +
+        '<div class="ti-price">' + t.price + '<span> ' + t.per + '</span></div>' +
+        '<ul><li>' + t.benefit + '</li></ul></div>';
+    }).join('');
+    var ageNote = (p.age >= 75)
+      ? 'Tuổi ' + p.age + ' + bệnh nền → phí nhóm cao hơn, nhưng vẫn nhận bảo hiểm (không từ chối vì tuổi).'
+      : 'Tuổi ' + p.age + ' → phí nhóm chuẩn. Mua sớm khóa phí thấp dài hạn.';
+    document.getElementById('ltcBody').innerHTML =
+      '<div class="insight ok"><span class="in-ico">💡</span><div>Chi phí chăm dài hạn (đột quỵ, sa sút trí tuệ, hậu phẫu) có thể 10–30 triệu/tháng. Bảo hiểm LTC chia sẻ gánh nặng này cho gia đình.</div></div>' +
+
+      '<div class="card" style="margin-top:0.7rem"><div class="card-title">📦 Chọn gói cho ' + p.short + '</div>' +
+        '<div class="tier-grid" style="grid-template-columns:1fr">' + cards + '</div></div>' +
+
+      '<div class="card"><div class="card-title">🧮 Phí theo tuổi &amp; sức khỏe</div>' +
+        '<div style="font-size:0.8rem;color:var(--muted)">' + ageNote + '</div></div>' +
+
+      '<div class="card"><div class="card-title">⚡ Bồi thường 1 chạm</div>' +
+        '<div style="font-size:0.78rem;color:var(--muted);margin-bottom:0.5rem">Khi cần chăm dài hạn — app tự lấy dữ liệu chăm sóc &amp; y tế để duyệt nhanh, không giấy tờ rườm rà.</div>' +
+        '<button class="btn btn-outline" style="width:100%" onclick="toast(\'📑 Đã mở hồ sơ bồi thường — duyệt trong 24h (demo)\')">📑 Yêu cầu bồi thường</button></div>' +
+
+      '<button class="btn btn-primary" style="width:100%" onclick="toast(\'✅ Đã đăng ký gói Tiêu chuẩn cho ' + p.short + '\')">✅ Đăng ký bảo hiểm LTC</button>';
+    document.getElementById('ltcOverlay').classList.add('show');
+  }
+  function closeLtc() { document.getElementById('ltcOverlay').classList.remove('show'); }
+
+  // ===== CỔNG NGƯỜI CHĂM (supply-side · Đào tạo + nhận ca + thu nhập) =====
+  var CG = {
+    name: 'Chị Phạm Thị Mai', ava: '👩‍⚕️', level: 2, star: '4.9', jobs: 38, hours: 142,
+    levels: [
+      { lv: 1, name: 'Cấp 1 · Chăm sóc cơ bản', skills: 'Vệ sinh, ăn uống, đo sinh hiệu cơ bản', st: 'done' },
+      { lv: 2, name: 'Cấp 2 · Chăm người bệnh mạn', skills: 'Tiểu đường, huyết áp, cho uống thuốc đúng cách', st: 'done' },
+      { lv: 3, name: 'Cấp 3 · Phục hồi chức năng', skills: 'PHCN sau đột quỵ, phòng té ngã, vật lý trị liệu', st: 'now', prog: 60 },
+      { lv: 4, name: 'Cấp 4 · Chăm sa sút trí tuệ', skills: 'Alzheimer, rối loạn hành vi, cho ăn an toàn', st: 'lock' }
+    ],
+    lessons: [
+      { st: 'done', t: 'Bài 1 · Sinh lý người sau đột quỵ' },
+      { st: 'done', t: 'Bài 2 · Bài tập vận động trị liệu' },
+      { st: 'now', t: 'Bài 3 · Phòng chống té ngã tại nhà' },
+      { st: 'todo', t: 'Bài 4 · Thi thực hành + cấp chứng chỉ' }
+    ],
+    jobsNear: [
+      { ava: '👵', name: 'Bà Hoa · 72t', meta: 'Khương Trung · cách 1,2km · 8:00–12:00', pay: '100k/giờ', tags: ['Huyết áp', 'Tiểu đường', 'Cấp 2+'] },
+      { ava: '👴', name: 'Ông Sơn · 78t', meta: 'Thanh Xuân · cách 2,0km · 14:00–17:00', pay: '120k/giờ', tags: ['Sau đột quỵ', 'PHCN', 'Cấp 3'] },
+      { ava: '👵', name: 'Bà Liên · 81t', meta: 'Hạ Đình · cách 2,8km · cả ngày', pay: '150k/giờ', tags: ['Sa sút trí tuệ', 'Cấp 4'] }
+    ],
+    earn: [1.2, 1.8, 1.5, 2.1, 2.4, 2.2, 2.8]
+  };
+  var cgTab = 'home';
+  function cgRender() {
+    var b = document.getElementById('caregiverBody');
+    if (cgTab === 'home') {
+      var nextLv = CG.levels[CG.level]; // cấp đang học
+      b.innerHTML = cgTabsHtml() +
+        '<div class="card"><div class="person"><div class="person-avatar">' + CG.ava + '</div><div>' +
+          '<div class="p-name">' + CG.name + ' <span class="verify-chip">✔ Đã xác minh</span></div>' +
+          '<div class="p-meta"><span class="lic-chip">CCHN ✔</span> · Lý lịch tư pháp ✔ · ⭐ ' + CG.star + '</div></div></div>' +
+          '<div style="font-size:0.7rem;color:var(--care);font-weight:700;margin-top:0.5rem">🎓 Trình độ hiện tại: Cấp ' + CG.level + '</div></div>' +
+
+        '<div class="card" style="background:#f0fdfa;border-color:#99f6e4"><div class="card-title">💰 Thu nhập tháng này</div>' +
+          '<div class="earn-big">' + vnd(14200000) + '</div>' +
+          '<div style="font-size:0.7rem;color:var(--muted);margin-top:0.2rem">' + CG.jobs + ' ca · ' + CG.hours + ' giờ · trả thẳng vào tài khoản</div></div>' +
+
+        '<div class="card"><div class="card-title">📅 Ca sắp tới</div>' +
+          '<div class="job-card" style="margin:0"><div class="jc-top"><span class="jc-ava">👵</span>' +
+            '<div><div class="jc-name">Bà Hoa · 72t</div><div class="jc-meta">Hôm nay 08:00–12:00 · Khương Trung</div></div>' +
+            '<div class="jc-pay"><b>100k</b><div class="jc-meta">/giờ</div></div></div>' +
+          '<button class="btn btn-primary" style="width:100%;margin-top:0.6rem" onclick="toast(\'📍 Đã check-in ca trực — chúc bạn làm việc tốt!\')">▶️ Bắt đầu ca · check-in</button></div></div>' +
+
+        '<div class="card"><div class="card-title">📈 Lên Cấp ' + (CG.level + 1) + ' để nhận ca cao cấp hơn</div>' +
+          '<div style="font-size:0.74rem;color:var(--muted);margin-bottom:0.4rem">' + nextLv.name + ' — ' + nextLv.skills + '</div>' +
+          '<div class="progress"><i style="width:' + nextLv.prog + '%"></i></div>' +
+          '<div style="font-size:0.66rem;color:var(--muted);margin-top:0.3rem">Hoàn thành ' + nextLv.prog + '% · Cấp cao hơn = ca khó hơn, giá cao hơn.</div>' +
+          '<button class="btn btn-outline" style="width:100%;margin-top:0.6rem" onclick="cgGo(\'train\')">🎓 Tiếp tục đào tạo</button></div>';
+    } else if (cgTab === 'train') {
+      var lvls = CG.levels.map(function (l) {
+        var badge = l.st === 'done' ? '<span class="lvl-badge g">✔ Đạt</span>'
+          : (l.st === 'now' ? '<span class="lvl-badge a">Đang học</span>' : '<span class="lvl-badge x">🔒 Khóa</span>');
+        return '<div class="lvl-card ' + l.st + '"><div class="lvl-top"><span class="lt-name">' + l.name + '</span>' + badge + '</div>' +
+          '<div class="lt-sub">' + l.skills + '</div>' +
+          (l.st === 'now' ? '<div class="progress" style="margin-top:0.45rem"><i style="width:' + l.prog + '%"></i></div>' : '') + '</div>';
+      }).join('');
+      var lessons = CG.lessons.map(function (x) {
+        var tick = x.st === 'done' ? '✓' : (x.st === 'now' ? '•' : '');
+        return '<div class="task-check ' + x.st + '"><div class="tc-tick">' + tick + '</div><div class="tc-main">' + x.t + '</div></div>';
+      }).join('');
+      b.innerHTML = cgTabsHtml() +
+        '<span class="gpp-badge">🎓 ElderCare Academy · chứng chỉ 4 cấp được công nhận nội bộ</span>' +
+        '<div class="card"><div class="card-title">📚 Lộ trình chứng chỉ</div>' + lvls + '</div>' +
+        '<div class="card"><div class="card-title">▶️ Khóa đang học · Cấp 3 PHCN</div>' + lessons +
+          '<button class="btn btn-primary" style="width:100%;margin-top:0.6rem" onclick="toast(\'▶️ Mở bài học · Phòng chống té ngã\')">Học bài tiếp theo →</button></div>' +
+        '<div class="card" style="background:#f0fdfa;border-color:#99f6e4"><div style="font-size:0.74rem;color:#0f766e">💡 Đào tạo bài bản là cách ElderCare đảm bảo <b>chất lượng người chăm</b> — khác biệt với thuê người tự do (plan · Đào tạo).</div></div>';
+    } else if (cgTab === 'jobs') {
+      var jobs = CG.jobsNear.map(function (j) {
+        var tags = j.tags.map(function (t) { return '<span class="job-tag">' + t + '</span>'; }).join('');
+        return '<div class="job-card"><div class="jc-top"><span class="jc-ava">' + j.ava + '</span>' +
+          '<div><div class="jc-name">' + j.name + '</div><div class="jc-meta">' + j.meta + '</div></div>' +
+          '<div class="jc-pay"><b>' + j.pay.split('/')[0] + '</b><div class="jc-meta">/giờ</div></div></div>' +
+          '<div class="job-tags">' + tags + '</div>' +
+          '<button class="btn btn-primary" style="width:100%;margin-top:0.6rem" onclick="toast(\'✅ Đã nhận ca · ' + j.name + '\')">Nhận ca</button></div>';
+      }).join('');
+      b.innerHTML = cgTabsHtml() +
+        '<div class="card" style="background:#f5f3ff;border-color:#ddd6fe"><div style="font-size:0.74rem;color:#5b21b6">🤖 <b>AI ghép ca</b> theo kỹ năng, cấp chứng chỉ &amp; khoảng cách — ưu tiên ca gần nhà bạn nhất (Phiên 3).</div></div>' +
+        '<div class="card"><div class="card-title">🔍 Ca gần bạn · ' + CG.jobsNear.length + ' ca phù hợp</div>' + jobs + '</div>';
+    } else {
+      b.innerHTML = cgTabsHtml() +
+        '<div class="card" style="background:#f0fdfa;border-color:#99f6e4"><div class="card-title">💳 Số dư khả dụng</div>' +
+          '<div class="earn-big">' + vnd(3850000) + '</div>' +
+          '<button class="btn btn-primary" style="width:100%;margin-top:0.6rem" onclick="toast(\'🏦 Đã gửi yêu cầu rút tiền về ngân hàng\')">🏦 Rút tiền</button></div>' +
+        '<div class="card"><div class="card-title">📊 Thu nhập 7 tuần (triệu đ)</div>' + sparkline(CG.earn, '#0d9488') +
+          '<div style="display:flex;justify-content:space-between;font-size:0.7rem;color:var(--muted);margin-top:0.3rem"><span>7 tuần trước</span><span>Tuần này: <b style="color:var(--care)">2,8tr</b></span></div></div>' +
+        '<div class="card"><div class="card-title">🧾 Ca gần đây</div>' +
+          '<div class="bill-row"><span>Bà Hoa · 4h</span><span>+' + vnd(400000) + '</span></div>' +
+          '<div class="bill-row"><span>Ông Sơn · 3h</span><span>+' + vnd(360000) + '</span></div>' +
+          '<div class="bill-row"><span>Bà Liên · 6h</span><span>+' + vnd(900000) + '</span></div>' +
+          '<div style="font-size:0.64rem;color:var(--muted);margin-top:0.5rem">Nền tảng giữ 20% (CareConnect) lo bảo hiểm nghề nghiệp, đào tạo &amp; ghép ca; phần còn lại là của bạn.</div></div>';
+    }
+  }
+  function cgTabsHtml() {
+    function t(k, label) { return '<button class="cg-tab' + (cgTab === k ? ' on' : '') + '" onclick="cgGo(\'' + k + '\')">' + label + '</button>'; }
+    return '<div class="cg-tabs">' + t('home', '🏠 Việc') + t('train', '🎓 Đào tạo') + t('jobs', '🔍 Nhận ca') + t('earn', '💰 Thu nhập') + '</div>';
+  }
+  function cgGo(tab) { cgTab = tab; cgRender(); document.getElementById('caregiverBody').scrollTop = 0; }
+  function openCaregiver() { closeSheet(); cgTab = 'home'; cgRender(); document.getElementById('caregiverOverlay').classList.add('show'); }
+  function closeCaregiver() { document.getElementById('caregiverOverlay').classList.remove('show'); }
 
   // ===== fall / wander simulation =====
   var fallTimer = null, fallCount = 10;
