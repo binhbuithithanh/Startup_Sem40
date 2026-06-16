@@ -1143,6 +1143,39 @@
     .elder-btn.sos .eb-lab { color: #dc2626; font-size: 1.3rem; }
     .elder-btn.call { background: #f0fdfa; border-color: #5eead4; }
 
+    /* ===== ĐỢT CẤP / CRISIS ===== */
+    .crisis-overlay { position: absolute; inset: 0; z-index: 65; display: none; flex-direction: column;
+      background: rgba(180,83,9,0.97); color: #fff; padding: 1.6rem; text-align: center; justify-content: center; }
+    .crisis-overlay.show { display: flex; }
+    .crisis-overlay .cr-ico { font-size: 4rem; animation: shake .5s infinite; }
+    .crisis-overlay .cr-vital { font-size: 3.2rem; font-weight: 900; line-height: 1; margin: 0.6rem 0 0.2rem; }
+    .crisis-overlay .cr-thr { font-size: 0.9rem; background: rgba(0,0,0,0.25); border-radius: 12px; padding: 0.6rem 1rem; margin: 1rem 0; }
+    .crisis-overlay .cr-chain { text-align: left; font-size: 0.82rem; }
+    .crisis-overlay .cr-chain .cc { display: flex; gap: 0.5rem; padding: 0.35rem 0; opacity: 0.4; transition: opacity .3s; }
+    .crisis-overlay .cr-chain .cc.on { opacity: 1; }
+    .crisis-overlay .cr-act { display: flex; flex-direction: column; gap: 0.5rem; margin-top: 1.2rem; }
+
+    /* ===== COVERAGE ĐÔ THỊ/TỈNH ===== */
+    .cov-stat { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.5rem; text-align: center; }
+    .cov-stat .cv { background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 0.65rem 0.3rem; }
+    .cov-stat .cv b { display: block; font-size: 1.3rem; color: var(--care); }
+    .cov-stat .cv span { font-size: 0.62rem; color: var(--muted); }
+    .cov-layer { display: flex; gap: 0.55rem; padding: 0.55rem 0; border-bottom: 1px solid #f1f5f4; }
+    .cov-layer:last-child { border-bottom: none; }
+    .cov-layer .cl-ico { font-size: 1.3rem; }
+    .cov-layer .cl-name { font-size: 0.8rem; font-weight: 700; }
+    .cov-layer .cl-sub { font-size: 0.66rem; color: var(--muted); }
+
+    /* ===== BURNOUT (chống kiệt sức người nhà) ===== */
+    .stress-scale { display: flex; gap: 0.3rem; margin: 0.5rem 0; }
+    .stress-scale button { flex: 1; padding: 0.5rem 0; border-radius: 10px; border: 1.5px solid var(--border);
+      background: #fff; font-family: inherit; font-size: 0.95rem; cursor: pointer; }
+    .stress-scale button.on { border-color: var(--care); background: #f0fdfa; transform: scale(1.05); }
+    .tip-row { display: flex; gap: 0.55rem; padding: 0.5rem 0; border-bottom: 1px solid #f1f5f4; align-items: flex-start; }
+    .tip-row:last-child { border-bottom: none; }
+    .tip-row .tp-ico { font-size: 1.2rem; }
+    .tip-row .tp-txt { font-size: 0.78rem; line-height: 1.4; }
+
     /* RESPONSIVE */
     @media (max-width: 900px) {
       .marketing { display: none; }
@@ -1246,7 +1279,7 @@
               <div style="font-size:0.7rem;opacity:0.9">AI phân loại &amp; gợi ý gói chăm</div></div>
             <button class="ob-close" onclick="closeOnboard()">✕</button>
           </div>
-          <div class="ob-steps"><i id="obs1"></i><i id="obs2"></i><i id="obs3"></i></div>
+          <div class="ob-steps"><i id="obs1"></i><i id="obs2"></i><i id="obs3"></i><i id="obs4"></i></div>
           <div class="ob-body" id="obBody"></div>
           <div class="ob-foot" id="obFoot"></div>
         </div>
@@ -1470,6 +1503,46 @@
             <button class="ov-close" onclick="closeLearn()">✕</button>
           </div>
           <div class="ov-body" id="learnBody"></div>
+        </div>
+      </div>
+
+      <!-- ĐỢT CẤP BỆNH MẠN -->
+      <div class="crisis-overlay" id="crisisOverlay">
+        <div class="cr-ico" id="crIco">🩸</div>
+        <div style="font-weight:900;font-size:1.2rem" id="crTitle">CẢNH BÁO ĐỢT CẤP</div>
+        <div class="cr-vital" id="crVital">—</div>
+        <div style="font-size:0.85rem" id="crName">—</div>
+        <div class="cr-thr" id="crThr">—</div>
+        <div class="cr-chain" id="crChain"></div>
+        <div class="cr-act">
+          <button class="btn btn-white" style="background:#fff;color:#b45309;border:none;border-radius:12px;padding:0.8rem;font-family:inherit;font-weight:800;cursor:pointer" onclick="closeCrisis()">✅ Đã xử lý — ổn định</button>
+          <button style="background:rgba(0,0,0,0.2);color:#fff;border:1.5px solid rgba(255,255,255,0.5);border-radius:12px;padding:0.8rem;font-family:inherit;font-weight:700;cursor:pointer" onclick="toast('📞 Đang gọi bác sĩ phụ trách...')">📞 Gọi bác sĩ ngay</button>
+        </div>
+      </div>
+
+      <!-- COVERAGE ĐÔ THỊ / TỈNH -->
+      <div class="overlay-screen" id="coverageOverlay">
+        <div class="ov-wrap">
+          <div class="ov-head teal">
+            <span style="font-size:1.3rem">🗺️</span>
+            <div><div style="font-weight:900;font-size:1rem">Mô hình phủ Đô thị ↔ Tỉnh</div>
+              <div style="font-size:0.7rem;opacity:0.9">Chăm tận nơi ở đâu cũng tới được</div></div>
+            <button class="ov-close" onclick="closeCoverage()">✕</button>
+          </div>
+          <div class="ov-body" id="coverageBody"></div>
+        </div>
+      </div>
+
+      <!-- CHỐNG KIỆT SỨC NGƯỜI NHÀ -->
+      <div class="overlay-screen" id="burnoutOverlay">
+        <div class="ov-wrap">
+          <div class="ov-head violet">
+            <span style="font-size:1.3rem">💚</span>
+            <div><div style="font-weight:900;font-size:1rem">Chăm sóc người chăm</div>
+              <div style="font-size:0.7rem;opacity:0.9">Bạn cũng cần được tiếp sức</div></div>
+            <button class="ov-close" onclick="closeBurnout()">✕</button>
+          </div>
+          <div class="ov-body" id="burnoutBody"></div>
         </div>
       </div>
 
@@ -1973,7 +2046,8 @@
       '<div class="sub-panel" data-sub="care-new" style="display:none">' +
         '<div class="card nearby-cta"><div class="card-title">📍 Quét quanh đây tìm người chăm</div>' +
           '<div style="font-size:0.8rem;color:#0f766e;margin-bottom:0.7rem">Tìm điều dưỡng, hộ lý &amp; người chăm <b>địa phương</b> đã xác minh trong bán kính 3km quanh nhà ' + p.short + ' — đến trong ngày.</div>' +
-          '<button class="btn btn-primary" style="width:100%" onclick="openNearby()">📡 Quét người chăm gần đây</button></div>' +
+          '<button class="btn btn-primary" style="width:100%" onclick="openNearby()">📡 Quét người chăm gần đây</button>' +
+          '<button class="btn btn-outline" style="width:100%;margin-top:0.5rem" onclick="openCoverage()">🗺️ Ở tỉnh? Xem mô hình phủ Đô thị ↔ Tỉnh</button></div>' +
         '<div class="card"><div class="card-title">⭐ Điều dưỡng gợi ý gần bạn</div>' +
           caregiverCard('👨‍⚕️','Điều dưỡng Tuấn','4.8','100k/giờ · cách 1,2km','Cấp 2') +
           caregiverCard('👩‍⚕️','Điều dưỡng Hương','4.9','120k/giờ · cách 2,5km','Cấp 3') +
@@ -2113,7 +2187,12 @@
 
       '<div class="card" style="border-color:#fecaca;background:#fef9f9"><div class="card-title" style="color:#dc2626">🚨 Mô phỏng sự cố (demo)</div>' +
         '<div style="font-size:0.8rem;color:var(--muted);margin-bottom:0.7rem">Bấm để xem CareSense phản ứng khi AI phát hiện sự cố.</div>' +
-        '<button class="fall-btn" onclick="simulateFall()">📹 Xem camera AI phát hiện té ngã</button>' + wander + '</div>' +
+        '<button class="fall-btn" onclick="simulateFall()">📹 Xem camera AI phát hiện té ngã</button>' +
+        '<button class="fall-btn amber" onclick="openCrisis()">🩸 Mô phỏng đợt cấp bệnh mạn (ngưỡng)</button>' + wander + '</div>' +
+
+      '<div class="card" style="border-color:#ddd6fe;background:#faf8ff"><div class="card-title" style="color:#6d28d9">💚 Chăm sóc người chăm (bạn)</div>' +
+        '<div style="font-size:0.8rem;color:var(--muted);margin-bottom:0.7rem">Chăm bố mẹ dễ kiệt sức. Tự kiểm tra &amp; được tiếp sức.</div>' +
+        '<button class="btn btn-primary" style="width:100%;background:#6d28d9" onclick="openBurnout()">💚 Mở góc chăm sóc bản thân</button></div>' +
 
       '<div class="card"><div class="card-title">💊 Lịch uống thuốc hôm nay</div>' + meds + '</div>';
   }
@@ -2335,7 +2414,7 @@
   }
 
   // ===== onboarding triage (3 bước) =====
-  var ob = { step: 1, dep: null, diseases: [] };
+  var ob = { step: 1, dep: null, diseases: [], distance: null, area: null, tech: null };
   var DEP_OPTS = [
     { v:'Tự chủ', d:'Sinh hoạt độc lập, cần theo dõi định kỳ' },
     { v:'Hỗ trợ một phần', d:'Cần hỗ trợ sinh hoạt & nhắc thuốc' },
@@ -2346,17 +2425,21 @@
   var DIS_OPTS = ['Tăng huyết áp', 'Tiểu đường', 'Thoái hóa khớp', 'Tim mạch', 'Đột quỵ', 'Parkinson', 'Sa sút trí tuệ', 'COPD/hô hấp'];
 
   function startOnboard() {
-    ob = { step: 1, dep: null, diseases: [] };
+    ob = { step: 1, dep: null, diseases: [], distance: null, area: null, tech: null };
     closeSheet();
     document.getElementById('onboardOverlay').classList.add('show');
     renderOnboard();
   }
   function closeOnboard() { document.getElementById('onboardOverlay').classList.remove('show'); }
 
+  function obGroup(field, label, opts) {
+    return '<div style="font-size:0.74rem;font-weight:700;margin:0.6rem 0 0.35rem">' + label + '</div><div class="chip-row">' +
+      opts.map(function (o) {
+        return '<button class="chip' + (ob[field] === o ? ' sel' : '') + '" onclick="obPick(\'' + field + '\',\'' + o + '\')">' + o + '</button>';
+      }).join('') + '</div>';
+  }
   function renderOnboard() {
-    document.getElementById('obs1').className = ob.step >= 1 ? 'on' : '';
-    document.getElementById('obs2').className = ob.step >= 2 ? 'on' : '';
-    document.getElementById('obs3').className = ob.step >= 3 ? 'on' : '';
+    for (var s = 1; s <= 4; s++) document.getElementById('obs' + s).className = ob.step >= s ? 'on' : '';
     var body = document.getElementById('obBody'), foot = document.getElementById('obFoot');
 
     if (ob.step === 1) {
@@ -2372,20 +2455,28 @@
           var sel = ob.diseases.indexOf(d) >= 0;
           return '<button class="chip' + (sel ? ' sel' : '') + '" onclick="obToggleDis(\'' + d + '\')">' + d + '</button>';
         }).join('') + '</div>';
-      foot.innerHTML = '<button class="btn btn-primary" onclick="obNext()">Phân tích bằng AI →</button>';
+      foot.innerHTML = '<button class="btn btn-primary" onclick="obNext()">Tiếp tục →</button>';
+    } else if (ob.step === 3) {
+      body.innerHTML = '<h3>Bước 3 · Hoàn cảnh gia đình</h3><div class="ob-q">Giúp AI chọn cách chăm &amp; giao diện phù hợp.</div>' +
+        obGroup('distance', '👨‍👧 Bạn ở đâu so với người thân?', ['Ở cùng nhà', 'Khác quận/tỉnh', 'Nước ngoài']) +
+        obGroup('area', '📍 Người thân sống ở?', ['Đô thị lớn', 'Tỉnh/nông thôn']) +
+        obGroup('tech', '📱 Người thân dùng điện thoại?', ['Tự dùng được', 'Cần hỗ trợ']);
+      foot.innerHTML = '<button class="btn btn-primary" onclick="obNext()"' + (ob.distance && ob.area && ob.tech ? '' : ' disabled style="opacity:.5"') + '>Phân tích bằng AI →</button>';
     } else {
       var rec = obRecommend();
-      body.innerHTML = '<h3>Bước 3 · AI gợi ý</h3><div class="ob-q">Dựa trên mức phụ thuộc &amp; bệnh nền, AI đề xuất:</div>' +
+      body.innerHTML = '<h3>Bước 4 · AI gợi ý theo phân khúc</h3><div class="ob-q">Ghép theo mức phụ thuộc, bệnh nền, vị trí &amp; hoàn cảnh:</div>' +
         '<div class="ob-result">' +
-          '<div class="or-row">📋 <b>Mức:</b> ' + ob.dep + '</div>' +
+          '<div class="or-row">📋 <b>Mức:</b> ' + ob.dep + ' · ' + ob.area + '</div>' +
           '<div class="or-row">🩺 <b>Bệnh nền:</b> ' + (ob.diseases.length ? ob.diseases.join(', ') : 'chưa chọn') + '</div>' +
           '<div class="or-row">📦 <b>Gói đề xuất:</b> ' + rec.pkg + '</div>' +
           '<div class="or-row">👥 <b>Đội chăm:</b> ' + rec.team + '</div>' +
-          '<div class="or-row" style="color:var(--muted);font-size:0.72rem">🤖 Gợi ý tự động (triage + matching, Phiên 3) — đội ngũ y tế sẽ xác nhận lại.</div>' +
+          rec.notes.map(function (n) { return '<div class="or-row" style="color:#0f766e">✦ ' + n + '</div>'; }).join('') +
+          '<div class="or-row" style="color:var(--muted);font-size:0.72rem">🤖 Gợi ý tự động (triage + matching theo phân khúc 3 trục) — đội y tế xác nhận lại.</div>' +
         '</div>';
       foot.innerHTML = '<button class="btn btn-primary" onclick="obFinish()">✅ Tạo hồ sơ &amp; đặt đội chăm</button>';
     }
   }
+  function obPick(field, val) { ob[field] = val; renderOnboard(); }
   function obPickDep(v) { ob.dep = v; renderOnboard(); }
   function obToggleDis(d) {
     var i = ob.diseases.indexOf(d);
@@ -2394,6 +2485,7 @@
   }
   function obNext() {
     if (ob.step === 1 && !ob.dep) return;
+    if (ob.step === 3 && !(ob.distance && ob.area && ob.tech)) return;
     ob.step++;
     renderOnboard();
   }
@@ -2407,7 +2499,12 @@
     if (ob.diseases.indexOf('Đột quỵ') >= 0 || ob.diseases.indexOf('Parkinson') >= 0) team.push('BS Thần kinh + PHCN');
     if (ob.diseases.indexOf('Sa sút trí tuệ') >= 0 || ob.dep === 'Sa sút trí tuệ') team.push('Tâm lý + Công tác xã hội');
     if (ob.diseases.indexOf('COPD/hô hấp') >= 0) team.push('BS Hô hấp');
-    return { pkg: pkg, team: team.join(' · ') };
+    var notes = [];
+    if (ob.area === 'Tỉnh/nông thôn') notes.push('Mô hình hub tỉnh + tele chuyên gia tuyến trên — vẫn đủ chuyên khoa');
+    else notes.push('Mạng lưới điều dưỡng dày — đến tận nhà trong ngày');
+    if (ob.distance === 'Nước ngoài' || ob.distance === 'Khác quận/tỉnh') notes.push('Giám sát từ xa: camera AI + báo cáo định kỳ gửi bạn');
+    if (ob.tech === 'Cần hỗ trợ') notes.push('Bật giao diện đơn giản chữ to + người chăm hỗ trợ thao tác');
+    return { pkg: pkg, team: team.join(' · '), notes: notes };
   }
   function obFinish() {
     closeOnboard();
@@ -3267,6 +3364,115 @@
     document.getElementById('elderView').classList.add('show');
   }
   function closeElderView() { document.getElementById('elderView').classList.remove('show'); }
+
+  // ===== S · phủ chuyên gia Đô thị ↔ Tỉnh =====
+  var covMode = 'city';
+  function openCoverage() { covMode = 'city'; renderCoverage(); document.getElementById('coverageOverlay').classList.add('show'); }
+  function setCov(m) { covMode = m; renderCoverage(); }
+  function renderCoverage() {
+    var tabs = '<div class="rep-period">' +
+      '<button class="' + (covMode === 'city' ? 'on' : '') + '" onclick="setCov(\'city\')">🏙️ Đô thị lớn</button>' +
+      '<button class="' + (covMode === 'rural' ? 'on' : '') + '" onclick="setCov(\'rural\')">🌾 Tỉnh/nông thôn</button></div>';
+    var body;
+    if (covMode === 'city') {
+      body =
+        '<div class="card"><div class="card-title">🏙️ Mô hình đô thị · chăm tận nhà</div>' +
+          '<div class="cov-stat"><div class="cv"><b>7</b><span>Quận đã phủ (HN)</span></div>' +
+          '<div class="cv"><b>~20\'</b><span>Điều dưỡng tới nhà</span></div></div></div>' +
+        '<div class="card"><div class="card-title">🧩 Cách vận hành</div>' +
+          covLayer('🩺', 'Điều dưỡng địa phương dày đặc', 'Bán kính 3km, đến trong ngày') +
+          covLayer('👨‍⚕️', 'Đầy đủ chuyên khoa onsite', 'BS đến nhà hoặc phòng khám liên kết') +
+          covLayer('📹', 'CareSense + tele bổ trợ', 'Theo dõi liên tục giữa các lần thăm') + '</div>';
+    } else {
+      body =
+        '<div class="card"><div class="card-title">🌾 Mô hình tỉnh · hub + tele</div>' +
+          '<div class="cov-stat"><div class="cv"><b>12</b><span>Tỉnh có hub</span></div>' +
+          '<div class="cv"><b>100%</b><span>Tiếp cận chuyên gia qua tele</span></div></div></div>' +
+        '<div class="card"><div class="card-title">🧩 Cách vận hành</div>' +
+          covLayer('🏥', 'Hub trung tâm tỉnh', 'Điểm chăm + thiết bị + dược, bán kính rộng') +
+          covLayer('🩺', 'Điều dưỡng địa phương đào tạo', 'ElderCare Academy chuẩn hóa tay nghề') +
+          covLayer('📡', 'Tele chuyên gia tuyến trên', 'BS đầu ngành HN/HCM khám từ xa — không cần lên thành phố') +
+          covLayer('🛵', 'Giao thuốc qua bưu cục', 'Thuốc chính hãng tới tận xã') + '</div>' +
+        '<div class="card" style="background:#f0fdfa;border-color:#99f6e4"><div style="font-size:0.72rem;color:#0f766e">💡 Tỉnh không đủ bác sĩ chuyên khoa → tele + hub giúp người già tỉnh tiếp cận chất lượng đô thị (plan · Phân khúc địa lý).</div></div>';
+    }
+    document.getElementById('coverageBody').innerHTML = tabs + body;
+  }
+  function covLayer(ico, name, sub) {
+    return '<div class="cov-layer"><span class="cl-ico">' + ico + '</span>' +
+      '<div><div class="cl-name">' + name + '</div><div class="cl-sub">' + sub + '</div></div></div>';
+  }
+  function closeCoverage() { document.getElementById('coverageOverlay').classList.remove('show'); }
+
+  // ===== U · mô phỏng đợt cấp bệnh mạn (ngưỡng CareSense) =====
+  var crisisTimers = [];
+  function clearCrisis() { for (var i = 0; i < crisisTimers.length; i++) clearTimeout(crisisTimers[i]); crisisTimers = []; }
+  function openCrisis() {
+    clearCrisis();
+    var p = P();
+    var sc = (p.id === 'tam')
+      ? { ico: '💓', name: 'Nhịp tim · Ông Tâm', from: 92, to: 138, unit: ' bpm', thr: 'Nhịp tim ≥120 kéo dài → cảnh báo BS Thần kinh', doc: 'BS Thần kinh Sơn' }
+      : { ico: '🩸', name: 'Huyết áp tâm thu · Bà Hoa', from: 132, to: 178, unit: ' mmHg', thr: 'Huyết áp ≥140/90 lặp lại → cảnh báo BS Tim mạch', doc: 'BS Tim mạch Hùng' };
+    document.getElementById('crIco').textContent = sc.ico;
+    document.getElementById('crName').textContent = sc.name;
+    document.getElementById('crThr').textContent = '⚠️ Ngưỡng: ' + sc.thr;
+    var chain = [
+      '📡 CareSense phát hiện vượt ngưỡng',
+      '🩺 Cảnh báo ' + sc.doc,
+      '👨‍👩 Báo con cái (Minh) kèm số đo',
+      '💊 Gợi ý: cho nghỉ, kiểm tra thuốc, đo lại sau 15 phút'
+    ];
+    document.getElementById('crChain').innerHTML = chain.map(function (c, i) {
+      return '<div class="cc" id="cc-' + i + '"><span>' + c + '</span></div>';
+    }).join('');
+    document.getElementById('crisisOverlay').classList.add('show');
+    // đếm số tăng dần tới ngưỡng
+    var steps = 14, cur = sc.from, inc = (sc.to - sc.from) / steps;
+    for (var s = 0; s <= steps; s++) {
+      (function (s) {
+        crisisTimers.push(setTimeout(function () {
+          document.getElementById('crVital').textContent = Math.round(sc.from + inc * s) + sc.unit;
+        }, s * 70));
+      })(s);
+    }
+    chain.forEach(function (_, i) {
+      crisisTimers.push(setTimeout(function () { var el = document.getElementById('cc-' + i); if (el) el.classList.add('on'); }, 1100 + i * 600));
+    });
+  }
+  function closeCrisis() { clearCrisis(); document.getElementById('crisisOverlay').classList.remove('show'); toast('✅ Đã ghi nhận & theo dõi tiếp'); }
+
+  // ===== W · chống kiệt sức người nhà (caregiver burnout) =====
+  var stressVal = 0;
+  function openBurnout() {
+    stressVal = 0;
+    document.getElementById('burnoutBody').innerHTML =
+      '<div class="card"><div class="card-title">💚 Hôm nay bạn căng thẳng mức nào?</div>' +
+        '<div class="stress-scale" id="stressScale"></div>' +
+        '<div style="font-size:0.66rem;color:var(--muted);text-align:center" id="stressTxt">Chạm để chọn</div></div>' +
+      '<div class="card"><div class="card-title">🌿 Mẹo giữ sức cho người chăm chính</div>' +
+        tipRow('😴', 'Ngủ đủ — đặt CareSense trông cụ ban đêm, bạn yên tâm nghỉ') +
+        tipRow('🔁', 'Chia ca với anh chị em — không ôm hết một mình') +
+        tipRow('🫂', 'Nói ra cảm xúc — cô đơn khi chăm là bình thường') +
+        tipRow('⏱️', 'Dành 30 phút mỗi ngày cho riêng bạn') + '</div>' +
+      '<div class="card"><div class="card-title">🤝 Tiếp sức ngay</div>' +
+        '<button class="btn btn-outline" style="width:100%;margin-bottom:0.5rem" onclick="closeBurnout();openRefer()">👨‍👩‍👧 Mời anh chị em chia ca chăm</button>' +
+        '<button class="btn btn-outline" style="width:100%" onclick="toast(\'🫂 Đã kết nối chuyên gia tâm lý — tư vấn miễn phí 15\\\'\')">🧠 Kết nối chuyên gia tâm lý</button></div>' +
+      '<div class="card" style="background:#f5f3ff;border-color:#ddd6fe"><div style="font-size:0.72rem;color:#5b21b6">💡 Kiệt sức người chăm (caregiver burnout) là rủi ro thật — giữ người nhà khỏe thì việc chăm mới bền (plan · Đào tạo).</div></div>';
+    renderStress();
+    document.getElementById('burnoutOverlay').classList.add('show');
+  }
+  function renderStress() {
+    var faces = ['😌', '🙂', '😐', '😟', '😩'];
+    document.getElementById('stressScale').innerHTML = faces.map(function (f, i) {
+      return '<button class="' + (stressVal === i + 1 ? 'on' : '') + '" onclick="setStress(' + (i + 1) + ')">' + f + '</button>';
+    }).join('');
+  }
+  function setStress(v) {
+    stressVal = v; renderStress();
+    var msg = v <= 2 ? 'Tốt — bạn đang giữ cân bằng 👍' : (v === 3 ? 'Hơi mệt — nhớ nghỉ ngơi nhé' : 'Bạn đang quá tải — hãy chia ca & tìm hỗ trợ ngay');
+    document.getElementById('stressTxt').textContent = msg;
+  }
+  function tipRow(ico, txt) { return '<div class="tip-row"><span class="tp-ico">' + ico + '</span><span class="tp-txt">' + txt + '</span></div>'; }
+  function closeBurnout() { document.getElementById('burnoutOverlay').classList.remove('show'); }
 
   // ===== fall / wander simulation =====
   var fallTimer = null, fallCount = 10;
