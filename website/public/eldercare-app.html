@@ -1086,6 +1086,63 @@
     .post-card .pc-body { font-size: 0.78rem; line-height: 1.45; }
     .post-card .pc-foot { font-size: 0.66rem; color: var(--muted); margin-top: 0.4rem; }
 
+    /* ===== THƯ VIỆN BỆNH LÝ ===== */
+    .dz-item { border: 1.5px solid var(--border); border-radius: 12px; margin-bottom: 0.5rem; overflow: hidden; }
+    .dz-head { display: flex; align-items: center; gap: 0.6rem; padding: 0.7rem 0.8rem; cursor: pointer; background: #fff; }
+    .dz-head .dz-ico { font-size: 1.4rem; }
+    .dz-head .dz-name { flex: 1; font-size: 0.85rem; font-weight: 800; }
+    .dz-head .dz-arrow { color: var(--muted); transition: transform .2s; }
+    .dz-item.open .dz-arrow { transform: rotate(90deg); }
+    .dz-body { display: none; padding: 0.2rem 0.8rem 0.8rem; }
+    .dz-item.open .dz-body { display: block; }
+    .dz-field { padding: 0.5rem 0; border-bottom: 1px solid #f1f5f4; }
+    .dz-field:last-child { border-bottom: none; }
+    .dz-field .dzf-lab { font-size: 0.62rem; font-weight: 800; text-transform: uppercase; color: var(--muted); margin-bottom: 0.15rem; }
+    .dz-field .dzf-val { font-size: 0.78rem; line-height: 1.4; }
+    .dz-field.alert .dzf-val { color: #dc2626; font-weight: 700; }
+    .dz-field.care .dzf-val { color: var(--care); font-weight: 700; }
+
+    /* ===== AI MATCHING EXPLAINER ===== */
+    .mx-factor { display: flex; gap: 0.5rem; align-items: flex-start; padding: 0.5rem 0; }
+    .mx-factor .mxf-ico { width: 26px; height: 26px; border-radius: 8px; background: #ede9fe; color: #6d28d9; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center; font-size: 0.8rem; }
+    .mx-factor .mxf-lab { font-size: 0.64rem; color: var(--muted); }
+    .mx-factor .mxf-val { font-size: 0.8rem; font-weight: 700; }
+    .mx-arrow { text-align: center; font-size: 1.2rem; color: #c4b5fd; margin: 0.2rem 0; }
+    .mx-member { display: flex; gap: 0.55rem; align-items: flex-start; padding: 0.55rem 0; border-bottom: 1px solid #f1f5f4; }
+    .mx-member:last-child { border-bottom: none; }
+    .mx-member .mxm-ico { font-size: 1.4rem; }
+    .mx-member .mxm-role { font-size: 0.8rem; font-weight: 800; }
+    .mx-member .mxm-why { font-size: 0.68rem; color: var(--muted); }
+
+    /* ===== E-LEARNING / QUIZ ===== */
+    .quiz-opt { display: block; width: 100%; text-align: left; font-family: inherit; border: 1.5px solid var(--border);
+      background: #fff; border-radius: 12px; padding: 0.7rem 0.85rem; margin-bottom: 0.5rem; font-size: 0.82rem;
+      font-weight: 600; color: var(--primary); cursor: pointer; transition: all .15s; }
+    .quiz-opt.correct { border-color: #16a34a; background: #f0fdf4; color: #15803d; }
+    .quiz-opt.wrong { border-color: #dc2626; background: #fef2f2; color: #b91c1c; }
+    .learn-prog { display: flex; gap: 0.3rem; margin-bottom: 0.7rem; }
+    .learn-prog i { flex: 1; height: 4px; border-radius: 99px; background: #e5e7eb; }
+    .learn-prog i.on { background: var(--care); }
+
+    /* ===== ELDER VIEW (xem như bố mẹ) ===== */
+    .elder-view { position: absolute; inset: 0; z-index: 62; background: #f8fafc; display: none; flex-direction: column; }
+    .elder-view.show { display: flex; }
+    .elder-top { background: linear-gradient(135deg, #0d9488, #0f766e); color: #fff; padding: 1.1rem; text-align: center; flex-shrink: 0; }
+    .elder-top .et-clock { font-size: 2rem; font-weight: 900; }
+    .elder-top .et-greet { font-size: 1rem; font-weight: 700; margin-top: 0.2rem; }
+    .elder-top .et-exit { position: absolute; top: 0.7rem; right: 0.8rem; background: rgba(255,255,255,0.2); border: none;
+      color: #fff; font-size: 0.72rem; padding: 0.3rem 0.6rem; border-radius: 99px; cursor: pointer; }
+    .elder-body { flex: 1; overflow-y: auto; padding: 1rem; display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; align-content: start; }
+    .elder-btn { border: 2px solid var(--border); border-radius: 18px; background: #fff; padding: 1.3rem 0.6rem; text-align: center;
+      font-family: inherit; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 0.4rem; }
+    .elder-btn .eb-ico { font-size: 2.6rem; }
+    .elder-btn .eb-lab { font-size: 1.05rem; font-weight: 800; color: var(--primary); }
+    .elder-btn.sos { grid-column: 1 / -1; background: #fef2f2; border-color: #fca5a5; }
+    .elder-btn.sos .eb-ico { font-size: 3rem; }
+    .elder-btn.sos .eb-lab { color: #dc2626; font-size: 1.3rem; }
+    .elder-btn.call { background: #f0fdfa; border-color: #5eead4; }
+
     /* RESPONSIVE */
     @media (max-width: 900px) {
       .marketing { display: none; }
@@ -1375,6 +1432,55 @@
           </div>
           <div class="ov-body" id="svcBody"></div>
         </div>
+      </div>
+
+      <!-- THƯ VIỆN BỆNH LÝ + PHÁC ĐỒ CARESENSE -->
+      <div class="overlay-screen" id="diseaseOverlay">
+        <div class="ov-wrap">
+          <div class="ov-head teal">
+            <span style="font-size:1.3rem">📖</span>
+            <div><div style="font-weight:900;font-size:1rem">Thư viện bệnh lý &amp; phác đồ</div>
+              <div style="font-size:0.7rem;opacity:0.9">Theo dõi gì · ngưỡng cảnh báo · ai chăm</div></div>
+            <button class="ov-close" onclick="closeDisease()">✕</button>
+          </div>
+          <div class="ov-body" id="diseaseBody"></div>
+        </div>
+      </div>
+
+      <!-- AI MATCHING EXPLAINER -->
+      <div class="overlay-screen" id="matchOverlay">
+        <div class="ov-wrap">
+          <div class="ov-head violet">
+            <span style="font-size:1.3rem">🧩</span>
+            <div><div style="font-weight:900;font-size:1rem">Vì sao đội chăm này?</div>
+              <div style="font-size:0.7rem;opacity:0.9">AI ghép theo nhu cầu thực của người thân</div></div>
+            <button class="ov-close" onclick="closeMatch()">✕</button>
+          </div>
+          <div class="ov-body" id="matchBody"></div>
+        </div>
+      </div>
+
+      <!-- E-LEARNING / BÀI HỌC + THI -->
+      <div class="overlay-screen" id="learnOverlay">
+        <div class="ov-wrap">
+          <div class="ov-head teal" id="learnHead">
+            <span style="font-size:1.3rem" id="learnIco">📚</span>
+            <div><div style="font-weight:900;font-size:1rem" id="learnTitle">Bài học</div>
+              <div style="font-size:0.7rem;opacity:0.9" id="learnSub">ElderCare Academy</div></div>
+            <button class="ov-close" onclick="closeLearn()">✕</button>
+          </div>
+          <div class="ov-body" id="learnBody"></div>
+        </div>
+      </div>
+
+      <!-- ELDER VIEW · xem như bố mẹ thấy -->
+      <div class="elder-view" id="elderView">
+        <div class="elder-top">
+          <button class="et-exit" onclick="closeElderView()">✕ Thoát chế độ</button>
+          <div class="et-clock">9:41</div>
+          <div class="et-greet" id="etGreet">Chào cụ 👋</div>
+        </div>
+        <div class="elder-body" id="elderBody"></div>
       </div>
 
       <!-- NEARBY RADAR OVERLAY -->
@@ -1860,7 +1966,8 @@
           '<div class="team-lead"><div class="tl-ava">' + p.team.lead.ico + '</div>' +
             '<div><div class="tl-role">' + p.team.lead.role + '</div><div class="tl-name">' + p.team.lead.name + '</div></div></div>' +
           members +
-          '<div style="font-size:0.66rem;color:var(--muted);margin-top:0.55rem">Phối hợp theo nỗi đau &amp; bệnh lý của ' + p.short + ' (ma trận chuyên gia — Phiên 3).</div></div>' +
+          '<div style="font-size:0.66rem;color:var(--muted);margin-top:0.55rem">Phối hợp theo nỗi đau &amp; bệnh lý của ' + p.short + ' (ma trận chuyên gia — Phiên 3).</div>' +
+          '<button class="btn btn-outline" style="width:100%;margin-top:0.6rem" onclick="openMatch()">🧩 Vì sao đội chăm này?</button></div>' +
       '</div>' +
 
       '<div class="sub-panel" data-sub="care-new" style="display:none">' +
@@ -1993,7 +2100,8 @@
         '<div><div class="ph-name">' + p.name + '</div><div class="ph-meta">' + p.meta + ' · ' + p.dependency + '</div></div></div>' +
 
       '<div class="card"><div class="card-title">❤️‍🩹 Bệnh mạn tính · tap để xem theo dõi</div>' +
-        '<div class="chronic">' + chronic + '</div></div>' +
+        '<div class="chronic">' + chronic + '</div>' +
+        '<button class="btn btn-outline" style="width:100%;margin-top:0.7rem" onclick="openDiseaseLib()">📖 Thư viện bệnh lý &amp; phác đồ CareSense</button></div>' +
 
       '<div class="consent-card"><div class="card-title" style="color:#1d4ed8">🔐 Quyền xem dữ liệu &amp; đồng ý · ' + c.mode + '</div>' +
         '<div class="cc-txt">' + c.txt + '</div>' +
@@ -2210,6 +2318,7 @@
     html += '<button class="ob-opt" style="border-color:#99f6e4;color:var(--care)" onclick="startOnboard()">➕ Thêm người thân mới<div class="ob-od">Onboarding triage — AI gợi ý gói &amp; đội chăm</div></button>';
     html += '<button class="ob-opt" style="border-color:#c7d2fe;color:#4338ca" onclick="openCaregiver()">🩺 Chế độ Người chăm (đối tác)<div class="ob-od">App phía cung — đào tạo, nhận ca, thu nhập</div></button>';
     html += '<button class="ob-opt" style="border-color:#bfdbfe;color:#1d4ed8" onclick="openB2b()">🏢 Cổng đối tác Doanh nghiệp/Phường<div class="ob-od">B2B2C — phúc lợi chăm bố mẹ cho tập thể</div></button>';
+    html += '<button class="ob-opt" style="border-color:#5eead4;color:var(--care)" onclick="openElderView()">👁️ Xem như bố mẹ thấy<div class="ob-od">Giao diện đơn giản chữ to cho người cao tuổi tự dùng</div></button>';
     openSheet(html);
   }
 
@@ -2690,7 +2799,8 @@
         '<span class="gpp-badge">🎓 ElderCare Academy · chứng chỉ 4 cấp được công nhận nội bộ</span>' +
         '<div class="card"><div class="card-title">📚 Lộ trình chứng chỉ</div>' + lvls + '</div>' +
         '<div class="card"><div class="card-title">▶️ Khóa đang học · Cấp 3 PHCN</div>' + lessons +
-          '<button class="btn btn-primary" style="width:100%;margin-top:0.6rem" onclick="toast(\'▶️ Mở bài học · Phòng chống té ngã\')">Học bài tiếp theo →</button></div>' +
+          '<button class="btn btn-primary" style="width:100%;margin-top:0.6rem" onclick="openLesson()">▶️ Học bài tiếp theo</button>' +
+          '<button class="btn btn-outline" style="width:100%;margin-top:0.5rem" onclick="openExam()">📝 Thi cấp chứng chỉ Cấp 3</button></div>' +
         '<div class="card" style="background:#f0fdfa;border-color:#99f6e4"><div style="font-size:0.74rem;color:#0f766e">💡 Đào tạo bài bản là cách ElderCare đảm bảo <b>chất lượng người chăm</b> — khác biệt với thuê người tự do (plan · Đào tạo).</div></div>';
     } else if (cgTab === 'jobs') {
       var jobs = CG.jobsNear.map(function (j) {
@@ -3005,6 +3115,158 @@
       '<div class="pc-body">' + body + '</div><div class="pc-foot">' + foot + '</div></div>';
   }
   function closeSvc() { document.getElementById('svcOverlay').classList.remove('show'); }
+
+  // ===== T · thư viện bệnh lý + phác đồ CareSense =====
+  var DISEASE_DB = {
+    'Tăng huyết áp': { ico: '🩸', dauHieu: 'Đau đầu, chóng mặt, mờ mắt, đỏ mặt buổi sáng', theoDoi: 'Huyết áp 2 lần/ngày, mạch, cân nặng', data: 'Vòng đeo đo HA + nhịp tim tự động, đồng bộ app', nguong: '≥140/90 lặp lại → cảnh báo BS tim mạch', aiCham: 'BS Tim mạch + Điều dưỡng' },
+    'Tiểu đường type 2': { ico: '🩸', dauHieu: 'Khát nước, tiểu nhiều, mệt, vết thương lâu lành', theoDoi: 'Đường huyết đói/sau ăn, bàn chân, chế độ ăn', data: 'Máy đo đường huyết nhập app + nhắc đo đúng giờ', nguong: '>10 mmol/L hoặc <4 → cảnh báo dược lâm sàng', aiCham: 'BS Nội tiết + Dược lâm sàng + Dinh dưỡng' },
+    'Thoái hóa khớp': { ico: '🦴', dauHieu: 'Đau khớp khi vận động, cứng khớp buổi sáng', theoDoi: 'Mức độ đau, biên độ vận động, nguy cơ té ngã', data: 'Cảm biến vận động/số bước, nhật ký đau', nguong: 'Đau tăng / ngã → BS cơ xương khớp + PHCN', aiCham: 'BS Cơ xương khớp + KTV PHCN' },
+    'Di chứng đột quỵ': { ico: '🧠', dauHieu: 'Yếu/liệt nửa người, nói khó, nuốt sặc, lú lẫn', theoDoi: 'Vận động, nuốt, huyết áp, dấu hiệu tái phát', data: 'Camera AI dáng đi + vòng đo HA + cảm biến giường', nguong: 'Méo miệng/yếu tay đột ngột → gọi 115 + BS thần kinh', aiCham: 'BS Thần kinh + KTV PHCN + Điều dưỡng' },
+    'Parkinson nhẹ': { ico: '🧠', dauHieu: 'Run tay khi nghỉ, cứng đờ, đi chậm, dễ ngã', theoDoi: 'Run, dáng đi, đáp ứng thuốc, té ngã', data: 'Camera AI phân tích dáng đi + cảm biến chuyển động', nguong: 'Dáng đi xấu đi / ngã → BS thần kinh chỉnh thuốc', aiCham: 'BS Thần kinh + KTV PHCN' },
+    'Sa sút trí tuệ': { ico: '🧩', dauHieu: 'Hay quên, lẫn lộn, đi lạc, kích động, đảo giấc ngủ', theoDoi: 'Định vị, hành vi, giấc ngủ, an toàn nhà', data: 'Vòng định vị GPS + cảm biến cửa + camera AI', nguong: 'Ra khỏi vùng an toàn → cảnh báo đi lạc + người giám hộ', aiCham: 'BS Thần kinh + Tâm lý + Công tác xã hội' }
+  };
+  function openDiseaseLib() {
+    var p = P();
+    var items = p.chronic.map(function (c, i) {
+      var d = DISEASE_DB[c.name] || { ico: '❤️‍🩹', dauHieu: '—', theoDoi: c.monitor, data: 'CareSense theo dõi tự động', nguong: c.thr, aiCham: c.doc };
+      return '<div class="dz-item" id="dz-' + i + '"><div class="dz-head" onclick="toggleDz(' + i + ')">' +
+        '<span class="dz-ico">' + d.ico + '</span><span class="dz-name">' + c.name + '</span><span class="dz-arrow">›</span></div>' +
+        '<div class="dz-body">' +
+          '<div class="dz-field"><div class="dzf-lab">🔎 Dấu hiệu nhận biết</div><div class="dzf-val">' + d.dauHieu + '</div></div>' +
+          '<div class="dz-field"><div class="dzf-lab">📋 Cần theo dõi gì</div><div class="dzf-val">' + d.theoDoi + '</div></div>' +
+          '<div class="dz-field"><div class="dzf-lab">📡 CareSense thu dữ liệu</div><div class="dzf-val">' + d.data + '</div></div>' +
+          '<div class="dz-field alert"><div class="dzf-lab">⚠️ Ngưỡng cảnh báo</div><div class="dzf-val">' + d.nguong + '</div></div>' +
+          '<div class="dz-field care"><div class="dzf-lab">👨‍⚕️ Ai chăm</div><div class="dzf-val">' + d.aiCham + '</div></div>' +
+        '</div></div>';
+    }).join('');
+    document.getElementById('diseaseBody').innerHTML =
+      '<span class="gpp-badge">📖 Phác đồ theo dõi của ' + p.short + ' · chuẩn hóa cho người chăm &amp; gia đình</span>' +
+      '<div style="font-size:0.74rem;color:var(--muted);margin-bottom:0.5rem">Bấm từng bệnh để xem: dấu hiệu · theo dõi gì · CareSense thu data nào · ngưỡng cảnh báo · ai chịu trách nhiệm.</div>' +
+      items;
+    document.getElementById('diseaseOverlay').classList.add('show');
+    setTimeout(function () { toggleDz(0); }, 100);
+  }
+  function toggleDz(i) { document.getElementById('dz-' + i).classList.toggle('open'); }
+  function closeDisease() { document.getElementById('diseaseOverlay').classList.remove('show'); }
+
+  // ===== R · AI matching explainer =====
+  function matchWhy(role) {
+    var r = role.toLowerCase();
+    if (r.indexOf('điều dưỡng') >= 0) return 'Chủ trì chăm sóc hằng ngày, theo dõi sinh hiệu & cho thuốc';
+    if (r.indexOf('tim mạch') >= 0) return 'Phụ trách tăng huyết áp — ngưỡng ≥140/90';
+    if (r.indexOf('nội tiết') >= 0) return 'Quản lý tiểu đường type 2 & đường huyết';
+    if (r.indexOf('dược') >= 0) return 'Rà soát đa thuốc, tránh tương tác';
+    if (r.indexOf('thần kinh') >= 0) return 'Di chứng đột quỵ + Parkinson, chỉnh thuốc';
+    if (r.indexOf('phục hồi') >= 0 || r.indexOf('phcn') >= 0 || r.indexOf('vận động') >= 0) return 'Tập phục hồi vận động theo phác đồ';
+    if (r.indexOf('tâm lý') >= 0) return 'Hỗ trợ tâm lý, hành vi sa sút trí tuệ';
+    if (r.indexOf('xã hội') >= 0 || r.indexOf('ctxh') >= 0) return 'Công tác xã hội, phối hợp người giám hộ';
+    if (r.indexOf('cơ xương') >= 0 || r.indexOf('khớp') >= 0) return 'Thoái hóa khớp, giảm đau & vận động';
+    return 'Phối hợp theo nỗi đau & bệnh lý của người thân';
+  }
+  function openMatch() {
+    var p = P();
+    var dis = p.chronic.map(function (c) { return c.name; }).join(', ');
+    var nỗiđau = (p.id === 'tam') ? 'Phụ thuộc nặng, nguy cơ đi lạc & té ngã' : 'Bệnh mạn ổn định, cần theo dõi đều';
+    var team = [p.team.lead].concat(p.team.members);
+    var members = team.map(function (m, i) {
+      return '<div class="mx-member"><span class="mxm-ico">' + m.ico + '</span>' +
+        '<div><div class="mxm-role">' + m.role + (i === 0 && m.role.indexOf('chủ trì') < 0 ? ' · chủ trì' : '') + '</div>' +
+        '<div class="mxm-why">' + matchWhy(m.role) + '</div></div></div>';
+    }).join('');
+    document.getElementById('matchBody').innerHTML =
+      '<div class="card"><div class="card-title">🎯 AI phân tích nhu cầu</div>' +
+        '<div class="mx-factor"><span class="mxf-ico">💢</span><div><div class="mxf-lab">Nỗi đau lõi</div><div class="mxf-val">' + nỗiđau + '</div></div></div>' +
+        '<div class="mx-factor"><span class="mxf-ico">🩺</span><div><div class="mxf-lab">Bệnh kèm</div><div class="mxf-val">' + dis + '</div></div></div>' +
+        '<div class="mx-factor"><span class="mxf-ico">📍</span><div><div class="mxf-lab">Địa lý</div><div class="mxf-val">' + p.addr.split('·')[0].trim() + '</div></div></div>' +
+        '<div class="mx-factor"><span class="mxf-ico">📊</span><div><div class="mxf-lab">Mức phụ thuộc</div><div class="mxf-val">' + p.dependency + '</div></div></div></div>' +
+      '<div class="mx-arrow">▼ AI ghép đội ▼</div>' +
+      '<div class="card"><div class="card-title">👥 Đội chăm đề xuất · vì sao</div>' + members + '</div>' +
+      '<div class="card" style="background:#f5f3ff;border-color:#ddd6fe"><div style="font-size:0.72rem;color:#5b21b6">🤖 Ghép theo ma trận <b>nỗi đau lõi + bệnh kèm + địa lý + mức phụ thuộc</b> — đúng chuyên gia, không thừa thiếu (plan · Phân khúc & chuyên gia).</div></div>';
+    document.getElementById('matchOverlay').classList.add('show');
+  }
+  function closeMatch() { document.getElementById('matchOverlay').classList.remove('show'); }
+
+  // ===== V · e-learning: bài học + quiz + thi chứng chỉ =====
+  function openLesson() {
+    document.getElementById('learnHead').className = 'ov-head teal';
+    document.getElementById('learnIco').textContent = '📚';
+    document.getElementById('learnTitle').textContent = 'Bài 3 · Phòng chống té ngã';
+    document.getElementById('learnSub').textContent = 'Cấp 3 · PHCN · e-learning';
+    document.getElementById('learnBody').innerHTML =
+      '<div class="learn-prog"><i class="on"></i><i class="on"></i><i class="on"></i><i></i></div>' +
+      '<div class="card"><div class="card-title">🎬 Nội dung bài học</div>' +
+        '<div class="photo-proof" style="background:linear-gradient(135deg,#1e293b,#0d9488)"><span class="pp-big">▶️</span>Video: kỹ thuật đỡ người già khi mất thăng bằng</div>' +
+        '<div style="font-size:0.8rem;line-height:1.5;margin-top:0.6rem;color:var(--primary)">Người cao tuổi té ngã chủ yếu do mất thăng bằng, sàn trơn, thiếu tay vịn. Người chăm cần: dọn vật cản, lắp tay vịn nhà tắm, hỗ trợ khi đứng dậy, không kéo giật.</div></div>' +
+      '<div class="card"><div class="card-title">❓ Câu hỏi kiểm tra</div>' +
+        '<div style="font-size:0.82rem;font-weight:700;margin-bottom:0.6rem">Khi cụ bắt đầu loạng choạng, người chăm nên?</div>' +
+        '<button class="quiz-opt" onclick="quizPick(this,false)">Kéo nhanh cụ về phía mình</button>' +
+        '<button class="quiz-opt" data-c="1" onclick="quizPick(this,true)">Hạ thấp trọng tâm, đỡ sát thân, từ từ ngồi xuống</button>' +
+        '<button class="quiz-opt" onclick="quizPick(this,false)">Để cụ tự đứng vững lại</button></div>' +
+      '<button class="btn btn-primary" style="width:100%" onclick="closeLearn();toast(\'✅ Hoàn thành bài 3 · +25% tiến độ Cấp 3\')">Hoàn thành bài học</button>';
+    document.getElementById('learnOverlay').classList.add('show');
+  }
+  function quizPick(el, correct) {
+    var opts = el.parentNode.querySelectorAll('.quiz-opt');
+    for (var i = 0; i < opts.length; i++) opts[i].onclick = null;
+    el.classList.add(correct ? 'correct' : 'wrong');
+    if (!correct) { for (var j = 0; j < opts.length; j++) if (opts[j].getAttribute('data-c') === '1') opts[j].classList.add('correct'); }
+    toast(correct ? '✅ Chính xác!' : '❌ Chưa đúng — xem lại đáp án xanh');
+  }
+  var examQ = 0, examScore = 0;
+  var EXAM = [
+    { q: 'Huyết áp người cao tuổi nên đo khi nào?', opts: ['Sau khi vận động mạnh', 'Buổi sáng, trước khi uống thuốc', 'Chỉ khi thấy mệt'], correct: 1 },
+    { q: 'Dấu hiệu đột quỵ cần gọi cấp cứu ngay?', opts: ['Méo miệng, yếu tay, nói khó đột ngột', 'Hơi đau đầu nhẹ', 'Buồn ngủ sau ăn'], correct: 0 },
+    { q: 'Người sa sút trí tuệ kích động, nên?', opts: ['Quát to cho dừng lại', 'Giữ chặt tay', 'Nói nhẹ nhàng, đánh lạc hướng, đảm bảo an toàn'], correct: 2 }
+  ];
+  function openExam() {
+    examQ = 0; examScore = 0;
+    document.getElementById('learnHead').className = 'ov-head amber';
+    document.getElementById('learnIco').textContent = '📝';
+    document.getElementById('learnTitle').textContent = 'Thi cấp chứng chỉ · Cấp 3';
+    document.getElementById('learnSub').textContent = 'Trả lời đúng ≥2/3 để đạt';
+    renderExam();
+    document.getElementById('learnOverlay').classList.add('show');
+  }
+  function renderExam() {
+    if (examQ >= EXAM.length) {
+      var pass = examScore >= 2;
+      document.getElementById('learnBody').innerHTML =
+        '<div class="pay-ok"><div class="po-ring" style="' + (pass ? '' : 'background:#fee2e2;color:#dc2626') + '">' + (pass ? '✓' : '✕') + '</div>' +
+          '<div style="font-weight:900;font-size:1.1rem">' + (pass ? 'Đạt chứng chỉ Cấp 3 🎓' : 'Chưa đạt') + '</div>' +
+          '<div style="font-size:0.85rem;color:var(--muted);margin-top:0.3rem">Điểm: ' + examScore + '/' + EXAM.length + (pass ? ' · mở khóa ca PHCN giá cao hơn' : ' · ôn lại & thi lại sau 24h') + '</div></div>' +
+        '<button class="btn btn-primary" style="width:100%" onclick="closeLearn();' + (pass ? "toast('🎓 Đã cấp chứng chỉ Cấp 3 vào hồ sơ')" : "toast('📚 Quay lại ôn tập')") + '">Xong</button>';
+      return;
+    }
+    var e = EXAM[examQ];
+    var opts = e.opts.map(function (o, i) {
+      return '<button class="quiz-opt" onclick="examPick(' + i + ')">' + o + '</button>';
+    }).join('');
+    document.getElementById('learnBody').innerHTML =
+      '<div class="learn-prog">' + EXAM.map(function (_, i) { return '<i class="' + (i <= examQ ? 'on' : '') + '"></i>'; }).join('') + '</div>' +
+      '<div class="card"><div style="font-size:0.7rem;color:var(--muted);margin-bottom:0.3rem">Câu ' + (examQ + 1) + '/' + EXAM.length + '</div>' +
+        '<div style="font-size:0.88rem;font-weight:800;margin-bottom:0.7rem">' + e.q + '</div>' + opts + '</div>';
+  }
+  function examPick(i) {
+    if (i === EXAM[examQ].correct) examScore++;
+    examQ++;
+    renderExam();
+  }
+  function closeLearn() { document.getElementById('learnOverlay').classList.remove('show'); }
+
+  // ===== P · elder view (xem như bố mẹ thấy) =====
+  function openElderView() {
+    closeSheet();
+    var p = P();
+    document.getElementById('etGreet').textContent = 'Chào ' + p.short + ' 👋';
+    document.getElementById('elderBody').innerHTML =
+      '<button class="elder-btn sos" onclick="closeElderView();openSOS()"><span class="eb-ico">🆘</span><span class="eb-lab">GỌI CỨU KHẨN</span></button>' +
+      '<button class="elder-btn call" onclick="toast(\'📞 Đang gọi con trai (Minh)...\')"><span class="eb-ico">📞</span><span class="eb-lab">Gọi con</span></button>' +
+      '<button class="elder-btn" onclick="toast(\'💊 Sáng: 2 viên đã uống · Chiều: 1 viên lúc 18:00\')"><span class="eb-ico">💊</span><span class="eb-lab">Thuốc hôm nay</span></button>' +
+      '<button class="elder-btn" onclick="closeElderView();openOnCall()"><span class="eb-ico">🩺</span><span class="eb-lab">Gọi bác sĩ</span></button>' +
+      '<button class="elder-btn" onclick="toast(\'📹 Đang gọi video cho con cháu...\')"><span class="eb-ico">📹</span><span class="eb-lab">Gọi video</span></button>';
+    document.getElementById('elderView').classList.add('show');
+  }
+  function closeElderView() { document.getElementById('elderView').classList.remove('show'); }
 
   // ===== fall / wander simulation =====
   var fallTimer = null, fallCount = 10;
