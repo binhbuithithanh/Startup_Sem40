@@ -1013,6 +1013,79 @@
     .job-tags { display: flex; flex-wrap: wrap; gap: 0.3rem; margin-top: 0.5rem; }
     .job-tag { font-size: 0.6rem; font-weight: 700; background: #f0fdfa; color: #0f766e; border-radius: 99px; padding: 0.1rem 0.5rem; }
 
+    .ov-head.red { background: linear-gradient(135deg, #dc2626, #991b1b); }
+
+    /* ===== SOS KHẨN CẤP TOÀN TRÌNH ===== */
+    .sos-step { display: flex; align-items: center; gap: 0.6rem; padding: 0.6rem 0; border-bottom: 1px solid #f1f5f4;
+      opacity: 0.35; transition: opacity 0.35s; }
+    .sos-step:last-child { border-bottom: none; }
+    .sos-step.on { opacity: 1; }
+    .sos-step .ss-ico { width: 30px; height: 30px; border-radius: 50%; background: #fee2e2; color: #dc2626; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center; font-size: 0.85rem; transition: all 0.3s; }
+    .sos-step.done .ss-ico { background: #dcfce7; color: #16a34a; }
+    .sos-step .ss-main { flex: 1; font-size: 0.82rem; font-weight: 700; }
+    .sos-step .ss-sub { font-size: 0.66rem; color: var(--muted); font-weight: 500; }
+    .sos-pulse { font-size: 3.4rem; text-align: center; animation: shake .5s infinite; }
+
+    /* ===== B2B2C ===== */
+    .stat3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem; text-align: center; }
+    .stat3 .s3 { background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 0.65rem 0.3rem; }
+    .stat3 .s3 b { display: block; font-size: 1.2rem; color: #1d4ed8; }
+    .stat3 .s3 span { font-size: 0.6rem; color: var(--muted); }
+    .emp-row { display: flex; align-items: center; gap: 0.6rem; padding: 0.55rem 0; border-bottom: 1px solid #f1f5f4; }
+    .emp-row:last-child { border-bottom: none; }
+    .emp-row .er-main { flex: 1; }
+    .emp-row .er-name { font-size: 0.8rem; font-weight: 700; }
+    .emp-row .er-sub { font-size: 0.66rem; color: var(--muted); }
+    .emp-row .er-st { font-size: 0.58rem; font-weight: 800; padding: 0.1rem 0.45rem; border-radius: 99px; background: #dcfce7; color: #16a34a; }
+
+    /* ===== PAYMENT VIETQR ===== */
+    .qr-wrap { text-align: center; padding: 0.3rem 0 0.6rem; }
+    .qr-box { width: 190px; height: 190px; margin: 0.4rem auto; padding: 8px; background: #fff; border-radius: 14px;
+      box-shadow: 0 4px 18px rgba(0,0,0,0.12); }
+    .qr-box svg { width: 100%; height: 100%; display: block; }
+    .pay-method { display: flex; align-items: center; gap: 0.6rem; padding: 0.65rem 0.75rem; border: 1.5px solid var(--border);
+      border-radius: 12px; margin-bottom: 0.5rem; cursor: pointer; font-family: inherit; width: 100%; background: #fff; text-align: left; }
+    .pay-method.on { border-color: var(--care); background: #f0fdfa; }
+    .pay-method .pm-ico { font-size: 1.4rem; }
+    .pay-method .pm-main { flex: 1; font-size: 0.82rem; font-weight: 700; color: var(--primary); }
+    .pay-method .pm-radio { width: 18px; height: 18px; border-radius: 50%; border: 2px solid var(--border); }
+    .pay-method.on .pm-radio { border-color: var(--care); background: radial-gradient(circle, var(--care) 40%, #fff 45%); }
+    .pay-ok { text-align: center; padding: 1.5rem 0; }
+    .pay-ok .po-ring { width: 90px; height: 90px; border-radius: 50%; background: #dcfce7; color: #16a34a; font-size: 3rem;
+      display: flex; align-items: center; justify-content: center; margin: 0 auto 0.8rem; animation: pulse 1.6s infinite; }
+
+    /* ===== EHR / HỒ SƠ Y TẾ ĐIỆN TỬ ===== */
+    .ehr-chip { display: inline-block; font-size: 0.66rem; font-weight: 700; background: #fef2f2; color: #dc2626;
+      border-radius: 99px; padding: 0.15rem 0.55rem; margin: 0.15rem 0.15rem 0 0; }
+    .ehr-row { display: flex; gap: 0.6rem; padding: 0.55rem 0; border-bottom: 1px solid #f1f5f4; }
+    .ehr-row:last-child { border-bottom: none; }
+    .ehr-row .eh-date { font-size: 0.64rem; color: #94a3b8; min-width: 56px; flex-shrink: 0; padding-top: 1px; }
+    .ehr-row .eh-main { font-size: 0.78rem; }
+    .ehr-row .eh-main b { font-weight: 700; }
+    .rx-line { display: flex; justify-content: space-between; font-size: 0.78rem; padding: 0.3rem 0; }
+
+    /* ===== ĐÁNH GIÁ SAO ===== */
+    .star-row { display: flex; gap: 0.4rem; justify-content: center; font-size: 2.1rem; margin: 0.5rem 0; }
+    .star-row .st { cursor: pointer; filter: grayscale(1); opacity: 0.4; transition: all .12s; }
+    .star-row .st.on { filter: none; opacity: 1; transform: scale(1.1); }
+    .fb-chips { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+
+    /* ===== NUTRITION / MARKETPLACE / COMMUNITY ===== */
+    .menu-row { display: flex; align-items: center; gap: 0.6rem; padding: 0.55rem 0; border-bottom: 1px solid #f1f5f4; }
+    .menu-row:last-child { border-bottom: none; }
+    .menu-row .mr-ico { font-size: 1.5rem; }
+    .menu-row .mr-main { flex: 1; }
+    .menu-row .mr-name { font-size: 0.8rem; font-weight: 700; }
+    .menu-row .mr-sub { font-size: 0.66rem; color: var(--muted); }
+    .post-card { border: 1px solid var(--border); border-radius: 12px; padding: 0.75rem 0.8rem; margin-bottom: 0.6rem; }
+    .post-card .pc-head { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.35rem; }
+    .post-card .pc-ava { font-size: 1.3rem; }
+    .post-card .pc-name { font-size: 0.76rem; font-weight: 800; }
+    .post-card .pc-time { font-size: 0.62rem; color: var(--muted); }
+    .post-card .pc-body { font-size: 0.78rem; line-height: 1.45; }
+    .post-card .pc-foot { font-size: 0.66rem; color: var(--muted); margin-top: 0.4rem; }
+
     /* RESPONSIVE */
     @media (max-width: 900px) {
       .marketing { display: none; }
@@ -1210,6 +1283,97 @@
             <button class="ov-close" onclick="closeCaregiver()">✕</button>
           </div>
           <div class="ov-body" id="caregiverBody"></div>
+        </div>
+      </div>
+
+      <!-- SOS KHẨN CẤP TOÀN TRÌNH -->
+      <div class="overlay-screen" id="sosOverlay" style="z-index:65">
+        <div class="ov-wrap">
+          <div class="ov-head red">
+            <span style="font-size:1.3rem">🆘</span>
+            <div><div style="font-weight:900;font-size:1rem">Cấp cứu khẩn cấp</div>
+              <div style="font-size:0.7rem;opacity:0.9">Quy trình tự động · không bỏ sót ai</div></div>
+            <button class="ov-close" onclick="closeSOS()">✕</button>
+          </div>
+          <div class="ov-body" id="sosBody"></div>
+        </div>
+      </div>
+
+      <!-- B2B2C ĐỐI TÁC DOANH NGHIỆP -->
+      <div class="overlay-screen" id="b2bOverlay">
+        <div class="ov-wrap">
+          <div class="ov-head blue">
+            <span style="font-size:1.3rem">🏢</span>
+            <div><div style="font-weight:900;font-size:1rem">Cổng đối tác · Doanh nghiệp &amp; Phường</div>
+              <div style="font-size:0.7rem;opacity:0.9">Phúc lợi chăm sóc bố mẹ cho tập thể</div></div>
+            <button class="ov-close" onclick="closeB2b()">✕</button>
+          </div>
+          <div class="ov-body" id="b2bBody"></div>
+        </div>
+      </div>
+
+      <!-- THANH TOÁN VIETQR -->
+      <div class="overlay-screen" id="payOverlay">
+        <div class="ov-wrap">
+          <div class="ov-head teal">
+            <span style="font-size:1.3rem">💳</span>
+            <div><div style="font-weight:900;font-size:1rem">Thanh toán</div>
+              <div style="font-size:0.7rem;opacity:0.9">VietQR · an toàn, tức thì</div></div>
+            <button class="ov-close" onclick="closePay()">✕</button>
+          </div>
+          <div class="ov-body" id="payBody"></div>
+        </div>
+      </div>
+
+      <!-- HỒ SƠ Y TẾ ĐIỆN TỬ -->
+      <div class="overlay-screen" id="ehrOverlay">
+        <div class="ov-wrap">
+          <div class="ov-head teal">
+            <span style="font-size:1.3rem">🗂️</span>
+            <div><div style="font-weight:900;font-size:1rem">Hồ sơ y tế điện tử</div>
+              <div style="font-size:0.7rem;opacity:0.9">Một nơi · chia sẻ an toàn cho bác sĩ</div></div>
+            <button class="ov-close" onclick="closeEhr()">✕</button>
+          </div>
+          <div class="ov-body" id="ehrBody"></div>
+        </div>
+      </div>
+
+      <!-- BÁC SĨ TRỰC ON-CALL -->
+      <div class="overlay-screen" id="onCallOverlay">
+        <div class="ov-wrap">
+          <div class="ov-head violet">
+            <span style="font-size:1.3rem">🩺</span>
+            <div><div style="font-weight:900;font-size:1rem">Bác sĩ trực 24/7</div>
+              <div style="font-size:0.7rem;opacity:0.9">Gọi ngay · không cần đặt lịch</div></div>
+            <button class="ov-close" onclick="closeOnCall()">✕</button>
+          </div>
+          <div class="ov-body" id="onCallBody"></div>
+        </div>
+      </div>
+
+      <!-- ĐÁNH GIÁ SAU CA -->
+      <div class="overlay-screen" id="ratingOverlay">
+        <div class="ov-wrap">
+          <div class="ov-head amber">
+            <span style="font-size:1.3rem">⭐</span>
+            <div><div style="font-weight:900;font-size:1rem">Đánh giá ca chăm</div>
+              <div style="font-size:0.7rem;opacity:0.9">Phản hồi giúp nâng chất lượng</div></div>
+            <button class="ov-close" onclick="closeRating()">✕</button>
+          </div>
+          <div class="ov-body" id="ratingBody"></div>
+        </div>
+      </div>
+
+      <!-- DỊCH VỤ MỞ RỘNG: DINH DƯỠNG / THIẾT BỊ / CỘNG ĐỒNG -->
+      <div class="overlay-screen" id="svcOverlay">
+        <div class="ov-wrap">
+          <div class="ov-head teal" id="svcHead">
+            <span style="font-size:1.3rem" id="svcIco">🍲</span>
+            <div><div style="font-weight:900;font-size:1rem" id="svcTitle">Dịch vụ</div>
+              <div style="font-size:0.7rem;opacity:0.9" id="svcSub"></div></div>
+            <button class="ov-close" onclick="closeSvc()">✕</button>
+          </div>
+          <div class="ov-body" id="svcBody"></div>
         </div>
       </div>
 
@@ -1654,7 +1818,7 @@
       '<div class="card"><div class="card-title">⚡ Thao tác nhanh</div><div class="quick-grid">' +
         '<button class="quick-btn" onclick="showScreen(\'care\')"><span class="qb-ico">🩺</span>Đặt điều dưỡng</button>' +
         '<button class="quick-btn" onclick="showScreen(\'visit\')"><span class="qb-ico">📹</span>Gọi video bác sĩ</button>' +
-        '<button class="quick-btn danger" onclick="toast(\'🆘 Đang gọi tổng đài cấp cứu 24/7...\')"><span class="qb-ico">🆘</span>Gọi khẩn cấp</button>' +
+        '<button class="quick-btn danger" onclick="openSOS()"><span class="qb-ico">🆘</span>Gọi khẩn cấp</button>' +
         '<button class="quick-btn" onclick="openPharmacy()"><span class="qb-ico">💊</span>Mua thuốc</button>' +
       '</div></div>' +
       '<div class="card"><div class="card-title">✨ Tiện ích khác</div><div class="extra-grid">' +
@@ -1711,9 +1875,10 @@
         '<div class="card" style="text-align:center;background:#f0fdfa;border-color:#99f6e4">' +
           '<div style="font-size:0.8rem;color:#0f766e;font-weight:600">💡 Tất cả điều dưỡng đều có <b>giấy phép hành nghề</b>, chứng chỉ đào tạo &amp; xác minh lý lịch tư pháp</div></div>' +
         '<div class="card"><div class="card-title">✨ Dịch vụ hỗ trợ</div><div class="extra-grid">' +
+          '<button class="extra-chip" onclick="openSvc(\'nutrition\')"><span class="ec-ico">🍲</span>Dinh dưỡng &amp; suất ăn</button>' +
+          '<button class="extra-chip" onclick="openSvc(\'market\')"><span class="ec-ico">🛒</span>Thiết bị y tế</button>' +
+          '<button class="extra-chip" onclick="openSvc(\'community\')"><span class="ec-ico">👨‍👩‍👧</span>Cộng đồng con chăm</button>' +
           '<button class="extra-chip" onclick="toast(\'🚗 Đặt xe đưa đón đi khám — sắp ra mắt\')"><span class="ec-ico">🚗</span>Đưa đón đi khám</button>' +
-          '<button class="extra-chip" onclick="toast(\'🛒 Thuê/mua thiết bị y tế — sắp ra mắt\')"><span class="ec-ico">🛒</span>Marketplace thiết bị</button>' +
-          '<button class="extra-chip" onclick="toast(\'👨‍👩‍👧 Cộng đồng người chăm — sắp ra mắt\')"><span class="ec-ico">👨‍👩‍👧</span>Cộng đồng</button>' +
         '</div></div>' +
       '</div>';
   }
@@ -1749,6 +1914,12 @@
           '<div class="p-name">' + p.video.name + ' <span class="lic-chip">Giấy phép ✔ · Điều 80</span></div>' +
           '<div class="p-meta">' + p.video.sub + '</div></div></div>' +
         '<button class="btn btn-primary" style="margin-top:0.85rem" onclick="openVideo()">🎥 Vào phòng khám</button></div>' +
+      '<div class="card" style="border-color:#ddd6fe;background:#faf8ff"><div class="card-title" style="color:#6d28d9">🩺 Cần gấp? Bác sĩ trực 24/7</div>' +
+        '<div style="font-size:0.78rem;color:var(--muted);margin-bottom:0.6rem">Không cần đặt lịch — gọi bác sĩ dự phòng đang trực, kết nối trong vài phút.</div>' +
+        '<button class="btn btn-primary" style="width:100%;background:#6d28d9" onclick="openOnCall()">📞 Gọi bác sĩ trực ngay</button></div>' +
+      '<div class="card"><div class="card-title">🗂️ Hồ sơ y tế điện tử</div>' +
+        '<div style="font-size:0.78rem;color:var(--muted);margin-bottom:0.6rem">Tiền sử, dị ứng, đơn thuốc điện tử — chia sẻ an toàn cho bác sĩ khi khám.</div>' +
+        '<button class="btn btn-outline" style="width:100%" onclick="openEhr()">Mở hồ sơ y tế</button></div>' +
       '<div class="card"><div class="card-title">🩺 Mạng lưới chuyên gia · khám từ xa</div>' + dir +
         '<div style="font-size:0.66rem;color:var(--muted);margin-top:0.55rem">12 nhóm chuyên gia — ghép theo nỗi đau &amp; bệnh lý (ma trận Phiên 3). Mọi bác sĩ đều có giấy phép hành nghề &amp; được phép KCB từ xa.</div></div>';
   }
@@ -1771,7 +1942,7 @@
     document.getElementById('screen-fin').innerHTML =
       '<div class="card"><div class="card-title">💳 Gói chăm sóc gia đình · so sánh</div>' +
         '<div class="tier-grid">' + tiers + '</div>' +
-        '<button class="btn btn-outline" style="margin-top:0.7rem" onclick="toast(\'⬆️ Mở so sánh & nâng/hạ gói\')">Đổi gói</button></div>' +
+        '<button class="btn btn-primary" style="margin-top:0.7rem;width:100%" onclick="openPay(\'Gói ElderCare Plus\', \'599.000đ/tháng\')">💳 Đăng ký / đổi gói · thanh toán</button></div>' +
 
       '<div class="card"><div class="card-title">🏥 Trả góp ca điều trị · MedFin</div>' +
         '<div style="font-weight:800;font-size:0.92rem">' + ins.name + '</div>' +
@@ -2038,6 +2209,7 @@
     });
     html += '<button class="ob-opt" style="border-color:#99f6e4;color:var(--care)" onclick="startOnboard()">➕ Thêm người thân mới<div class="ob-od">Onboarding triage — AI gợi ý gói &amp; đội chăm</div></button>';
     html += '<button class="ob-opt" style="border-color:#c7d2fe;color:#4338ca" onclick="openCaregiver()">🩺 Chế độ Người chăm (đối tác)<div class="ob-od">App phía cung — đào tạo, nhận ca, thu nhập</div></button>';
+    html += '<button class="ob-opt" style="border-color:#bfdbfe;color:#1d4ed8" onclick="openB2b()">🏢 Cổng đối tác Doanh nghiệp/Phường<div class="ob-od">B2B2C — phúc lợi chăm bố mẹ cho tập thể</div></button>';
     openSheet(html);
   }
 
@@ -2373,7 +2545,7 @@
         '<div class="bill-row"><span>Đã trực</span><span>3 giờ 36 phút</span></div>' +
         '<div class="bill-row total"><span>Tạm tính ca</span><span style="color:var(--care)">' + vnd(billed) + '</span></div>' +
         '<div style="font-size:0.64rem;color:var(--muted);margin-top:0.5rem">Trong đó nền tảng giữ ' + vnd(fee) + ' (20% GMV) — phần còn lại trả thẳng người chăm. Tính theo giờ thực, không làm tròn lên.</div>' +
-        '<button class="btn btn-outline" style="width:100%;margin-top:0.7rem" onclick="toast(\'✅ Đã xác nhận ca trực — cảm ơn!\')">✅ Xác nhận ca khi kết thúc</button></div>';
+        '<button class="btn btn-primary" style="width:100%;margin-top:0.7rem" onclick="closeShift();openRating()">✅ Xác nhận &amp; đánh giá ca</button></div>';
     document.getElementById('shiftOverlay').classList.add('show');
   }
   function closeShift() { document.getElementById('shiftOverlay').classList.remove('show'); }
@@ -2449,7 +2621,7 @@
         '<div style="font-size:0.78rem;color:var(--muted);margin-bottom:0.5rem">Khi cần chăm dài hạn — app tự lấy dữ liệu chăm sóc &amp; y tế để duyệt nhanh, không giấy tờ rườm rà.</div>' +
         '<button class="btn btn-outline" style="width:100%" onclick="toast(\'📑 Đã mở hồ sơ bồi thường — duyệt trong 24h (demo)\')">📑 Yêu cầu bồi thường</button></div>' +
 
-      '<button class="btn btn-primary" style="width:100%" onclick="toast(\'✅ Đã đăng ký gói Tiêu chuẩn cho ' + p.short + '\')">✅ Đăng ký bảo hiểm LTC</button>';
+      '<button class="btn btn-primary" style="width:100%" onclick="closeLtc();openPay(\'Bảo hiểm LTC · gói Tiêu chuẩn\', \'349.000đ/tháng\')">✅ Đăng ký bảo hiểm LTC</button>';
     document.getElementById('ltcOverlay').classList.add('show');
   }
   function closeLtc() { document.getElementById('ltcOverlay').classList.remove('show'); }
@@ -2553,6 +2725,286 @@
   function cgGo(tab) { cgTab = tab; cgRender(); document.getElementById('caregiverBody').scrollTop = 0; }
   function openCaregiver() { closeSheet(); cgTab = 'home'; cgRender(); document.getElementById('caregiverOverlay').classList.add('show'); }
   function closeCaregiver() { document.getElementById('caregiverOverlay').classList.remove('show'); }
+
+  // ===== H · SOS khẩn cấp toàn trình =====
+  var sosTimers = [];
+  function clearSos() { for (var i = 0; i < sosTimers.length; i++) clearTimeout(sosTimers[i]); sosTimers = []; }
+  function bloodGroup(p) { var m = p.meta.match(/Nhóm máu\s*([ABO]+)/); return m ? m[1] : 'O'; }
+  function openSOS() {
+    clearSos();
+    var p = P();
+    var allergies = (p.id === 'tam') ? 'Penicillin' : 'Không rõ';
+    var dis = p.chronic.map(function (d) { return d.name; }).join(', ');
+    var medList = p.meds.slice(0, 3).map(function (m) { return m.name.replace(/\s*\([^)]*\)/, ''); }).join(', ');
+    var steps = [
+      { ico: '📞', main: 'Gọi tổng đài cấp cứu 115', sub: 'Kết nối điều phối viên y tế' },
+      { ico: '👨‍👩', main: 'Báo người giám hộ (Minh)', sub: 'Gọi + gửi SMS kèm vị trí' },
+      { ico: '🩺', main: 'Điều dưỡng gần nhất', sub: p.nurse.name + ' · 0,6km · đang tới (~8 phút)' },
+      { ico: '📍', main: 'Chia sẻ vị trí GPS', sub: p.addr.split('·')[0].trim() },
+      { ico: '📋', main: 'Gửi tóm tắt hồ sơ y tế', sub: 'Bệnh nền + dị ứng + thuốc cho đội cấp cứu' }
+    ];
+    var stepsHtml = steps.map(function (s, i) {
+      return '<div class="sos-step" id="sos-' + i + '"><div class="ss-ico">⏳</div>' +
+        '<div style="flex:1"><div class="ss-main">' + s.main + '</div><div class="ss-sub">' + s.sub + '</div></div></div>';
+    }).join('');
+    document.getElementById('sosBody').innerHTML =
+      '<div class="sos-pulse">🚨</div>' +
+      '<div style="text-align:center;font-weight:900;font-size:1.05rem;color:#dc2626;margin-bottom:0.3rem">Đã kích hoạt cấp cứu cho ' + p.short + '</div>' +
+      '<div class="card"><div class="card-title">⚡ Quy trình tự động</div>' + stepsHtml + '</div>' +
+      '<div class="card" style="border-color:#fecaca;background:#fff7f7"><div class="card-title" style="color:#dc2626">📋 Hồ sơ y tế khẩn (gửi đội cấp cứu)</div>' +
+        '<div class="rx-line"><span>Nhóm máu</span><b>' + bloodGroup(p) + '</b></div>' +
+        '<div class="rx-line"><span>Dị ứng thuốc</span><b>' + allergies + '</b></div>' +
+        '<div class="rx-line"><span>Bệnh nền</span><b style="text-align:right">' + dis + '</b></div>' +
+        '<div class="rx-line"><span>Đang dùng</span><b style="text-align:right">' + medList + '</b></div></div>' +
+      '<button class="btn btn-primary" style="width:100%;background:#dc2626" onclick="toast(\'📞 Đang gọi 115...\')">📞 Gọi 115 trực tiếp</button>' +
+      '<button class="btn btn-outline" style="width:100%;margin-top:0.5rem" onclick="closeSOS()">✅ Đã ổn — hủy báo động</button>';
+    document.getElementById('sosOverlay').classList.add('show');
+    steps.forEach(function (s, i) {
+      sosTimers.push(setTimeout(function () {
+        var el = document.getElementById('sos-' + i); if (!el) return;
+        el.classList.add('on');
+        sosTimers.push(setTimeout(function () {
+          el.classList.add('done'); el.querySelector('.ss-ico').textContent = '✓';
+        }, 700));
+      }, 400 + i * 850));
+    });
+  }
+  function closeSOS() { clearSos(); document.getElementById('sosOverlay').classList.remove('show'); toast('🛟 Đã ghi nhận — đội hỗ trợ vẫn theo dõi'); }
+
+  // ===== I · B2B2C gói doanh nghiệp / phường =====
+  function openB2b() {
+    closeSheet();
+    document.getElementById('b2bBody').innerHTML =
+      '<div class="card" style="border-color:#bfdbfe;background:#f5f9ff"><div class="card-title" style="color:#1d4ed8">🏢 Công ty CP Công nghệ ABC</div>' +
+        '<div style="font-size:0.8rem;color:var(--muted)">Phúc lợi <b>“Chăm bố mẹ nhân viên”</b> · hợp đồng năm</div></div>' +
+
+      '<div class="card"><div class="card-title">📊 Tổng quan chương trình</div>' +
+        '<div class="stat3"><div class="s3"><b>120</b><span>Nhân viên tham gia</span></div>' +
+        '<div class="s3"><b>240</b><span>Bố mẹ được chăm</span></div>' +
+        '<div class="s3"><b>96%</b><span>Hài lòng</span></div></div>' +
+        '<div style="display:flex;justify-content:space-between;font-size:0.78rem;margin-top:0.7rem"><span>Ngân sách phúc lợi/tháng</span><b style="color:#1d4ed8">' + vnd(360000000) + '</b></div></div>' +
+
+      '<div class="card"><div class="card-title">👥 Nhân viên &amp; người thân được chăm</div>' +
+        empRow('🧑‍💼', 'Nguyễn Văn Minh', 'Chăm: Bà Hoa 72t · gói Plus', 'Đang chăm') +
+        empRow('👩‍💻', 'Trần Thu Hằng', 'Chăm: Ông Bố 75t · gói Cơ bản', 'Đang chăm') +
+        empRow('👨‍🔧', 'Lê Quốc Anh', 'Chăm: Mẹ 68t · gói Plus', 'Đang chăm') +
+        '<button class="btn btn-outline" style="width:100%;margin-top:0.6rem" onclick="toast(\'➕ Mở form thêm nhân viên vào chương trình\')">+ Thêm nhân viên</button></div>' +
+
+      '<div class="card" style="background:#eff6ff;border-color:#bfdbfe"><div style="font-size:0.74rem;color:#1e3a8a">💡 <b>B2B2C:</b> doanh nghiệp/phường trả phí cho cả tập thể → CAC thấp, hợp đồng lớn &amp; ổn định. Mở rộng nhanh ngoài kênh B2C (plan · Phân khúc).</div></div>' +
+
+      '<button class="btn btn-primary" style="width:100%" onclick="toast(\'📑 Đã xuất báo cáo sử dụng phúc lợi cho HR\')">📑 Báo cáo cho phòng Nhân sự</button>';
+    document.getElementById('b2bOverlay').classList.add('show');
+  }
+  function empRow(ava, name, sub, st) {
+    return '<div class="emp-row"><span style="font-size:1.5rem">' + ava + '</span>' +
+      '<div class="er-main"><div class="er-name">' + name + '</div><div class="er-sub">' + sub + '</div></div>' +
+      '<span class="er-st">' + st + '</span></div>';
+  }
+  function closeB2b() { document.getElementById('b2bOverlay').classList.remove('show'); }
+
+  // ===== J · thanh toán VietQR =====
+  var payCtx = { name: '', price: '' };
+  function genQR(seed) {
+    var N = 25, cell = 7, h = 0;
+    for (var i = 0; i < seed.length; i++) { h = (h * 31 + seed.charCodeAt(i)) >>> 0; }
+    function rnd() { h = (h * 1103515245 + 12345) & 0x7fffffff; return h / 0x7fffffff; }
+    var sq = '';
+    for (var y = 0; y < N; y++) for (var x = 0; x < N; x++) {
+      var finder = (x < 7 && y < 7) || (x >= N - 7 && y < 7) || (x < 7 && y >= N - 7);
+      var on = finder ? ((x === 0 || x === 6 || y === 0 || y === 6 || (x >= 2 && x <= 4 && y >= 2 && y <= 4) ||
+        (x >= N - 7 && (x === N - 7 || x === N - 1)) ) || (x >= 2 && x <= 4 && y >= 2 && y <= 4)) : rnd() > 0.55;
+      if (finder) { // vẽ 3 ô định vị chuẩn
+        var lx = x < 7 ? x : x - (N - 7), ly = y < 7 ? y : y - (N - 7);
+        on = (lx === 0 || lx === 6 || ly === 0 || ly === 6 || (lx >= 2 && lx <= 4 && ly >= 2 && ly <= 4));
+      }
+      if (on) sq += '<rect x="' + (x * cell) + '" y="' + (y * cell) + '" width="' + cell + '" height="' + cell + '"/>';
+    }
+    return '<svg viewBox="0 0 ' + (N * cell) + ' ' + (N * cell) + '" fill="#0f172a"><rect width="100%" height="100%" fill="#fff"/>' + sq + '</svg>';
+  }
+  function openPay(name, price) {
+    payCtx = { name: name, price: price };
+    var p = P();
+    document.getElementById('payBody').innerHTML =
+      '<div class="card"><div class="card-title">🧾 Nội dung thanh toán</div>' +
+        '<div class="rx-line"><span>Dịch vụ</span><b>' + name + '</b></div>' +
+        '<div class="rx-line"><span>Cho</span><b>' + p.short + '</b></div>' +
+        '<div class="rx-line" style="font-size:0.95rem"><span><b>Số tiền</b></span><b style="color:var(--care)">' + price + '</b></div></div>' +
+
+      '<div class="card"><div class="card-title">📷 Quét VietQR để trả</div>' +
+        '<div class="qr-wrap"><div class="qr-box">' + genQR(name + price) + '</div>' +
+        '<div style="font-size:0.72rem;color:var(--muted)">Ngân hàng <b>MB</b> · ElderCare VN JSC<br>STK <b>0901 234 5678</b> · ND: ECARE ' + p.short.replace(/\s/g, '') + '</div></div></div>' +
+
+      '<div class="card"><div class="card-title">Hoặc chọn cách khác</div>' +
+        '<button class="pay-method on" onclick="pickPay(this)"><span class="pm-ico">🏦</span><span class="pm-main">VietQR / Chuyển khoản</span><span class="pm-radio"></span></button>' +
+        '<button class="pay-method" onclick="pickPay(this)"><span class="pm-ico">💳</span><span class="pm-main">Thẻ nội địa / quốc tế</span><span class="pm-radio"></span></button>' +
+        '<button class="pay-method" onclick="pickPay(this)"><span class="pm-ico">📱</span><span class="pm-main">Ví Momo / ZaloPay</span><span class="pm-radio"></span></button></div>' +
+
+      '<button class="btn btn-primary" style="width:100%" onclick="payDone()">✅ Tôi đã thanh toán</button>';
+    document.getElementById('payOverlay').classList.add('show');
+  }
+  function pickPay(el) {
+    var all = el.parentNode.querySelectorAll('.pay-method');
+    for (var i = 0; i < all.length; i++) all[i].classList.remove('on');
+    el.classList.add('on');
+  }
+  function payDone() {
+    document.getElementById('payBody').innerHTML =
+      '<div class="pay-ok"><div class="po-ring">✓</div>' +
+        '<div style="font-weight:900;font-size:1.1rem">Thanh toán thành công</div>' +
+        '<div style="font-size:0.85rem;color:var(--muted);margin-top:0.3rem">' + payCtx.name + ' · ' + payCtx.price + '</div></div>' +
+      '<div class="card" style="background:#ecfdf5;border-color:#a7f3d0"><div style="font-size:0.8rem;color:#047857;text-align:center">🎉 Đã kích hoạt cho ' + P().short + ' · biên nhận điện tử đã gửi email</div></div>' +
+      '<button class="btn btn-primary" style="width:100%" onclick="closePay()">Xong</button>';
+  }
+  function closePay() { document.getElementById('payOverlay').classList.remove('show'); }
+
+  // ===== K · hồ sơ y tế điện tử + đơn thuốc điện tử =====
+  function openEhr() {
+    var p = P();
+    var allergies = (p.id === 'tam') ? ['Penicillin', 'Aspirin'] : ['Chưa ghi nhận'];
+    var aChips = allergies.map(function (a) { return '<span class="ehr-chip">⚠️ ' + a + '</span>'; }).join('');
+    var dis = p.chronic.map(function (d) { return '<span class="ehr-chip" style="background:#eff6ff;color:#1d4ed8">' + d.name + '</span>'; }).join('');
+    var timeline = (p.id === 'tam') ? [
+      ['T6/2024', '🧠 Đột quỵ nhẹ — nhập viện Bạch Mai 5 ngày'],
+      ['T9/2024', '🏥 Bắt đầu chương trình PHCN tại nhà'],
+      ['Hôm qua', '📹 Khám video BS Thần kinh Sơn — điều chỉnh thuốc']
+    ] : [
+      ['T3/2024', '🩺 Khám tổng quát — phát hiện tiền tiểu đường'],
+      ['T11/2024', '💉 Tiêm vaccine cúm mùa'],
+      ['Hôm qua', '📹 Khám video BS Tim mạch Hùng — ổn định']
+    ];
+    var tl = timeline.map(function (r) { return '<div class="ehr-row"><span class="eh-date">' + r[0] + '</span><span class="eh-main">' + r[1] + '</span></div>'; }).join('');
+    var rx = rxFromProfile(p).slice(0, 3).map(function (r) {
+      return '<div class="rx-line"><span>' + r.name + ' · ' + r.use + '</span><b>' + r.qty + ' viên</b></div>';
+    }).join('');
+    document.getElementById('ehrBody').innerHTML =
+      '<div class="card"><div class="card-title">🧬 Thông tin cơ bản</div>' +
+        '<div class="rx-line"><span>Họ tên</span><b>' + p.name + '</b></div>' +
+        '<div class="rx-line"><span>Tuổi · nhóm máu</span><b>' + p.age + 't · ' + bloodGroup(p) + '</b></div>' +
+        '<div style="margin-top:0.5rem;font-size:0.7rem;color:var(--muted)">Dị ứng:</div>' + aChips +
+        '<div style="margin-top:0.4rem;font-size:0.7rem;color:var(--muted)">Bệnh nền:</div>' + dis + '</div>' +
+
+      '<div class="card"><div class="card-title">📜 Diễn biến y tế</div>' + tl + '</div>' +
+
+      '<div class="card" style="border-color:#99f6e4;background:#f0fdfa"><div class="card-title" style="color:#0f766e">💊 Đơn thuốc điện tử mới nhất</div>' +
+        '<div style="font-size:0.7rem;color:var(--muted);margin-bottom:0.3rem">Kê sau khám video · BS có giấy phép · ' + (p.id === 'tam' ? 'BS Sơn (Thần kinh)' : 'BS Hùng (Tim mạch)') + ' · Điều 80</div>' + rx +
+        '<button class="btn btn-primary" style="width:100%;margin-top:0.5rem" onclick="closeEhr();openPharmacy()">🛵 Gửi đơn tới nhà thuốc &amp; giao tận nhà</button></div>' +
+
+      '<button class="btn btn-outline" style="width:100%" onclick="toast(\'🔗 Đã tạo liên kết chia sẻ hồ sơ (hết hạn sau 24h)\')">🔗 Chia sẻ hồ sơ cho bác sĩ (có thời hạn)</button>';
+    document.getElementById('ehrOverlay').classList.add('show');
+  }
+  function closeEhr() { document.getElementById('ehrOverlay').classList.remove('show'); }
+
+  // ===== L · bác sĩ trực on-call 24/7 =====
+  var ocTimer = null;
+  function openVideoCustom(ava, name) {
+    document.getElementById('vcAva').textContent = ava;
+    document.getElementById('vcName').textContent = name;
+    document.getElementById('vcStatus').textContent = 'Đang kết nối...';
+    document.getElementById('videoOverlay').classList.add('show');
+    if (vcTimer) clearTimeout(vcTimer);
+    vcTimer = setTimeout(function () { document.getElementById('vcStatus').textContent = '🟢 Đã kết nối · 00:01'; }, 1600);
+  }
+  function openOnCall() {
+    document.getElementById('onCallBody').innerHTML =
+      '<div class="card" style="text-align:center"><div class="vc-avatar" style="margin:0.5rem auto;width:90px;height:90px;font-size:3rem;background:#ede9fe;color:#6d28d9;border-radius:50%;display:flex;align-items:center;justify-content:center;animation:pulse 1.6s infinite">🔎</div>' +
+        '<div id="ocStatus" style="font-weight:800;font-size:0.95rem">Đang tìm bác sĩ trực rảnh...</div>' +
+        '<div style="font-size:0.74rem;color:var(--muted);margin-top:0.3rem">Trung bình kết nối &lt; 3 phút</div></div>' +
+      '<div class="card" style="background:#f5f3ff;border-color:#ddd6fe"><div style="font-size:0.74rem;color:#5b21b6">🩺 <b>Chuyên gia dự phòng on-call</b> — không cần đặt lịch, gọi ngay khi cần gấp. Tính phí theo cuộc, sẵn sàng 24/7 (1 trong 3 trụ cột sinh tiền · plan).</div></div>' +
+      '<div id="ocResult"></div>';
+    document.getElementById('onCallOverlay').classList.add('show');
+    if (ocTimer) clearTimeout(ocTimer);
+    ocTimer = setTimeout(function () {
+      var st = document.getElementById('ocStatus'); if (st) st.textContent = '✅ Đã tìm thấy bác sĩ trực';
+      var r = document.getElementById('ocResult'); if (!r) return;
+      r.innerHTML = '<div class="card"><div class="person"><div class="person-avatar">👨‍⚕️</div><div>' +
+        '<div class="p-name">BS Trực Phương <span class="lic-chip">Giấy phép ✔ · Điều 80</span></div>' +
+        '<div class="p-meta">Nội tổng quát · ⭐ 4.8 · sẵn sàng ngay</div></div></div>' +
+        '<div style="font-size:0.74rem;color:var(--muted);margin:0.4rem 0">Phí cuộc gọi: <b>120.000đ</b> · trừ vào ví hoặc gói</div>' +
+        '<button class="btn btn-primary" style="width:100%" onclick="closeOnCall();openVideoCustom(\'👨‍⚕️\',\'BS Trực Phương — trực 24/7\')">🎥 Vào khám ngay</button></div>';
+    }, 1500);
+  }
+  function closeOnCall() { if (ocTimer) clearTimeout(ocTimer); document.getElementById('onCallOverlay').classList.remove('show'); }
+
+  // ===== M · đánh giá sau ca =====
+  var ratingVal = 5;
+  function openRating() {
+    ratingVal = 5;
+    var p = P();
+    document.getElementById('ratingBody').innerHTML =
+      '<div class="card" style="text-align:center"><div class="person" style="justify-content:center"><div class="person-avatar">' + p.nurse.ava + '</div>' +
+        '<div><div class="p-name">' + p.nurse.name + '</div><div class="p-meta">Ca hôm nay · 08:00–12:00</div></div></div>' +
+        '<div style="font-size:0.82rem;color:var(--muted);margin-top:0.6rem">Bạn hài lòng với ca chăm thế nào?</div>' +
+        '<div class="star-row" id="starRow"></div></div>' +
+      '<div class="card"><div class="card-title">Điểm tốt (chọn nhanh)</div><div class="fb-chips">' +
+        ['Đúng giờ', 'Tận tâm', 'Chuyên môn tốt', 'Sạch sẽ', 'Giao tiếp tốt'].map(function (c) {
+          return '<button class="chip" onclick="this.classList.toggle(\'sel\')">' + c + '</button>';
+        }).join('') + '</div></div>' +
+      '<div class="card" style="background:#fffbeb;border-color:#fcd34d"><div style="font-size:0.72rem;color:#92400e">💡 Đánh giá ảnh hưởng <b>thứ hạng &amp; ưu tiên ghép ca</b> của người chăm — giữ chất lượng marketplace (plan).</div></div>' +
+      '<button class="btn btn-primary" style="width:100%" onclick="closeRating();toast(\'⭐ Cảm ơn đánh giá của bạn!\')">Gửi đánh giá</button>';
+    renderStars();
+    document.getElementById('ratingOverlay').classList.add('show');
+  }
+  function renderStars() {
+    var html = '';
+    for (var i = 1; i <= 5; i++) html += '<span class="st' + (i <= ratingVal ? ' on' : '') + '" onclick="setRating(' + i + ')">⭐</span>';
+    document.getElementById('starRow').innerHTML = html;
+  }
+  function setRating(v) { ratingVal = v; renderStars(); }
+  function closeRating() { document.getElementById('ratingOverlay').classList.remove('show'); }
+
+  // ===== N · dịch vụ mở rộng: dinh dưỡng / thiết bị / cộng đồng =====
+  function openSvc(kind) {
+    var head = document.getElementById('svcHead'), body = document.getElementById('svcBody'), p = P();
+    if (kind === 'nutrition') {
+      head.className = 'ov-head teal';
+      document.getElementById('svcIco').textContent = '🍲';
+      document.getElementById('svcTitle').textContent = 'Dinh dưỡng & suất ăn';
+      document.getElementById('svcSub').textContent = 'Thực đơn theo bệnh · giao tận nhà';
+      var diet = (p.id === 'tam') ? 'mềm, dễ nuốt · ít muối (sau đột quỵ)' : 'ít đường · ít muối (tiểu đường + huyết áp)';
+      body.innerHTML =
+        '<div class="card" style="background:#f0fdfa;border-color:#99f6e4"><div style="font-size:0.78rem;color:#0f766e">🥗 Thực đơn cá nhân hóa cho <b>' + p.short + '</b>: ' + diet + ' — chuyên gia dinh dưỡng duyệt.</div></div>' +
+        '<div class="card"><div class="card-title">🍽️ Suất ăn hôm nay</div>' +
+          menuRow('🥣', 'Cháo yến mạch + ức gà', 'Sáng · 320 kcal · ít đường', '35.000đ') +
+          menuRow('🍚', 'Cơm gạo lứt + cá hấp + rau', 'Trưa · 450 kcal · ít muối', '55.000đ') +
+          menuRow('🥗', 'Súp bí đỏ + sữa chua', 'Tối · 280 kcal', '40.000đ') +
+          '<button class="btn btn-primary" style="width:100%;margin-top:0.6rem" onclick="toast(\'🛵 Đã đặt combo cả ngày — giao 3 bữa tận nhà\')">Đặt combo cả ngày · 120.000đ</button></div>';
+    } else if (kind === 'market') {
+      head.className = 'ov-head blue';
+      document.getElementById('svcIco').textContent = '🛒';
+      document.getElementById('svcTitle').textContent = 'Thiết bị y tế';
+      document.getElementById('svcSub').textContent = 'Thuê / mua · giao &amp; lắp tận nhà';
+      body.innerHTML =
+        '<div class="card"><div class="card-title">🔧 Thuê hoặc mua</div>' +
+          menuRow('🩸', 'Máy đo huyết áp bắp tay', 'Omron · chính hãng', 'Mua 850k') +
+          menuRow('🛏️', 'Giường y tế đa năng', 'Nâng hạ điện · chống loét', 'Thuê 600k/th') +
+          menuRow('♿', 'Xe lăn gấp gọn', 'Nhẹ · phù hợp người già', 'Thuê 250k/th') +
+          menuRow('🫁', 'Máy tạo oxy 5 lít', 'Cho bệnh hô hấp', 'Thuê 1,2tr/th') +
+          '<button class="btn btn-primary" style="width:100%;margin-top:0.6rem" onclick="toast(\'🚚 Đã thêm vào giỏ — giao &amp; hướng dẫn sử dụng tận nhà\')">Thêm vào giỏ</button></div>' +
+        '<div class="card" style="background:#eff6ff;border-color:#bfdbfe"><div style="font-size:0.72rem;color:#1e3a8a">💡 Marketplace thiết bị — dòng doanh thu mở rộng, tăng giá trị mỗi khách (plan).</div></div>';
+    } else {
+      head.className = 'ov-head violet';
+      document.getElementById('svcIco').textContent = '👨‍👩‍👧';
+      document.getElementById('svcTitle').textContent = 'Cộng đồng con chăm bố mẹ';
+      document.getElementById('svcSub').textContent = 'Hỏi đáp · chia sẻ · chuyên gia trả lời';
+      body.innerHTML =
+        '<div class="card"><button class="btn btn-outline" style="width:100%" onclick="toast(\'✍️ Mở ô đặt câu hỏi cho cộng đồng\')">✍️ Đặt câu hỏi cho cộng đồng</button></div>' +
+        postCard('👩', 'Chị Lan', '2 giờ trước', 'Bố mình hay quên uống thuốc buổi chiều, mọi người có mẹo gì không ạ?', '💬 14 trả lời · 👍 32') +
+        postCard('🧑‍⚕️', 'BS Hùng (chuyên gia)', 'Hôm qua', 'Người cao tuổi huyết áp cao nên đo vào buổi sáng trước khi uống thuốc, ghi lại để bác sĩ điều chỉnh.', '💬 8 trả lời · 👍 56 · ✔ Đã xác minh') +
+        postCard('👨', 'Anh Tuấn', '2 ngày trước', 'Review dịch vụ điều dưỡng tại nhà ElderCare — đặt cho mẹ 3 tháng, rất yên tâm 👏', '💬 21 trả lời · 👍 88');
+    }
+    document.getElementById('svcOverlay').classList.add('show');
+  }
+  function menuRow(ico, name, sub, price) {
+    return '<div class="menu-row"><span class="mr-ico">' + ico + '</span>' +
+      '<div class="mr-main"><div class="mr-name">' + name + '</div><div class="mr-sub">' + sub + '</div></div>' +
+      '<b style="color:var(--care);font-size:0.8rem;white-space:nowrap">' + price + '</b></div>';
+  }
+  function postCard(ava, name, time, body, foot) {
+    return '<div class="post-card"><div class="pc-head"><span class="pc-ava">' + ava + '</span>' +
+      '<div><div class="pc-name">' + name + '</div><div class="pc-time">' + time + '</div></div></div>' +
+      '<div class="pc-body">' + body + '</div><div class="pc-foot">' + foot + '</div></div>';
+  }
+  function closeSvc() { document.getElementById('svcOverlay').classList.remove('show'); }
 
   // ===== fall / wander simulation =====
   var fallTimer = null, fallCount = 10;
