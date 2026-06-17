@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kid Account — Ngân hàng cho thế hệ tương lai</title>
+<style>
+:root{
+  --navy:#071a3a; --navy2:#0d2a5c; --blue:#1d5dff; --blue-soft:#5b8cff;
+  --gold:#ffc233; --teal:#19d3b5; --coral:#ff6b6b;
+  --ink:#0a1730; --paper:#f6f9ff; --muted:#6b7da3; --line:rgba(255,255,255,.12);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%}
+body{
+  font-family:"Inter","Segoe UI",system-ui,-apple-system,sans-serif;
+  background:#02060f;color:#fff;overflow:hidden;
+}
+.deck{height:100vh;width:100vw;position:relative}
+.slide{
+  position:absolute;inset:0;display:none;flex-direction:column;
+  padding:6vh 7vw;opacity:0;transition:opacity .5s ease;
+  background:radial-gradient(1200px 700px at 80% -10%,#10336e 0%,transparent 55%),
+             radial-gradient(900px 600px at -10% 110%,#0a2350 0%,transparent 50%),
+             linear-gradient(160deg,#071a3a 0%,#04102a 100%);
+}
+.slide.active{display:flex;opacity:1;animation:rise .6s ease}
+@keyframes rise{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+.kicker{
+  display:inline-flex;align-items:center;gap:8px;align-self:flex-start;
+  font-size:.8rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--navy);background:linear-gradient(90deg,var(--gold),#ffd76b);
+  padding:7px 16px;border-radius:999px;margin-bottom:22px;
+}
+h1{font-size:clamp(2.4rem,5.2vw,4.6rem);line-height:1.04;font-weight:800;letter-spacing:-.02em}
+h2{font-size:clamp(1.8rem,3.6vw,3rem);line-height:1.1;font-weight:800;letter-spacing:-.01em;margin-bottom:6px}
+.en{color:var(--blue-soft);font-weight:600;font-size:clamp(.95rem,1.5vw,1.25rem);letter-spacing:.01em}
+.sub{color:#c7d6f5;font-size:clamp(1rem,1.55vw,1.35rem);line-height:1.55;max-width:60ch}
+.grid{display:grid;gap:22px;margin-top:auto;margin-bottom:auto}
+.g2{grid-template-columns:repeat(2,1fr)}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g4{grid-template-columns:repeat(4,1fr)}
+.card{
+  background:linear-gradient(160deg,rgba(255,255,255,.08),rgba(255,255,255,.03));
+  border:1px solid var(--line);border-radius:20px;padding:26px 24px;backdrop-filter:blur(6px);
+  transition:transform .3s,border-color .3s;
+}
+.slide.active .card{animation:pop .5s backwards}
+.slide.active .card:nth-child(2){animation-delay:.08s}
+.slide.active .card:nth-child(3){animation-delay:.16s}
+.slide.active .card:nth-child(4){animation-delay:.24s}
+.slide.active .card:nth-child(5){animation-delay:.32s}
+.slide.active .card:nth-child(6){animation-delay:.4s}
+.slide.active .card:nth-child(7){animation-delay:.48s}
+@keyframes pop{from{opacity:0;transform:translateY(16px) scale(.98)}to{opacity:1;transform:none}}
+.card .ic{font-size:2rem;margin-bottom:12px;display:block}
+.card h3{font-size:1.25rem;font-weight:800;margin-bottom:4px}
+.card .ce{color:var(--blue-soft);font-size:.85rem;font-weight:600;margin-bottom:10px}
+.card p{color:#bcccf0;font-size:1rem;line-height:1.5}
+.card b{color:var(--gold)}
+.num{font-size:clamp(2.6rem,5vw,4rem);font-weight:800;
+  background:linear-gradient(120deg,var(--gold),var(--teal));-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1}
+ul.feat{list-style:none;display:flex;flex-direction:column;gap:12px;margin-top:8px}
+ul.feat li{position:relative;padding-left:30px;color:#cdd9f5;font-size:1.05rem;line-height:1.45}
+ul.feat li::before{content:"";position:absolute;left:0;top:.5em;width:12px;height:12px;border-radius:4px;
+  background:linear-gradient(135deg,var(--gold),var(--teal));transform:rotate(45deg)}
+.pill{display:inline-block;background:rgba(29,93,255,.18);border:1px solid rgba(91,140,255,.4);
+  color:#bcd0ff;border-radius:999px;padding:5px 13px;font-size:.85rem;font-weight:600;margin:4px 6px 0 0}
+.pill.vn{background:rgba(25,211,181,.14);border-color:rgba(25,211,181,.45);color:#9bf0df}
+/* title slide */
+.hero{justify-content:center}
+.hero .logo{display:flex;align-items:center;gap:14px;margin-bottom:30px;align-self:flex-start}
+.hero .logo .dot{width:46px;height:46px;border-radius:14px;background:linear-gradient(135deg,var(--gold),var(--coral));display:grid;place-items:center;font-size:1.6rem}
+.hero .logo span{font-weight:800;font-size:1.3rem;letter-spacing:.02em}
+.hero h1{max-width:18ch}
+.hero .tag{margin-top:24px;font-size:clamp(1.1rem,1.8vw,1.5rem);color:#c7d6f5;max-width:50ch}
+.hero .meta{margin-top:40px;display:flex;gap:14px;flex-wrap:wrap}
+.chip{border:1px solid var(--line);border-radius:12px;padding:10px 18px;font-size:.95rem;color:#cdd9f5;background:rgba(255,255,255,.04)}
+/* roadmap */
+.road{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin:auto 0}
+.phase{background:linear-gradient(170deg,rgba(255,255,255,.09),rgba(255,255,255,.03));
+  border:1px solid var(--line);border-radius:18px;padding:22px 20px;position:relative;overflow:hidden}
+.phase::before{content:"";position:absolute;top:0;left:0;right:0;height:5px;background:var(--accent)}
+.phase .ph{font-size:.8rem;font-weight:700;letter-spacing:.1em;color:var(--accent);text-transform:uppercase}
+.phase h3{font-size:1.2rem;font-weight:800;margin:6px 0 4px}
+.phase .vp{color:var(--gold);font-style:italic;font-size:.95rem;margin:10px 0;line-height:1.4}
+.phase p{color:#bcccf0;font-size:.92rem;line-height:1.45}
+/* matrix */
+.matrix{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:1fr;gap:14px;margin:auto 0}
+.mx{background:linear-gradient(160deg,rgba(255,255,255,.08),rgba(255,255,255,.03));border:1px solid var(--line);
+  border-radius:16px;padding:18px;display:flex;flex-direction:column;gap:6px}
+.mx .mxn{font-size:1.6rem}
+.mx h4{font-size:1.05rem;font-weight:800;line-height:1.2}
+.mx .mxe{color:var(--blue-soft);font-size:.78rem;font-weight:600}
+.mx p{color:#aebbdc;font-size:.85rem;line-height:1.35}
+/* footer + nav */
+.foot{position:absolute;bottom:22px;left:7vw;right:7vw;display:flex;justify-content:space-between;
+  align-items:center;font-size:.8rem;color:var(--muted);letter-spacing:.04em}
+.dots{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);display:flex;gap:8px;z-index:30}
+.dots b{width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.22);cursor:pointer;transition:.3s}
+.dots b.on{background:var(--gold);width:26px;border-radius:6px}
+.nav{position:fixed;bottom:18px;right:24px;display:flex;gap:8px;z-index:30}
+.nav button{width:42px;height:42px;border-radius:12px;border:1px solid var(--line);background:rgba(255,255,255,.06);
+  color:#fff;font-size:1.2rem;cursor:pointer;transition:.25s}
+.nav button:hover{background:var(--blue);border-color:var(--blue)}
+.progress{position:fixed;top:0;left:0;height:4px;background:linear-gradient(90deg,var(--gold),var(--teal));z-index:40;transition:width .4s}
+.two{display:grid;grid-template-columns:1.1fr 1fr;gap:40px;align-items:center;margin:auto 0}
+.bench{display:grid;grid-template-columns:1fr 1fr;gap:26px;margin:auto 0}
+.bench .col{background:linear-gradient(160deg,rgba(255,255,255,.07),rgba(255,255,255,.02));border:1px solid var(--line);border-radius:20px;padding:28px}
+.bench h3{font-size:1.4rem;margin-bottom:6px}
+.bench .ce{color:var(--blue-soft);font-size:.9rem;font-weight:600;margin-bottom:16px}
+.solhead{display:flex;align-items:baseline;gap:16px;flex-wrap:wrap;margin-bottom:4px}
+.solhead .tagn{font-size:1.1rem;font-weight:800;color:var(--navy);background:var(--gold);width:46px;height:46px;border-radius:14px;display:grid;place-items:center;flex:none}
+.purpose{background:rgba(29,93,255,.12);border-left:4px solid var(--blue);border-radius:0 12px 12px 0;padding:16px 20px;color:#d3defa;font-size:1.05rem;line-height:1.5;margin:14px 0 18px}
+.solgrid{display:grid;grid-template-columns:1.4fr 1fr;gap:30px;align-items:start;margin-top:6px}
+.who{display:flex;flex-direction:column;gap:10px}
+.who .wl{font-size:.8rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+@media (max-width:820px){.g2,.g3,.g4,.road,.matrix,.solgrid,.two,.bench{grid-template-columns:1fr}.slide{padding:5vh 6vw}}
+</style>
+</head>
+<body>
+<div class="progress" id="prog"></div>
+<div class="deck" id="deck">
+
+<!-- 1 COVER -->
+<section class="slide hero active">
+  <div class="logo"><div class="dot">🐷</div><span>KID&nbsp;ACCOUNT</span></div>
+  <div class="kicker">Chiến lược sản phẩm · Product Strategy</div>
+  <h1>Ngân hàng cho <span style="background:linear-gradient(120deg,var(--gold),var(--teal));-webkit-background-clip:text;background-clip:text;color:transparent">thế hệ tương lai</span></h1>
+  <p class="tag">Kid Account — Banking for the next generation. Xây dựng lòng trung thành với Gen Z &amp; Gen Alpha ngay từ hôm nay.</p>
+  <div class="meta">
+    <div class="chip">👨‍👩‍👧 Trẻ 6–18 tuổi</div>
+    <div class="chip">🏦 Sub-account · Prepaid Card</div>
+    <div class="chip">📈 CLV · Retention · Data</div>
+  </div>
+</section>
+
+<!-- 2 AGENDA -->
+<section class="slide">
+  <div class="kicker">Nội dung · Agenda</div>
+  <h2>Bốn câu chuyện trong một chiến lược</h2>
+  <div class="en">Four chapters, one strategy</div>
+  <div class="grid g4">
+    <div class="card"><span class="num">01</span><h3>Là gì</h3><div class="ce">What it is</div><p>Định nghĩa Kid Account &amp; cơ chế vận hành.</p></div>
+    <div class="card"><span class="num">02</span><h3>Giá trị</h3><div class="ce">Why it matters</div><p>Giá trị kinh doanh dài hạn cho ngân hàng.</p></div>
+    <div class="card"><span class="num">03</span><h3>Giải pháp</h3><div class="ce">Solutions</div><p>7 nhóm giải pháp &amp; benchmark thị trường.</p></div>
+    <div class="card"><span class="num">04</span><h3>Lộ trình</h3><div class="ce">Roadmap</div><p>4 giai đoạn triển khai từng bước.</p></div>
+  </div>
+</section>
+
+<!-- 3 WHAT IS -->
+<section class="slide">
+  <div class="kicker">01 · Kid Account là gì</div>
+  <h2>Tài khoản đầu đời của trẻ</h2>
+  <div class="en">What is a Kid Account?</div>
+  <div class="two">
+    <div>
+      <p class="sub">Mô hình tài khoản thanh toán dành cho trẻ em &amp; thanh thiếu niên <b style="color:var(--gold)">6–18 tuổi</b>, liên kết và chịu quản lý của tài khoản cha mẹ.</p>
+      <div style="margin-top:22px">
+        <span class="pill">Youth Account</span><span class="pill">Junior Account</span><span class="pill">Teen Account</span>
+      </div>
+      <div class="purpose" style="margin-top:24px">⚙️ <b style="color:#fff">Về bản chất hệ thống:</b> không phải tài khoản độc lập, mà là <b>Sub-account</b> hoặc <b>thẻ ảo / trả trước (Prepaid/Virtual Card)</b> gắn vào Parent Account.</div>
+    </div>
+    <div class="card">
+      <span class="ic">🎯</span>
+      <h3>Mục tiêu chính</h3><div class="ce">Core goals</div>
+      <ul class="feat">
+        <li>Giúp trẻ làm quen quản lý tiền</li>
+        <li>Xây kỹ năng tài chính từ sớm</li>
+        <li>Cha mẹ giám sát &amp; kiểm soát rủi ro</li>
+        <li>Tạo nguồn khách hàng tương lai cho ngân hàng</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 4 GOALS -->
+<section class="slide">
+  <div class="kicker">01 · Mục tiêu cốt lõi</div>
+  <h2>Bốn mục tiêu, một vòng đời khách hàng</h2>
+  <div class="en">Four goals, one customer lifecycle</div>
+  <div class="grid g4">
+    <div class="card"><span class="ic">💡</span><h3>Làm quen tiền</h3><div class="ce">Money literacy</div><p>Trẻ trải nghiệm chi tiêu số an toàn ngay từ nhỏ.</p></div>
+    <div class="card"><span class="ic">📚</span><h3>Kỹ năng tài chính</h3><div class="ce">Financial skills</div><p>Tiết kiệm, lập ngân sách, giá trị lao động.</p></div>
+    <div class="card"><span class="ic">🛡️</span><h3>Cha mẹ kiểm soát</h3><div class="ce">Parental control</div><p>Giám sát, giới hạn, an tâm trước rủi ro.</p></div>
+    <div class="card"><span class="ic">🌱</span><h3>KH tương lai</h3><div class="ce">Future customers</div><p>Gieo mầm khách hàng trung thành dài hạn.</p></div>
+  </div>
+</section>
+
+<!-- 5 WHY NOW -->
+<section class="slide">
+  <div class="kicker">01 · Vì sao bây giờ</div>
+  <h2>Người thắng là người đến sớm nhất</h2>
+  <div class="en">The winner is whoever arrives first</div>
+  <div class="two">
+    <div>
+      <p class="sub">Gen Z và Gen Alpha lớn lên hoàn toàn trong môi trường số. Ngân hàng nào chạm tới các em <b style="color:var(--gold)">trước tuổi trưởng thành</b> sẽ sở hữu khách hàng cho cả 50 năm tiếp theo.</p>
+      <div class="purpose" style="margin-top:24px">🔑 Tài khoản đầu đời = thói quen tài chính suốt đời. Chuyển đổi sang tài khoản chính (Main CASA) gần như tự nhiên khi trẻ đủ 18.</div>
+    </div>
+    <div class="grid" style="gap:18px">
+      <div class="card"><span class="num">6–18</span><h3>Độ tuổi vàng</h3><p>Cửa sổ hình thành thói quen tài chính.</p></div>
+      <div class="card"><span class="num">1→1</span><h3>Cha mẹ + con</h3><p>Một sản phẩm, hai thế hệ khách hàng.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 6 BUSINESS VALUE -->
+<section class="slide">
+  <div class="kicker">02 · Giá trị kinh doanh</div>
+  <h2>Không chỉ là một tính năng</h2>
+  <div class="en">Not just a feature — a long-term ecosystem play</div>
+  <div class="grid g3">
+    <div class="card"><span class="ic">📈</span><h3>Tăng CLV</h3><div class="ce">Customer Lifetime Value</div><p>Chiếm lòng tin Gen Z/Alpha từ sớm. Tài khoản phụ <b>dễ chuyển đổi thành Main CASA</b> khi trưởng thành.</p></div>
+    <div class="card"><span class="ic">🔗</span><h3>Giữ chân KH</h3><div class="ce">Retention</div><p>Biến app ngân hàng thành <b>công cụ quản lý tài chính gia đình</b> — cha mẹ gắn bó sâu hơn.</p></div>
+    <div class="card"><span class="ic">🧠</span><h3>Dữ liệu</h3><div class="ce">Household data</div><p>Hiểu hành vi chi tiêu hộ gia đình để <b>cross-sell / up-sell</b>: bảo hiểm giáo dục, thẻ tín dụng…</p></div>
+  </div>
+</section>
+
+<!-- 7 MATRIX -->
+<section class="slide">
+  <div class="kicker">03 · Bản đồ giải pháp</div>
+  <h2>7 nhóm giải pháp Kid Account</h2>
+  <div class="en">The 7 solution groups</div>
+  <div class="matrix">
+    <div class="mx"><span class="mxn">💳</span><h4>1. Kid Payment</h4><div class="mxe">Payment account</div><p>Thay thế tiền mặt bằng thẻ/QR số.</p></div>
+    <div class="mx"><span class="mxn">🛡️</span><h4>2. Parent Control</h4><div class="mxe">Parental control</div><p>Phanh an toàn cho cha mẹ.</p></div>
+    <div class="mx"><span class="mxn">🔄</span><h4>3. Pocket Money</h4><div class="mxe">Allowance automation</div><p>Tiền tiêu vặt tự động.</p></div>
+    <div class="mx"><span class="mxn">🎯</span><h4>4. Goal Saving</h4><div class="mxe">Goal-based saving</div><p>Tiết kiệm có mục tiêu.</p></div>
+    <div class="mx"><span class="mxn">🧹</span><h4>5. Chore-to-Earn</h4><div class="mxe">Earn by chores</div><p>Làm việc nhà nhận thưởng.</p></div>
+    <div class="mx"><span class="mxn">🎮</span><h4>6. Financial Edu</h4><div class="mxe">Edu platform</div><p>Học tài chính qua game.</p></div>
+    <div class="mx"><span class="mxn">👨‍👩‍👧‍👦</span><h4>7. Family Banking</h4><div class="mxe">Family banking</div><p>Ngân hàng cả gia đình.</p></div>
+    <div class="mx" style="background:linear-gradient(135deg,var(--blue),var(--blue-soft));border:none"><span class="mxn">➡️</span><h4>Chi tiết từng nhóm</h4><div class="mxe" style="color:#dce7ff">Next slides</div><p style="color:#eaf0ff">Mục đích · tính năng · ai đang làm.</p></div>
+  </div>
+</section>
+
+<!-- 8 SOL 1 -->
+<section class="slide">
+  <div class="kicker">03 · Giải pháp 1/7</div>
+  <div class="solhead"><div class="tagn">1</div><div><h2>Kid Payment Account</h2><div class="en">Tài khoản thanh toán cho trẻ em · 💳</div></div></div>
+  <div class="purpose"><b style="color:#fff">Mục đích:</b> Thay thế tiền mặt vật lý bằng thanh toán số an toàn — trẻ tự lập chi tiêu hàng ngày (ăn sáng, xe buýt, dụng cụ học tập), ngân hàng tiếp cận khách hàng tương lai từ sớm.</div>
+  <div class="solgrid">
+    <div><ul class="feat">
+      <li>Phát hành <b>thẻ vật lý</b> (Debit/Prepaid) mang tên trẻ hoặc <b>thẻ ảo</b></li>
+      <li>Thanh toán chạm: Apple Pay · Google Pay · Samsung Pay</li>
+      <li>Giao diện rút gọn <b>Kid View</b> — quét QR chuyển khoản / thanh toán tại cửa hàng</li>
+    </ul></div>
+    <div class="who"><div class="wl">Đơn vị đang triển khai · Who's doing it</div>
+      <div><span class="pill">Revolut &lt;18 🇬🇧</span><span class="pill">Step 🇺🇸</span><span class="pill">Monzo Kids 🇬🇧</span><span class="pill">Chase First Banking 🇺🇸</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 9 SOL 2 -->
+<section class="slide">
+  <div class="kicker">03 · Giải pháp 2/7</div>
+  <div class="solhead"><div class="tagn">2</div><div><h2>Parent Control</h2><div class="en">Phụ huynh kiểm soát · 🛡️</div></div></div>
+  <div class="purpose"><b style="color:#fff">Mục đích:</b> Xóa nỗi lo lớn nhất của cha mẹ — trẻ chi sai mục đích hay bị lừa đảo mạng. Là chiếc "phanh an toàn" giám sát mà vẫn giữ tự chủ cho con.</div>
+  <div class="solgrid">
+    <div><ul class="feat">
+      <li><b>Bật/tắt thẻ</b> &amp; khóa tính năng theo thời gian thực (chặn ATM, chặn online)</li>
+      <li><b>Hạn mức linh hoạt</b> — tối đa X VNĐ/ngày hoặc tuần</li>
+      <li>Chặn danh mục theo mã <b>MCC</b> (game, cờ bạc, nội dung người lớn)</li>
+      <li>Push <b>real-time</b> về máy cha mẹ mỗi giao dịch</li>
+    </ul></div>
+    <div class="who"><div class="wl">Đơn vị đang triển khai</div>
+      <div><span class="pill">Greenlight 🇺🇸</span><span class="pill">GoHenry 🇬🇧</span><span class="pill">Commonwealth Bank 🇦🇺</span></div>
+      <div style="margin-top:8px"><span class="pill vn">🇻🇳 VIB — quản lý thẻ cho con trên MyVIB</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 10 SOL 3 -->
+<section class="slide">
+  <div class="kicker">03 · Giải pháp 3/7</div>
+  <div class="solhead"><div class="tagn">3</div><div><h2>Pocket Money Automation</h2><div class="en">Tự động hóa tiền tiêu vặt · 🔄</div></div></div>
+  <div class="purpose"><b style="color:#fff">Mục đích:</b> Cha mẹ không còn quên đưa tiền tiêu vặt đúng hạn; trẻ học lập ngân sách dựa trên nguồn thu định kỳ, có thể dự báo trước.</div>
+  <div class="solgrid">
+    <div><ul class="feat">
+      <li><b>Auto-allowance</b> — chuyển tiền tự động theo lịch (thứ Hai hàng tuần, ngày 1 hàng tháng)</li>
+      <li>Cơ chế <b>"Pay Yourself First"</b> — tự trích một phần thẳng vào tiết kiệm trước khi cho tiêu</li>
+    </ul></div>
+    <div class="who"><div class="wl">Đơn vị đang triển khai</div>
+      <div><span class="pill">BusyKid 🇺🇸</span><span class="pill">RoosterMoney (NatWest) 🇬🇧</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 11 SOL 4 -->
+<section class="slide">
+  <div class="kicker">03 · Giải pháp 4/7</div>
+  <div class="solhead"><div class="tagn">4</div><div><h2>Goal Saving</h2><div class="en">Tiết kiệm có mục tiêu · 🎯</div></div></div>
+  <div class="purpose"><b style="color:#fff">Mục đích:</b> Bỏ thói quen "thích gì mua nấy", dạy trẻ trì hoãn thỏa mãn (delayed gratification) &amp; giá trị của tích lũy dài hạn.</div>
+  <div class="solgrid">
+    <div><ul class="feat">
+      <li><b>Lọ tiết kiệm / Heo đất điện tử</b> theo mục tiêu (xe đạp, Nintendo Switch)</li>
+      <li><b>Progress Bar</b> trực quan mức hoàn thành (đã đạt 60%)</li>
+      <li><b>Round-up</b> — tiêu 18.000đ làm tròn 20.000đ, 2.000đ lẻ vào quỹ</li>
+      <li><b>Lãi suất ưu đãi</b> do cha mẹ trả để khuyến khích giữ tiền</li>
+    </ul></div>
+    <div class="who"><div class="wl">Đơn vị đang triển khai</div>
+      <div><span class="pill">Capital One MONEY 🇺🇸</span><span class="pill">Acorns Early 🇺🇸</span></div>
+      <div style="margin-top:8px"><span class="pill vn">🇻🇳 Techcombank Super Kid</span><span class="pill vn">🇻🇳 Vietcombank</span><span class="pill vn">🇻🇳 VIB Future Saving</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 12 SOL 5 -->
+<section class="slide">
+  <div class="kicker">03 · Giải pháp 5/7</div>
+  <div class="solhead"><div class="tagn">5</div><div><h2>Chore-to-Earn</h2><div class="en">Làm việc nhà nhận tiền · 🧹</div></div></div>
+  <div class="purpose"><b style="color:#fff">Mục đích:</b> Dạy bài học "tiền là phần thưởng cho lao động &amp; giá trị tạo ra" — kết nối hành vi tích cực thực tế với phần thưởng tài chính số.</div>
+  <div class="solgrid">
+    <div><ul class="feat">
+      <li><b>Chore Checklist</b> trên app cha mẹ (rửa bát 20k, quét nhà 10k, điểm 10 = 50k)</li>
+      <li>Trẻ <b>check-in gửi bằng chứng</b> hoàn thành (ảnh/video)</li>
+      <li><b>Approval một chạm</b> của cha mẹ → chuyển tiền tức thì vào ví con</li>
+    </ul></div>
+    <div class="who"><div class="wl">Đơn vị đang triển khai</div>
+      <div><span class="pill">Greenlight 🇺🇸</span><span class="pill">GoHenry 🇬🇧</span><span class="pill">Starling Kite 🇬🇧</span></div>
+      <div style="margin-top:8px"><span class="pill vn">🇻🇳 VIB — Junior Banking / Maxtopia</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 13 SOL 6 -->
+<section class="slide">
+  <div class="kicker">03 · Giải pháp 6/7</div>
+  <div class="solhead"><div class="tagn">6</div><div><h2>Financial Education Platform</h2><div class="en">Nền tảng giáo dục tài chính · 🎮</div></div></div>
+  <div class="purpose"><b style="color:#fff">Mục đích:</b> Khắc phục sự khô khan của kiến thức tài chính. Biến app ngân hàng thành nền tảng <b>EdTech</b> học tập chủ động.</div>
+  <div class="solgrid">
+    <div><ul class="feat">
+      <li><b>Gamification</b> — quiz, bài học dạng truyện tranh / hoạt hình</li>
+      <li><b>Level · XP · Badges</b> mở khóa đặc quyền trong app</li>
+      <li><b>Virtual Investing</b> — đầu tư giả lập bằng tiền ảo trên dữ liệu chứng khoán thật</li>
+    </ul></div>
+    <div class="who"><div class="wl">Đơn vị đang triển khai</div>
+      <div><span class="pill">Greenlight Level Up™ 🇺🇸</span><span class="pill">GoHenry Money Missions 🇬🇧</span></div>
+      <div style="margin-top:8px"><span class="pill vn">🇻🇳 VIB</span><span class="pill vn">🇻🇳 TNEX</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 14 SOL 7 -->
+<section class="slide">
+  <div class="kicker">03 · Giải pháp 7/7</div>
+  <div class="solhead"><div class="tagn">7</div><div><h2>Family Banking</h2><div class="en">Ngân hàng gia đình · 👨‍👩‍👧‍👦</div></div></div>
+  <div class="purpose"><b style="color:#fff">Mục đích:</b> Coi cả hộ là "đơn vị tài chính thống nhất" — quản lý thu chi chung, minh bạch vợ-chồng, bao trùm con cái. Ngân hàng <b>"khóa chặt" (lock-in)</b> cả hệ sinh thái, tối ưu đặc quyền theo tổng tài sản (AUM) gia đình.</div>
+  <div class="solgrid">
+    <div><ul class="feat">
+      <li><b>Family Dashboard</b> — toàn cảnh tài sản, dư nợ, chi tiêu cả nhà 1 màn hình</li>
+      <li><b>Joint Account / Shared Wallet</b> — ví chung vợ chồng cùng đóng góp</li>
+      <li><b>Family Saving Goals</b> · phân quyền Admin/Co-admin/Member</li>
+      <li><b>Pooled Rewards</b> — gộp điểm, chia sẻ hạn mức thẻ chính-phụ</li>
+    </ul></div>
+    <div class="who"><div class="wl">Đơn vị đang triển khai</div>
+      <div><span class="pill">Revolut 🇬🇧</span><span class="pill">Bank of America 🇺🇸</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 15 BENCHMARK -->
+<section class="slide">
+  <div class="kicker">03 · Benchmark thị trường</div>
+  <h2>Ai đang dẫn dắt cuộc chơi?</h2>
+  <div class="en">The competitive landscape</div>
+  <div class="bench">
+    <div class="col"><h3>🌍 Thế giới</h3><div class="ce">Global leaders</div>
+      <div><span class="pill">Greenlight</span><span class="pill">GoHenry</span><span class="pill">Revolut &lt;18</span><span class="pill">Step</span><span class="pill">Monzo Kids</span><span class="pill">Chase First</span><span class="pill">BusyKid</span><span class="pill">RoosterMoney</span><span class="pill">Acorns Early</span><span class="pill">Starling Kite</span><span class="pill">Bank of America</span></div>
+      <p style="margin-top:16px;color:#bcccf0;font-size:1rem;line-height:1.5">Bộ tính năng đầy đủ: control · allowance · saving · chore · giáo dục game hóa · family hub.</p>
+    </div>
+    <div class="col"><h3>🇻🇳 Việt Nam</h3><div class="ce">Vietnam market</div>
+      <div><span class="pill vn">VIB — Junior / Maxtopia</span><span class="pill vn">Techcombank Super Kid</span><span class="pill vn">Vietcombank</span><span class="pill vn">TNEX</span></div>
+      <p style="margin-top:16px;color:#bcccf0;font-size:1rem;line-height:1.5"><b style="color:var(--gold)">Cơ hội:</b> thị trường VN còn sơ khai — chủ yếu dừng ở tiết kiệm &amp; quản lý thẻ. Family Banking, Chore-to-Earn, EdTech game hóa <b>gần như còn trống</b>.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 16 ROADMAP -->
+<section class="slide">
+  <div class="kicker">04 · Lộ trình triển khai</div>
+  <h2>Bốn giai đoạn, một hành trình</h2>
+  <div class="en">Four phases · Target: phụ huynh có con 6–15 tuổi</div>
+  <div class="road">
+    <div class="phase" style="--accent:var(--gold)"><div class="ph">Giai đoạn 1</div><h3>Digital Pocket Money</h3><div class="vp">"Cho con tự chủ tài chính trong phạm vi an toàn."</div><p>Kid Account · Thẻ Debit · QR Payment · chuyển tiền phụ huynh → con.</p></div>
+    <div class="phase" style="--accent:var(--teal)"><div class="ph">Giai đoạn 2</div><h3>Smart Parenting Finance</h3><div class="vp">"Ngân hàng giúp cha mẹ quản lý hành vi tài chính của con."</div><p>Hạn mức · khóa thẻ · Merchant control: mua hàng phải được cha mẹ duyệt.</p></div>
+    <div class="phase" style="--accent:var(--blue-soft)"><div class="ph">Giai đoạn 3</div><h3>Financial Education</h3><div class="vp">"Ngân hàng đồng hành cùng phụ huynh giáo dục tài chính cho con."</div><p>Pocket Money · Goal Saving · Chore-to-Earn · Quiz/Game/Video.</p></div>
+    <div class="phase" style="--accent:var(--coral)"><div class="ph">Giai đoạn 4</div><h3>Family Financial Hub</h3><div class="vp">"Một ứng dụng cho mọi nhu cầu tài chính của gia đình."</div><p>Family Budget · Family Goals (học tập, du lịch) · Family Insights.</p></div>
+  </div>
+</section>
+
+<!-- 17 CTA -->
+<section class="slide hero">
+  <div class="kicker">Khuyến nghị · Call to action</div>
+  <h1>Bắt đầu từ <span style="background:linear-gradient(120deg,var(--gold),var(--teal));-webkit-background-clip:text;background-clip:text;color:transparent">Giai đoạn 1</span>, chiếm trọn vòng đời.</h1>
+  <p class="tag">Thị trường Việt Nam còn trống. Mỗi đứa trẻ hôm nay là một khách hàng Main CASA của ngày mai — và cả gia đình đi kèm.</p>
+  <div class="meta">
+    <div class="chip">✅ MVP: Kid Account + Thẻ + QR</div>
+    <div class="chip">✅ Lớp Parent Control làm khác biệt</div>
+    <div class="chip">✅ Mở rộng tới Family Hub</div>
+  </div>
+  <p style="margin-top:34px;color:var(--muted);font-size:.95rem">Cảm ơn · Thank you — Kid Account Strategy</p>
+</section>
+
+</div>
+
+<div class="dots" id="dots"></div>
+<div class="nav"><button onclick="go(cur-1)">‹</button><button onclick="go(cur+1)">›</button></div>
+
+<script>
+const slides=[...document.querySelectorAll('.slide')];
+const dots=document.getElementById('dots');
+const prog=document.getElementById('prog');
+let cur=0;
+slides.forEach((_,i)=>{const b=document.createElement('b');b.onclick=()=>go(i);dots.appendChild(b)});
+function go(n){
+  cur=Math.max(0,Math.min(slides.length-1,n));
+  slides.forEach((s,i)=>s.classList.toggle('active',i===cur));
+  [...dots.children].forEach((d,i)=>d.classList.toggle('on',i===cur));
+  prog.style.width=((cur+1)/slides.length*100)+'%';
+}
+document.addEventListener('keydown',e=>{
+  if(['ArrowRight','ArrowDown',' ','PageDown'].includes(e.key)){e.preventDefault();go(cur+1)}
+  if(['ArrowLeft','ArrowUp','PageUp'].includes(e.key)){e.preventDefault();go(cur-1)}
+  if(e.key==='Home')go(0); if(e.key==='End')go(slides.length-1);
+});
+let sx=0;
+document.addEventListener('touchstart',e=>sx=e.touches[0].clientX);
+document.addEventListener('touchend',e=>{const d=e.changedTouches[0].clientX-sx;if(Math.abs(d)>50)go(cur+(d<0?1:-1))});
+go(0);
+</script>
+</body>
+</html>
