@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>SEM40 MASTERMIND — Vào chơi</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0c1322;--card:#16223a;--line:rgba(255,255,255,.12);--txt:#e8eefc;--muted:#93a3bf;--gold:#f5a623;--teal:#2dd4bf;--coral:#fb7185;--green:#34d399}
+body{font-family:Inter,sans-serif;background:var(--bg);color:var(--txt);line-height:1.5;padding:16px;max-width:520px;margin:0 auto;-webkit-tap-highlight-color:transparent}
+.brand{font-weight:900;font-size:1.15rem;text-align:center;margin-bottom:2px}.brand span{color:var(--gold)}
+.sub{text-align:center;color:var(--muted);font-size:.8rem;margin-bottom:18px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;margin-bottom:12px}
+input{width:100%;background:#0f1a2e;border:1px solid var(--line);color:var(--txt);border-radius:12px;padding:13px;font-family:inherit;font-size:1rem;margin-bottom:12px}
+.teams{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px}
+.teams button{padding:14px 6px;border-radius:12px;border:2px solid var(--line);background:#0f1a2e;color:var(--txt);font-weight:800;font-size:.95rem;cursor:pointer}
+.teams button.sel.GPT{border-color:var(--green);background:rgba(52,211,153,.16)}
+.teams button.sel.Gemini{border-color:#7ea6ff;background:rgba(91,140,255,.16)}
+.teams button.sel.Claude{border-color:var(--gold);background:rgba(245,166,35,.16)}
+button.go{width:100%;padding:15px;border-radius:12px;border:none;background:var(--gold);color:#1a1300;font-weight:900;font-size:1.05rem;cursor:pointer}
+.me{display:flex;justify-content:space-between;align-items:center;font-size:.85rem;margin-bottom:10px}
+.me .pill{font-weight:800;padding:4px 12px;border-radius:99px}
+.pill.GPT{background:rgba(52,211,153,.16);color:var(--green)}.pill.Gemini{background:rgba(91,140,255,.16);color:#7ea6ff}.pill.Claude{background:rgba(245,166,35,.16);color:var(--gold)}
+.phase{font-size:.72rem;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--gold)}
+.qtext{font-size:1.2rem;font-weight:800;margin:8px 0 16px;line-height:1.35}
+.opts{display:flex;flex-direction:column;gap:10px}
+.opt{display:flex;gap:12px;align-items:center;background:#0f1a2e;border:2px solid var(--line);border-radius:14px;padding:15px;font-size:1.02rem;font-weight:600;cursor:pointer;text-align:left;color:var(--txt);width:100%}
+.opt .lt{width:32px;height:32px;flex:none;border-radius:9px;background:rgba(255,255,255,.08);display:grid;place-items:center;font-weight:900;color:var(--muted)}
+.opt.picked{border-color:var(--gold);background:rgba(245,166,35,.14)}
+.opt.picked .lt{background:var(--gold);color:#1a1300}
+.opt.correct{border-color:var(--green);background:rgba(52,211,153,.16)}.opt.correct .lt{background:var(--green);color:#04201c}
+.opt.bad{border-color:var(--coral);background:rgba(251,113,133,.12)}
+.opt:disabled{cursor:default;opacity:1}
+.buzz{width:100%;padding:26px;border-radius:18px;border:none;background:var(--coral);color:#3a0a14;font-weight:900;font-size:1.4rem;cursor:pointer;margin-top:8px}
+.buzz:disabled{background:#33405c;color:var(--muted)}
+.status{text-align:center;color:var(--muted);font-size:.9rem;padding:20px 0}
+.flash{text-align:center;font-weight:800;padding:10px;border-radius:12px;margin-top:10px}
+.flash.ok{background:rgba(52,211,153,.15);color:var(--green)}.flash.no{background:rgba(251,113,133,.15);color:var(--coral)}
+.conn{font-size:.7rem;font-weight:700;padding:2px 8px;border-radius:99px;background:rgba(251,113,133,.15);color:var(--coral)}
+.conn.on{background:rgba(52,211,153,.15);color:var(--green)}
+.hide{display:none}
+</style>
+</head>
+<body>
+
+<div class="brand">SEM40 <span>MASTERMIND</span></div>
+<div class="sub">Đấu Trường Tri Thức · vào chơi</div>
+
+<div id="joinView" class="card">
+  <input id="name" placeholder="Tên của bạn" maxlength="24" />
+  <div style="font-size:.82rem;color:var(--muted);margin-bottom:6px">Chọn đội của bạn:</div>
+  <div class="teams" id="teams">
+    <button data-t="GPT" class="GPT">🟢 GPT</button>
+    <button data-t="Gemini" class="Gemini">🔵 Gemini</button>
+    <button data-t="Claude" class="Claude">🟠 Claude</button>
+  </div>
+  <button class="go" id="joinBtn">Vào chơi →</button>
+</div>
+
+<div id="gameView" class="hide">
+  <div class="me">
+    <span>👤 <b id="meName"></b> <span class="pill" id="mePill"></span></span>
+    <span>Điểm đội: <b id="meScore">0</b> · <span class="conn" id="conn">offline</span></span>
+  </div>
+  <div class="card" id="qcard">
+    <div class="phase" id="phase">—</div>
+    <div class="qtext" id="qtext">Chờ MC bắt đầu…</div>
+    <div class="opts" id="opts"></div>
+    <button class="buzz hide" id="buzz">⚡ BẤM CHUÔNG</button>
+    <div id="flash"></div>
+  </div>
+</div>
+
+<script>
+const API="/api/mastermind";
+let me=JSON.parse(localStorage.getItem("mm_me")||"null");
+let selTeam=null,curRound=-1,answered=false,buzzed=false,myChoice=null;
+const $=id=>document.getElementById(id);
+
+document.querySelectorAll("#teams button").forEach(b=>b.onclick=()=>{
+  selTeam=b.dataset.t;
+  document.querySelectorAll("#teams button").forEach(x=>x.classList.remove("sel"));
+  b.classList.add("sel",selTeam);
+});
+$("joinBtn").onclick=async()=>{
+  const name=$("name").value.trim()||"Ẩn danh";
+  if(!selTeam){alert("Chọn đội đã nhé!");return;}
+  const r=await fetch(API,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({action:"join",name,team:selTeam,pid:me?me.pid:undefined})});
+  const d=await r.json();
+  me={pid:d.pid,name:d.name,team:d.team};
+  localStorage.setItem("mm_me",JSON.stringify(me));
+  showGame();
+};
+function showGame(){
+  $("joinView").classList.add("hide");$("gameView").classList.remove("hide");
+  $("meName").textContent=me.name;$("mePill").textContent=me.team;$("mePill").className="pill "+me.team;
+}
+if(me)showGame();
+
+async function answer(i){
+  if(answered)return;answered=true;myChoice=i;render(lastState,true);
+  const r=await fetch(API,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({action:"answer",pid:me.pid,choice:i})});
+  const d=await r.json();
+  if(!d.ok){answered=!!d.reason&&d.reason==="already";}
+}
+async function doBuzz(){
+  if(buzzed)return;buzzed=true;$("buzz").textContent="✅ ĐÃ BẤM!";$("buzz").disabled=true;
+  await fetch(API,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({action:"buzz",pid:me.pid})});
+}
+$("buzz").onclick=doBuzz;
+
+let lastState=null;
+function render(st,optimistic){
+  if(!st)return;lastState=st;const g=st.game;
+  if(!g||!g.q){$("phase").textContent="—";$("qtext").textContent="Chờ MC bắt đầu…";$("opts").innerHTML="";$("buzz").classList.add("hide");$("flash").innerHTML="";return;}
+  const q=g.q;
+  if(g.round!==curRound){curRound=g.round;answered=false;buzzed=false;myChoice=null;$("buzz").textContent="⚡ BẤM CHUÔNG";$("buzz").disabled=false;$("flash").innerHTML="";}
+  // my submitted answer from server
+  const mine=(st.subs||[]).find(s=>s.pid===me.pid);
+  if(mine){answered=true;myChoice=mine.choice;}
+  $("phase").textContent=q.phase+"  ·  Câu "+q.no+"/"+q.total+(q.points==="JACKPOT"?"  · CƯỢC":"  · +"+q.points);
+  $("qtext").textContent=q.text;
+  $("opts").innerHTML=q.opts.map((o,i)=>{
+    let cls="opt";
+    if(q.revealed){if(i===q.correct)cls+=" correct";else if(i===myChoice)cls+=" bad";}
+    else if(i===myChoice)cls+=" picked";
+    const dis=(!q.open||q.revealed||answered)?"disabled":"";
+    return `<button class="${cls}" ${dis} onclick="answer(${i})"><span class="lt">${"ABCD"[i]}</span>${o}</button>`;
+  }).join("");
+  // buzz
+  if(q.buzzOpen){$("buzz").classList.remove("hide");}else{$("buzz").classList.add("hide");}
+  const bz=(st.buzz||[]).find(b=>b.pid===me.pid);
+  if(bz){buzzed=true;$("buzz").disabled=true;const pos=(st.buzz||[]).sort((a,b)=>a.ts-b.ts).findIndex(b=>b.pid===me.pid)+1;$("buzz").textContent="✅ Bạn bấm thứ "+pos;}
+  // flash result
+  if(q.revealed){
+    if(myChoice===null)$("flash").innerHTML='<div class="flash no">Bạn chưa trả lời 😅</div>';
+    else if(myChoice===q.correct)$("flash").innerHTML='<div class="flash ok">Chính xác! 🎉</div>';
+    else $("flash").innerHTML='<div class="flash no">Chưa đúng. Đáp án: '+"ABCD"[q.correct]+'</div>';
+  }else if(answered&&!optimistic){$("flash").innerHTML='<div class="flash ok">Đã gửi đáp án ✓ chờ MC mở</div>';}
+  else if(!optimistic)$("flash").innerHTML="";
+  // my team score
+  if(g.scores&&g.scores[me.team]!==undefined)$("meScore").textContent=g.scores[me.team];
+}
+window.answer=answer;
+
+async function poll(){
+  if(!me)return;
+  try{const r=await fetch(API+"?action=state");const st=await r.json();$("conn").textContent="online";$("conn").classList.add("on");render(st,false);}
+  catch{$("conn").textContent="offline";$("conn").classList.remove("on");}
+}
+setInterval(poll,900);poll();
+</script>
+</body>
+</html>

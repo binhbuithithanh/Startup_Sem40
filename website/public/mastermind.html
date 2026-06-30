@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>SEM40 MASTERMIND — Màn điều khiển (MC)</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap" rel="stylesheet" />
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0c1322;--card:#16223a;--line:rgba(255,255,255,.1);--txt:#e8eefc;--muted:#93a3bf;--gold:#f5a623;--teal:#2dd4bf;--coral:#fb7185;--green:#34d399}
+body{font-family:Inter,sans-serif;background:var(--bg);color:var(--txt);line-height:1.5;padding:14px 16px 40px;max-width:1100px;margin:0 auto}
+a{color:var(--teal)}
+.top{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);padding-bottom:12px;margin-bottom:14px}
+.brand{font-weight:900;font-size:1.2rem;letter-spacing:-.5px}.brand span{color:var(--gold)}
+.join{display:flex;gap:12px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:8px 12px}
+.join img{width:74px;height:74px;border-radius:8px;background:#fff;padding:3px}
+.join .jt{font-size:.78rem;color:var(--muted)}.join .ju{font-weight:700;font-size:.86rem;word-break:break-all}
+.conn{font-size:.72rem;font-weight:700;padding:3px 9px;border-radius:99px;background:rgba(52,211,153,.15);color:var(--green)}
+.conn.off{background:rgba(251,113,133,.15);color:var(--coral)}
+
+.stage{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px;margin-bottom:14px;position:relative;overflow:hidden}
+.phase{display:inline-block;font-size:.72rem;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--gold);background:rgba(245,166,35,.12);border:1px solid rgba(245,166,35,.3);padding:4px 12px;border-radius:99px}
+.qno{color:var(--muted);font-weight:700;font-size:.85rem;margin-left:8px}
+.qtext{font-size:1.5rem;font-weight:800;margin:14px 0 16px;line-height:1.3}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(max-width:680px){.opts{grid-template-columns:1fr}}
+.opt{display:flex;gap:12px;align-items:center;background:#0f1a2e;border:2px solid var(--line);border-radius:12px;padding:12px 14px;font-size:1.02rem;font-weight:600}
+.opt .lt{width:30px;height:30px;flex:none;border-radius:8px;background:rgba(255,255,255,.08);display:grid;place-items:center;font-weight:900;color:var(--muted)}
+.opt.correct{border-color:var(--green);background:rgba(52,211,153,.14)}
+.opt.correct .lt{background:var(--green);color:#04201c}
+.opt.wrong{border-color:var(--coral);background:rgba(251,113,133,.1)}
+.timerwrap{position:absolute;top:18px;right:18px;text-align:center}
+.timerwrap svg{transform:rotate(-90deg)}
+.timerwrap .tnum{font-size:1.5rem;font-weight:900;margin-top:-44px;position:relative}
+
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.live{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:14px 0}
+@media(max-width:680px){.live{grid-template-columns:1fr}}
+.tm{border-radius:14px;border:1px solid var(--line);background:var(--card);padding:12px}
+.tm h4{font-size:1rem;font-weight:900;display:flex;align-items:center;gap:8px;justify-content:space-between}
+.tm .sc{font-size:1.7rem;font-weight:900}
+.tm .ans{margin-top:6px;font-size:.85rem;color:var(--muted)}
+.tm .ans b{font-size:1.1rem}
+.tm.GPT{box-shadow:inset 0 0 0 2px rgba(52,211,153,.5)}.tm.GPT .badge{color:var(--green)}
+.tm.Gemini{box-shadow:inset 0 0 0 2px rgba(91,140,255,.5)}.tm.Gemini .badge{color:#7ea6ff}
+.tm.Claude{box-shadow:inset 0 0 0 2px rgba(245,166,35,.5)}.tm.Claude .badge{color:var(--gold)}
+.adj{display:flex;gap:6px;margin-top:8px}
+.adj button{flex:1;font-size:.8rem;padding:6px;border-radius:8px}
+
+button{font-family:inherit;cursor:pointer;border:1px solid var(--line);background:#1c2a47;color:var(--txt);font-weight:700;border-radius:10px;padding:10px 14px;font-size:.9rem;transition:.15s}
+button:hover{background:#243657}button:disabled{opacity:.4;cursor:not-allowed}
+button.primary{background:var(--gold);color:#1a1300;border-color:var(--gold)}
+button.teal{background:var(--teal);color:#04201c;border-color:var(--teal)}
+button.ghost{background:transparent}
+.controls{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0 14px}
+.buzz{margin:10px 0;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:10px 14px;font-size:.9rem;min-height:46px}
+.buzz b{color:var(--gold)}
+.buzz .first{color:var(--gold);font-weight:900}
+.help{display:flex;gap:14px;flex-wrap:wrap;font-size:.8rem;color:var(--muted);margin-top:4px}
+.kbd{font-size:.72rem;background:rgba(255,255,255,.08);padding:1px 6px;border-radius:5px;border:1px solid var(--line)}
+.lead{color:var(--muted);font-size:.85rem;margin-bottom:8px}
+.jackpot input{width:90px;background:#0f1a2e;border:1px solid var(--line);color:var(--txt);border-radius:8px;padding:6px 8px;font-family:inherit;font-weight:700}
+.hide{display:none}
+</style>
+</head>
+<body>
+
+<div class="top">
+  <div>
+    <div class="brand">SEM40 <span>MASTERMIND</span></div>
+    <div class="lead">Đấu Trường Tri Thức · màn điều khiển MC</div>
+  </div>
+  <div class="join">
+    <img id="qr" alt="QR tham gia" />
+    <div>
+      <div class="jt">Học viên quét QR để vào chơi:</div>
+      <div class="ju" id="playurl"></div>
+      <div style="margin-top:4px"><span class="conn off" id="conn">offline</span> <span class="jt" id="pcount">0 người</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="stage">
+  <div class="timerwrap" id="timerwrap">
+    <svg width="84" height="84"><circle cx="42" cy="42" r="36" stroke="rgba(255,255,255,.1)" stroke-width="7" fill="none"/><circle id="tring" cx="42" cy="42" r="36" stroke="#f5a623" stroke-width="7" fill="none" stroke-linecap="round" stroke-dasharray="226" stroke-dashoffset="0"/></svg>
+    <div class="tnum" id="tnum">–</div>
+  </div>
+  <div><span class="phase" id="phase">Sẵn sàng</span><span class="qno" id="qno"></span></div>
+  <div class="qtext" id="qtext">Bấm “Bắt đầu trận” để mở phòng cho học viên vào.</div>
+  <div class="opts" id="opts"></div>
+</div>
+
+<div class="buzz" id="buzzbox">⚡ <b>Cướp chuông:</b> <span id="buzzlist">tắt</span></div>
+
+<div class="controls">
+  <button class="ghost" id="prev">◀ Câu trước</button>
+  <button class="primary" id="start">▶ Mở trả lời + giờ</button>
+  <button id="lock">⏸ Khoá</button>
+  <button class="teal" id="reveal">✓ Đáp án</button>
+  <button id="autoscore">🏅 Chấm tự động</button>
+  <button id="next">Câu tiếp ▶</button>
+  <button class="ghost" id="togglebuzz">⚡ Bật cướp chuông</button>
+  <button class="ghost" id="reset">↺ Reset</button>
+</div>
+<div class="help">
+  <span><span class="kbd">Space</span> mở/khoá</span>
+  <span><span class="kbd">R</span> đáp án</span>
+  <span><span class="kbd">←</span>/<span class="kbd">→</span> chuyển câu</span>
+  <span><span class="kbd">A</span> chấm</span>
+  <span>Điểm đội = đáp án người bấm sớm nhất của đội</span>
+</div>
+
+<div class="jackpot hide" id="jackpotbox" style="margin:12px 0;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px">
+  <b style="color:var(--gold)">💎 Câu Jackpot — nhập mức cược từng đội (0 → điểm hiện có) TRƯỚC khi mở đáp án:</b>
+  <div class="row" style="margin-top:8px">
+    <label>GPT <input id="wGPT" type="number" min="0" value="0"></label>
+    <label>Gemini <input id="wGemini" type="number" min="0" value="0"></label>
+    <label>Claude <input id="wClaude" type="number" min="0" value="0"></label>
+    <button class="teal" id="settle">Quyết toán cược</button>
+  </div>
+</div>
+
+<div class="live" id="live"></div>
+
+<script>
+const KEY="sem40mc";
+const API="/api/mastermind";
+const TEAMS=["GPT","Gemini","Claude"];
+const PLAY_URL=location.origin+"/mastermind-play";
+document.getElementById("playurl").textContent=PLAY_URL;
+document.getElementById("qr").src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data="+encodeURIComponent(PLAY_URL);
+
+const QUESTIONS=[
+ {phase:"Phần 1 · Khởi động",points:10,sec:20,text:"4P trong Marketing gồm những gì?",
+  opts:["Product, Price, Place, Promotion","People, Process, Physical, Promotion","Plan, Price, Place, Product","Product, People, Place, Profit"],correct:0},
+ {phase:"Phần 1 · Khởi động",points:10,sec:20,text:"Chỉ số NPV (Net Present Value) dùng để làm gì?",
+  opts:["Đo thị phần doanh nghiệp","Đánh giá giá trị hiện tại ròng của một dự án đầu tư","Tính lương nhân viên","Đo mức độ hài lòng khách hàng"],correct:1},
+ {phase:"Phần 1 · Khởi động",points:10,sec:20,text:"RAG trong AI là viết tắt của?",
+  opts:["Retrieval-Augmented Generation","Random Access Generator","Rapid AI Growth","Recurrent Adaptive Gradient"],correct:0},
+ {phase:"Phần 1 · Khởi động",points:10,sec:20,text:"Phân tích SWOT gồm 4 yếu tố nào?",
+  opts:["Sales, Work, Output, Time","Strategy, Work, Org, Tactics","Strengths, Weaknesses, Opportunities, Threats","Strengths, Wins, Options, Targets"],correct:2},
+ {phase:"Phần 1 · Khởi động",points:10,sec:20,text:"MVP trong khởi nghiệp nghĩa là?",
+  opts:["Minimum Viable Product — sản phẩm khả dụng tối thiểu","Most Valuable Player","Maximum Value Production","Market Validation Plan"],correct:0},
+ {phase:"Phần 1 · Khởi động",points:10,sec:20,text:"“Hallucination” của mô hình ngôn ngữ lớn (LLM) là gì?",
+  opts:["Mô hình quá tải treo máy","Mô hình bịa thông tin sai nhưng nghe rất hợp lý","Lỗi mất điện máy chủ","Mô hình từ chối trả lời"],correct:1},
+
+ {phase:"Phần 2 · Ngành nghề lớp mình",points:20,sec:25,text:"Chỉ số NIM (Net Interest Margin) quan trọng nhất với ngành nào?",
+  opts:["Ngân hàng","Khách sạn","Giáo dục","Logistics"],correct:0},
+ {phase:"Phần 2 · Ngành nghề lớp mình",points:20,sec:25,text:"RevPAR đo hiệu quả kinh doanh của ngành nào?",
+  opts:["Bán lẻ","Viễn thông","Khách sạn / lưu trú","Ngân hàng"],correct:2},
+ {phase:"Phần 2 · Ngành nghề lớp mình",points:20,sec:25,text:"Sprint & Scrum là phương pháp quen thuộc với dân ngành nào?",
+  opts:["Công nghệ / phần mềm","Khách sạn","Ngân hàng","Hoá chất"],correct:0},
+ {phase:"Phần 2 · Ngành nghề lớp mình",points:20,sec:25,text:"ARPU (Average Revenue Per User) là chỉ số đặc trưng của ngành nào?",
+  opts:["Xây dựng","Viễn thông","Khách sạn","Giáo dục"],correct:1},
+ {phase:"Phần 2 · Ngành nghề lớp mình",points:20,sec:25,text:"Trong bán lẻ / siêu thị, “SKU” là gì?",
+  opts:["Mã đơn vị quản lý hàng hoá (Stock Keeping Unit)","Doanh thu mỗi cửa hàng","Số khách mỗi ngày","Chiết khấu nhà cung cấp"],correct:0},
+ {phase:"Phần 2 · Ngành nghề lớp mình",points:20,sec:25,text:"Chỉ số OEE đo điều gì trong ngành sản xuất?",
+  opts:["Chi phí lao động","Tồn kho an toàn","Tỷ lệ nghỉ việc","Hiệu suất tổng thể thiết bị (Overall Equipment Effectiveness)"],correct:3},
+
+ {phase:"Phần 3 · Cao thủ MBA FSB",points:30,sec:30,text:"Ma trận BCG phân loại sản phẩm theo 2 trục nào?",
+  opts:["Thị phần tương đối & Tốc độ tăng trưởng thị trường","Doanh thu & Lợi nhuận","Giá & Chất lượng","Rủi ro & Lợi nhuận"],correct:0},
+ {phase:"Phần 3 · Cao thủ MBA FSB",points:30,sec:30,text:"Mô hình 5 áp lực cạnh tranh (5 Forces) là của ai?",
+  opts:["Philip Kotler","Michael Porter","Peter Drucker","Abraham Maslow"],correct:1},
+ {phase:"Phần 3 · Cao thủ MBA FSB",points:30,sec:30,text:"Tháp nhu cầu Maslow có mấy bậc?",
+  opts:["3 bậc","4 bậc","5 bậc","7 bậc"],correct:2},
+ {phase:"Phần 3 · Cao thủ MBA FSB",points:30,sec:30,text:"Đòn bẩy tài chính làm TĂNG ROE khi nào?",
+  opts:["Khi tỷ suất sinh lời trên tài sản > chi phí lãi vay","Khi lãi vay lớn hơn lợi nhuận","Khi doanh nghiệp không vay nợ","Khi thị phần giảm"],correct:0},
+ {phase:"Phần 3 · Cao thủ MBA FSB",points:30,sec:30,text:"Mô hình EOQ trong quản trị vận hành tối ưu điều gì?",
+  opts:["Giá bán sản phẩm","Lượng đặt hàng kinh tế (giảm tổng chi phí tồn kho + đặt hàng)","Số nhân viên kho","Thời gian giao hàng"],correct:1},
+ {phase:"Phần 3 · Cao thủ MBA FSB",points:30,sec:30,text:"Balanced Scorecard gồm mấy viễn cảnh (perspective)?",
+  opts:["4 — Tài chính, Khách hàng, Quy trình nội bộ, Học hỏi & phát triển","3","5","6"],correct:0},
+
+ {phase:"💎 CÂU JACKPOT",points:"JACKPOT",sec:40,text:"WACC (Weighted Average Cost of Capital) thường được dùng làm gì khi định giá doanh nghiệp?",
+  opts:["Tính thuế thu nhập doanh nghiệp","Làm tỷ lệ chiết khấu dòng tiền tương lai","Đo mức độ hài lòng khách hàng","Tính lượng tồn kho tối ưu"],correct:1}
+];
+
+let idx=0, timer=null, timeLeft=0, totalTime=0, scoredRounds={};
+const $=id=>document.getElementById(id);
+
+async function post(b){const r=await fetch(API,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(b)});return r.json();}
+async function getState(){const r=await fetch(API+"?action=state");return r.json();}
+
+function curQ(){return QUESTIONS[idx];}
+function isJackpot(){return curQ().points==="JACKPOT";}
+
+async function loadQ(){
+  const q=curQ();
+  await post({key:KEY,action:"setq",q:{no:idx+1,total:QUESTIONS.length,phase:q.phase,points:q.points,text:q.text,opts:q.opts,correct:q.correct,sec:q.sec,open:false,buzzOpen:false,revealed:false}});
+  stopTimer(); timeLeft=q.sec; totalTime=q.sec; renderTimer();
+  $("jackpotbox").classList.toggle("hide",!isJackpot());
+  renderStage(false);
+}
+function renderStage(revealed){
+  const q=curQ();
+  $("phase").textContent=q.phase;
+  $("qno").textContent="Câu "+(idx+1)+"/"+QUESTIONS.length+" · +"+(isJackpot()?"CƯỢC":q.points);
+  $("qtext").textContent=q.text;
+  $("opts").innerHTML=q.opts.map((o,i)=>{
+    let cls="opt"; if(revealed&&i===q.correct)cls+=" correct";
+    return `<div class="${cls}"><span class="lt">${"ABCD"[i]}</span>${o}</div>`;
+  }).join("");
+}
+
+function startTimer(){
+  stopTimer();
+  timer=setInterval(()=>{
+    timeLeft--; renderTimer();
+    if(timeLeft<=0){stopTimer(); lock();}
+  },1000);
+}
+function stopTimer(){if(timer){clearInterval(timer);timer=null;}}
+function renderTimer(){
+  $("tnum").textContent=timeLeft>=0?timeLeft:"–";
+  const frac=totalTime>0?Math.max(0,timeLeft)/totalTime:0;
+  $("tring").style.strokeDashoffset=String(226*(1-frac));
+  $("tring").style.stroke=timeLeft<=5?"#fb7185":"#f5a623";
+}
+
+async function start(){const q=curQ();await post({key:KEY,action:"patch",patch:{open:true,buzzOpen:buzzMode}});timeLeft=q.sec;totalTime=q.sec;renderTimer();startTimer();}
+async function lock(){stopTimer();await post({key:KEY,action:"patch",patch:{open:false,buzzOpen:false}});}
+async function reveal(){stopTimer();await post({key:KEY,action:"patch",patch:{open:false,buzzOpen:false,revealed:true}});renderStage(true);}
+
+let buzzMode=false;
+$("togglebuzz").onclick=async()=>{buzzMode=!buzzMode;$("togglebuzz").textContent=(buzzMode?"⚡ Tắt cướp chuông":"⚡ Bật cướp chuông");$("togglebuzz").classList.toggle("primary",buzzMode);if(curQ()&&!isJackpot())await post({key:KEY,action:"patch",patch:{buzzOpen:buzzMode}});};
+
+$("prev").onclick=()=>{if(idx>0){idx--;loadQ();}};
+$("next").onclick=()=>{if(idx<QUESTIONS.length-1){idx++;loadQ();}};
+$("start").onclick=start;
+$("lock").onclick=lock;
+$("reveal").onclick=reveal;
+$("autoscore").onclick=autoScore;
+$("reset").onclick=async()=>{if(confirm("Reset toàn bộ điểm + phòng?")){idx=0;scoredRounds={};await post({key:KEY,action:"reset",clearPlayers:true});loadQ();}};
+$("settle").onclick=settleJackpot;
+
+document.addEventListener("keydown",e=>{
+  if(["INPUT","TEXTAREA"].includes(e.target.tagName))return;
+  if(e.code==="Space"){e.preventDefault();timer?lock():start();}
+  else if(e.key==="r"||e.key==="R")reveal();
+  else if(e.key==="ArrowLeft")$("prev").click();
+  else if(e.key==="ArrowRight")$("next").click();
+  else if(e.key==="a"||e.key==="A")autoScore();
+});
+
+// team answer = earliest submission of that team for current round
+function teamAnswers(subs){
+  const m={};
+  for(const s of subs){if(m[s.team]===undefined||s.ts<m[s.team].ts)m[s.team]=s;}
+  return m;
+}
+let lastGame=null,lastSubs=[];
+async function autoScore(){
+  const st=await getState();const g=st.game;if(!g.q)return;
+  const rk=g.round;
+  if(scoredRounds[rk]){if(!confirm("Câu này đã chấm. Chấm lại (cộng thêm)?"))return;}
+  if(isJackpot()){alert("Câu Jackpot: dùng nút “Quyết toán cược”.");return;}
+  const ta=teamAnswers(st.subs);const sc={...g.scores};
+  let msg=[];
+  for(const t of TEAMS){const a=ta[t];if(a&&a.choice===g.q.correct){sc[t]=(sc[t]||0)+g.q.points;msg.push(t+" +"+g.q.points);}}
+  await post({key:KEY,action:"setscores",scores:sc});
+  scoredRounds[rk]=true;
+  if(!g.q.revealed)reveal();
+}
+async function settleJackpot(){
+  const st=await getState();const g=st.game;if(!g.q||!isJackpot())return;
+  const ta=teamAnswers(st.subs);const sc={...g.scores};
+  for(const t of TEAMS){
+    const w=Math.max(0,parseInt($("w"+t).value)||0);const a=ta[t];
+    if(a&&a.choice===g.q.correct)sc[t]=(sc[t]||0)+w;else sc[t]=(sc[t]||0)-w;
+  }
+  await post({key:KEY,action:"setscores",scores:sc});
+  if(!g.q.revealed)reveal();
+}
+async function adjust(t,d){const sc={...(lastGame?lastGame.scores:{})};sc[t]=(sc[t]||0)+d;await post({key:KEY,action:"setscores",scores:sc});}
+
+function renderLive(st){
+  lastGame=st.game;lastSubs=st.subs||[];
+  const g=st.game;const ta=teamAnswers(st.subs||[]);
+  const counts={};for(const p of(st.players||[]))counts[p.team]=(counts[p.team]||0)+1;
+  $("pcount").textContent=(st.players||[]).length+" người";
+  $("live").innerHTML=TEAMS.map(t=>{
+    const a=ta[t];const letter=a?("ABCD"[a.choice]):"—";
+    const revealed=g.q&&g.q.revealed;
+    let ac="";if(a&&revealed)ac=a.choice===g.q.correct?"style='color:var(--green)'":"style='color:var(--coral)'";
+    return `<div class="tm ${t}"><h4><span class="badge">${t}</span><span class="sc">${(g.scores&&g.scores[t])||0}</span></h4>
+     <div class="ans">${counts[t]||0} đt · chọn <b ${ac}>${letter}</b>${a?(" — "+a.name):""}</div>
+     <div class="adj"><button onclick="adjust('${t}',-5)">−5</button><button onclick="adjust('${t}',5)">+5</button><button onclick="adjust('${t}',10)">+10</button></div></div>`;
+  }).join("");
+  // buzz
+  const bz=st.buzz||[];
+  $("buzzbox").style.display=(g.q&&g.q.buzzOpen)||bz.length?"block":"block";
+  if(bz.length){$("buzzlist").innerHTML=bz.map((b,i)=>`<span class="${i===0?'first':''}">${i+1}. ${b.team}/${b.name}</span>`).join(" &nbsp; ");}
+  else $("buzzlist").textContent=(g.q&&g.q.buzzOpen)?"đang mở — chờ bấm…":"tắt";
+}
+window.adjust=adjust;
+
+async function poll(){
+  try{const st=await getState();$("conn").textContent="online";$("conn").classList.remove("off");renderLive(st);}
+  catch{$("conn").textContent="offline";$("conn").classList.add("off");}
+}
+setInterval(poll,900);poll();
+renderStage(false);
+</script>
+</body>
+</html>
