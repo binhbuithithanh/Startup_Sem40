@@ -31,7 +31,8 @@ button.go{width:100%;padding:15px;border-radius:12px;border:none;background:var(
 .opt.picked .lt{background:var(--gold);color:#1a1300}
 .opt.correct{border-color:var(--green);background:rgba(52,211,153,.16)}.opt.correct .lt{background:var(--green);color:#04201c}
 .opt.bad{border-color:var(--coral);background:rgba(251,113,133,.12)}
-.opt:disabled{cursor:default;opacity:1}
+.opt:disabled{cursor:default;opacity:.5}
+.opt.picked,.opt.correct,.opt.bad{opacity:1!important}
 .buzz{width:100%;padding:26px;border-radius:18px;border:none;background:var(--coral);color:#3a0a14;font-weight:900;font-size:1.4rem;cursor:pointer;margin-top:8px}
 .buzz:disabled{background:#33405c;color:var(--muted)}
 .status{text-align:center;color:var(--muted);font-size:.9rem;padding:20px 0}
@@ -137,8 +138,9 @@ function render(st,optimistic){
     if(myChoice===null)$("flash").innerHTML='<div class="flash no">Bạn chưa trả lời 😅</div>';
     else if(myChoice===q.correct)$("flash").innerHTML='<div class="flash ok">Chính xác! 🎉</div>';
     else $("flash").innerHTML='<div class="flash no">Chưa đúng. Đáp án: '+"ABCD"[q.correct]+'</div>';
-  }else if(answered&&!optimistic){$("flash").innerHTML='<div class="flash ok">Đã gửi đáp án ✓ chờ MC mở</div>';}
-  else if(!optimistic)$("flash").innerHTML="";
+  }else if(answered){$("flash").innerHTML='<div class="flash ok">Đã chọn '+"ABCD"[myChoice]+' ✓ — chờ MC chấm</div>';}
+  else if(!q.open){$("flash").innerHTML='<div class="flash" style="background:rgba(245,166,35,.15);color:var(--gold)">⏳ Chờ MC mở trả lời…</div>';}
+  else if(!optimistic)$("flash").innerHTML='<div class="flash" style="background:rgba(45,212,191,.12);color:var(--teal)">👉 Chọn đáp án đi!</div>';
   // my team score
   if(g.scores&&g.scores[me.team]!==undefined)$("meScore").textContent=g.scores[me.team];
 }

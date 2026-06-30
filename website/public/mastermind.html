@@ -183,12 +183,13 @@ async function getState(){const r=await fetch(API+"?action=state");return r.json
 function curQ(){return QUESTIONS[idx];}
 function isJackpot(){return curQ().points==="JACKPOT";}
 
-async function loadQ(){
-  const q=curQ();
-  await post({key:KEY,action:"setq",q:{no:idx+1,total:QUESTIONS.length,phase:q.phase,points:q.points,text:q.text,opts:q.opts,correct:q.correct,sec:q.sec,open:false,buzzOpen:false,revealed:false}});
+async function loadQ(autoOpen){
+  const q=curQ();const open=!!autoOpen;
+  await post({key:KEY,action:"setq",q:{no:idx+1,total:QUESTIONS.length,phase:q.phase,points:q.points,text:q.text,opts:q.opts,correct:q.correct,sec:q.sec,open,buzzOpen:open&&buzzMode}});
   stopTimer(); timeLeft=q.sec; totalTime=q.sec; renderTimer();
   $("jackpotbox").classList.toggle("hide",!isJackpot());
   renderStage(false);
+  if(open)startTimer();
 }
 function renderStage(revealed){
   const q=curQ();
@@ -218,7 +219,7 @@ function renderTimer(){
 
 async function start(){
   const st=await getState();
-  if(!st.game||!st.game.q||!st.game.q.text)await loadQ();
+  if(!st.game||!st.game.q||!st.game.q.text)await loadQ(false);
   const q=curQ();
   await post({key:KEY,action:"patch",patch:{open:true,buzzOpen:buzzMode}});
   timeLeft=q.sec;totalTime=q.sec;renderTimer();startTimer();
@@ -229,8 +230,8 @@ async function reveal(){stopTimer();await post({key:KEY,action:"patch",patch:{op
 let buzzMode=false;
 $("togglebuzz").onclick=async()=>{buzzMode=!buzzMode;$("togglebuzz").textContent=(buzzMode?"⚡ Tắt cướp chuông":"⚡ Bật cướp chuông");$("togglebuzz").classList.toggle("primary",buzzMode);if(curQ()&&!isJackpot())await post({key:KEY,action:"patch",patch:{buzzOpen:buzzMode}});};
 
-$("prev").onclick=()=>{if(idx>0){idx--;loadQ();}};
-$("next").onclick=()=>{if(idx<QUESTIONS.length-1){idx++;loadQ();}};
+$("prev").onclick=()=>{if(idx>0){idx--;loadQ(false);}};
+$("next").onclick=()=>{if(idx<QUESTIONS.length-1){idx++;loadQ(true);}};
 $("start").onclick=start;
 $("lock").onclick=lock;
 $("reveal").onclick=reveal;
@@ -316,7 +317,7 @@ async function init(){
       return;
     }
   }catch{}
-  loadQ();
+  loadQ(false);
 }
 setInterval(poll,900);poll();
 init();
