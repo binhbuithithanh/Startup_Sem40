@@ -115,9 +115,11 @@ export async function onRequest({ request, env }) {
     return j({ ok: true, game: g });
   }
   if (action === "reset") {
-    await kv.put("mm_game", JSON.stringify(defaultGame()));
+    // keep round monotonic so old per-round sub/buzz keys are never reused
+    const g = { round: round, q: null, scores: { GPT: 0, Gemini: 0, Claude: 0 } };
+    await kv.put("mm_game", JSON.stringify(g));
     if (body.clearPlayers) await kv.put("mm_roster", JSON.stringify({}), { expirationTtl: TTL });
-    return j({ ok: true, game: defaultGame() });
+    return j({ ok: true, game: g });
   }
   return j({ error: "bad action" }, 400);
 }
