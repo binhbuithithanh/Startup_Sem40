@@ -216,7 +216,13 @@ function renderTimer(){
   $("tring").style.stroke=timeLeft<=5?"#fb7185":"#f5a623";
 }
 
-async function start(){const q=curQ();await post({key:KEY,action:"patch",patch:{open:true,buzzOpen:buzzMode}});timeLeft=q.sec;totalTime=q.sec;renderTimer();startTimer();}
+async function start(){
+  const st=await getState();
+  if(!st.game||!st.game.q||!st.game.q.text)await loadQ();
+  const q=curQ();
+  await post({key:KEY,action:"patch",patch:{open:true,buzzOpen:buzzMode}});
+  timeLeft=q.sec;totalTime=q.sec;renderTimer();startTimer();
+}
 async function lock(){stopTimer();await post({key:KEY,action:"patch",patch:{open:false,buzzOpen:false}});}
 async function reveal(){stopTimer();await post({key:KEY,action:"patch",patch:{open:false,buzzOpen:false,revealed:true}});renderStage(true);}
 
@@ -297,8 +303,23 @@ async function poll(){
   try{const st=await getState();$("conn").textContent="online";$("conn").classList.remove("off");renderLive(st);}
   catch{$("conn").textContent="offline";$("conn").classList.add("off");}
 }
+async function init(){
+  try{
+    const st=await getState();const q=st.game&&st.game.q;
+    if(q&&q.text){
+      idx=Math.min(Math.max((q.no||1)-1,0),QUESTIONS.length-1);
+      totalTime=q.sec;timeLeft=q.sec;renderTimer();
+      $("jackpotbox").classList.toggle("hide",q.points!=="JACKPOT");
+      buzzMode=!!q.buzzOpen;
+      if(buzzMode){$("togglebuzz").textContent="⚡ Tắt cướp chuông";$("togglebuzz").classList.add("primary");}
+      renderStage(!!q.revealed);
+      return;
+    }
+  }catch{}
+  loadQ();
+}
 setInterval(poll,900);poll();
-renderStage(false);
+init();
 </script>
 </body>
 </html>

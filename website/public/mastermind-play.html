@@ -113,7 +113,7 @@ $("buzz").onclick=doBuzz;
 let lastState=null;
 function render(st,optimistic){
   if(!st)return;lastState=st;const g=st.game;
-  if(!g||!g.q){$("phase").textContent="—";$("qtext").textContent="Chờ MC bắt đầu…";$("opts").innerHTML="";$("buzz").classList.add("hide");$("flash").innerHTML="";return;}
+  if(!g||!g.q||!g.q.text){$("phase").textContent="—";$("qtext").textContent="Chờ MC bắt đầu…";$("opts").innerHTML="";$("buzz").classList.add("hide");$("flash").innerHTML="";return;}
   const q=g.q;
   if(g.round!==curRound){curRound=g.round;answered=false;buzzed=false;myChoice=null;$("buzz").textContent="⚡ BẤM CHUÔNG";$("buzz").disabled=false;$("flash").innerHTML="";}
   // my submitted answer from server
