@@ -111,6 +111,18 @@
     .bs .bd { color:var(--muted); font-size:.76rem; }
     .bs li .tag { align-self:flex-start; }
 
+    /* DESIGN 3D — tông ấm vàng/cam/nâu/cam đất */
+    .palette { display:flex; flex-wrap:wrap; gap:12px; margin:20px 0 8px; }
+    .sw-big { width:120px; border-radius:12px; overflow:hidden; box-shadow:var(--shadow); border:1px solid var(--border); }
+    .sw-big .c { height:62px; }
+    .sw-big .t { padding:7px 10px; font-size:.76rem; background:var(--card); }
+    .sw-big .t b { display:block; }
+    .sw-big .t span { color:var(--muted); font-size:.7rem; }
+    .mock { background:var(--card); border:1px solid var(--border); border-radius:16px; padding:16px; box-shadow:var(--shadow); }
+    .mock h4 { margin-bottom:10px; font-size:1rem; }
+    .mock svg { width:100%; height:auto; display:block; border-radius:10px; }
+    .mock .cap { color:var(--muted); font-size:.8rem; margin-top:10px; }
+
     /* product zones */
     .zone { border-top: 4px solid var(--green); }
     .zone .zh { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; margin-bottom: 4px; }
@@ -184,6 +196,7 @@
         <a href="#banchay">Bán chạy</a>
         <a href="#matbang">Mặt bằng</a>
         <a href="#noithat">Kệ & Quầy</a>
+        <a href="#design">Design 3D</a>
         <a href="#von">Bảng vốn</a>
         <a href="#lotrinh">Lộ trình</a>
       </div>
@@ -552,6 +565,153 @@
           <p class="mini">Bàn pop-up ngay cửa: <b>máy đo huyết áp tự động</b>, gương/thiết bị soi da, mẫu dùng thử (kem chống nắng, vitamin dẻo), ghế ngồi nhỏ. Đây là "mồi" kéo khách vào &amp; tạo cớ tư vấn — khác biệt lớn nhất với 2 đối thủ.</p>
           <div class="pill-row"><span class="tag">Đo HA miễn phí</span><span class="tag">Dùng thử</span><span class="tag">Góc chụp ảnh</span></div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DESIGN 3D -->
+  <section id="design" style="background:linear-gradient(180deg,#faf1e3,var(--paper))">
+    <div class="wrap">
+      <span class="sec-k" style="color:#c56a3a">Phác thảo thiết kế 3D</span>
+      <h2 class="sec">Nhận diện ấm áp — vàng · cam · nâu · cam đất</h2>
+      <p class="sec-sub">Bảng màu đất ấm (warm earthy) tạo cảm giác tin cậy, gần gũi, cao cấp — khác hẳn tông xanh/đỏ y tế lạnh của Long Châu. Dưới đây là phác thảo biển hiệu, mặt tiền và nội thất quầy để đưa cho bên thi công.</p>
+
+      <div class="palette">
+        <div class="sw-big"><div class="c" style="background:#E8B84B"></div><div class="t"><b>Vàng nghệ</b><span>#E8B84B · nhấn chính, chữ</span></div></div>
+        <div class="sw-big"><div class="c" style="background:#E58A3C"></div><div class="t"><b>Cam</b><span>#E58A3C · awning, điểm nhấn</span></div></div>
+        <div class="sw-big"><div class="c" style="background:#C56A3A"></div><div class="t"><b>Cam đất</b><span>#C56A3A · biển, quầy bar</span></div></div>
+        <div class="sw-big"><div class="c" style="background:#5E4028"></div><div class="t"><b>Nâu gỗ</b><span>#5E4028 · khung, kệ, nền</span></div></div>
+        <div class="sw-big"><div class="c" style="background:#FBF3E6"></div><div class="t"><b>Kem</b><span>#FBF3E6 · nền sáng, khoảng thở</span></div></div>
+      </div>
+
+      <div class="grid g3" style="margin-top:24px">
+        <!-- BIEN HIEU -->
+        <div class="mock">
+          <h4>🪧 Biển hiệu</h4>
+          <svg viewBox="0 0 640 260" role="img" aria-label="Phác thảo biển hiệu">
+            <defs>
+              <linearGradient id="bgwall" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6b4a2e"/><stop offset="1" stop-color="#4a3220"/></linearGradient>
+              <linearGradient id="board" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d4793f"/><stop offset="1" stop-color="#b85e30"/></linearGradient>
+            </defs>
+            <rect width="640" height="260" fill="url(#bgwall)"/>
+            <!-- 3D extrusion shadow -->
+            <rect x="52" y="54" width="536" height="156" rx="14" fill="#3a2716"/>
+            <!-- board -->
+            <rect x="44" y="44" width="536" height="156" rx="14" fill="url(#board)" stroke="#e8b84b" stroke-width="3"/>
+            <!-- top highlight -->
+            <rect x="44" y="44" width="536" height="20" rx="14" fill="#e8955a" opacity=".5"/>
+            <!-- logo cross -->
+            <rect x="72" y="78" width="80" height="80" rx="16" fill="#e8b84b"/>
+            <path d="M112 96 v44 M90 118 h44" stroke="#5e4028" stroke-width="12" stroke-linecap="round"/>
+            <!-- name -->
+            <text x="180" y="112" font-family="Fraunces,serif" font-size="46" font-weight="700" fill="#f7e7c4">Thanh Hải</text>
+            <text x="180" y="158" font-family="Fraunces,serif" font-size="46" font-weight="700" fill="#e8b84b">Store</text>
+            <text x="182" y="184" font-family="Inter,sans-serif" font-size="15" letter-spacing="3" fill="#f3d9a8">DRUGSTORE · WELLNESS</text>
+            <!-- mounts -->
+            <rect x="140" y="200" width="10" height="24" fill="#2e2012"/>
+            <rect x="480" y="200" width="10" height="24" fill="#2e2012"/>
+          </svg>
+          <p class="cap">Nền cam đất, chữ serif vàng nghệ, logo chữ thập bo tròn. Chữ nổi khối (3D) + viền vàng, đèn hắt phía dưới ban đêm.</p>
+        </div>
+
+        <!-- MAT TIEN -->
+        <div class="mock">
+          <h4>🏬 Mặt tiền (3,25m)</h4>
+          <svg viewBox="0 0 400 460" role="img" aria-label="Phác thảo mặt tiền">
+            <defs>
+              <radialGradient id="glow" cx="0.5" cy="0.5" r="0.7"><stop offset="0" stop-color="#ffe9b8"/><stop offset="1" stop-color="#e8b84b" stop-opacity="0"/></radialGradient>
+              <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#cfe3df"/><stop offset="1" stop-color="#eef6f3"/></linearGradient>
+            </defs>
+            <rect width="400" height="460" fill="#f1e3cf"/>
+            <!-- sidewalk -->
+            <rect x="0" y="420" width="400" height="40" fill="#d8c3a2"/>
+            <!-- building frame -->
+            <rect x="40" y="20" width="320" height="410" fill="#5e4028"/>
+            <!-- sign band -->
+            <rect x="48" y="30" width="304" height="68" rx="6" fill="#c56a3a" stroke="#e8b84b" stroke-width="2"/>
+            <rect x="62" y="48" width="34" height="34" rx="8" fill="#e8b84b"/>
+            <path d="M79 56 v18 M70 65 h18" stroke="#5e4028" stroke-width="6" stroke-linecap="round"/>
+            <text x="108" y="66" font-family="Fraunces,serif" font-size="25" font-weight="700" fill="#f7e7c4">Thanh Hải</text>
+            <text x="108" y="90" font-family="Fraunces,serif" font-size="19" font-weight="700" fill="#e8b84b">Store</text>
+            <!-- awning stripes -->
+            <g>
+              <rect x="44" y="104" width="312" height="30" fill="#e58a3c"/>
+              <rect x="44" y="104" width="52" height="30" fill="#f1e3cf"/><rect x="148" y="104" width="52" height="30" fill="#f1e3cf"/><rect x="252" y="104" width="52" height="30" fill="#f1e3cf"/>
+              <path d="M44 134 L60 150 H340 L356 134 Z" fill="#c56a3a"/>
+            </g>
+            <!-- interior glow -->
+            <rect x="60" y="160" width="280" height="250" fill="url(#glow)"/>
+            <!-- left window -->
+            <rect x="60" y="160" width="150" height="250" fill="url(#glass)" stroke="#5e4028" stroke-width="6"/>
+            <!-- shelf silhouettes in window -->
+            <g fill="#caa15f" opacity=".85">
+              <rect x="74" y="185" width="122" height="14"/><rect x="74" y="215" width="122" height="14"/><rect x="74" y="245" width="122" height="14"/><rect x="74" y="275" width="122" height="14"/>
+            </g>
+            <g fill="#e58a3c"><rect x="80" y="170" width="12" height="13"/><rect x="110" y="170" width="12" height="13"/><rect x="150" y="200" width="12" height="13"/><rect x="92" y="230" width="12" height="13"/></g>
+            <!-- door -->
+            <rect x="222" y="160" width="118" height="250" fill="url(#glass)" stroke="#5e4028" stroke-width="6"/>
+            <line x1="281" y1="160" x2="281" y2="410" stroke="#5e4028" stroke-width="3"/>
+            <rect x="268" y="270" width="8" height="40" rx="4" fill="#e8b84b"/><rect x="286" y="270" width="8" height="40" rx="4" fill="#e8b84b"/>
+            <!-- plants -->
+            <rect x="46" y="396" width="20" height="24" fill="#8a5a33"/><circle cx="56" cy="392" r="16" fill="#6f8f5a"/>
+            <rect x="334" y="396" width="20" height="24" fill="#8a5a33"/><circle cx="344" cy="392" r="16" fill="#6f8f5a"/>
+          </svg>
+          <p class="cap">Mặt tiền hẹp 1 gian: biển cam đất + mái hiên (awning) cam-kem, cửa kính lớn khoe kệ, ánh đèn vàng ấm hắt ra, cây xanh 2 bên.</p>
+        </div>
+
+        <!-- NOI THAT -->
+        <div class="mock">
+          <h4>🛍️ Nội thất quầy (phối cảnh)</h4>
+          <svg viewBox="0 0 400 460" role="img" aria-label="Phác thảo nội thất phối cảnh">
+            <defs>
+              <linearGradient id="floor" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#c99a63"/><stop offset="1" stop-color="#a97c48"/></linearGradient>
+              <radialGradient id="pend" cx="0.5" cy="0" r="1"><stop offset="0" stop-color="#ffe6ad"/><stop offset="1" stop-color="#ffe6ad" stop-opacity="0"/></radialGradient>
+            </defs>
+            <!-- ceiling + walls (one-point perspective, VP center-back) -->
+            <rect width="400" height="460" fill="#f3e6d2"/>
+            <polygon points="0,0 400,0 272,150 128,150" fill="#e7d3b4"/><!-- ceiling -->
+            <polygon points="0,0 128,150 128,330 0,460" fill="#c56a3a" opacity=".92"/><!-- left wall -->
+            <polygon points="400,0 272,150 272,330 400,460" fill="#b85e30" opacity=".92"/><!-- right wall -->
+            <polygon points="0,460 400,460 272,330 128,330" fill="url(#floor)"/><!-- floor -->
+            <!-- back wall: OTC counter + cửa sau -->
+            <rect x="128" y="150" width="144" height="180" fill="#6b4a2e"/>
+            <rect x="150" y="250" width="100" height="80" fill="#8a6a45"/>
+            <text x="200" y="300" text-anchor="middle" font-family="Inter,sans-serif" font-size="12" fill="#f3d9a8">QUẦY OTC</text>
+            <!-- pendant lights -->
+            <g><rect x="150" y="150" width="6" height="18" fill="#3a2716"/><ellipse cx="153" cy="172" rx="12" ry="7" fill="#e8b84b"/><ellipse cx="153" cy="178" rx="40" ry="18" fill="url(#pend)"/></g>
+            <g><rect x="244" y="150" width="6" height="18" fill="#3a2716"/><ellipse cx="247" cy="172" rx="12" ry="7" fill="#e8b84b"/><ellipse cx="247" cy="178" rx="40" ry="18" fill="url(#pend)"/></g>
+            <!-- left shelves (receding) -->
+            <polygon points="20,170 120,180 120,320 20,430" fill="#7a5433"/>
+            <g fill="#f1e3cf"><polygon points="30,195 116,202 116,214 30,210"/><polygon points="30,235 116,238 116,250 30,248"/><polygon points="30,280 116,278 116,290 30,292"/></g>
+            <!-- products left (colored boxes) -->
+            <g fill="#e58a3c"><rect x="36" y="198" width="10" height="10"/><rect x="60" y="200" width="10" height="10"/></g>
+            <g fill="#e8b84b"><rect x="84" y="201" width="10" height="11"/><rect x="40" y="238" width="10" height="10"/></g>
+            <g fill="#c56a3a"><rect x="70" y="240" width="10" height="10"/><rect x="50" y="282" width="10" height="11"/></g>
+            <!-- right shelves -->
+            <polygon points="380,170 280,180 280,320 380,430" fill="#7a5433"/>
+            <g fill="#f1e3cf"><polygon points="370,195 284,202 284,214 370,210"/><polygon points="370,235 284,238 284,250 370,248"/><polygon points="370,280 284,278 284,290 370,292"/></g>
+            <g fill="#e8b84b"><rect x="354" y="198" width="10" height="10"/><rect x="330" y="200" width="10" height="10"/></g>
+            <g fill="#e58a3c"><rect x="306" y="201" width="10" height="11"/><rect x="350" y="238" width="10" height="10"/></g>
+            <!-- central low gondola -->
+            <polygon points="170,300 230,300 245,360 155,360" fill="#8a6a45"/>
+            <rect x="168" y="286" width="64" height="18" rx="3" fill="#a9824f"/>
+            <g fill="#e8b84b"><rect x="176" y="289" width="9" height="11"/></g><g fill="#e58a3c"><rect x="192" y="289" width="9" height="11"/></g><g fill="#c56a3a"><rect x="208" y="289" width="9" height="11"/></g>
+            <!-- cash counter front-right -->
+            <polygon points="250,360 360,360 390,440 250,440" fill="#c56a3a"/>
+            <polygon points="250,360 360,360 360,372 250,372" fill="#d4793f"/>
+            <text x="315" y="410" text-anchor="middle" font-family="Inter,sans-serif" font-size="12" font-weight="700" fill="#f7e7c4">QUẦY BAR</text>
+            <!-- experience table front-left -->
+            <polygon points="40,370 120,370 110,430 20,430" fill="#8a6a45"/>
+            <circle cx="70" cy="388" r="8" fill="#e8b84b"/>
+          </svg>
+          <p class="cap">Nhìn từ cửa vào: sàn gỗ ấm, kệ áp tường 2 bên đầy hàng, dãy kệ giữa thấp, quầy bar cam đất phía trước, đèn thả vàng ấm, quầy OTC cuối nhà.</p>
+        </div>
+      </div>
+
+      <div class="grid g3" style="margin-top:18px">
+        <div class="card"><h4 style="margin-bottom:6px">💡 Vật liệu</h4><p class="mini">Gỗ sáng vân ấm (kệ, khung), mặt quầy cam đất/đá terrazzo, sàn gỗ hoặc gạch vân gỗ, kim loại đồng/vàng cho tay nắm &amp; chi tiết.</p></div>
+        <div class="card"><h4 style="margin-bottom:6px">💡 Ánh sáng</h4><p class="mini">Đèn thả vàng ấm (3000K) trên lối đi, LED rọi kệ làm nổi bao bì, đèn hắt biển hiệu ban đêm. Tránh đèn trắng lạnh kiểu bệnh viện.</p></div>
+        <div class="card"><h4 style="margin-bottom:6px">💡 Điểm nhấn</h4><p class="mini">Mảng tường cam đất sau quầy + logo chữ thập vàng; cây xanh nhỏ; bảng gỗ viết tay tên khu hàng. Tạo chất "tiệm sống khỏe" ấm cúng.</p></div>
       </div>
     </div>
   </section>
