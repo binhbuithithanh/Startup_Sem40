@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WellMart — Drugstore kiểu Mỹ · Thường Tín</title>
+  <meta name="description" content="Kế hoạch mở drugstore kiểu Mỹ (TPCN + dược mỹ phẩm + OTC) tại Thường Tín: tệp khách, danh mục sản phẩm theo tầm giá, bản vẽ mặt bằng, thiết kế kệ – quầy bar – khu trải nghiệm, bảng vốn 150–200 triệu. Chủ: Nguyễn Thị Thanh Hải." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink: #14281d;
+      --green: #1f7a53;      /* xanh wellness chính */
+      --green-d: #155c3e;
+      --mint: #e8f5ef;
+      --mint-2: #d4ecde;
+      --lime: #a7e8bd;
+      --gold: #d9a441;       /* nhấn cao cấp */
+      --coral: #e4705e;
+      --paper: #f7faf8;
+      --card: #ffffff;
+      --muted: #627568;
+      --border: #e2ece7;
+      --shadow: 0 10px 30px -14px rgba(20,40,29,.22);
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--paper);
+      color: var(--ink);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+    .wrap { max-width: 1080px; margin: 0 auto; padding: 0 20px; }
+    .serif { font-family: 'Fraunces', Georgia, serif; }
+
+    /* NAV */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(247,250,248,.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-in { max-width: 1080px; margin: 0 auto; padding: 0 20px; height: 60px;
+      display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+    .logo { font-weight: 800; font-size: 1.15rem; letter-spacing: -.5px; color: var(--ink); text-decoration: none; display: flex; align-items: center; gap: 8px; }
+    .logo b { color: var(--green); }
+    .logo .leaf { width: 26px; height: 26px; background: var(--green); border-radius: 8px 8px 8px 2px; display: grid; place-items: center; color: #fff; font-size: 15px; }
+    .nav-tabs { display: flex; gap: 2px; overflow-x: auto; }
+    .nav-tabs a { color: var(--muted); text-decoration: none; font-size: .8rem; font-weight: 600;
+      padding: 6px 11px; border-radius: 8px; white-space: nowrap; transition: .18s; }
+    .nav-tabs a:hover { background: var(--mint); color: var(--green-d); }
+    @media(max-width: 760px){ .nav-tabs { display: none; } }
+
+    /* HERO */
+    .hero { background:
+      radial-gradient(1100px 420px at 80% -10%, #cdeede 0%, transparent 60%),
+      linear-gradient(180deg, #f1f8f4, var(--paper)); padding: 56px 0 40px; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 7px; background: #fff; border: 1px solid var(--border);
+      color: var(--green-d); font-weight: 700; font-size: .74rem; letter-spacing: .3px; text-transform: uppercase;
+      padding: 6px 13px; border-radius: 999px; box-shadow: var(--shadow); }
+    .hero h1 { font-size: clamp(2rem, 5.2vw, 3.4rem); line-height: 1.05; font-weight: 700; margin: 18px 0 14px; letter-spacing: -1px; }
+    .hero h1 em { color: var(--green); font-style: normal; }
+    .hero p.lead { font-size: clamp(1rem, 2.2vw, 1.22rem); color: #3a4d42; max-width: 720px; }
+    .hero-meta { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
+    .chip { background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 10px 14px; font-size: .84rem; box-shadow: var(--shadow); }
+    .chip b { color: var(--green-d); }
+
+    section { padding: 48px 0; }
+    .sec-k { color: var(--green); font-weight: 800; font-size: .78rem; letter-spacing: 1.2px; text-transform: uppercase; }
+    h2.sec { font-family:'Fraunces',serif; font-size: clamp(1.5rem, 3.6vw, 2.2rem); font-weight: 700; letter-spacing: -.5px; margin: 6px 0 8px; }
+    .sec-sub { color: var(--muted); max-width: 760px; margin-bottom: 26px; }
+
+    .card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 22px; box-shadow: var(--shadow); }
+
+    /* alert */
+    .alert { border-left: 5px solid var(--gold); background: #fdf7ea; border-radius: 12px; padding: 18px 20px; }
+    .alert h3 { color: #8a6218; font-size: 1.02rem; margin-bottom: 6px; display: flex; gap: 8px; align-items: center; }
+    .alert p { font-size: .92rem; color: #5c4a22; }
+    .alert ul { margin: 8px 0 0 18px; font-size: .9rem; color: #5c4a22; }
+    .alert li { margin-bottom: 4px; }
+
+    .grid { display: grid; gap: 16px; }
+    .g2 { grid-template-columns: repeat(2,1fr); }
+    .g3 { grid-template-columns: repeat(3,1fr); }
+    .g4 { grid-template-columns: repeat(4,1fr); }
+    @media(max-width: 880px){ .g3,.g4 { grid-template-columns: repeat(2,1fr); } }
+    @media(max-width: 560px){ .g2,.g3,.g4 { grid-template-columns: 1fr; } }
+
+    /* personas */
+    .persona .pic { font-size: 1.9rem; }
+    .persona h4 { margin: 8px 0 2px; font-size: 1.02rem; }
+    .persona .role { color: var(--green); font-weight: 700; font-size: .8rem; }
+    .persona p { font-size: .87rem; color: var(--muted); margin-top: 8px; }
+    .persona .buys { margin-top: 10px; display: flex; flex-wrap: wrap; gap: 6px; }
+    .tag { font-size: .72rem; background: var(--mint); color: var(--green-d); padding: 3px 9px; border-radius: 999px; font-weight: 600; }
+
+    /* product zones */
+    .zone { border-top: 4px solid var(--green); }
+    .zone .zh { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; margin-bottom: 4px; }
+    .zone .zh h4 { font-size: 1.05rem; }
+    .zone .pct { font-weight: 800; color: var(--green); font-size: .85rem; }
+    .zone .share { color: var(--muted); font-size: .8rem; }
+    .prodlist { list-style: none; margin-top: 12px; }
+    .prodlist li { display: flex; justify-content: space-between; gap: 10px; font-size: .85rem; padding: 7px 0; border-bottom: 1px dashed var(--border); }
+    .prodlist li:last-child { border-bottom: none; }
+    .prodlist .nm { color: var(--ink); }
+    .prodlist .pr { color: var(--green-d); font-weight: 700; white-space: nowrap; }
+
+    /* floor plan */
+    .plan-wrap { display: grid; grid-template-columns: 300px 1fr; gap: 24px; align-items: start; }
+    @media(max-width: 820px){ .plan-wrap { grid-template-columns: 1fr; } }
+    .legend { font-size: .84rem; }
+    .legend li { list-style: none; display: flex; gap: 10px; margin-bottom: 11px; align-items: flex-start; }
+    .legend .sw { width: 18px; height: 18px; border-radius: 5px; flex-shrink: 0; margin-top: 2px; border: 1px solid rgba(0,0,0,.12); }
+    .legend b { display: block; font-size: .86rem; }
+    .legend span { color: var(--muted); font-size: .8rem; }
+    svg.plan { width: 100%; height: auto; background: #fff; border: 1px solid var(--border); border-radius: 14px; box-shadow: var(--shadow); }
+    .plan text { font-family: 'Inter', sans-serif; }
+
+    /* budget table */
+    table.bud { width: 100%; border-collapse: collapse; font-size: .88rem; background: #fff; border-radius: 14px; overflow: hidden; box-shadow: var(--shadow); }
+    table.bud th, table.bud td { padding: 11px 14px; text-align: left; border-bottom: 1px solid var(--border); }
+    table.bud thead th { background: var(--green); color: #fff; font-size: .8rem; letter-spacing: .3px; }
+    table.bud td.n, table.bud th.n { text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
+    table.bud tr:last-child td { border-bottom: none; }
+    table.bud tr.grp td { background: var(--mint); font-weight: 700; color: var(--green-d); }
+    table.bud tfoot td { font-weight: 800; background: #eef7f1; font-size: .95rem; }
+    .muted { color: var(--muted); font-size: .78rem; }
+
+    /* steps / roadmap */
+    .road { position: relative; padding-left: 26px; }
+    .road::before { content:''; position: absolute; left: 7px; top: 6px; bottom: 6px; width: 3px; background: var(--lime); border-radius: 3px; }
+    .road .it { position: relative; margin-bottom: 20px; }
+    .road .it::before { content:''; position: absolute; left: -24px; top: 4px; width: 15px; height: 15px; border-radius: 50%; background: var(--green); border: 3px solid #fff; box-shadow: 0 0 0 2px var(--lime); }
+    .road .it h4 { font-size: 1rem; }
+    .road .it .ph { font-size: .74rem; font-weight: 800; color: var(--green); letter-spacing: .5px; text-transform: uppercase; }
+    .road .it p { font-size: .87rem; color: var(--muted); margin-top: 3px; }
+
+    footer { background: var(--ink); color: #cfe3d8; padding: 34px 0; font-size: .85rem; margin-top: 20px; }
+    footer a { color: var(--lime); }
+    .pill-row { display:flex; flex-wrap:wrap; gap:8px; margin-top:10px; }
+    .mini { font-size:.78rem; color:var(--muted); }
+
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        --ink:#e8f1ec; --paper:#0f1713; --card:#16211b; --mint:#15271d; --border:#243229;
+        --muted:#93a89b; --green:#4cc58a; --green-d:#7adba8; --shadow:0 10px 30px -14px rgba(0,0,0,.5);
+      }
+      :root:not([data-theme="light"]) nav { background: rgba(15,23,19,.9); }
+      :root:not([data-theme="light"]) .hero { background: linear-gradient(180deg,#14201a,var(--paper)); }
+      :root:not([data-theme="light"]) .eyebrow,:root:not([data-theme="light"]) .chip { background:#16211b; }
+      :root:not([data-theme="light"]) .alert { background:#241d0f; }
+      :root:not([data-theme="light"]) .alert h3,:root:not([data-theme="light"]) .alert p,:root:not([data-theme="light"]) .alert li { color:#e4cf9b; }
+      :root:not([data-theme="light"]) svg.plan { background:#16211b; }
+      :root:not([data-theme="light"]) table.bud tfoot td { background:#1b2c22; }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="nav-in">
+      <a href="#top" class="logo"><span class="leaf">✚</span> Well<b>Mart</b></a>
+      <div class="nav-tabs">
+        <a href="#concept">Mô hình</a>
+        <a href="#khach">Tệp khách</a>
+        <a href="#sanpham">Danh mục</a>
+        <a href="#matbang">Mặt bằng</a>
+        <a href="#noithat">Kệ & Quầy</a>
+        <a href="#von">Bảng vốn</a>
+        <a href="#lotrinh">Lộ trình</a>
+      </div>
+    </div>
+  </nav>
+
+  <div id="top"></div>
+  <header class="hero">
+    <div class="wrap">
+      <span class="eyebrow">● Bản kế hoạch mở quầy · Chủ: Nguyễn Thị Thanh Hải</span>
+      <h1 class="serif">Drugstore kiểu Mỹ cho <em>Thường Tín</em> — bán sức khỏe, không chỉ bán thuốc.</h1>
+      <p class="lead">Không gian mở (open-browse) 40–50m², trục chính là <b>thực phẩm chức năng &amp; dược mỹ phẩm</b> cao cấp, giữ một rổ <b>thuốc OTC</b> thông dụng để chăm khách hằng ngày. Né chiến tranh giá thuốc kê đơn với Long Châu, đánh vào trải nghiệm "sống khỏe" mà Thanh Bình không có.</p>
+      <div class="hero-meta">
+        <div class="chip">📍 Mặt tiền <b>3–4m</b> · sàn <b>40–50m²</b></div>
+        <div class="chip">💰 Tổng vốn <b>150–200 triệu</b> (all-in)</div>
+        <div class="chip">🏠 Nhà mình — <b>0đ thuê</b></div>
+        <div class="chip">👩‍⚕️ Tự đứng quầy · Hộ kinh doanh</div>
+        <div class="chip">🧖 Tầng 2: <b>Massage trị liệu</b> (làm sau)</div>
+      </div>
+    </div>
+  </header>
+
+  <!-- CONCEPT + LEGAL -->
+  <section id="concept">
+    <div class="wrap">
+      <span class="sec-k">Mô hình</span>
+      <h2 class="sec">"Né" chỗ mạnh của đối thủ, "đánh" chỗ trống</h2>
+      <p class="sec-sub">Long Châu &amp; Thanh Bình giải bài toán <b>chữa bệnh (sick-care)</b>. WellMart giải bài toán <b>phòng bệnh &amp; sống khỏe (well-care)</b> — nơi khách tự cầm chai vitamin đọc công dụng, đo huyết áp miễn phí, được tư vấn dinh dưỡng thay vì đứng chờ gọi tên ở quầy kính.</p>
+
+      <div class="grid g3" style="margin-bottom:24px">
+        <div class="card">
+          <div style="font-size:1.6rem">🧬</div>
+          <h4 style="margin:6px 0">Curation là vũ khí</h4>
+          <p class="mini">60–70% danh mục là TPCN Mỹ/Úc/Âu chính ngạch, có tem phụ &amp; giấy tờ rõ ràng — thứ các nhà thuốc nhỏ hay dính hàng xách tay trôi nổi.</p>
+        </div>
+        <div class="card">
+          <div style="font-size:1.6rem">🛒</div>
+          <h4 style="margin:6px 0">Không gian mở 70/30</h4>
+          <p class="mini">70% sàn để khách tự đi lại chọn lựa giữa các đảo kệ thấp; 30% cho quầy thanh toán &amp; khu thuốc OTC. Không quầy kính cao chắn người.</p>
+        </div>
+        <div class="card">
+          <div style="font-size:1.6rem">💚</div>
+          <h4 style="margin:6px 0">Tư vấn thay vì bán</h4>
+          <p class="mini">Đứng quầy theo kiểu "Health Coach": máy đo huyết áp, góc test da, tư vấn vi chất. Khách đến không chỉ khi ốm.</p>
+        </div>
+      </div>
+
+      <div class="alert">
+        <h3>⚠️ Đọc kỹ trước khi làm: ranh giới pháp lý Thuốc vs TPCN</h3>
+        <p>Bán <b>thuốc</b> (kể cả thuốc không kê đơn/OTC) là ngành kinh doanh có điều kiện. Thường Tín nay là <b>xã</b> → đủ điều kiện mở <b>Quầy thuốc</b>, nhưng bắt buộc:</p>
+        <ul>
+          <li><b>Người phụ trách chuyên môn</b> có bằng <b>Trung cấp/Cao đẳng Dược + ≥18 tháng</b> thực hành → có Chứng chỉ hành nghề dược.</li>
+          <li><b>Giấy đủ điều kiện kinh doanh dược</b> (Sở Y tế) + đạt chuẩn <b>GPP</b> (tủ mát, nhiệt ẩm kế, khu ra lẻ…).</li>
+          <li>Hộ kinh doanh đứng tên được, nhưng nếu chị Hải chưa có bằng dược → <b>phải có 1 dược sĩ đứng chuyên môn cho mảng thuốc</b>.</li>
+        </ul>
+        <p style="margin-top:10px"><b>→ Cách đi khôn ngoan:</b> Giai đoạn đầu tập trung <b>TPCN + dược mỹ phẩm + chăm sóc cá nhân</b> (KHÔNG cần chứng chỉ dược) để mở được ngay trong ngân sách &amp; tự đứng quầy. Mảng <b>thuốc OTC bổ sung sau</b> khi đã có dược sĩ/chứng chỉ. Số liệu dưới đây có 2 kịch bản tương ứng.</p>
+        <p class="mini" style="margin-top:8px">Lưu ý: từ 01/07/2025 áp dụng Luật Dược sửa đổi 2024 &amp; Nghị định 163/2025 — nên hỏi trực tiếp Phòng Y tế/Sở Y tế để chốt thủ tục mới nhất.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- KHACH HANG -->
+  <section id="khach" style="background:linear-gradient(180deg,#eef7f1,var(--paper))">
+    <div class="wrap">
+      <span class="sec-k">Tệp khách Thường Tín</span>
+      <h2 class="sec">Ai sẽ bước vào cửa hàng?</h2>
+      <p class="sec-sub">Thu nhập Thường Tín ~76 triệu/người/năm (2024) và đang lên nhanh — vùng ven Hà Nội đã "khá" hơn, sẵn sàng chi cho vitamin, đồ ngoại cho con, chăm da. 4 nhóm cốt lõi:</p>
+      <div class="grid g4">
+        <div class="card persona">
+          <div class="pic">👩‍👧</div>
+          <h4>Chị Lan, 38</h4>
+          <div class="role">Phụ nữ trung niên · trụ cột mua sắm</div>
+          <p>Mua TPCN cho cả nhà &amp; bố mẹ già. Quyết định phần lớn giỏ hàng sức khỏe.</p>
+          <div class="buys"><span class="tag">Canxi/xương khớp</span><span class="tag">Bổ gan</span><span class="tag">Omega-3</span></div>
+        </div>
+        <div class="card persona">
+          <div class="pic">🤱</div>
+          <h4>Mẹ Trang, 29</h4>
+          <div class="role">Mẹ bỉm hiện đại</div>
+          <p>Chuộng đồ ngoại chính ngạch cho con, sợ hàng giả. Sẵn trả thêm để yên tâm.</p>
+          <div class="buys"><span class="tag">Vitamin trẻ em</span><span class="tag">Men vi sinh</span><span class="tag">D3K2</span></div>
+        </div>
+        <div class="card persona">
+          <div class="pic">🧓</div>
+          <h4>Bác Hùng, 61</h4>
+          <div class="role">Người cao tuổi · bệnh nền nhẹ</div>
+          <p>Huyết áp, tiểu đường, xương khớp. Thích được đo HA miễn phí &amp; tư vấn kỹ.</p>
+          <div class="buys"><span class="tag">Bổ tim mạch</span><span class="tag">Tiểu đường</span><span class="tag">Glucosamine</span></div>
+        </div>
+        <div class="card persona">
+          <div class="pic">🏃</div>
+          <h4>Minh, 25</h4>
+          <div class="role">Người trẻ quan tâm vóc dáng</div>
+          <p>Gym, làm đẹp, skincare. Mua theo trend, ảnh hưởng bởi review mạng.</p>
+          <div class="buys"><span class="tag">Whey/BCAA</span><span class="tag">Collagen</span><span class="tag">Serum/chống nắng</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DANH MUC -->
+  <section id="sanpham">
+    <div class="wrap">
+      <span class="sec-k">Danh mục sản phẩm</span>
+      <h2 class="sec">Bày gì lên kệ — theo nhu cầu sống, theo tầm giá</h2>
+      <p class="sec-sub">Chia khu rõ ràng để khách tự tìm. Giá là <b>giá bán lẻ tham khảo</b>; biên lợi nhuận TPCN/mỹ phẩm thường 30–50%, OTC 10–20%. Ưu tiên hàng chính ngạch có tem phụ (Kirkland, Nature Made, Blackmores, Centrum, DHC, Healthy Care, Swisse…).</p>
+
+      <div class="grid g3">
+        <div class="card zone">
+          <div class="zh"><h4>🦴 Xương khớp & Người lớn tuổi</h4><span class="pct">~20%</span></div>
+          <span class="share">Nhóm chi mạnh nhất ở vùng ven</span>
+          <ul class="prodlist">
+            <li><span class="nm">Glucosamine Blackmores 180v</span><span class="pr">~520k</span></li>
+            <li><span class="nm">Canxi + D3 Nature Made</span><span class="pr">~350k</span></li>
+            <li><span class="nm">Bổ tim mạch CoQ10</span><span class="pr">~450k</span></li>
+            <li><span class="nm">Omega-3 Kirkland 400v</span><span class="pr">~480k</span></li>
+          </ul>
+        </div>
+        <div class="card zone">
+          <div class="zh"><h4>🛡️ Miễn dịch & Đa vitamin</h4><span class="pct">~18%</span></div>
+          <span class="share">Mua quanh năm, dễ lặp lại</span>
+          <ul class="prodlist">
+            <li><span class="nm">Centrum đa vitamin 200v</span><span class="pr">~470k</span></li>
+            <li><span class="nm">Vitamin C + Kẽm sủi</span><span class="pr">~120k</span></li>
+            <li><span class="nm">DHC Multivitamin 60 ngày</span><span class="pr">~270k</span></li>
+            <li><span class="nm">Bổ gan / giải độc</span><span class="pr">~300k</span></li>
+          </ul>
+        </div>
+        <div class="card zone">
+          <div class="zh"><h4>👶 Mẹ & Bé</h4><span class="pct">~15%</span></div>
+          <span class="share">Mẹ bỉm trả thêm để yên tâm</span>
+          <ul class="prodlist">
+            <li><span class="nm">D3K2 nhỏ giọt cho bé</span><span class="pr">~280k</span></li>
+            <li><span class="nm">Men vi sinh trẻ em</span><span class="pr">~260k</span></li>
+            <li><span class="nm">Vitamin gummy trẻ em</span><span class="pr">~320k</span></li>
+            <li><span class="nm">DHA/sắt cho mẹ bầu</span><span class="pr">~400k</span></li>
+          </ul>
+        </div>
+        <div class="card zone">
+          <div class="zh"><h4>✨ Làm đẹp & Dược mỹ phẩm</h4><span class="pct">~17%</span></div>
+          <span class="share">Biên lợi nhuận cao, hút người trẻ</span>
+          <ul class="prodlist">
+            <li><span class="nm">Collagen DHC/Swisse</span><span class="pr">~450k</span></li>
+            <li><span class="nm">Kem chống nắng (La Roche/Anessa)</span><span class="pr">~380k</span></li>
+            <li><span class="nm">Serum B5 / HA phục hồi</span><span class="pr">~350k</span></li>
+            <li><span class="nm">Viên trắng da / chống nắng uống</span><span class="pr">~500k</span></li>
+          </ul>
+        </div>
+        <div class="card zone">
+          <div class="zh"><h4>💪 Thể thao & Vóc dáng</h4><span class="pct">~10%</span></div>
+          <span class="share">Khách trẻ, mua theo trend</span>
+          <ul class="prodlist">
+            <li><span class="nm">Whey protein (hũ nhỏ)</span><span class="pr">~650k</span></li>
+            <li><span class="nm">BCAA / điện giải</span><span class="pr">~350k</span></li>
+            <li><span class="nm">Giảm cân / detox</span><span class="pr">~400k</span></li>
+            <li><span class="nm">Vitamin tổng hợp gym</span><span class="pr">~300k</span></li>
+          </ul>
+        </div>
+        <div class="card zone" style="border-top-color:var(--gold)">
+          <div class="zh"><h4>💊 Thuốc OTC <span class="mini">(cần dược sĩ)</span></h4><span class="pct" style="color:var(--gold)">~20%</span></div>
+          <span class="share">Giữ chân khách hằng ngày · giai đoạn 2</span>
+          <ul class="prodlist">
+            <li><span class="nm">Hạ sốt / giảm đau (Paracetamol…)</span><span class="pr">15–40k</span></li>
+            <li><span class="nm">Tiêu hóa / men / oresol</span><span class="pr">20–60k</span></li>
+            <li><span class="nm">Nhỏ mắt / mũi / ho</span><span class="pr">25–80k</span></li>
+            <li><span class="nm">Băng gạc / vật tư y tế cơ bản</span><span class="pr">10–100k</span></li>
+          </ul>
+        </div>
+      </div>
+      <p class="mini" style="margin-top:14px">💡 Quy tắc 60–70% TPCN cao cấp + 20% OTC + 10% chăm sóc cá nhân (khăn ướt, băng vệ sinh organic, xịt mũi, kẹo ngậm…). Tập ~150–200 mã lúc khai trương, không ôm quá rộng.</p>
+    </div>
+  </section>
+
+  <!-- MAT BANG -->
+  <section id="matbang" style="background:linear-gradient(180deg,#eef7f1,var(--paper))">
+    <div class="wrap">
+      <span class="sec-k">Bản vẽ mặt bằng</span>
+      <h2 class="sec">Tầng 1 — nhìn từ trên xuống (≈ 4m × 12m)</h2>
+      <p class="sec-sub">Nguyên tắc 70/30: lối đi thông, kệ đảo thấp ở giữa, dược sĩ đứng quầy vẫn bao quát toàn bộ. Khu trải nghiệm đặt ngay cửa để hút khách vào. Mũi tên là dòng di chuyển khách.</p>
+      <div class="plan-wrap">
+        <ul class="legend card">
+          <li><span class="sw" style="background:#cdeede"></span><b>Khu trải nghiệm</b><span>Bàn pop-up: đo huyết áp, test da, mẫu dùng thử</span></li>
+          <li><span class="sw" style="background:#a7e8bd"></span><b>Kệ đảo trung tâm (Gondola)</b><span>Cao 1m2–1m4, 2 mặt bày hàng, không chắn tầm nhìn</span></li>
+          <li><span class="sw" style="background:#7fd4a6"></span><b>Kệ áp tường</b><span>Chạy dọc 2 bên + sau, cao tới 1m8–2m</span></li>
+          <li><span class="sw" style="background:#d9a441"></span><b>Quầy bar thanh toán (thấp)</b><span>Cash &amp; wrap kiểu Watson/nhà sách, không kính cao</span></li>
+          <li><span class="sw" style="background:#b7c2d9"></span><b>Quầy thuốc OTC + tủ mát</b><span>Khu dược sĩ, tủ bảo quản đạt GPP (giai đoạn 2)</span></li>
+          <li><span class="sw" style="background:#e7e2d4"></span><b>Kho nhỏ · WC · Cầu thang</b><span>Lên tầng 2 massage</span></li>
+        </ul>
+
+        <svg class="plan" viewBox="0 0 340 740" role="img" aria-label="Bản vẽ mặt bằng tầng 1">
+          <!-- outer wall -->
+          <rect x="14" y="14" width="312" height="712" rx="6" fill="none" stroke="#2b4a3a" stroke-width="3"/>
+          <!-- storefront / entrance (bottom) -->
+          <rect x="90" y="716" width="150" height="10" fill="#1f7a53"/>
+          <text x="165" y="735" text-anchor="middle" font-size="12" font-weight="700" fill="#1f7a53">MẶT TIỀN · CỬA KÍNH (3–4m)</text>
+
+          <!-- Experience zone (front, near entrance) -->
+          <rect x="24" y="560" width="135" height="140" rx="8" fill="#cdeede" stroke="#5bbf90"/>
+          <text x="91" y="612" text-anchor="middle" font-size="12" font-weight="700" fill="#14281d">KHU TRẢI</text>
+          <text x="91" y="628" text-anchor="middle" font-size="12" font-weight="700" fill="#14281d">NGHIỆM</text>
+          <text x="91" y="648" text-anchor="middle" font-size="9.5" fill="#2b4a3a">Đo HA · test da</text>
+          <text x="91" y="661" text-anchor="middle" font-size="9.5" fill="#2b4a3a">bàn mẫu dùng thử</text>
+
+          <!-- Cash & wrap (front right, by door) -->
+          <rect x="181" y="620" width="135" height="80" rx="8" fill="#d9a441" stroke="#b9862a"/>
+          <text x="248" y="655" text-anchor="middle" font-size="12" font-weight="700" fill="#3d2c07">QUẦY BAR</text>
+          <text x="248" y="672" text-anchor="middle" font-size="10" fill="#3d2c07">thanh toán (thấp)</text>
+
+          <!-- Wall shelves left -->
+          <rect x="24" y="70" width="34" height="470" rx="4" fill="#7fd4a6" stroke="#4aa578"/>
+          <text x="41" y="305" text-anchor="middle" font-size="11" font-weight="700" fill="#14281d" transform="rotate(-90 41 305)">KỆ ÁP TƯỜNG · Xương khớp / Tim mạch</text>
+
+          <!-- Wall shelves right -->
+          <rect x="282" y="70" width="34" height="520" rx="4" fill="#7fd4a6" stroke="#4aa578"/>
+          <text x="299" y="330" text-anchor="middle" font-size="11" font-weight="700" fill="#14281d" transform="rotate(-90 299 330)">KỆ ÁP TƯỜNG · Làm đẹp / Mẹ&amp;Bé</text>
+
+          <!-- Island gondola 1 -->
+          <rect x="108" y="250" width="124" height="60" rx="8" fill="#a7e8bd" stroke="#4aa578"/>
+          <text x="170" y="277" text-anchor="middle" font-size="11" font-weight="700" fill="#14281d">ĐẢO KỆ 1</text>
+          <text x="170" y="293" text-anchor="middle" font-size="9.5" fill="#2b4a3a">Đa vitamin / Miễn dịch</text>
+
+          <!-- Island gondola 2 -->
+          <rect x="108" y="390" width="124" height="60" rx="8" fill="#a7e8bd" stroke="#4aa578"/>
+          <text x="170" y="417" text-anchor="middle" font-size="11" font-weight="700" fill="#14281d">ĐẢO KỆ 2</text>
+          <text x="170" y="433" text-anchor="middle" font-size="9.5" fill="#2b4a3a">Thể thao / Giảm cân</text>
+
+          <!-- OTC counter + fridge (back) -->
+          <rect x="108" y="70" width="124" height="70" rx="8" fill="#b7c2d9" stroke="#7f91b5"/>
+          <text x="170" y="100" text-anchor="middle" font-size="11" font-weight="700" fill="#1a2740">QUẦY THUỐC OTC</text>
+          <text x="170" y="116" text-anchor="middle" font-size="9.5" fill="#1a2740">+ tủ mát (GPP) · GĐ2</text>
+
+          <!-- storage / WC / stairs back corners -->
+          <rect x="24" y="24" width="60" height="38" rx="5" fill="#e7e2d4" stroke="#b9b095"/>
+          <text x="54" y="47" text-anchor="middle" font-size="9.5" font-weight="700" fill="#5c5433">KHO</text>
+          <rect x="256" y="24" width="60" height="38" rx="5" fill="#e7e2d4" stroke="#b9b095"/>
+          <text x="286" y="40" text-anchor="middle" font-size="9" font-weight="700" fill="#5c5433">CẦU THANG</text>
+          <text x="286" y="52" text-anchor="middle" font-size="8.5" fill="#5c5433">↑ Tầng 2</text>
+
+          <!-- customer flow arrows -->
+          <g stroke="#e4705e" stroke-width="2.5" fill="none" stroke-linecap="round">
+            <path d="M165,705 L165,470" marker-end="url(#ah)"/>
+            <path d="M170,360 L170,320" marker-end="url(#ah)"/>
+            <path d="M170,240 L170,150" marker-end="url(#ah)"/>
+          </g>
+          <defs>
+            <marker id="ah" markerWidth="9" markerHeight="9" refX="4.5" refY="4.5" orient="auto">
+              <path d="M0,0 L9,4.5 L0,9 Z" fill="#e4705e"/>
+            </marker>
+          </defs>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- NOI THAT: KE + QUAY -->
+  <section id="noithat">
+    <div class="wrap">
+      <span class="sec-k">Kệ · Quầy · Khu trải nghiệm</span>
+      <h2 class="sec">Brief "giao bài" cho bên thiết kế</h2>
+      <p class="sec-sub">4 ràng buộc bắt buộc để thợ không kéo về lối "nhà thuốc truyền thống" (quầy kính cao chắn người). Đưa thẳng brief này cho đơn vị thi công nội thất bán lẻ.</p>
+      <div class="grid g2">
+        <div class="card">
+          <h4>① Kệ đảo trung tâm (Gondola) &lt; 1m4</h4>
+          <p class="mini">2 đảo kệ giữa nhà cao tối đa 1m2–1m4, 2 mặt bày hàng. Khách đi vòng tự chọn, dược sĩ ở quầy vẫn bao quát. Chân kệ có bánh xe để dễ đổi layout theo mùa.</p>
+          <div class="pill-row"><span class="tag">Kích thước ~1m2 × 0.6m</span><span class="tag">Tôn sơn tĩnh điện trắng</span></div>
+        </div>
+        <div class="card">
+          <h4>② Kệ áp tường cao 1m8–2m</h4>
+          <p class="mini">Chạy dọc 2 bên + tường sau, tận dụng chiều cao. Đèn LED trắng ấm rọi từng tầng kệ làm nổi bao bì (cảm giác wellness). Nhóm hàng theo nhu cầu sống, biển phân khu treo trên cao.</p>
+          <div class="pill-row"><span class="tag">6–7 tầng</span><span class="tag">Có biển phân khu</span></div>
+        </div>
+        <div class="card" style="border-top:4px solid var(--gold)">
+          <h4>③ Quầy bar thanh toán thấp</h4>
+          <p class="mini">Kiểu Watson/Guardian/nhà sách hiện đại — cao ngang eo, thân thiện, KHÔNG kính chắn cao. Đặt gần cửa. Trên quầy để hàng mua bốc đồng (kẹo vitamin, son dưỡng, khẩu trang). Có máy POS + in hóa đơn + QR thanh toán.</p>
+          <div class="pill-row"><span class="tag">Cao ~1m</span><span class="tag">Impulse buy</span><span class="tag">VietQR</span></div>
+        </div>
+        <div class="card" style="border-top:4px solid var(--green)">
+          <h4>④ Khu trải nghiệm (Experience Zone)</h4>
+          <p class="mini">Bàn pop-up ngay cửa: <b>máy đo huyết áp tự động</b>, gương/thiết bị soi da, mẫu dùng thử (kem chống nắng, vitamin dẻo), ghế ngồi nhỏ. Đây là "mồi" kéo khách vào &amp; tạo cớ tư vấn — khác biệt lớn nhất với 2 đối thủ.</p>
+          <div class="pill-row"><span class="tag">Đo HA miễn phí</span><span class="tag">Dùng thử</span><span class="tag">Góc chụp ảnh</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VON -->
+  <section id="von" style="background:linear-gradient(180deg,#eef7f1,var(--paper))">
+    <div class="wrap">
+      <span class="sec-k">Bảng vốn</span>
+      <h2 class="sec">Tất tần tật trong 150–200 triệu</h2>
+      <p class="sec-sub">Mặt bằng 0đ (nhà mình) + tự đứng quầy giúp dồn vốn vào <b>hàng hóa</b>. 2 kịch bản: <b>Gọn (TPCN/mỹ phẩm, mở ngay)</b> và <b>Đầy đủ (thêm thuốc OTC + tủ mát GPP)</b>.</p>
+      <table class="bud">
+        <thead>
+          <tr><th>Hạng mục</th><th class="n">Gọn (TPCN)</th><th class="n">Đầy đủ (+OTC)</th><th>Ghi chú</th></tr>
+        </thead>
+        <tbody>
+          <tr class="grp"><td colspan="4">A · Thi công &amp; nội thất</td></tr>
+          <tr><td>Kệ áp tường + 2 đảo kệ gondola</td><td class="n">22tr</td><td class="n">25tr</td><td>sơn tĩnh điện, có bánh xe</td></tr>
+          <tr><td>Quầy bar thanh toán thấp</td><td class="n">6tr</td><td class="n">6tr</td><td>gỗ công nghiệp + mặt đá</td></tr>
+          <tr><td>Biển hiệu + mặt tiền + đèn LED</td><td class="n">10tr</td><td class="n">12tr</td><td>đèn trắng ấm làm nổi hàng</td></tr>
+          <tr><td>Sơn/sàn/cây xanh/trang trí</td><td class="n">6tr</td><td class="n">7tr</td><td>tông xanh wellness</td></tr>
+          <tr><td>Tủ mát bảo quản (GPP)</td><td class="n">—</td><td class="n">7tr</td><td>bắt buộc nếu bán thuốc</td></tr>
+
+          <tr class="grp"><td colspan="4">B · Thiết bị &amp; phần mềm</td></tr>
+          <tr><td>Máy tính/POS + phần mềm quản lý</td><td class="n">7tr</td><td class="n">8tr</td><td>KiotViet/DượcViệt</td></tr>
+          <tr><td>Máy in bill + ngăn kéo + máy quét</td><td class="n">4tr</td><td class="n">4tr</td><td></td></tr>
+          <tr><td>Camera giám sát 3 mắt</td><td class="n">3tr</td><td class="n">3tr</td><td></td></tr>
+          <tr><td>Máy đo huyết áp + cân sức khỏe</td><td class="n">3tr</td><td class="n">3tr</td><td>cho khu trải nghiệm</td></tr>
+
+          <tr class="grp"><td colspan="4">C · Pháp lý &amp; vận hành ban đầu</td></tr>
+          <tr><td>Đăng ký hộ KD + giấy tờ</td><td class="n">2tr</td><td class="n">3tr</td><td>+ xin GPP/CCHN nếu bán thuốc</td></tr>
+          <tr><td>Túi, tem nhãn, đồng phục, VPP</td><td class="n">4tr</td><td class="n">4tr</td><td>bao bì nhận diện</td></tr>
+          <tr><td>Marketing khai trương</td><td class="n">6tr</td><td class="n">8tr</td><td>"Tuần tầm soát sức khỏe miễn phí"</td></tr>
+
+          <tr class="grp"><td colspan="4">D · Vốn nhập hàng ban đầu</td></tr>
+          <tr><td>TPCN cao cấp (trục chính)</td><td class="n">52tr</td><td class="n">55tr</td><td>60–70% danh mục</td></tr>
+          <tr><td>Dược mỹ phẩm / skincare</td><td class="n">18tr</td><td class="n">20tr</td><td>biên lợi nhuận cao</td></tr>
+          <tr><td>Mẹ &amp; bé + chăm sóc cá nhân</td><td class="n">12tr</td><td class="n">12tr</td><td></td></tr>
+          <tr><td>Thuốc OTC thông dụng</td><td class="n">—</td><td class="n">18tr</td><td>giai đoạn 2</td></tr>
+
+          <tr class="grp"><td colspan="4">E · Dự phòng</td></tr>
+          <tr><td>Quỹ dự phòng (hàng + sự cố)</td><td class="n">12tr</td><td class="n">15tr</td><td>~8–10% tổng vốn</td></tr>
+        </tbody>
+        <tfoot>
+          <tr><td>TỔNG CỘNG</td><td class="n">≈ 157tr</td><td class="n">≈ 197tr</td><td>trong khung 150–200tr ✓</td></tr>
+        </tfoot>
+      </table>
+      <p class="mini" style="margin-top:12px">Con số là ước tính để lập kế hoạch — xin 2–3 báo giá kệ/quầy từ đơn vị thi công nội thất bán lẻ (không phải bên setup nhà thuốc y tế) và chốt công nợ gối đầu với nhà phân phối TPCN để nhẹ vốn nhập hàng.</p>
+    </div>
+  </section>
+
+  <!-- LO TRINH -->
+  <section id="lotrinh">
+    <div class="wrap">
+      <span class="sec-k">Lộ trình</span>
+      <h2 class="sec">Mở nhẹ trước, lớn dần sau</h2>
+      <div class="road" style="margin-top:20px">
+        <div class="it">
+          <span class="ph">Tháng 0–1 · Chuẩn bị</span>
+          <h4>Pháp lý + thi công + nhập hàng</h4>
+          <p>Đăng ký hộ KD; chốt thiết kế &amp; đặt kệ/quầy; mở tài khoản với 2–3 nhà phân phối TPCN chính ngạch; tự học sâu kiến thức sản phẩm để đứng tư vấn.</p>
+        </div>
+        <div class="it">
+          <span class="ph">Tháng 1 · Khai trương</span>
+          <h4>"Tuần tầm soát sức khỏe miễn phí"</h4>
+          <p>Thay vì phát tờ rơi giảm giá thuốc — đo huyết áp, tư vấn vi chất miễn phí, tặng sample vitamin/trà thảo mộc. Kéo khách quen với việc ghé mua đồ lifestyle.</p>
+        </div>
+        <div class="it">
+          <span class="ph">Tháng 2–4 · Chạy TPCN</span>
+          <h4>Tối ưu danh mục theo dữ liệu bán</h4>
+          <p>Giữ mã bán chạy, cắt mã ế. Xây tệp khách lặp lại (Zalo/thẻ tích điểm). Đánh giá dòng tiền trước khi mở rộng.</p>
+        </div>
+        <div class="it">
+          <span class="ph">Tháng 4–6 · Thêm thuốc OTC</span>
+          <h4>Có dược sĩ → mở mảng thuốc</h4>
+          <p>Tuyển/hợp tác dược sĩ đứng chuyên môn, xin Chứng chỉ hành nghề + GPP, lắp tủ mát, nhập rổ OTC. Giữ chân khách mua hằng ngày.</p>
+        </div>
+        <div class="it">
+          <span class="ph">Tháng 6+ · Tầng 2</span>
+          <h4>Massage trị liệu</h4>
+          <p>Khi dòng tiền tầng 1 ổn, set up tầng 2 massage/trị liệu — bán chéo gói chăm sóc + TPCN hồi phục. Tăng giá trị mỗi khách.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <b style="color:#fff">WellMart — Drugstore kiểu Mỹ · Thường Tín</b>
+      <p style="margin-top:6px">Bản kế hoạch cho Nguyễn Thị Thanh Hải · Tổng vốn 150–200tr · mô hình TPCN + dược mỹ phẩm, thuốc OTC bổ sung giai đoạn 2.</p>
+      <p class="mini" style="margin-top:10px;color:#8fae9f">Số liệu giá &amp; chi phí là ước tính tham khảo để lập kế hoạch — cần xin báo giá thực tế &amp; hỏi Sở/Phòng Y tế về thủ tục dược mới nhất (Luật Dược sửa đổi 2024, NĐ 163/2025).</p>
+    </div>
+  </footer>
+</body>
+</html>

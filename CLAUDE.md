@@ -27,6 +27,7 @@ Deploy production cần user xác nhận (bị sandbox classifier chặn).
   - `eldercare.html` (`/eldercare`) — landing ElderCare VN
   - `eldercare-plan.html` (`/eldercare-plan`) — business plan nhiều tab (#market, #experience, #founders, Five Forces, Canvas…)
   - `eldercare-app.html` (`/eldercare-app`) — **app demo clickable** (phone-frame). Xem mục dưới.
+  - `drugstore.html` (`/drugstore`) — kế hoạch mở drugstore kiểu Mỹ tại Thường Tín (TPCN + dược mỹ phẩm + OTC) cho Nguyễn Thị Thanh Hải: tệp khách, danh mục giá, bản vẽ mặt bằng SVG, brief kệ/quầy, bảng vốn 150–200tr
   - `eldercare-deck.{pptx,pdf}`, `eldercare-class-deck.{pptx,pdf}`, `eldercare-financial-model.xlsx` — tài liệu tĩnh
 - `website/functions/api/votes.js` — Cloudflare Pages Function cho voting (KV binding `STARTUP_VOTES`)
 - `deck-build/` — build script tạo deck (`build.js`, `build-class.js`), gitignored node_modules. Không phải runtime của site.
