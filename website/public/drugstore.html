@@ -342,6 +342,54 @@
         </div>
       </div>
 
+      <h3 style="margin:28px 0 12px;font-size:1.1rem;color:var(--green-d)">🔁 Truy ngược nhu cầu nhập hàng của khu này</h3>
+      <p class="sec-sub" style="margin-bottom:14px">Không ai bán "báo cáo nhà thuốc X nhập mã gì", nhưng nhu cầu nhập <b>rò rỉ ra nhiều điểm</b> — gom lại là ra. 3 nguồn "ground truth" mạnh nhất:</p>
+      <div class="grid g3">
+        <div class="card" style="border-top:4px solid var(--gold)">
+          <h4>👔 Trình dược viên / NPP</h4>
+          <p class="mini"><b>Nguồn số 1.</b> Họ giao cho MỌI nhà thuốc trong vùng → cầm sẵn bản đồ nhu cầu + lịch sử đơn khu Thường Tín. Mở tài khoản sỉ xong hỏi thẳng: "khu này mã nào chạy, bao lâu đặt/lần, mỗi lần mấy thùng?". Kết thân 2–3 người = insider data free.</p>
+        </div>
+        <div class="card" style="border-top:4px solid var(--gold)">
+          <h4>🛒 App bán sỉ cho nhà thuốc</h4>
+          <p class="mini"><b>thuocsi.vn</b> (BuyMed) phục vụ <b>30.000+ nhà thuốc, ~17.000 đặt đều/tháng, 7 khu vực</b>. Đăng ký tài khoản hộ KD dược → xem "Bán chạy", "nhà thuốc khác cũng mua", ranking SKU theo khu. Cầu thật của hàng chục nghìn nhà thuốc gộp lại.</p>
+        </div>
+        <div class="card" style="border-top:4px solid var(--gold)">
+          <h4>📱 Tồn kho đối thủ qua app</h4>
+          <p class="mini">App/web <b>Long Châu, Pharmacity, An Khang</b> cho chọn chi nhánh gần bạn → xem sản phẩm <b>còn/hết hàng tại chi nhánh Thường Tín</b>. Luôn còn đầy = stock chủ lực; <b>hết hàng thường xuyên = bán chạy cháy</b>. Quét 2–3 lần/tuần trong 2 tuần.</p>
+        </div>
+      </div>
+
+      <div class="alert" style="margin-top:18px">
+        <h3>🎯 Công thức tam giác → ra "mã bắt buộc nhập"</h3>
+        <p><b>Trình dược viên</b> (sản lượng thật) × <b>thuocsi ranking</b> (cầu gộp toàn quốc) × <b>tồn kho Long Châu chi nhánh Thường Tín</b> (đối thủ thật sự bày gì). Mã nào <b>cả 3 nguồn cùng nhắc</b> = nhập chắc tay cho lô đầu. Mã chỉ 1 nguồn = để test lô nhỏ.</p>
+        <p class="mini" style="margin-top:8px">Điểm tra: <b>thuocsi.vn</b> · <b>nghidinh15.vfa.gov.vn</b> (Cục ATTP — tra ngược đơn vị nhập khẩu) · app <b>Long Châu / Pharmacity</b> · báo cáo thường niên <b>FRT (FPT Long Châu)</b> cho cơ cấu ngành hàng toàn chuỗi.</p>
+      </div>
+
+      <h3 style="margin:28px 0 10px;font-size:1.1rem;color:var(--green-d)">📊 Data thật đã quét — Long Châu, mục TPCN, sắp xếp "Bán chạy"</h3>
+      <p class="mini" style="margin-bottom:12px">Quét web Long Châu (đối thủ dẫn đầu, 2.700+ nhà thuốc) ngày 16/10/2026 — top mã bán chạy toàn chuỗi &amp; giá niêm yết. Là <b>tín hiệu cầu</b>; số liệu riêng Thường Tín cần chọn chi nhánh trong app.</p>
+      <table class="bud">
+        <thead>
+          <tr><th>Mã bán chạy (Long Châu)</th><th>Nhóm</th><th>Nước</th><th class="n">Giá niêm yết</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>ZINCELITE Vitamins For Life</td><td>Đề kháng · kẽm</td><td>Mỹ</td><td class="n">295k</td></tr>
+          <tr><td>Nature's Way Complete Daily Multi 200v</td><td>Đa vitamin</td><td>Úc</td><td class="n">540k</td></tr>
+          <tr><td>Nature's Way Kids Smart D3+K2</td><td>Canxi trẻ em</td><td>Úc</td><td class="n">360k</td></tr>
+          <tr><td>Léana Ocavill</td><td>Nội tiết nữ</td><td>Pháp</td><td class="n">571k</td></tr>
+          <tr><td>Lactobact Intima</td><td>Lợi khuẩn nữ</td><td>Đức</td><td class="n">685k</td></tr>
+          <tr><td>Boganic Premium Traphaco 60v</td><td>Bổ gan</td><td>VN</td><td class="n">424k</td></tr>
+          <tr><td>Sâm Nhung Bổ Thận TW3 Platinum</td><td>Sinh lý nam</td><td>VN</td><td class="n">688k</td></tr>
+          <tr><td>Nature's Way Kids Liquid Zinc siro</td><td>Kẽm trẻ em</td><td>Úc</td><td class="n">355k</td></tr>
+          <tr><td>Nano Anpacov Biochempha</td><td>Ho · họng</td><td>VN</td><td class="n">149k</td></tr>
+          <tr><td>Lacto Biomin Gold+ cốm</td><td>Men vi sinh bé</td><td>VN</td><td class="n">149k</td></tr>
+        </tbody>
+      </table>
+      <div class="card" style="margin-top:14px;border-top:4px solid var(--green)">
+        <h4 style="margin-bottom:6px">🔎 Đọc ra gì từ data này</h4>
+        <p class="mini">Cầu thật nghiêng về <b>đề kháng/đa vitamin · vitamin trẻ em (D3K2, kẽm, men) · nội tiết nữ · bổ gan · sinh lý nam</b> — khớp giả thuyết chân dung Thường Tín, bổ sung thêm 2 nhóm sinh lời cao: <b>nội tiết nữ &amp; sinh lý nam</b>. Giá chủ lực <b>150k–700k</b>. Hàng ngoại chính ngạch (Úc/Mỹ/Đức) đứng đầu → khách sẵn trả cho đồ ngoại có tem phụ.</p>
+        <div class="pill-row" style="margin-top:10px"><b class="mini" style="width:100%;margin-bottom:2px">Từ khóa cầu cao Long Châu đẩy lên thanh tìm nhanh:</b><span class="tag">Canxi</span><span class="tag">Omega-3</span><span class="tag">Kẽm</span><span class="tag">Sắt</span><span class="tag">Kem chống nắng</span><span class="tag">Thuốc nhỏ mắt</span><span class="tag">Men vi sinh</span><span class="tag">Dung dịch vệ sinh</span><span class="tag">Vitamin C</span></div>
+      </div>
+
       <div class="grid g2" style="margin-top:22px">
         <div class="card" style="border-top:4px solid var(--gold)">
           <h4 style="margin-bottom:8px">🕵️ Checklist mỗi lần "đi chợ" đối thủ</h4>
